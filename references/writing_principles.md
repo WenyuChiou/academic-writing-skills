@@ -1,397 +1,285 @@
-# Writing Principles — 8 Core Rules
+# Writing Principles
 
-These are universal rules for rigorous academic writing. Every rule includes a
-**why** so judgment calls at the edges stay consistent.
+Universal rules for rigorous academic writing. Use paper-specific overrides in
+`.paper/style_overrides.md` when a journal, advisor, or field convention differs.
 
----
+## 1. Structure And Logic
 
-## 1. Structure & Logic
+### 1.1 Findings First
 
-### 1.1 Findings-first
+State the result before the figure citation or mechanism.
 
-State the result before explaining the cause. Never open a result paragraph
-with "Figure X shows..." or "Results indicate that...".
+Correct:
 
-- **Correct**: *Adaptation reduces renter flood damage by 19%. Relocation to
-  lower-exposure tracts accumulates over time, so damage avoidance contributes
-  a growing share of the reduction.*
-- **Wrong**: *Figure 5 shows that renters relocate to safer tracts, which
-  leads to damage reductions of 19%.*
+> Adaptation reduces renter flood damage by 19%. Relocation to lower-exposure
+> tracts accumulates over time, so damage avoidance contributes a growing share
+> of the reduction.
 
-**Why**: readers scan for the finding; front-loading mechanism hides it.
+Wrong:
 
-### 1.2 Mechanism for every result
+> Figure 5 shows that renters relocate to safer tracts, which reduces damage by
+> 19%.
 
-Every result sentence is followed by a mechanism sentence. If the reader can
-ask "why?" after the finding, the paragraph is incomplete.
+Why: readers scan for the finding. Opening with "Figure X shows" hides the
+scientific point.
 
-A result triple: **What (pattern) → Why (causal explanation grounded in the
-study design) → Implication (for the RQ or broader context)**.
+### 1.2 Mechanism For Every Result
 
-Missing any layer triggers an immediate rewrite.
+Every result needs a mechanism sentence. A complete result paragraph usually has:
 
-### 1.3 Every sentence connects to the previous
+```text
+finding -> mechanism -> implication for the research question
+```
 
-Each sentence must be linked to the one before by:
-- "While [prior], [new focus]" pivot, or
-- A demonstrative + verb ("This gap reflects...", "These patterns suggest..."), or
-- A pronoun with a clear, unambiguous antecedent.
+If the reader can still ask "why?" after the finding, the paragraph is not done.
 
-If the reader cannot tell why sentence B follows sentence A, the transition
-is broken and the whole paragraph fails.
+### 1.3 Sentence-To-Sentence Continuity
 
-### 1.4 Finish each section completely
+Each sentence must connect to the previous one through a clear pivot,
+demonstrative, noun repeat, or causal link. If sentence B could be moved
+elsewhere without changing meaning, the paragraph is probably a list, not an
+argument.
 
-Do not defer explanations to a later section. Each paragraph lands its own
-mechanism and implication before moving on. Never force the reader to "wait"
-for the next section to understand the current one.
+### 1.4 Complete The Local Explanation
 
-**Why**: forward references make rebuttal reviews painful and signal that the
-structure is not thought through.
+Do not defer an explanation to a later section when the current paragraph needs
+it. A section may point forward, but it should not make the reader wait to
+understand the current result.
 
-### 1.5 Opening sentence per subsection
+### 1.5 Subsection Openings
 
-Every subsection begins with one sentence that states **(a) what this
-subsection does, and (b) why it is needed now**. This is the
-transition-plus-purpose pattern, not a topic sentence.
+Open each subsection with one sentence that states what the subsection does and
+why it is needed at this point in the paper.
 
-The reader should never wonder "why am I reading this section at this point?".
+### 1.6 Hypothesis-Driven Research Questions
 
-### 1.6 Hypothesis-driven research questions
+When possible, place a directional expectation before each research question:
 
-Every RQ is preceded by a directional hypothesis — "We expect X because Y,
-given Z" — and the Results section tests that specific hypothesis.
+```text
+We expect X because Y, given Z.
+```
 
-Vague RQs that ask "how does X change" with no directional expectation, paired
-with descriptive results, trigger a complete rewrite.
-
----
+Descriptive research questions without a directional expectation often produce
+weak Results sections.
 
 ## 2. Precision
 
-### 2.1 No overclaim
+### 2.1 No Overclaim
 
-Match certainty to evidence. Two tiers:
+Match certainty to evidence.
 
-- **Direct language OK**: established empirical facts from the literature,
-  mathematical identities, and design decisions the author controls
-  (e.g., "we set X = 5", "the protocol was approved by the IRB", "the model
-  threshold triggers an update").
-- **Hedged language required**: any result, pattern, or mechanism *inferred
-  from* your data, simulation, or statistical test. Use *is consistent with,
-  suggests, appears to, may explain, is associated with*.
+Direct language is appropriate for:
 
-**Red-flag overclaim words for inferred findings**: *confirms, proves,
-demonstrates, determines, controls, ensures, eliminates, clearly,
-dramatically, significantly* (without a p-value or effect size).
+- established empirical facts,
+- mathematical definitions,
+- method settings controlled by the authors.
 
-### 2.2 No vague intensifiers
+Hedged language is required for:
 
-Words like *substantially, sharply, considerably, major, dramatic* require a
-number or concrete comparison right next to them. Delete them if you cannot
-quantify.
+- patterns inferred from data,
+- simulation output,
+- statistical associations,
+- mechanisms not directly observed.
 
-Note: "significant" is correct and expected when reporting a statistical
-test with a p-value or confidence interval. It is a red flag only when used
-as a vague intensifier outside a statistical context.
+Prefer "is consistent with", "suggests", "appears to", "is associated with",
+"may explain", or "contributes to" when evidence is inferential.
 
-### 2.3 Precise targets
+### 2.2 No Vague Intensifiers
 
-- "Distributions decline" → specify **what** declines (median? IQR? tail?).
-- "Similar pattern" → state what is similar, or delete.
-- "The gap" → specify "the gap between X and Y".
-- "Various factors" → name them.
-- Demonstratives ("this gap", "these asymmetries") must have a referent the
-  reader can point to in the prior sentence.
+Words such as "substantial", "major", "dramatic", "strong", and "large" need a
+number or comparison. Delete them if they cannot be quantified.
 
-### 2.4 Figure citations at panel level
+"Significant" is valid only when reporting a statistical test with a p-value,
+confidence interval, or equivalent inferential result.
 
-Cite "(Figure 5b, blue line)" or "(Figure 6e, tail region)" rather than
-"(Figure 5)". Panel-level precision lets the reader verify in one glance.
+### 2.3 Precise Targets
 
-### 2.5 Numbers must match code / data output
+Replace vague nouns with the actual quantity:
 
-Re-run the computation every time the paper is revised. Never copy numbers
-from a prior draft. Values change between revisions and stale numbers are
-the easiest reviewer catch. This applies equally to simulation output,
-regression coefficients, bench-measurement readings, and literature quotes.
+- "the distribution declines" -> "the median household loss declines"
+- "the gap widens" -> "the homeowner-renter damage gap widens"
+- "various factors" -> name the factors
 
-### 2.6 Numbers must match figures
+Demonstratives such as "this", "these", and "that" need clear antecedents.
 
-Any precise percentage or value in the prose must be visible on the referenced
-figure (as an annotation, endpoint label, or readable from a labeled axis). If
-the figure does not display the number, either:
-- Add the annotation to the figure, or
-- Switch to a qualitative description in the prose.
+### 2.4 Panel-Level Figure Citations
 
-Do not let precise percentages appear only in the text while the figure shows
-nothing that supports them.
+Use panel-specific citations when panels exist:
 
-### 2.7 Symbols match figures and equations
+- "Figure 5b, blue line"
+- "Figure 6e, tail region"
 
-Notation in the prose (e.g., `p_a^g`) must match exactly what the figure or
-equation displays. Pick distinct symbols for distinct quantities — never reuse
-`D` for both depth and deductible.
+Avoid bare "Figure 5" when the claim depends on one panel.
 
----
+### 2.5 Numbers Must Match Source Output
 
-## 3. Mechanism & Argument
+Re-check numbers after every revision. Abstract numbers, Results numbers, code
+output, tables, and figure annotations drift during editing.
 
-### 3.1 Every finding earns its mechanism
+### 2.6 Numbers Must Be Visible Or Traceable
 
-No result sentence stands alone. Results that only describe the figure
-("Figure X shows A increases") without explaining **why** the study produced
-that outcome are incomplete.
+Any precise number in prose must be visible on a figure, in a table, in code
+output, or in a cited source. If the reader cannot verify it, either add the
+evidence or soften the prose.
 
-### 3.2 Counterintuitive Result Audit
+### 2.7 Symbols Must Match
 
-Before writing a counterintuitive finding into the paper, run this 5-step
-audit. This applies to any paper — simulation, empirical, lab, or archival:
+Notation in prose, equations, legends, and figures must match exactly. Do not
+reuse one symbol for distinct quantities.
 
-1. **Denominator check**: if the result is a percentage, verify the denominator.
-   Watch for units that leave the pool (e.g., dropouts in a cohort, failed
-   batches in a lab, censored observations in survival data) that inflate the
-   remaining category percentages mechanically.
-2. **Direction plausibility**: trace the causal chain through the study's
-   theory or design. If the direction seems wrong, investigate possible
-   cascades (sequential-decision order, threshold interactions, non-monotonic
-   dose response, confounders).
-3. **Subgroup magnitude check**: compare to related subgroups. Outliers in one
-   subgroup deserve a specific explanation, not a general one.
-4. **Artifact check**: look for initialization bias, backfill rules, boundary
-   effects, batch effects, instrument drift, questionnaire wording, or other
-   structural causes that could produce the pattern without a real mechanism.
-5. **Absolute-value sanity**: compare to real-world data or prior literature.
-   Unusual magnitudes often signal a unit or scaling error.
+## 3. Mechanism And Argument
 
-Report the audit to the user **before** writing the finding into the paper.
-If the audit reveals a real mechanism, the mechanism becomes the story. If it
-reveals an artifact, fix the artifact first.
+### 3.1 Counterintuitive Result Audit
 
-### 3.3 Counterintuitive findings need stories, not number dumps
+Before writing a surprising result, run this audit:
 
-When a result contradicts intuition, explain the mechanism as a narrative:
-what happened, why the data produced it, and what the reader should take
-away. Reporting a raw percentage without the story is a missed scientific
-opportunity.
+1. Denominator check: verify what the percentage is divided by.
+2. Direction plausibility: trace the causal chain through the method or theory.
+3. Subgroup magnitude check: compare the subgroup to related groups.
+4. Artifact check: test initialization, censoring, measurement, model, or coding
+   artifacts.
+5. Absolute-value sanity check: compare against prior literature or real-world
+   ranges.
 
-### 3.4 Logical-fallacy and argumentation audit
+Report the audit before treating the result as a contribution.
 
-Before writing a causal claim, check against these common failures:
+### 3.2 Mechanisms Need Evidence
 
-- **Correlation vs causation**: is the claim supported by more than a
-  correlation? If you lack intervention, randomization, or instrumental
-  variation, switch to associational language.
-- **Reverse causality**: could the effect have caused the cause? Rule out
-  before asserting direction.
-- **Selection bias in framing**: does the sample under-represent a group
-  whose inclusion would flip the finding? Name the selection rule.
-- **Straw-manning prior work**: quote or paraphrase prior claims faithfully,
-  then extend. Never caricature to make your contribution look bigger.
-- **Base-rate neglect**: a 3x relative-risk increase from 0.1% to 0.3% is
-  not "widespread" — report the absolute rate alongside the relative one.
-- **Survivorship bias**: are you generalizing from cases that made it into
-  the dataset while ignoring the silent failures that did not?
+Mechanism explanations in Results should point to either:
 
-Apply these checks in Discussion paragraphs that make causal or policy claims.
+- a visible quantity in another figure or table,
+- a method rule already described,
+- a cited theory or empirical finding.
 
-### 3.5 Contribution test
+Longer interpretation belongs in Discussion.
 
-Before claiming any result as a contribution, apply the test: **could a
-reader guess this without running your study?**
+### 3.3 Causal Claim Audit
 
-- Yes → it is common sense and does not belong in the abstract, results,
-  conclusion, or sensitivity analysis.
-- No → it earns contribution status.
+Before writing a causal claim, check:
 
-Only study-dependent insights are contributions.
+- correlation vs. causation,
+- reverse causality,
+- selection bias,
+- base-rate neglect,
+- survivorship bias,
+- faithful treatment of prior work.
 
----
+If the study design cannot support causality, use associational language.
+
+### 3.4 Contribution Test
+
+Before claiming a contribution, ask:
+
+```text
+Could a knowledgeable reader guess this without running the study?
+```
+
+If yes, it is background or common sense. If no, it may be a contribution.
 
 ## 4. Word Choice
 
-### 4.1 No GPT / AI-style vocabulary
+### 4.1 Avoid GPT-Style Vocabulary
 
-Load `banned_words.md` and audit every new paragraph against it.
+Audit new prose with `banned_words.md`.
 
-### 4.2 Avoid awkward agency
+### 4.2 Avoid Awkward Agency
 
-Variables don't "receive" values; data don't "know" things. Use precise
-descriptions:
-- **Wrong**: *Subjects receive score increases after treatment.*
-- **Right**: *Treatment raises subjects' scores.*
+Variables do not "receive" values, data do not "know" things, and models do not
+"discover" unless that is technically accurate. Use plain verbs that name the
+actor and action.
 
-### 4.3 Causal connectors
+### 4.3 Causal Connectors
 
-Avoid "because" and "so" as causal connectors — too informal for academic
-prose. Use instead:
-- Subordinate clauses: *As X, Y...* / *Given that X, Y...*
-- Participial phrases: *X, resulting in Y* / *X, which in turn Y*
-- Semicolons with consequence: *X; this Y*
-- Explicit connectors: *This difference arises from...* /
-  *This pattern reflects...*
+Avoid oral connectors such as "because" and "so" when formal alternatives are
+available:
 
-### 4.4 No colons as list starters inside prose
+- "Given that X, Y..."
+- "As X increases, Y..."
+- "X increases, resulting in Y."
+- "This pattern reflects..."
+- "This difference arises from..."
 
-Do not write "Three factors: (a)...(b)...(c)...". Integrate the list into the
-sentence grammar or break into separate sentences.
+### 4.4 Avoid Prose Colon Lists
 
-### 4.5 Academic polish pass
+Do not write "Three factors: (a)...". Integrate the list into grammar or split
+the items into separate sentences.
 
-After structural rewrite, run a distinct **polish pass** for:
-- Nominalized phrasings: *"knowledge gap reflects..."*,
-  *"cumulative effect on..."*
-- Parallel structure in lists and comparisons
-- Redundant prepositional chains
+### 4.5 Polish After Structure
 
----
+Do not polish before the logic is fixed. The normal order is:
 
-## 5. Voice, Tense, and Rhythm
+1. claim structure,
+2. mechanism accuracy,
+3. evidence consistency,
+4. word choice,
+5. transitions and rhythm.
 
-### 5.1 Active vs passive voice
+## 5. Voice, Tense, And Rhythm
 
-- **Active** for claims, findings, contributions: *"We find X.", "This study
-  shows Y."*
-- **Passive** for methods that are conventional or when the actor is
-  irrelevant: *"Samples were collected in triplicate."*
-- **Neither** as a universal rule — mix to match the point being made.
+### 5.1 Active And Passive Voice
 
-Over-reliance on passive voice signals hedging or concealment. Over-reliance
-on active "we" throughout methods reads as self-centered.
+Use active voice for claims and contributions. Use passive voice when the actor
+is conventional or irrelevant. Do not enforce either as a universal rule.
 
-### 5.2 Tense conventions
+### 5.2 Tense
 
-- **Past tense** for methods, data collection, and specific results:
-  *"We sampled 200 tracts. The adaptation scenario reduced damage by 19%."*
-- **Present tense** for established background, definitions, equations, and
-  general statements about how the model works:
-  *"Equation 2 computes insurance payouts. Floods cause damage roughly
-  proportional to inundation depth."*
-- **Present perfect** ("has shown", "have demonstrated") for literature
-  background when framing a gap.
+- Past tense: methods performed and specific results.
+- Present tense: definitions, equations, stable facts, and paper structure.
+- Present perfect: literature background when framing a gap.
 
-Mixing tenses within a sentence is usually wrong; check each sentence.
+### 5.3 Sentence Length
 
-### 5.3 Sentence rhythm
+Avoid monotonous sentence rhythm. Target an average near 20-30 words and revise
+sentences above 45 words unless the journal style or content justifies them.
 
-Vary sentence length. A paragraph of uniform 22-word sentences reads
-monotonic even when the content is strong. Alternate:
-- One long sentence that carries the main claim with its caveats.
-- One short sentence that hits the consequence ("This reverses the pattern
-  reported in prior work.").
+### 5.4 Repetition
 
-Target hard max: ≤35 words per sentence. Average: 20–30.
-
-### 5.4 Word repetition
-
-- Same noun appearing 3+ times in one paragraph → replace two instances with
-  synonyms or pronouns where the referent is clear.
-- Same verb 2+ times in one paragraph → vary.
-- Same adjective/adverb 2+ times in one paragraph → vary or delete.
-- Exempt: proper nouns, defined acronyms, and unavoidable technical terms.
-
----
+Repeated nouns, verbs, and adjectives can be useful for precision, but repeated
+phrasing across consecutive sentences often reads machine-generated. Keep
+defined technical terms stable while varying nontechnical wording.
 
 ## 6. Figures
 
-See `figure_conventions.md` for full rules. Core principles:
+Use `figure_conventions.md` for detailed checks. Core rules:
 
-### 6.1 Define once, use thereafter
-
-A term defined in the first figure's legend is used as-is in every later
-figure. Do not redefine the same concept with a different label mid-paper.
-
-### 6.2 Cross-figure consistency
-
-Same concept → same label, same color, same annotation style across all
-figures in the same paper.
-
-### 6.3 Figure-text coupling
-
-Numbers cited in the prose must appear on the figure. If the prose reports
-"insurance covers 36%", the figure shows 36% (as a tail-gap annotation,
-percentage label, or equivalent).
-
-### 6.4 Caption format
-
-*Figure X. [Description sentence]. (a) [panel description], (b) [panel
-description], ...*
-
-Never start a caption sentence with parentheses. Each panel is described
-individually.
-
-### 6.5 Field conventions
-
-Use the standard chart type of the field (e.g., hydrograph in hydrology,
-Kaplan–Meier in survival analysis, forest plot in meta-analysis,
-exceedance-probability curve in catastrophe modeling).
-
-Be careful with conventions that assume specific data properties. Example:
-**rank-based return periods** require independent events — they are not valid
-for ensembles generated by replicating the same hazard sequence with
-stochastic agent decisions. Use plain exceedance probability when
-independence fails.
-
----
+- Same concept -> same label, color, and annotation style.
+- Precise numbers in prose must be visible or traceable.
+- Captions should be self-contained.
+- Panel citations should be specific.
+- Field-standard plots are preferred over invented plot types.
 
 ## 7. Redundancy
 
-### 7.1 Do not repeat across paragraphs
+Do not define the same term repeatedly across sections. Do not restate Methods
+inside Results unless the interpretation requires a specific equation, rule, or
+parameter.
 
-If a mechanism is explained in P1, a P5 summary does not re-explain it.
-Summary paragraphs reference, they do not restate.
+## 8. Revision Process
 
-### 7.2 Do not repeat across sections
+### 8.1 Base Revisions On The Accepted Version
 
-Anything established in Methods is not re-explained in Results. Results
-references Methods by section or equation number if needed.
+When revising against advisor or reviewer comments, start from the accepted
+manuscript version and change only what the comments require.
 
-### 7.3 Define once per paper
+### 8.2 Anchor Every Comment
 
-A term defined on first use is never re-defined. Re-definitions are a common
-reviewer annoyance and signal the sections were written by different people
-without reconciliation.
+Before answering a comment, identify the exact sentence, paragraph, figure, or
+table it targets. Do not guess.
 
-### 7.4 Vary expression
+### 8.3 Build Scripts Are Source Of Truth
 
-Do not repeat the same phrasing back-to-back. Paraphrase while keeping the
-technical term exactly the same.
+If a compiled manuscript and source scripts disagree, trust the build scripts or
+source files, then regenerate the manuscript.
 
----
+### 8.4 Iterative Rewrite Reality
 
-## 8. Process
+Heavy rewrites usually need separate passes:
 
-### 8.1 Base revisions on the accepted version
+1. structure,
+2. mechanism,
+3. terminology,
+4. evidence consistency,
+5. academic polish,
+6. word count.
 
-When revising against comments, apply track-changes first; then modify only
-what the comments require. Do not rewrite from scratch.
-
-### 8.2 Every comment → exact anchor text
-
-Before responding, identify the exact sentence the comment is attached to.
-Do not guess.
-
-### 8.3 Build / compilation scripts are source of truth
-
-When a compiled master document (e.g., `manuscript_V3.docx`) and the
-individual build scripts or source files disagree, trust the build scripts.
-Master docs can lag by weeks.
-
-### 8.4 Iterative rewrite reality
-
-Heavy rewrites (abstracts, rebuttal letters) typically need 3–6 passes, each
-fixing a different class of issue:
-1. Structure
-2. Mechanism accuracy
-3. Terminology
-4. Academic polish
-5. Transitions
-6. Word count
-
-Set this expectation with the user upfront.
-
-### 8.5 Auto-review habit
-
-After writing or significantly modifying any paragraph, run this skill's
-audit before showing the paragraph to the user. Do not wait for the user
-to ask.
+Set this expectation before trying to fix everything in one pass.

@@ -1,101 +1,140 @@
 # academic-writing-skills
 
-針對嚴謹學術論文寫作、改稿與投稿的 Claude Code skill。不綁定任何領域，期刊
-特定規則與論文個別例外都放在每篇論文自己的 repo 裡（`<paper-repo>/.paper/`），
-因此 skill 本身保持通用。
+這是一個可分享的 Claude/Codex skill，用於嚴謹的學術論文寫作、修改、審稿回覆、圖文一致性檢查，以及投稿前檢查。
 
 [English README](./README.md)
 
----
+## 目的
 
-## 能做什麼
+這個 skill 把常見的論文工作流程變成可重複執行的檢查與寫作規則：
 
-- 強制 **findings-first + mechanism** 結構（結果先講、機制跟上）
-- **禁用字詞稽核**：抓出 GPT 風格、過度聲稱、填充語
-- 檢查 **圖文對應**：正文裡的數字必須出現在圖上
-- 引導 **分節撰寫**：Abstract、Introduction、Methods、Results、Discussion、
-  Conclusion 各有專屬 checklist
-- 寫作前 **強制確認期刊格式**（word limit、citation style、required sections）
-- 投稿前 **完整 submission checklist**：封面信、推薦審稿人、data availability、
-  圖檔規格、ORCID/CRediT/IRB 等身份與倫理披露
+- 用 findings-first 結構撰寫章節。
+- 幫 Results 和 Discussion 補上明確 mechanism。
+- 找出 GPT 式空泛語言、過度宣稱和模糊強化詞。
+- 檢查每個 claim 是否有 figure、table、統計結果、程式輸出或文獻支撐。
+- 確認數字、figure panel、caption 和正文一致。
+- 建立 point-by-point reviewer response table。
+- 準備投稿前 checklist 和必要 declarations。
+- 建立 `.paper/` context 檔，讓之後的 AI session 不需要反覆讀整篇 manuscript，節省 token。
+
+這個 skill 不綁定特定領域。期刊規則、老師偏好、paper 專用術語與例外規則，都應放在各自 paper repo 的 `.paper/` 內。
 
 ## 安裝
 
-複製到 Claude Code 的 skills 資料夾。請把 `<your-fork>` 改成你自己的 GitHub
-帳號或上游 repo 擁有者：
+安裝到 Claude Code 的 user-level skills 目錄：
 
 ```bash
-# 使用者層級（所有專案都可用）
-git clone https://github.com/<your-fork>/academic-writing-skills ~/.claude/skills/academic-writing-skills
-
-# 專案層級（只在該專案生效）
-git clone https://github.com/<your-fork>/academic-writing-skills <project>/.claude/skills/academic-writing-skills
+git clone https://github.com/WenyuChiou/academic-writing-skills ~/.claude/skills/academic-writing-skills
 ```
 
-Claude Code 會自動從這些路徑偵測 skill，不需要額外設定。
+只安裝到單一 project：
+
+```bash
+git clone https://github.com/WenyuChiou/academic-writing-skills <project>/.claude/skills/academic-writing-skills
+```
+
+Claude Code 會自動偵測這些路徑下的 skills。
 
 ## 每篇論文的一次性設定
 
-在每篇論文的 git repo 建立 `.paper/` 資料夾：
+每篇 manuscript 建議在 paper repo 內建立 `.paper/`：
 
-```
+```text
 <paper-repo>/
-└── .paper/
-    ├── journal_format.md      # 用 journal_format_template.md 填出來
-    └── style_overrides.md     # 選填：這篇論文的專屬禁用詞、例外
+  .paper/
+    journal_format.md
+    style_overrides.md
+    context.md
+    figure_inventory.md
+    claim_evidence_ledger.md
+    reviewer_comments.md
+    submissions_log.md
 ```
 
-第一次在 paper repo 啟用時，skill 會：
+最低限度設定：
 
-1. 檢查 `.paper/journal_format.md` 是否存在
-2. 若不存在，帶你依據 `references/journal_format_template.md` 填寫
-3. 把完成的檔案存到 `<paper-repo>/.paper/journal_format.md`
+1. 複製 `references/journal_format_template.md` 到
+   `<paper-repo>/.paper/journal_format.md`。
+2. 根據目標期刊最新 author guidelines 填入格式規則。
+3. 如有必要，複製 `references/style_overrides_example.md` 到
+   `<paper-repo>/.paper/style_overrides.md`。
+4. 長期專案建議建立 `references/paper_context_packet.md` 中定義的 context packet。
 
 ## Skill 結構
 
-```
+```text
 academic-writing-skills/
-├── SKILL.md                            # 入口 + 工作流
-├── references/
-│   ├── writing_principles.md           # 8 大核心原則
-│   ├── banned_words.md                 # GPT / 過度聲稱 / 填充語偵測
-│   ├── figure_conventions.md           # 圖文對應 + 跨圖一致性規則
-│   ├── section_checklists.md           # 各 section 撰寫檢查
-│   ├── submission_checklist.md         # 投稿前完整清單
-│   ├── journal_format_template.md      # 期刊格式模板
-│   └── style_overrides_example.md      # `.paper/style_overrides.md` 範例
-└── README.md (+ README.zh-TW.md)
+  SKILL.md
+  references/
+    banned_words.md
+    claim_evidence_audit.md
+    figure_conventions.md
+    journal_format_template.md
+    paper_context_packet.md
+    reviewer_response_workflow.md
+    section_checklists.md
+    style_overrides_example.md
+    submission_checklist.md
+    writing_principles.md
+  evals/
+    evals.json
+  tests/
+    test_skill_integrity.py
 ```
 
-## 工作流
+## 常見使用場景
 
-接到任何寫論文的任務時，skill 會跑這個流程：
+### 撰寫或修改章節
 
-1. **確認期刊格式** — 載入 `<paper-repo>/.paper/journal_format.md`，
-   或請使用者先填模板。
-   - **Fast-path**：單句 polish、禁用字掃描、transition 調整等小改不強制填模板，
-     直接進下一步。
-2. **載入論文專屬 overrides** — 套用 `<paper-repo>/.paper/style_overrides.md`
-   的規則（優先於 skill 預設）。
-3. **載入通用規則** — `writing_principles.md` 和 `banned_words.md`。
-4. **依任務類型載入專屬檔** — section checklist、figure conventions 或
-   submission checklist。
-5. **出稿前自我稽核** — 檢查機制完整性、禁用字、數字對應、句間銜接，
-   通過才呈現給使用者。
+skill 會讀取期刊格式、paper overrides、writing principles、banned words，以及相關 section checklist，然後檢查：
 
-## 不在 skill 裡面的東西
+- finding 是否放在 figure citation 前面，
+- 每個 result 是否有 mechanism，
+- 術語是否一致，
+- 是否有 unsupported overclaim，
+- 有 panel 的圖是否使用 panel-level citation。
 
-- **特定期刊列表** — 由每位使用者在自己的 paper repo 維護，因為領域差異大。
-- **領域專屬術語偏好** — 由論文的 `style_overrides.md` 處理。
-- **個人聲腔偏好** — 那屬於使用者的 CLAUDE.md。
+### 檢查 claim 和 evidence
 
-## 設計哲學
+skill 會建立 claim-evidence ledger：
 
-- **嚴謹但不強推風格**：skill 會抓過度聲稱、缺機制、圖文不符等普遍問題，
-  但不逼使用者採用特定句式。
-- **格式優先、寫作其次**：任何寫作前先確認期刊規格。
-- **論文主權**：每篇論文的 `.paper/` 資料夾擁有最終決定權。skill 絕不會在
-  論文已經表態的情況下默默套用自己的偏好。
+```text
+claim -> evidence source -> allowed certainty -> missing check -> revision
+```
+
+這對修改 Abstract、Discussion、Conclusion、cover letter 和 reviewer response 特別有用。
+
+### 回覆審稿人
+
+skill 會把 reviewer comments 轉成 response table：
+
+```text
+comment -> anchor text -> response -> manuscript change -> evidence
+```
+
+目標是避免只寫「we clarified」但 manuscript 沒有實際修改的情況。
+
+### 節省 AI session token
+
+長 manuscript 建議維護 `.paper/context.md`、`.paper/figure_inventory.md` 和 `.paper/claim_evidence_ledger.md`。之後的 AI session 可以先讀這些濃縮檔案，而不是每次重讀整篇論文。
+
+## 這個 skill 不處理什麼
+
+- 不管理 Zotero。
+- 不設定 Obsidian 或 NotebookLM workspace。
+- 不做 coding-agent delegation。
+- 不只是一般文法檢查器。
+- 不會替使用者編造 scientific assumptions、results 或 citations。
+
+## 測試
+
+執行：
+
+```bash
+python -m pytest -q
+```
+
+測試會檢查 frontmatter、reference files、eval prompts，以及常見亂碼標記。
 
 ## 授權
 

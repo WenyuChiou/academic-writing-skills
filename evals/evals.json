@@ -1,0 +1,35 @@
+{
+  "skill_name": "academic-writing-skills",
+  "evals": [
+    {
+      "id": "abstract_claim_evidence_audit",
+      "prompt": "Audit this abstract for overclaim and unsupported claims. The paper is a simulation study, and the abstract currently says the model proves that flood adaptation eliminates renter vulnerability.",
+      "expected_output": "A claim-evidence audit that flags 'proves' and 'eliminates', recommends hedged simulation-appropriate language, and asks for evidence sources or figure references before preserving precise claims.",
+      "files": []
+    },
+    {
+      "id": "results_paragraph_rewrite",
+      "prompt": "Rewrite this Results paragraph so it is findings-first and mechanism-driven: 'Figure 5 shows the results. The blue line is lower. This demonstrates that insurance is crucial for resilience.'",
+      "expected_output": "A revised paragraph that starts with the finding, adds a mechanism, removes 'demonstrates' and 'crucial', and requests the actual metric or figure value if missing.",
+      "files": []
+    },
+    {
+      "id": "reviewer_response_table",
+      "prompt": "Turn three reviewer comments into a response-to-reviewers table. One comment asks for a new robustness check, one asks for clearer figure labels, and one asks for an out-of-scope experiment we cannot run this month.",
+      "expected_output": "A point-by-point table with comment IDs, anchor text placeholders, response strategy, manuscript change, and evidence. The out-of-scope item should be declined with a concrete reason and a smaller surrogate or limitation note.",
+      "files": []
+    },
+    {
+      "id": "figure_caption_consistency",
+      "prompt": "Check whether a caption and paragraph are consistent. The paragraph cites Figure 6, says damage falls by 36%, but the caption only describes panels a-c and the number is not labeled.",
+      "expected_output": "A figure-text consistency audit that flags missing panel-level citation, missing visible number, incomplete caption coverage, and recommends either adding the 36% annotation/source or softening the prose.",
+      "files": []
+    },
+    {
+      "id": "paper_context_packet",
+      "prompt": "Create a minimal .paper context packet for a manuscript about LLM-driven agent-based flood adaptation with figures, claims, and journal format still in progress.",
+      "expected_output": "A concise plan and file templates for context.md, figure_inventory.md, claim_evidence_ledger.md, journal_format.md, and style_overrides.md, with no invented scientific results.",
+      "files": []
+    }
+  ]
+}

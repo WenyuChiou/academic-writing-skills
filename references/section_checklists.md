@@ -1,282 +1,153 @@
-# Section-by-Section Checklists
+# Section Checklists
 
-Load only the checklist for the section currently being written or reviewed.
-
----
+Load only the subsection needed for the current task.
 
 ## Abstract
 
-**6-Part structure (in order):**
+Recommended six-part order:
 
-1. **CHALLENGE (2–3 sentences)** — Why does this problem matter *scientifically*?
-   Frame the knowledge gap as a scientific question, not a literature gap
-   ("nobody has done this").
-2. **WHAT (1–2 sentences)** — The tool / framework you built. High-level, no
-   technique names yet.
-3. **HOW (2–3 sentences)** — How the methodology works. Agent setup, actions,
-   long-term objective. Avoid namedropping techniques without stating what they
-   do.
-4. **WHERE (1–2 sentences)** — Study area. Put it in the **middle**, never at
-   the beginning. Study area is a testbed, not the employer.
-5. **RESULTS (2–3 sentences)** — Most critical findings in internal logical
-   order (temporal → spatial, or damage → financial).
-6. **CONTRIBUTION (1 sentence)** — The one advance this study provides.
+1. Challenge: why the problem matters scientifically.
+2. What: the framework, dataset, experiment, or argument.
+3. How: the method at a high level.
+4. Where: study area or case, placed in the middle rather than the opening.
+5. Results: the most important findings in logical order.
+6. Contribution: the study-dependent advance.
 
-**Mindset rules**:
-- The abstract is a sales pitch, not a mini-paper summary.
-- Study area = testbed, not location of interest.
-- Every sentence must carry load; delete any whose removal loses nothing.
+Checklist:
 
-**Checklist**:
-- [ ] Opens with scientific challenge, not a study area or technique name
-- [ ] WHERE appears in the middle, not the first sentence
-- [ ] No "Monte Carlo" or technique names without explanation
-- [ ] Sentences under 35 words
-- [ ] No banned words (run `banned_words.md`)
-- [ ] Relative terms preferred over raw numbers (unless journal format requires)
-- [ ] Contribution is model/data-dependent, not common sense
-
----
+- [ ] Opens with scientific challenge, not study area or method name.
+- [ ] Avoids unexplained technique names.
+- [ ] States only claims supported by the claim-evidence ledger.
+- [ ] Keeps sentences under the target journal's word and length constraints.
+- [ ] Does not include precise numbers that are absent from Results or figures.
+- [ ] Ends with a contribution that could not be guessed without the study.
 
 ## Introduction
 
-**Funnel structure (4 stages)**:
+Recommended funnel:
 
-1. **Grand Challenge (1–2 paragraphs)** — broad societal/scientific challenge
-   at global/national scale. Cite authoritative source (policy acts, landmark
-   stats) or historical arc of the field.
-2. **Literature Review + Gap Identification (2–4 paragraphs)** — thematic,
-   not chronological. Each cluster: review → critique → reveal limitation.
-   "However," is the standard gap pivot.
-3. **Research Objective (1 paragraph)** — direct statement: "To address these
-   research gaps, the objective of this paper is to...". Multiple objectives
-   as numbered list: "(1)... (2)... and (3)...".
-4. **Roadmap (final paragraph)** — "The rest of the paper is structured as
-   follows...".
+1. Grand challenge.
+2. Thematic literature review.
+3. Gap and limitation.
+4. Directional expectation or hypothesis.
+5. Research objective and research questions.
+6. Roadmap if the journal expects one.
 
-**Before the RQ**: include a directional hypothesis — "We expect X because Y,
-given Z". Vague RQs without direction trigger rewrite.
+Checklist:
 
-**Checklist**:
-- [ ] Opens at broad scale (not study area)
-- [ ] Gap pivot uses "However," or equivalent
-- [ ] Every cited paper serves a specific argumentative function (no citation
-      dumps)
-- [ ] Directional hypothesis precedes the RQ
-- [ ] RQs are testable (specific, measurable)
-- [ ] Roadmap with explicit section numbers
-
----
+- [ ] Opens at a broad scientific or societal scale.
+- [ ] Literature is thematic, not a citation dump.
+- [ ] Each cited work has a clear argumentative function.
+- [ ] Gap language is specific and fair to prior work.
+- [ ] Research questions are testable.
+- [ ] Hypotheses or expectations state direction when possible.
+- [ ] Roadmap uses the journal's preferred section numbering style.
 
 ## Methods
 
-**Top-down modular structure**:
+Recommended structure:
 
-1. Overview paragraph (what the framework does, module list, SM references)
-2. Physical / natural model
-3. Human / decision model
-4. Coupling mechanism (the key contribution — always explicit)
-5. Scenarios and metrics
-6. Calibration / validation
+1. Overview of the study design or framework.
+2. Data sources and preprocessing.
+3. Model, experiment, or analytical approach.
+4. Coupling or integration mechanism, if applicable.
+5. Scenarios, variables, and metrics.
+6. Calibration, validation, robustness, or sensitivity checks.
+7. Reproducibility details.
 
-**Each module**:
-- What it does (1–2 sentences defining the role)
-- Data sources (with citations)
-- Method / equations (text introduces → equation → "where" definitions)
-- Dynamic updates (how other modules modify this one, if applicable)
+Checklist:
 
-**Equation presentation**:
-- Introduce variables in text BEFORE the equation
-- Centered equation with right-aligned numbering
-- "where" paragraph defining every symbol
-- Move derivations to SM
+- [ ] Overview states what the method does in one paragraph.
+- [ ] Inputs, outputs, units, and time steps are explicit.
+- [ ] Equations define every symbol.
+- [ ] Assumptions include rationale and limitations.
+- [ ] Data cleaning and exclusion rules are stated before analysis.
+- [ ] Software versions, packages, seeds, and code availability are stated.
+- [ ] Human-subject, animal, clinical, or ethics details are included when relevant.
 
-**Simplifying assumptions**:
-- State the simplification
-- Give the rationale briefly
-- Forward pointer: "(implications discussed in Section X)"
+Additional empirical checklist:
 
-**Checklist (simulation / modeling track)**:
-- [ ] Overview states the framework's purpose in one paragraph
-- [ ] Coupling or integration mechanism described explicitly (not just implied)
-- [ ] Each equation has a "where" paragraph
-- [ ] Every SM item referenced with a specific label (Text S1, Figure S2)
-- [ ] Simplifying assumptions have forward pointers to Discussion
-- [ ] No re-definition of terms defined in Introduction
+- [ ] Sample size or power justification.
+- [ ] Randomization and blinding procedures, if applicable.
+- [ ] Inclusion and exclusion criteria.
+- [ ] Statistical assumptions checked.
+- [ ] Effect sizes and confidence intervals, not only p-values.
+- [ ] Outlier rules stated before analysis.
 
-### Empirical / lab-science track (use in addition or instead)
+Additional qualitative or archival checklist:
 
-If the study involves human subjects, wet-lab experiments, clinical data, or
-field measurements, also check:
-
-- [ ] Sample size and power justification (a priori if possible)
-- [ ] Randomization and blinding procedures (if applicable)
-- [ ] Inclusion / exclusion criteria stated with numeric drop-offs
-- [ ] Pre-registration reference (OSF, ClinicalTrials.gov, AEA registry, ...)
-- [ ] Materials / reagents table with vendor, catalog number, RRID
-- [ ] Biological vs. technical replicates clearly distinguished
-- [ ] Statistical test assumptions checked (normality, independence,
-      homogeneity of variance) and reported
-- [ ] Effect sizes with confidence intervals, not just p-values
-- [ ] Data cleaning and outlier rules stated before analysis
-- [ ] Software version and analysis code availability
-
-### Archival / theoretical / qualitative track
-
-- [ ] Primary sources listed with archive locations and dates accessed
-- [ ] Coding scheme or analytical framework described and cited
-- [ ] Inter-rater reliability reported if multiple coders
-- [ ] Reflexivity / positionality statement if warranted by method
-
----
+- [ ] Primary source locations and dates accessed.
+- [ ] Coding scheme or analytical framework.
+- [ ] Inter-rater reliability, if multiple coders.
+- [ ] Reflexivity or positionality statement if warranted.
 
 ## Results
 
-**Dual-scale presentation**: system/basin level + agent/individual level.
+Every paragraph should follow:
 
-**Every paragraph**: Finding → Mechanism → RQ link.
+```text
+finding -> mechanism -> link to research question
+```
 
-**Transition to the next paragraph**: the first sentence must link back to the
-previous finding and introduce the new one (see `writing_principles.md` §1.3).
+Checklist:
 
-**RQ-echo opening**: the first sentence of a section should echo the RQ's key
-terms without literally saying "RQ1 asks...". This signals what the section is
-about to answer.
-
-**Example RQ-echo opening**:
-> *To examine how X and Y shape Z for groups A and B, we compare W between the
-> X scenario and the Y baseline. [Directional preview of the finding.]*
-
-**Checklist**:
-- [ ] Opens with finding, not "Figure X shows..."
-- [ ] Every result has a mechanism sentence
-- [ ] Every counterintuitive finding has run the 5-step audit
-- [ ] No single paragraph/figure bears the entire RQ conclusion —
-      synthesis happens at the end of the section
-- [ ] Precise numbers in prose are visible on the figure
-- [ ] Figure citations specify panel (e.g., "Figure 6e, tail region")
-- [ ] Medians / IQRs / CIs described once, not re-stated every paragraph
-
----
+- [ ] Opens with the finding, not "Figure X shows".
+- [ ] Includes a mechanism sentence grounded in data, method, or literature.
+- [ ] Uses panel-specific figure citations when panels exist.
+- [ ] Precise numbers in prose are visible or traceable.
+- [ ] Counterintuitive findings passed the audit in `writing_principles.md`.
+- [ ] Section-level synthesis appears after the individual findings.
+- [ ] Does not overinterpret model output as causal proof.
 
 ## Discussion
 
-**Structure (flexible, journal-dependent, but typical order)**:
+Typical structure:
 
-1. Restate the main findings in 1–2 sentences (no new detail)
-2. Compare with prior work (where you confirm, where you extend, where you
-   contradict — cite specifically)
-3. Mechanism synthesis: what the model reveals about the system
-4. Implications (policy / practice / theory)
-5. Limitations + future directions
+1. Main findings in brief.
+2. Comparison with prior work.
+3. Mechanism synthesis across results.
+4. Implications for theory, policy, practice, or method.
+5. Limitations and future work.
 
-**Limitations section**:
-- Thematic opening: *"Here we discuss N areas of limitation: [area 1] and
-  [area 2]."* Do not open with validation metrics.
-- Each limitation: identify constraint → explain practical impact → suggest
-  solution / future direction.
-- Cite literature within limitation paragraphs when relevant.
-- Do NOT undermine core results. Reframe as: *"This limitation suggests future
-  research should..."*
-- Hedging language: *"are suggested for future research", "could improve",
-  "We suggest..."*.
+Checklist:
 
-**Checklist**:
-- [ ] Does not restate Results paragraph-by-paragraph
-- [ ] Every comparison to prior work cites specifically
-- [ ] Mechanism synthesis connects findings across RQs
-- [ ] Implications are modest and grounded
-- [ ] Limitations thematic opening, not metric-driven
-- [ ] Future directions hedged
-
----
+- [ ] Does not repeat Results paragraph by paragraph.
+- [ ] Prior-work comparisons are specific and cited.
+- [ ] Mechanism synthesis connects multiple findings.
+- [ ] Implications are modest and evidence-bound.
+- [ ] Limitations state constraint, impact, and next step.
+- [ ] Does not undermine the central contribution.
 
 ## Conclusion
 
-**Structure (usually 2–3 short paragraphs)**:
+Checklist:
 
-1. What the study did and what it found (tied to RQs)
-2. Key mechanism insight or policy implication
-3. One-sentence statement of the broader significance
+- [ ] Mirrors the order of the research questions.
+- [ ] Summarizes what was done and what was found.
+- [ ] Includes the strongest mechanism or implication.
+- [ ] Introduces no new result.
+- [ ] Uses numbers already verified in Results.
+- [ ] Final sentence explains why the study matters beyond the case.
 
-**Checklist**:
-- [ ] Mirrors the RQ order from the Introduction
-- [ ] Numbers match Results (re-run if necessary)
-- [ ] Terminology consistent with Introduction and Methods
-- [ ] No new results introduced
-- [ ] Final sentence lands the broader "why this matters"
-- [ ] No banned words (run `banned_words.md`)
+## Cover Letter
 
----
+Checklist:
 
-## Reviewer Response (Rebuttal)
+- [ ] Addresses the editor or journal correctly.
+- [ ] States the central contribution in one or two sentences.
+- [ ] Explains why the journal is a good venue.
+- [ ] Confirms originality and no concurrent review.
+- [ ] Notes related preprints or prior submissions.
+- [ ] Suggests reviewers only if the journal allows.
+- [ ] Avoids inflated claims not present in the manuscript.
 
-Most journals now require a **point-by-point response table** (reviewer
-comment verbatim → response → change location). Build it as the primary
-deliverable, not an afterthought.
+## Reviewer Response
 
-**Structure for each comment**:
+For reviewer response, use `reviewer_response_workflow.md`. This section is only
+the quick gate:
 
-1. **Comment** (verbatim, numbered per reviewer, e.g., R1.3)
-2. **Response** (student tone — "Fixed.", "Added explanation.",
-   "Yes, confirmed via additional test...")
-3. **Changes in the manuscript** (quote new text with page/line numbers,
-   or cite the new figure/table). For LaTeX, reference the commit or diff.
-
-**Rules**:
-- Every comment → identify the exact anchor text in the manuscript before
-  responding. Do not guess which sentence the comment refers to.
-- Apply the editor-accepted changes first; then revise only what the comments
-  require. Do not rewrite clean paragraphs.
-- Iterative rewrites (abstract, intro) typically need 3–6 passes; set this
-  expectation with the user upfront.
-
-### Productive disagreement
-
-Reviewers are not always right. When a comment rests on a misreading or a
-methodological disagreement, disagree carefully:
-
-- **Cite evidence, not politeness alone**: back up any counter-argument with
-  literature (*"We follow the convention established by [Author, year], who
-  showed that..."*) or with new data (*"To address this concern directly, we
-  ran the suggested test; the result (Figure R1) supports the original
-  interpretation."*).
-- **Reframe before rejecting**: acknowledge the reviewer's underlying
-  concern ("*The reviewer is right that X could be confounded...*"), then
-  explain why your approach addresses it.
-- **Never "we respectfully disagree" alone**: this reads as dismissal.
-  Either provide the argument or accept the comment.
-- **Run the reviewer's own suggested test** when feasible, even if you expect
-  it to support your original finding. Showing the robustness check in the
-  response is more persuasive than words.
-- **Decline only with a reason**: if a requested experiment is out of scope,
-  state why concretely (cost, timeframe, ethics, data access), propose a
-  smaller surrogate where possible, and acknowledge the limit in Discussion.
-
-### Handling contradictory reviewer requests
-
-When R1 asks for X and R2 asks for not-X:
-1. Name the tension explicitly in both responses.
-2. Choose one path with justification, and inform the other reviewer through
-   their response.
-3. If neither can be dropped, request an editor ruling in the cover letter.
-
-### Common rebuttal anti-patterns
-
-- Restating the original text instead of revising it.
-- Agreeing verbally but making no manuscript change.
-- Moving a challenged claim to the SM without changing its substance.
-- Adding a generic "we have clarified the text" without pointing to specific
-  lines.
-
-**Checklist**:
-- [ ] Every reviewer comment has a numbered response
-- [ ] Every response cites the specific change in the manuscript (page/line
-      or figure/table reference)
-- [ ] Changes use track-changes (Word) or diff-visible form (LaTeX)
-- [ ] Student tone, not formal reviewer language
-- [ ] Disagreements are supported by evidence or citation, not just politeness
-- [ ] At least one reviewer suggestion was tested and reported, even when
-      the original finding held
-- [ ] Contradictory requests are explicitly reconciled
-- [ ] No new banned words introduced in the revision
+- [ ] Every comment has a numbered response.
+- [ ] Every response names the manuscript change.
+- [ ] Every disagreement is evidence-backed.
+- [ ] No response says "clarified" without a visible revision.
+- [ ] Contradictory reviewer requests are reconciled explicitly.

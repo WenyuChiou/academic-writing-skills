@@ -1,114 +1,180 @@
 ---
 name: academic-writing-skills
-description: End-to-end manuscript and submission workflow for academic papers. Trigger for full-paper writing, revising against reviewer comments, rebuttal letters, pre-submission audits, multi-section drafting, or figure-text consistency audits. Also for GPT-style / overclaim language detection across a manuscript. Defer to `abstract-writer` for abstract-only rewrites and `professor-yang-review` for critique-only passes. Enforces findings-first structure, mechanism-for-every-result, banned-word audit, figure-text consistency, and per-journal format compliance.
+description: End-to-end academic manuscript workflow for drafting, revision, reviewer response, figure-text consistency, claim-evidence audits, and pre-submission checks. Use this skill whenever a user asks for manuscript sections, paper revision, rebuttal letters, journal compliance, overclaim detection, GPT-style prose cleanup, figure captions, or evidence-backed academic writing. It is especially useful for multi-section papers where context, claims, figures, and reviewer comments must stay consistent across revisions.
 ---
 
-# Academic Writing Skills — Paper Writing & Submission Toolkit
+# Academic Writing Skills
 
-A general, field-agnostic skill for rigorous academic paper writing. The skill itself
-stays universal; journal-specific rules and paper-specific exceptions live inside each
-paper's own repository under `<paper-repo>/.paper/`.
+Field-agnostic workflow for rigorous academic paper writing, revision, rebuttal,
+and submission preparation.
 
-## When to Use
+The skill is intentionally general. Journal-specific rules, advisor preferences,
+paper terminology, evidence maps, and figure inventories belong in each paper
+repository under `.paper/`.
 
-Activate on any of:
-- Writing or editing paper sections
-- Revising against reviewer/advisor comments
-- Checking a draft against journal format
-- Pre-submission audit
-- Critiquing prose for academic rigor, overclaim, or GPT-style writing
-- Adjusting figures or captions
+## When To Use
 
-## Mandatory Workflow
+Use this skill for:
 
-Before producing ANY paper prose, execute these steps in order:
+- Drafting or revising Abstract, Introduction, Methods, Results, Discussion,
+  Conclusion, cover letter, or reviewer response.
+- Auditing overclaim, GPT-style prose, vague mechanism language, or unsupported
+  conclusions.
+- Checking whether claims are backed by figures, tables, statistics, code output,
+  or cited literature.
+- Verifying figure captions, panel references, numerical consistency, and
+  figure-text coupling.
+- Preparing a paper for journal submission or resubmission.
+- Compressing paper context so future LLM sessions do not reread the whole
+  manuscript repeatedly.
 
-### Step 1. Confirm Journal Format
+Do not use this skill for generic literature workspace management, Zotero CRUD,
+Obsidian vault setup, NotebookLM source curation, or coding tasks. Those belong
+to separate research-workspace or coding-agent skills.
 
-Look for `<paper-repo>/.paper/journal_format.md` (the paper repo is the user's
-working directory, or an explicitly specified path).
+## Required Workflow
 
-- **Present** → load it and apply all format rules (word limits, citation style,
-  required sections, figure specs). Cite them back to the user so both sides agree
-  on the contract before writing.
-- **Missing, and task is format-sensitive** (word-count-bound writing, section
-  structure, figure-count audit, submission prep) → stop. Ask the user which
-  journal, then walk through `references/journal_format_template.md` to create it.
-- **Missing, and task is small** (single-sentence polish, banned-word audit,
-  transition fix, typo pass, one-paragraph critique) → **fast-path: skip format
-  confirmation** and proceed directly to Steps 3–5. The user can fill the template
-  later when a format-sensitive task comes up.
+Before producing substantive manuscript prose, follow this sequence.
 
-### Step 2. Load Paper-Specific Overrides
+### 1. Classify The Task
 
-Look for `<paper-repo>/.paper/style_overrides.md`. If present, its rules
-**take precedence** over any universal rule in this skill (e.g., a banned term
-the paper allows, or an extra banned term specific to this paper).
+Identify the requested artifact:
 
-### Step 3. Load Universal Rules
+- New prose: section draft, paragraph rewrite, abstract, cover letter.
+- Diagnostic audit: overclaim, banned words, claim-evidence, figure consistency.
+- Revision: advisor comments, reviewer comments, response table.
+- Submission: journal checklist, declarations, file inventory.
+- Context compression: `.paper/` packet or paper memory update.
+
+For small copyediting tasks, use the fast path in Step 3 and avoid asking for
+unneeded setup.
+
+### 2. Locate The Paper Repository
+
+Use the current working directory unless the user gives another path. Look for:
+
+```text
+<paper-repo>/
+  .paper/
+    journal_format.md
+    style_overrides.md
+    context.md
+    figure_inventory.md
+    claim_evidence_ledger.md
+    reviewer_comments.md
+    submissions_log.md
+```
+
+If `.paper/` does not exist and the task is multi-section, submission-facing, or
+reviewer-facing, offer to create a minimal paper context packet using
+`references/paper_context_packet.md`.
+
+### 3. Confirm Journal Format
+
+Look for `<paper-repo>/.paper/journal_format.md`.
+
+- If present, load it and apply its word limits, citation style, section order,
+  figure specs, declarations, and submission rules.
+- If missing and the task is format-sensitive, stop and ask for the target
+  journal. Use `references/journal_format_template.md` to create the file.
+- If missing and the task is small, proceed without journal setup and state that
+  journal compliance was not checked.
+
+Format-sensitive tasks include abstract word limits, cover letters, section
+order, figure-count audits, declarations, reviewer suggestions, and submission
+preparation.
+
+### 4. Load Paper-Specific Overrides
+
+If `<paper-repo>/.paper/style_overrides.md` exists, apply it after the universal
+rules. It can override banned terms, allowed terms, terminology preferences,
+figure conventions, and advisor-specific instructions.
+
+If `<paper-repo>/.paper/context.md` exists, use it as the preferred compressed
+source of paper context before reading the full manuscript.
+
+### 5. Load Universal Rules
 
 Always load:
-- `references/writing_principles.md` — 7 core principles
-- `references/banned_words.md` — GPT / overclaim / filler detection
 
-### Step 4. Load Task-Specific References
+- `references/writing_principles.md`
+- `references/banned_words.md`
+
+These define findings-first structure, mechanism requirements, overclaim
+language, GPT-style vocabulary, causal-claim checks, and revision discipline.
+
+### 6. Load Task-Specific References
 
 | Task | Load |
-|------|------|
-| Drafting or editing any section | `references/section_checklists.md` (jump to the relevant section) |
-| Working on a figure, caption, or figure-related prose | `references/figure_conventions.md` |
-| Writing or rewriting an abstract | `references/section_checklists.md#abstract` (6-part structure) |
-| Responding to reviewer comments | `references/section_checklists.md#reviewer-response` |
-| Preparing for submission | `references/submission_checklist.md` |
+|---|---|
+| Drafting or editing a manuscript section | `references/section_checklists.md` |
+| Figure, caption, panel, or number consistency | `references/figure_conventions.md` |
+| Claim support, overclaim, abstract/conclusion audit | `references/claim_evidence_audit.md` |
+| Reviewer response or rebuttal letter | `references/reviewer_response_workflow.md` |
+| Submission or resubmission prep | `references/submission_checklist.md` |
+| Creating or refreshing `.paper/` memory | `references/paper_context_packet.md` |
 
-### Step 5. Self-Audit Before Showing User
+Read only the relevant subsection when possible. The goal is to save context,
+not load every reference by default.
 
-After producing any paragraph or block, run an internal audit:
-1. Does every result have a mechanism explanation? (If not, add one.)
-2. Do any sentences contain banned words from `banned_words.md`?
-3. Does every figure/table citation match a real panel?
-4. Do the numbers in the prose match the numbers in the referenced figure?
-5. Does each sentence connect clearly to the previous one?
+### 7. Produce The Artifact
 
-Only show the user after these pass.
+Use the output structure that fits the task:
 
-## Paper-Repo Conventions
+- For prose: revised text first, then a short audit note if useful.
+- For audits: findings table, severity, evidence, recommended fix.
+- For reviewer response: point-by-point table with comment, response, manuscript
+  change, and evidence.
+- For submission: checklist with pass, fail, unknown, and required action.
+- For context compression: concise `.paper/` files that future sessions can load
+  instead of the full paper.
 
-The skill expects each paper's repository to contain:
+When revising existing text, change only what the task requires. Preserve the
+author's voice unless the sentence violates a rigor rule.
 
+### 8. Self-Audit Before Showing The User
+
+Before returning prose or an audit result, check:
+
+1. Does every result state the finding before the figure citation?
+2. Does every finding have a mechanism grounded in data, method, or literature?
+3. Are overclaim verbs and vague intensifiers removed or hedged?
+4. Does every precise number in prose trace to a figure, table, code output, or
+   citation?
+5. Are figure references panel-specific when panels exist?
+6. Do reviewer responses point to a real manuscript change?
+7. Does journal format override any default rule?
+
+If any item fails, fix it before showing the user.
+
+## Paper Context Packet
+
+Use `.paper/` files to reduce repeated token use across sessions. A mature paper
+repository should contain:
+
+```text
+.paper/
+  journal_format.md
+  style_overrides.md
+  context.md
+  figure_inventory.md
+  claim_evidence_ledger.md
+  reviewer_comments.md
+  submissions_log.md
 ```
-<paper-repo>/
-└── .paper/
-    ├── journal_format.md      # Built from journal_format_template.md on first use
-    └── style_overrides.md     # Optional: paper-specific terminology, banned terms
-```
 
-When starting work on a new paper, offer to create the `.paper/` folder and walk
-the user through filling the template.
+`context.md`, `figure_inventory.md`, and `claim_evidence_ledger.md` are the most
+important token-saving files. They let future agents understand the paper's
+research question, claims, figures, and evidence without rereading the full
+manuscript.
 
-## Reference Files
+## Core Principles
 
-All reference files live under `references/`:
-
-| File | Contains |
-|------|----------|
-| `writing_principles.md` | 7 core principles — structure, precision, mechanism, word choice, figures, redundancy, process |
-| `banned_words.md` | Banned single words (by part of speech), banned phrases, banned sentence starters, banned patterns, detection heuristics |
-| `figure_conventions.md` | Figure-text coupling, cross-figure label consistency, define-once rule, annotation style, field-specific conventions |
-| `section_checklists.md` | Per-section checks: Abstract, Introduction, Methods, Results, Discussion, Conclusion, Reviewer Response |
-| `submission_checklist.md` | Pre-submission audit: manuscript, cover letter, suggested reviewers, data availability, figure quality, references |
-| `journal_format_template.md` | Template the user fills in once per target journal; saved to `<paper-repo>/.paper/journal_format.md` |
-| `style_overrides_example.md` | Example of a filled `style_overrides.md` a user can copy into their paper repo |
-
-## Operating Notes
-
-- **Findings-first principle always**: state the result first, then the mechanism.
-  Never open a results paragraph with "Figure X shows...".
-- **Mechanism for every result**: if the reader can still ask "why?" after a finding,
-  the paragraph is incomplete.
-- **Match the user's voice**: the skill enforces rigor, not a specific prose style.
-  Keep the user's sentence cadence and technical vocabulary unless it violates a rule.
-- **Report violations concisely**: when flagging, quote the exact phrase + the rule
-  violated + a specific replacement. Do not lecture.
-- **Track-change mindset for revisions**: when revising existing prose, change only
-  what the comment or audit requires. Do not rewrite clean paragraphs.
+- Findings first, then mechanism.
+- Claims must be traceable to evidence.
+- Figure text, captions, and prose must agree.
+- Journal rules override generic preferences.
+- Paper-specific overrides beat skill defaults.
+- Reviewer response is a change-management task, not a politeness exercise.
+- Preserve scientific uncertainty; do not invent assumptions or results.
+- Prefer concise, evidence-backed prose over generic academic polish.

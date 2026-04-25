@@ -1,102 +1,150 @@
 # academic-writing-skills
 
-A Claude Code skill for rigorous academic paper writing, revision, and submission.
-Field-agnostic. Journal-specific rules and paper-specific exceptions live inside
-each paper's own repository, so the skill itself stays general.
+A shareable Claude/Codex skill for rigorous academic paper writing, revision,
+reviewer response, figure-text consistency, and pre-submission audits.
 
-[繁體中文 README](./README.zh-TW.md)
+[Traditional Chinese README](./README.zh-TW.md)
 
-## What it does
+## Purpose
 
-- Enforces **findings-first + mechanism** structure in every result paragraph
-- Runs a **banned-word audit** catching GPT / overclaim / filler language
-- Checks **figure-text consistency** (numbers in prose must appear on figures)
-- Guides **per-section writing** (Abstract, Introduction, Methods, Results,
-  Discussion, Conclusion)
-- Requires **journal format confirmation** before writing any prose
-- Provides a **pre-submission checklist** covering manuscript, cover letter,
-  reviewer suggestions, data availability, figure specs, and post-submission
-  housekeeping
+This skill helps researchers turn manuscript work into a repeatable workflow:
+
+- Draft sections with findings-first structure.
+- Rewrite results and discussion paragraphs with explicit mechanisms.
+- Detect GPT-style prose, vague intensifiers, and overclaim language.
+- Check whether claims are backed by figures, tables, statistics, code output,
+  or literature.
+- Keep numbers, figure panels, captions, and prose consistent.
+- Build point-by-point reviewer response tables.
+- Prepare journal submission checklists and declaration items.
+- Create `.paper/` context files so future AI sessions use fewer tokens.
+
+The skill is field-agnostic. Journal-specific rules and paper-specific
+terminology live inside each paper repository.
 
 ## Install
 
-Clone into the Claude Code skills directory. Replace `<your-fork>` with your
-GitHub username or the upstream owner:
+Clone the repo into your Claude Code skills directory:
 
 ```bash
-# User-level (all projects)
-git clone https://github.com/<your-fork>/academic-writing-skills ~/.claude/skills/academic-writing-skills
-
-# Project-level (this project only)
-git clone https://github.com/<your-fork>/academic-writing-skills <project>/.claude/skills/academic-writing-skills
+git clone https://github.com/WenyuChiou/academic-writing-skills ~/.claude/skills/academic-writing-skills
 ```
 
-Claude Code auto-discovers skills from these paths; no further setup needed.
+For a single project only:
 
-## Per-paper setup (one-time)
-
-For each paper, create a `.paper/` folder in the paper's git repository:
-
+```bash
+git clone https://github.com/WenyuChiou/academic-writing-skills <project>/.claude/skills/academic-writing-skills
 ```
+
+Claude Code discovers skills from these paths automatically.
+
+## Per-Paper Setup
+
+For each manuscript, create a `.paper/` folder in the paper repository:
+
+```text
 <paper-repo>/
-└── .paper/
-    ├── journal_format.md      # Built from journal_format_template.md
-    └── style_overrides.md     # Optional: paper-specific terminology, banned terms
+  .paper/
+    journal_format.md
+    style_overrides.md
+    context.md
+    figure_inventory.md
+    claim_evidence_ledger.md
+    reviewer_comments.md
+    submissions_log.md
 ```
 
-On first use in a paper repo, the skill will:
-1. Check for `.paper/journal_format.md`
-2. If missing, walk you through filling
-   `references/journal_format_template.md`
-3. Save the completed file to `<paper-repo>/.paper/journal_format.md`
+Minimum setup:
 
-## Skill layout
+1. Copy `references/journal_format_template.md` to
+   `<paper-repo>/.paper/journal_format.md`.
+2. Fill in target journal rules from current author guidelines.
+3. Optionally copy `references/style_overrides_example.md` to
+   `<paper-repo>/.paper/style_overrides.md`.
+4. For long projects, create the context packet described in
+   `references/paper_context_packet.md`.
 
-```
+## Skill Layout
+
+```text
 academic-writing-skills/
-├── SKILL.md                            # Entry point + workflow
-├── references/
-│   ├── writing_principles.md           # 7 core principles
-│   ├── banned_words.md                 # GPT / overclaim / filler detection
-│   ├── figure_conventions.md           # Figure-text coupling + cross-figure rules
-│   ├── section_checklists.md           # Per-section writing checks
-│   ├── submission_checklist.md         # Pre-submission audit
-│   └── journal_format_template.md      # Template for .paper/journal_format.md
-└── README.md
+  SKILL.md
+  references/
+    banned_words.md
+    claim_evidence_audit.md
+    figure_conventions.md
+    journal_format_template.md
+    paper_context_packet.md
+    reviewer_response_workflow.md
+    section_checklists.md
+    style_overrides_example.md
+    submission_checklist.md
+    writing_principles.md
+  evals/
+    evals.json
+  tests/
+    test_skill_integrity.py
 ```
 
-## Workflow
+## Typical Workflows
 
-On any paper-writing request, the skill runs this workflow:
+### Draft or revise a section
 
-1. **Confirm journal format** — load `<paper-repo>/.paper/journal_format.md`
-   or ask the user to fill the template.
-2. **Load paper-specific overrides** — apply any rules in
-   `<paper-repo>/.paper/style_overrides.md` (takes precedence over skill defaults).
-3. **Load universal rules** — `writing_principles.md` and `banned_words.md`.
-4. **Load task-specific references** — section checklists, figure conventions,
-   or submission checklist as appropriate.
-5. **Self-audit before output** — verify mechanism, check banned words, confirm
-   numbers match figures, check sentence-level transitions.
+The skill loads journal format, paper overrides, writing principles, banned
+words, and the relevant section checklist. It then rewrites with:
 
-## What's NOT in the skill
+- finding before figure citation,
+- mechanism after each result,
+- precise terminology,
+- no unsupported overclaim,
+- panel-specific figure references when needed.
 
-- **Specific journal libraries** — each user maintains their own in their paper
-  repos, because journal choice varies by field and user.
-- **Field-specific terminology preferences** — paper-specific
-  `style_overrides.md` handles these.
-- **Personal voice or tone rules** — these belong in user-level CLAUDE.md.
+### Audit claims and evidence
 
-## Philosophy
+The skill builds a claim-evidence ledger:
 
-- **Rigor without style enforcement**: the skill flags violations of universal
-  rigor (overclaim, no mechanism, figure-text mismatch) but does not impose a
-  specific prose style.
-- **Journal-first, prose-second**: format compliance is confirmed before any
-  writing starts.
-- **Paper sovereignty**: each paper's `.paper/` folder owns its overrides. The
-  skill never silently applies its own preferences when a paper has stated
-  otherwise.
+```text
+claim -> evidence source -> allowed certainty -> missing check -> revision
+```
+
+This is useful before editing Abstract, Discussion, Conclusion, cover letter, or
+reviewer response.
+
+### Respond to reviewers
+
+The skill converts comments into a response table:
+
+```text
+comment -> anchor text -> response -> manuscript change -> evidence
+```
+
+It avoids the common failure mode of saying "clarified" without a visible
+manuscript change.
+
+### Save tokens across AI sessions
+
+For long manuscripts, the skill can maintain `.paper/context.md`,
+`.paper/figure_inventory.md`, and `.paper/claim_evidence_ledger.md`. Future
+sessions can read those concise files before opening the full manuscript.
+
+## What This Skill Is Not
+
+- It is not a Zotero manager.
+- It is not an Obsidian or NotebookLM workspace skill.
+- It is not a coding-agent delegation skill.
+- It is not a generic grammar checker.
+- It does not invent scientific assumptions, results, or citations.
+
+## Testing
+
+Run integrity tests with:
+
+```bash
+python -m pytest -q
+```
+
+The tests validate frontmatter, bundled references, eval prompts, and common
+mojibake/encoding corruption markers.
 
 ## License
 

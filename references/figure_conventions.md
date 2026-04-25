@@ -1,148 +1,116 @@
 # Figure Conventions
 
-These rules govern figures, captions, and figure-text coupling. They apply to
-every manuscript figure regardless of field.
-
----
+Rules for figures, captions, panel references, and figure-text coupling.
 
 ## 1. Figure-Text Coupling
 
-Any precise number in the prose must be **visible on the figure**.
+Any precise number in prose must be visible or traceable:
 
-- Prose says "insurance covers 36%" → the figure shows 36% as an annotation,
-  endpoint label, or an axis value the reader can verify directly.
-- Prose says "cumulative damage reaches \$350K per household" → the figure has
-  "\$350K" labeled at the endpoint.
+- visible annotation on the figure,
+- readable axis value,
+- table entry,
+- code output,
+- cited source.
 
-If the figure does not display the number, either:
-1. Add the annotation to the figure, or
-2. Replace the precise number in the prose with a qualitative description.
+If prose says "insurance covers 36%", the figure, table, or source must let the
+reader verify 36%. If not, add the evidence or use qualitative wording.
 
-**Never** let a precise percentage or dollar value appear only in the text
-while the figure gives no way to verify it.
+## 2. Cross-Figure Consistency
 
----
+Use the same label, color, and annotation style for the same concept across the
+paper.
 
-## 2. Cross-Figure Label Consistency
+Examples:
 
-The same concept uses the same label, color, and annotation style across every
-figure in the paper.
+- Do not switch between "flood damage", "gross loss", and "GUL" unless the
+  paper defines a real distinction.
+- If adaptation is red in Figure 5, keep it red in Figure 6.
+- If a difference label uses "Delta = X" in one figure, use the same format
+  elsewhere.
 
-- If Figure 5's legend says "Flood damage", Figure 6 cannot switch to
-  "GUL" or "Gross damage".
-- If Figure 5 colors the adaptation scenario red, Figure 6 colors it red too.
-- If Figure 7 uses a "Δ = X" annotation with a boxed label, Figure 8 uses the
-  same annotation style, not a different one.
+## 3. Define Once
 
-Inconsistencies force the reader to re-learn notation every figure.
+Define a term on first use, then use the same term. Do not redefine concepts in
+Results or Discussion that were already defined in Methods.
 
----
+## 4. Annotation Style
 
-## 3. Define Once, Use Thereafter
+Standardize:
 
-A term defined in the first figure's legend or caption is used as-is in every
-later figure. Do not re-define it.
-
-- Figure 5 caption: *"Cumulative per-household flood damage (i.e., total
-  damage before insurance recovery)..."*
-- Figure 6 caption: uses "flood damage" directly — no re-definition.
-
-This applies within the text too: a term defined in the Methods is never
-re-defined in Results or Discussion.
-
----
-
-## 4. Annotation Style Consistency
-
-Standardize annotation styles across figures:
-
-| Annotation | Style rule |
+| Annotation | Rule |
 |---|---|
-| Endpoint dollar labels | same font size, same colored bold text, same rounded white box on every figure |
-| Gap / difference markers | same arrow style (`<->`), same label format (`Δ = X` or `Tail gap = X`), same white box with colored edge |
-| Severe-event shading | same fill color across figures; keep distinct from any data color used |
-| Panel labels | same position ((a), (b), ...) — usually top-left, same font weight |
-
----
+| Endpoint labels | same font size, color, and box style |
+| Gap markers | same arrow style and same label format |
+| Shaded event windows | same fill color and transparency |
+| Panel labels | same position and font weight |
+| Statistical markers | same threshold notation and caption explanation |
 
 ## 5. Caption Format
 
-Standard caption pattern:
+Recommended pattern:
 
-> *Figure X. [Brief one-sentence description of the figure as a whole]. (a)
-> [panel description], (b) [panel description], (c) [panel description].*
+```text
+Figure X. One-sentence description of the figure as a whole. (a) Panel
+description, (b) panel description, and (c) panel description.
+```
 
 Rules:
-- **Never start a caption sentence with parentheses.** Lead with "Figure X." and
-  a descriptive sentence.
+
+- Do not start a caption sentence with a parenthetical panel label.
 - Describe each panel individually.
-- Keep captions self-contained: the reader should understand the figure without
-  returning to the body text.
-- Define all abbreviations used in the figure on first use (in the caption, or
-  confirm they were defined in the main text).
+- Define abbreviations on first use unless already defined in the manuscript.
+- Make captions self-contained enough for a reader scanning figures.
 
----
+## 6. Panel-Level Citations
 
-## 6. Figure Citations at Panel Level
+Cite specific panels:
 
-Cite the specific panel, not just the figure:
-- *"(Figure 5b, blue line)"*
-- *"(Figure 6e, tail region)"*
-- Not: *"(Figure 5)"* when the claim is about one panel.
+- "Figure 5b, blue line"
+- "Figure 6e, tail region"
 
-Panel-level precision lets the reader verify in one glance.
+Avoid bare figure citations when the claim depends on one panel.
 
----
+## 7. Field Conventions
 
-## 7. Field-Specific Plot Conventions
+Prefer standard plots when the field has one:
 
-Use the standard chart type of the domain. Do not invent a plot when a
-standard one exists.
-
-| Field | Standard plot |
+| Field | Typical plot |
 |---|---|
-| Catastrophe / insurance | **Exceedance Probability (EP) curve** — x = P(L > x), loss on y |
-| Hydrology time series | hydrograph with calendar x-axis |
-| Regression diagnostics | residual plot + Q-Q + scale-location panels |
-| Sensitivity analysis | tornado plot or Sobol bar chart |
-| Probabilistic forecasts | reliability diagram + sharpness histogram |
+| Catastrophe or insurance | exceedance probability curve |
+| Hydrology | hydrograph with calendar x-axis |
+| Regression diagnostics | residual, Q-Q, and scale-location panels |
+| Sensitivity analysis | tornado plot or Sobol index bar chart |
+| Clinical or survival analysis | Kaplan-Meier curve when appropriate |
+| Meta-analysis | forest plot |
+| Probabilistic forecasts | reliability diagram and sharpness histogram |
 
-**Be careful with conventions that assume specific data properties.** For
-example, rank-based **return periods** (rank / (n + 1)) require **independent
-events**. If the data are generated by replicating the same hazard sequence
-with stochastic agent decisions, the "return period" interpretation does not
-hold — use plain exceedance probability instead.
+Check assumptions behind the convention. For example, rank-based return periods
+require independent events. If the same hazard sequence is reused with stochastic
+agent decisions, use exceedance probability instead of return period language.
 
----
+## 8. Accessibility
 
-## 8. Color and Accessibility
+- Use colorblind-safe palettes.
+- Do not rely on color alone.
+- Use line styles, markers, direct labels, or annotations.
+- Keep background shading distinct from data colors.
 
-- Use colorblind-safe palettes (e.g., IBM, Okabe-Ito, ColorBrewer).
-- Avoid red-green as the only contrast.
-- Do not rely on color alone — use line style, marker shape, or direct labels.
-- Shaded background for emphasis (e.g., "severe flood years") should be
-  **visually distinct from any data color** used in the figure. Light gray
-  is safe when blue is a data color.
+## 9. File Quality
 
----
+- Prefer vector formats for line art: PDF, SVG, EPS.
+- Use 600 DPI for raster line art when raster is required.
+- Use 300 DPI or the journal's requirement for photos and halftones.
+- Check exact journal requirements in `.paper/journal_format.md`.
 
-## 9. DPI and File Format
+## 10. Figure Audit
 
-- Submit vector (PDF, SVG, EPS) when possible.
-- If raster (PNG/TIFF) is required: 600 DPI for line art, 300 DPI for photos.
-- Check the target journal's exact requirements in
-  `<paper-repo>/.paper/journal_format.md`.
+Before returning figure-related prose or captions, check:
 
----
-
-## 10. Figure Audit Before Showing the User
-
-For every figure produced or modified:
-
-1. Does each panel have a label (a), (b), (c), ...?
-2. Are all axes labeled with units?
-3. Are all plotted quantities defined in either the legend or caption?
-4. Do annotations use the same style as other figures in the paper?
-5. Does every precise number cited in the prose appear on the figure?
-6. Does the chart type match the field convention?
-7. Is the severe/shaded background distinct from any data color?
+- [ ] Every panel has a label.
+- [ ] Axes include units.
+- [ ] Plotted quantities are defined.
+- [ ] Legend labels match prose terminology.
+- [ ] Precise prose numbers are visible or traceable.
+- [ ] Caption describes each panel.
+- [ ] Chart type matches field convention.
+- [ ] Colors and annotations are consistent with other figures.
