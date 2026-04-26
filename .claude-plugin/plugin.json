@@ -1,0 +1,13 @@
+{
+  "name": "academic-writing-skills",
+  "description": "Manuscript revision, claim-evidence audit, banned-word / humanize pass, figure-text consistency, journal-format check, reviewer response.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Wenyu Chiou"
+  },
+  "homepage": "https://github.com/WenyuChiou/academic-writing-skills",
+  "repository": "https://github.com/WenyuChiou/academic-writing-skills",
+  "license": "MIT",
+  "keywords": ["academic-writing", "manuscript", "research", "writing", "peer-review"],
+  "skills": ["./"]
+}
