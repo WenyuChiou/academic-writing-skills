@@ -24,19 +24,21 @@ terminology live inside each paper repository.
 
 ## Install
 
-Clone the repo into your Claude Code skills directory:
+Install via the [`ai-research-skills` Claude Code marketplace](https://github.com/WenyuChiou/ai-research-skills):
 
 ```bash
-git clone https://github.com/WenyuChiou/academic-writing-skills ~/.claude/skills/academic-writing-skills
+claude plugin marketplace add WenyuChiou/ai-research-skills
+claude plugin install academic-writing-skills@ai-research-skills --scope user
 ```
 
-For a single project only:
-
-```bash
-git clone https://github.com/WenyuChiou/academic-writing-skills <project>/.claude/skills/academic-writing-skills
-```
-
-Claude Code discovers skills from these paths automatically.
+> **Migrating from a previous `git clone`?** The skill repo was
+> restructured to a `skills/<name>/SKILL.md` layout that the marketplace
+> requires. The old `git clone https://github.com/WenyuChiou/academic-writing-skills ~/.claude/skills/academic-writing-skills`
+> path no longer loads (Claude Code's user-skills loader only scans one
+> level deep). Either uninstall the cloned copy
+> (`rm -rf ~/.claude/skills/academic-writing-skills`) and run the
+> marketplace install above, or clone the inner subdirectory:
+> `git clone -n https://github.com/WenyuChiou/academic-writing-skills /tmp/aws && mv /tmp/aws/skills/academic-writing-skills ~/.claude/skills/academic-writing-skills`.
 
 ## Per-Paper Setup
 

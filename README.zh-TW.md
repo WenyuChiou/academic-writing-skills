@@ -21,19 +21,19 @@
 
 ## 安裝
 
-安裝到 Claude Code 的 user-level skills 目錄：
+從 [`ai-research-skills` Claude Code marketplace](https://github.com/WenyuChiou/ai-research-skills) 裝：
 
 ```bash
-git clone https://github.com/WenyuChiou/academic-writing-skills ~/.claude/skills/academic-writing-skills
+claude plugin marketplace add WenyuChiou/ai-research-skills
+claude plugin install academic-writing-skills@ai-research-skills --scope user
 ```
 
-只安裝到單一 project：
-
-```bash
-git clone https://github.com/WenyuChiou/academic-writing-skills <project>/.claude/skills/academic-writing-skills
-```
-
-Claude Code 會自動偵測這些路徑下的 skills。
+> **之前用 `git clone` 裝的？** 為了符合 marketplace 規範，這個 repo 的
+> SKILL.md 已從 root 搬到 `skills/<name>/SKILL.md`；舊的
+> `git clone ... ~/.claude/skills/academic-writing-skills` 路徑現在
+> 不會載入（Claude Code 的 user-skills loader 只掃一層）。請刪掉舊的
+> （`rm -rf ~/.claude/skills/academic-writing-skills`）改走上面的
+> marketplace 安裝。
 
 ## 每篇論文的一次性設定
 
