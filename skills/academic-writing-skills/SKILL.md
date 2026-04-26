@@ -93,6 +93,13 @@ figure conventions, and advisor-specific instructions.
 If `<paper-repo>/.paper/context.md` exists, use it as the preferred compressed
 source of paper context before reading the full manuscript.
 
+If `<paper-repo>/.paper/claims.yml` or `<paper-repo>/.paper/figures.yml` exist
+(produced by the `paper-memory-builder` skill), prefer them over re-reading the
+manuscript when running claim-evidence audits, figure-text consistency checks,
+or banned-word audits — the YAML is the authoritative shared memory layer
+across writing sessions. Refresh the YAML via `paper-memory-builder` if the
+manuscript has changed since the YAML was last written.
+
 ### 5. Load Universal Rules
 
 Always load:
