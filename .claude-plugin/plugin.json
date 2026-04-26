@@ -8,6 +8,14 @@
   "homepage": "https://github.com/WenyuChiou/academic-writing-skills",
   "repository": "https://github.com/WenyuChiou/academic-writing-skills",
   "license": "MIT",
-  "keywords": ["academic-writing", "manuscript", "research", "writing", "peer-review"],
-  "skills": ["./"]
+  "keywords": [
+    "academic-writing",
+    "manuscript",
+    "research",
+    "writing",
+    "peer-review"
+  ],
+  "skills": [
+    "."
+  ]
 }
