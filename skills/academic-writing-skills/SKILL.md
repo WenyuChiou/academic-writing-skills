@@ -100,6 +100,11 @@ or banned-word audits — the YAML is the authoritative shared memory layer
 across writing sessions. Refresh the YAML via `paper-memory-builder` if the
 manuscript has changed since the YAML was last written.
 
+If `<paper-repo>/.paper/revision_history.yml` exists, read it before answering
+"what changed since last submission" / "did I address reviewer N's comment" /
+"which figures have been touched in the last 2 rounds". The history is the
+audit trail; don't infer it from the current manuscript alone.
+
 ### 5. Load Universal Rules
 
 Always load:
