@@ -214,6 +214,55 @@ Do not polish before the logic is fixed. The normal order is:
 4. word choice,
 5. transitions and rhythm.
 
+### 4.6 Domain-Native Vocabulary
+
+Match terminology to the field the paper is being submitted to. A reviewer in
+water resources, ecology, epidemiology, or materials science scans for the
+field's native vocabulary; CS, engineering, or general-AI jargon that has
+slipped in from a method paper or a software repository signals "this author
+is not from our field" before the science is even read. Vocabulary drift is
+most common in papers that began as a software-method or AI-method draft and
+were later refocused for a domain audience.
+
+Before settling on a noun or verb, check:
+
+1. Would a senior reviewer in the target field use this exact word in their
+   own paper?
+2. If the word originated in CS, software engineering, general AI, or
+   reinforcement learning, is there a field-native equivalent the reviewer
+   would prefer?
+3. Has a novel term that names the paper's contribution been defined inline
+   with a field-native concrete example at first use?
+
+Per-paper vocabulary swaps belong in `.paper/style_overrides.md` under a
+"Domain Vocabulary Swaps" section. The paper's banned-term and preferred-
+term lists are field-specific, not universal — `banned_words.md` covers
+field-agnostic GPT-style vocabulary, but field-foreign jargon is whatever
+the target reviewer pool does not use.
+
+Worked example: a human-water agent-based modelling paper for a water-
+journal audience.
+
+| Field-foreign (CS / engineering / generic) | Water-resources native |
+|---|---|
+| "validator stack", "rule engine" | "institutional rule checks", "rule layer" |
+| "intercepts proposals before execution" | "screens each proposed decision before the agent acts" |
+| "numerical state in, numerical action out" | "behavioural equation that takes observed conditions and returns a numerical action" |
+| "compressed into coefficients" | "absorbed into the equation's calibrated parameters" |
+| "computational interior" | "the model's parameter values" |
+| "cross-theory portability" | "the same agent architecture hosts different behavioural theories by changing the rule set, not the decision code" |
+| "decomposed across self-reported cognitive coordinates" | "broken down by the agent's own reported appraisal of scarcity and capacity" |
+| "factor these" (as verb for separating) | "separate the two" |
+| "theoretical mobility" (invented term) | "switching the underlying behavioural assumption requires rewriting the decision equation" |
+
+The same logic applies in any field: ecology papers should not adopt RL
+terminology wholesale; materials-science papers should not import LLM-paper
+phrasing; epidemiology papers should keep clinical-research vocabulary even
+when the model is computational.
+
+Apply this audit after structure and mechanism are correct, alongside the
+banned-word audit in `banned_words.md`.
+
 ## 5. Voice, Tense, And Rhythm
 
 ### 5.1 Active And Passive Voice

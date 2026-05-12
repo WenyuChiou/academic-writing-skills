@@ -156,6 +156,10 @@ Before returning prose or an audit result, check:
 5. Are figure references panel-specific when panels exist?
 6. Do reviewer responses point to a real manuscript change?
 7. Does journal format override any default rule?
+8. Does the prose use terminology a reviewer in the target field would
+   recognise, or has CS / engineering / general-AI jargon slipped in from a
+   method draft or software repository? See `references/writing_principles.md`
+   §4.6 and `.paper/style_overrides.md` "Domain Vocabulary Swaps".
 
 If any item fails, fix it before showing the user.
 

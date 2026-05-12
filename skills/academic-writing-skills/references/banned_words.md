@@ -3,6 +3,12 @@
 Items below should be deleted, replaced, quantified, or justified. Paper-specific
 overrides in `.paper/style_overrides.md` take precedence.
 
+This file covers field-agnostic GPT-style vocabulary. For field-foreign
+jargon that signals "this author is not from our discipline" to reviewers
+(CS / engineering / AI terms in a water, ecology, materials, or
+epidemiology paper), see `writing_principles.md` §4.6 and the "Domain
+Vocabulary Swaps" section of `.paper/style_overrides.md`.
+
 ## 1. Single Words
 
 ### Verbs

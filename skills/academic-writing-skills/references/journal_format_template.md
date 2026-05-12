@@ -14,6 +14,21 @@ target journal's current author guidelines.
 | Submission portal URL | |
 | Date guidelines checked | YYYY-MM-DD |
 
+## Target Field And Audience
+
+| Field | Value |
+|---|---|
+| Primary research field | |
+| Typical reader background | |
+| Reviewer pool likely background | |
+| Field-foreign vocabulary risk | low / medium / high |
+
+If the manuscript originated as or imported text from a software-method or
+general-AI source, vocabulary risk is at least medium — fill the "Domain
+Vocabulary Swaps" section of `.paper/style_overrides.md` with the
+field-foreign terms that must be replaced before submission. See
+`references/writing_principles.md` §4.6.
+
 ## Length Limits
 
 | Item | Limit |
