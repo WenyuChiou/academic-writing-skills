@@ -4,6 +4,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+SKILL_DIR = ROOT / "skills" / "academic-writing-skills"
 
 
 def read(path: str) -> str:
@@ -11,7 +12,9 @@ def read(path: str) -> str:
 
 
 def test_skill_frontmatter_is_valid():
-    content = read("SKILL.md")
+    # SKILL.md lives under skills/<name>/ since the 2026-04-26 marketplace
+    # auto-discovery migration (commit fca3dc7).
+    content = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
     assert content.startswith("---\n")
     frontmatter = content.split("---", 2)[1]
     assert re.search(r"^name:\s*academic-writing-skills$", frontmatter, re.M)
@@ -35,7 +38,8 @@ def test_referenced_files_exist():
         "references/style_overrides_example.md",
     ]
     for relative_path in required:
-        assert (ROOT / relative_path).exists(), relative_path
+        # Same migration: references/ moved under skills/<name>/.
+        assert (SKILL_DIR / relative_path).exists(), relative_path
 
 
 def test_eval_file_has_realistic_prompts():
