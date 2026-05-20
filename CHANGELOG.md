@@ -16,6 +16,21 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 - `.github/workflows/test.yml` — runs `python -m pytest tests/ -q` on
   push + PR to `main`.
 
+### Changed
+
+- **Frontmatter description surfaces the `paper-memory-builder`
+  upstream-dep ordering hint.** Body text already explained the
+  contract ("if `.paper/claims.yml` exists, prefer it; refresh via
+  paper-memory-builder if changed", lines 96-100) and
+  `WenyuChiou/ai-research-skills/CONTRIBUTING.md` §2 documents the
+  cross-skill artifact contract — but the frontmatter `description`
+  field never mentioned it. Auto-trigger by Claude Code routes via
+  description-keyword matching, so the trigger-time hint to consider
+  running `paper-memory-builder` first for multi-section /
+  claim-evidence / reviewer-response work was missing. Closes the
+  D6 / Phase 2 Item #6 gap surfaced by the `ai-research-skills`
+  Task #27 dogfood walk.
+
 ### Fixed
 
 - `tests/test_skill_integrity.py` — pre-existing bug: tests pointed at

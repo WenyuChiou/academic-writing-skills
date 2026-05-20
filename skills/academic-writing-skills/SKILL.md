@@ -1,6 +1,6 @@
 ---
 name: academic-writing-skills
-description: End-to-end academic manuscript workflow for drafting, revision, reviewer response, figure-text consistency, claim-evidence audits, and pre-submission checks. Use this skill whenever a user asks for manuscript sections, paper revision, rebuttal letters, journal compliance, overclaim detection, GPT-style prose cleanup, figure captions, or evidence-backed academic writing. It is especially useful for multi-section papers where context, claims, figures, and reviewer comments must stay consistent across revisions.
+description: End-to-end academic manuscript workflow for drafting, revision, reviewer response, figure-text consistency, claim-evidence audits, and pre-submission checks. Use this skill whenever a user asks for manuscript sections, paper revision, rebuttal letters, journal compliance, overclaim detection, GPT-style prose cleanup, figure captions, or evidence-backed academic writing. It is especially useful for multi-section papers where context, claims, figures, and reviewer comments must stay consistent across revisions. When `.paper/claims.yml` and `.paper/figures.yml` exist (produced by the `paper-memory-builder` skill), use them as ground truth instead of re-reading the manuscript; if they are absent and the task is multi-section / claim-evidence / reviewer-response work, suggest running `paper-memory-builder` first to build the memory layer.
 ---
 
 # Academic Writing Skills
