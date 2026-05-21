@@ -11,6 +11,19 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+### Added
+
+- **CI `skill-version-guard` job** (`.github/workflows/test.yml`).
+  Blocks a PR that changes `skills/` content without also bumping
+  `.claude-plugin/plugin.json` `version`. The marketplace plugin
+  cache is keyed on the version string, so an un-bumped skill change
+  ships to `main` but never reaches user installs. The `0.2.0`
+  release itself was a fix for exactly this — the `§8 step 10`
+  change had merged without a version bump (dogfood finding V1b).
+  This guard makes that a hard CI failure at PR time. Workflow-only
+  change; no plugin version bump needed (the guard does not fire on
+  `.github/` edits).
+
 ## [0.2.0] - 2026-05-21
 
 ### Added
