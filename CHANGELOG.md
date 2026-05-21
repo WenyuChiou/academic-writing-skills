@@ -18,6 +18,25 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ### Changed
 
+- **§8 Self-Audit gains a mandatory claim-gap cross-reference (step 10).**
+  The 2026-05-20 `ai-research-skills` dogfood found a real gap: a
+  banned-word / overclaim audit could pass a sentence as
+  linguistically clean while that sentence asserted a claim the
+  `paper-memory-builder` memory layer recorded as `status: gap`
+  (unevidenced). The skill consumed `.paper/claims.yml` as a context
+  *source* (§4) but never cross-referenced audited prose against the
+  `gap` status. Step 10 now makes it mandatory: every assertive
+  sentence mapping to a `status: gap` claim must be flagged
+  `[MATERIAL GAP]`, on overclaim / banned-word / claim-evidence
+  audits alike — a clean-prose verdict never overrides a `gap`
+  finding. Step 10 carries an inline `claims.yml` row-schema note
+  (`id` / `text` / `status` one of `draft | supported | rejected |
+  gap`) so a session that has not loaded `paper-memory-builder` can
+  still execute it, plus an "assertive sentence" heuristic. Closes
+  the dogfood C2 PARTIAL finding for audits orchestrated through
+  `SKILL.md` §8 — a future caller that runs a banned-word pass as a
+  standalone subagent without loading `SKILL.md` is out of this
+  step's reach.
 - **Frontmatter description surfaces the `paper-memory-builder`
   upstream-dep ordering hint.** Body text already explained the
   contract ("if `.paper/claims.yml` exists, prefer it; refresh via

@@ -171,6 +171,32 @@ Before returning prose or an audit result, check:
    vocabulary? Are semicolons and colons in body prose limited to at most
    one each per paragraph (citation lists and equation parentheticals
    excluded)? See `references/writing_principles.md` §4.4 and §4.7.
+10. Claim-gap cross-reference: if `<paper-repo>/.paper/claims.yml` exists,
+    map every assertive sentence in the produced prose or the audited text
+    to a claim row, and flag any sentence that maps to a `status: gap`
+    claim with `[MATERIAL GAP]`.
+
+    - **`claims.yml` row schema** (produced by the `paper-memory-builder`
+      skill): each row has `id` (`C1`, `C2`, ...), `text`, and `status`
+      — one of `draft | supported | rejected | gap`. A `gap` row also
+      carries a one-line `gap_reason`. `status: gap` means the memory
+      layer has recorded the claim as having no backing evidence
+      artifact. If you have not loaded `paper-memory-builder` and the
+      schema is unclear, treat any row whose `status` is literally
+      `gap` as a material gap.
+    - **What counts as "assertive"**: sentences with a numeric claim,
+      a definitive verb (shows, proves, confirms, establishes, exceeds,
+      demonstrates), or an absolute comparative. Hedged sentences
+      (suggests, is consistent with, may indicate) are not assertive
+      and need no mapping.
+    - This check is mandatory on overclaim audits, banned-word audits,
+      and claim-evidence audits alike: a sentence can be linguistically
+      clean (no banned words, no overclaim verbs) and still assert a
+      `status: gap` claim. A clean-prose verdict never overrides a
+      `status: gap` finding.
+    - If `.paper/claims.yml` is absent and the task is a claim-evidence
+      or overclaim audit, say so explicitly and suggest running
+      `paper-memory-builder` first.
 
 If any item fails, fix it before showing the user.
 
