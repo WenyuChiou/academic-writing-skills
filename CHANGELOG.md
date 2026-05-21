@@ -11,6 +11,8 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-05-21
+
 ### Added
 
 - `.github/workflows/test.yml` — runs `python -m pytest tests/ -q` on
@@ -18,6 +20,14 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ### Changed
 
+- **Plugin version `0.1.0` → `0.2.0`** (`.claude-plugin/plugin.json`).
+  Required so the §8 step-10 change below actually reaches user
+  installs: the marketplace plugin cache directory is keyed on this
+  version string. A 2026-05-21 Phase 9 behavioral verification found
+  step 10 was correct on `main` but absent from the cached `0.1.0`
+  bundle — the change had shipped to the repo but not to installs.
+  Bumping the version forces a fresh cache directory on
+  `claude plugin update academic-writing-skills@ai-research-skills`.
 - **§8 Self-Audit gains a mandatory claim-gap cross-reference (step 10).**
   The 2026-05-20 `ai-research-skills` dogfood found a real gap: a
   banned-word / overclaim audit could pass a sentence as
@@ -87,12 +97,13 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
 ### Known limitations (as of 0.1.0)
 
 - No GitHub Actions CI yet — pytest is run locally before each
-  commit. (CI added in the [Unreleased] section above.)
+  commit. (CI added in [0.2.0] above.)
 - Tested by one graduate-student researcher; not corpus-scale
   validated.
 - Domain lean: water-resources / agent-based modeling phrasing
   conventions surface in some references; the core workflow is
   domain-neutral.
 
-[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/WenyuChiou/academic-writing-skills/releases/tag/v0.1.0
