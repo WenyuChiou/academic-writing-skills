@@ -11,6 +11,47 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-05-23
+
+### Fixed
+
+- **`claim_evidence_audit.md` is now schema-aware of `.paper/claims.yml`**
+  (`skills/academic-writing-skills/references/claim_evidence_audit.md`,
+  plugin `0.2.0 → 0.2.1`). Cross-plugin friction surfaced by Stage 7-8
+  dogfood (`~/.claude/audits/dogfood_runs/2026-05-23-paper-memory-academic-writing-stage-7-8/VERIFICATION.md`
+  F-cross1): SKILL.md prominently says *"When `.paper/claims.yml` and
+  `.paper/figures.yml` exist (produced by `paper-memory-builder`),
+  use them as ground truth instead of re-reading the manuscript"* —
+  but `claim_evidence_audit.md`, the actual workflow doc, had **zero
+  mentions** of any schema field (`evidence_artifacts`, `status`,
+  `risk`, `sentence_in_manuscript`, `figures[].supports_claims`).
+  An agent walking the audit doc had to either re-read the manuscript
+  (defeating the contract) or guess how to map the YAML.
+  - Adds a new `## When .paper/claims.yml is present (schema-aware
+    audit, v0.2.1+)` section that maps each schema field to an
+    audit-table column.
+  - Documents the **status → certainty allowed** mapping:
+    `supported` → direct verbs OK; `draft` → hedged verbs only;
+    `gap` → NONE, must apply Disposition (1-5).
+  - Documents **status transitions during audit** (e.g. `gap → draft`
+    when Disposition 5 adds evidence; `draft → supported` when audit
+    confirms wording matches evidence strength) so changes can be
+    recorded in `.paper/revision_history.yml`.
+  - Documents the **figures.yml cross-check** — every claim with
+    `figure_or_table` entries should appear in the corresponding
+    `figures[].supports_claims` list; mismatches flag for
+    `paper-memory-builder` refresh.
+  - Includes schema-aware audit pseudocode showing how to walk
+    `claims.yml` while enforcing the anti-leakage rule.
+  - Same shape of fix as the v0.3.13 (PR #97) F1 fix on the
+    `research-context-compressor` Output spec (consumer-side
+    workflow doc gains schema awareness so the producer-side
+    contract is operational at workflow level).
+  - Pure additive prose change to one reference file — no schema
+    changes, no SKILL.md edits, no behaviour change for users
+    auditing without a `.paper/claims.yml` present (they still
+    follow the legacy generic-audit workflow above).
+
 ### Added
 
 - **CI `skill-version-guard` job** (`.github/workflows/test.yml`).
@@ -117,6 +158,7 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   conventions surface in some references; the core workflow is
   domain-neutral.
 
-[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/WenyuChiou/academic-writing-skills/releases/tag/v0.1.0

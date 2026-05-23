@@ -33,6 +33,81 @@ Use this table when auditing:
 | ... | Abstract sentence 4 | Figure 5b | suggests | "proves" overclaims | replace with "suggests" |
 ```
 
+## When `.paper/claims.yml` is present (schema-aware audit, v0.2.1+)
+
+If `<paper-repo>/.paper/claims.yml` and `<paper-repo>/.paper/figures.yml`
+exist (produced by `paper-memory-builder`), use the structured schema
+fields as ground truth instead of re-extracting from the manuscript.
+This is how the SKILL.md "ground truth" promise becomes operational at
+the workflow level.
+
+**Schema fields → audit-table columns:**
+
+| `claims.yml` field | Audit-table column | Notes |
+|---|---|---|
+| `claims[].sentence_in_manuscript` | **Claim** | Verbatim claim text — copy as-is. |
+| Manuscript section (inferred from sentence; not in schema) | **Location** | E.g. "Abstract sentence 4", "Result §4.2". |
+| `claims[].evidence_artifacts` + `claims[].figure_or_table` | **Evidence Source** | A bulleted list of all artifacts. Empty list ⟺ `status: gap` (anti-leakage). |
+| `claims[].status` → certainty | **Certainty Allowed** | See status→certainty mapping below. |
+| `claims[].risk` | **Problem** | Pre-identified reviewer-pushback risk; use verbatim or refine. |
+| Auditor's revision proposal | **Revision** | Per "Certainty Rules" section above. |
+| Disposition (1-5) | **Disposition** | Per "Disposition When A Claim Cannot Be Verified". |
+
+**Status → Certainty allowed mapping:**
+
+| `claims[].status` | Allowed language | Action if audit finds the wording stronger |
+|---|---|---|
+| `supported` | "shows", "demonstrates", "estimates" (direct verbs OK) | None — wording matches evidence strength. |
+| `draft` | "suggests", "is consistent with", "appears to", "is associated with" | Soften wording to hedged verbs. |
+| `gap` | NONE — claim must be revised or moved | Apply Disposition (1-5). If keeping the claim, populate `evidence_artifacts` and lift to `draft` first. |
+| `rejected` | Claim dropped from manuscript | No audit row needed — it's audit-trail only. |
+
+**Status transitions during audit:**
+
+The audit can drive these `claims[].status` transitions (record changes
+in `.paper/revision_history.yml`):
+
+- `draft` → `supported`: audit confirmed evidence is solid AND wording is appropriately hedged.
+- `draft` → `gap`: audit found the `evidence_artifacts` pointer is stale/missing/insufficient → strip `evidence_artifacts`, add `gap_reason`, hand back to `paper-memory-builder` for refresh.
+- `gap` → `draft`: Disposition 5 applied — added evidence, populated `evidence_artifacts`, moved `gap_reason` to `risk`.
+- any → `rejected`: Disposition 1 applied — claim dropped, kept for audit trail.
+
+**Cross-checking with `figures.yml`:**
+
+For each claim with `figure_or_table` entries, verify the
+corresponding `figures[]` entry in `.paper/figures.yml` lists the
+claim id in its `supports_claims:` field. A figure that supports a
+claim but doesn't list it (or vice versa) is a cross-reference drift —
+flag for `paper-memory-builder` refresh.
+
+```python
+# Schema-aware audit pseudocode (wrap in open() for real usage)
+import yaml
+with open('.paper/claims.yml') as fh:
+    data = yaml.safe_load(fh)
+
+for claim in data['claims']:
+    if not claim.get('evidence_artifacts') and claim['status'] != 'gap':
+        raise SchemaViolation("anti-leakage rule")
+    if claim['status'] == 'gap' and not claim.get('gap_reason'):
+        raise SchemaViolation("gap claim missing gap_reason")
+
+    # Audit row from schema fields
+    row = {
+        'claim': claim.get('sentence_in_manuscript', claim['text']),
+        'evidence': claim.get('evidence_artifacts') or [],
+        'certainty_allowed': STATUS_TO_CERTAINTY[claim['status']],
+        'problem': claim.get('risk', ''),
+        # ...
+    }
+```
+
+**Why this matters:** without the schema mapping, the auditor must
+re-read the manuscript and re-derive each row, defeating the
+"`.paper/` as ground truth" promise. With the mapping, the audit
+is a structured pass over the YAML — faster, more consistent, and
+machine-checkable for anti-leakage / certainty drift.
+
 ## Required Checks
 
 - [ ] The claim has a visible or cited evidence source.

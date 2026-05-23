@@ -1,7 +1,7 @@
 {
   "name": "academic-writing-skills",
   "description": "Manuscript revision, claim-evidence audit, banned-word / humanize pass, figure-text consistency, journal-format check, reviewer response.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "Wenyu Chiou"
   },
