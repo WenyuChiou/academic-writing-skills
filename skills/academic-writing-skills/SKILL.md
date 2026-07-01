@@ -88,7 +88,11 @@ preparation.
 
 If `<paper-repo>/.paper/style_overrides.md` exists, apply it after the universal
 rules. It can override banned terms, allowed terms, terminology preferences,
-figure conventions, and advisor-specific instructions.
+figure conventions, and advisor-specific instructions. For a filled-in generic
+template see `references/style_overrides_example.md`; for a guide to calibrating
+your own group's overrides (field-native word exemptions, a corpus-measured
+em-dash budget, the hard-flag stock-phrase list, and per-section signatures)
+see `references/style_overrides_customization.md`.
 
 If `<paper-repo>/.paper/context.md` exists, use it as the preferred compressed
 source of paper context before reading the full manuscript.

@@ -17,11 +17,21 @@ Correct:
 
 Wrong:
 
-> Figure 5 shows that renters relocate to safer tracts, which reduces damage by
-> 19%.
+> Figure 5 shows the relocation and damage results.
 
-Why: readers scan for the finding. Opening with "Figure X shows" hides the
-scientific point.
+Why: readers scan for the finding. A bare callout with no finding, no number,
+and no mechanism hides the scientific point.
+
+Scope. This rule governs the Abstract and finding-density prose. Inside a
+Results section, a figure-first or table-first callout ("Figure 5 shows ...",
+"Table 3 presents ...") is acceptable and is the dominant paragraph form in
+some fields (hydrology, earth science, and modeling papers), PROVIDED the
+number and its mechanism follow immediately in the same paragraph ("Figure 5
+shows [pattern], a [number] change. This is because [mechanism]."). The
+failure mode is a bare callout with no number and no mechanism, which still
+hides the point. The finding must still arrive; it may share the opening
+sentence with the figure pointer rather than precede it. See
+`section_checklists.md` Results.
 
 ### 1.2 Mechanism For Every Result
 
@@ -116,6 +126,24 @@ Better (extends beyond the question):
 This extends §1.1 (findings first) and §1.6 (hypothesis-driven questions) to the
 section level: the Results earn the answers; the Discussion earns the meaning.
 
+### 1.9 Paragraph-To-Question Alignment
+
+Where the paper has research sub-questions, align the paragraphs to them so the
+reader can trace each question through the paper. In the Introduction's
+literature review, let each thematic paragraph build toward one sub-question
+(the second review paragraph sets up SQ1, the third sets up SQ2, and so on),
+and make the review hook to the specific gap this study addresses rather than
+survey the field for its own sake. Carry the same order into the Results (one
+result thread per sub-question, in the same sequence) and into the Conclusion
+(one finding per sub-question). This alignment is the paper's organizing spine;
+it keeps the review, the results, and the conclusion answering the same
+questions in the same order.
+
+The alignment is a default to aim for, not a rule that forbids a paragraph
+from serving two questions or a question from needing two paragraphs. State the
+mapping only where it helps the reader; do not add "which answers SQ1" labels
+to the prose.
+
 ## 2. Precision
 
 ### 2.1 No Overclaim
@@ -140,9 +168,23 @@ Prefer "is consistent with", "suggests", "appears to", "is associated with",
 
 For inferential or simulation results, avoid the overclaim verbs *confirms*,
 *demonstrates*, *proves*, *establishes*, and *shows*; replace them with
-*indicates*, *suggests*, or *is consistent with*. Reserve *confirms* / *shows*
-for facts the reader can verify directly, such as a value printed in a figure
-or a setting the authors controlled.
+*indicates*, *suggests*, or *is consistent with* (except the neutral reporting
+frame "the results show that ..."; see the exemption below). Reserve *confirms*
+/ *shows* for facts the reader can verify directly, such as a value printed in
+a figure or a setting the authors controlled.
+
+Exemption: the neutral reporting frame "the results show/showed that ...",
+"the [model] results showed that ...", or "results suggest/indicate that ..."
+is allowed as a way to introduce model output. The frame reports what the run
+produced; it is not the overclaim. The hedge lives on the INTERPRETATION that
+follows the number: report the computed output directly, and hedge the causal
+or predictive leap from the number to its meaning. Do not mechanically rewrite
+this frame to "is consistent with", which reads as if the model output itself
+were uncertain. The exemption covers the frame only, not the whole sentence: an
+unhedged causal or predictive verb after the frame still triggers §2.1 and the
+§3.3 causal-claim audit. "The results show that adaptation reduces damage by
+19%" is acceptable; "The results show that adaptation causes a 19% reduction"
+still overclaims.
 
 ### 2.2 No Vague Intensifiers
 
@@ -310,10 +352,11 @@ Common replacements:
 - Semicolon as a list separator with already-comma-rich items: acceptable;
   this is the one case the rule does not apply.
 
-The Yang-group convention is stricter (≤1 semicolon per paragraph); other
-journals are more permissive. Apply the stricter form by default — it
-forces clearer sentence boundaries and reads less like LLM-generated prose,
-which tends to over-use both marks.
+Some advisor groups are stricter (at most one semicolon per paragraph); other
+journals are more permissive. Record the group's preference in
+`.paper/style_overrides.md`. Apply the stricter form by default. It forces
+clearer sentence boundaries and reads less like LLM-generated prose, which
+tends to over-use both marks.
 
 ### 4.5 Polish After Structure
 

@@ -11,6 +11,67 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-06-30
+
+Calibrated the skill against a corpus of a water-resources advisor group's own
+published papers (the corpus analysis is kept private to the maintainer). The
+rules below were verified against that corpus and passed a multi-angle
+adversarial gate (contradiction, corpus-faithfulness, dogfooding, anonymization,
+cross-reference, apply-time usability) followed by a skeptic adjudication pass.
+All additions are field-agnostic; group-specific values belong in
+`.paper/style_overrides.md`.
+
+### Added
+
+- **Study Area section checklist** in `references/section_checklists.md` (the
+  skill previously had none): a four-move funnel (name-and-quantify or a
+  first-person testbed selection, stakes via a "However" pivot, an optional
+  institutional or legal layer, and a mandatory testbed justification),
+  two-layer hedging, a justify-every-choice lint, and an explicit carve-out
+  that the abstract "no study area first" rule does not apply here.
+- **§1.9 Paragraph-To-Question Alignment** in
+  `references/writing_principles.md`: align Introduction review paragraphs,
+  Results threads, and Conclusion findings to the research sub-questions
+  (P2 to SQ1, P3 to SQ2), stated as a default to aim for rather than a rigid
+  rule.
+- **`references/style_overrides_customization.md`**: a generic template for
+  calibrating a group's own overrides (a corpus-measurement recipe, a
+  field-native word allow-list, the universal stock-phrase hard-flag list, an
+  em-dash budget method, and per-section prompts). Registered in the integrity
+  test manifest.
+- Introduction, Abstract, Results, Discussion, and Conclusion checklist items
+  for the patterns the corpus surfaced: reporting frames, who/where/time in the
+  abstract WHERE, an optional forward-looking closer, figure-first Results
+  openings, an opt-in certainty-grading ladder and validation-before-projection,
+  a mandatory enumerated Limitations-and-future-work subsection, and a
+  conclusion that mirrors the introduction's numbered objectives with a
+  capability-phrased generalizability sentence.
+
+### Changed
+
+- **§1.1 Findings First** now scopes its figure-first ban to the abstract and
+  finding-density prose, and permits a figure-first callout in Results when the
+  finding's magnitude and its mechanism follow immediately in the same
+  paragraph.
+- **§2.1 No Overclaim** exempts the neutral reporting frame "the results
+  show/showed that ..." (the hedge lives on the interpretation that follows,
+  not on the frame). An unhedged causal or predictive verb after the frame
+  still trips the overclaim and causal-claim audits.
+- **`references/banned_words.md`**: a new Field-Native Exemptions subsection
+  turns field-native words ("robust", "comprehensive", "facilitate") into a
+  density check rather than a per-occurrence ban; "novel"/"first" are
+  permitted-but-hedged in body sections when fenced by "to the best of our
+  knowledge" and routed to a priority check, and stay banned in the abstract.
+  The §6 overclaim table and the em-dash rule cross-reference the exemptions.
+- Directional expectations in the Introduction are now optional rather than
+  expected, and grand-narrative openers are discouraged.
+
+### Notes
+
+- Anonymization: a pre-existing advisor-group name in
+  `references/writing_principles.md` §4.4 was generalized to "some advisor
+  groups"; no advisor, paper, or basin is named anywhere in the skill.
+
 ## [0.2.4] - 2026-06-14
 
 ### Added
@@ -201,7 +262,9 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   conventions surface in some references; the core workflow is
   domain-neutral.
 
-[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.3...HEAD
+[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.4...v0.3.0
+[0.2.4]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.0...v0.2.1

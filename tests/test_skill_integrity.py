@@ -36,6 +36,7 @@ def test_referenced_files_exist():
         "references/paper_context_packet.md",
         "references/journal_format_template.md",
         "references/style_overrides_example.md",
+        "references/style_overrides_customization.md",
     ]
     for relative_path in required:
         # Same migration: references/ moved under skills/<name>/.

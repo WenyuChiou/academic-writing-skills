@@ -50,7 +50,42 @@ limit on semicolons and colons in body prose, see `writing_principles.md`
 Delete or quantify: crucial, pivotal, intricate, meticulous, vibrant, robust,
 nuanced, multifaceted, comprehensive, paramount, imperative, indispensable,
 noteworthy, novel, innovative, holistic, seamless, substantial, substantive,
-major, dramatic.
+major, dramatic. Several of these are field-native in some disciplines (see
+Field-Native Exemptions below).
+
+### Field-Native Exemptions
+
+This exemption governs BOTH the verb table and the adjective list above. Some
+of these words are ordinary register in a given discipline and appear in a
+large share of that field's published papers, not as GPT tells. In water
+resources and hydrology, for example, the verb "facilitate" and the adjectives
+"robust" (a robust optimization algorithm, a statistically robust test),
+"comprehensive", and "substantial" are used routinely and legitimately. In such
+a field, treat these as a density check (flag only when one word appears many
+times in a single section, i.e. word-spamming) rather than a per-occurrence
+ban. Record the exempt list for a given paper or group in
+`.paper/style_overrides.md` under "Allowed Terms Despite Defaults". The
+multi-word stock PHRASES in §2 and §2a are the reliable tells and stay banned
+regardless of field.
+
+"novel" and "first" are permitted-but-hedged in BODY sections (Introduction,
+Methods, Discussion, Conclusion) when they denote a genuine methodological or
+model first, and only when fenced in the same or the next clause by a
+knowledge-scope qualifier ("to the best of our knowledge, this is the first
+study that ..."). An unfenced "novel"/"first" is still an overclaim. Results is
+excluded from this list on purpose: a "novel"/"first" claim in a Results
+paragraph is almost always a contribution claim rather than a finding, so move
+it to the Introduction or Discussion. In the ABSTRACT the stricter rule holds:
+keep "novel"/"first"/"unprecedented"/"pioneering" out entirely (see the
+`abstract-writer` skill), because the abstract has no room to establish the
+scope that justifies the claim.
+
+The fence is necessary, not sufficient: "to the best of our knowledge" lowers
+the tone but does not establish the fact. Route every fenced novelty or
+priority claim to a literature and priority check (the `verify-references`
+skill or the claim-evidence ledger); do not clear it on the qualifier string
+alone. A prior work existing anywhere makes the claim false even when the
+qualifier precedes it.
 
 "Significant" is allowed for statistical significance. It is not allowed as a
 generic intensifier.
@@ -162,6 +197,15 @@ Some journals allow long dashes and some advisors dislike them. The universal
 rule is overuse: more than two long dashes in one paragraph usually signals
 sloppy or AI-like prose. Follow `.paper/style_overrides.md`.
 
+Corpus-calibrated baseline (optional, stronger than the universal rule). If a
+`.paper/style_overrides.md` sets an em-dash budget from the target author's own
+published corpus, benchmark against that baseline rather than a whole-field
+mean. Prefer the author's own first-author and corresponding-author papers over
+papers where they are a middle author, since co-author drafts run heavier on
+dashes and would inflate the threshold. For a template that shows how to
+measure and set this budget from your own corpus, see
+`style_overrides_customization.md`.
+
 ### Adjective Stacks
 
 Avoid noun piles such as "comprehensive robust multi-scale framework". Use one
@@ -199,6 +243,13 @@ For inferred findings, avoid:
 | explains | may explain, is consistent with |
 
 Use "significant" only with statistical evidence.
+
+Reporting-frame exemption. "the results show/showed that ...", "the [model]
+results showed that ...", and "results suggest/indicate that ..." are allowed
+as neutral frames for introducing model or experiment output. The frame is not
+the overclaim; the hedge belongs on the interpretation that follows the number.
+Do not remap this frame to "is consistent with". See `writing_principles.md`
+§2.1.
 
 ## 7. Mechanistic Trigger Phrases
 
