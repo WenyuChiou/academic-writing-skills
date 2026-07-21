@@ -11,6 +11,30 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-07-21
+
+### Added
+
+- `references/results_writing.md`: a Results-specific workflow for selecting
+  the current evidence baseline, organizing prose around patterns rather than
+  inventories, avoiding Methods duplication, grounding each number in the
+  source actually cited, and distinguishing descriptive, within-group, and
+  formal between-group comparisons.
+- Two behavioral evals covering reader-visible evidence and subgroup
+  comparison boundaries.
+
+### Changed
+
+- Results guidance now uses `main pattern -> selective evidence -> result-level
+  synthesis` as the default arc. A mechanism is included only when directly
+  supported, preventing descriptive or associational findings from acquiring
+  invented causal explanations.
+- Figure-text and claim-evidence audits now check authoritative artifact
+  versions, reader-visible support, exact source attribution, sample counts,
+  model names, and run counts in both directions.
+- Plugin version bumped from `0.3.0` to `0.3.1` so marketplace installs receive
+  the updated skill content.
+
 ## [0.3.0] - 2026-06-30
 
 Calibrated the skill against a corpus of a water-resources advisor group's own
@@ -262,7 +286,8 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   conventions surface in some references; the core workflow is
   domain-neutral.
 
-[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.4...v0.3.0
 [0.2.4]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.2...v0.2.3

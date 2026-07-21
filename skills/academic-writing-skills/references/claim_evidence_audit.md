@@ -111,9 +111,14 @@ machine-checkable for anti-leakage / certainty drift.
 ## Required Checks
 
 - [ ] The claim has a visible or cited evidence source.
+- [ ] The evidence is visible to the reader, not merely known from an internal
+      dataset, prior draft, or author memory.
 - [ ] The certainty matches the evidence type.
 - [ ] The number in the claim matches the source.
 - [ ] The source is current, not an old draft or stale run.
+- [ ] The paragraph cites the source that actually contains the claimed value;
+      a nearby figure citation is not treated as support when the value is
+      absent from that figure.
 - [ ] The mechanism is either observed, specified in Methods, or framed as an
       interpretation.
 - [ ] The same claim is worded consistently across Abstract, Results,
@@ -175,6 +180,8 @@ Before finalizing Abstract or Conclusion:
 3. Remove claims without evidence.
 4. Reduce certainty where evidence is inferential.
 5. Verify all numbers against current Results or figures.
+6. Verify that each citation points to the artifact that actually displays or
+   documents the claim.
 
 ## Reviewer Response Gate
 

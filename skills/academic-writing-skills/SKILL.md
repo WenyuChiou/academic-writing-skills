@@ -124,6 +124,7 @@ language, GPT-style vocabulary, causal-claim checks, and revision discipline.
 | Task | Load |
 |---|---|
 | Drafting or editing a manuscript section | `references/section_checklists.md` |
+| Drafting or revising Results | `references/results_writing.md` plus the Results subsection of `references/section_checklists.md` |
 | Figure, caption, panel, or number consistency | `references/figure_conventions.md` |
 | Claim support, overclaim, abstract/conclusion audit | `references/claim_evidence_audit.md` |
 | Reviewer response or rebuttal letter | `references/reviewer_response_workflow.md` |
@@ -152,7 +153,8 @@ author's voice unless the sentence violates a rigor rule.
 
 Before returning prose or an audit result, check:
 
-1. Does every result state the finding before the figure citation?
+1. Does every result state the main pattern at the opening or immediately after
+   a figure-first callout?
 2. Does every finding have a mechanism grounded in data, method, or literature?
 3. Are overclaim verbs and vague intensifiers removed or hedged?
 4. Numeric verifiability: re-grep every numeric token in Abstract, Results,
@@ -210,6 +212,19 @@ Before returning prose or an audit result, check:
     Conclusion already appears in Methods or Results per
     `references/writing_principles.md` §4.9. Flag any term, compound, or
     near-synonym the body never uses; fix the body's term first, then reuse it.
+13. Results evidence baseline: for Results work, confirm that every cited
+    figure, table, caption, and analysis output belongs to the current
+    authoritative version. Resolve disagreements before drafting; do not blend
+    values from different versions. See `references/results_writing.md` §1.
+14. Evidence attribution: verify that the source cited in the paragraph
+    actually contains the reported number or pattern. Information known from
+    the dataset but absent from that source must be linked to the correct
+    reader-visible evidence, added to a display, or removed. See
+    `references/results_writing.md` §4.
+15. Group-comparison language: do not convert different descriptive values or
+    one significant and one nonsignificant within-group path into a formal
+    between-group difference without a valid comparison test. See
+    `references/results_writing.md` §5.
 
 If any item fails, fix it before showing the user.
 

@@ -9,8 +9,8 @@
     },
     {
       "id": "results_paragraph_rewrite",
-      "prompt": "Rewrite this Results paragraph so it is findings-first and mechanism-driven: 'Figure 5 shows the results. The blue line is lower. This demonstrates that insurance is crucial for resilience.'",
-      "expected_output": "A revised paragraph that starts with the finding, adds a mechanism, removes 'demonstrates' and 'crucial', and requests the actual metric or figure value if missing.",
+      "prompt": "Rewrite this Results paragraph around its main pattern and supporting evidence: 'Figure 5 shows the results. The blue line is lower. This demonstrates that insurance is crucial for resilience.'",
+      "expected_output": "A revised paragraph that states the pattern, requests the actual metric or figure value, removes 'demonstrates' and 'crucial', and adds a mechanism only if the available evidence supports one.",
       "files": []
     },
     {
@@ -29,6 +29,18 @@
       "id": "paper_context_packet",
       "prompt": "Create a minimal .paper context packet for a manuscript about LLM-driven agent-based flood adaptation with figures, claims, and journal format still in progress.",
       "expected_output": "A concise plan and file templates for context.md, figure_inventory.md, claim_evidence_ledger.md, journal_format.md, and style_overrides.md, with no invented scientific results.",
+      "files": []
+    },
+    {
+      "id": "results_reader_visible_evidence",
+      "prompt": "Revise a Results paragraph that says 24% of respondents had prior flood experience and cites Figure 5, but Figure 5 does not display that percentage. The percentage exists only in an internal survey summary.",
+      "expected_output": "An evidence-grounding diagnosis that does not attribute 24% to Figure 5, then either cites or adds a reader-visible table or supplement, or removes the percentage and preserves only the supported result.",
+      "files": []
+    },
+    {
+      "id": "results_group_comparison_boundary",
+      "prompt": "Rewrite subgroup Results where one path is significant for NMG and nonsignificant for MG, but no formal between-group test was run. The current draft says the pathway is significantly stronger for NMG.",
+      "expected_output": "A revision that reports the two within-group results separately, avoids claiming a statistically significant group difference, and states that a formal between-group test is required for that conclusion.",
       "files": []
     }
   ]
