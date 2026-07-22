@@ -29,6 +29,7 @@ def test_referenced_files_exist():
         "references/writing_principles.md",
         "references/banned_words.md",
         "references/section_checklists.md",
+        "references/results_writing.md",
         "references/figure_conventions.md",
         "references/claim_evidence_audit.md",
         "references/reviewer_response_workflow.md",
@@ -83,3 +84,14 @@ def test_readmes_describe_public_positioning():
         assert ".paper/" in text
     assert "Traditional Chinese README" in english
     assert "English README" in traditional_chinese
+
+
+def test_results_guardrails_are_registered():
+    skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+    results = (SKILL_DIR / "references/results_writing.md").read_text(
+        encoding="utf-8"
+    )
+    assert "references/results_writing.md" in skill
+    assert "current authoritative" in results
+    assert "source that actually" in results
+    assert "between-group" in results

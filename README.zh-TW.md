@@ -9,7 +9,7 @@
 這個 skill 把常見的論文工作流程變成可重複執行的檢查與寫作規則：
 
 - 用 findings-first 結構撰寫章節。
-- 幫 Results 和 Discussion 補上明確 mechanism。
+- 讓 Results 依主要模式、關鍵證據與有依據的 mechanism 或結果層次總結組織。
 - 找出 GPT 式空泛語言、過度宣稱和模糊強化詞。
 - 檢查每個 claim 是否有 figure、table、統計結果、程式輸出或文獻支撐。
 - 確認數字、figure panel、caption 和正文一致。
@@ -71,6 +71,7 @@ academic-writing-skills/
     figure_conventions.md
     journal_format_template.md
     paper_context_packet.md
+    results_writing.md
     reviewer_response_workflow.md
     section_checklists.md
     style_overrides_example.md
@@ -89,7 +90,8 @@ academic-writing-skills/
 skill 會讀取期刊格式、paper overrides、writing principles、banned words，以及相關 section checklist，然後檢查：
 
 - finding 是否放在 figure citation 前面，
-- 每個 result 是否有 mechanism，
+- Results 是否先呈現主要模式，再選擇關鍵數值支持，
+- mechanism 是否有資料、Methods 規則或文獻支撐；若沒有，是否以結果層次總結收尾，
 - 術語是否一致，
 - 是否有 unsupported overclaim，
 - 有 panel 的圖是否使用 panel-level citation。

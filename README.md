@@ -12,7 +12,8 @@ reviewer response, figure-text consistency, and pre-submission audits.
 This skill helps researchers turn manuscript work into a repeatable workflow:
 
 - Draft sections with findings-first structure.
-- Rewrite results and discussion paragraphs with explicit mechanisms.
+- Organize Results around main patterns, selective evidence, and supported
+  mechanisms or result-level synthesis.
 - Detect GPT-style prose, vague intensifiers, and overclaim language.
 - Check whether claims are backed by figures, tables, statistics, code output,
   or literature.
@@ -79,6 +80,7 @@ academic-writing-skills/
     figure_conventions.md
     journal_format_template.md
     paper_context_packet.md
+    results_writing.md
     reviewer_response_workflow.md
     section_checklists.md
     style_overrides_example.md
@@ -98,7 +100,7 @@ The skill loads journal format, paper overrides, writing principles, banned
 words, and the relevant section checklist. It then rewrites with:
 
 - finding before figure citation,
-- mechanism after each result,
+- supported mechanism or result-level synthesis after each main pattern,
 - precise terminology,
 - no unsupported overclaim,
 - panel-specific figure references when needed.

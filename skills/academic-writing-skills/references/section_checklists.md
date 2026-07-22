@@ -166,32 +166,34 @@ Additional qualitative or archival checklist:
 
 ## Results
 
-Every paragraph should follow this arc. The finding may share the opening
-sentence with a figure-first callout in fields where that is the norm (see the
-first checklist item):
+Load `results_writing.md` for the full workflow. Every paragraph should follow
+this arc. The finding may share the opening sentence with a figure-first
+callout in fields where that is the norm:
 
 ```text
-[finding, or figure-first callout] -> number -> mechanism -> link to research question
+[main pattern, or figure-first pattern] -> selective evidence -> result-level synthesis
 ```
 
 Checklist:
 
 - [ ] Opens with the finding OR with a figure/table callout that is followed
-      immediately, in the same paragraph, by the number that quantifies the
-      stated finding (its effect size or magnitude, not merely a count of
-      panels, tracts, or samples) and its mechanism.
-      A bare "Figure X shows ..." with no number and no mechanism is the
-      failure; "Figure X shows [pattern], which is [number]. This is because
-      [mechanism]" is acceptable and is the dominant form in some fields
-      (see `writing_principles.md` §1.1 scope note).
+      in the same paragraph by selective evidence that establishes the stated
+      pattern. A bare "Figure X shows the results" is the failure.
 - [ ] Where the paper has sub-questions, the results follow the same order as
       the questions, one result thread per sub-question (paragraph-to-question
       alignment; see `writing_principles.md` §1.9).
-- [ ] Includes a mechanism sentence grounded in data, method, or literature,
-      often via an explicit causal connector ("This is because ...", "The
-      reason for this is that ...", "A possible reason is that ...").
+- [ ] Adds a mechanism only when it is grounded in data, a method rule, or a
+      cited source; otherwise ends with supported result-level synthesis.
 - [ ] Uses panel-specific figure citations when panels exist.
-- [ ] Precise numbers in prose are visible or traceable.
+- [ ] Precise numbers come from the current authoritative version and are
+      visible in the source actually cited by the paragraph.
+- [ ] Reports only the values needed to establish the main pattern, clearest
+      comparison, important exception, or uncertainty; it does not narrate
+      every node, coefficient, or panel value.
+- [ ] Does not repeat Methods definitions or model architecture unless a brief
+      reminder is necessary to interpret the result.
+- [ ] Distinguishes descriptive group differences, separate within-group
+      significance, and formal between-group tests.
 - [ ] Counterintuitive findings passed the audit in `writing_principles.md`.
 - [ ] Section-level synthesis appears after the individual findings.
 - [ ] Does not overinterpret model output as causal proof.

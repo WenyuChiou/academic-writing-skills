@@ -15,6 +15,17 @@ Any precise number in prose must be visible or traceable:
 If prose says "insurance covers 36%", the figure, table, or source must let the
 reader verify 36%. If not, add the evidence or use qualitative wording.
 
+Run the check in both directions:
+
+- prose to display: every reported value and pattern is present in the cited
+  source;
+- display to prose and caption: labels, sample sizes, units, and definitions do
+  not contradict the surrounding text.
+
+A value stored in an internal dataset does not make a figure citation valid if
+the figure does not show that value. Cite the correct reader-visible source or
+change the prose.
+
 ## 2. Cross-Figure Consistency
 
 Use the same label, color, and annotation style for the same concept across the
@@ -114,3 +125,9 @@ Before returning figure-related prose or captions, check:
 - [ ] Caption describes each panel.
 - [ ] Chart type matches field convention.
 - [ ] Colors and annotations are consistent with other figures.
+- [ ] Figure, caption, table, and prose use the same sample size, group counts,
+      means, uncertainty values, model names, and run counts.
+- [ ] The audited figure is the current authoritative version rather than an
+      older embedded image or export.
+- [ ] When two artifacts conflict, the conflict is resolved against the
+      designated analysis output before either artifact is edited.

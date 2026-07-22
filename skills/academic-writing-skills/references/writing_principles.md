@@ -19,29 +19,31 @@ Wrong:
 
 > Figure 5 shows the relocation and damage results.
 
-Why: readers scan for the finding. A bare callout with no finding, no number,
-and no mechanism hides the scientific point.
+Why: readers scan for the finding. A bare callout that does not identify a main
+pattern or provide selective evidence hides the scientific point.
 
 Scope. This rule governs the Abstract and finding-density prose. Inside a
 Results section, a figure-first or table-first callout ("Figure 5 shows ...",
 "Table 3 presents ...") is acceptable and is the dominant paragraph form in
-some fields (hydrology, earth science, and modeling papers), PROVIDED the
-number and its mechanism follow immediately in the same paragraph ("Figure 5
-shows [pattern], a [number] change. This is because [mechanism]."). The
-failure mode is a bare callout with no number and no mechanism, which still
-hides the point. The finding must still arrive; it may share the opening
-sentence with the figure pointer rather than precede it. See
-`section_checklists.md` Results.
+some fields (hydrology, earth science, and modeling papers), PROVIDED the main
+pattern and selective evidence follow immediately in the same paragraph. Add a
+mechanism only when it is directly supported. The failure mode is a bare
+callout that does not identify or support a pattern. The finding must still
+arrive; it may share the opening sentence with the figure pointer rather than
+precede it. See `section_checklists.md` Results.
 
-### 1.2 Mechanism For Every Result
+### 1.2 Explain Results At The Supported Level
 
-Every result needs a mechanism sentence. A complete result paragraph usually has:
+A complete Results paragraph usually has:
 
 ```text
-finding -> mechanism -> implication for the research question
+main pattern -> selective evidence -> result-level synthesis
 ```
 
-If the reader can still ask "why?" after the finding, the paragraph is not done.
+Add a brief mechanism only when data, a method rule, or a cited source directly
+supports it. Do not invent a causal explanation for descriptive means,
+subgroup patterns, or statistical associations merely to make every paragraph
+answer "why?". Broader or speculative explanations belong in Discussion.
 
 ### 1.3 Sentence-To-Sentence Continuity
 
@@ -216,13 +218,17 @@ Avoid bare "Figure 5" when the claim depends on one panel.
 ### 2.5 Numbers Must Match Source Output
 
 Re-check numbers after every revision. Abstract numbers, Results numbers, code
-output, tables, and figure annotations drift during editing.
+output, tables, and figure annotations drift during editing. Confirm that the
+sources belong to the same current analysis or figure generation; do not merge
+values from stale and current versions.
 
 ### 2.6 Numbers Must Be Visible Or Traceable
 
-Any precise number in prose must be visible on a figure, in a table, in code
-output, or in a cited source. If the reader cannot verify it, either add the
-evidence or soften the prose.
+Any precise number in prose must be visible on a figure, in a table, in
+reader-accessible analysis output, or in a cited source. Internal knowledge or
+an uncited prior draft is not enough. If the reader cannot verify it, either
+add or cite the evidence, or soften the prose. The paragraph must cite the
+source that actually contains the value.
 
 ### 2.7 Symbols Must Match
 
@@ -247,14 +253,14 @@ Report the audit before treating the result as a contribution.
 
 ### 3.2 Mechanisms Need Evidence — And A Section
 
-Mechanism explanations in Results should point to either:
+When a mechanism explanation is included in Results, it should point to either:
 
 - a visible quantity in another figure or table,
 - a method rule already described,
 - a cited theory or empirical finding.
 
-**Length rule.** Results mechanism = one (rarely two) sentence that names the
-cause and points to the evidence. Anything longer — multi-result synthesis,
+**Length rule.** A supported Results mechanism uses one (rarely two) sentence
+that names the cause and points to the evidence. Anything longer — multi-result synthesis,
 theory tie-in, comparison with prior literature, or speculative explanation —
 belongs in Discussion §3 (Mechanism synthesis).
 
@@ -267,8 +273,10 @@ duplicates rather than synthesises.
 
 **Runnable check.** For each Results paragraph, after writing:
 1. Is the finding stated first?
-2. Is there exactly one mechanism sentence?
-3. Does that sentence point to a figure / table / method rule / citation?
+2. If a mechanism is stated, does it point to a figure / table / method rule /
+   citation?
+3. If no mechanism is directly supported, does the paragraph end with a
+   result-level synthesis rather than speculation?
 
 If any answer is no, revise. If the mechanism needs more than one sentence,
 move the additional content to Discussion.
