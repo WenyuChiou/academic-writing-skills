@@ -19,8 +19,8 @@ Wrong:
 
 > Figure 5 shows the relocation and damage results.
 
-Why: readers scan for the finding. A bare callout with no finding, no number,
-and no mechanism hides the scientific point.
+Why: readers scan for the finding. A bare callout that does not identify a main
+pattern or provide selective evidence hides the scientific point.
 
 Scope. This rule governs the Abstract and finding-density prose. Inside a
 Results section, a figure-first or table-first callout ("Figure 5 shows ...",
