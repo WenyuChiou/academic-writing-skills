@@ -155,7 +155,7 @@ Before returning prose or an audit result, check:
 
 1. Does every result state the main pattern at the opening or immediately after
    a figure-first callout?
-2. Does every finding have a mechanism grounded in data, method, or literature?
+2. If a mechanism is stated, is it grounded in data, method, or literature?
 3. Are overclaim verbs and vague intensifiers removed or hedged?
 4. Numeric verifiability: re-grep every numeric token in Abstract, Results,
    and Conclusion. Each must trace to a row in `.paper/claim_evidence_ledger.md`
