@@ -95,3 +95,18 @@ def test_results_guardrails_are_registered():
     assert "current authoritative" in results
     assert "source that actually" in results
     assert "between-group" in results
+
+
+def test_summary_section_guardrails_are_registered():
+    skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+    principles = (SKILL_DIR / "references/writing_principles.md").read_text(
+        encoding="utf-8"
+    )
+    checklists = (SKILL_DIR / "references/section_checklists.md").read_text(
+        encoding="utf-8"
+    )
+    assert "frequency and readability" in skill
+    assert "Avoid Gerund Or Participial Openings" in principles
+    assert "Abbreviations In Summary Sections" in principles
+    assert "background or importance" in checklists
+    assert "does not require it" in checklists
