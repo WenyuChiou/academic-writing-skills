@@ -24,6 +24,8 @@ For the full six-part method, banned-word list, and worked examples, use the `ab
 Checklist:
 
 - [ ] Opening signals why the problem matters (its importance or stakes), then pivots to the specific unresolved gap (not study area or method name).
+- [ ] Opens sentences with the scientific subject or claim, not a gerund or participial phrase such as "Improving...", "Using...", or "Building on..." (see `writing_principles.md` §5.6).
+- [ ] Uses abbreviations selectively: define only terms repeated in the Abstract, and spell out one-off terms when that reads more clearly (see `writing_principles.md` §4.11).
 - [ ] Avoids unexplained technique names.
 - [ ] States only claims supported by the claim-evidence ledger.
 - [ ] Keeps sentences under the target journal's word and length constraints.
@@ -267,19 +269,23 @@ group uses them):
 
 Three-part structure (parallel to the 6-part abstract, at conclusion scale):
 
-1. **Challenge recap** (2-3 sentences): re-establish the scientific problem, why existing approaches fall short, and what this approach offers. Not a "we did X" summary; restate why it matters.
+1. **Challenge recap** (normally 3 sentences): progress from the scientific background or importance, to the specific unresolved gap, to how the present study addresses that gap. Do not begin with "This study..." or a list of research questions. Do not copy the Abstract or Introduction sentences; preserve their logic while writing from a conclusion perspective.
 2. **Findings, one per research question** (one paragraph): name the aims, then give one finding per research question in the SAME order, each with its mechanism (the "why", not only the "what"); mark the last with "Finally,".
 3. **Scope, contribution, beyond the case** (one paragraph): bound the claim honestly (limitations, hedged), state the key contribution once, and end on why it matters beyond this case or system (a transferable direction), not a methods self-compliment.
 
 Skeleton:
 
-- P1: "Understanding [phenomenon] requires [capability]. Existing [approaches] [limitation]. [This approach] offers [opportunity]."
+- P1: "[Scientific subject] requires [capability]. [Proposed or existing approach] may help, but [specific evidence gap]. This study [design that directly addresses the gap]."
 - P2: "We [built or applied X] to [aim 1], [aim 2], and [aim 3]. [Finding 1], because [mechanism 1]. [Finding 2], reflecting [mechanism 2]. Finally, [finding 3], which [mechanism 3]."
 - P3: "This work is best viewed as [scope]. Limitations include [a, b, c], but the findings [contribution]. By [the advance], [approach] opens [a generalizable direction]."
 
 Checklist:
 
 - [ ] P1 recaps the challenge (why), not a bare "what we did" summary.
+- [ ] P1 follows background or importance → specific gap → study response, with each sentence handing its key noun or question to the next.
+- [ ] P1 does not repeat the wording of the Abstract or Introduction, list the research questions, or open with "This study...".
+- [ ] Conclusion sentences open with concrete subjects rather than gerund or participial phrases (see `writing_principles.md` §5.6).
+- [ ] Reuses abbreviations selectively. Prior definition permits reuse but does not require it; retain repeated abbreviations and spell out one-off terms when clearer (see `writing_principles.md` §4.11).
 - [ ] Mirrors the order of the research questions, one finding paragraph per question (1:1).
 - [ ] The enumerated findings mirror the introduction's numbered objectives or sub-questions, in the same order, closing the loop the introduction opened (see `writing_principles.md` §1.9).
 - [ ] Each finding carries a mechanism, not only the result.
@@ -287,6 +293,7 @@ Checklist:
 - [ ] Uses numbers already verified in Results.
 - [ ] Key contribution stated exactly once.
 - [ ] Limitations and future work are hedged.
+- [ ] Describes within-model significance patterns without turning one significant and one nonsignificant result into a formal group difference unless a valid comparison test supports that claim.
 - [ ] Includes a generalizability or transferability sentence phrased as capability, not guarantee ("can be applied to other [systems]", not "will work everywhere").
 - [ ] Final sentence explains why the study matters beyond the case (generalization, not a methods self-compliment).
 
