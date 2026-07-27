@@ -11,6 +11,30 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-07-27
+
+### Added
+
+- A mandatory comprehensive-manuscript review for top-to-bottom,
+  paper-ready, and final-release requests. The workflow records evidence while
+  moving from document structure through headings, sections, paragraphs,
+  sentences, terminology, displays, and evidence provenance, then repeats the
+  review in reverse after editing.
+- Explicit gates for orphan text between parent headings and subsections,
+  author-specified paragraph counts, conceptual sentence and paragraph
+  handoffs, sentence necessity, standalone-artifact abbreviations, and model
+  display names versus technical identifiers.
+- Rendered page-break semantics for continued tables and a reproducibility
+  provenance gate for runtime, token, cost, call-count, and hardware records.
+- Two behavioral evals covering hierarchical manuscript review and
+  supplementary-table pagination with suspicious duplicate workload values.
+
+### Changed
+
+- Submission reporting now separates technical paper-ready,
+  author-action-required, and fully submission-ready states.
+- Plugin version bumped from `0.3.2` to `0.3.3`.
+
 ## [0.3.2] - 2026-07-27
 
 ### Added
@@ -312,7 +336,8 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   conventions surface in some references; the core workflow is
   domain-neutral.
 
-[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.3...HEAD
+[0.3.3]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.4...v0.3.0
