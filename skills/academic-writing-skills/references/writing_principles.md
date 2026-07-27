@@ -146,6 +146,30 @@ from serving two questions or a question from needing two paragraphs. State the
 mapping only where it helps the reader; do not add "which answers SQ1" labels
 to the prose.
 
+### 1.10 Reader Encounter Order And Explicit Scope
+
+Introduce information in the order a reader needs it:
+
+```text
+purpose or role -> concept or procedure -> criterion or metric -> interpretation
+```
+
+Do not ask readers to interpret a metric, threshold, acronym, model component,
+or assessment category before explaining what it is used for. At first use,
+name the scientific purpose and the object being assessed. Later sentences may
+then define individual metrics or report their values.
+
+References must also have an explicit scope. Phrases such as "previous
+studies", "these criteria", "this procedure", and "the above results" are
+acceptable only when the antecedent is unmistakable and the cited source
+supports the full scope of the statement. When sources differ by variable,
+question, dataset, or analytical step, identify them at that level or point to
+a table that maps each element to its source. Do not use a collective label
+that implies every element shares the same provenance.
+
+Run this check across paragraph boundaries as well as within a paragraph. A
+term defined later in the section does not repair an unclear first encounter.
+
 ## 2. Precision
 
 ### 2.1 No Overclaim

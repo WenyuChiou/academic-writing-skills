@@ -234,6 +234,20 @@ Before returning prose or an audit result, check:
     copying the Abstract or Introduction or opening with a list of research
     questions. See `references/writing_principles.md` §5.6 and
     `references/section_checklists.md`.
+17. Reader encounter order: introduce the purpose and object of a concept or
+    assessment before defining its metrics or interpreting its results. Replace
+    collective source labels such as "previous studies" when the cited
+    provenance differs by item or step. See `references/writing_principles.md`
+    §1.10.
+18. Statistic-claim alignment: confirm that each inferential statement names
+    the estimand and hypothesis actually tested. Keep visual observations,
+    descriptive summaries, and inferential conclusions distinct. See
+    `references/results_writing.md` §5.
+19. Cross-artifact integrity: before submission, designate authoritative
+    invariants and verify them across the manuscript, supplementary material,
+    figures, captions, standalone submission files, and package contents.
+    Remove drafting scaffolds and rebuild the package after any component
+    changes. See `references/submission_checklist.md` §8.
 
 If any item fails, fix it before showing the user.
 
@@ -268,3 +282,9 @@ manuscript.
 - Reviewer response is a change-management task, not a politeness exercise.
 - Preserve scientific uncertainty; do not invent assumptions or results.
 - Prefer concise, evidence-backed prose over generic academic polish.
+- Introduce concepts in reader-needed order and scope source attributions
+  precisely.
+- Match every statistical claim to the quantity and hypothesis actually
+  evaluated.
+- Treat cross-file invariants and artifact synchronization as submission
+  requirements.

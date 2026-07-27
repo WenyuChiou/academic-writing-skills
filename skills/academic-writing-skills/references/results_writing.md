@@ -10,9 +10,10 @@ inventory of every displayed value.
 2. Build the subsection around patterns
 3. Keep Methods, Results, and Discussion distinct
 4. Control evidence attribution
-5. Handle group comparisons precisely
-6. Use natural transitions
-7. Apply the final Results gate
+5. Match claims to estimands and tests
+6. Handle group comparisons precisely
+7. Use natural transitions
+8. Apply the final Results gate
 
 ## 1. Establish The Evidence Baseline
 
@@ -80,7 +81,31 @@ If the number is not displayed in the cited figure or table:
 
 Never imply that a figure shows a value that it does not contain.
 
-## 5. Handle Group Comparisons Precisely
+## 5. Match Claims To Estimands And Tests
+
+Describe the quantity that was actually summarized and the hypothesis that was
+actually tested. A visual pattern and an inferential test may support different
+claims.
+
+| Evidence or analysis | Claim allowed |
+|---|---|
+| Mean and a test of mean differences | difference in means |
+| Median or quantile comparison | difference in the reported quantile |
+| Variance or dispersion statistic | difference in variability or dispersion |
+| Distributional test | difference in distributions, within the test's scope |
+| Visual overlap or separation only | descriptive visual pattern |
+
+Do not use a mean-comparison test to claim that medians or complete
+distributions differ. Conversely, a plotted median moving closer to a
+reference does not establish that the means are closer or that the full
+distributions are reproduced. State visual observations and inferential
+results separately when they address different estimands.
+
+Use the same alignment for model fit, reliability, classification performance,
+and other analyses: name the exact property evaluated, the statistic used, and
+the scope of the resulting claim.
+
+## 6. Handle Group Comparisons Precisely
 
 Distinguish three claims that are often conflated:
 
@@ -99,7 +124,7 @@ resemble that group. State sample composition as interpretive context, not as
 proof that the dominant group caused the pooled result. Preserve the
 group-specific pattern when it answers the research question.
 
-## 6. Use Natural Transitions
+## 7. Use Natural Transitions
 
 Make transitions name the analytical move rather than announce generic
 progress. For example, use "When examined separately by group" when shifting
@@ -107,12 +132,14 @@ from pooled to subgroup results. Avoid repeatedly opening paragraphs with
 formulaic phrases such as "Moving from" or "Building on these results" when
 the sentence can state the actual comparison.
 
-## 7. Final Results Gate
+## 8. Final Results Gate
 
 - [ ] The paragraph leads with the main pattern, not an inventory of values.
 - [ ] Only decision-relevant numbers are reported in prose.
 - [ ] Every number comes from the current authoritative source.
 - [ ] The cited source visibly supports the claim or is correctly identified.
+- [ ] The prose claim matches the estimand and hypothesis tested; visual,
+      descriptive, and inferential statements are not conflated.
 - [ ] Methods content is repeated only when needed for interpretation.
 - [ ] Descriptive, within-group, and between-group claims are distinguished.
 - [ ] Any mechanism is directly supported and stays brief.

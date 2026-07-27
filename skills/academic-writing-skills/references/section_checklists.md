@@ -143,6 +143,9 @@ Recommended structure:
 Checklist:
 
 - [ ] Overview states what the method does in one paragraph.
+- [ ] Each concept, assessment, or procedure is introduced with its purpose
+      before individual criteria or metrics are defined; readers do not meet an
+      unexplained metric first.
 - [ ] Inputs, outputs, units, and time steps are explicit.
 - [ ] Equations define every symbol.
 - [ ] Assumptions include rationale and limitations.
@@ -158,6 +161,11 @@ Additional empirical checklist:
 - [ ] Statistical assumptions checked.
 - [ ] Effect sizes and confidence intervals, not only p-values.
 - [ ] Outlier rules stated before analysis.
+- [ ] For latent-variable or multi-question measurement, the measurement model
+      and its reliability and validity assessment are established before
+      structural relations, group comparisons, or downstream interpretations.
+- [ ] If measurement quality or comparability is inadequate, the Methods state
+      how that limits later coefficient comparisons or substantive claims.
 
 Additional qualitative or archival checklist:
 

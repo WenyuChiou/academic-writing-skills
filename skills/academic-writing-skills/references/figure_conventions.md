@@ -26,6 +26,13 @@ A value stored in an internal dataset does not make a figure citation valid if
 the figure does not show that value. Cite the correct reader-visible source or
 change the prose.
 
+Place an embedded figure near its first substantive interpretation. A passing
+mention does not count as substantive interpretation. Keep the display,
+caption, and the paragraph that explains its main pattern close enough that the
+reader does not have to search across sections or several pages. Journal layout
+rules may alter the final placement, but the source manuscript should preserve
+the intended figure-argument connection.
+
 ## 2. Cross-Figure Consistency
 
 Use the same label, color, and annotation style for the same concept across the
@@ -122,6 +129,7 @@ Before returning figure-related prose or captions, check:
 - [ ] Plotted quantities are defined.
 - [ ] Legend labels match prose terminology.
 - [ ] Precise prose numbers are visible or traceable.
+- [ ] The embedded figure is near its first substantive interpretation.
 - [ ] Caption describes each panel.
 - [ ] Chart type matches field convention.
 - [ ] Colors and annotations are consistent with other figures.
@@ -129,5 +137,7 @@ Before returning figure-related prose or captions, check:
       means, uncertainty values, model names, and run counts.
 - [ ] The audited figure is the current authoritative version rather than an
       older embedded image or export.
+- [ ] The embedded image and separately supplied figure file represent the same
+      authoritative figure state.
 - [ ] When two artifacts conflict, the conflict is resolved against the
       designated analysis output before either artifact is edited.

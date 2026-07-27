@@ -11,6 +11,9 @@ Run this checklist before submission or resubmission. Journal-specific rules in
 - [ ] Main text is within word or page limit.
 - [ ] Required sections are present and in the required order.
 - [ ] Section numbering matches journal style.
+- [ ] Drafting scaffolds, paragraph-role labels, outline prompts, and internal
+      author notes have been removed unless the journal explicitly requires
+      them.
 - [ ] Line numbers and spacing match journal instructions.
 - [ ] Figures and tables are cited in order.
 
@@ -31,6 +34,11 @@ Run this checklist before submission or resubmission. Journal-specific rules in
 - [ ] Supplementary labels follow order of first mention.
 - [ ] Supplementary captions are complete.
 - [ ] No main-text claim depends only on uncited supplementary material.
+- [ ] Every supplementary item is cited from the main text, and every
+      supplementary citation resolves to an existing item.
+- [ ] Main text and supplementary material use the same terminology,
+      definitions, sample counts, group counts, model names, units, and
+      analytical settings.
 
 ## 4. References
 
@@ -69,7 +77,22 @@ Run this checklist before submission or resubmission. Journal-specific rules in
 - [ ] Paper-specific terminology applied consistently.
 - [ ] Numbers were rechecked against the latest outputs.
 
-## 8. Submission Portal
+## 8. Cross-Artifact Integrity
+
+- [ ] Designate one authoritative source for each invariant, including sample
+      totals, subgroup totals, model or treatment names, run counts, units,
+      analysis versions, and figure states.
+- [ ] Arithmetic and set relationships among invariants are valid, such as a
+      total equaling the sum of mutually exclusive subgroups.
+- [ ] Manuscript, title page, abstract file, cover letter, highlights,
+      supplementary material, figure files, captions, and portal metadata all
+      use those same invariants.
+- [ ] Embedded figures match separately supplied figure files.
+- [ ] After any component changes, rebuild the submission package from the
+      authoritative files and verify the contents rather than patching only one
+      copy.
+
+## 9. Submission Portal
 
 - [ ] Account created.
 - [ ] Manuscript uploaded with correct file type tag.
@@ -79,7 +102,7 @@ Run this checklist before submission or resubmission. Journal-specific rules in
 - [ ] Keywords and classifications selected.
 - [ ] Reviewer information verified.
 
-## 9. After Submission
+## 10. After Submission
 
 - [ ] Submitted PDF and source files archived.
 - [ ] Submission ID recorded in `.paper/submissions_log.md`.

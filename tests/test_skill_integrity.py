@@ -110,3 +110,29 @@ def test_summary_section_guardrails_are_registered():
     assert "Abbreviations In Summary Sections" in principles
     assert "background or importance" in checklists
     assert "does not require it" in checklists
+
+
+def test_cross_section_and_artifact_integrity_rules_are_registered():
+    skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+    principles = (SKILL_DIR / "references/writing_principles.md").read_text(
+        encoding="utf-8"
+    )
+    results = (SKILL_DIR / "references/results_writing.md").read_text(
+        encoding="utf-8"
+    )
+    methods = (SKILL_DIR / "references/section_checklists.md").read_text(
+        encoding="utf-8"
+    )
+    figures = (SKILL_DIR / "references/figure_conventions.md").read_text(
+        encoding="utf-8"
+    )
+    submission = (SKILL_DIR / "references/submission_checklist.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "Reader Encounter Order And Explicit Scope" in principles
+    assert "Match Claims To Estimands And Tests" in results
+    assert "measurement model" in methods
+    assert "first substantive interpretation" in figures
+    assert "Cross-Artifact Integrity" in submission
+    assert "Cross-artifact integrity" in skill
