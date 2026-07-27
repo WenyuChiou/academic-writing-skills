@@ -19,8 +19,8 @@ Wrong:
 
 > Figure 5 shows the relocation and damage results.
 
-Why: readers scan for the finding. A bare callout that does not identify a main
-pattern or provide selective evidence hides the scientific point.
+Why: readers scan for the finding. A bare callout with no finding, no number,
+and no mechanism hides the scientific point.
 
 Scope. This rule governs the Abstract and finding-density prose. Inside a
 Results section, a figure-first or table-first callout ("Figure 5 shows ...",
@@ -145,6 +145,30 @@ The alignment is a default to aim for, not a rule that forbids a paragraph
 from serving two questions or a question from needing two paragraphs. State the
 mapping only where it helps the reader; do not add "which answers SQ1" labels
 to the prose.
+
+### 1.10 Reader Encounter Order And Explicit Scope
+
+Introduce information in the order a reader needs it:
+
+```text
+purpose or role -> concept or procedure -> criterion or metric -> interpretation
+```
+
+Do not ask readers to interpret a metric, threshold, acronym, model component,
+or assessment category before explaining what it is used for. At first use,
+name the scientific purpose and the object being assessed. Later sentences may
+then define individual metrics or report their values.
+
+References must also have an explicit scope. Phrases such as "previous
+studies", "these criteria", "this procedure", and "the above results" are
+acceptable only when the antecedent is unmistakable and the cited source
+supports the full scope of the statement. When sources differ by variable,
+question, dataset, or analytical step, identify them at that level or point to
+a table that maps each element to its source. Do not use a collective label
+that implies every element shares the same provenance.
+
+Run this check across paragraph boundaries as well as within a paragraph. A
+term defined later in the section does not repair an unclear first encounter.
 
 ## 2. Precision
 
@@ -546,6 +570,25 @@ closes its loop and opens nothing) and a connective-only bridge (the link lives
 in a filler word rather than in the substance). This complements §4.5, which
 places transition work after the structure is fixed.
 
+### 4.11 Abbreviations In Summary Sections
+
+An abbreviation defined earlier is available for reuse; its definition does not
+make its use mandatory. Choose abbreviations in the Abstract and Conclusion
+according to readability and frequency.
+
+- Define an abbreviation in the Abstract only when it appears again and
+  materially reduces clutter.
+- Reuse established abbreviations in the Conclusion when they occur repeatedly
+  or make path notation easier to follow.
+- Spell out a term that appears only once or whose abbreviation would make a
+  summary harder to read.
+- Do not expand every established abbreviation again in the Conclusion merely
+  because it is a summary section.
+
+Apply this choice deliberately rather than by a mechanical rule such as "all
+defined abbreviations must be reused" or "all summary terms must be written in
+full." Terminology must still satisfy §4.9.
+
 ## 5. Voice, Tense, And Rhythm
 
 ### 5.1 Active And Passive Voice
@@ -602,6 +645,26 @@ clear a passage.
 Heuristic: read the passage aloud. If it sounds like a competent stranger
 narrating rather than the author explaining, it needs humanizing. The target is
 the author's plain voice, not a smoother machine voice.
+
+### 5.6 Avoid Gerund Or Participial Openings In Summary Sections
+
+Open Abstract and Conclusion sentences with the scientific subject or claim,
+not a sentence-opening gerund or participial phrase. Openings such as
+"Improving...", "Using...", "Considering...", "Building on...", and
+"Having examined..." delay the subject and often produce generic prose.
+
+Weak:
+
+> Improving household adaptation requires a better understanding of risk.
+
+Better:
+
+> Effective household adaptation requires a better understanding of risk.
+
+This rule concerns sentence openings. Gerunds remain appropriate when they
+serve a necessary grammatical role later in a sentence. Record any stricter
+author preference, including prohibited transition words, in
+`.paper/style_overrides.md`.
 
 ## 6. Figures
 

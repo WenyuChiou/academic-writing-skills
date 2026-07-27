@@ -11,6 +11,32 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-07-27
+
+### Added
+
+- A reader-encounter-order rule that introduces the purpose and object of an
+  assessment before its criteria or metrics, and requires source labels to
+  match the actual provenance scope.
+- A statistic-claim alignment gate that separates visual observations,
+  descriptive summaries, and inferential claims and matches each claim to the
+  estimand and hypothesis tested.
+- Conditional measurement-model checks for studies using latent variables or
+  multi-question measures.
+- Bidirectional main-text and supplementary-material checks, removal of
+  drafting scaffolds, cross-artifact invariant checks, and submission-package
+  rebuild verification.
+- Figure-placement and embedded-versus-standalone figure synchronization
+  checks.
+- Two behavioral evals covering reader order and statistic-claim alignment,
+  and cross-artifact submission integrity.
+
+### Changed
+
+- Plugin version bumped from `0.3.1` to `0.3.2`.
+- The new rules are field-agnostic and store no paper-, journal-, sample-, or
+  template-specific values.
+
 ## [0.3.1] - 2026-07-21
 
 ### Added
@@ -286,7 +312,8 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   conventions surface in some references; the core workflow is
   domain-neutral.
 
-[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.4...v0.3.0
 [0.2.4]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.2.3...v0.2.4

@@ -155,7 +155,7 @@ Before returning prose or an audit result, check:
 
 1. Does every result state the main pattern at the opening or immediately after
    a figure-first callout?
-2. If a mechanism is stated, is it grounded in data, method, or literature?
+2. Does every finding have a mechanism grounded in data, method, or literature?
 3. Are overclaim verbs and vague intensifiers removed or hedged?
 4. Numeric verifiability: re-grep every numeric token in Abstract, Results,
    and Conclusion. Each must trace to a row in `.paper/claim_evidence_ledger.md`
@@ -212,6 +212,8 @@ Before returning prose or an audit result, check:
     Conclusion already appears in Methods or Results per
     `references/writing_principles.md` §4.9. Flag any term, compound, or
     near-synonym the body never uses; fix the body's term first, then reuse it.
+    Choose abbreviations by frequency and readability rather than mechanically
+    reusing every abbreviation defined earlier (§4.11).
 13. Results evidence baseline: for Results work, confirm that every cited
     figure, table, caption, and analysis output belongs to the current
     authoritative version. Resolve disagreements before drafting; do not blend
@@ -225,6 +227,27 @@ Before returning prose or an audit result, check:
     one significant and one nonsignificant within-group path into a formal
     between-group difference without a valid comparison test. See
     `references/results_writing.md` §5.
+16. Summary-section openings: Abstract and Conclusion sentences begin with the
+    scientific subject or claim rather than a gerund or participial phrase.
+    For a Conclusion, the opening paragraph progresses from background or
+    importance to the specific gap and then to the study response, without
+    copying the Abstract or Introduction or opening with a list of research
+    questions. See `references/writing_principles.md` §5.6 and
+    `references/section_checklists.md`.
+17. Reader encounter order: introduce the purpose and object of a concept or
+    assessment before defining its metrics or interpreting its results. Replace
+    collective source labels such as "previous studies" when the cited
+    provenance differs by item or step. See `references/writing_principles.md`
+    §1.10.
+18. Statistic-claim alignment: confirm that each inferential statement names
+    the estimand and hypothesis actually tested. Keep visual observations,
+    descriptive summaries, and inferential conclusions distinct. See
+    `references/results_writing.md` §5.
+19. Cross-artifact integrity: before submission, designate authoritative
+    invariants and verify them across the manuscript, supplementary material,
+    figures, captions, standalone submission files, and package contents.
+    Remove drafting scaffolds and rebuild the package after any component
+    changes. See `references/submission_checklist.md` §8.
 
 If any item fails, fix it before showing the user.
 
@@ -259,3 +282,9 @@ manuscript.
 - Reviewer response is a change-management task, not a politeness exercise.
 - Preserve scientific uncertainty; do not invent assumptions or results.
 - Prefer concise, evidence-backed prose over generic academic polish.
+- Introduce concepts in reader-needed order and scope source attributions
+  precisely.
+- Match every statistical claim to the quantity and hypothesis actually
+  evaluated.
+- Treat cross-file invariants and artifact synchronization as submission
+  requirements.

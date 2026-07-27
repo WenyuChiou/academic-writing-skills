@@ -42,6 +42,18 @@
       "prompt": "Rewrite subgroup Results where one path is significant for NMG and nonsignificant for MG, but no formal between-group test was run. The current draft says the pathway is significantly stronger for NMG.",
       "expected_output": "A revision that reports the two within-group results separately, avoids claiming a statistically significant group difference, and states that a formal between-group test is required for that conclusion.",
       "files": []
+    },
+    {
+      "id": "reader_order_and_statistic_claim_alignment",
+      "prompt": "Audit a Methods-to-Results passage that reports reliability and validity metrics before explaining their purpose, attributes all questionnaire elements to 'previous studies' even though sources differ by question, and uses a mean-comparison test to claim that two complete distributions differ.",
+      "expected_output": "An audit that introduces the assessment purpose before its metrics, requires question- or element-level source scope, and limits the inferential claim to mean differences while separating plotted distributional observations from the test result.",
+      "files": []
+    },
+    {
+      "id": "submission_cross_artifact_integrity",
+      "prompt": "Run a pre-submission integrity check where the manuscript reports 420 participants, subgroup totals sum to 421, one supplementary table is uncited, an outline role label remains in Results, and the embedded figure differs from the standalone upload.",
+      "expected_output": "A submission-blocking audit that designates authoritative invariants, resolves the arithmetic conflict across all files, restores bidirectional main-supplement references, removes drafting scaffolding, synchronizes embedded and standalone figures, and rebuilds the package from authoritative files.",
+      "files": []
     }
   ]
 }
