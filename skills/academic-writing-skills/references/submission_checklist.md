@@ -27,6 +27,10 @@ Run this checklist before submission or resubmission. Journal-specific rules in
 - [ ] Table captions, numbering, and units are correct.
 - [ ] Numbers in prose match figures and tables.
 - [ ] Accessibility check passed.
+- [ ] Every continued data table repeats its actual column headers; survey
+      questions or data rows are not incorrectly repeated as headers.
+- [ ] The first and last row on every rendered table page retain their labels,
+      units, and comparison meaning.
 
 ## 3. Supplementary Material
 
@@ -39,6 +43,11 @@ Run this checklist before submission or resubmission. Journal-specific rules in
 - [ ] Main text and supplementary material use the same terminology,
       definitions, sample counts, group counts, model names, units, and
       analytical settings.
+- [ ] Technical model or treatment identifiers are separated from display
+      names, and any shortened table or figure names are defined once.
+- [ ] Runtime, token, cost, call-count, and hardware rows trace to source
+      records. Identical values across different systems have been verified
+      rather than copied.
 
 ## 4. References
 
@@ -91,6 +100,14 @@ Run this checklist before submission or resubmission. Journal-specific rules in
 - [ ] After any component changes, rebuild the submission package from the
       authoritative files and verify the contents rather than patching only one
       copy.
+- [ ] A forward review has been completed in the order document → heading
+      hierarchy → section → paragraph → sentence → terminology → displays →
+      evidence provenance.
+- [ ] A reverse review has rechecked changed sentences in context, standalone
+      summary files, rendered pages, and the rebuilt package. Completion
+      evidence is recorded for each level.
+- [ ] Technical paper-ready, author-action-required, and submission-ready
+      states are reported separately.
 
 ## 9. Submission Portal
 

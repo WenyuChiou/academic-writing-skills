@@ -38,6 +38,7 @@ def test_referenced_files_exist():
         "references/journal_format_template.md",
         "references/style_overrides_example.md",
         "references/style_overrides_customization.md",
+        "references/comprehensive_manuscript_review.md",
     ]
     for relative_path in required:
         # Same migration: references/ moved under skills/<name>/.
@@ -136,3 +137,28 @@ def test_cross_section_and_artifact_integrity_rules_are_registered():
     assert "first substantive interpretation" in figures
     assert "Cross-Artifact Integrity" in submission
     assert "Cross-artifact integrity" in skill
+
+
+def test_comprehensive_review_gate_is_registered():
+    skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+    review = (
+        SKILL_DIR / "references/comprehensive_manuscript_review.md"
+    ).read_text(encoding="utf-8")
+    submission = (
+        SKILL_DIR / "references/submission_checklist.md"
+    ).read_text(encoding="utf-8")
+    checklists = (
+        SKILL_DIR / "references/section_checklists.md"
+    ).read_text(encoding="utf-8")
+
+    assert "ordered forward pass" in skill
+    assert "reverse pass" in skill
+    assert "Heading And Orphan-Text Gate" in review
+    assert "Sentence-Necessity Gate" in review
+    assert "Abbreviation Ledger" in review
+    assert "Model Or Treatment Identity Ledger" in review
+    assert "Display And Page-Break Semantics" in review
+    assert "Workload And Reproducibility Provenance" in review
+    assert "technical paper-ready" in review
+    assert "continued data table repeats" in submission
+    assert "no orphan paragraph" in checklists

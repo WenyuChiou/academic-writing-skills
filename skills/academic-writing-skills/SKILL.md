@@ -129,10 +129,14 @@ language, GPT-style vocabulary, causal-claim checks, and revision discipline.
 | Claim support, overclaim, abstract/conclusion audit | `references/claim_evidence_audit.md` |
 | Reviewer response or rebuttal letter | `references/reviewer_response_workflow.md` |
 | Submission or resubmission prep | `references/submission_checklist.md` |
+| Full-manuscript, top-to-bottom, paper-ready, or final-gate review | `references/comprehensive_manuscript_review.md` plus `references/submission_checklist.md` |
 | Creating or refreshing `.paper/` memory | `references/paper_context_packet.md` |
 
 Read only the relevant subsection when possible. The goal is to save context,
-not load every reference by default.
+not load every reference by default. The comprehensive-review reference is an
+exception: read and apply it in full whenever the user requests a complete
+review or a paper-ready decision. Do not substitute sampled paragraphs or
+keyword scans for that workflow.
 
 ### 7. Produce The Artifact
 
@@ -248,6 +252,13 @@ Before returning prose or an audit result, check:
     figures, captions, standalone submission files, and package contents.
     Remove drafting scaffolds and rebuild the package after any component
     changes. See `references/submission_checklist.md` §8.
+20. Comprehensive-review gate: for full-manuscript, top-to-bottom,
+    paper-ready, or final-release requests, complete the ordered forward pass
+    from document structure to sentence-level necessity and evidence
+    provenance, then the reverse pass from changed sentences back to the
+    rebuilt package. Record completion evidence at every level; a flat list of
+    independent checks is not sufficient. See
+    `references/comprehensive_manuscript_review.md`.
 
 If any item fails, fix it before showing the user.
 

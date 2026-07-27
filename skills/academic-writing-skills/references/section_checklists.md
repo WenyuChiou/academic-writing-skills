@@ -24,6 +24,14 @@ For the full six-part method, banned-word list, and worked examples, use the `ab
 Checklist:
 
 - [ ] Opening signals why the problem matters (its importance or stakes), then pivots to the specific unresolved gap (not study area or method name).
+- [ ] Each move hands its scientific subject or open question to the next:
+      importance → empirical or methodological basis → unresolved gap → study
+      response. Adding a generic connector does not count when the shared
+      concept is missing.
+- [ ] Generic comparison nouns such as "variation", "difference", or
+      "agreement" name the quantity, population, or relationship they refer
+      to; the same word is not reused for different constructs without an
+      explicit distinction.
 - [ ] Opens sentences with the scientific subject or claim, not a gerund or participial phrase such as "Improving...", "Using...", or "Building on..." (see `writing_principles.md` §5.6).
 - [ ] Uses abbreviations selectively: define only terms repeated in the Abstract, and spell out one-off terms when that reads more clearly (see `writing_principles.md` §4.11).
 - [ ] Avoids unexplained technique names.
@@ -242,6 +250,11 @@ Typical structure:
 
 Checklist:
 
+- [ ] A numbered parent heading leads directly to its first subsection unless
+      an intentional section overview has a distinct, nonduplicative function;
+      no orphan paragraph remains between the parent heading and subsection.
+- [ ] When the author specifies a paragraph count for a subsection, the count
+      is verified after editing and again after rendering.
 - [ ] Does not repeat Results paragraph by paragraph.
 - [ ] Extends beyond the research questions (synthesis / boundary / implication); not a paragraph-by-paragraph re-answer to them (that 1:1 mapping is the Conclusion's job).
 - [ ] Prior-work comparisons are specific and cited.
@@ -318,6 +331,8 @@ Checklist:
 - [ ] Notes related preprints or prior submissions.
 - [ ] Suggests reviewers only if the journal allows.
 - [ ] Avoids inflated claims not present in the manuscript.
+- [ ] Defines or avoids abbreviations independently of the manuscript; a cover
+      letter must remain understandable when read on its own.
 
 ## Reviewer Response
 
