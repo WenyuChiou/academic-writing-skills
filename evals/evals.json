@@ -54,6 +54,18 @@
       "prompt": "Run a pre-submission integrity check where the manuscript reports 420 participants, subgroup totals sum to 421, one supplementary table is uncited, an outline role label remains in Results, and the embedded figure differs from the standalone upload.",
       "expected_output": "A submission-blocking audit that designates authoritative invariants, resolves the arithmetic conflict across all files, restores bidirectional main-supplement references, removes drafting scaffolding, synchronizes embedded and standalone figures, and rebuilds the package from authoritative files.",
       "files": []
+    },
+    {
+      "id": "comprehensive_hierarchical_review",
+      "prompt": "Perform a top-to-bottom paper-ready review. The Discussion contains body text between the parent heading and Section 5.1, Section 5.1 must contain exactly three paragraphs, the abstract jumps from background to 'variation' without defining what varies, prose gives display model names followed by technical identifiers in parentheses, and Highlights use an undefined abbreviation.",
+      "expected_output": "A hierarchical review that checks document and heading structure before sentence polish, resolves or deliberately assigns the orphan text, verifies the three-paragraph requirement after editing, replaces ambiguous 'variation' with the actual quantity, separates display names from technical identifiers, defines or removes the standalone abbreviation, then performs a reverse pass and withholds paper-ready status until every level passes.",
+      "files": []
+    },
+    {
+      "id": "table_pagination_and_workload_provenance",
+      "prompt": "Audit Supplementary Material where a long descriptive table continues for three pages without repeated column headers, a survey question was accidentally marked as a repeating header, and two different models have identical runtime, token, and call-count rows even though only one model has a source log.",
+      "expected_output": "A submission-blocking audit that restores semantic column headers on every data-table page without repeating a survey question, traces every workload row to a source record, treats identical cross-system values as a duplication warning, removes or marks unavailable the unsupported model rows, distinguishes local from provider-managed hardware, and verifies the rendered pages after revision.",
+      "files": []
     }
   ]
 }
