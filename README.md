@@ -1,156 +1,132 @@
 # academic-writing-skills
 
-A shareable Claude/Codex skill for rigorous academic paper writing, revision,
-reviewer response, figure-text consistency, and pre-submission audits.
+A Claude/Codex plugin for lifecycle-aware academic manuscript work. Version
+1.0 contains two composable skills:
+
+- `academic-writing-skills`: the cross-disciplinary manuscript-integrity core
+- `paper-review`: an evidence-safe Ethan-style overlay for water resources,
+  coupled natural-human systems, ABM, flood and catastrophe modeling,
+  hydrodynamics, uncertainty, and LLM studies
 
 [Traditional Chinese README](./README.zh-TW.md)
 
-> 📚 Part of the [**agentic AI learning roadmap**](https://github.com/WenyuChiou/awesome-agentic-ai-zh) — a 7-stage curated path for building agentic AI, multilingual (zh-TW · zh-CN · English). This skill is referenced in §13 (research workflow skills).
+> Part of the [agentic AI learning roadmap](https://github.com/WenyuChiou/awesome-agentic-ai-zh).
 
-## Purpose
+## What changed in 1.0
 
-This skill helps researchers turn manuscript work into a repeatable workflow:
+The plugin now treats a manuscript as an evolving evidence system rather than a
+collection of isolated passages. It distinguishes:
 
-- Draft sections with findings-first structure.
-- Organize Results around main patterns, selective evidence, and supported
-  mechanisms or result-level synthesis.
-- Detect GPT-style prose, vague intensifiers, and overclaim language.
-- Check whether claims are backed by figures, tables, statistics, code output,
-  or literature.
-- Keep numbers, figure panels, captions, and prose consistent.
-- Build point-by-point reviewer response tables.
-- Prepare journal submission checklists and declaration items.
-- Create `.paper/` context files so future AI sessions use fewer tokens.
+- lightweight edits from managed, multi-artifact manuscript projects
+- writing sequence from evidence dependency and review maturity
+- universal integrity rules from study-design, domain, reviewer, venue, and
+  project overlays
+- supported findings from interpretations, mechanisms, and speculation
+- a working draft from an exact, verified release candidate
 
-The skill is field-agnostic. Journal-specific rules and paper-specific
-terminology live inside each paper repository.
+Every review or revision ends with a functional-completeness retrospective.
+High-severity validity, ethics, metadata, or release issues block
+`SUBMISSION_READY`.
 
 ## Install
 
-Install via the [`ai-research-skills` Claude Code marketplace](https://github.com/WenyuChiou/ai-research-skills):
+Install through the
+[`ai-research-skills` Claude Code marketplace](https://github.com/WenyuChiou/ai-research-skills):
 
 ```bash
 claude plugin marketplace add WenyuChiou/ai-research-skills
 claude plugin install academic-writing-skills@ai-research-skills --scope user
 ```
 
-> **Migrating from a previous `git clone`?** The skill repo was
-> restructured to a `skills/<name>/SKILL.md` layout that the marketplace
-> requires. The old `git clone https://github.com/WenyuChiou/academic-writing-skills ~/.claude/skills/academic-writing-skills`
-> path no longer loads (Claude Code's user-skills loader only scans one
-> level deep). Either uninstall the cloned copy
-> (`rm -rf ~/.claude/skills/academic-writing-skills`) and run the
-> marketplace install above, or clone the inner subdirectory:
-> `git clone -n https://github.com/WenyuChiou/academic-writing-skills /tmp/aws && mv /tmp/aws/skills/academic-writing-skills ~/.claude/skills/academic-writing-skills`.
+For an existing installation:
 
-## Per-Paper Setup
-
-For each manuscript, create a `.paper/` folder in the paper repository:
-
-```text
-<paper-repo>/
-  .paper/
-    journal_format.md
-    style_overrides.md
-    context.md
-    figure_inventory.md
-    claim_evidence_ledger.md
-    reviewer_comments.md
-    submissions_log.md
+```bash
+claude plugin update academic-writing-skills@ai-research-skills
 ```
 
-Minimum setup:
+The plugin exposes both `$academic-writing-skills` and `$paper-review`.
 
-1. Copy `references/journal_format_template.md` to
-   `<paper-repo>/.paper/journal_format.md`.
-2. Fill in target journal rules from current author guidelines.
-3. Optionally copy `references/style_overrides_example.md` to
-   `<paper-repo>/.paper/style_overrides.md`.
-4. For long projects, create the context packet described in
-   `references/paper_context_packet.md`.
+## Use the core skill
 
-## Skill Layout
+Use `$academic-writing-skills` for planning, drafting, reviewing, revising,
+proofreading, cross-file synchronization, or submission readiness. It supports
+empirical, qualitative, computational, AI/LLM, review, theoretical, framework,
+methods, and data papers without forcing every manuscript into IMRAD.
 
-```text
-academic-writing-skills/
-  SKILL.md
-  references/
-    banned_words.md
-    claim_evidence_audit.md
-    figure_conventions.md
-    journal_format_template.md
-    paper_context_packet.md
-    results_writing.md
-    reviewer_response_workflow.md
-    section_checklists.md
-    style_overrides_example.md
-    submission_checklist.md
-    writing_principles.md
-  evals/
-    evals.json
-  tests/
-    test_skill_integrity.py
+For a full manuscript or long-running project, initialize a project state:
+
+```bash
+python skills/academic-writing-skills/scripts/init_manuscript_state.py \
+  manuscript_state.json
 ```
 
-## Typical Workflows
+The state records active artifacts, authority sources, locked wording, facts,
+question-to-evidence alignment, design dimensions, decisions, open issues, and
+release checks. Keep it with the manuscript project, not inside the installed
+skill.
 
-### Draft or revise a section
+Useful deterministic diagnostics include:
 
-The skill loads journal format, paper overrides, writing principles, banned
-words, and the relevant section checklist. It then rewrites with:
-
-- finding before figure citation,
-- supported mechanism or result-level synthesis after each main pattern,
-- precise terminology,
-- no unsupported overclaim,
-- panel-specific figure references when needed.
-
-### Audit claims and evidence
-
-The skill builds a claim-evidence ledger:
-
-```text
-claim -> evidence source -> allowed certainty -> missing check -> revision
+```bash
+python skills/academic-writing-skills/scripts/audit_manuscript_state.py manuscript_state.json
+python skills/academic-writing-skills/scripts/audit_text_consistency.py manuscript_state.json
+python skills/academic-writing-skills/scripts/audit_docx_structure.py manuscript.docx
+python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
-This is useful before editing Abstract, Discussion, Conclusion, cover letter, or
-reviewer response.
+These scripts report evidence; they do not replace substantive scholarly
+judgment.
 
-### Respond to reviewers
+## Use the review overlay
 
-The skill converts comments into a response table:
+Use `$paper-review` only for a relevant Ethan-style internal review. It loads
+the core skill first, then adds only the applicable water, CNHS, ABM,
+flood/hydrodynamic, uncertainty, or AI module.
+
+The overlay:
+
+- labels comments as `MUST`, `SHOULD`, `QUERY`, or `PREFERENCE`
+- uses an explicit R1-R4 label when supplied, otherwise maturity labels
+- does not impersonate Prof. Ethan Yang
+- does not infer AI authorship from prose
+- does not invent a mechanism merely because a review asks “why”
+- loads named project precedents only after the exact project is established
+
+## Repository layout
 
 ```text
-comment -> anchor text -> response -> manuscript change -> evidence
+skills/
+  academic-writing-skills/
+    SKILL.md
+    references/
+    scripts/
+    assets/
+    agents/
+  paper-review/
+    SKILL.md
+    references/
+    assets/
+    agents/
+evals/
+tests/
 ```
-
-It avoids the common failure mode of saying "clarified" without a visible
-manuscript change.
-
-### Save tokens across AI sessions
-
-For long manuscripts, the skill can maintain `.paper/context.md`,
-`.paper/figure_inventory.md`, and `.paper/claim_evidence_ledger.md`. Future
-sessions can read those concise files before opening the full manuscript.
-
-## What This Skill Is Not
-
-- It is not a Zotero manager.
-- It is not an Obsidian or NotebookLM workspace skill.
-- It is not a coding-agent delegation skill.
-- It is not a generic grammar checker.
-- It does not invent scientific assumptions, results, or citations.
 
 ## Testing
 
-Run integrity tests with:
-
 ```bash
-python -m pytest -q
+python -m pytest tests/ -q
+python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
-The tests validate frontmatter, bundled references, eval prompts, and common
-mojibake/encoding corruption markers.
+The tests check package structure, frontmatter, reference routing, project-state
+schema, deterministic regressions, overlay isolation, and common encoding
+corruption.
+
+## Scope
+
+The plugin does not invent scientific assumptions, analyses, results,
+citations, mechanisms, or metadata. It also does not replace Zotero,
+NotebookLM, document rendering, or format-specific tracked-change tooling.
 
 ## License
 

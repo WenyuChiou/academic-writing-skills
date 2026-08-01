@@ -1,142 +1,126 @@
 # academic-writing-skills
 
-這是一個可分享的 Claude/Codex skill，用於嚴謹的學術論文寫作、修改、審稿回覆、圖文一致性檢查，以及投稿前檢查。
+這是一套適用於 Claude／Codex 的學術論文工作 plugin。1.0 版包含兩個可組合的 skills：
+
+- `academic-writing-skills`：跨領域的 manuscript integrity 通用核心
+- `paper-review`：適用於水資源、coupled natural-human systems、ABM、洪水與
+  catastrophe modeling、hydrodynamics、不確定性及 LLM 研究的證據安全
+  Ethan-style review overlay
 
 [English README](./README.md)
 
-## 目的
+## 1.0 版的主要改變
 
-這個 skill 把常見的論文工作流程變成可重複執行的檢查與寫作規則：
+新版將論文視為持續演進的證據系統，不再只是逐句潤飾。它會區分：
 
-- 用 findings-first 結構撰寫章節。
-- 讓 Results 依主要模式、關鍵證據與有依據的 mechanism 或結果層次總結組織。
-- 找出 GPT 式空泛語言、過度宣稱和模糊強化詞。
-- 檢查每個 claim 是否有 figure、table、統計結果、程式輸出或文獻支撐。
-- 確認數字、figure panel、caption 和正文一致。
-- 建立 point-by-point reviewer response table。
-- 準備投稿前 checklist 和必要 declarations。
-- 建立 `.paper/` context 檔，讓之後的 AI session 不需要反覆讀整篇 manuscript，節省 token。
+- 單段修改與多檔案、長期 managed manuscript project
+- 寫作順序、證據依賴與 review maturity
+- 通用 integrity 規則，以及 study-design、domain、reviewer、venue、
+  project overlays
+- 直接結果、interpretation、mechanism 與 speculation
+- working draft 與真正通過驗證的 release candidate
 
-這個 skill 不綁定特定領域。期刊規則、老師偏好、paper 專用術語與例外規則，都應放在各自 paper repo 的 `.paper/` 內。
+每次 review、revision 或 audit 最後都必須進行
+functional-completeness retrospective。尚有高嚴重度 validity、ethics、
+metadata 或 release 問題時，不得標示為 `SUBMISSION_READY`。
 
 ## 安裝
 
-從 [`ai-research-skills` Claude Code marketplace](https://github.com/WenyuChiou/ai-research-skills) 裝：
+透過
+[`ai-research-skills` Claude Code marketplace](https://github.com/WenyuChiou/ai-research-skills)
+安裝：
 
 ```bash
 claude plugin marketplace add WenyuChiou/ai-research-skills
 claude plugin install academic-writing-skills@ai-research-skills --scope user
 ```
 
-> **之前用 `git clone` 裝的？** 為了符合 marketplace 規範，這個 repo 的
-> SKILL.md 已從 root 搬到 `skills/<name>/SKILL.md`；舊的
-> `git clone ... ~/.claude/skills/academic-writing-skills` 路徑現在
-> 不會載入（Claude Code 的 user-skills loader 只掃一層）。請刪掉舊的
-> （`rm -rf ~/.claude/skills/academic-writing-skills`）改走上面的
-> marketplace 安裝。
+已安裝者可更新：
 
-## 每篇論文的一次性設定
-
-每篇 manuscript 建議在 paper repo 內建立 `.paper/`：
-
-```text
-<paper-repo>/
-  .paper/
-    journal_format.md
-    style_overrides.md
-    context.md
-    figure_inventory.md
-    claim_evidence_ledger.md
-    reviewer_comments.md
-    submissions_log.md
+```bash
+claude plugin update academic-writing-skills@ai-research-skills
 ```
 
-最低限度設定：
+安裝後可使用 `$academic-writing-skills` 與 `$paper-review`。
 
-1. 複製 `references/journal_format_template.md` 到
-   `<paper-repo>/.paper/journal_format.md`。
-2. 根據目標期刊最新 author guidelines 填入格式規則。
-3. 如有必要，複製 `references/style_overrides_example.md` 到
-   `<paper-repo>/.paper/style_overrides.md`。
-4. 長期專案建議建立 `references/paper_context_packet.md` 中定義的 context packet。
+## 使用通用核心
 
-## Skill 結構
+`$academic-writing-skills` 可用於規劃、撰寫、review、revision、
+proofreading、跨檔案同步與投稿準備。它支援實證、質性、計算模擬、
+AI／LLM、review、theoretical、framework、methods 與 data papers，不會把
+所有稿件強制套入 IMRAD。
 
-```text
-academic-writing-skills/
-  SKILL.md
-  references/
-    banned_words.md
-    claim_evidence_audit.md
-    figure_conventions.md
-    journal_format_template.md
-    paper_context_packet.md
-    results_writing.md
-    reviewer_response_workflow.md
-    section_checklists.md
-    style_overrides_example.md
-    submission_checklist.md
-    writing_principles.md
-  evals/
-    evals.json
-  tests/
-    test_skill_integrity.py
+完整論文或長期專案可先建立 project state：
+
+```bash
+python skills/academic-writing-skills/scripts/init_manuscript_state.py \
+  manuscript_state.json
 ```
 
-## 常見使用場景
+project state 會記錄 active artifacts、權威來源、locked wording、facts、
+question-to-evidence alignment、研究設計維度、決策、open issues 與 release
+checks。這個檔案應放在論文專案內，不應存進 skill 本身。
 
-### 撰寫或修改章節
+可使用的 deterministic diagnostics：
 
-skill 會讀取期刊格式、paper overrides、writing principles、banned words，以及相關 section checklist，然後檢查：
-
-- finding 是否放在 figure citation 前面，
-- Results 是否先呈現主要模式，再選擇關鍵數值支持，
-- mechanism 是否有資料、Methods 規則或文獻支撐；若沒有，是否以結果層次總結收尾，
-- 術語是否一致，
-- 是否有 unsupported overclaim，
-- 有 panel 的圖是否使用 panel-level citation。
-
-### 檢查 claim 和 evidence
-
-skill 會建立 claim-evidence ledger：
-
-```text
-claim -> evidence source -> allowed certainty -> missing check -> revision
+```bash
+python skills/academic-writing-skills/scripts/audit_manuscript_state.py manuscript_state.json
+python skills/academic-writing-skills/scripts/audit_text_consistency.py manuscript_state.json
+python skills/academic-writing-skills/scripts/audit_docx_structure.py manuscript.docx
+python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
-這對修改 Abstract、Discussion、Conclusion、cover letter 和 reviewer response 特別有用。
+這些 scripts 只提供診斷證據，不能取代實質的學術判斷。
 
-### 回覆審稿人
+## 使用 Paper Review overlay
 
-skill 會把 reviewer comments 轉成 response table：
+`$paper-review` 僅在需要相關領域的 Ethan-style internal review 時使用。
+它會先載入通用核心，再依稿件實際內容選擇 water、CNHS、ABM、
+flood／hydrodynamic、uncertainty 或 AI module。
+
+這個 overlay：
+
+- 將 comments 分成 `MUST`、`SHOULD`、`QUERY`、`PREFERENCE`
+- 使用使用者明確提供的 R1-R4；未提供時只使用 maturity labels
+- 不冒充 Prof. Ethan Yang
+- 不從寫作風格推斷 AI authorship
+- 不會因為 reviewer 問「why」就自行創造 mechanism
+- 只有確認 exact project 後才載入 project precedents
+
+## Repository 結構
 
 ```text
-comment -> anchor text -> response -> manuscript change -> evidence
+skills/
+  academic-writing-skills/
+    SKILL.md
+    references/
+    scripts/
+    assets/
+    agents/
+  paper-review/
+    SKILL.md
+    references/
+    assets/
+    agents/
+evals/
+tests/
 ```
-
-目標是避免只寫「we clarified」但 manuscript 沒有實際修改的情況。
-
-### 節省 AI session token
-
-長 manuscript 建議維護 `.paper/context.md`、`.paper/figure_inventory.md` 和 `.paper/claim_evidence_ledger.md`。之後的 AI session 可以先讀這些濃縮檔案，而不是每次重讀整篇論文。
-
-## 這個 skill 不處理什麼
-
-- 不管理 Zotero。
-- 不設定 Obsidian 或 NotebookLM workspace。
-- 不做 coding-agent delegation。
-- 不只是一般文法檢查器。
-- 不會替使用者編造 scientific assumptions、results 或 citations。
 
 ## 測試
 
-執行：
-
 ```bash
-python -m pytest -q
+python -m pytest tests/ -q
+python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
-測試會檢查 frontmatter、reference files、eval prompts，以及常見亂碼標記。
+測試涵蓋 package structure、frontmatter、reference routing、project-state
+schema、deterministic regressions、overlay isolation 與常見亂碼。
+
+## 範圍
+
+本 plugin 不會編造 scientific assumptions、analyses、results、citations、
+mechanisms 或 metadata，也不取代 Zotero、NotebookLM、文件渲染或
+tracked-change 工具。
 
 ## 授權
 

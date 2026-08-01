@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "id": "replace-with-project-id",
+    "title": "",
+    "archetype": "empirical",
+    "study_designs": [],
+    "lifecycle_stage": "outline",
+    "review_maturity": "developmental",
+    "target_venue": "",
+    "active_release": "working"
+  },
+  "artifacts": [
+    {
+      "id": "main",
+      "path": "manuscript.docx",
+      "role": "main_manuscript",
+      "status": "ACTIVE",
+      "required_for_release": true
+    }
+  ],
+  "authority_sources": [
+    {
+      "id": "analysis-output",
+      "kind": "verified_primary_evidence",
+      "path_or_reference": "",
+      "scope": ["methods", "results", "numbers"],
+      "status": "UNVERIFIED",
+      "last_verified": ""
+    }
+  ],
+  "contract": {
+    "gap": "",
+    "task": "",
+    "outcomes": [],
+    "questions": [
+      {
+        "id": "Q1",
+        "text": "",
+        "lock": "SEMANTIC"
+      }
+    ],
+    "contribution": "",
+    "nonclaims": []
+  },
+  "semantic_locks": [],
+  "terminology": [],
+  "facts": [],
+  "alignment": [
+    {
+      "question_id": "Q1",
+      "method": "",
+      "evidence": "",
+      "result": "",
+      "interpretation": "",
+      "limitation": "",
+      "contribution": "",
+      "status": "PLANNED"
+    }
+  ],
+  "dimensions": [],
+  "decisions": [],
+  "issues": [],
+  "release": {
+    "status": "WORKING",
+    "candidate_artifact_ids": ["main"],
+    "required_checks": [
+      "argument_structure",
+      "evidence_scope",
+      "scholarly_writing",
+      "delivery_integrity",
+      "functional_completeness"
+    ],
+    "completed_checks": [],
+    "checked_hashes": {},
+    "visual_check": "NOT_RUN"
+  }
+}

@@ -11,6 +11,44 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-08-02
+
+### Added
+
+- A managed-project workflow with authority sources, semantic locks, fact and
+  terminology registries, question-to-evidence alignment, issue status,
+  release candidates, and exact-artifact checks.
+- Study-design adapters for quantitative, experimental, qualitative, mixed,
+  computational, AI/LLM, evidence-synthesis, theoretical, framework, methods,
+  and data papers.
+- Deterministic audits for manuscript state, text consistency, Word OOXML
+  structure, and regression cases.
+- A mandatory functional-completeness retrospective after every review,
+  revision, audit, or release check.
+- The separate `paper-review` skill, implemented as an evidence-safe
+  Ethan-style water, CNHS, ABM, flood/hydrodynamics, uncertainty, and AI review
+  overlay.
+
+### Changed
+
+- Rebuilt `academic-writing-skills` around the full manuscript lifecycle,
+  bidirectional evidence alignment, change-impact classes, negative-space
+  review, and blocking release gates.
+- Separated universal integrity, study-design checks, domain conventions,
+  reviewer preferences, venue requirements, and project-specific state.
+- Replaced fixed IMRAD and section-template assumptions with reader-function
+  routing across manuscript archetypes.
+- Replaced unsupported “explain why” requirements with evidence-calibrated
+  mechanism and interpretation rules.
+- Bumped the plugin from 0.3.3 to 1.0.0 because the architecture and bundled
+  skill set changed materially.
+
+### Removed
+
+- Legacy style checklists and fixed templates that duplicated the new
+  lifecycle core or promoted project and reviewer preferences to universal
+  rules.
+
 ## [0.3.3] - 2026-07-27
 
 ### Added
@@ -336,7 +374,8 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   conventions surface in some references; the core workflow is
   domain-neutral.
 
-[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.3...HEAD
+[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/commits/main
+[1.0.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.3...main
 [0.3.3]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.0...v0.3.1

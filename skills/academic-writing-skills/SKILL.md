@@ -1,301 +1,161 @@
 ---
 name: academic-writing-skills
-description: End-to-end academic manuscript workflow for drafting, revision, reviewer response, figure-text consistency, claim-evidence audits, and pre-submission checks. Use this skill whenever a user asks for manuscript sections, paper revision, rebuttal letters, journal compliance, overclaim detection, GPT-style prose cleanup, figure captions, or evidence-backed academic writing. It is especially useful for multi-section papers where context, claims, figures, and reviewer comments must stay consistent across revisions. When `.paper/claims.yml` and `.paper/figures.yml` exist (produced by the `paper-memory-builder` skill), use them as ground truth instead of re-reading the manuscript; if they are absent and the task is multi-section / claim-evidence / reviewer-response work, suggest running `paper-memory-builder` first to build the memory layer.
+description: Review, revise, or proofread academic manuscripts, journal articles, theses, conference papers, abstracts, supplementary materials, and submission packages across disciplines and study designs. Use for developmental editing, staged manuscript development, top-to-bottom integrity checks, reviewer-style revision, method and evidence alignment, technical and citation consistency, natural scholarly prose, claim-scope control, cross-file synchronization, change-impact review, or final submission readiness.
 ---
 
 # Academic Writing Skills
 
-Field-agnostic workflow for rigorous academic paper writing, revision, rebuttal,
-and submission preparation.
+## Governing Principle
 
-The skill is intentionally general. Journal-specific rules, advisor preferences,
-paper terminology, evidence maps, and figure inventories belong in each paper
-repository under `.paper/`.
+Preserve the authors' evidence, intended meaning, and locked decisions while making the scholarly argument clear, reproducible, internally consistent, and no stronger than the evidence permits. Never invent results, mechanisms, citations, metadata, analyses, or field requirements.
 
-## When To Use
+Treat a manuscript as an evolving evidence system, not as isolated prose. Follow the author's writing sequence, but re-open earlier sections whenever later evidence changes them.
 
-Use this skill for:
+## Route the Task
 
-- Drafting or revising Abstract, Introduction, Methods, Results, Discussion,
-  Conclusion, cover letter, or reviewer response.
-- Auditing overclaim, GPT-style prose, vague mechanism language, or unsupported
-  conclusions.
-- Checking whether claims are backed by figures, tables, statistics, code output,
-  or cited literature.
-- Verifying figure captions, panel references, numerical consistency, and
-  figure-text coupling.
-- Preparing a paper for journal submission or resubmission.
-- Compressing paper context so future LLM sessions do not reread the whole
-  manuscript repeatedly.
+First identify:
 
-Do not use this skill for generic literature workspace management, Zotero CRUD,
-Obsidian vault setup, NotebookLM source curation, or coding tasks. Those belong
-to separate research-workspace or coding-agent skills.
+- requested action: plan, draft, review, revise, proofread, or certify readiness
+- artifact scope: passage, section, full manuscript, supplement, or submission package
+- manuscript archetype and study design
+- lifecycle stage and review maturity
+- authoritative sources, active files, and historical references
+- user-locked wording, facts, terminology, and decisions
+- whether editing is authorized or the task is diagnosis only
 
-## Required Workflow
+Use **lightweight mode** for a passage, isolated section, or bounded language edit. Use **managed-project mode** for a full manuscript, repeated revision, multiple companion files, material scientific changes, or any submission-ready request.
 
-Before producing substantive manuscript prose, follow this sequence.
+In managed-project mode, read [state-and-authority.md](references/state-and-authority.md) and use the project-state template. Initialize it with `scripts/init_manuscript_state.py` when no equivalent project record exists. Do not create project state for a simple one-off edit.
 
-### 1. Classify The Task
+## Follow the Manuscript Lifecycle
 
-Identify the requested artifact:
+Map the work to this lifecycle without forcing the final article order to equal the writing order:
 
-- New prose: section draft, paragraph rewrite, abstract, cover letter.
-- Diagnostic audit: overclaim, banned words, claim-evidence, figure consistency.
-- Revision: advisor comments, reviewer comments, response table.
-- Submission: journal checklist, declarations, file inventory.
-- Context compression: `.paper/` packet or paper memory update.
+1. establish project authority, manuscript archetype, and intended venue
+2. develop the extended outline, Introduction, gap, questions, and planned contribution
+3. develop study context, data, theory, and Methods
+4. build Results from verified analyses, figures, tables, or source evidence
+5. develop Discussion, alternatives, implications, limitations, and future work
+6. synthesize the Conclusion from the stabilized evidence map
+7. rebuild the title, Abstract, highlights, and summaries from the current manuscript
+8. reconcile references, supplements, metadata, and submission files
+9. pass release checks on the exact deliverables
 
-For small copyediting tasks, use the fast path in Step 3 and avoid asking for
-unneeded setup.
+At every stage, run both directions of alignment:
 
-### 2. Locate The Paper Repository
+- **top-down:** purpose or gap → question or objective → method → expected evidence
+- **bottom-up:** source evidence → result → interpretation → contribution and summary claim
 
-Use the current working directory unless the user gives another path. Look for:
+Read [lifecycle-and-routing.md](references/lifecycle-and-routing.md) for stage gates, review maturity, non-IMRAD routing, and change-impact classes.
 
-```text
-<paper-repo>/
-  .paper/
-    journal_format.md
-    style_overrides.md
-    context.md
-    figure_inventory.md
-    claim_evidence_ledger.md
-    reviewer_comments.md
-    submissions_log.md
-```
+## Apply Universal Integrity Gates
 
-If `.paper/` does not exist and the task is multi-section, submission-facing, or
-reviewer-facing, offer to create a minimal paper context packet using
-`references/paper_context_packet.md`.
+Always verify:
 
-### 3. Confirm Journal Format
+1. **Authority:** derive facts from identified sources; do not infer authorship roles, funding, sample sizes, or methods from formatting or old drafts.
+2. **Contract:** preserve locked gap, task, questions, outcomes, contribution, and explicit nonclaims unless the user authorizes a semantic change.
+3. **Alignment:** connect every central question or objective to a method, evidence source, substantive answer, interpretation, limitation, and contribution.
+4. **Method–evidence integrity:** require enough detail to understand how evidence was produced and which assumptions bound the inference.
+5. **Claim scope:** distinguish direction, magnitude, uncertainty, significance, equivalence, causation, mechanism, prediction, and generalizability.
+6. **Cross-artifact synchronization:** propagate material changes to every affected section and companion artifact.
+7. **Version integrity:** identify one active release and distinguish it from historical references.
+8. **Release integrity:** never use `FINAL`, `VERIFIED`, or `SUBMISSION_READY` while a high-severity blocker or unresolved required source remains.
 
-Look for `<paper-repo>/.paper/journal_format.md`.
+Read [universal-integrity.md](references/universal-integrity.md) for paragraph, abstract, conclusion, evidence, terminology, citation, and four-pass review rules.
 
-- If present, load it and apply its word limits, citation style, section order,
-  figure specs, declarations, and submission rules.
-- If missing and the task is format-sensitive, stop and ask for the target
-  journal. Use `references/journal_format_template.md` to create the file.
-- If missing and the task is small, proceed without journal setup and state that
-  journal compliance was not checked.
+## Select Study-Design Adapters
 
-Format-sensitive tasks include abstract word limits, cover letters, section
-order, figure-count audits, declarations, reviewer suggestions, and submission
-preparation.
+Select adapters by research design, not by discipline label. Load only the relevant sections of [study-design-adapters.md](references/study-design-adapters.md):
 
-### 4. Load Paper-Specific Overrides
+- quantitative observational or survey research
+- experiments or quasi-experiments
+- qualitative research
+- mixed methods
+- computational models or simulations
+- AI/LLM-based studies
+- evidence syntheses, reviews, or meta-analyses
+- theoretical, conceptual, framework, methods, or data papers
 
-If `<paper-repo>/.paper/style_overrides.md` exists, apply it after the universal
-rules. It can override banned terms, allowed terms, terminology preferences,
-figure conventions, and advisor-specific instructions. For a filled-in generic
-template see `references/style_overrides_example.md`; for a guide to calibrating
-your own group's overrides (field-native word exemptions, a corpus-measured
-em-dash budget, the hard-flag stock-phrase list, and per-section signatures)
-see `references/style_overrides_customization.md`.
+Combine adapters when the design is genuinely hybrid. Treat adapter checks as questions requiring manuscript evidence, not assumptions that a method was used incorrectly.
 
-If `<paper-repo>/.paper/context.md` exists, use it as the preferred compressed
-source of paper context before reading the full manuscript.
+## Compose External Overlays Safely
 
-If `<paper-repo>/.paper/claims.yml` or `<paper-repo>/.paper/figures.yml` exist
-(produced by the `paper-memory-builder` skill), prefer them over re-reading the
-manuscript when running claim-evidence audits, figure-text consistency checks,
-or banned-word audits — the YAML is the authoritative shared memory layer
-across writing sessions. Refresh the YAML via `paper-memory-builder` if the
-manuscript has changed since the YAML was last written.
+Apply a supplied domain skill, reviewer rubric, professor checklist, reporting standard, or journal guide as an overlay. Read [overlay-contract.md](references/overlay-contract.md) before applying one.
 
-If `<paper-repo>/.paper/revision_history.yml` exists, read it before answering
-"what changed since last submission" / "did I address reviewer N's comment" /
-"which figures have been touched in the last 2 rounds". The history is the
-audit trail; don't infer it from the current manuscript alone.
+Keep overlay rules classified as:
 
-### 5. Load Universal Rules
+- study-design requirement
+- domain convention or technical check
+- reviewer preference or tone
+- venue requirement
+- project-specific fact or decision
 
-Always load:
+Never promote an overlay rule into a universal rule. When an overlay conflicts with evidence, author instructions, ethics, or defensible inference, preserve the evidence and report the conflict. A request to explain “why” does not authorize an unsupported mechanism.
 
-- `references/writing_principles.md`
-- `references/banned_words.md`
+## Control Material Changes
 
-These define findings-first structure, mechanism requirements, overclaim
-language, GPT-style vocabulary, causal-claim checks, and revision discipline.
+Classify each proposed change before editing:
 
-### 6. Load Task-Specific References
+- **Class A — semantic contract:** gap, task, question, outcome, contribution, causal or validation framing
+- **Class B — evidence or method:** data, sample, model, analysis, number, figure, table, limitation
+- **Class C — metadata:** authors, affiliations, funding, roles, declarations, repository links
+- **Class D — surface:** grammar, punctuation, formatting, local clarity with no scientific change
 
-| Task | Load |
-|---|---|
-| Drafting or editing a manuscript section | `references/section_checklists.md` |
-| Drafting or revising Results | `references/results_writing.md` plus the Results subsection of `references/section_checklists.md` |
-| Figure, caption, panel, or number consistency | `references/figure_conventions.md` |
-| Claim support, overclaim, abstract/conclusion audit | `references/claim_evidence_audit.md` |
-| Reviewer response or rebuttal letter | `references/reviewer_response_workflow.md` |
-| Submission or resubmission prep | `references/submission_checklist.md` |
-| Full-manuscript, top-to-bottom, paper-ready, or final-gate review | `references/comprehensive_manuscript_review.md` plus `references/submission_checklist.md` |
-| Creating or refreshing `.paper/` memory | `references/paper_context_packet.md` |
+Run the corresponding impact scan before declaring the edit complete. Class A normally reopens the whole evidence chain and all summaries. Class B reopens affected methods, results, interpretations, visuals, supplements, and summaries. Class C reopens every submission artifact and metadata field. Class D requires a local semantic diff and formatted-file check.
 
-Read only the relevant subsection when possible. The goal is to save context,
-not load every reference by default. The comprehensive-review reference is an
-exception: read and apply it in full whenever the user requests a complete
-review or a paper-ready decision. Do not substitute sampled paragraphs or
-keyword scans for that workflow.
+Do not make a global replacement across equations, field codes, citations, XML, or metadata without protected-context checks and a post-change diff.
 
-### 7. Produce The Artifact
+## Use Deterministic Audits as Evidence, Not Judgment
 
-Use the output structure that fits the task:
+For managed projects, use the bundled scripts when relevant:
 
-- For prose: revised text first, then a short audit note if useful.
-- For audits: findings table, severity, evidence, recommended fix.
-- For reviewer response: point-by-point table with comment, response, manuscript
-  change, and evidence.
-- For submission: checklist with pass, fail, unknown, and required action.
-- For context compression: concise `.paper/` files that future sessions can load
-  instead of the full paper.
+- `scripts/audit_manuscript_state.py`: validate state completeness, source links, question alignment, dimension coverage, and release blockers
+- `scripts/audit_text_consistency.py`: extract text from supported files and scan registered locked strings, prohibited variants, and fact conflicts
+- `scripts/audit_docx_structure.py`: inspect Word OOXML using exact tag names for tracked changes, comments, fields, and placeholders
+- `scripts/run_regression_tests.py`: verify the audit tools against bundled failure cases
 
-When revising existing text, change only what the task requires. Preserve the
-author's voice unless the sentence violates a rigor rule.
+Treat script findings as diagnostics. Inspect each match in context before editing. A clean script report never replaces substantive reading.
 
-### 8. Self-Audit Before Showing The User
+## Conduct Four Distinct Passes
 
-Before returning prose or an audit result, check:
+For full reviews or substantial revisions, complete four top-to-bottom passes:
 
-1. Does every result state the main pattern at the opening or immediately after
-   a figure-first callout?
-2. Does every finding have a mechanism grounded in data, method, or literature?
-3. Are overclaim verbs and vague intensifiers removed or hedged?
-4. Numeric verifiability: re-grep every numeric token in Abstract, Results,
-   and Conclusion. Each must trace to a row in `.paper/claim_evidence_ledger.md`
-   (or to a figure annotation, table cell, code output, or citation visible
-   to the reader). Numbers without a ledger row must be removed, hedged, or
-   have evidence added per the disposition tree in
-   `references/claim_evidence_audit.md`. Do not rely on memory across
-   revisions — numbers drift silently when figures are regenerated or
-   analyses re-run.
-5. Are figure references panel-specific when panels exist?
-6. Do reviewer responses point to a real manuscript change?
-7. Does journal format override any default rule?
-8. Does the prose use terminology a reviewer in the target field would
-   recognise, or has CS / engineering / general-AI jargon slipped in from a
-   method draft or software repository? See `references/writing_principles.md`
-   §4.6 and `.paper/style_overrides.md` "Domain Vocabulary Swaps".
-9. Are any noun-noun (or noun-noun-noun) compounds joined by hyphens
-   invented for this paper rather than drawn from existing field
-   vocabulary? Are semicolons and colons in body prose limited to at most
-   one each per paragraph (citation lists and equation parentheticals
-   excluded)? See `references/writing_principles.md` §4.4 and §4.7.
-10. Claim-gap cross-reference: if `<paper-repo>/.paper/claims.yml` exists,
-    map every assertive sentence in the produced prose or the audited text
-    to a claim row, and flag any sentence that maps to a `status: gap`
-    claim with `[MATERIAL GAP]`.
+1. **Argument and structure:** reader functions, purpose, questions, organization, paragraph openings, and contribution.
+2. **Evidence and scope:** methods, data, results, figures, tables, citations, uncertainty, claim strength, and cross-file propagation.
+3. **Scholarly writing:** clarity, natural subjects, terminology, repetition, syntax, tense, voice, and notation.
+4. **Delivery integrity:** summaries, references, numbering, metadata, exact filenames, tracked changes, visual rendering, and release blockers.
 
-    - **`claims.yml` row schema** (produced by the `paper-memory-builder`
-      skill): each row has `id` (`C1`, `C2`, ...), `text`, and `status`
-      — one of `draft | supported | rejected | gap`. A `gap` row also
-      carries a one-line `gap_reason`. `status: gap` means the memory
-      layer has recorded the claim as having no backing evidence
-      artifact. If you have not loaded `paper-memory-builder` and the
-      schema is unclear, treat any row whose `status` is literally
-      `gap` as a material gap.
-    - **What counts as "assertive"**: sentences with a numeric claim,
-      a definitive verb (shows, proves, confirms, establishes, exceeds,
-      demonstrates), or an absolute comparative. Hedged sentences
-      (suggests, is consistent with, may indicate) are not assertive
-      and need no mapping.
-    - This check is mandatory on overclaim audits, banned-word audits,
-      and claim-evidence audits alike: a sentence can be linguistically
-      clean (no banned words, no overclaim verbs) and still assert a
-      `status: gap` claim. A clean-prose verdict never overrides a
-      `status: gap` finding.
-    - If `.paper/claims.yml` is absent and the task is a claim-evidence
-      or overclaim audit, say so explicitly and suggest running
-      `paper-memory-builder` first.
-11. Humanize pass: scan for AI-tell structural patterns per
-    `references/writing_principles.md` §5.5 (mechanical rule-of-three,
-    negative parallelism, uniform sentence rhythm, formulaic signposts,
-    hedge stacking, repeated paragraph openers). These are structural, not
-    word choice, so a clean banned-word verdict does not clear them.
-12. Summary-section terminology: every technical term in an Abstract or
-    Conclusion already appears in Methods or Results per
-    `references/writing_principles.md` §4.9. Flag any term, compound, or
-    near-synonym the body never uses; fix the body's term first, then reuse it.
-    Choose abbreviations by frequency and readability rather than mechanically
-    reusing every abbreviation defined earlier (§4.11).
-13. Results evidence baseline: for Results work, confirm that every cited
-    figure, table, caption, and analysis output belongs to the current
-    authoritative version. Resolve disagreements before drafting; do not blend
-    values from different versions. See `references/results_writing.md` §1.
-14. Evidence attribution: verify that the source cited in the paragraph
-    actually contains the reported number or pattern. Information known from
-    the dataset but absent from that source must be linked to the correct
-    reader-visible evidence, added to a display, or removed. See
-    `references/results_writing.md` §4.
-15. Group-comparison language: do not convert different descriptive values or
-    one significant and one nonsignificant within-group path into a formal
-    between-group difference without a valid comparison test. See
-    `references/results_writing.md` §5.
-16. Summary-section openings: Abstract and Conclusion sentences begin with the
-    scientific subject or claim rather than a gerund or participial phrase.
-    For a Conclusion, the opening paragraph progresses from background or
-    importance to the specific gap and then to the study response, without
-    copying the Abstract or Introduction or opening with a list of research
-    questions. See `references/writing_principles.md` §5.6 and
-    `references/section_checklists.md`.
-17. Reader encounter order: introduce the purpose and object of a concept or
-    assessment before defining its metrics or interpreting its results. Replace
-    collective source labels such as "previous studies" when the cited
-    provenance differs by item or step. See `references/writing_principles.md`
-    §1.10.
-18. Statistic-claim alignment: confirm that each inferential statement names
-    the estimand and hypothesis actually tested. Keep visual observations,
-    descriptive summaries, and inferential conclusions distinct. See
-    `references/results_writing.md` §5.
-19. Cross-artifact integrity: before submission, designate authoritative
-    invariants and verify them across the manuscript, supplementary material,
-    figures, captions, standalone submission files, and package contents.
-    Remove drafting scaffolds and rebuild the package after any component
-    changes. See `references/submission_checklist.md` §8.
-20. Comprehensive-review gate: for full-manuscript, top-to-bottom,
-    paper-ready, or final-release requests, complete the ordered forward pass
-    from document structure to sentence-level necessity and evidence
-    provenance, then the reverse pass from changed sentences back to the
-    rebuilt package. Record completion evidence at every level; a flat list of
-    independent checks is not sufficient. See
-    `references/comprehensive_manuscript_review.md`.
+If a later pass finds a material issue, fix it and repeat every affected upstream and downstream check. Do not certify the earlier pass as current.
 
-If any item fails, fix it before showing the user.
+## End Every Check with a Functional-Completeness Retrospective
 
-## Paper Context Packet
+After every review, revision round, audit, or release check, explicitly revisit the task's functional coverage before reporting completion. Ask:
 
-Use `.paper/` files to reduce repeated token use across sessions. A mature paper
-repository should contain:
+1. Did the work cover the requested lifecycle stage and every artifact in scope?
+2. Did it preserve locked meaning and consult the correct authority sources?
+3. Did every affected question, method, result, interpretation, limitation, and summary remain aligned?
+4. Did all relevant study-design adapters and overlays run without becoming universal assumptions?
+5. Did the change-impact scan cover upstream, downstream, and companion-file dependencies?
+6. Are any unknowns, unavailable sources, open issues, waivers, or high-severity blockers still present?
+7. Were deterministic, structural, and visual checks used where applicable, and were their limits stated?
+8. Is the exact deliverable—not an intermediate copy—the one inspected?
 
-```text
-.paper/
-  journal_format.md
-  style_overrides.md
-  context.md
-  figure_inventory.md
-  claim_evidence_ledger.md
-  reviewer_comments.md
-  submissions_log.md
-```
+If any answer is no or unknown, continue the work or report the limit. Never collapse this retrospective into a generic “all checks passed.”
 
-`context.md`, `figure_inventory.md`, and `claim_evidence_ledger.md` are the most
-important token-saving files. They let future agents understand the paper's
-research question, claims, figures, and evidence without rereading the full
-manuscript.
+Read [reviewer-red-team-and-release.md](references/reviewer-red-team-and-release.md) for negative-space tests, issue severity, readiness criteria, and the final report format.
 
-## Core Principles
+## Work with Formatted Files
 
-- Findings first, then mechanism.
-- Claims must be traceable to evidence.
-- Figure text, captions, and prose must agree.
-- Journal rules override generic preferences.
-- Paper-specific overrides beat skill defaults.
-- Reviewer response is a change-management task, not a politeness exercise.
-- Preserve scientific uncertainty; do not invent assumptions or results.
-- Prefer concise, evidence-backed prose over generic academic polish.
-- Introduce concepts in reader-needed order and scope source attributions
-  precisely.
-- Match every statistical claim to the quantity and hypothesis actually
-  evaluated.
-- Treat cross-file invariants and artifact synchronization as submission
-  requirements.
+Use the dedicated document, spreadsheet, presentation, or PDF skill for file-format operations and visual verification. This skill governs scholarly integrity; it does not replace format-specific rendering, tracked-change, or OOXML workflows.
+
+## Report the Outcome
+
+Lead with readiness and remaining blockers. Report only checks actually performed. State:
+
+- what changed and what was preserved
+- whether scientific meaning, evidence, numbers, citations, or metadata changed
+- which artifacts and lifecycle gates were checked
+- unresolved issues, unavailable sources, or explicit waivers
+- the functional-completeness retrospective outcome
+
+Do not call a manuscript final when the evidence supports only a partial or conditional review.

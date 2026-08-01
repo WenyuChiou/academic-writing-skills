@@ -1,0 +1,14 @@
+interface:
+  display_name: Academic Writing Skills
+  short_description: Manage cross-disciplinary manuscript integrity
+  default_prompt: Use $academic-writing-skills to review this manuscript through its
+    current lifecycle stage and finish with a functional-completeness retrospective.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

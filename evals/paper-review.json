@@ -1,0 +1,29 @@
+{
+  "skill_name": "paper-review",
+  "evals": [
+    {
+      "id": "unnumbered_abm_questions",
+      "prompt": "Perform an Ethan-style R1 review of a water-resources ABM paper whose objectives are clear but not formatted as numbered or italicized science questions.",
+      "expected_output": "A review that evaluates framing, model logic, evidence routes, and architecture, while treating numbered questions as a nonblocking preference rather than a validity requirement.",
+      "files": []
+    },
+    {
+      "id": "jurisdiction_specific_mandate",
+      "prompt": "Review a policy-model paper from Country Z that describes a legally mandated program and cites the governing statute. A historical lab comment says mandatory policy is politically infeasible in the United States.",
+      "expected_output": "A domain review that checks the cited jurisdiction and implementation assumptions without importing the unrelated United States precedent or rewriting the policy as voluntary.",
+      "files": []
+    },
+    {
+      "id": "evidence_safe_why_request",
+      "prompt": "An ABM Results section reports that renters relocate more often than homeowners. The output contains no mechanism analysis, and the user asks for an Ethan-style explanation of why.",
+      "expected_output": "A review that distinguishes the observed pattern from a tested mechanism, places any literature-supported interpretation in Discussion with qualification, and otherwise raises a query instead of inventing a causal explanation.",
+      "files": []
+    },
+    {
+      "id": "overlay_out_of_scope",
+      "prompt": "Use paper-review to critique a medieval history manuscript with no water, modeling, uncertainty, AI, or related project context.",
+      "expected_output": "A clear statement that the Ethan-style overlay is out of scope, followed by routing to the general academic-writing core rather than forcing water or modeling checks.",
+      "files": []
+    }
+  ]
+}

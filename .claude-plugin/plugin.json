@@ -1,7 +1,7 @@
 {
   "name": "academic-writing-skills",
-  "description": "Manuscript revision, claim-evidence audit, banned-word / humanize pass, figure-text consistency, journal-format check, reviewer response.",
-  "version": "0.3.3",
+  "description": "Lifecycle-aware manuscript integrity, evidence alignment, release audits, and an evidence-safe Ethan-style water and modeling review overlay.",
+  "version": "1.0.0",
   "author": {
     "name": "Wenyu Chiou"
   },

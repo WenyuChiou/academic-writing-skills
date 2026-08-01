@@ -2,69 +2,39 @@
   "skill_name": "academic-writing-skills",
   "evals": [
     {
-      "id": "abstract_claim_evidence_audit",
-      "prompt": "Audit this abstract for overclaim and unsupported claims. The paper is a simulation study, and the abstract currently says the model proves that flood adaptation eliminates renter vulnerability.",
-      "expected_output": "A claim-evidence audit that flags 'proves' and 'eliminates', recommends hedged simulation-appropriate language, and asks for evidence sources or figure references before preserving precise claims.",
+      "id": "locked_question_semantic_drift",
+      "prompt": "Shorten a manuscript after the authors locked a research question asking whether LLM-generated respondents reproduce human decision-factor levels and pathways. A draft summary now says only that the datasets have similarities and differences.",
+      "expected_output": "A Class A impact diagnosis that preserves the reproduction task, reopens the full evidence chain and all summaries, and does not weaken the locked question merely to reduce word count.",
       "files": []
     },
     {
-      "id": "results_paragraph_rewrite",
-      "prompt": "Rewrite this Results paragraph around its main pattern and supporting evidence: 'Figure 5 shows the results. The blue line is lower. This demonstrates that insurance is crucial for resilience.'",
-      "expected_output": "A revised paragraph that states the pattern, requests the actual metric or figure value, removes 'demonstrates' and 'crucial', and adds a mechanism only if the available evidence supports one.",
+      "id": "non_imrad_conceptual_paper",
+      "prompt": "Review a conceptual paper with premises, propositions, boundary conditions, and implications but no empirical Methods or Results headings.",
+      "expected_output": "A reader-function review that tests definitions, assumptions, derivation, counterexamples, boundaries, and contribution without falsely requiring empirical Methods or Results sections.",
       "files": []
     },
     {
-      "id": "reviewer_response_table",
-      "prompt": "Turn three reviewer comments into a response-to-reviewers table. One comment asks for a new robustness check, one asks for clearer figure labels, and one asks for an out-of-scope experiment we cannot run this month.",
-      "expected_output": "A point-by-point table with comment IDs, anchor text placeholders, response strategy, manuscript change, and evidence. The out-of-scope item should be declined with a concrete reason and a smaller surrogate or limitation note.",
+      "id": "llm_reporting_dimension_gap",
+      "prompt": "Audit an LLM survey study that reports model identifier, runtime, tokens, and call count for one model, but only the model name for a second model. It also omits the selected-run rule and parser failure handling.",
+      "expected_output": "A dimension-completeness audit that reports asymmetric model fields, selected-run and parser gaps, distinguishes unknown from zero, and limits reproducibility and behavioral claims without inventing missing values.",
       "files": []
     },
     {
-      "id": "figure_caption_consistency",
-      "prompt": "Check whether a caption and paragraph are consistent. The paragraph cites Figure 6, says damage falls by 36%, but the caption only describes panels a-c and the number is not labeled.",
-      "expected_output": "A figure-text consistency audit that flags missing panel-level citation, missing visible number, incomplete caption coverage, and recommends either adding the 36% annotation/source or softening the prose.",
+      "id": "cross_artifact_stale_release",
+      "prompt": "Check a submission package where the manuscript contains revised Figures 3-6 and two analyzed models, while standalone figure and table archives retain earlier numbering and four models.",
+      "expected_output": "A Class B and release-integrity diagnosis that identifies the active authority source, rebuilds or requests synchronized standalone artifacts, checks all affected text and summaries, and blocks submission readiness until exact files agree.",
       "files": []
     },
     {
-      "id": "paper_context_packet",
-      "prompt": "Create a minimal .paper context packet for a manuscript about LLM-driven agent-based flood adaptation with figures, claims, and journal format still in progress.",
-      "expected_output": "A concise plan and file templates for context.md, figure_inventory.md, claim_evidence_ledger.md, journal_format.md, and style_overrides.md, with no invented scientific results.",
+      "id": "survey_group_comparison_scope",
+      "prompt": "One SEM path is significant for NMG and nonsignificant for MG, but no formal between-group comparison was performed. The conclusion says the path is significantly stronger for NMG.",
+      "expected_output": "A quantitative-adapter finding that separate within-group significance does not establish a significant group difference, with bounded replacement language and propagation to Results, Discussion, Abstract, and Conclusion.",
       "files": []
     },
     {
-      "id": "results_reader_visible_evidence",
-      "prompt": "Revise a Results paragraph that says 24% of respondents had prior flood experience and cites Figure 5, but Figure 5 does not display that percentage. The percentage exists only in an internal survey summary.",
-      "expected_output": "An evidence-grounding diagnosis that does not attribute 24% to Figure 5, then either cites or adds a reader-visible table or supplement, or removes the percentage and preserves only the supported result.",
-      "files": []
-    },
-    {
-      "id": "results_group_comparison_boundary",
-      "prompt": "Rewrite subgroup Results where one path is significant for NMG and nonsignificant for MG, but no formal between-group test was run. The current draft says the pathway is significantly stronger for NMG.",
-      "expected_output": "A revision that reports the two within-group results separately, avoids claiming a statistically significant group difference, and states that a formal between-group test is required for that conclusion.",
-      "files": []
-    },
-    {
-      "id": "reader_order_and_statistic_claim_alignment",
-      "prompt": "Audit a Methods-to-Results passage that reports reliability and validity metrics before explaining their purpose, attributes all questionnaire elements to 'previous studies' even though sources differ by question, and uses a mean-comparison test to claim that two complete distributions differ.",
-      "expected_output": "An audit that introduces the assessment purpose before its metrics, requires question- or element-level source scope, and limits the inferential claim to mean differences while separating plotted distributional observations from the test result.",
-      "files": []
-    },
-    {
-      "id": "submission_cross_artifact_integrity",
-      "prompt": "Run a pre-submission integrity check where the manuscript reports 420 participants, subgroup totals sum to 421, one supplementary table is uncited, an outline role label remains in Results, and the embedded figure differs from the standalone upload.",
-      "expected_output": "A submission-blocking audit that designates authoritative invariants, resolves the arithmetic conflict across all files, restores bidirectional main-supplement references, removes drafting scaffolding, synchronizes embedded and standalone figures, and rebuilds the package from authoritative files.",
-      "files": []
-    },
-    {
-      "id": "comprehensive_hierarchical_review",
-      "prompt": "Perform a top-to-bottom paper-ready review. The Discussion contains body text between the parent heading and Section 5.1, Section 5.1 must contain exactly three paragraphs, the abstract jumps from background to 'variation' without defining what varies, prose gives display model names followed by technical identifiers in parentheses, and Highlights use an undefined abbreviation.",
-      "expected_output": "A hierarchical review that checks document and heading structure before sentence polish, resolves or deliberately assigns the orphan text, verifies the three-paragraph requirement after editing, replaces ambiguous 'variation' with the actual quantity, separates display names from technical identifiers, defines or removes the standalone abbreviation, then performs a reverse pass and withholds paper-ready status until every level passes.",
-      "files": []
-    },
-    {
-      "id": "table_pagination_and_workload_provenance",
-      "prompt": "Audit Supplementary Material where a long descriptive table continues for three pages without repeated column headers, a survey question was accidentally marked as a repeating header, and two different models have identical runtime, token, and call-count rows even though only one model has a source log.",
-      "expected_output": "A submission-blocking audit that restores semantic column headers on every data-table page without repeating a survey question, traces every workload row to a source record, treats identical cross-system values as a duplication warning, removes or marks unavailable the unsupported model rows, distinguishes local from provider-managed hardware, and verifies the rendered pages after revision.",
+      "id": "submission_release_blockers",
+      "prompt": "The prose and figures are polished, but IRB or consent status, funding authority, API retention, and the active supplementary file remain unverified. Certify the package as final.",
+      "expected_output": "A refusal to label the package final or submission-ready, with S3/S4 issues, required authority sources, exact affected artifacts, and a functional-completeness retrospective naming the remaining limits.",
       "files": []
     }
   ]

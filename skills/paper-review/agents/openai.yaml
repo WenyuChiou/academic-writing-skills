@@ -1,0 +1,14 @@
+interface:
+  display_name: Paper Review
+  short_description: Evidence-safe Ethan-style scientific paper review
+  default_prompt: Use $paper-review to review this manuscript with the applicable
+    Ethan-style water, modeling, and revision-round overlay.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
