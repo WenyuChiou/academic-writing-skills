@@ -35,6 +35,7 @@ Ask one targeted question only when the available evidence leaves two materially
 
 Load:
 
+- [display-notation-provenance.md](references/display-notation-provenance.md) for equations, formal notation, derived display quantities, normalization or aggregation rules, uncertainty displays, or cross-artifact symbol consistency
 - [quantitative-psychometrics-sem.md](references/quantitative-psychometrics-sem.md) for surveys, scales, psychometrics, factor analysis, latent variables, SEM, mediation, or multi-group comparison
 - [ai-llm-computational.md](references/ai-llm-computational.md) for simulations, ABM, coupled computational models, ML, GenAI, LLMs, synthetic respondents, or agent evaluation
 - [water-cnhs-uncertainty.md](references/water-cnhs-uncertainty.md) for water resources, coupled natural–human systems, water policy, frameworks, reviews, uncertainty, or equifinality
@@ -65,7 +66,7 @@ Apply the base skill's four passes, then use the selected modules to deepen—no
 2. **Design and methods:** verify sampling or source selection, measurement, model logic, estimand, assumptions, uncertainty, comparison design, and reproducibility as applicable.
 3. **Results and claim scope:** verify question-to-result coverage, statistical or computational evidence, alternative explanations, mechanisms, and formal versus descriptive comparisons.
 4. **Discussion and synthesis:** distinguish direct findings, literature-supported interpretation, plausible alternatives, implications, limitations, and speculation.
-5. **Displays and notation:** verify figures, tables, equations, captions, units, symbols, panels, and text–display agreement.
+5. **Displays and notation:** verify figures, tables, equations, captions, units, symbols, panels, text–display agreement, and the provenance of derived quantities. When the display-and-notation module applies, use its symbol ledger and provenance trace rather than checking each artifact in isolation.
 6. **Writing and delivery:** verify terminology, repetition, observable stock phrasing, flow, summaries, citations, companion files, metadata, and named-stage readiness.
 
 For every material issue, inherit the base skill's scope, S0–S4 severity, evidence status, issue status, authority needed, affected artifacts, and blocking stage. If an optional reviewer overlay uses `MUST`, `SHOULD`, `QUERY`, or `PREFERENCE`, keep those labels separate from severity.
@@ -76,7 +77,7 @@ Do not invent mechanisms, citations, facts, thresholds, analyses, prior comments
 
 Do not infer AI authorship from prose. Report observable features such as vague subjects, stock transitions, empty intensifiers, repetitive cadence, duplicated synthesis, or unsupported mechanisms.
 
-Do not call a cross-round issue resolved without the prior instruction and current evidence. Do not make a preference blocking unless a verified venue, reporting, author, or reviewer requirement makes it so.
+Do not call a cross-round issue resolved without the prior instruction and current evidence. A response letter or resolved comment thread is evidence of an author claim, not evidence that the current artifact contains the requested change. Do not make a preference blocking unless a verified venue, reporting, author, or reviewer requirement makes it so.
 
 ## Output Format
 

@@ -38,3 +38,15 @@ Classify prior issues as:
 - `NOT_VERIFIABLE`: required prior artifact or source is unavailable
 
 After material revisions, re-open upstream framing and downstream summaries rather than checking only the commented sentence.
+
+## Audit Comment Threads Against the Current Artifact
+
+When prior comments, author replies, tracked changes, or resolved comment threads are supplied, keep three evidence layers separate:
+
+1. the reviewer instruction or requested decision
+2. the author's response or claimed action
+3. the change verified in the current manuscript and affected companion artifacts
+
+A reply such as “revised,” “fixed,” or “addressed” does not establish resolution. Locate the claimed change in the active artifact, verify that it satisfies the instruction, and check that it did not create a contradiction or leave a stale Abstract, Conclusion, figure, table, equation, caption, supplement, or response letter.
+
+Classify the issue as `PARTIAL` when the response is present but the verified change addresses only part of the request. Use `OPEN` when current evidence shows that the requested change is absent or substantively insufficient. Use `NOT_VERIFIABLE` when the prior instruction, cited source, earlier version, tracked-change basis, or active artifact needed for comparison is unavailable. Never upgrade a thread to `RESOLVED` from reply text or UI resolution state alone.

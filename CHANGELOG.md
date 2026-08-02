@@ -11,6 +11,24 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-08-02
+
+### Added
+
+- A selectively loaded display, notation, and provenance module with an
+  equation-symbol ledger and an end-to-end trace for derived figure and table
+  quantities.
+- Routing and boundary evals for derived displays, simple descriptive displays,
+  and comment replies that are not verified by the current artifacts.
+
+### Changed
+
+- Cross-round review now separates reviewer instructions, author replies, and
+  changes verified in the active manuscript and companion files.
+- A resolved comment thread or response-letter claim no longer establishes
+  `RESOLVED` without current-artifact evidence.
+- Bumped the plugin from 1.1.0 to 1.1.1.
+
 ## [1.1.0] - 2026-08-02
 
 ### Added
@@ -405,7 +423,9 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   domain-neutral.
 
 [Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/commits/main
-[1.0.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.3...main
+[1.1.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.1.0...main
+[1.1.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.3...v1.0.0
 [0.3.3]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.0...v0.3.1

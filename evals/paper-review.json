@@ -36,6 +36,24 @@
       "prompt": "Use paper-review to critique a conceptual medieval-history manuscript with no quantitative, computational, water, or named-reviewer context.",
       "expected_output": "A general reader-function and evidence-scope review using the academic-writing core without forcing any bundled domain module or declaring the manuscript out of scope.",
       "files": []
+    },
+    {
+      "id": "derived_display_and_notation_provenance",
+      "prompt": "Review a modeling paper whose equations reuse k for two parameters and whose main figure shows a normalized divergence band without defining the baseline, aggregation rule, or uncertainty meaning.",
+      "expected_output": "A review that loads display-notation-provenance, builds a cross-artifact symbol ledger, identifies the conflicting k definitions, traces the derived band from source through transformation and display to claim, and marks unavailable provenance as not verifiable without reconstructing the analysis.",
+      "files": []
+    },
+    {
+      "id": "simple_display_does_not_trigger_provenance_module",
+      "prompt": "Review a short qualitative paper containing one descriptive participant-count table with explicit categories, counts, source, and no transformations or formal notation.",
+      "expected_output": "A general review that does not load display-notation-provenance merely because a simple table is present, while still checking ordinary table-label and text agreement through the base review.",
+      "files": []
+    },
+    {
+      "id": "author_reply_is_not_verified_resolution",
+      "prompt": "Compare a reviewer comment, an author reply saying fixed, and the current manuscript. The requested sensitivity definition was added to Methods but the figure caption and supplement still use the old definition.",
+      "expected_output": "A round-calibrated regression audit that separates instruction, author claim, and verified current changes; classifies the issue as partial rather than resolved; and names the stale caption and supplement as affected artifacts.",
+      "files": []
     }
   ]
 }

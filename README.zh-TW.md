@@ -53,6 +53,7 @@ claude plugin update academic-writing-skills@ai-research-skills
 
 | 稿件證據 | 載入 reference |
 |---|---|
+| Equations、formal notation、normalized／aggregated series、composite metrics 或 derived uncertainty displays | `display-notation-provenance.md` |
 | Survey、scale、CFA、psychometrics、SEM、mediation、multi-group analysis | `quantitative-psychometrics-sem.md` |
 | Simulation、ABM、ML、GenAI、LLM、synthetic respondents、agent evaluation | `ai-llm-computational.md` |
 | Water resources、CNHS、policy、framework、review、uncertainty、equifinality | `water-cnhs-uncertainty.md` |
@@ -63,6 +64,8 @@ claude plugin update academic-writing-skills@ai-research-skills
 Hybrid paper 可以載入多個 modules。只有現有資訊仍存在會實質改變 evidence requirements 或 review standard 的歧義時，reviewer 才問一個精準問題，例如 factor analysis 究竟是 exploratory 還是 confirmatory。稿件本身已能判斷時，不會再要求使用者選領域。
 
 其他使用者之後可新增直接 reference。每個 module 應包含 trigger／exclusion cues、technical and evidence checks、claim-scope boundaries、display／reproducibility checks，以及至少一個 routing 或 boundary eval。Reviewer、journal、laboratory 與 project rules 必須維持獨立 conditional overlays。
+
+跨輪次審查時，author reply 或已 resolved 的 comment thread 本身不等於問題已解決；reviewer 必須在 active manuscript 與所有受影響 companion artifacts 中驗證修改。對 derived figures／tables，還會追溯 source data 或 model output、transformation、aggregation、display 到 textual claim 的完整來源鏈。
 
 ## 從 outline 到投稿的完整流程
 

@@ -28,6 +28,7 @@ CORE_SCRIPTS = {
 }
 REVIEW_REFERENCES = {
     "ai-llm-computational.md",
+    "display-notation-provenance.md",
     "ethan-style-overlay.md",
     "flood-hydrodynamics-catastrophe.md",
     "overlay-contract.md",
@@ -56,7 +57,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.1.0"
+    assert manifest["version"] == "1.1.1"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -116,10 +117,13 @@ def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
     ethan = read(REVIEW / "references" / "ethan-style-overlay.md")
     psych = read(REVIEW / "references" / "quantitative-psychometrics-sem.md")
     ai = read(REVIEW / "references" / "ai-llm-computational.md")
+    displays = read(REVIEW / "references" / "display-notation-provenance.md")
+    rounds = read(REVIEW / "references" / "round-calibration.md")
     assert "Use `academic-writing-skills` as the manuscript-integrity base" in skill
     assert "Select Modules Progressively" in skill
     assert "Ask one targeted question only when" in skill
     assert "Support New Domain Modules" in skill
+    assert "display-notation-provenance.md" in skill
     assert "only when the user explicitly requests Ethan-style review" in skill
     assert "Select the smallest sufficient set" in contract
     assert "Load this file only after" in precedents
@@ -127,6 +131,11 @@ def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
     assert "Do not claim to be Prof. Ethan Yang" in ethan
     assert "one significant path and one nonsignificant path" in psych
     assert "LLM consistency is not behavioral validity" in ai
+    assert "Build an Equation and Notation Ledger" in displays
+    assert "Do not load it merely because" in displays
+    assert "source data or model output -> transformation or equation" in displays
+    assert "Never upgrade a thread to `RESOLVED`" in rounds
+    assert "response letter or resolved comment thread" in skill
     assert "acting as Prof. Ethan Yang" not in skill
 
 

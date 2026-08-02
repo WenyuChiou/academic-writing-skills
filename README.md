@@ -71,6 +71,7 @@ sufficient module set:
 
 | Evidence in the paper | Reference loaded |
 |---|---|
+| Equations, formal notation, normalized or aggregated series, composite metrics, or derived uncertainty displays | `display-notation-provenance.md` |
 | Surveys, scales, CFA, psychometrics, SEM, mediation, multi-group analysis | `quantitative-psychometrics-sem.md` |
 | Simulation, ABM, ML, GenAI, LLMs, synthetic respondents, agent evaluation | `ai-llm-computational.md` |
 | Water resources, CNHS, policy, frameworks, reviews, uncertainty, equifinality | `water-cnhs-uncertainty.md` |
@@ -89,6 +90,12 @@ define trigger and exclusion cues, technical and evidence checks, claim-scope
 boundaries, display or reproducibility checks, and at least one routing or
 boundary eval. Reviewer, journal, laboratory, and project rules remain separate
 conditional overlays.
+
+For cross-round review, an author reply or resolved comment thread is not by
+itself evidence of resolution. The reviewer verifies the requested change in
+the active manuscript and every affected companion artifact. For derived
+figures and tables, it also traces source data or model output through the
+transformation, aggregation, display, and textual claim.
 
 ## End-to-end manuscript workflow
 
