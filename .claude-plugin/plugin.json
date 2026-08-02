@@ -1,7 +1,7 @@
 {
   "name": "academic-writing-skills",
-  "description": "Lifecycle-aware manuscript integrity, evidence alignment, release audits, and an evidence-safe Ethan-style water and modeling review overlay.",
-  "version": "1.0.0",
+  "description": "Lifecycle-aware academic writing and scientific paper review with progressive method, domain, round, and reviewer modules.",
+  "version": "1.1.0",
   "author": {
     "name": "Wenyu Chiou"
   },
@@ -11,7 +11,11 @@
   "keywords": [
     "academic-writing",
     "manuscript",
+    "psychometrics",
     "research",
+    "sem",
+    "llm",
+    "water-resources",
     "writing",
     "peer-review"
   ]

@@ -54,6 +54,12 @@ Review maturity does not equal section order. Re-open the Introduction at integr
 
 Identify the active project, sources, archetype, intended audience, gap, objective or questions, outcome, contribution, and nonclaims. Ensure every planned question has a plausible evidence route.
 
+Build the extended outline as an evidence plan, not a list of headings. For each section and planned paragraph, record its reader function, central claim or question, authorized evidence, inference boundary, and bridge to the next unit. Test the outline top-down from gap to contribution and bottom-up from available evidence to supported claims before prose drafting begins.
+
+### Paragraph and section drafting gate
+
+Draft each paragraph from a five-part contract: function, claim, evidence, development, and bridge. Check the paragraph locally against that contract, then read the topic sentences of the whole section in sequence. A section is not current merely because every planned paragraph exists; its paragraphs must form one cumulative argument with no duplicated function, orphan evidence, or unsupported transition.
+
 ### Context and Methods gate
 
 Trace data or premises from source through preparation, measurement, model or analysis, diagnostics, and output. Separate reproducible procedures from contextual description and later interpretation.
@@ -73,6 +79,10 @@ Synthesize current evidence; do not copy an earlier abstract. Preserve the study
 ### Companion and release gate
 
 Synchronize supplements, figures, tables, metadata, cover materials, and repository statements. Inspect the exact active files and block release when required evidence or high-severity issues remain.
+
+### Top-to-bottom integration gate
+
+After all major sections exist, review the exact manuscript in four distinct passes: argument and structure; evidence and scope; scholarly prose; delivery integrity. During the prose pass, review terminology, abbreviation use, exact and semantic repetition, stock phrasing, sentence and paragraph openings, subject continuity, old-to-new information flow, and transitions. Re-run affected earlier passes whenever a prose edit changes scientific meaning or claim scope.
 
 ## Change-Impact Classes
 

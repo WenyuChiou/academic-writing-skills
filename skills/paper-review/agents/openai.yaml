@@ -1,8 +1,8 @@
 interface:
   display_name: Paper Review
-  short_description: Evidence-safe Ethan-style scientific paper review
-  default_prompt: Use $paper-review to review this manuscript with the applicable
-    Ethan-style water, modeling, and revision-round overlay.
+  short_description: Review papers with progressive domain modules
+  default_prompt: Use $paper-review to run an evidence-safe scientific review and
+    load only the method, domain, round, or reviewer modules that apply.
   icon_small: assets/icon.svg
   icon_large: assets/icon.svg
 policy:

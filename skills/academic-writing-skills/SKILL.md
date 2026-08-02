@@ -1,6 +1,6 @@
 ---
 name: academic-writing-skills
-description: Review, revise, or proofread academic manuscripts, journal articles, theses, conference papers, abstracts, supplementary materials, and submission packages across disciplines and study designs. Use for developmental editing, staged manuscript development, top-to-bottom integrity checks, reviewer-style revision, method and evidence alignment, technical and citation consistency, natural scholarly prose, claim-scope control, cross-file synchronization, change-impact review, or final submission readiness.
+description: Plan, outline, draft, review, revise, or proofread academic manuscripts, journal articles, theses, conference papers, abstracts, supplementary materials, and submission packages across disciplines and study designs. Use for extended-outline development, section or paragraph drafting, developmental editing, top-to-bottom and bottom-up integrity checks, reviewer-style revision, method and evidence alignment, terminology control, repetition and flow review, observable stock or AI-like prose patterns, citation consistency, natural scholarly prose, claim-scope control, cross-file synchronization, change-impact review, or final submission readiness.
 ---
 
 # Academic Writing Skills
@@ -48,6 +48,18 @@ At every stage, run both directions of alignment:
 
 Read [lifecycle-and-routing.md](references/lifecycle-and-routing.md) for stage gates, review maturity, non-IMRAD routing, and change-impact classes.
 
+## Draft from Explicit Writing Contracts
+
+Before drafting an outline, section, or paragraph, identify its reader function, central claim or question, authorized evidence, inference limit, and link to adjacent material. For a paragraph, use this compact contract:
+
+1. function: what the paragraph must accomplish
+2. claim: the narrowest defensible main point
+3. evidence: the source, result, citation, or reasoning that supports it
+4. development: how the evidence is explained without adding a mechanism
+5. bridge: what relation leads into the next paragraph
+
+Draft only after the contract is coherent. After drafting, compare the paragraph against the contract and re-read its previous and next paragraphs. Do not polish a paragraph into fluency if its function, evidence, or placement is wrong.
+
 ## Apply Universal Integrity Gates
 
 Always verify:
@@ -60,6 +72,7 @@ Always verify:
 6. **Cross-artifact synchronization:** propagate material changes to every affected section and companion artifact.
 7. **Version integrity:** identify one active release and distinguish it from historical references.
 8. **Release integrity:** never use `FINAL`, `VERIFIED`, or `SUBMISSION_READY` while a high-severity blocker or unresolved required source remains.
+9. **Prose integrity:** preserve one term per concept, distinguish necessary technical repetition from avoidable verbal repetition, and verify paragraph-to-paragraph flow without using synonym rotation to hide repetition.
 
 Read [universal-integrity.md](references/universal-integrity.md) for paragraph, abstract, conclusion, evidence, terminology, citation, and four-pass review rules.
 
@@ -111,6 +124,7 @@ For managed projects, use the bundled scripts when relevant:
 
 - `scripts/audit_manuscript_state.py`: validate state completeness, source links, question alignment, dimension coverage, and release blockers
 - `scripts/audit_text_consistency.py`: extract text from supported files and scan registered locked strings, prohibited variants, and fact conflicts
+- `scripts/audit_prose_patterns.py`: report exact duplication, repeated openings and phrases, stock phrasing, and candidate nontechnical word overuse without claiming AI authorship
 - `scripts/audit_docx_structure.py`: inspect Word OOXML using exact tag names for tracked changes, comments, fields, and placeholders
 - `scripts/run_regression_tests.py`: verify the audit tools against bundled failure cases
 
@@ -122,7 +136,7 @@ For full reviews or substantial revisions, complete four top-to-bottom passes:
 
 1. **Argument and structure:** reader functions, purpose, questions, organization, paragraph openings, and contribution.
 2. **Evidence and scope:** methods, data, results, figures, tables, citations, uncertainty, claim strength, and cross-file propagation.
-3. **Scholarly writing:** clarity, natural subjects, terminology, repetition, syntax, tense, voice, and notation.
+3. **Scholarly writing:** clarity, natural subjects, terminology, necessary versus avoidable repetition, sentence-opening variety, observable stock phrasing, paragraph flow, syntax, tense, voice, and notation. Never label prose AI-generated from style alone.
 4. **Delivery integrity:** summaries, references, numbering, metadata, exact filenames, tracked changes, visual rendering, and release blockers.
 
 If a later pass finds a material issue, fix it and repeat every affected upstream and downstream check. Do not certify the earlier pass as current.

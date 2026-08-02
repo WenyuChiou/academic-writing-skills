@@ -1,136 +1,123 @@
 ---
 name: paper-review
-description: Review journal-paper drafts for Prof. Ethan Yang's students and collaborators using an evidence-safe Ethan-style internal-review overlay for coupled natural–human systems, water resources, agent-based modeling, catastrophe and flood modeling, hydrodynamics, model uncertainty, and GenAI or LLM studies. Use when the user requests this lab-specific review style, uploads a relevant draft for review or critique, asks to assess a revision round, or wants prior PI comments checked. Supports partial drafts and R1–R4 reviews. Do not use for grants, cover letters, response-to-reviewer documents, unrelated fields, or generic academic editing when the lab overlay is not requested.
+description: Conduct reviewer-style, evidence-safe reviews of academic manuscripts across disciplines using progressive method, domain, review-round, and optional reviewer overlays. Use when the user asks for a critique, scientific review, priority comments, top-to-bottom review, revision-round assessment, prior-comment regression check, or review memo rather than ordinary drafting. Infer the smallest applicable module set from the conversation and manuscript; ask only when unresolved domain or review-profile ambiguity would materially change the review. Includes optional psychometrics and SEM, computational and LLM, water and CNHS, flood and hydrodynamics, and explicit Ethan-style modules.
 ---
 
-# Paper Review Overlay
+# Paper Review
 
-## Base Workflow
+## Use the Manuscript-Integrity Base
 
-Use `academic-writing-skills` as the manuscript-integrity base. Apply this skill only as a conditional reviewer, study-design, domain, and project-history overlay. The base skill determines what makes the manuscript defensible; this overlay determines which specialized questions to ask, how to calibrate the internal-review round, and how to organize an Ethan-style review memo.
+Use `academic-writing-skills` as the manuscript-integrity base for lifecycle, evidence, prose, change-impact, and release checks. Apply this skill as a reviewer orchestrator that selects only the method, domain, review-round, venue, or reviewer modules needed for the manuscript.
 
-Do not claim to be Prof. Ethan Yang or write `REVIEWER: Ethan Yang`. Describe the output as an `Ethan-style internal review calibrated to supplied or archived review patterns`.
-
-Do not edit the manuscript unless the user authorizes revision. A request to review, critique, or comment is non-mutating.
+Do not edit the manuscript unless the user authorizes revision. A request to review, critique, comment, or assess a round is non-mutating. Use the appropriate document or PDF skill for extraction, comments, tracked changes, and visual rendering.
 
 ## Establish the Review Basis
 
-Before reviewing, identify:
+Identify:
 
-- the manuscript and companion artifacts in scope
-- review-only versus editing mode
-- manuscript archetype and actual study design
-- applicable water, CNHS, ABM, flood, modeling, or AI domain
-- explicit review round, if supplied
-- prior draft, prior comments, tracked responses, and issue status, if available
-- target venue or reporting standard, if supplied
-- exact project identity, if any
+- manuscript and companion artifacts in scope
+- review-only versus authorized revision
+- manuscript archetype, study design, lifecycle stage, and intended venue
+- main questions, outcomes, methods, evidence, and claimed contribution
+- prior draft, prior comments, responses, and round label when supplied
+- candidate method, domain, venue, reviewer, and project overlays
+- unavailable sources or ambiguities that could change the review standard
 
-Prefer an explicit R1–R4 label. If the round is not supplied, use `developmental`, `substantive`, `integration`, or `submission` rather than inferring a round from prose quality or comment count. Cross-round claims such as `fixed` or `not fixed` require prior-round evidence.
+Prefer an explicit review round. If none is supplied, use `developmental`, `substantive`, `integration`, or `submission`; do not infer R1–R4 from prose quality, filename, or comment count.
 
-Read [overlay-contract.md](references/overlay-contract.md) for precedence, comment strength, evidence safety, and output behavior. Read [round-calibration.md](references/round-calibration.md) only when review maturity or cross-round progress is in scope.
+Read [overlay-contract.md](references/overlay-contract.md) before applying optional modules. Read [round-calibration.md](references/round-calibration.md) only when review maturity or cross-round progress is in scope.
 
-## Select Only Applicable Modules
+## Select Modules Progressively
 
-Load [abm-computational-and-ai.md](references/abm-computational-and-ai.md) for ABM, coupled models, simulations, ML surrogates, or GenAI/LLM studies.
+Infer candidate modules from the current conversation, title, Abstract, questions, Methods, tables, figures, equations, and supplement. Select the smallest set that covers the actual study. State the selected modules in the review header.
 
-Load [cnhs-water-and-uncertainty.md](references/cnhs-water-and-uncertainty.md) for CNHS, water policy, framework, equifinality, or water-resources review papers.
+Ask one targeted question only when the available evidence leaves two materially different review standards plausible—for example, whether a latent-variable model is confirmatory or exploratory, or whether the user wants a neutral review versus a named reviewer style. Do not ask when the manuscript itself resolves the choice.
 
-Load [flood-and-hydrodynamics.md](references/flood-and-hydrodynamics.md) for flood, catastrophe, hydrodynamic, drainage, sensor, or inundation-model papers.
+Load:
 
-Load more than one module only when the paper genuinely spans them. Treat named citations as literature candidates requiring verification, never mandatory insertions.
+- [quantitative-psychometrics-sem.md](references/quantitative-psychometrics-sem.md) for surveys, scales, psychometrics, factor analysis, latent variables, SEM, mediation, or multi-group comparison
+- [ai-llm-computational.md](references/ai-llm-computational.md) for simulations, ABM, coupled computational models, ML, GenAI, LLMs, synthetic respondents, or agent evaluation
+- [water-cnhs-uncertainty.md](references/water-cnhs-uncertainty.md) for water resources, coupled natural–human systems, water policy, frameworks, reviews, uncertainty, or equifinality
+- [flood-hydrodynamics-catastrophe.md](references/flood-hydrodynamics-catastrophe.md) for flood risk, catastrophe models, inundation, drainage, hydrodynamics, hazards, exposure, vulnerability, or loss
+- [ethan-style-overlay.md](references/ethan-style-overlay.md) only when the user explicitly requests Ethan-style review or establishes that lab review context
+- [project-precedents.md](references/project-precedents.md) only after the exact named project is established and only together with an explicit relevant reviewer or lab context
 
-Load [project-precedents.md](references/project-precedents.md) only when the user or manuscript establishes the exact named project and the rule remains current. Project precedents are advisory history, not authoritative facts.
+Load multiple modules for genuinely hybrid studies. A citation, keyword, or study-area mention alone does not establish a module. Treat named methods, thresholds, citations, and reporting practices inside modules as checks to evaluate, not assumptions that the manuscript must follow them.
 
-## Classify Every Overlay Comment
+## Support New Domain Modules
 
-Label each material comment by strength:
+Keep reusable domain knowledge in a direct reference file rather than expanding this routing file. A contributed module should contain:
 
-- **MUST:** research integrity, reproducibility, internal consistency, applicable reporting requirement, or evidence-scope failure
-- **SHOULD:** strong study-design or domain convention whose applicability is established
-- **QUERY:** missing source, unclear method, factual uncertainty, or author decision requiring confirmation
-- **PREFERENCE:** lab, professor, organization, wording, or presentation preference
+1. explicit trigger and exclusion cues
+2. method and evidence checks
+3. claim-scope and alternative-explanation checks
+4. figure, table, equation, and reproducibility checks where relevant
+5. terminology cautions without project facts
+6. at least one routing or boundary eval
 
-Also inherit the base skill's scope, severity, evidence status, and issue status. A preference is not blocking merely because prior lab drafts used it.
+Add the module to the routing list and architecture tests. Keep professor, laboratory, journal, and project rules in separate conditional overlays.
 
-## Protect Evidence and Interpretation
+## Run the Review
 
-For every request to explain why a pattern occurs:
+Apply the base skill's four passes, then use the selected modules to deepen—not duplicate—the review:
 
-1. explain a mechanism in Results only when analysis or directly relevant evidence supports it
-2. place a literature-supported interpretation in Discussion with appropriate qualification
-3. label a plausible but untested explanation as a hypothesis or possible interpretation
-4. when support is absent, flag the missing evidence instead of supplying a mechanism
+1. **Framing and contribution:** verify that the literature supports the gap, the task matches the methods, and the contribution does not exceed the evidence.
+2. **Design and methods:** verify sampling or source selection, measurement, model logic, estimand, assumptions, uncertainty, comparison design, and reproducibility as applicable.
+3. **Results and claim scope:** verify question-to-result coverage, statistical or computational evidence, alternative explanations, mechanisms, and formal versus descriptive comparisons.
+4. **Discussion and synthesis:** distinguish direct findings, literature-supported interpretation, plausible alternatives, implications, limitations, and speculation.
+5. **Displays and notation:** verify figures, tables, equations, captions, units, symbols, panels, and text–display agreement.
+6. **Writing and delivery:** verify terminology, repetition, observable stock phrasing, flow, summaries, citations, companion files, metadata, and named-stage readiness.
 
-Do not replace one unverified literature, policy, historical, or terminology claim with another. Ask for or verify the relevant source.
+For every material issue, inherit the base skill's scope, S0–S4 severity, evidence status, issue status, authority needed, affected artifacts, and blocking stage. If an optional reviewer overlay uses `MUST`, `SHOULD`, `QUERY`, or `PREFERENCE`, keep those labels separate from severity.
 
-Do not infer AI authorship from writing style. Describe observable problems such as vague claims, stock transitions, unstable subjects, repetitive synthesis, or unsupported mechanisms.
+## Protect Evidence and Reviewer Boundaries
 
-## Run the Ethan-Style Review
+Do not invent mechanisms, citations, facts, thresholds, analyses, prior comments, or reviewer preferences. A request to explain “why” does not authorize a causal story unsupported by analysis or literature.
 
-Apply the base skill's lifecycle and four-pass integrity review, then add applicable overlay checks:
+Do not infer AI authorship from prose. Report observable features such as vague subjects, stock transitions, empty intensifiers, repetitive cadence, duplicated synthesis, or unsupported mechanisms.
 
-1. **Framing and contribution:** verify that the stated gap is supported, the study task matches the methods, and the paper explains what its approach adds without overstating novelty.
-2. **Study-design reporting:** verify agents, coupling, model logic, calibration, validation, uncertainty, prompts, model calls, or synthesis procedures as applicable.
-3. **Domain precision:** verify definitions, units, mechanisms, model capabilities, policy context, and field-specific distinctions against available evidence.
-4. **Figure and equation audit:** verify symbols, subscripts, panels, captions, axes, data exchange, scenario counts, and text–visual agreement.
-5. **Round regression:** when prior material exists, verify resolved, unresolved, regressed, and newly introduced issues.
-6. **Reader synthesis:** ensure each stated question or objective has a substantive answer and that summaries reflect the final evidence.
-
-Numbered italicized questions, explicit question signposts in Results, section-order templates, public repositories, supplementary placement, wording bans, and paragraph-count rules are preferences or conditional requirements unless a venue, reporting standard, or current project decision makes them mandatory.
+Do not call a cross-round issue resolved without the prior instruction and current evidence. Do not make a preference blocking unless a verified venue, reporting, author, or reviewer requirement makes it so.
 
 ## Output Format
 
-Adapt the memo to the available artifact. Do not create comments for absent sections or invent findings to meet a quota.
+Adapt the memo to the available artifact and stage. Do not invent comments for absent sections or target a fixed number.
 
 ### Header
 
 ```text
-REVIEW PROFILE: Ethan-style internal review
+REVIEW PROFILE: [general scientific / named conditional overlay]
 PAPER: [title]
 MODE: [review only / authorized revision]
-STAGE OR ROUND: [developmental / substantive / integration / submission, or explicit R1–R4]
-SOURCE BASIS: [current draft, prior comments, companion files, unavailable sources]
-READINESS: [primary bottleneck and named next-stage readiness]
+STAGE OR ROUND: [maturity label or supplied round]
+MODULES: [selected references and why]
+SOURCE BASIS: [current files, prior material, unavailable sources]
+READINESS: [named next-stage readiness and primary bottleneck]
 ```
 
-### A. Cross-Round Status
+### Cross-Round Status
 
-Include only when prior-round material is available. List resolved, unresolved, regressed, and newly introduced material issues.
+Include only with prior evidence. Classify issues as resolved, partial, open, regressed, waived, new, or not verifiable.
 
-### B. Priority-Ranked Action Items
+### Priority-Ranked Action Items
 
-For each item, give:
+For each material issue, give its location, classification, severity and evidence status, specific problem, bounded action or decision, affected artifacts, and whether it blocks the named next stage.
 
-```text
-[number]. [section or artifact] — [label]
-Strength: [MUST / SHOULD / QUERY / PREFERENCE]
-Severity and evidence: [S0–S4; confirmed / probable / unverified]
-Problem: [specific evidence-backed issue]
-Required action or decision: [bounded next step]
-Blocking?: [yes/no, and for which next stage]
-```
+### Section-Linked Comments
 
-Stop when all material issues are covered. Do not target a fixed number.
+Follow the manuscript's actual reader functions and structure. Anchor comments to short fragments. Distinguish validity, reporting, domain convention, venue rule, reviewer preference, and local prose improvement.
 
-### C. Section-Linked Comments
+### Writing and Presentation Flags
 
-Follow the manuscript's actual structure. Begin each section with a brief structural verdict, then anchor comments to short quoted fragments. Distinguish an accuracy or validity issue from a lab preference.
+Include representative cases and a revision direction. Do not rewrite unless authorized.
 
-### D. Writing and Presentation Flags
+### Next-Step Instruction
 
-Include only representative, material cases. Give a rewrite direction unless the user authorized rewriting.
+State which issues, decisions, sources, and artifacts must be addressed before the next review.
 
-### E. Next-Round Instruction
+### Functional-Completeness Retrospective
 
-State exactly which artifacts and issues should be addressed before the next review.
-
-### F. Functional-Completeness Retrospective
-
-Use the base skill's retrospective. Explicitly name the lifecycle stage, modules and precedents loaded, prior-round evidence available, artifacts covered, unresolved sources, impact propagation, and readiness limits.
+Use the base retrospective. Name the lifecycle stage, modules loaded, selection evidence, unresolved ambiguity, prior-round evidence, artifacts covered, change propagation, checks performed, and readiness limits.
 
 ## Safety and Restraint
 
-Be direct, technically precise, and respectful. Do not perform persona imitation, express frustration, or use humiliation as a teaching device. Never suppress a newly found validity, ethics, evidence, or metadata issue because the draft is in a late round.
-
-Use the appropriate document or PDF skill for extraction, comments, tracked changes, and rendering. Do not certify a visual or prior-comment check that was not performed.
+Be direct, technically precise, and respectful. Do not impersonate a named reviewer, express frustration, or use humiliation. Never suppress a validity, ethics, evidence, or metadata issue because the manuscript is in a late round.

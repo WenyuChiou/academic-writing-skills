@@ -12,6 +12,7 @@ from pathlib import Path
 
 from audit_docx_structure import inspect
 from audit_manuscript_state import audit
+from audit_prose_patterns import audit as audit_prose
 from audit_text_consistency import audit as audit_text
 
 
@@ -78,10 +79,25 @@ def main() -> int:
         tests.append("submission-ready release")
 
         require(not audit_text(state, root), "clean text unexpectedly flagged")
+        require(not audit_prose(state, root), "clean prose unexpectedly flagged")
         (root / "manuscript.md").write_text("What similarities and differences. Funding CBET #1941727. LLM households.\n", encoding="utf-8")
         codes = {item["code"] for item in audit_text(state, root)}
         require({"LOCK001", "LOCK002", "TERM001", "FACT101", "FACT102"}.issubset(codes), "semantic/fact drift set incomplete")
         tests.append("semantic and fact drift")
+
+        prose = copy.deepcopy(state)
+        (root / "manuscript.md").write_text(
+            "It is important to note that the model reports one result. "
+            "This analysis shows that repeated framing can obscure evidence. "
+            "This analysis shows that repeated framing can obscure interpretation. "
+            "This analysis shows that repeated framing can obscure the contribution. "
+            "The same complete sentence appears here for deterministic testing. "
+            "The same complete sentence appears here for deterministic testing.\n",
+            encoding="utf-8",
+        )
+        prose_codes = {item["code"] for item in audit_prose(prose, root)}
+        require({"PROSE001", "PROSE002", "PROSE003", "PROSE004"}.issubset(prose_codes), "prose-pattern audit incomplete")
+        tests.append("observable prose patterns")
 
         field_docx = root / "field.docx"
         make_docx(field_docx, '<w:p><w:r><w:instrText>REF _Ref1</w:instrText></w:r><w:r><w:t>Text</w:t></w:r></w:p>')

@@ -5,14 +5,17 @@
 1. Argument and paragraph function
 2. Evidence and claim scope
 3. Abstract and Conclusion
-4. Terms, numbers, citations, and visuals
-5. Four-pass review
+4. Terminology, repetition, and flow
+5. Numbers, citations, and visuals
+6. Four-pass review
 
 ## Argument and Paragraph Function
 
 Map purpose or gap → question or objective → method → evidence → result → interpretation → limitation → contribution. Flag missing, contradictory, or orphan links.
 
 Lead paragraphs with their central function. Read only paragraph-opening sentences in sequence; they should form a coherent section outline. Use one primary function per paragraph unless a concise transition genuinely requires two.
+
+Before drafting, define the paragraph's function, claim, evidence, development, and bridge. After drafting, verify that every sentence serves that contract. Read the preceding and following paragraphs before accepting a local rewrite.
 
 In Results, state the finding before or with the figure or table callout. Report evidence needed to support it, then close with the substantive answer. Do not close with another inventory of statistics, themes, paths, or cases.
 
@@ -57,11 +60,30 @@ Build the Conclusion around:
 
 Do not add new evidence or copy the Abstract. Preserve the study's actual task verb and inference level.
 
-## Terms, Numbers, Citations, and Visuals
+## Terminology, Repetition, and Flow
 
 Use the entity that produced or contains the evidence. Do not interchange participant, response, dataset, model, simulation, or estimate.
 
 Use one stable term per concept. Allow contextual variants only when the terminology registry identifies them. Resolve vague referents locally.
+
+Do not rotate technical terms merely for variety. Separate four cases:
+
+1. required repetition of a defined construct, model, population, or outcome
+2. useful repetition that preserves a section's subject or comparison
+3. avoidable repetition of a nontechnical word, phrase, sentence opening, or paragraph function
+4. exact or near-duplicate prose that adds no new evidence or reasoning
+
+For prose that feels formulaic or AI-like, report only observable features: generic metadiscourse, empty intensifiers, stock transitions, vague subjects, repetitive cadence, excessive preview-and-summary sentences, symmetrical but content-light lists, or unsupported synthesis. Never infer or allege AI authorship from these features. Replace a flagged pattern only when the revision improves precision, evidence linkage, or information flow.
+
+Test flow at three levels:
+
+- **sentence:** place familiar information before new information when it helps comprehension; keep the grammatical subject aligned with the entity being discussed
+- **paragraph:** develop one main function from claim through evidence and explanation; close by resolving the point or establishing a specific relation to what follows
+- **section:** read topic sentences and closing sentences in sequence; verify cumulative movement rather than repeated restatement
+
+Use transitions that name the actual relation—contrast, cause, condition, extension, qualification, or consequence. Do not insert a transition merely to make adjacent paragraphs sound connected.
+
+## Numbers, Citations, and Visuals
 
 Trace material numbers and metadata to sources. Check units, denominators, rounding, sample subsets, equations, figure labels, table notes, and supplement entries.
 
@@ -81,7 +103,7 @@ Test methods against outputs, samples, units, equations, figures, tables, citati
 
 ### Pass 3: Scholarly prose
 
-Revise delayed main points, unstable subjects, repetition, long noun stacks, vague intensifiers, syntax, tense, voice, and notation without rotating technical terms for variety.
+First stabilize terminology and abbreviations. Then review exact duplication, repeated phrases and openings, nontechnical word overuse, stock phrasing, long noun stacks, vague intensifiers, unstable subjects, syntax, tense, voice, notation, and paragraph-to-paragraph flow. Preserve necessary technical repetition and do not use synonym rotation as a cosmetic fix.
 
 ### Pass 4: Delivery integrity
 

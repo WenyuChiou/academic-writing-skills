@@ -2,27 +2,39 @@
   "skill_name": "paper-review",
   "evals": [
     {
-      "id": "unnumbered_abm_questions",
-      "prompt": "Perform an Ethan-style R1 review of a water-resources ABM paper whose objectives are clear but not formatted as numbered or italicized science questions.",
-      "expected_output": "A review that evaluates framing, model logic, evidence routes, and architecture, while treating numbered questions as a nonblocking preference rather than a validity requirement.",
+      "id": "hybrid_psychometrics_llm_routing",
+      "prompt": "Review a study that uses LLM-generated survey respondents, CFA, SEM, and human group comparisons. The Methods and Abstract make all components explicit.",
+      "expected_output": "A general review that loads both quantitative-psychometrics-sem and ai-llm-computational without asking the user, states why each module applies, and keeps measurement quality, repeated-generation dependence, and behavioral-validity claims distinct.",
       "files": []
     },
     {
-      "id": "jurisdiction_specific_mandate",
-      "prompt": "Review a policy-model paper from Country Z that describes a legally mandated program and cites the governing statute. A historical lab comment says mandatory policy is politically infeasible in the United States.",
-      "expected_output": "A domain review that checks the cited jurisdiction and implementation assumptions without importing the unrelated United States precedent or rewriting the policy as voluntary.",
+      "id": "materially_ambiguous_factor_model",
+      "prompt": "Review a scale paper whose draft says only that factor analysis was conducted; it is unclear whether the analysis was exploratory or confirmatory and the distinction changes the required evidence.",
+      "expected_output": "One targeted clarification about the intended factor-analysis design while proceeding with review findings that do not depend on that answer; no broad intake questionnaire.",
       "files": []
     },
     {
-      "id": "evidence_safe_why_request",
-      "prompt": "An ABM Results section reports that renters relocate more often than homeowners. The output contains no mechanism analysis, and the user asks for an Ethan-style explanation of why.",
-      "expected_output": "A review that distinguishes the observed pattern from a tested mechanism, places any literature-supported interpretation in Discussion with qualification, and otherwise raises a query instead of inventing a causal explanation.",
+      "id": "neutral_water_review_without_ethan_overlay",
+      "prompt": "A researcher asks for a review of a coupled flood-risk and household ABM paper but does not request a named reviewer style.",
+      "expected_output": "A general paper review using ai-llm-computational, water-cnhs-uncertainty, and flood-hydrodynamics-catastrophe as applicable, without loading Ethan-style preferences or project precedents.",
       "files": []
     },
     {
-      "id": "overlay_out_of_scope",
-      "prompt": "Use paper-review to critique a medieval history manuscript with no water, modeling, uncertainty, AI, or related project context.",
-      "expected_output": "A clear statement that the Ethan-style overlay is out of scope, followed by routing to the general academic-writing core rather than forcing water or modeling checks.",
+      "id": "explicit_ethan_style_composition",
+      "prompt": "Perform an Ethan-style R2 review of a water-resources ABM paper and compare it with the supplied R1 comments.",
+      "expected_output": "A review that composes the relevant neutral method and water modules with round-calibration and ethan-style-overlay, separates MUST/SHOULD/QUERY/PREFERENCE from severity, and reports evidence-backed cross-round status.",
+      "files": []
+    },
+    {
+      "id": "round_claim_without_prior_evidence",
+      "prompt": "Review an R3 manuscript and state which R2 comments were fixed, but the prior manuscript and comments are unavailable.",
+      "expected_output": "An integration-stage review that marks cross-round status not verifiable, does not invent prior issues, and still reports current high-risk findings separately.",
+      "files": []
+    },
+    {
+      "id": "generic_field_without_special_module",
+      "prompt": "Use paper-review to critique a conceptual medieval-history manuscript with no quantitative, computational, water, or named-reviewer context.",
+      "expected_output": "A general reader-function and evidence-scope review using the academic-writing core without forcing any bundled domain module or declaring the manuscript out of scope.",
       "files": []
     }
   ]

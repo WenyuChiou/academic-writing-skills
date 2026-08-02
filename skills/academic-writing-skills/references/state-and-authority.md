@@ -31,6 +31,7 @@ Maintain one `manuscript_state.json` or an equivalent project record containing:
 - authority sources and their scopes
 - manuscript contract: gap, task, questions or objectives, outcomes, contribution, and nonclaims
 - semantic locks and terminology rules
+- language variant, protected technical terms, allowed repetition, and project-discouraged phrases
 - facts and metadata with sources
 - gap–question–method–evidence–claim alignment entries
 - design dimensions and reporting-field coverage
@@ -38,6 +39,8 @@ Maintain one `manuscript_state.json` or an equivalent project record containing:
 - release candidate and required checks
 
 Use `assets/manuscript_state_template.json` as a starting point. Keep the state beside the manuscript project, not inside this skill.
+
+Treat the style profile as project guidance, not proof that every registered phrase is wrong. Preserve technical terms and author-approved wording even when a deterministic prose audit reports frequent use.
 
 ## Lock and Change Rules
 

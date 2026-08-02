@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CORE = ROOT / "skills" / "academic-writing-skills"
-OVERLAY = ROOT / "skills" / "paper-review"
+REVIEW = ROOT / "skills" / "paper-review"
 
 
 CORE_REFERENCES = {
@@ -21,17 +21,20 @@ CORE_REFERENCES = {
 CORE_SCRIPTS = {
     "audit_docx_structure.py",
     "audit_manuscript_state.py",
+    "audit_prose_patterns.py",
     "audit_text_consistency.py",
     "init_manuscript_state.py",
     "run_regression_tests.py",
 }
-OVERLAY_REFERENCES = {
-    "abm-computational-and-ai.md",
-    "cnhs-water-and-uncertainty.md",
-    "flood-and-hydrodynamics.md",
+REVIEW_REFERENCES = {
+    "ai-llm-computational.md",
+    "ethan-style-overlay.md",
+    "flood-hydrodynamics-catastrophe.md",
     "overlay-contract.md",
     "project-precedents.md",
+    "quantitative-psychometrics-sem.md",
     "round-calibration.md",
+    "water-cnhs-uncertainty.md",
 }
 
 
@@ -53,26 +56,28 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.0.0"
-    assert "Ethan-style" in manifest["description"]
+    assert manifest["version"] == "1.1.0"
+    assert "progressive" in manifest["description"].lower()
+    assert "domain" in manifest["description"].lower()
 
 
 def test_both_skill_frontmatters_are_valid_and_minimal():
     core = frontmatter(CORE / "SKILL.md")
-    overlay = frontmatter(OVERLAY / "SKILL.md")
+    review = frontmatter(REVIEW / "SKILL.md")
     assert set(core) == {"name", "description"}
-    assert set(overlay) == {"name", "description"}
+    assert set(review) == {"name", "description"}
     assert core["name"] == "academic-writing-skills"
-    assert overlay["name"] == "paper-review"
+    assert review["name"] == "paper-review"
     assert "submission" in core["description"].lower()
-    assert "ethan-style" in overlay["description"].lower()
+    assert "progressive" in review["description"].lower()
+    assert "psychometrics" in review["description"].lower()
 
 
 def test_skill_file_sets_match_the_release_contract():
     assert {p.name for p in (CORE / "references").glob("*.md")} == CORE_REFERENCES
     assert {p.name for p in (CORE / "scripts").glob("*.py")} == CORE_SCRIPTS
-    assert {p.name for p in (OVERLAY / "references").glob("*.md")} == OVERLAY_REFERENCES
-    for skill in (CORE, OVERLAY):
+    assert {p.name for p in (REVIEW / "references").glob("*.md")} == REVIEW_REFERENCES
+    for skill in (CORE, REVIEW):
         assert (skill / "agents" / "openai.yaml").is_file()
         assert (skill / "assets" / "icon.svg").is_file()
     assert (CORE / "assets" / "manuscript_state_template.json").is_file()
@@ -80,7 +85,7 @@ def test_skill_file_sets_match_the_release_contract():
 
 def test_markdown_reference_routes_resolve():
     pattern = re.compile(r"\]\((references/[^)#]+\.md)(?:#[^)]+)?\)")
-    for skill in (CORE, OVERLAY):
+    for skill in (CORE, REVIEW):
         routes = pattern.findall(read(skill / "SKILL.md"))
         assert routes
         for route in routes:
@@ -96,30 +101,41 @@ def test_core_includes_lifecycle_impact_and_release_gates():
     assert "managed-project mode" in skill
     assert "Class A" in skill and "Class D" in skill
     assert "Functional-Completeness Retrospective" in skill
+    assert "Draft from Explicit Writing Contracts" in skill
+    assert "audit_prose_patterns.py" in skill
     assert "revise-and-resubmit" in lifecycle
     assert "Do not require headings" in lifecycle
     assert "S3 and S4 open blockers equal zero" in release
     assert "separate standardized coefficients" in adapters
 
 
-def test_overlay_remains_conditional_and_evidence_safe():
-    skill = read(OVERLAY / "SKILL.md")
-    contract = read(OVERLAY / "references" / "overlay-contract.md")
-    precedents = read(OVERLAY / "references" / "project-precedents.md")
+def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
+    skill = read(REVIEW / "SKILL.md")
+    contract = read(REVIEW / "references" / "overlay-contract.md")
+    precedents = read(REVIEW / "references" / "project-precedents.md")
+    ethan = read(REVIEW / "references" / "ethan-style-overlay.md")
+    psych = read(REVIEW / "references" / "quantitative-psychometrics-sem.md")
+    ai = read(REVIEW / "references" / "ai-llm-computational.md")
     assert "Use `academic-writing-skills` as the manuscript-integrity base" in skill
-    assert "Do not claim to be Prof. Ethan Yang" in skill
-    assert "MUST / SHOULD / QUERY / PREFERENCE" in skill
-    assert "Reviewer preference never overrides evidence" in contract
+    assert "Select Modules Progressively" in skill
+    assert "Ask one targeted question only when" in skill
+    assert "Support New Domain Modules" in skill
+    assert "only when the user explicitly requests Ethan-style review" in skill
+    assert "Select the smallest sufficient set" in contract
     assert "Load this file only after" in precedents
     assert "Do not import sample sizes, funding, model versions" in precedents
+    assert "Do not claim to be Prof. Ethan Yang" in ethan
+    assert "one significant path and one nonsignificant path" in psych
+    assert "LLM consistency is not behavioral validity" in ai
     assert "acting as Prof. Ethan Yang" not in skill
 
 
 def test_state_template_is_valid_and_starts_working():
     state = json.loads(read(CORE / "assets" / "manuscript_state_template.json"))
-    assert state["schema_version"] == "1.0"
+    assert state["schema_version"] == "1.1"
     assert state["project"]["active_release"] == "working"
     assert state["release"]["status"] == "WORKING"
+    assert state["style_profile"]["phrase_words"] == 5
     assert "functional_completeness" in state["release"]["required_checks"]
 
 
@@ -136,10 +152,10 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 9
+    assert len(report["tests"]) == 10
 
 
-def test_evals_cover_core_and_overlay_behavior():
+def test_evals_cover_core_and_progressive_review_behavior():
     files = {
         "academic-writing-skills": ROOT / "evals" / "evals.json",
         "paper-review": ROOT / "evals" / "paper-review.json",
@@ -156,13 +172,18 @@ def test_evals_cover_core_and_overlay_behavior():
             assert isinstance(item["files"], list)
 
 
-def test_readmes_describe_two_skill_architecture():
+def test_readmes_describe_two_skill_progressive_architecture_and_workflow():
     english = read(ROOT / "README.md")
     chinese = read(ROOT / "README.zh-TW.md")
     for text in (english, chinese):
         assert "$academic-writing-skills" in text
         assert "$paper-review" in text
+        assert "progressive" in text.lower()
+        assert "psychometrics" in text.lower()
         assert "functional-completeness" in text
+        assert "audit_prose_patterns.py" in text
+        assert "outline" in text.lower()
+        assert "top-to-bottom" in text.lower()
         assert "Zotero" in text
         assert "NotebookLM" in text
     assert "Traditional Chinese README" in english

@@ -1,4 +1,4 @@
-# Paper-Review Overlay Contract
+# Progressive Review Overlay Contract
 
 ## Precedence
 
@@ -8,52 +8,38 @@ Apply, in order:
 2. verified manuscript evidence and authoritative project facts
 3. explicit current user instructions
 4. applicable venue and reporting requirements
-5. the `academic-writing-skills` universal core
-6. established study-design checks
-7. established domain conventions
-8. Ethan-style preferences and project precedents
+5. the `academic-writing-skills` universal core and study-design adapters
+6. applicable method and domain modules
+7. explicit reviewer preferences and confirmed project precedents
 
-Surface a conflict instead of silently choosing. Reviewer preference never overrides evidence or venue rules.
+Surface conflicts instead of silently choosing. A domain convention or reviewer preference never overrides evidence, ethics, or a verified venue rule.
 
-## Comment Strength
+## Module Selection
 
-- `MUST`: necessary for accuracy, reproducibility, defensible inference, ethics, internal consistency, or a confirmed requirement
-- `SHOULD`: strong convention with established applicability
-- `QUERY`: author or source clarification needed
-- `PREFERENCE`: house style, preferred organization, wording, or emphasis
+Use manuscript evidence before asking the user. Infer candidate modules from the research questions, entities, measures, models, estimands, equations, figures, and claimed inference—not from a single keyword.
 
-Use `blocking` only when the issue prevents the named next stage. A preference is normally nonblocking.
+Select the smallest sufficient set. Record why each module was loaded. Ask a targeted question only when ambiguity would materially change the required evidence, claim scope, or review profile.
+
+Do not let one module silently activate another. In hybrid studies, apply each module only to the claims and artifacts within its scope.
 
 ## Evidence Safety
 
-Require evidence appropriate to the claim. Distinguish:
+Require evidence appropriate to each claim. Distinguish direct result, tested mechanism, literature-supported interpretation, plausible alternative, and speculation.
 
-- directly demonstrated mechanism
-- literature-supported interpretation
-- plausible but untested explanation
-- unsupported speculation
+Do not treat shared significance as equivalence, separate significance results as a significant difference, coefficient similarity as formal agreement, good fit as mechanism validity, code execution as verification, simulation as observation, or output consistency as behavioral validity.
 
-Do not invent a mechanism, citation, policy fact, historical cause, or numerical interpretation. Do not treat shared significance as equivalence, separate nonsignificance as similarity, standardized coefficients as formal group tests, predictive performance as mechanism validation, or simulated behavior as observed behavior.
+## Rule Classification
 
-Challenge a literature gap without declaring what the “real” gap is until the literature supports that conclusion.
+Classify overlay content as:
 
-## Conditional Rules
+- method or design requirement
+- domain technical check
+- venue or reporting requirement
+- reviewer preference
+- project precedent
 
-Treat the following as conditional rather than universal:
-
-- numbered or italicized questions
-- an organization paragraph at the end of the Introduction
-- a literal question signpost at the start of every Results subsection
-- fixed Introduction or Conclusion paragraph templates
-- exact model-description order
-- public data or code release
-- prompt details in supplementary material
-- no bold in body text
-- specific vocabulary substitutions
-- fixed comment counts
-
-Apply one only when a current project decision, venue, reporting standard, or established reviewer preference makes it useful. Preserve privacy, licensing, IRB, security, and data-governance constraints.
+Never promote a reviewer, journal, lab, or project rule into a universal requirement. Project facts must remain in project state, not reusable domain references.
 
 ## Output Control
 
-Use prior-round status only with prior evidence. Comment on the actual sections present. Let issue materiality determine review length. Provide direct, respectful observations; never assert that prose is AI-generated from style alone.
+Use prior-round status only with prior evidence. Comment on actual sections and artifacts. Let materiality determine review length. Do not repeat the base review merely to produce a longer memo.

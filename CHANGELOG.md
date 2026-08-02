@@ -11,6 +11,36 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-08-02
+
+### Added
+
+- An explicit extended-outline and paragraph-contract workflow linking function,
+  claim, evidence, development, and paragraph-to-paragraph bridges.
+- A project style profile for language variant, protected technical terms,
+  allowed repetition, and discouraged phrases.
+- `audit_prose_patterns.py` for deterministic diagnostics of exact duplication,
+  repeated sentence openings and multiword phrases, stock phrasing, and
+  candidate nontechnical word overuse.
+- Progressive `paper-review` references for psychometrics and SEM; AI, LLM,
+  ABM, and computational studies; water, CNHS, policy, and uncertainty; and
+  flood, hydrodynamics, and catastrophe modeling.
+- Routing and boundary evals for hybrid module selection, material ambiguity,
+  neutral domain review, explicit Ethan-style composition, and cross-round
+  evidence limits.
+
+### Changed
+
+- Generalized `paper-review` into a cross-disciplinary reviewer orchestrator
+  that infers the smallest sufficient module set from the conversation and
+  manuscript.
+- Made Ethan-style review and named lab-project precedents explicit-only
+  overlays instead of default behavior for water or modeling papers.
+- Expanded the full review pass to separate necessary technical repetition from
+  avoidable prose repetition and to assess observable formulaic patterns
+  without inferring AI authorship.
+- Bumped the plugin from 1.0.0 to 1.1.0.
+
 ## [1.0.0] - 2026-08-02
 
 ### Added

@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "project": {
     "id": "replace-with-project-id",
     "title": "",
@@ -45,6 +45,15 @@
   },
   "semantic_locks": [],
   "terminology": [],
+  "style_profile": {
+    "language_variant": "",
+    "protected_terms": [],
+    "discouraged_phrases": [],
+    "allowed_repetitions": [],
+    "sentence_opening_words": 4,
+    "phrase_words": 5,
+    "phrase_min_occurrences": 3
+  },
   "facts": [],
   "alignment": [
     {

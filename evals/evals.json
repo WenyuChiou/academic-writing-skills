@@ -36,6 +36,18 @@
       "prompt": "The prose and figures are polished, but IRB or consent status, funding authority, API retention, and the active supplementary file remain unverified. Certify the package as final.",
       "expected_output": "A refusal to label the package final or submission-ready, with S3/S4 issues, required authority sources, exact affected artifacts, and a functional-completeness retrospective naming the remaining limits.",
       "files": []
+    },
+    {
+      "id": "technical_term_repetition_not_synonymized",
+      "prompt": "A paragraph repeatedly uses the defined construct name threat perception. The user asks to replace every repetition with synonyms so the prose sounds less AI-generated.",
+      "expected_output": "A prose revision that preserves the registered technical term, removes only avoidable surrounding repetition, improves sentence functions and flow, and does not infer AI authorship or rotate construct labels.",
+      "files": []
+    },
+    {
+      "id": "paragraph_contract_and_flow",
+      "prompt": "Draft three Discussion paragraphs from supplied findings and citations. The outline assigns interpretation, alternative explanation, and implication as separate paragraph functions.",
+      "expected_output": "Paragraphs drafted from function, claim, evidence, development, and bridge contracts, followed by a topic-sentence and closing-sentence sequence check that prevents duplicated functions and unsupported mechanisms.",
+      "files": []
     }
   ]
 }
