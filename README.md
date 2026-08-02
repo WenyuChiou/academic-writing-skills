@@ -1,41 +1,28 @@
 # academic-writing-skills
 
-A Claude/Codex plugin for lifecycle-aware manuscript development and
-reviewer-style scientific assessment. Version 1.1 has two main skills:
-
-| Skill | Use it for |
-|---|---|
-| `$academic-writing-skills` | Extended outlines, section and paragraph drafting, evidence alignment, terminology, repetition, flow, revision, cross-file synchronization, and release checks |
-| `$paper-review` | Review-only critique, top-to-bottom scientific review, revision-round assessment, prior-comment regression, and progressively loaded method, domain, or reviewer modules |
-
-`$paper-review` uses `$academic-writing-skills` as its integrity base. Its
-specialized knowledge is stored in direct references and loaded only when the
-conversation or manuscript establishes that it applies.
+Two composable skills for evidence-safe academic writing and scientific paper
+review. They treat a manuscript as an evolving evidence system: every claim
+must remain aligned with its question, method, evidence, interpretation, and
+summary across the active manuscript and companion files.
 
 [Traditional Chinese README](./README.zh-TW.md)
 
 > Part of the [agentic AI learning roadmap](https://github.com/WenyuChiou/awesome-agentic-ai-zh).
 
-## What changed in 1.1
+## Skills at a glance
 
-- Made `$paper-review` a general reviewer rather than an Ethan- or water-only
-  entry point.
-- Added progressive modules for psychometrics and SEM; AI, LLM, ABM, and
-  computational studies; water, CNHS, policy, and uncertainty; and flood,
-  hydrodynamics, and catastrophe modeling.
-- Kept Ethan-style review and named project precedents as explicit-only
-  references that never activate from a water or modeling topic alone.
-- Added an end-to-end workflow from extended outline through paragraph
-  drafting, section integration, top-to-bottom review, revision regression,
-  summary rebuilding, and exact submission-package release.
-- Added a style profile and deterministic prose diagnostics for exact
-  duplication, repeated sentence openings and phrases, stock phrasing, and
-  candidate nontechnical word overuse.
-- Clarified that formulaic or AI-like prose features are writing diagnostics,
-  not proof of AI authorship, and that technical terms must not be rotated for
-  cosmetic variety.
+| Skill | Best starting point for |
+|---|---|
+| [`$academic-writing-skills`](./skills/academic-writing-skills/SKILL.md) | Extended outlines, section or paragraph drafting, revision, terminology control, repetition and flow checks, cross-file synchronization, and submission-package preparation |
+| [`$paper-review`](./skills/paper-review/SKILL.md) | Review-only critique, top-to-bottom scientific review, revision-round assessment, prior-comment regression checks, and method- or domain-specific review |
 
-## Install
+`$paper-review` uses `$academic-writing-skills` as its manuscript-integrity
+base, then progressively loads only the technical references supported by the
+paper. A request to review does not authorize manuscript editing.
+
+## Quick start
+
+### 1. Install or update
 
 Install through the
 [`ai-research-skills` Claude Code marketplace](https://github.com/WenyuChiou/ai-research-skills):
@@ -45,198 +32,196 @@ claude plugin marketplace add WenyuChiou/ai-research-skills
 claude plugin install academic-writing-skills@ai-research-skills --scope user
 ```
 
-For an existing installation:
+This single plugin installation enables both `$academic-writing-skills` and
+`$paper-review`.
+
+Update an existing installation:
 
 ```bash
 claude plugin update academic-writing-skills@ai-research-skills
 ```
 
-## Which skill should I use?
+### 2. Invoke the skill you need
 
-| Request | Invoke |
+In Claude Code, invoke `$academic-writing-skills` or `$paper-review`. The
+installation commands above are specifically for Claude Code. If the skills
+are already installed separately in ChatGPT or Codex, request them by name,
+for example `Use @paper-review ...`.
+
+The copyable prompts below use Claude Code's `$skill-name` form. In ChatGPT or
+Codex, replace it with `@skill-name`.
+
+You do not need to select technical modules manually. State the task, attach
+the active files, and identify any prior version, reviewer comments, journal,
+or locked decisions that matter.
+
+### 3. Provide the right evidence
+
+| Task | Minimum useful input |
 |---|---|
-| Build or revise an outline, section, paragraph, Abstract, or Conclusion | `$academic-writing-skills` |
-| Check terminology, repeated wording, stock phrasing, or flow while revising | `$academic-writing-skills` |
-| Critique an outline, section, manuscript, supplement, or submission package | `$paper-review` |
-| Run a psychometrics, SEM, LLM, water, flood, ABM, or hybrid technical review | `$paper-review`; it selects the relevant references |
-| Run an Ethan-style R1–R4 review or check supplied PI comments | `$paper-review` with the Ethan-style request stated explicitly |
-| Apply accepted review comments | `$academic-writing-skills` plus the selected comments |
-| Verify that prior comments were resolved without regressions | `$paper-review` plus the prior comments and relevant versions |
+| Outline planning | Research purpose, gap, questions or objectives, methods, available evidence, intended venue, and explicit nonclaims |
+| Section drafting | Approved outline, authorized sources or results, locked terminology, and adjacent paragraphs |
+| Scientific review | Exact active manuscript plus relevant figures, tables, supplement, and intended review stage |
+| Revision-round check | Current manuscript, prior comments, author responses, and the prior version when available |
+| Submission check | Exact files to be submitted plus current venue requirements and metadata |
 
-## How progressive review routing works
+If a required source is unavailable, the skills report the limit instead of
+guessing.
 
-`$paper-review` first uses the conversation, title, Abstract, questions,
-Methods, equations, figures, tables, and supplement to infer the smallest
-sufficient module set:
+For work involving several files or versions, this compact header prevents
+most authority conflicts:
 
-| Evidence in the paper | Reference loaded |
+```text
+TASK: [plan / draft / revise / review / submission check]
+ACTIVE FILES: [the exact versions to review or change]
+AUTHORITY SOURCES: [results, data, code, approved outline, or decisions that control conflicts]
+LOCKED DECISIONS: [wording, numbers, questions, or claims that must not change]
+NONCLAIMS: [interpretations or conclusions the manuscript must not make]
+TARGET / STAGE: [venue and developmental / substantive / integration / submission]
+```
+
+Use `developmental` for an outline or incomplete draft, `substantive` when the
+core scientific content exists, `integration` for a complete draft and its
+companion files, and `submission` only for the exact release package. If a
+journal or reviewer supplied an R1–R4 label, provide it explicitly; the skill
+does not infer a round from writing quality or comment count.
+
+For editable revision, provide the DOCX or source file; a PDF is sufficient
+for review-only work when its text and displays are legible. Attach standalone
+figures, tables, and supplements when they are not fully readable in the main
+file. Add source papers for exact citation checks, code or data for
+reproducibility and derived-display checks, and the current journal guide for
+venue-specific formatting.
+
+## Copy-and-paste prompts
+
+### Build an extended outline
+
+```text
+Use $academic-writing-skills to build an extended outline from the attached
+materials. First establish the gap, task, research questions, methods,
+available evidence, intended contribution, and nonclaims. For every planned
+paragraph, specify its function, claim, authorized evidence, inference limit,
+and bridge to the next paragraph. Do not draft the full manuscript yet.
+```
+
+### Draft a section
+
+```text
+Use $academic-writing-skills to draft Section 2.3 from the approved outline
+and supplied sources. Preserve all locked terms, numbers, and citations. Check
+each paragraph's function, claim, evidence, development, and bridge, then
+verify its connection to the preceding and following paragraphs.
+```
+
+### Revise an existing section
+
+```text
+Use $academic-writing-skills to revise the attached current version of Section
+2.3 for the stated purpose. Treat the supplied results and approved outline as
+authority sources. Preserve the locked terms, numbers, citations, research
+questions, and claim scope. Show any requested change that would require new
+evidence or an author decision instead of silently making it.
+```
+
+### Check terminology, repetition, and flow
+
+```text
+Use $academic-writing-skills to revise this section for terminology
+consistency, avoidable nontechnical repetition, stock phrasing, and
+paragraph-to-paragraph flow. Protect necessary technical repetition and do not
+change scientific meaning, numbers, citations, or claim strength.
+```
+
+### Run a substantive scientific review
+
+```text
+Use $paper-review for a substantive, review-only assessment of the attached
+manuscript and supplement. Infer and state the smallest applicable module set,
+rank issues by scientific and reproducibility risk, anchor comments to the
+manuscript, and do not edit the files.
+```
+
+### Verify a revision round
+
+```text
+Use $paper-review to compare the current manuscript with the supplied prior
+comments, response letter, and earlier version. Classify each issue as
+resolved, partial, open, regressed, waived, new, or not verifiable. Do not
+treat an author reply or resolved comment thread as proof that the requested
+change appears in every affected file.
+```
+
+### Apply selected review comments
+
+```text
+Use $academic-writing-skills to implement review items 1, 3, and 5. Preserve
+the accepted scientific meaning. Keep items that require a missing source or
+author decision open, and propagate each material change to every affected
+section, figure, table, supplement, Abstract, and Conclusion.
+```
+
+### Check the final submission package
+
+```text
+Use $paper-review at submission stage on the exact attached manuscript,
+supplement, figures, tables, highlights, cover letter, declarations, and
+metadata. Run top-to-bottom and bottom-up checks, identify release blockers,
+and mark the package SUBMISSION_READY only if the exact deliverables support
+that status.
+```
+
+## Recommended manuscript workflow
+
+| Stage | Skill | Outcome |
+|---|---|---|
+| 1. Establish authority | `$academic-writing-skills` | Active files, authoritative sources, locked decisions, questions, contribution, and nonclaims |
+| 2. Plan | `$academic-writing-skills` | Evidence-linked extended outline |
+| 3. Draft and integrate | `$academic-writing-skills` | Sections with coherent paragraph functions and cross-section consistency |
+| 4. Review | `$paper-review` | Priority-ranked scientific and presentation issues without edits |
+| 5. Revise | `$academic-writing-skills` | Authorized fixes propagated across affected artifacts |
+| 6. Verify | `$paper-review` | Cross-round regression or exact-package release assessment |
+
+The workflow is iterative. A material change to a question, method, result, or
+claim reopens every affected downstream summary and companion file.
+
+## How progressive paper review works
+
+`$paper-review` infers the smallest sufficient module set from the conversation,
+Abstract, questions, Methods, equations, figures, tables, and supplement. A
+hybrid paper may load more than one module.
+
+| Manuscript evidence | Reference loaded when applicable |
 |---|---|
-| Equations, formal notation, normalized or aggregated series, composite metrics, or derived uncertainty displays | `display-notation-provenance.md` |
-| Surveys, scales, CFA, psychometrics, SEM, mediation, multi-group analysis | `quantitative-psychometrics-sem.md` |
-| Simulation, ABM, ML, GenAI, LLMs, synthetic respondents, agent evaluation | `ai-llm-computational.md` |
-| Water resources, CNHS, policy, frameworks, reviews, uncertainty, equifinality | `water-cnhs-uncertainty.md` |
-| Flood risk, hydrodynamics, drainage, inundation, catastrophe and loss models | `flood-hydrodynamics-catastrophe.md` |
-| Explicit revision round or prior-review comparison | `round-calibration.md` |
-| Explicit Ethan-style or confirmed lab-review context | `ethan-style-overlay.md`; exact project context may also load `project-precedents.md` |
+| Equations, formal notation, normalization, aggregation, composite metrics, or derived uncertainty displays | `display-notation-provenance.md` |
+| Surveys, scales, psychometrics, CFA, SEM, mediation, or multi-group comparison | `quantitative-psychometrics-sem.md` |
+| Simulation, ABM, ML, GenAI, LLMs, synthetic respondents, or agent evaluation | `ai-llm-computational.md` |
+| Water resources, CNHS, policy, frameworks, uncertainty, or equifinality | `water-cnhs-uncertainty.md` |
+| Flood risk, inundation, drainage, hydrodynamics, catastrophe models, exposure, vulnerability, or loss | `flood-hydrodynamics-catastrophe.md` |
+| Prior comments, earlier drafts, or an explicit revision round | `round-calibration.md` |
+| An explicit Ethan-style request or confirmed relevant lab-review context | `ethan-style-overlay.md`; exact project context may also load `project-precedents.md` |
 
-A hybrid paper may load several modules. The reviewer asks one targeted
-question only when unresolved ambiguity would materially change the required
-evidence or review standard—for example, whether a factor analysis is
-exploratory or confirmatory. It does not ask the user to select a domain when
-the manuscript already makes the choice clear.
+A keyword or study-area mention alone does not activate a module. The reviewer
+asks one targeted question only when an unresolved ambiguity would materially
+change the review standard, such as whether a factor analysis is exploratory
+or confirmatory.
 
-Additional users can contribute a new direct reference. Each module should
-define trigger and exclusion cues, technical and evidence checks, claim-scope
-boundaries, display or reproducibility checks, and at least one routing or
-boundary eval. Reviewer, journal, laboratory, and project rules remain separate
-conditional overlays.
+## Long-running projects and deterministic diagnostics
 
-For cross-round review, an author reply or resolved comment thread is not by
-itself evidence of resolution. The reviewer verifies the requested change in
-the active manuscript and every affected companion artifact. For derived
-figures and tables, it also traces source data or model output through the
-transformation, aggregation, display, and textual claim.
-
-## End-to-end manuscript workflow
-
-### 1. Establish project authority
-
-For a full manuscript, repeated revision, or multi-file package, initialize a
-project state:
+A one-off passage edit can use lightweight mode without extra setup. For a
+full manuscript, repeated revision, or a multi-file submission package,
+initialize a project state and keep it with the manuscript project:
 
 ```bash
 python skills/academic-writing-skills/scripts/init_manuscript_state.py \
   manuscript_state.json
 ```
 
-Record active artifacts, authoritative analyses and sources, locked questions
-and decisions, terminology, facts, question-to-evidence alignment, open issues,
-and release checks. Keep the state with the manuscript project, not inside the
-installed plugin.
+The state records active artifacts, authority sources, locked wording, facts,
+terminology, question-to-evidence alignment, decisions, open issues, and
+release checks. It is a project record, not a memory of every wording choice.
 
-> Use `$academic-writing-skills` to establish the manuscript contract and
-> authority hierarchy for these files. Do not draft yet. Identify the gap,
-> task, questions, outcomes, contribution, nonclaims, and unresolved sources.
-
-### 2. Build the extended outline
-
-Use `$academic-writing-skills` to build an evidence plan rather than a list of
-headings. For each section and planned paragraph, define the reader function,
-central claim or question, authorized evidence, inference boundary, and bridge
-to the next unit. Test the plan top-down from gap to contribution and bottom-up
-from available evidence to supported claims.
-
-> Use `$academic-writing-skills` to build the extended outline. Map every
-> planned paragraph to its function, claim, evidence, inference limit, and
-> next-paragraph bridge. Flag missing analyses or sources; do not fabricate
-> expected results.
-
-For a technically complex study, then ask `$paper-review` to critique the
-outline. It will load the applicable psychometric, computational, LLM, water,
-or flood modules without turning the review into prose drafting.
-
-### 3. Draft one paragraph or section at a time
-
-Use a five-part paragraph contract:
-
-1. function
-2. narrowest defensible claim
-3. authorized evidence
-4. evidence-based development
-5. bridge to the next paragraph
-
-Provide the active outline, sources, locked wording, and adjacent paragraphs.
-A bounded request stays bounded.
-
-> Use `$academic-writing-skills` to draft Section 2.3 from the approved outline
-> and supplied sources. Preserve locked terms and numbers. For every paragraph,
-> verify function, claim, evidence, development, and bridge, then check its
-> handoff to the preceding and following paragraphs.
-
-When a completed passage needs an independent technical critique, use
-`$paper-review` in review-only mode and let it select the relevant references.
-
-### 4. Integrate each section
-
-After drafting a section, read its topic sentences and closing sentences in
-sequence. Verify that paragraphs form one cumulative argument, do not duplicate
-the same function, and do not introduce orphan evidence or unsupported
-transitions. Reconcile terminology, abbreviations, citations, figures, and
-tables before moving on.
-
-### 5. Run milestone reviews
-
-General or domain-specific review:
-
-> Use `$paper-review` for a substantive, review-only assessment of the current
-> manuscript and supplement. Infer and state the modules used, rank issues by
-> scientific and reproducibility risk, and do not edit.
-
-Explicit Ethan-style review:
-
-> Use `$paper-review` for an Ethan-style R2 review. Compare the current files
-> with the supplied prior comments, separate MUST/SHOULD/QUERY/PREFERENCE from
-> severity, and report resolved, partial, open, regressed, and new issues.
-
-### 6. Revise through the writing core
-
-Return accepted review items to `$academic-writing-skills`. Separate authorized
-edits from items needing an author decision or missing source. Propagate every
-semantic or evidence change to affected Methods, Results, Discussion,
-limitations, Abstract, Conclusion, supplement, displays, and submission
-materials.
-
-### 7. Run the full top-to-bottom review
-
-When all major sections exist, ask `$paper-review` to run four distinct passes
-on the exact active files:
-
-1. argument and structure
-2. evidence, methods, claims, figures, tables, equations, and citations
-3. scholarly prose, terminology, repetition, observable stock phrasing, and
-   paragraph-to-paragraph flow
-4. summaries, references, numbering, metadata, rendering, and release
-   integrity
-
-Then run the bottom-up check from source evidence through result,
-interpretation, contribution, Abstract, and Conclusion. If a prose edit changes
-scientific meaning, repeat the affected evidence checks.
-
-### 8. Rebuild summaries from the stabilized manuscript
-
-Use `$academic-writing-skills` to rebuild the title, Abstract, highlights,
-Conclusion, conference abstract, and cover materials from the current evidence
-map. Never treat an older Abstract as the authority source.
-
-### 9. Verify the exact submission package
-
-Use `$paper-review` at submission stage on the final manuscript, supplement,
-figures, tables, highlights, cover letter, metadata, declarations, and required
-repository statements. High-severity blockers, unknown required facts, stale
-companion files, tracked changes, or failed rendering prevent
-`SUBMISSION_READY`.
-
-## Terminology, repeated wording, stock phrasing, and flow
-
-The writing core distinguishes necessary technical repetition from avoidable
-prose repetition. Register one preferred term per concept and protect
-constructs, model names, populations, and outcomes from cosmetic synonym
-rotation.
-
-The scholarly-prose pass checks:
-
-- exact or near-duplicate sentences and paragraph functions
-- repeated nontechnical words, phrases, and sentence openings
-- generic metadiscourse, empty intensifiers, stock transitions, vague subjects,
-  repetitive cadence, and content-light summaries
-- subject continuity and familiar-to-new information order
-- paragraph claim–evidence–development logic
-- topic-sentence and closing-sentence flow across each section
-
-These are writing diagnostics, not AI detection. The skills must never claim
-that prose was generated by GPT or another model solely from style.
-
-Useful deterministic diagnostics:
+Useful diagnostics:
 
 ```bash
 python skills/academic-writing-skills/scripts/audit_manuscript_state.py manuscript_state.json
@@ -246,19 +231,49 @@ python skills/academic-writing-skills/scripts/audit_docx_structure.py manuscript
 python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
-The scripts report candidates for contextual review; they do not decide that a
-technical term is overused, a transition is wrong, or prose is AI-generated.
+These scripts surface candidates for contextual review. They do not decide
+that a technical term is overused, a transition is wrong, or prose was
+AI-generated.
+
+## Evidence and review boundaries
+
+- The skills do not invent assumptions, analyses, results, citations,
+  mechanisms, thresholds, reviewer preferences, or metadata.
+- Technical terminology is protected from cosmetic synonym rotation; prose
+  repetition is assessed in context.
+- Observable stock or AI-like writing patterns are editing diagnostics, not
+  evidence of AI authorship.
+- A response letter is evidence of an author claim, not proof that a revision
+  is present in the current manuscript and all companion files.
+- Every review, revision, audit, or release check ends with a
+  functional-completeness retrospective that states what was checked, what
+  remains unresolved, and what limits readiness.
+- The plugin complements rather than replaces Zotero, NotebookLM, statistical
+  software, source verification, document rendering, or tracked-change tools.
 
 ## Repository layout
 
 ```text
 skills/
   academic-writing-skills/
-  paper-review/
+    SKILL.md
     references/
+    scripts/
+    assets/
+    agents/
+  paper-review/
+    SKILL.md
+    references/
+    assets/
+    agents/
 evals/
 tests/
 ```
+
+New reusable review knowledge belongs in a direct `paper-review` reference
+with explicit trigger and exclusion cues, technical and evidence checks,
+claim-scope boundaries, and at least one routing or boundary eval. Journal,
+reviewer, laboratory, and project rules remain separate conditional overlays.
 
 ## Testing
 
@@ -267,18 +282,10 @@ python -m pytest tests/ -q
 python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
-The tests check both skill boundaries, progressive reference routing,
-project-state schema, prose and integrity regressions, eval coverage, and
-common encoding corruption.
+The tests cover skill boundaries, progressive routing, project-state schema,
+prose and integrity regressions, eval coverage, and common encoding corruption.
 
-Every review, revision, audit, or release check ends with a named
-functional-completeness retrospective rather than a generic all-clear.
-
-## Scope
-
-The plugin does not invent assumptions, analyses, results, citations,
-mechanisms, or metadata. It also does not replace Zotero, NotebookLM, document
-rendering, or format-specific tracked-change tooling.
+See [CHANGELOG.md](./CHANGELOG.md) for release history.
 
 ## License
 

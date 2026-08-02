@@ -1,26 +1,23 @@
 # academic-writing-skills
 
-這是一套適用於 Claude／Codex 的論文撰寫與 reviewer-style scientific review plugin。1.1 版有兩個主要 skills：
-
-| Skill | 使用情境 |
-|---|---|
-| `$academic-writing-skills` | extended outline、section／paragraph 撰寫、證據對齊、用詞、重複、流暢度、revision、跨檔案同步與 release checks |
-| `$paper-review` | review-only critique、top-to-bottom scientific review、revision-round assessment、prior-comment regression，以及按需載入的 method、domain 或 reviewer modules |
-
-`$paper-review` 以 `$academic-writing-skills` 作為 integrity base。專業知識放在直接 references，只有對話或稿件證明適用時才會載入。
+這是一套由兩個 skills 組成的學術論文寫作與科學審查工具。它把論文視為持續演進的證據系統：每一項主張都必須與研究問題、方法、證據、解釋及摘要保持一致，並同步反映在目前有效的主稿與相關附件中。
 
 [English README](./README.md)
 
-## 1.1 版的主要改變
+> 本專案屬於 [agentic AI learning roadmap](https://github.com/WenyuChiou/awesome-agentic-ai-zh) 的一部分。
 
-- 將 `$paper-review` 改為通用 reviewer，不再只服務 Ethan-style 或水領域論文。
-- 新增 psychometrics／SEM、AI／LLM／ABM／computational、water／CNHS／policy／uncertainty，以及 flood／hydrodynamics／catastrophe 等 progressive modules。
-- Ethan-style review 與 named project precedents 保持 explicit-only；不會因稿件涉及 water、ABM 或 LLM 就自動啟用。
-- 補上 extended outline、逐段撰寫、section integration、top-to-bottom review、revision regression、summaries rebuild 與 exact submission package 的完整流程。
-- 新增 style profile 與 deterministic prose diagnostics，可檢查 exact duplication、重複句首、跨句重複片語、stock phrasing 與可能過度使用的非技術詞。
-- 明確規定：公式化或 AI-like 文字特徵只是 writing diagnostics，不是 AI authorship 證據；技術用詞不得為了表面變化而替換。
+## 兩個 skills 的分工
 
-## 安裝
+| Skill | 最適合從這裡開始的任務 |
+|---|---|
+| [`$academic-writing-skills`](./skills/academic-writing-skills/SKILL.md) | Extended outline、section／paragraph 撰寫與修改、用詞統一、重複與流暢度檢查、跨檔案同步，以及投稿檔案準備 |
+| [`$paper-review`](./skills/paper-review/SKILL.md) | Review-only critique、top-to-bottom 科學審查、revision-round assessment、prior-comment regression，以及方法或領域專項審查 |
+
+`$paper-review` 以 `$academic-writing-skills` 作為 manuscript-integrity base，再根據稿件證據 progressively 載入必要的技術 references。要求 review 預設只會審查，不代表授權修改稿件。
+
+## 快速開始
+
+### 1. 安裝或更新
 
 透過 [`ai-research-skills` Claude Code marketplace](https://github.com/WenyuChiou/ai-research-skills) 安裝：
 
@@ -29,136 +26,161 @@ claude plugin marketplace add WenyuChiou/ai-research-skills
 claude plugin install academic-writing-skills@ai-research-skills --scope user
 ```
 
+這一個 plugin 安裝完成後，會同時提供 `$academic-writing-skills` 與 `$paper-review`。
+
 已安裝者可更新：
 
 ```bash
 claude plugin update academic-writing-skills@ai-research-skills
 ```
 
-## 要使用哪一個 skill？
+### 2. 叫用需要的 skill
 
-| 任務 | 使用 |
+在 Claude Code 中使用 `$academic-writing-skills` 或 `$paper-review`。上面的安裝指令只適用於 Claude Code。若 ChatGPT／Codex 已透過其他方式安裝這些 skills，可直接指定名稱，例如：`Use @paper-review ...`。
+
+下方可複製的 prompts 使用 Claude Code 的 `$skill-name` 寫法；在 ChatGPT／Codex 中請改成 `@skill-name`。
+
+使用者不需要自行選擇技術模組。只要說明任務、附上目前有效的檔案，並指出相關的舊版、reviewer comments、目標期刊或已鎖定決策即可。
+
+### 3. 提供正確的證據與檔案
+
+| 任務 | 建議至少提供 |
 |---|---|
-| 建立或修改 outline、section、paragraph、Abstract、Conclusion | `$academic-writing-skills` |
-| 修改時檢查用詞統一、重複用字、stock phrasing、flow | `$academic-writing-skills` |
-| critique outline、section、manuscript、supplement、submission package | `$paper-review` |
-| 進行 psychometrics、SEM、LLM、water、flood、ABM 或 hybrid technical review | `$paper-review`，由它選擇 references |
-| 進行 Ethan-style R1–R4 review 或確認 supplied PI comments | `$paper-review`，並明確寫出 Ethan-style |
-| 根據 review comments 修改論文 | `$academic-writing-skills` 加上已選定的 comments |
-| 驗證上一輪 comments 是否解決且沒有 regression | `$paper-review` 加上 prior comments 與相關 versions |
+| 規劃 outline | 研究目的、gap、questions／objectives、methods、現有證據、目標 venue 與明確 nonclaims |
+| 撰寫 section | 核准的 outline、可使用的 sources／results、鎖定用詞與前後段落 |
+| 科學審查 | 目前有效的 manuscript，以及相關 figures、tables、supplement 和預定 review stage |
+| Revision-round 核對 | Current manuscript、prior comments、author responses，以及可取得的 prior version |
+| 投稿前檢查 | 實際要提交的全部檔案、目前的 venue requirements 與 metadata |
 
-## Progressive review 如何選擇模組
+必要來源若無法取得，skills 會明確標示限制，不會自行猜測。
 
-`$paper-review` 會先從對話、title、Abstract、questions、Methods、equations、figures、tables 與 supplement 推斷最小且足夠的模組組合：
+涉及多個檔案或版本時，可以在 prompt 前先填這六行，避免版本與權威來源混淆：
 
-| 稿件證據 | 載入 reference |
+```text
+TASK: [plan / draft / revise / review / submission check]
+ACTIVE FILES: [這次要審查或修改的 exact versions]
+AUTHORITY SOURCES: [發生衝突時應以哪些 results、data、code、approved outline 或 decisions 為準]
+LOCKED DECISIONS: [不得改變的 wording、numbers、questions 或 claims]
+NONCLAIMS: [本稿不能提出的 interpretations 或 conclusions]
+TARGET / STAGE: [venue，以及 developmental / substantive / integration / submission]
+```
+
+`developmental` 適用於 outline 或尚未完成的初稿；`substantive` 表示核心科學內容已具備；`integration` 用於完整主稿與 companion files 的整合；`submission` 只用於實際準備提交的 exact package。若期刊或 reviewer 已提供 R1–R4，請明確寫出；skill 不會根據文筆或 comment 數量猜測輪次。
+
+需要實際修改時，請提供 DOCX 或原始 source file；只做 review 且文字與圖表可清楚閱讀時，PDF 即可。若主稿內的 figures、tables 或 supplement 不完整，請另外附上。需要逐項核對 citations 時應提供 source papers；需要檢查 reproducibility 或 derived displays 時應提供 code／data；需要檢查期刊格式時則應提供目前有效的 journal guide。
+
+## 可直接複製的 prompts
+
+### 建立 extended outline
+
+```text
+使用 $academic-writing-skills，根據附件建立 extended outline。先確認研究
+gap、task、research questions、methods、現有 evidence、預定 contribution
+與 nonclaims。每個 planned paragraph 都列出 function、claim、authorized
+evidence、inference limit 和銜接下一段的 bridge。暫時不要撰寫完整正文。
+```
+
+### 撰寫一個 section
+
+```text
+使用 $academic-writing-skills，依照已核准的 outline 與提供的 sources 撰寫
+Section 2.3。保留所有鎖定用詞、數值與 citations。逐段檢查 function、
+claim、evidence、development 和 bridge，並確認與前後段的銜接。
+```
+
+### 修改現有 section
+
+```text
+使用 $academic-writing-skills，依照指定目的修改附件中的 current Section 2.3。
+將提供的 results 與 approved outline 視為 authority sources；保留 locked
+terms、numbers、citations、research questions 與 claim scope。若某項修改需要
+新增 evidence 或 author decision，請明確指出，不要自行補寫。
+```
+
+### 檢查用詞、重複與流暢度
+
+```text
+使用 $academic-writing-skills 修改這一節的 terminology consistency、可避免的
+非技術詞重複、stock phrasing 與 paragraph-to-paragraph flow。保留必要的
+technical repetition，不要改變科學意義、數值、citations 或 claim strength。
+```
+
+### 執行實質科學審查
+
+```text
+使用 $paper-review 對附件 manuscript 與 supplement 進行 substantive、
+review-only assessment。推斷並列出最小且足夠的 modules，依 scientific 與
+reproducibility risk 排序問題，將 comments 定位到稿件內容，不要修改檔案。
+```
+
+### 驗證 revision round
+
+```text
+使用 $paper-review，比較 current manuscript、prior comments、response letter
+與 earlier version。將每個 issue 分為 resolved、partial、open、regressed、
+waived、new 或 not verifiable。不能只因 author reply 或 comment thread 已標為
+resolved，就認定修改已出現在所有受影響檔案中。
+```
+
+### 套用已選定的 review comments
+
+```text
+使用 $academic-writing-skills 處理 review items 1、3、5。保留已接受的科學
+意義；需要 missing source 或 author decision 的項目繼續列為 open。將每項
+material change 同步到受影響的 sections、figures、tables、supplement、
+Abstract 與 Conclusion。
+```
+
+### 檢查最終投稿檔案
+
+```text
+使用 $paper-review，在 submission stage 檢查附件中的 exact manuscript、
+supplement、figures、tables、highlights、cover letter、declarations 與
+metadata。執行 top-to-bottom 和 bottom-up checks，列出 release blockers；
+只有實際提交檔案全部支持時，才能標示 SUBMISSION_READY。
+```
+
+## 建議的完整論文流程
+
+| 階段 | Skill | 產出 |
+|---|---|---|
+| 1. 建立權威來源 | `$academic-writing-skills` | Active files、authoritative sources、locked decisions、questions、contribution 與 nonclaims |
+| 2. 規劃 | `$academic-writing-skills` | 與證據連結的 extended outline |
+| 3. 撰寫與整合 | `$academic-writing-skills` | 段落功能清楚、跨 section 一致的正文 |
+| 4. 審查 | `$paper-review` | 不直接改稿、依優先順序排列的科學與呈現問題 |
+| 5. 修改 | `$academic-writing-skills` | 已授權修改，並同步所有受影響檔案 |
+| 6. 驗證 | `$paper-review` | Cross-round regression 或 exact-package release assessment |
+
+這不是單向流程。研究問題、方法、結果或主張只要發生 material change，就必須重新檢查所有受影響的 summaries 與 companion files。
+
+## Paper review 如何自動選擇模組
+
+`$paper-review` 會從目前對話、Abstract、questions、Methods、equations、figures、tables 與 supplement 推斷最小且足夠的模組組合。Hybrid paper 可以同時載入多個 modules。
+
+| 稿件證據 | 適用時載入的 reference |
 |---|---|
-| Equations、formal notation、normalized／aggregated series、composite metrics 或 derived uncertainty displays | `display-notation-provenance.md` |
-| Survey、scale、CFA、psychometrics、SEM、mediation、multi-group analysis | `quantitative-psychometrics-sem.md` |
-| Simulation、ABM、ML、GenAI、LLM、synthetic respondents、agent evaluation | `ai-llm-computational.md` |
-| Water resources、CNHS、policy、framework、review、uncertainty、equifinality | `water-cnhs-uncertainty.md` |
-| Flood risk、hydrodynamics、drainage、inundation、catastrophe／loss model | `flood-hydrodynamics-catastrophe.md` |
-| 明確 revision round 或 prior-review comparison | `round-calibration.md` |
-| 明確 Ethan-style 或已確認的 lab-review context | `ethan-style-overlay.md`；exact project context 才可能再載入 `project-precedents.md` |
+| Equations、formal notation、normalization、aggregation、composite metrics 或 derived uncertainty displays | `display-notation-provenance.md` |
+| Surveys、scales、psychometrics、CFA、SEM、mediation 或 multi-group comparison | `quantitative-psychometrics-sem.md` |
+| Simulation、ABM、ML、GenAI、LLM、synthetic respondents 或 agent evaluation | `ai-llm-computational.md` |
+| Water resources、CNHS、policy、framework、uncertainty 或 equifinality | `water-cnhs-uncertainty.md` |
+| Flood risk、inundation、drainage、hydrodynamics、catastrophe model、exposure、vulnerability 或 loss | `flood-hydrodynamics-catastrophe.md` |
+| Prior comments、earlier drafts 或明確 revision round | `round-calibration.md` |
+| 使用者明確要求 Ethan-style，或確認存在相關 lab-review context | `ethan-style-overlay.md`；exact project context 才可能再載入 `project-precedents.md` |
 
-Hybrid paper 可以載入多個 modules。只有現有資訊仍存在會實質改變 evidence requirements 或 review standard 的歧義時，reviewer 才問一個精準問題，例如 factor analysis 究竟是 exploratory 還是 confirmatory。稿件本身已能判斷時，不會再要求使用者選領域。
+單一 keyword 或 study-area mention 不足以啟用模組。只有尚未釐清的歧義會實質改變 review standard 時，reviewer 才會問一個精準問題，例如 factor analysis 是 exploratory 還是 confirmatory。
 
-其他使用者之後可新增直接 reference。每個 module 應包含 trigger／exclusion cues、technical and evidence checks、claim-scope boundaries、display／reproducibility checks，以及至少一個 routing 或 boundary eval。Reviewer、journal、laboratory 與 project rules 必須維持獨立 conditional overlays。
+## 長期專案與 deterministic diagnostics
 
-跨輪次審查時，author reply 或已 resolved 的 comment thread 本身不等於問題已解決；reviewer 必須在 active manuscript 與所有受影響 companion artifacts 中驗證修改。對 derived figures／tables，還會追溯 source data 或 model output、transformation、aggregation、display 到 textual claim 的完整來源鏈。
-
-## 從 outline 到投稿的完整流程
-
-### 1. 建立 project authority
-
-完整論文、反覆 revision 或多檔案 package 應先建立 project state：
+一次性的段落修改可直接使用 lightweight mode，不需要額外設定。完整論文、反覆 revision 或多檔案 submission package，則建議建立 project state，並將它留在論文專案內：
 
 ```bash
 python skills/academic-writing-skills/scripts/init_manuscript_state.py \
   manuscript_state.json
 ```
 
-記錄 active artifacts、權威 analyses／sources、locked questions／decisions、terminology、facts、question-to-evidence alignment、open issues 與 release checks。state 放在論文 project，不放進 installed plugin。
+Project state 記錄 active artifacts、authority sources、locked wording、facts、terminology、question-to-evidence alignment、decisions、open issues 與 release checks。它是正式專案紀錄，不會把每一次局部用字都永久記住。
 
-> 使用 `$academic-writing-skills` 建立這些檔案的 manuscript contract 與 authority hierarchy。先不要寫正文；確認 gap、task、questions、outcomes、contribution、nonclaims 與 unresolved sources。
-
-### 2. 建立 extended outline
-
-使用 `$academic-writing-skills` 建立 evidence plan，而不是只有 headings。每個 section 與 planned paragraph 都要定義 reader function、central claim 或 question、authorized evidence、inference boundary 與 next-unit bridge；同時做 top-down（gap → contribution）與 bottom-up（evidence → supported claim）檢查。
-
-> 使用 `$academic-writing-skills` 建立 extended outline。將每一個 planned paragraph 對應到 function、claim、evidence、inference limit 與 next-paragraph bridge。列出缺少的 analyses 或 sources，不要自行生成 expected results。
-
-複雜研究完成 outline 後，可再使用 `$paper-review` critique outline。它會按需載入 psychometric、computational、LLM、water 或 flood modules，但不會代替正文撰寫。
-
-### 3. 一次撰寫一個 paragraph 或 section
-
-每段使用五部分 contract：
-
-1. function
-2. narrowest defensible claim
-3. authorized evidence
-4. evidence-based development
-5. bridge to the next paragraph
-
-提供 active outline、sources、locked wording 與 adjacent paragraphs。單段任務應維持單段範圍。
-
-> 使用 `$academic-writing-skills`，依 approved outline 與 supplied sources 撰寫 Section 2.3。保留 locked terms 與 numbers。逐段檢查 function、claim、evidence、development、bridge，並確認與前後段銜接。
-
-完成的 passage 若需要獨立 technical critique，再以 review-only mode 使用 `$paper-review`，由它選擇 relevant references。
-
-### 4. 完成一節後做 integration
-
-依序只讀 topic sentences 與 closing sentences，確認各段形成累積論證、不重複相同功能，也沒有 orphan evidence 或 unsupported transitions。進入下一節前同步 terminology、abbreviations、citations、figures 與 tables。
-
-### 5. 在重要版本進行 review
-
-一般或 domain-specific review：
-
-> 使用 `$paper-review` 對目前 manuscript 與 supplement 做 substantive、review-only assessment。推斷並列出使用的 modules，依 scientific 與 reproducibility risk 排序問題，不要修改。
-
-明確 Ethan-style review：
-
-> 使用 `$paper-review` 進行 Ethan-style R2 review。比較 current files 與 supplied prior comments，將 MUST／SHOULD／QUERY／PREFERENCE 與 severity 分開，並列出 resolved、partial、open、regressed 與 new issues。
-
-### 6. 回到 writing core 修改
-
-把接受的 review items 交給 `$academic-writing-skills`。區分已授權 edits、需要 author decision 的問題與 missing sources。任何 semantic 或 evidence change 都要同步 Methods、Results、Discussion、limitations、Abstract、Conclusion、supplement、displays 與 submission materials。
-
-### 7. 執行完整 top-to-bottom review
-
-主要 sections 完成後，使用 `$paper-review` 對 exact active files 分四輪檢查：
-
-1. argument and structure
-2. evidence、methods、claims、figures、tables、equations、citations
-3. scholarly prose、terminology、repetition、observable stock phrasing、paragraph-to-paragraph flow
-4. summaries、references、numbering、metadata、rendering、release integrity
-
-再做 bottom-up 檢查：source evidence → result → interpretation → contribution → Abstract／Conclusion。若 prose edit 改變 scientific meaning，必須重跑受影響的 evidence checks。
-
-### 8. 從穩定正文重建 summaries
-
-使用 `$academic-writing-skills` 從目前 evidence map 重建 title、Abstract、highlights、Conclusion、conference abstract 與 cover materials。舊版 Abstract 不得作為 authority source。
-
-### 9. 驗證 exact submission package
-
-在 submission stage 使用 `$paper-review` 檢查 final manuscript、supplement、figures、tables、highlights、cover letter、metadata、declarations 與 required repository statements。仍有 high-severity blockers、unknown required facts、stale companion files、tracked changes 或 failed rendering 時，不得標示 `SUBMISSION_READY`。
-
-## 用詞統一、重複用字、stock phrasing 與 flow
-
-Writing core 會區分必要 technical repetition 與可避免 prose repetition。每個 concept 設定一個 preferred term，並保護 constructs、model names、populations 與 outcomes，不以 synonym rotation 做表面修改。
-
-Scholarly-prose pass 會檢查：
-
-- exact／near-duplicate sentences 與重複 paragraph functions
-- 重複的非技術詞、phrases 與 sentence openings
-- generic metadiscourse、empty intensifiers、stock transitions、vague subjects、repetitive cadence 與 content-light summaries
-- subject continuity 與 familiar-to-new information order
-- paragraph claim–evidence–development logic
-- section 內 topic sentence 與 closing sentence flow
-
-這些是 writing diagnostics，不是 AI detection。skills 不得只依 style 判定文字由 GPT 或其他模型生成。
-
-可使用的 deterministic diagnostics：
+可使用的 diagnostics：
 
 ```bash
 python skills/academic-writing-skills/scripts/audit_manuscript_state.py manuscript_state.json
@@ -168,18 +190,37 @@ python skills/academic-writing-skills/scripts/audit_docx_structure.py manuscript
 python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
-Scripts 只回報需要 contextual review 的 candidates，不會自行認定 technical term 過度重複、transition 錯誤或 prose 為 AI-generated。
+這些 scripts 只找出需要 contextual review 的 candidates，不會自行判定 technical term 過度重複、transition 錯誤或文字由 AI 生成。
+
+## 證據與審查邊界
+
+- Skills 不會編造 assumptions、analyses、results、citations、mechanisms、thresholds、reviewer preferences 或 metadata。
+- Technical terminology 不會為了表面變化而進行 synonym rotation；prose repetition 會依上下文判斷。
+- 可觀察的 stock 或 AI-like writing patterns 只是 editing diagnostics，不是 AI authorship 的證據。
+- Response letter 只能證明作者聲稱已修改，不能證明 current manuscript 與所有 companion files 已完成修改。
+- 每次 review、revision、audit 或 release check 都會以 functional-completeness retrospective 結束，清楚列出已檢查內容、未解決問題與 readiness limits。
+- 本 plugin 是 Zotero、NotebookLM、統計軟體、來源核對、文件 rendering 與 tracked-change tools 的補充，不會取代它們。
 
 ## Repository 結構
 
 ```text
 skills/
   academic-writing-skills/
-  paper-review/
+    SKILL.md
     references/
+    scripts/
+    assets/
+    agents/
+  paper-review/
+    SKILL.md
+    references/
+    assets/
+    agents/
 evals/
 tests/
 ```
+
+新的通用 review knowledge 應放在 `paper-review` 的直接 reference 中，並定義 trigger／exclusion cues、technical and evidence checks、claim-scope boundaries，以及至少一個 routing 或 boundary eval。Journal、reviewer、laboratory 與 project rules 必須維持為獨立的 conditional overlays。
 
 ## 測試
 
@@ -188,13 +229,9 @@ python -m pytest tests/ -q
 python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
-測試涵蓋兩個 skill boundaries、progressive reference routing、project-state schema、prose／integrity regressions、eval coverage 與常見亂碼。
+測試涵蓋兩個 skill boundaries、progressive routing、project-state schema、prose／integrity regressions、eval coverage 與常見亂碼。
 
-每次 review、revision、audit 或 release check 最後都必須完成具體的 functional-completeness retrospective，不得只回覆籠統的 all-clear。
-
-## 範圍
-
-本 plugin 不會編造 assumptions、analyses、results、citations、mechanisms 或 metadata，也不取代 Zotero、NotebookLM、文件 rendering 或 tracked-change tooling。
+版本紀錄請見 [CHANGELOG.md](./CHANGELOG.md)。
 
 ## 授權
 
