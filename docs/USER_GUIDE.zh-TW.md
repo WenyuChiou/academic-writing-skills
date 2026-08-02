@@ -1,6 +1,6 @@
 # 完整使用指南
 
-這份文件收錄從首頁移出的進階說明。多數使用者可直接從 README 的三個範例 prompts 開始。
+這份文件收錄從首頁移出的進階說明。多數使用者可直接從 README 的兩個範例 prompts 開始。
 
 [English](./USER_GUIDE.md)
 

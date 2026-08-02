@@ -1,7 +1,7 @@
 # Usage Guide
 
 This guide contains the optional detail removed from the main README. Most
-users can start with the three prompts on the repository front page.
+users can start with the two prompts on the repository front page.
 
 [繁體中文](./USER_GUIDE.zh-TW.md)
 

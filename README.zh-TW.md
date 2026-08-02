@@ -1,40 +1,61 @@
 # Academic Writing Skills
 
-提供給 Claude Code、ChatGPT 與 Codex 使用的學術論文寫作與科學審查工具，重點是讓文字、證據與主張保持一致。
+[![tests](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml/badge.svg)](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml)
+[![plugin version](https://img.shields.io/badge/plugin-v1.1.1-blue.svg)](./CHANGELOG.md)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-[English](./README.md)
+**讓研究問題、證據、主張與用詞，從 extended outline 到最終投稿都維持一致。**
 
-一次安裝會提供兩個互補的 skills：
+適用於 Claude Code、ChatGPT 與 Codex。[English](./README.md)
 
-| 你想做的事 | 使用 |
+## 為什麼需要這些 skills？
+
+一般用途的 AI 可以把一段文字改得更流暢，卻不一定知道這個修改會影響論文的
+其他位置，最後可能出現：
+
+- 主張比研究結果實際能支持的更強；
+- 術語、數值或結論在不同章節與檔案之間漂移；
+- 回覆信寫著「已修改」，但實際稿件仍遺漏該項調整；
+- 文字看似完整，研究問題、方法、結果與結論卻沒有真正對齊。
+
+這套 skills 把論文視為一個互相連動的證據系統。它會保護作者已鎖定的決策，
+證據不足時明確標示而不自行補寫，並依稿件內容逐步選擇真正需要的方法與領域
+檢查。
+
+## 兩個 skills，一套工作流程
+
+`規劃 → 撰寫 → 審查 → 修改 → 驗證`
+
+| Skill | 適合使用的情況 |
 |---|---|
-| 規劃、撰寫、修改或潤飾論文 | [`$academic-writing-skills`](./skills/academic-writing-skills/SKILL.md) |
-| 審查論文並找出問題，但不直接改稿 | [`$paper-review`](./skills/paper-review/SKILL.md) |
+| [`$academic-writing-skills`](./skills/academic-writing-skills/SKILL.md) | 規劃、建立 outline、撰寫、修改、跨檔案同步，或準備投稿材料。 |
+| [`$paper-review`](./skills/paper-review/SKILL.md) | 需要 reviewer-style critique、revision-round 核對或投稿前審查，但不直接修改稿件。 |
 
-`$paper-review` 負責找出問題並排定優先順序；需要實際修改時，再使用
-`$academic-writing-skills`。
+`$paper-review` 預設只進行審查。選定要採用的 comments 後，再使用
+`$academic-writing-skills` 修改並同步所有受影響的內容。
 
 ## 安裝
+
+在 Claude Code 中執行：
 
 ```bash
 claude plugin marketplace add WenyuChiou/ai-research-skills
 claude plugin install academic-writing-skills@ai-research-skills --scope user
 ```
 
-之後需要更新時：
+一次安裝會同時提供兩個 skills。之後需要更新時：
 
 ```bash
 claude plugin update academic-writing-skills@ai-research-skills
 ```
 
-## 快速開始
+若已安裝在 ChatGPT 或 Codex，可使用 `@academic-writing-skills` 或
+`@paper-review` 指定 skill。
 
-1. 附上目前有效的 manuscript 或 section。
-2. 視任務加入 figures、tables、supplement、reviewer comments 或 prior version。
-3. 說明你要做什麼，再複製下方最接近的 prompt。
+## 立即試用
 
-以下範例使用 Claude Code 的 `$skill-name`；若 skills 已安裝在 ChatGPT 或
-Codex，請改用 `@skill-name`。
+附上這次要處理的正確 manuscript 或 section；若任務涉及 figures、tables、
+supplement、reviewer comments 或 prior version，也請一併提供。
 
 ### 撰寫或修改
 
@@ -52,20 +73,22 @@ Codex，請改用 `@skill-name`。
 直接修改檔案。
 ```
 
-## 會檢查什麼
+## 主要檢查範圍
 
-- Claims 是否有現有 evidence 支持。
-- Methods、Results、Discussion、Abstract、figures、tables 與 supplement
-  是否一致。
-- 術語、重複與段落銜接是否穩定，同時避免改變科學意義。
-- 是否存在特定方法或領域的風險；需要的 review modules 會自動選擇。
+- 從 research questions 到 conclusions 的主張與證據是否對齊。
+- Manuscript、Abstract、figures、tables、supplement 與投稿材料是否一致。
+- 術語、重複、段落銜接與制式語句是否需要修改，同時避免用同義詞輪替掩蓋
+  問題。
+- Equations 與衍生圖表、surveys 與 psychometrics／SEM、simulation 與
+  AI／LLM studies、water 與 flood models，以及 revision rounds 的相關技術風險。
 
-Skills 不會自行補造 results、citations、assumptions 或 reviewer preferences；
-缺少證據時會明確標示限制。
+缺少的 results、citations、assumptions 或 reviewer preferences 只會被標示為
+限制，不會由 skills 自行編造。
 
 ## 進一步說明
 
-- [完整使用指南](./docs/USER_GUIDE.zh-TW.md)
+- [完整使用指南](./docs/USER_GUIDE.zh-TW.md)：更多 prompts、輸入模板、
+  review stages 與長期專案使用方式。
 - [版本紀錄](./CHANGELOG.md)
 
 本專案屬於
@@ -74,4 +97,4 @@ Skills 不會自行補造 results、citations、assumptions 或 reviewer prefere
 
 ## 授權
 
-MIT
+[MIT](./LICENSE)

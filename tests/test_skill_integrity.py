@@ -181,22 +181,49 @@ def test_evals_cover_core_and_progressive_review_behavior():
             assert isinstance(item["files"], list)
 
 
-def test_readmes_describe_two_skill_progressive_architecture_and_workflow():
+def test_readmes_are_bilingual_user_facing_entrypoints():
     english = read(ROOT / "README.md")
     chinese = read(ROOT / "README.zh-TW.md")
+    version = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))["version"]
+
     for text in (english, chinese):
         assert "$academic-writing-skills" in text
         assert "$paper-review" in text
-        assert "progressive" in text.lower()
-        assert "psychometrics" in text.lower()
-        assert "functional-completeness" in text
-        assert "audit_prose_patterns.py" in text
+        assert "claude plugin marketplace add WenyuChiou/ai-research-skills" in text
+        assert "claude plugin install academic-writing-skills@ai-research-skills" in text
         assert "outline" in text.lower()
-        assert "top-to-bottom" in text.lower()
-        assert "Zotero" in text
-        assert "NotebookLM" in text
-    assert "Traditional Chinese README" in english
-    assert "English README" in chinese
+        assert "psychometrics" in text.lower()
+        assert "AI/LLM" in text or "AI／LLM" in text
+        assert f"plugin-v{version}-blue.svg" in text
+        assert len(text.splitlines()) <= 120
+        for internal_detail in (
+            "functional-completeness",
+            "audit_prose_patterns.py",
+            "S3 and S4",
+            "authority sources",
+        ):
+            assert internal_detail not in text
+
+    assert "## Why use these skills?" in english
+    assert "progressively select" in english
+    assert "Use $academic-writing-skills" in english
+    assert "Use $paper-review" in english
+    assert "[繁體中文](./README.zh-TW.md)" in english
+    assert "[Full usage guide](./docs/USER_GUIDE.md)" in english
+
+    assert "## 為什麼需要這些 skills？" in chinese
+    assert "逐步選擇" in chinese
+    assert "使用 $academic-writing-skills" in chinese
+    assert "使用 $paper-review" in chinese
+    assert "[English](./README.md)" in chinese
+    assert "[完整使用指南](./docs/USER_GUIDE.zh-TW.md)" in chinese
+
+    relative_link = re.compile(r"\]\((\./[^)#]+)")
+    for source in (ROOT / "README.md", ROOT / "README.zh-TW.md"):
+        for route in relative_link.findall(read(source)):
+            assert (ROOT / route.removeprefix("./")).exists(), (
+                f"broken README link: {source.name} -> {route}"
+            )
 
 
 def test_no_common_mojibake_or_internal_skill_ids():
