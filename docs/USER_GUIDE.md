@@ -1,15 +1,17 @@
 # Usage Guide
 
 This guide contains the optional detail removed from the main README. Most
-users can start with the two prompts on the repository front page.
+users can start with the two prompts on the repository front page. Every
+example below is platform-neutral: it names the skill in ordinary text instead
+of relying on a client-specific invocation prefix.
 
 [繁體中文](./USER_GUIDE.zh-TW.md)
 
 ## Choose a skill
 
-Use `$academic-writing-skills` to plan, draft, revise, synchronize, or prepare
-submission materials. Use `$paper-review` when you want a review-only
-assessment. A review request does not authorize file editing.
+Use the `academic-writing-skills` skill to plan, draft, revise, synchronize,
+or prepare submission materials. Use the `paper-review` skill when you want a
+review-only assessment. A review request does not authorize file editing.
 
 ## What to provide
 
@@ -47,7 +49,7 @@ for venue-specific formatting.
 ### Build an extended outline
 
 ```text
-Use $academic-writing-skills to build an extended outline from the attached
+Use the academic-writing-skills skill to build an extended outline from the attached
 materials. Establish the gap, research questions, methods, available evidence,
 intended contribution, and nonclaims. For every planned paragraph, specify its
 function, claim, authorized evidence, inference limit, and bridge. Do not draft
@@ -57,7 +59,7 @@ the full manuscript yet.
 ### Draft a section
 
 ```text
-Use $academic-writing-skills to draft Section 2.3 from the approved outline
+Use the academic-writing-skills skill to draft Section 2.3 from the approved outline
 and supplied sources. Preserve all locked terms, numbers, and citations. Check
 each paragraph's claim, evidence, development, and connection to adjacent text.
 ```
@@ -65,7 +67,7 @@ each paragraph's claim, evidence, development, and connection to adjacent text.
 ### Check terminology and flow
 
 ```text
-Use $academic-writing-skills to revise this section for terminology
+Use the academic-writing-skills skill to revise this section for terminology
 consistency, avoidable nontechnical repetition, stock phrasing, and paragraph
 flow. Protect necessary technical repetition and do not change scientific
 meaning, numbers, citations, or claim strength.
@@ -74,7 +76,7 @@ meaning, numbers, citations, or claim strength.
 ### Apply selected review comments
 
 ```text
-Use $academic-writing-skills to implement review items 1, 3, and 5. Keep items
+Use the academic-writing-skills skill to implement review items 1, 3, and 5. Keep items
 that require a missing source or author decision open, and propagate each
 material change to every affected section, display, supplement, Abstract, and
 Conclusion.
@@ -83,7 +85,7 @@ Conclusion.
 ### Verify a revision round
 
 ```text
-Use $paper-review to compare the current manuscript with the reviewer
+Use the paper-review skill to compare the current manuscript with the reviewer
 comments, response letter, and prior version. Classify each issue as resolved,
 partial, open, regressed, waived, new, or not verifiable. Do not treat the
 response letter alone as proof that every affected file was updated.
@@ -92,7 +94,7 @@ response letter alone as proof that every affected file was updated.
 ### Check a submission package
 
 ```text
-Use $paper-review at submission stage on the exact manuscript, supplement,
+Use the paper-review skill at submission stage on the exact manuscript, supplement,
 figures, tables, highlights, cover letter, declarations, and metadata. Identify
 release blockers and mark the package SUBMISSION_READY only if the exact files
 support that status.
@@ -109,7 +111,7 @@ support that status.
 
 ## Automatic review modules
 
-`$paper-review` selects the smallest sufficient set of technical references
+`paper-review` selects the smallest sufficient set of technical references
 from the paper itself. Users do not need to choose modules manually.
 
 Available coverage includes:
