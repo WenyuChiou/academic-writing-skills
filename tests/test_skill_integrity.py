@@ -57,7 +57,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.1.1"
+    assert manifest["version"] == "1.1.2"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -187,15 +187,21 @@ def test_readmes_are_bilingual_user_facing_entrypoints():
     version = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))["version"]
 
     for text in (english, chinese):
-        assert "$academic-writing-skills" in text
-        assert "$paper-review" in text
+        assert "$academic-writing-skills" not in text
+        assert "$paper-review" not in text
+        assert "@academic-writing-skills" not in text
+        assert "@paper-review" not in text
+        assert "academic-writing-skills" in text
+        assert "paper-review" in text
         assert "claude plugin marketplace add WenyuChiou/ai-research-skills" in text
         assert "claude plugin install academic-writing-skills@ai-research-skills" in text
+        assert "OpenCode" in text
+        assert "Hermes Agent" in text
         assert "outline" in text.lower()
         assert "psychometrics" in text.lower()
         assert "AI/LLM" in text or "AI／LLM" in text
         assert f"plugin-v{version}-blue.svg" in text
-        assert len(text.splitlines()) <= 120
+        assert len(text.splitlines()) <= 150
         for internal_detail in (
             "functional-completeness",
             "audit_prose_patterns.py",
@@ -204,17 +210,23 @@ def test_readmes_are_bilingual_user_facing_entrypoints():
         ):
             assert internal_detail not in text
 
-    assert "## Why use these skills?" in english
-    assert "progressively select" in english
-    assert "Use $academic-writing-skills" in english
-    assert "Use $paper-review" in english
+    assert "## From research architecture to submission" in english
+    assert "argument architecture" in english
+    assert "top-down" in english
+    assert "bottom-up" in english
+    assert "top-to-bottom" in english
+    assert "Use the academic-writing-skills skill" in english
+    assert "Use the paper-review skill" in english
     assert "[繁體中文](./README.zh-TW.md)" in english
     assert "[Full usage guide](./docs/USER_GUIDE.md)" in english
 
-    assert "## 為什麼需要這些 skills？" in chinese
-    assert "逐步選擇" in chinese
-    assert "使用 $academic-writing-skills" in chinese
-    assert "使用 $paper-review" in chinese
+    assert "## 從研究架構到最終投稿" in chinese
+    assert "架構發想" in chinese
+    assert "由上而下" in chinese
+    assert "由下而上" in chinese
+    assert "從頭到尾" in chinese
+    assert "請使用 academic-writing-skills skill" in chinese
+    assert "請使用 paper-review skill" in chinese
     assert "[English](./README.md)" in chinese
     assert "[完整使用指南](./docs/USER_GUIDE.zh-TW.md)" in chinese
 
@@ -224,6 +236,27 @@ def test_readmes_are_bilingual_user_facing_entrypoints():
             assert (ROOT / route.removeprefix("./")).exists(), (
                 f"broken README link: {source.name} -> {route}"
             )
+
+
+def test_user_facing_prompts_are_platform_neutral():
+    paths = [
+        ROOT / "README.md",
+        ROOT / "README.zh-TW.md",
+        ROOT / "docs" / "USER_GUIDE.md",
+        ROOT / "docs" / "USER_GUIDE.zh-TW.md",
+        CORE / "agents" / "openai.yaml",
+        REVIEW / "agents" / "openai.yaml",
+    ]
+    prohibited = (
+        "$academic-writing-skills",
+        "$paper-review",
+        "@academic-writing-skills",
+        "@paper-review",
+    )
+    for path in paths:
+        text = read(path)
+        for marker in prohibited:
+            assert marker not in text, f"client-specific invocation in {path}: {marker}"
 
 
 def test_no_common_mojibake_or_internal_skill_ids():
