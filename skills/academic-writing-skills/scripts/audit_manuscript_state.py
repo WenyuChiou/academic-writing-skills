@@ -44,6 +44,29 @@ def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
     if out:
         return out
 
+    for index, lock in enumerate(state.get("semantic_locks", []), start=1):
+        missing = [key for key in ("id", "kind", "canonical") if not str(lock.get(key, "")).strip()]
+        if missing:
+            out.append(finding(
+                "STATE101", "S3",
+                f"semantic_locks[{index}] is not auditable; missing {', '.join(missing)}",
+                True,
+            ))
+        elif lock.get("kind") not in {"EXACT", "SEMANTIC"}:
+            out.append(finding(
+                "STATE102", "S3",
+                f"semantic lock {lock.get('id')} has invalid kind {lock.get('kind')}",
+                True,
+            ))
+
+    for index, term in enumerate(state.get("terminology", []), start=1):
+        if not str(term.get("id", term.get("concept", ""))).strip() or not str(term.get("preferred", "")).strip():
+            out.append(finding(
+                "STATE103", "S3",
+                f"terminology[{index}] requires an id or concept and a preferred term",
+                True,
+            ))
+
     artifacts = state.get("artifacts", [])
     artifact_ids = [item.get("id") for item in artifacts]
     if len(artifact_ids) != len(set(artifact_ids)):
@@ -68,6 +91,12 @@ def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
             out.append(finding("FACT001", "S4", f"fact {fact.get('id')} lacks a valid authority source", True))
         elif sources[source_id].get("status") != "VERIFIED":
             out.append(finding("FACT002", "S3", f"fact {fact.get('id')} depends on unverified source {source_id}", True))
+        if not fact.get("expected_strings") and not fact.get("forbidden_strings"):
+            out.append(finding(
+                "STATE104", "S1",
+                f"fact {fact.get('id')} is registered for manual use but has no machine-auditable text strings",
+                False,
+            ))
 
     questions = state.get("contract", {}).get("questions", [])
     question_ids = [item.get("id") for item in questions]

@@ -23,7 +23,7 @@ First identify:
 - user-locked wording, facts, terminology, and decisions
 - whether editing is authorized or the task is diagnosis only
 
-Use **lightweight mode** for a passage, isolated section, or bounded language edit. Use **managed-project mode** for a full manuscript, repeated revision, multiple companion files, material scientific changes, or any submission-ready request.
+Use **lightweight mode** for a passage, isolated section, or bounded language edit. Use **managed-project mode** for a full manuscript, repeated revision, multiple companion files, material scientific changes, or any submission-ready request. Lightweight mode narrows the context and impact scan; it does not waive the exact-candidate gate below.
 
 In managed-project mode, read [state-and-authority.md](references/state-and-authority.md) and use the project-state template. Initialize it with `scripts/init_manuscript_state.py` when no equivalent project record exists. Do not create project state for a simple one-off edit.
 
@@ -105,6 +105,10 @@ Keep overlay rules classified as:
 
 Never promote an overlay rule into a universal rule. When an overlay conflicts with evidence, author instructions, ethics, or defensible inference, preserve the evidence and report the conflict. A request to explain “why” does not authorize an unsupported mechanism.
 
+## Apply Registered Project Workflows
+
+When the project, folder, manuscript, or user request identifies **Survey paper**, **PiDS**, or a **WC_vX** manuscript, use the installed `survey-paper-wcvx` skill as the project-state and reviewer-round overlay together with these universal integrity gates. Keep that project's filenames, author identity, priority scheme, and version rules within the project overlay.
+
 ## Control Material Changes
 
 Classify each proposed change before editing:
@@ -125,10 +129,23 @@ For managed projects, use the bundled scripts when relevant:
 - `scripts/audit_manuscript_state.py`: validate state completeness, source links, question alignment, dimension coverage, and release blockers
 - `scripts/audit_text_consistency.py`: extract text from supported files and scan registered locked strings, prohibited variants, and fact conflicts
 - `scripts/audit_prose_patterns.py`: report exact duplication, repeated openings and phrases, stock phrasing, and candidate nontechnical word overuse without claiming AI authorship
-- `scripts/audit_docx_structure.py`: inspect Word OOXML using exact tag names for tracked changes, comments, fields, and placeholders
+- `scripts/audit_candidate_text.py`: scan the exact proposed passage against the active project terminology, forbidden variants, and prose profile and record its hash
+- `scripts/audit_docx_structure.py`: inspect Word OOXML using exact tag names for tracked changes, revision authors, comments, parent-linked replies, reply authors, fields, and placeholders
 - `scripts/run_regression_tests.py`: verify the audit tools against bundled failure cases
 
 Treat script findings as diagnostics. Inspect each match in context before editing. A clean script report never replaces substantive reading.
+
+## Gate the Exact Candidate Before Delivery
+
+After the last wording change, freeze the exact passage or artifact that will be delivered. For managed projects, load the active project state and every applicable overlay even when the requested edit is only one sentence or paragraph. Then:
+
+1. compare the exact candidate with its writing contract, locked meaning, evidence, and adjacent paragraphs;
+2. check every retained, added, or removed citation against the claim it supports and the reference list;
+3. run terminology, forbidden-variant, repetition, stock-phrase, and project-discouraged-phrase checks on the exact candidate itself;
+4. inspect and resolve each deterministic finding in context, or record an explicit author-approved reason to retain it; and
+5. record which candidate was checked, using its hash when a deterministic candidate audit is available.
+
+Any edit after this gate invalidates its result. Re-run every affected candidate check before calling the wording checked, final, polished, or ready to paste. Never report that `academic-writing-skills` passed when only an earlier draft, the surrounding manuscript, or an unchanged source artifact was audited.
 
 ## Conduct Four Distinct Passes
 
@@ -153,6 +170,7 @@ After every review, revision round, audit, or release check, explicitly revisit 
 6. Are any unknowns, unavailable sources, open issues, waivers, or high-severity blockers still present?
 7. Were deterministic, structural, and visual checks used where applicable, and were their limits stated?
 8. Is the exact deliverable—not an intermediate copy—the one inspected?
+9. Did the exact post-edit candidate pass the applicable project profile, and were all findings resolved or explicitly retained with a reason?
 
 If any answer is no or unknown, continue the work or report the limit. Never collapse this retrospective into a generic “all checks passed.”
 

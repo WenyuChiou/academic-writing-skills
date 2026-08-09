@@ -58,7 +58,7 @@ Build the extended outline as an evidence plan, not a list of headings. For each
 
 ### Paragraph and section drafting gate
 
-Draft each paragraph from a five-part contract: function, claim, evidence, development, and bridge. Check the paragraph locally against that contract, then read the topic sentences of the whole section in sequence. A section is not current merely because every planned paragraph exists; its paragraphs must form one cumulative argument with no duplicated function, orphan evidence, or unsupported transition.
+Draft each paragraph from a five-part contract: function, claim, evidence, development, and bridge. Check the paragraph locally against that contract, then read the topic sentences of the whole section in sequence. After the final rewrite, apply the exact-candidate terminology, citation, prose-pattern, and adjacent-flow gate; any later wording change invalidates that result. A section is not current merely because every planned paragraph exists; its paragraphs must form one cumulative argument with no duplicated function, orphan evidence, or unsupported transition.
 
 ### Context and Methods gate
 

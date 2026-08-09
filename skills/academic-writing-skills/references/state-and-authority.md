@@ -42,6 +42,14 @@ Use `assets/manuscript_state_template.json` as a starting point. Keep the state 
 
 Treat the style profile as project guidance, not proof that every registered phrase is wrong. Preserve technical terms and author-approved wording even when a deterministic prose audit reports frequent use.
 
+Use machine-auditable registry fields consistently:
+
+- semantic lock: `id`, `kind` (`EXACT` or `SEMANTIC`), `canonical`, optional `required_roles`, and optional `forbidden_variants`
+- terminology entry: `id` or `concept`, `preferred`, optional `prohibited` (the audit also accepts legacy `avoid`), and optional `scope_roles`
+- fact entry: `id`, `value`, `source_id`, optional `expected_strings`, optional `forbidden_strings`, and optional `scope_roles`
+
+Do not store a prose reminder such as `term/rule` inside `semantic_locks` and then claim the lock audit passed. Convert it to the schema above or record it as a decision that requires manual verification. A registry entry that cannot be audited must be reported as such rather than silently skipped.
+
 ## Lock and Change Rules
 
 Use an exact lock only for content the user has explicitly finalized or that must remain verbatim, such as a formal research question. Use a semantic lock when wording may vary but the scientific task and scope must remain stable.

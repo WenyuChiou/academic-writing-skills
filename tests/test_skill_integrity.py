@@ -19,6 +19,7 @@ CORE_REFERENCES = {
     "universal-integrity.md",
 }
 CORE_SCRIPTS = {
+    "audit_candidate_text.py",
     "audit_docx_structure.py",
     "audit_manuscript_state.py",
     "audit_prose_patterns.py",
@@ -161,7 +162,7 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 10
+    assert len(report["tests"]) == 16
 
 
 def test_evals_cover_core_and_progressive_review_behavior():
