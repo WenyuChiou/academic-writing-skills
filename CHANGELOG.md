@@ -11,6 +11,21 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-08-03
+
+### Changed
+
+- Reframed the bilingual README around the complete manuscript lifecycle, from
+  research framing and argument architecture through extended outlining,
+  evidence-led drafting, bidirectional alignment, four-pass top-to-bottom
+  review, revision propagation, and exact-package verification.
+- Documented compatibility with ChatGPT, Codex, Claude Code, OpenCode, Hermes
+  Agent, and other clients that implement the open Agent Skills format.
+- Replaced client-specific skill invocation prefixes in user-facing prompts and
+  interface defaults with portable natural-language skill names.
+- Bumped the plugin from 1.1.1 to 1.1.2 so the updated interface defaults are
+  delivered to installed clients.
+
 ## [1.1.1] - 2026-08-02
 
 ### Added

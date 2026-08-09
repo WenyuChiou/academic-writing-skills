@@ -1,8 +1,9 @@
 interface:
   display_name: Academic Writing Skills
   short_description: Manage cross-disciplinary manuscript integrity
-  default_prompt: Use $academic-writing-skills to plan, draft, or review this manuscript
-    at its current lifecycle stage and finish with a functional-completeness retrospective.
+  default_prompt: Use the academic-writing-skills skill to plan, draft, or review
+    this manuscript at its current lifecycle stage and finish with a functional-completeness
+    retrospective.
   icon_small: assets/icon.svg
   icon_large: assets/icon.svg
 policy:
