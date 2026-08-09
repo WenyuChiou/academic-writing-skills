@@ -66,9 +66,7 @@ def contains_variant(text: str, needle: str, case_sensitive: bool = False) -> bo
     if not needle:
         return False
     flags = 0 if case_sensitive else re.IGNORECASE
-    start = r"(?<!\w)" if needle[0].isalnum() or needle[0] == "_" else ""
-    end = r"(?!\w)" if needle[-1].isalnum() or needle[-1] == "_" else ""
-    return re.search(f"{start}{re.escape(needle)}{end}", text, flags) is not None
+    return re.search(rf"(?<!\w){re.escape(needle)}(?!\w)", text, flags) is not None
 
 
 def prohibited_variants(term: dict[str, Any]) -> list[str]:
