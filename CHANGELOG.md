@@ -11,6 +11,28 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.1.3] - 2026-08-10
+
+### Added
+
+- An exact-candidate audit that checks the final proposed passage against the
+  active project's terminology, forbidden variants, and discouraged prose
+  patterns, and records the candidate hash.
+- Regression coverage for candidate rewrites, legacy terminology registries,
+  accepted-view DOCX extraction, and Word comment-reply linkage.
+
+### Changed
+
+- Lightweight edits now retain a mandatory post-rewrite candidate gate; any
+  later wording change invalidates the earlier result.
+- Text consistency audits accept legacy `avoid` terminology fields, apply
+  token-aware matching, exclude deleted Word text and comments, and block
+  non-auditable semantic-lock schemas instead of silently passing them.
+- DOCX structure reports now include revision, comment, and reply authors plus
+  orphaned reply-parent identifiers.
+- Bumped the plugin from 1.1.2 to 1.1.3 so the exact-candidate audit and related
+  integrity fixes are delivered to installed clients.
+
 ## [1.1.2] - 2026-08-03
 
 ### Changed

@@ -7,7 +7,8 @@
 3. Abstract and Conclusion
 4. Terminology, repetition, and flow
 5. Numbers, citations, and visuals
-6. Four-pass review
+6. Exact-candidate gate
+7. Four-pass review
 
 ## Argument and Paragraph Function
 
@@ -91,6 +92,19 @@ Require support for external facts, prior findings, established definitions, dat
 
 Explain each visual's main pattern, relevant evidence, uncertainty, and relation to the question. Explain mechanisms only when supported. Inspect captions, panels, legends, axes, units, callouts, resolution, readability, and cross-file numbering.
 
+## Exact-Candidate Gate
+
+Audit the exact text that will be delivered after the final rewrite, not the source paragraph or an earlier candidate. A local edit must still pass these bounded checks:
+
+1. paragraph function, claim, evidence, development, and bridge;
+2. preservation of locked meaning and defensible claim scope;
+3. stable terminology and abbreviations;
+4. exact and semantic repetition, stock transitions, vague synthesis, excessive summary, and project-discouraged phrases;
+5. support for every retained or added citation and reconciliation of every removed citation; and
+6. flow with the preceding and following paragraph when they are available.
+
+If the project has a style or terminology profile, apply it even in lightweight mode. Treat a deterministic finding as a prompt for contextual judgment, but do not ignore it silently. If any word changes after this gate, repeat the affected checks on the new exact candidate.
+
 ## Four-Pass Review
 
 ### Pass 1: Argument and structure
@@ -103,7 +117,7 @@ Test methods against outputs, samples, units, equations, figures, tables, citati
 
 ### Pass 3: Scholarly prose
 
-First stabilize terminology and abbreviations. Then review exact duplication, repeated phrases and openings, nontechnical word overuse, stock phrasing, long noun stacks, vague intensifiers, unstable subjects, syntax, tense, voice, notation, and paragraph-to-paragraph flow. Preserve necessary technical repetition and do not use synonym rotation as a cosmetic fix.
+First stabilize terminology and abbreviations. Then review exact duplication, repeated phrases and openings, nontechnical word overuse, stock phrasing, long noun stacks, vague intensifiers, unstable subjects, syntax, tense, voice, notation, and paragraph-to-paragraph flow. Preserve necessary technical repetition and do not use synonym rotation as a cosmetic fix. After revising, run this pass once more on the exact post-edit candidate; findings from the pre-edit text do not certify the revision.
 
 ### Pass 4: Delivery integrity
 

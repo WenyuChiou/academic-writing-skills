@@ -12,16 +12,58 @@ from pathlib import Path
 
 from audit_docx_structure import inspect
 from audit_manuscript_state import audit
+from audit_candidate_text import audit_candidate
 from audit_prose_patterns import audit as audit_prose
 from audit_text_consistency import audit as audit_text
 
 
 W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+W14 = "http://schemas.microsoft.com/office/word/2010/wordml"
+W15 = "http://schemas.microsoft.com/office/word/2012/wordml"
 
 
 def make_docx(path: Path, inner_xml: str) -> None:
     with zipfile.ZipFile(path, "w") as archive:
         archive.writestr("word/document.xml", f'<w:document xmlns:w="{W}"><w:body>{inner_xml}</w:body></w:document>')
+
+
+def make_comment_docx(path: Path, parent_id: str = "A0000001") -> None:
+    with zipfile.ZipFile(path, "w") as archive:
+        archive.writestr(
+            "word/document.xml",
+            f'<w:document xmlns:w="{W}"><w:body><w:p><w:ins w:author="Wenyu Chiou"><w:r><w:t>new</w:t></w:r></w:ins></w:p></w:body></w:document>',
+        )
+        archive.writestr(
+            "word/comments.xml",
+            f'<w:comments xmlns:w="{W}" xmlns:w14="{W14}">'
+            '<w:comment w:id="0" w:author="Ethan Yang"><w:p w14:paraId="A0000001"><w:r><w:t>Revise.</w:t></w:r></w:p></w:comment>'
+            '<w:comment w:id="1" w:author="Wenyu Chiou"><w:p w14:paraId="B0000001"><w:r><w:t>Revised.</w:t></w:r></w:p></w:comment>'
+            '</w:comments>',
+        )
+        archive.writestr(
+            "word/commentsExtended.xml",
+            f'<w15:commentsEx xmlns:w15="{W15}">'
+            '<w15:commentEx w15:paraId="A0000001" w15:done="0"/>'
+            f'<w15:commentEx w15:paraId="B0000001" w15:paraIdParent="{parent_id}" w15:done="0"/>'
+            '</w15:commentsEx>',
+        )
+
+
+def make_review_docx(path: Path) -> None:
+    with zipfile.ZipFile(path, "w") as archive:
+        archive.writestr(
+            "word/document.xml",
+            f'<w:document xmlns:w="{W}"><w:body><w:p>'
+            '<w:r><w:t>Accepted wording.</w:t></w:r>'
+            '<w:del><w:r><w:delText>LLM households and nominal significance.</w:delText></w:r></w:del>'
+            '</w:p></w:body></w:document>',
+        )
+        archive.writestr(
+            "word/comments.xml",
+            f'<w:comments xmlns:w="{W}"><w:comment w:id="0" w:author="Reviewer">'
+            '<w:p><w:r><w:t>LLM households and nominal significance.</w:t></w:r></w:p>'
+            '</w:comment></w:comments>',
+        )
 
 
 def base_state(root: Path) -> dict:
@@ -85,6 +127,29 @@ def main() -> int:
         require({"LOCK001", "LOCK002", "TERM001", "FACT101", "FACT102"}.issubset(codes), "semantic/fact drift set incomplete")
         tests.append("semantic and fact drift")
 
+        alias_state = copy.deepcopy(state)
+        alias_state["terminology"] = [{
+            "concept": "flood experience", "preferred": "flood experience", "avoid": ["FE"],
+            "scope_roles": ["main_manuscript"],
+        }]
+        (root / "manuscript.md").write_text("FE was used as a shorthand.\n", encoding="utf-8")
+        require(any(item["code"] == "TERM001" for item in audit_text(alias_state, root)), "legacy avoid alias was ignored")
+        tests.append("terminology avoid alias")
+
+        candidate_state = copy.deepcopy(alias_state)
+        candidate_state["style_profile"] = {"discouraged_phrases": ["together"]}
+        candidate_findings = audit_candidate("Together, FE summarizes the result.", "candidate", candidate_state)
+        require({"PROSE003", "TERM001"}.issubset({item["code"] for item in candidate_findings}), "candidate gate missed introduced prose or terminology")
+        require(not audit_candidate("Flood experience summarizes the result.", "candidate", candidate_state), "clean candidate unexpectedly flagged")
+        require(not audit_candidate("Sufficient evidence summarizes the result.", "candidate", candidate_state), "short prohibited term matched inside a longer word")
+        tests.append("exact candidate prose and terminology gate")
+
+        malformed = copy.deepcopy(state)
+        malformed["semantic_locks"] = [{"term": "decision variables", "rule": "Use consistently."}]
+        require(any(item["code"] == "STATE101" and item["blocker"] for item in audit(malformed, root)), "nonauditable semantic lock silently passed")
+        require(any(item["code"] == "CAND002" for item in audit_candidate("Decision variables were compared.", "candidate", malformed)), "candidate gate accepted a malformed project profile")
+        tests.append("state schema rejects nonauditable locks")
+
         prose = copy.deepcopy(state)
         (root / "manuscript.md").write_text(
             "It is important to note that the model reports one result. "
@@ -99,6 +164,21 @@ def main() -> int:
         require({"PROSE001", "PROSE002", "PROSE003", "PROSE004"}.issubset(prose_codes), "prose-pattern audit incomplete")
         tests.append("observable prose patterns")
 
+        review_docx = root / "review.docx"
+        make_review_docx(review_docx)
+        review_state = copy.deepcopy(state)
+        review_state["artifacts"][0]["path"] = review_docx.name
+        review_state["semantic_locks"] = []
+        review_state["facts"] = []
+        review_state["terminology"] = [{
+            "id": "llm-artifact", "preferred": "LLM-generated respondents",
+            "prohibited": ["LLM households"], "scope_roles": ["main_manuscript"],
+        }]
+        review_state["style_profile"] = {"discouraged_phrases": ["nominal significance"]}
+        require(not audit_text(review_state, root), "deleted text or comments polluted terminology audit")
+        require(not audit_prose(review_state, root), "deleted text or comments polluted prose audit")
+        tests.append("accepted-view DOCX extraction")
+
         field_docx = root / "field.docx"
         make_docx(field_docx, '<w:p><w:r><w:instrText>REF _Ref1</w:instrText></w:r><w:r><w:t>Text</w:t></w:r></w:p>')
         report = inspect(field_docx)
@@ -109,6 +189,20 @@ def main() -> int:
         make_docx(edit_docx, '<w:p><w:ins><w:r><w:t>new</w:t></w:r></w:ins></w:p>')
         require(inspect(edit_docx)["tracked_changes"] == 1, "exact insertion tag not detected")
         tests.append("OOXML insertion")
+
+        comment_docx = root / "comments.docx"
+        make_comment_docx(comment_docx)
+        comment_report = inspect(comment_docx)
+        require(comment_report["revision_authors"] == {"Wenyu Chiou": 1}, "revision author not detected")
+        require(comment_report["comment_authors"] == {"Ethan Yang": 1, "Wenyu Chiou": 1}, "comment authors not detected")
+        require(comment_report["reply_authors"] == {"Wenyu Chiou": 1}, "reply author not detected")
+        require(not comment_report["orphan_parent_para_ids"], "valid parent link marked orphan")
+        tests.append("OOXML author and reply linkage")
+
+        orphan_docx = root / "orphan-comment.docx"
+        make_comment_docx(orphan_docx, parent_id="DEADBEEF")
+        require(inspect(orphan_docx)["orphan_parent_para_ids"] == ["DEADBEEF"], "orphan reply parent not detected")
+        tests.append("OOXML orphan reply parent")
 
         split_docx = root / "split.docx"
         make_docx(split_docx, '<w:p><w:r><w:t>Locked SQ</w:t></w:r><w:r><w:t> text.</w:t></w:r></w:p>')

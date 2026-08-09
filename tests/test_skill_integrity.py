@@ -19,6 +19,7 @@ CORE_REFERENCES = {
     "universal-integrity.md",
 }
 CORE_SCRIPTS = {
+    "audit_candidate_text.py",
     "audit_docx_structure.py",
     "audit_manuscript_state.py",
     "audit_prose_patterns.py",
@@ -57,7 +58,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.1.2"
+    assert manifest["version"] == "1.1.3"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -161,7 +162,7 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 10
+    assert len(report["tests"]) == 16
 
 
 def test_evals_cover_core_and_progressive_review_behavior():

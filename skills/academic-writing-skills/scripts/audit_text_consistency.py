@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Scan active manuscript artifacts for registered semantic and factual conflicts."""
+"""Scan accepted manuscript text for registered semantic and factual conflicts."""
 
 from __future__ import annotations
 
@@ -16,23 +16,34 @@ WORD_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 TEXT_SUFFIXES = {".txt", ".md", ".csv", ".tsv", ".json", ".yaml", ".yml", ".tex"}
 
 
+def _accepted_paragraph_text(paragraph: ET.Element) -> str:
+    """Return accepted-view text, excluding tracked deletions and comment bodies."""
+    parts: list[str] = []
+
+    def visit(node: ET.Element, deleted: bool = False) -> None:
+        is_deleted = deleted or node.tag in {f"{{{WORD_NS}}}del", f"{{{WORD_NS}}}moveFrom"}
+        if not is_deleted and node.tag == f"{{{WORD_NS}}}t":
+            parts.append(node.text or "")
+        for child in node:
+            visit(child, is_deleted)
+
+    visit(paragraph)
+    return "".join(parts)
+
+
 def docx_text(path: Path) -> str:
     parts: list[str] = []
     with zipfile.ZipFile(path) as archive:
         names = [
             name for name in archive.namelist()
-            if re.fullmatch(r"word/(document|footnotes|endnotes|comments|header\d+|footer\d+)\.xml", name)
+            if re.fullmatch(r"word/(document|footnotes|endnotes|header\d+|footer\d+)\.xml", name)
         ]
         for name in sorted(names):
             root = ET.fromstring(archive.read(name))
             for paragraph in root.iter(f"{{{WORD_NS}}}p"):
-                runs = [
-                    node.text or ""
-                    for node in paragraph.iter()
-                    if node.tag in {f"{{{WORD_NS}}}t", f"{{{WORD_NS}}}delText"}
-                ]
-                if runs:
-                    parts.append("".join(runs))
+                text = _accepted_paragraph_text(paragraph)
+                if text:
+                    parts.append(text)
     return "\n".join(parts)
 
 
@@ -48,6 +59,49 @@ def contains(text: str, needle: str, case_sensitive: bool = False) -> bool:
     if not case_sensitive:
         text, needle = text.casefold(), needle.casefold()
     return needle in text
+
+
+def contains_variant(text: str, needle: str, case_sensitive: bool = False) -> bool:
+    """Match a registered word or phrase without finding it inside a longer token."""
+    if not needle:
+        return False
+    flags = 0 if case_sensitive else re.IGNORECASE
+    return re.search(rf"(?<!\w){re.escape(needle)}(?!\w)", text, flags) is not None
+
+
+def prohibited_variants(term: dict[str, Any]) -> list[str]:
+    """Support the canonical `prohibited` key and the legacy `avoid` alias."""
+    values = list(term.get("prohibited", [])) + list(term.get("avoid", []))
+    return [str(value) for value in values if str(value).strip()]
+
+
+def audit_fragment(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str, Any]]:
+    """Audit a candidate fragment without requiring whole-manuscript locks or facts."""
+    findings: list[dict[str, Any]] = []
+    for lock in state.get("semantic_locks", []):
+        for variant in lock.get("forbidden_variants", []):
+            if contains_variant(text, str(variant)):
+                findings.append({
+                    "code": "LOCK002", "lock": lock.get("id", lock.get("term")),
+                    "artifact": artifact, "match": variant,
+                    "message": "forbidden semantic variant found in candidate text",
+                })
+    for term in state.get("terminology", []):
+        for variant in prohibited_variants(term):
+            if contains_variant(text, variant):
+                findings.append({
+                    "code": "TERM001", "term": term.get("id", term.get("concept")),
+                    "artifact": artifact, "match": variant,
+                    "message": "prohibited term variant found in candidate text",
+                })
+    for fact in state.get("facts", []):
+        for variant in fact.get("forbidden_strings", []):
+            if contains_variant(text, str(variant), True):
+                findings.append({
+                    "code": "FACT101", "fact": fact.get("id"), "artifact": artifact,
+                    "match": variant, "message": "conflicting fact string found in candidate text",
+                })
+    return findings
 
 
 def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
@@ -74,19 +128,19 @@ def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
             findings.append({"code": "LOCK001", "lock": lock.get("id"), "message": "required exact lock not found"})
         for variant in lock.get("forbidden_variants", []):
             for item in target_items:
-                if contains(item["text"], str(variant)):
+                if contains_variant(item["text"], str(variant)):
                     findings.append({"code": "LOCK002", "lock": lock.get("id"), "artifact": item.get("id"), "match": variant, "message": "forbidden semantic variant found"})
 
     for term in state.get("terminology", []):
-        for variant in term.get("prohibited", []):
+        for variant in prohibited_variants(term):
             for item in selected(term.get("scope_roles")):
-                if contains(item["text"], str(variant)):
+                if contains_variant(item["text"], str(variant)):
                     findings.append({"code": "TERM001", "term": term.get("id"), "artifact": item.get("id"), "match": variant, "message": "prohibited term variant found"})
 
     for fact in state.get("facts", []):
         for variant in fact.get("forbidden_strings", []):
             for item in selected(fact.get("scope_roles")):
-                if contains(item["text"], str(variant), True):
+                if contains_variant(item["text"], str(variant), True):
                     findings.append({"code": "FACT101", "fact": fact.get("id"), "artifact": item.get("id"), "match": variant, "message": "conflicting fact string found"})
         expected = fact.get("expected_strings", [])
         if expected:
