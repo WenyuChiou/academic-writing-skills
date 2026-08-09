@@ -11,6 +11,8 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.1.3] - 2026-08-10
+
 ### Added
 
 - An exact-candidate audit that checks the final proposed passage against the
@@ -28,6 +30,8 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
   non-auditable semantic-lock schemas instead of silently passing them.
 - DOCX structure reports now include revision, comment, and reply authors plus
   orphaned reply-parent identifiers.
+- Bumped the plugin from 1.1.2 to 1.1.3 so the exact-candidate audit and related
+  integrity fixes are delivered to installed clients.
 
 ## [1.1.2] - 2026-08-03
 

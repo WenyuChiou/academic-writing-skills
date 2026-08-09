@@ -58,7 +58,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.1.2"
+    assert manifest["version"] == "1.1.3"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
