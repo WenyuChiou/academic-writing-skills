@@ -21,7 +21,7 @@ def _accepted_paragraph_text(paragraph: ET.Element) -> str:
     parts: list[str] = []
 
     def visit(node: ET.Element, deleted: bool = False) -> None:
-        is_deleted = deleted or node.tag == f"{{{WORD_NS}}}del"
+        is_deleted = deleted or node.tag in {f"{{{WORD_NS}}}del", f"{{{WORD_NS}}}moveFrom"}
         if not is_deleted and node.tag == f"{{{WORD_NS}}}t":
             parts.append(node.text or "")
         for child in node:
