@@ -11,6 +11,27 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.1.4] - 2026-08-10
+
+### Added
+
+- A six-part functional prose and citation audit covering transitions,
+  function-preserving concision, natural scholarly syntax, claim–citation
+  alignment, observable stock patterns, and dash/hyphen style.
+- A project-profile check for established open compounds so exact-candidate
+  audits can flag forms such as `disaster-management` when the registered
+  convention is `disaster management`.
+- Regression coverage for scholarly abbreviations, demonstrative openings,
+  short transition-led sentences, suspended compounds, dense hyphenation, and
+  registered open compounds.
+
+### Changed
+
+- Paragraph-boundary checks now require the closing bridge to identify which
+  research questions or objectives it prepares.
+- Bumped the plugin from 1.1.3 to 1.1.4 so the functional prose and open-compound
+  checks are delivered to installed clients.
+
 ## [1.1.3] - 2026-08-10
 
 ### Added

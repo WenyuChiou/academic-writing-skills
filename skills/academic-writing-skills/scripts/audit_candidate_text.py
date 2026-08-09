@@ -15,7 +15,12 @@ from audit_text_consistency import audit_fragment
 MANUAL_CHECKS = [
     "paragraph contract and adjacent-paragraph flow",
     "claim scope and preservation of locked meaning",
+    "functional transitions and cumulative information flow",
+    "function-preserving concision and sentence rhythm",
+    "natural scholarly subjects, syntax, and disciplinary accessibility",
     "claim-to-citation support and reference-list changes",
+    "observable stock or AI-like prose features without authorship inference",
+    "dash and hyphen style, including grammatical role, established open compounds, density, and suspended compounds",
     "necessary technical repetition versus avoidable restatement",
 ]
 

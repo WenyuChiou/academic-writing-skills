@@ -13,6 +13,7 @@ REVIEW = ROOT / "skills" / "paper-review"
 CORE_REFERENCES = {
     "lifecycle-and-routing.md",
     "overlay-contract.md",
+    "prose-and-citation-editing.md",
     "reviewer-red-team-and-release.md",
     "state-and-authority.md",
     "study-design-adapters.md",
@@ -58,7 +59,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.1.3"
+    assert manifest["version"] == "1.1.4"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -162,7 +163,7 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 16
+    assert len(report["tests"]) == 19
 
 
 def test_evals_cover_core_and_progressive_review_behavior():
