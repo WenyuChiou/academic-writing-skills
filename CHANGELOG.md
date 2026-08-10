@@ -24,6 +24,9 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 - Regression coverage for scholarly abbreviations, demonstrative openings,
   short transition-led sentences, suspended compounds, dense hyphenation, and
   registered open compounds.
+- A literature-synthesis gate that orders examples by an explicit evidentiary
+  logic, with broad context to the closest precedent and gap as the default
+  when it fits the paragraph's function.
 
 ### Changed
 
