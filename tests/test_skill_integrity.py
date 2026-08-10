@@ -98,6 +98,7 @@ def test_markdown_reference_routes_resolve():
 def test_core_includes_lifecycle_impact_and_release_gates():
     skill = read(CORE / "SKILL.md")
     lifecycle = read(CORE / "references" / "lifecycle-and-routing.md")
+    prose = read(CORE / "references" / "prose-and-citation-editing.md")
     release = read(CORE / "references" / "reviewer-red-team-and-release.md")
     adapters = read(CORE / "references" / "study-design-adapters.md")
     assert "lightweight mode" in skill
@@ -110,6 +111,9 @@ def test_core_includes_lifecycle_impact_and_release_gates():
     assert "Do not require headings" in lifecycle
     assert "S3 and S4 open blockers equal zero" in release
     assert "separate standardized coefficients" in adapters
+    assert "broad field context" in prose
+    assert "closest precedent" in prose
+    assert "cumulative argument rather than a list" in prose
 
 
 def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
@@ -163,7 +167,7 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 19
+    assert len(report["tests"]) == 20
 
 
 def test_evals_cover_core_and_progressive_review_behavior():
