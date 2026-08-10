@@ -12,7 +12,7 @@ from pathlib import Path
 
 from audit_docx_structure import inspect
 from audit_manuscript_state import audit
-from audit_candidate_text import audit_candidate
+from audit_candidate_text import MANUAL_CHECKS, audit_candidate
 from audit_prose_patterns import audit as audit_prose, sentences
 from audit_text_consistency import audit as audit_text
 
@@ -211,6 +211,16 @@ def main() -> int:
             "preferred open compound or valid related compound was incorrectly flagged",
         )
         tests.append("registered open-compound hyphenation")
+
+        require(
+            any(
+                "literature-example ordering" in check
+                and "closest precedent" in check
+                for check in MANUAL_CHECKS
+            ),
+            "exact-candidate gate omitted cumulative literature-example ordering",
+        )
+        tests.append("cumulative literature-example ordering gate")
 
         review_docx = root / "review.docx"
         make_review_docx(review_docx)
