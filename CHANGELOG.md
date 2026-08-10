@@ -11,6 +11,18 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.1.5] - 2026-08-10
+
+### Added
+
+- A reader-accessibility gate for nonessential field shorthand and umbrella
+  labels that obscure an otherwise simple claim.
+- Context-sensitive diagnostics for sentence-opening `Beyond X,` frames and
+  indirect uses of `draw on`, with direct wording retained as the default when
+  no meaning would be lost.
+- Regression coverage distinguishing the flagged templates from a direct
+  subject–verb sentence.
+
 ## [1.1.4] - 2026-08-10
 
 ### Added

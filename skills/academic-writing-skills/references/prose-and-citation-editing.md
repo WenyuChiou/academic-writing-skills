@@ -16,6 +16,8 @@ Identify the relation that must carry the reader from one sentence or paragraph 
 
 Reject transitions that merely announce movement, such as an unexplained `Moreover`, `Taken together`, or `One line of work`. A transition is functional only when removing it would hide a real logical relation. Do not require every sentence to begin with a connector, and do not add a separate transition-only sentence when the relation can be carried by a content sentence.
 
+Treat sentence-opening frames such as `Beyond X,` as cues for contextual review, not as default signals of progression. Retain them only when `X` names a boundary that the next clause genuinely extends. When the sentence merely adds another application or evidence type, name that content directly instead of announcing the move.
+
 At paragraph boundaries, read the prior closing sentence, the revised paragraph's opening and closing sentences, and the next opening sentence as one sequence. Confirm that the revised paragraph performs its own function and does not prematurely perform the next paragraph's work. When a paragraph bridges to numbered questions or objectives, identify exactly which question each closing phrase prepares; do not rely on a generic gap sentence.
 
 When a literature paragraph contains several examples, choose an evidence order that advances the argument instead of preserving the order in which sources were found. A useful default is broad field context, then more specific applications, then the precedent most directly comparable to the present study, and finally the unresolved gap. Use chronological, methodological, causal, or contrastive order instead when it better serves the paragraph's function; do not force broad-to-specific progression onto evidence that has another clear relation.
@@ -34,6 +36,10 @@ Inspect sentence rhythm after compression. Merge a very short sentence when it e
 
 Prefer concrete scholarly subjects, direct verbs, and terms recognizable to the intended disciplinary audience. Preserve one term per concept and avoid synonym rotation. Turn literature inventories into cumulative argument by making each sentence state what a study group examined and how it advances the paragraph.
 
+Write for the intended journal's broad disciplinary readership, not only specialists in the narrow topic. Define or replace a nonessential umbrella label when readers must decode it before understanding the claim. For example, use a concrete description of disaster-related tasks instead of `disaster management cycle` when the stages of that cycle are not analytically important.
+
+Prefer a literal verb when an idiomatic academic verb adds no meaning. If `draw on data` only means `use data`, write `use data`; retain `draw on` only when it conveys a broader intellectual or evidentiary dependence that `use` would lose. Apply the same test to other polished-sounding phrases rather than rotating them mechanically.
+
 Read for cadence as well as grammar. Flag repeated sentence shapes, excessive parallel lists, long noun stacks, vague agents such as `researchers` or `studies` when the field or evidence source is clearer, and repeated demonstrative openings such as `This`, `These`, or `Such`. Revise only when the change improves meaning, flow, or evidence linkage.
 
 ## Claim–Citation Alignment
@@ -49,6 +55,8 @@ Do not certify claim–citation support from titles or memory when the claim dep
 Never infer AI authorship from writing style. Report observable features only: empty metadiscourse, stock transitions, generic synthesis, repeated deictic openings, excessive preview-and-summary language, symmetrical but content-light category lists, repeated cadence, vague subjects, or unsupported claims of consensus.
 
 Assess combinations and local density rather than banning isolated phrases. A common phrase may be natural once but formulaic when several appear in sequence. Replace it only with wording that states the actual relation or evidence more precisely.
+
+Treat diagnostics for forms such as sentence-opening `Beyond X,` and `draw on` as prompts for reader-accessibility review, not proof that the wording is wrong. Check whether a reader can state the sentence's concrete claim without first translating a transition template, field label, or indirect verb.
 
 ## Dash and Hyphen Style
 

@@ -19,6 +19,7 @@ MANUAL_CHECKS = [
     "literature-example ordering from broad context to the closest precedent and gap, or another explicit evidentiary logic",
     "function-preserving concision and sentence rhythm",
     "natural scholarly subjects, syntax, and disciplinary accessibility",
+    "reader accessibility, including nonessential field shorthand, transition templates, and indirect verbs",
     "claim-to-citation support and reference-list changes",
     "observable stock or AI-like prose features without authorship inference",
     "dash and hyphen style, including grammatical role, established open compounds, density, and suspended compounds",

@@ -36,6 +36,7 @@ DEICTIC_OPENINGS = {"this", "these", "those", "such"}
 SHORT_TRANSITION_OPENINGS = {
     "additionally", "furthermore", "however", "moreover", "overall", "therefore",
 }
+INDIRECT_ACADEMIC_VERB_RE = re.compile(r"\b(?:draw|draws|drawing|drew|drawn)\s+on\b", re.IGNORECASE)
 
 
 def tokens(text: str) -> list[str]:
@@ -132,6 +133,19 @@ def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str
                 "code": "PROSE009", "artifact": artifact, "match": sentence,
                 "count": len(item),
                 "message": "short transition-led sentence; verify that it carries substantive content",
+            })
+
+    for sentence in sentence_list:
+        matches: list[str] = []
+        beyond = re.match(r"^\s*Beyond\s+[^,]{1,80},", sentence, flags=re.IGNORECASE)
+        if beyond:
+            matches.append(beyond.group(0))
+        matches.extend(match.group(0) for match in INDIRECT_ACADEMIC_VERB_RE.finditer(sentence))
+        if matches:
+            findings.append({
+                "code": "PROSE012", "artifact": artifact,
+                "match": " | ".join(matches), "count": len(matches),
+                "message": "formulaic connective or indirect academic verb; retain only when it clarifies the relation better than direct wording",
             })
 
     hyphen_threshold = max(3, int(profile.get("hyphenated_token_threshold", 4)))

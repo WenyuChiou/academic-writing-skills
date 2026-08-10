@@ -59,7 +59,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.1.4"
+    assert manifest["version"] == "1.1.5"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -114,6 +114,8 @@ def test_core_includes_lifecycle_impact_and_release_gates():
     assert "broad field context" in prose
     assert "closest precedent" in prose
     assert "cumulative argument rather than a list" in prose
+    assert "broad disciplinary readership" in prose
+    assert "draw on data" in prose
 
 
 def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
@@ -167,7 +169,7 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 20
+    assert len(report["tests"]) == 22
 
 
 def test_evals_cover_core_and_progressive_review_behavior():
