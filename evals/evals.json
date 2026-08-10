@@ -54,6 +54,12 @@
       "prompt": "Revise a literature paragraph that lists several cited applications one after another. The broad reviews establish the field, two pairs of studies illustrate simulation and assessment, and one survey study is the closest precedent for the manuscript's human-comparison gap.",
       "expected_output": "A cumulative paragraph that moves from broad field context through grouped examples to the closest precedent and then the gap, uses example markers only where they clarify a real relation, preserves claim-citation alignment, and does not force this order when another explicit evidentiary logic would fit better.",
       "files": []
+    },
+    {
+      "id": "reader_accessible_academic_prose",
+      "prompt": "Revise a cross-disciplinary literature paragraph that uses an unexplained field umbrella label, opens one sentence with 'Beyond simulation,' and says that studies 'draw on data' when they simply use those data.",
+      "expected_output": "Plain scholarly prose that replaces nonessential field shorthand with a concrete description, states extensions through content rather than a transition template, uses a literal verb when no nuance is lost, and preserves technical terms that are necessary for the claim.",
+      "files": []
     }
   ]
 }

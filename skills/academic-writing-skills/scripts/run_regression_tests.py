@@ -68,7 +68,7 @@ def make_review_docx(path: Path) -> None:
 
 def base_state(root: Path) -> dict:
     artifact = root / "manuscript.md"
-    artifact.write_text("Locked SQ text. Funding SES-2342842. LLM-generated respondents.\n", encoding="utf-8")
+    artifact.write_text("Locked SQ text. Funding TEST-GRANT-ALPHA. LLM-generated respondents.\n", encoding="utf-8")
     return {
         "project": {"id": "fixture"},
         "artifacts": [{"id": "main", "path": artifact.name, "role": "main_manuscript", "status": "ACTIVE", "required_for_release": True}],
@@ -76,7 +76,7 @@ def base_state(root: Path) -> dict:
         "contract": {"questions": [{"id": "Q1"}]},
         "semantic_locks": [{"id": "sq", "kind": "EXACT", "canonical": "Locked SQ text.", "required_roles": ["main_manuscript"], "forbidden_variants": ["What similarities and differences"]}],
         "terminology": [{"id": "llm-artifact", "preferred": "LLM-generated respondents", "prohibited": ["LLM households"], "scope_roles": ["main_manuscript"]}],
-        "facts": [{"id": "funding", "value": "SES-2342842", "source_id": "src", "scope_roles": ["main_manuscript"], "expected_strings": ["SES-2342842"], "forbidden_strings": ["CBET #1941727"]}],
+        "facts": [{"id": "funding", "value": "TEST-GRANT-ALPHA", "source_id": "src", "scope_roles": ["main_manuscript"], "expected_strings": ["TEST-GRANT-ALPHA"], "forbidden_strings": ["TEST-GRANT-BETA"]}],
         "alignment": [{"question_id": "Q1", "method": "m", "evidence": "e", "result": "r", "interpretation": "i", "limitation": "l", "contribution": "c", "status": "COMPLETE"}],
         "dimensions": [{"id": "model-reporting", "values": ["Gemma", "Sonnet"], "required_fields": ["workload"], "coverage": [{"value": "Gemma", "field": "workload", "status": "COMPLETE", "evidence": "SM"}, {"value": "Sonnet", "field": "workload", "status": "COMPLETE", "evidence": "SM"}]}],
         "issues": [],
@@ -122,7 +122,7 @@ def main() -> int:
 
         require(not audit_text(state, root), "clean text unexpectedly flagged")
         require(not audit_prose(state, root), "clean prose unexpectedly flagged")
-        (root / "manuscript.md").write_text("What similarities and differences. Funding CBET #1941727. LLM households.\n", encoding="utf-8")
+        (root / "manuscript.md").write_text("What similarities and differences. Funding TEST-GRANT-BETA. LLM households.\n", encoding="utf-8")
         codes = {item["code"] for item in audit_text(state, root)}
         require({"LOCK001", "LOCK002", "TERM001", "FACT101", "FACT102"}.issubset(codes), "semantic/fact drift set incomplete")
         tests.append("semantic and fact drift")
@@ -221,6 +221,36 @@ def main() -> int:
             "exact-candidate gate omitted cumulative literature-example ordering",
         )
         tests.append("cumulative literature-example ordering gate")
+
+        accessibility = copy.deepcopy(state)
+        flagged_accessibility = audit_candidate(
+            "Beyond simulation, survey studies draw on post-event data.",
+            "candidate",
+            accessibility,
+        )
+        require(
+            any(item["code"] == "PROSE012" for item in flagged_accessibility),
+            "context-sensitive connective and indirect verb were not reported",
+        )
+        require(
+            not audit_candidate(
+                "Survey studies use post-event data to predict evacuation decisions.",
+                "candidate",
+                accessibility,
+            ),
+            "direct reader-accessible wording was incorrectly flagged",
+        )
+        tests.append("context-sensitive connective and indirect-verb review")
+
+        require(
+            any(
+                "reader accessibility" in check
+                and "field shorthand" in check
+                for check in MANUAL_CHECKS
+            ),
+            "exact-candidate gate omitted reader-accessibility review",
+        )
+        tests.append("reader-accessibility exact-candidate gate")
 
         review_docx = root / "review.docx"
         make_review_docx(review_docx)
