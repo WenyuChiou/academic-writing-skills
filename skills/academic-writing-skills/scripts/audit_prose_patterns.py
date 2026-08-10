@@ -32,6 +32,10 @@ DEFAULT_STOCK_PHRASES = {
     "a myriad of",
     "delve into",
 }
+DEICTIC_OPENINGS = {"this", "these", "those", "such"}
+SHORT_TRANSITION_OPENINGS = {
+    "additionally", "furthermore", "however", "moreover", "overall", "therefore",
+}
 
 
 def tokens(text: str) -> list[str]:
@@ -44,7 +48,30 @@ def normalized(text: str) -> str:
 
 def sentences(text: str) -> list[str]:
     flattened = re.sub(r"\s+", " ", text).strip()
-    return [item.strip() for item in re.split(r"(?<=[.!?])\s+", flattened) if item.strip()]
+    protected = flattened
+    abbreviation_patterns = (
+        r"\bet al\.", r"\be\.g\.", r"\bi\.e\.", r"\bFig\.", r"\bFigs\.",
+        r"\bEq\.", r"\bEqs\.", r"\bDr\.", r"\bMr\.", r"\bMs\.",
+    )
+    for pattern in abbreviation_patterns:
+        protected = re.sub(
+            pattern,
+            lambda match: match.group(0).replace(".", "<DOT>"),
+            protected,
+            flags=re.IGNORECASE,
+        )
+    items = [item.strip() for item in re.split(r"(?<=[.!?])\s+", protected) if item.strip()]
+    return [item.replace("<DOT>", ".") for item in items]
+
+
+def preferred_open_compounds(state: dict[str, Any]) -> list[str]:
+    values = state.get("style_profile", {}).get("preferred_open_compounds", [])
+    compounds: list[str] = []
+    for value in values:
+        phrase = re.sub(r"\s+", " ", str(value).strip())
+        if len(re.findall(r"[A-Za-z]+", phrase)) >= 2 and "-" not in phrase:
+            compounds.append(phrase)
+    return compounds
 
 
 def protected_phrases(state: dict[str, Any]) -> set[str]:
@@ -65,6 +92,71 @@ def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str
     protected_words = {word for phrase in protected for word in phrase.split()}
     sentence_list = sentences(text)
     sentence_tokens = [tokens(item) for item in sentence_list]
+
+    for start in range(len(sentence_tokens) - 1):
+        run = []
+        for index in range(start, len(sentence_tokens)):
+            if sentence_tokens[index] and sentence_tokens[index][0] in DEICTIC_OPENINGS:
+                run.append(index)
+            else:
+                break
+        if len(run) >= 2 and (start == 0 or not sentence_tokens[start - 1] or sentence_tokens[start - 1][0] not in DEICTIC_OPENINGS):
+            findings.append({
+                "code": "PROSE006", "artifact": artifact,
+                "match": " | ".join(sentence_list[index] for index in run),
+                "count": len(run),
+                "message": "consecutive demonstrative sentence openings; inspect referents and cadence",
+            })
+
+    syntactic_dashes = re.findall(r"\s[—–]\s|—", text)
+    if syntactic_dashes:
+        findings.append({
+            "code": "PROSE007", "artifact": artifact,
+            "match": "syntactic dash punctuation", "count": len(syntactic_dashes),
+            "message": "review em/en dash punctuation in context; retain when functional, not by default",
+        })
+
+    suspended = re.findall(
+        r"\b[A-Za-z]+-\s+(?:and|or)\s+[A-Za-z]+(?:-[A-Za-z]+)+",
+        text,
+    )
+    for match in suspended:
+        findings.append({
+            "code": "PROSE008", "artifact": artifact, "match": match,
+            "count": 1, "message": "suspended compound; consider a clearer open phrase",
+        })
+
+    for sentence, item in zip(sentence_list, sentence_tokens):
+        if item and len(item) <= 7 and item[0] in SHORT_TRANSITION_OPENINGS:
+            findings.append({
+                "code": "PROSE009", "artifact": artifact, "match": sentence,
+                "count": len(item),
+                "message": "short transition-led sentence; verify that it carries substantive content",
+            })
+
+    hyphen_threshold = max(3, int(profile.get("hyphenated_token_threshold", 4)))
+    for sentence in sentence_list:
+        compounds = re.findall(r"\b[A-Za-z]+(?:-[A-Za-z]+)+\b", sentence)
+        if len(compounds) >= hyphen_threshold:
+            findings.append({
+                "code": "PROSE010", "artifact": artifact,
+                "match": ", ".join(compounds), "count": len(compounds),
+                "message": "dense lexical hyphenation in one sentence; inspect clarity and field convention",
+            })
+
+    for compound in preferred_open_compounds(state):
+        hyphenated = re.sub(r"\s+", "-", compound)
+        matches = re.findall(
+            rf"(?<![A-Za-z]){re.escape(hyphenated)}(?![A-Za-z])",
+            text,
+            flags=re.IGNORECASE,
+        )
+        if matches:
+            findings.append({
+                "code": "PROSE011", "artifact": artifact,
+                "match": matches[0], "count": len(matches),
+                "message": f"registered open compound is hyphenated; review against preferred form '{compound}'",
+            })
 
     normalized_sentences = [" ".join(item) for item in sentence_tokens if len(item) >= 8]
     for sentence, count in Counter(normalized_sentences).most_common():

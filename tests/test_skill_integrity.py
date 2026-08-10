@@ -13,6 +13,7 @@ REVIEW = ROOT / "skills" / "paper-review"
 CORE_REFERENCES = {
     "lifecycle-and-routing.md",
     "overlay-contract.md",
+    "prose-and-citation-editing.md",
     "reviewer-red-team-and-release.md",
     "state-and-authority.md",
     "study-design-adapters.md",
@@ -58,7 +59,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.1.3"
+    assert manifest["version"] == "1.1.4"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -97,6 +98,7 @@ def test_markdown_reference_routes_resolve():
 def test_core_includes_lifecycle_impact_and_release_gates():
     skill = read(CORE / "SKILL.md")
     lifecycle = read(CORE / "references" / "lifecycle-and-routing.md")
+    prose = read(CORE / "references" / "prose-and-citation-editing.md")
     release = read(CORE / "references" / "reviewer-red-team-and-release.md")
     adapters = read(CORE / "references" / "study-design-adapters.md")
     assert "lightweight mode" in skill
@@ -109,6 +111,9 @@ def test_core_includes_lifecycle_impact_and_release_gates():
     assert "Do not require headings" in lifecycle
     assert "S3 and S4 open blockers equal zero" in release
     assert "separate standardized coefficients" in adapters
+    assert "broad field context" in prose
+    assert "closest precedent" in prose
+    assert "cumulative argument rather than a list" in prose
 
 
 def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
@@ -162,7 +167,7 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 16
+    assert len(report["tests"]) == 20
 
 
 def test_evals_cover_core_and_progressive_review_behavior():

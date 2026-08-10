@@ -145,6 +145,8 @@ After the last wording change, freeze the exact passage or artifact that will be
 4. inspect and resolve each deterministic finding in context, or record an explicit author-approved reason to retain it; and
 5. record which candidate was checked, using its hash when a deterministic candidate audit is available.
 
+For any prose revision, also apply the six-part functional editing audit in [prose-and-citation-editing.md](references/prose-and-citation-editing.md): functional transitions, function-preserving concision, natural scholarly prose, claim–citation alignment, observable stock or AI-like prose features, and dash/hyphen style. Treat its diagnostics as prompts for judgment, not universal bans or authorship detection.
+
 Any edit after this gate invalidates its result. Re-run every affected candidate check before calling the wording checked, final, polished, or ready to paste. Never report that `academic-writing-skills` passed when only an earlier draft, the surrounding manuscript, or an unchanged source artifact was audited.
 
 ## Conduct Four Distinct Passes

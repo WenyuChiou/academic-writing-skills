@@ -12,8 +12,8 @@ from pathlib import Path
 
 from audit_docx_structure import inspect
 from audit_manuscript_state import audit
-from audit_candidate_text import audit_candidate
-from audit_prose_patterns import audit as audit_prose
+from audit_candidate_text import MANUAL_CHECKS, audit_candidate
+from audit_prose_patterns import audit as audit_prose, sentences
 from audit_text_consistency import audit as audit_text
 
 
@@ -163,6 +163,64 @@ def main() -> int:
         prose_codes = {item["code"] for item in audit_prose(prose, root)}
         require({"PROSE001", "PROSE002", "PROSE003", "PROSE004"}.issubset(prose_codes), "prose-pattern audit incomplete")
         tests.append("observable prose patterns")
+
+        functional = copy.deepcopy(state)
+        functional["style_profile"] = {
+            "preferred_open_compounds": ["disaster management"],
+        }
+        (root / "manuscript.md").write_text(
+            "This result identifies one limitation. These findings require another check. "
+            "Overall, results are mixed. The subgroup- and topic-specific pattern is unclear. "
+            "Evidence—rather than fluency—sets the boundary. "
+            "A profile-conditioned, model-specific, group-sensitive, response-level comparison follows. "
+            "The review covers disaster-management phases.\n",
+            encoding="utf-8",
+        )
+        functional_codes = {item["code"] for item in audit_prose(functional, root)}
+        require(
+            {"PROSE006", "PROSE007", "PROSE008", "PROSE009", "PROSE010", "PROSE011"}.issubset(functional_codes),
+            "functional prose and dash diagnostics incomplete",
+        )
+        tests.append("functional prose and dash diagnostics")
+
+        require(
+            len(sentences("Hullman et al. (2026) provide one boundary. Another sentence follows.")) == 2,
+            "sentence splitter treated et al. as a sentence boundary",
+        )
+        tests.append("scholarly abbreviation sentence splitting")
+
+        open_compound = copy.deepcopy(state)
+        open_compound["style_profile"] = {"preferred_open_compounds": ["disaster management"]}
+        require(
+            any(
+                item["code"] == "PROSE011"
+                for item in audit_candidate(
+                    "The review covers disaster-management phases.",
+                    "candidate",
+                    open_compound,
+                )
+            ),
+            "registered open compound was not detected in the exact candidate",
+        )
+        require(
+            not audit_candidate(
+                "The review covers phases of disaster management and disaster-related tasks.",
+                "candidate",
+                open_compound,
+            ),
+            "preferred open compound or valid related compound was incorrectly flagged",
+        )
+        tests.append("registered open-compound hyphenation")
+
+        require(
+            any(
+                "literature-example ordering" in check
+                and "closest precedent" in check
+                for check in MANUAL_CHECKS
+            ),
+            "exact-candidate gate omitted cumulative literature-example ordering",
+        )
+        tests.append("cumulative literature-example ordering gate")
 
         review_docx = root / "review.docx"
         make_review_docx(review_docx)

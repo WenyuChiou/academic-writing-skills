@@ -48,6 +48,12 @@
       "prompt": "Draft three Discussion paragraphs from supplied findings and citations. The outline assigns interpretation, alternative explanation, and implication as separate paragraph functions.",
       "expected_output": "Paragraphs drafted from function, claim, evidence, development, and bridge contracts, followed by a topic-sentence and closing-sentence sequence check that prevents duplicated functions and unsupported mechanisms.",
       "files": []
+    },
+    {
+      "id": "literature_examples_form_cumulative_argument",
+      "prompt": "Revise a literature paragraph that lists several cited applications one after another. The broad reviews establish the field, two pairs of studies illustrate simulation and assessment, and one survey study is the closest precedent for the manuscript's human-comparison gap.",
+      "expected_output": "A cumulative paragraph that moves from broad field context through grouped examples to the closest precedent and then the gap, uses example markers only where they clarify a real relation, preserves claim-citation alignment, and does not force this order when another explicit evidentiary logic would fit better.",
+      "files": []
     }
   ]
 }

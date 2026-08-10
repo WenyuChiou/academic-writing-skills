@@ -42,6 +42,8 @@ Use `assets/manuscript_state_template.json` as a starting point. Keep the state 
 
 Treat the style profile as project guidance, not proof that every registered phrase is wrong. Preserve technical terms and author-approved wording even when a deterministic prose audit reports frequent use.
 
+Register established open compounds in `style_profile.preferred_open_compounds` when a project or venue requires them to remain open even before another noun. The prose audit then reports registered hyphenated variants for contextual review.
+
 Use machine-auditable registry fields consistently:
 
 - semantic lock: `id`, `kind` (`EXACT` or `SEMANTIC`), `canonical`, optional `required_roles`, and optional `forbidden_variants`

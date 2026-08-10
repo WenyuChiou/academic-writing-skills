@@ -49,6 +49,7 @@
     "language_variant": "",
     "protected_terms": [],
     "discouraged_phrases": [],
+    "preferred_open_compounds": [],
     "allowed_repetitions": [],
     "sentence_opening_words": 4,
     "phrase_words": 5,
