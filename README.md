@@ -1,7 +1,7 @@
 # Academic Writing Skills
 
 [![tests](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml/badge.svg)](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml)
-[![plugin version](https://img.shields.io/badge/plugin-v1.1.5-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.1.6-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 **Develop and review a manuscript as one connected evidence system—from
