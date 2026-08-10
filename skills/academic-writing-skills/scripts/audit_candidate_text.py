@@ -16,6 +16,7 @@ MANUAL_CHECKS = [
     "paragraph contract and adjacent-paragraph flow",
     "claim scope and preservation of locked meaning",
     "functional transitions and cumulative information flow",
+    "literature-example ordering from broad context to the closest precedent and gap, or another explicit evidentiary logic",
     "function-preserving concision and sentence rhythm",
     "natural scholarly subjects, syntax, and disciplinary accessibility",
     "claim-to-citation support and reference-list changes",
