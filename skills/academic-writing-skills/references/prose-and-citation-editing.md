@@ -5,10 +5,11 @@
 1. Functional transitions
 2. Function-preserving concision
 3. Natural scholarly prose
-4. Claim–citation alignment
-5. Observable stock or AI-like prose
-6. Dash and hyphen style
-7. Exact-candidate procedure
+4. Gap statements and comparative framing
+5. Claim–citation alignment
+6. Observable stock or AI-like prose
+7. Dash and hyphen style
+8. Exact-candidate procedure
 
 ## Functional Transitions
 
@@ -41,6 +42,18 @@ Write for the intended journal's broad disciplinary readership, not only special
 Prefer a literal verb when an idiomatic academic verb adds no meaning. If `draw on data` only means `use data`, write `use data`; retain `draw on` only when it conveys a broader intellectual or evidentiary dependence that `use` would lose. Apply the same test to other polished-sounding phrases rather than rotating them mechanically.
 
 Read for cadence as well as grammar. Flag repeated sentence shapes, excessive parallel lists, long noun stacks, vague agents such as `researchers` or `studies` when the field or evidence source is clearer, and repeated demonstrative openings such as `This`, `These`, or `Such`. Revise only when the change improves meaning, flow, or evidence linkage.
+
+## Gap Statements and Comparative Framing
+
+Treat the main task verb as part of the scientific claim. Use verbs such as `compare`, `characterize`, `estimate`, `predict`, `validate`, `reproduce`, `replicate`, or `evaluate` only when they match the study's actual inferential aim and analysis. Do not turn a descriptive comparison into a capability, validation, equivalence, or pass/fail claim merely because a stronger verb sounds more consequential. When the study asks how two evidence sources differ or align, state the comparison directly instead of implying that one source is expected to recreate the other.
+
+Write a gap as a specific missing piece of knowledge, evidence, comparison, mechanism, population, scale, or analytical level. Treat phrases such as `remains unclear`, `is not well understood`, or `little is known` as incomplete unless the sentence or adjacent context names exactly what has not been examined. Prefer a concrete literature-state statement when support allows it, such as `has not been examined`, `has rarely been compared`, or `remains largely unexamined`, while avoiding absolute novelty claims that the search basis cannot support.
+
+Avoid packing the study object, outcome, comparison source, population, scale, and analytical level into one long noun stack. Put the main comparison or unknown in the subject–verb core, then add overall, subgroup, temporal, spatial, or methodological scope in a separate phrase or sentence when needed. A reader should be able to identify what is missing before reaching the end of the sentence.
+
+State why the gap matters at the level justified by the paper: interpretation, theory, method choice, policy inference, program design, decision support, transferability, or another substantive consequence. The stake may appear in the same sentence or the next one; do not force it into every gap sentence. Avoid generic importance claims when the manuscript can name the concrete decision or inference that depends on the missing evidence.
+
+When a close precedent overlaps strongly with the present study, use it to define the boundary rather than treating it as a threat to novelty. State what that study actually compared or established, then identify the different analytical level, outcome, structure, population, or inference that remains open. Do not claim that `no study` has performed a broad class of comparison when prior work has already covered a narrower version of it.
 
 ## Claim–Citation Alignment
 
@@ -77,7 +90,7 @@ Review dash density at the sentence and paragraph level. A technically correct d
 After the last wording change:
 
 1. freeze the exact candidate and record its hash when supported;
-2. rerun all six audits above on that exact text;
+2. rerun all seven audits above on that exact text;
 3. read the previous and next paragraph with it;
 4. inspect every deterministic diagnostic in context and record why any flagged form is retained;
 5. reconcile retained and removed citations with the reference list; and
