@@ -18,6 +18,10 @@ Reject transitions that merely announce movement, such as an unexplained `Moreov
 
 At paragraph boundaries, read the prior closing sentence, the revised paragraph's opening and closing sentences, and the next opening sentence as one sequence. Confirm that the revised paragraph performs its own function and does not prematurely perform the next paragraph's work. When a paragraph bridges to numbered questions or objectives, identify exactly which question each closing phrase prepares; do not rely on a generic gap sentence.
 
+When a literature paragraph contains several examples, choose an evidence order that advances the argument instead of preserving the order in which sources were found. A useful default is broad field context, then more specific applications, then the precedent most directly comparable to the present study, and finally the unresolved gap. Use chronological, methodological, causal, or contrastive order instead when it better serves the paragraph's function; do not force broad-to-specific progression onto evidence that has another clear relation.
+
+Group sources that perform the same evidentiary function in one sentence or clause when their claims can be represented accurately. Use `For example` to introduce a representative set when it clarifies the move from a broad claim to concrete evidence, but do not repeat example markers before every citation. Place the closest precedent immediately before the gap when it establishes the comparison boundary. As a diagnostic, temporarily remove the citations: the remaining prose should still read as a cumulative argument rather than a list of study summaries.
+
 ## Function-Preserving Concision
 
 Map each sentence to one or more required functions: claim, evidence, explanation, qualification, synthesis, or bridge. Remove or combine duplicated functions before deleting scientific content. Compress repeated examples, parallel literature inventories, and restated criteria while preserving the narrow claim, its evidence, inference limit, and bridge.
