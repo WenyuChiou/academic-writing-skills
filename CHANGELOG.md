@@ -11,6 +11,13 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.1.6] - 2026-08-10
+
+### Changed
+
+- Bumped the plugin from 1.1.5 to 1.1.6 so the latest skill-content updates
+  are delivered to installed clients.
+
 ## [1.1.5] - 2026-08-10
 
 ### Added
