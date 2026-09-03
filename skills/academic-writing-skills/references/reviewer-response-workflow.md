@@ -210,6 +210,53 @@ When the deliverable is a Word response document:
 Use the available `docx` or Word-document skill for tracked-change and OOXML
 operations.
 
+## Checks After a Model or Evidence Revision
+
+These checks address recurring failures when a revised model changes both the
+numbers and the explanation of the results:
+
+- **Lock the current evidence first.** Identify the source version, configuration,
+  and outputs behind each result. An old figure or completed experiment is not
+  current evidence merely because its label still matches the comment.
+- **Separate direction, magnitude, and mechanism.** A group can retain a larger
+  proportional loss reduction while the process producing that reduction changes.
+  Do not summarize this as “the conclusions are unchanged.” State precisely what
+  remains and what must be reinterpreted. Distinguish absolute losses, percentage
+  reductions, and losses relative to income or another denominator.
+- **Do not attribute a combined revision to one factor.** Results after several
+  model changes describe their combined effect. Claiming that one change caused a
+  difference requires an appropriate controlled comparison or other supporting
+  evidence. A mechanism suggested by the decision rule is not automatically a
+  measured explanation of the observed effect size.
+- **Keep assumptions, calibration, and validation distinct.** Literature may
+  support a direction without supporting an exact interval or initial rate.
+  Label modeler-selected values honestly. Call a value calibrated only when a
+  calibration procedure and target exist, and do not treat the same target as
+  independent validation. A threshold or assignment probability is not itself an
+  observed or realized adoption rate.
+- **Match the comparison population and definition.** Check geography, years,
+  household group, denominators, and event or policy definitions. Do not compare
+  a subgroup's modeled rate with an all-population reference without explaining
+  the difference. A small signed error relative to absolute error can reflect
+  cancellation and does not by itself establish accurate central tendency.
+- **Keep model coverage claims narrow.** Adding an attribute does not mean the
+  model captures every associated hazard, behavioral, institutional, or pricing
+  relationship. Explain which calculations actually use the attribute and which
+  correlations remain unrepresented.
+- **Reconcile facts, not just wording.** Verify sample counts and analysis-specific
+  exclusions against the source records. Do not force different effective sample
+  sizes to match merely for consistency or describe an unverified correction as
+  completed.
+- **Read the effective revised text.** When inspecting Track Changes, distinguish
+  retained and inserted text from deleted text. Do not concatenate both versions
+  and diagnose the resulting duplication as current prose. Identify when an
+  archived copy is used because the active file cannot be read.
+- **Avoid unnecessary expansion.** Give summary points distinct functions, such
+  as model changes, sensitivity evidence, documentation, and figure updates.
+  Add no new experiment, figure, or manuscript paragraph solely to increase
+  response length. A complete methodological correction may need no comparison
+  figure, especially when the available comparison would confound other changes.
+
 ## Common Failure Modes
 
 - Saying “clarified” without showing what changed.
