@@ -15,6 +15,7 @@ CORE_REFERENCES = {
     "overlay-contract.md",
     "prose-and-citation-editing.md",
     "reviewer-red-team-and-release.md",
+    "reviewer-response-workflow.md",
     "state-and-authority.md",
     "study-design-adapters.md",
     "universal-integrity.md",

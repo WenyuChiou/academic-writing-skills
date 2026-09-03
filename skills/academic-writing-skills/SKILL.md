@@ -109,6 +109,17 @@ Never promote an overlay rule into a universal rule. When an overlay conflicts w
 
 When the project, folder, manuscript, or user request identifies **Survey paper**, **PiDS**, or a **WC_vX** manuscript, use the installed `survey-paper-wcvx` skill as the project-state and reviewer-round overlay together with these universal integrity gates. Keep that project's filenames, author identity, priority scheme, and version rules within the project overlay.
 
+## Handle Reviewer Responses
+
+For rebuttal letters and response-to-reviewers documents, read
+[reviewer-response-workflow.md](references/reviewer-response-workflow.md).
+Use its comment ledger, response-order, evidence, cross-reference, and formatted
+document checks together with the active manuscript state and any supplied lab
+examples. A high-level synthesis response may navigate to later detail, but the
+first substantive response to an issue must explain the change, evidence,
+interpretation, manuscript effect, and remaining boundary needed to answer that
+comment.
+
 ## Control Material Changes
 
 Classify each proposed change before editing:
