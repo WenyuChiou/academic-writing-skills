@@ -168,6 +168,16 @@ series figure when the concern concerns order, timing, trajectories, or path
 dependence. Do not include both a table and figure for the same values unless
 each answers a distinct part of the comment.
 
+Keep the response prose and figure caption distinct. In the prose, introduce the
+scientific comparison in one sentence, report the result, and explain its meaning
+for the reviewer’s concern. Do not walk the reader through panel letters, colors,
+line styles, markers, or bands unless one of those encodings is itself part of
+the argument. Put panel assignments, visual encodings, sample or run counts, and
+uncertainty definitions in the caption or legend. Match the caption structure and
+terminology already used by the manuscript rather than inventing a response-only
+caption style. A caption should explain how to read the figure; the prose should
+explain what the figure shows scientifically.
+
 Keep the adopted baseline model specification distinct from the sensitivity
 procedure. Report the procedure in the Methods, Supporting Material, or response
 letter as required by the venue and reproducibility needs; do not describe an
