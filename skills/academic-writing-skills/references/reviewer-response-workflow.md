@@ -153,6 +153,21 @@ minimal and use them only for compact self-contained details; do not hide the
 experimental design, comparison logic, or substantive interpretation in a
 note.
 
+Before reporting the first value from a table or figure, add one direct sentence
+that states what the exhibit compares, which outcomes it reports, and how its
+values are summarized. Make the title name the outcome and comparison reference
+explicitly; labels such as “sensitivity results” or “comparison” are not enough.
+Use the prose, rather than the caption or note, to explain why the comparison was
+made and what the result means. Restrict a table note to information required to
+read the entries, such as units, denominator, summary statistic, uncertainty
+notation, or the meaning of a sign.
+
+Choose the evidence format according to the reviewer’s question. Use a table for
+a compact comparison of endpoint values or several exact mappings. Use a time-
+series figure when the concern concerns order, timing, trajectories, or path
+dependence. Do not include both a table and figure for the same values unless
+each answers a distinct part of the comment.
+
 Keep the adopted baseline model specification distinct from the sensitivity
 procedure. Report the procedure in the Methods, Supporting Material, or response
 letter as required by the venue and reproducibility needs; do not describe an
