@@ -216,6 +216,10 @@ verifying the tracked and clean files.
 
 - Use professional appreciation when the comment led to a meaningful change,
   but do not begin every paragraph with the same formula.
+- Write for a reviewer who understands the paper's broad research direction but
+  may not know the model's internal sequence, project-specific terms, or earlier
+  drafting history. Explain each necessary term, comparison, and causal step at
+  first use instead of expecting the reviewer to reconstruct them.
 - Lead with the answer, followed by evidence and the manuscript change.
 - Use terminology already present in the manuscript. Define an abbreviation on
   first use within a reviewer section when the reader may not have seen it.
@@ -227,6 +231,11 @@ verifying the tracked and clean files.
   adjacent paragraphs do not read as disconnected bullets or repeated “We...”
   statements.
 - Do not overstate completion, robustness, validation, or generalizability.
+
+After drafting, read the completed response aloud or simulate an ordinary spoken
+reading. Keep the technical meaning exact, but revise any sentence that sounds
+assembled rather than naturally written by a researcher, requires backtracking,
+or would make the intended reviewer ask what its subject or comparison is.
 
 ## Disagreement or an Unimplemented Request
 

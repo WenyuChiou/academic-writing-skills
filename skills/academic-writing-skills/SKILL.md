@@ -60,6 +60,8 @@ Before drafting an outline, section, or paragraph, identify its reader function,
 
 Draft only after the contract is coherent. After drafting, compare the paragraph against the contract and re-read its previous and next paragraphs. Do not polish a paragraph into fluency if its function, evidence, or placement is wrong.
 
+Also identify the intended reader's likely knowledge. For interdisciplinary papers and reviewer responses, assume a reader who understands the broader research area but does not know the study's internal terminology, model sequence, data transformations, or earlier drafting history. Supply the minimum context that reader needs at the point of use; do not make the reader reconstruct it from later text.
+
 ## Apply Universal Integrity Gates
 
 Always verify:
@@ -169,7 +171,7 @@ For full reviews or substantial revisions, complete four top-to-bottom passes:
 1. **Argument and structure:** reader functions, purpose, questions, organization, paragraph openings, and contribution.
 2. **Evidence and scope:** methods, data, results, figures, tables, citations, uncertainty, claim strength, and cross-file propagation.
 3. **Scholarly writing:** clarity, natural subjects, terminology, necessary versus avoidable repetition, sentence-opening variety, observable stock phrasing, paragraph flow, syntax, tense, voice, and notation. Never label prose AI-generated from style alone.
-4. **Delivery integrity:** summaries, references, numbering, metadata, exact filenames, tracked changes, visual rendering, and release blockers.
+4. **Delivery integrity:** summaries, references, numbering, metadata, exact filenames, tracked changes, visual rendering, and release blockers. Read the revised prose aloud or simulate an ordinary spoken reading. If a sentence would sound unnatural when said by a researcher, or its meaning becomes clear only after rereading, revise its syntax, referents, or information order without making the scholarly language casual.
 
 If a later pass finds a material issue, fix it and repeat every affected upstream and downstream check. Do not certify the earlier pass as current.
 

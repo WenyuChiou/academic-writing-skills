@@ -39,9 +39,13 @@ Prefer concrete scholarly subjects, direct verbs, and terms recognizable to the 
 
 Write for the intended journal's broad disciplinary readership, not only specialists in the narrow topic. Define or replace a nonessential umbrella label when readers must decode it before understanding the claim. For example, use a concrete description of disaster-related tasks instead of `disaster management cycle` when the stages of that cycle are not analytically important.
 
+Maintain a clear sense of the reader. For interdisciplinary work, write for a researcher whose background overlaps with the paper's broad direction but who does not already know the study's model logic, project-specific labels, or data-processing choices. Introduce a necessary technical term, comparison, or causal step where that reader first needs it. Do not assume that familiarity with the field implies familiarity with this study.
+
 Prefer a literal verb when an idiomatic academic verb adds no meaning. If `draw on data` only means `use data`, write `use data`; retain `draw on` only when it conveys a broader intellectual or evidentiary dependence that `use` would lose. Apply the same test to other polished-sounding phrases rather than rotating them mechanically.
 
 Read for cadence as well as grammar. Flag repeated sentence shapes, excessive parallel lists, long noun stacks, vague agents such as `researchers` or `studies` when the field or evidence source is clearer, and repeated demonstrative openings such as `This`, `These`, or `Such`. Revise only when the change improves meaning, flow, or evidence linkage.
+
+After drafting, read the exact passage aloud or simulate how a researcher would naturally say it. The test is not whether the prose sounds conversational. It is whether the sentence can be spoken at an ordinary pace, whether its subject and action remain clear, and whether the listener can follow the information in the order presented. Rewrite passages that sound assembled, require backtracking, or contain wording a researcher would be unlikely to say.
 
 ## Gap Statements and Comparative Framing
 
@@ -94,6 +98,7 @@ After the last wording change:
 3. read the previous and next paragraph with it;
 4. inspect every deterministic diagnostic in context and record why any flagged form is retained;
 5. reconcile retained and removed citations with the reference list; and
-6. invalidate the audit if any word, citation, or punctuation mark changes afterward.
+6. perform the intended-reader and read-aloud checks on the exact candidate; and
+7. invalidate the audit if any word, citation, or punctuation mark changes afterward.
 
 Do not call a passage final, polished, natural, concise, or citation-checked when only an earlier candidate passed.

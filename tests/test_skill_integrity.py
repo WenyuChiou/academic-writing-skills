@@ -132,6 +132,8 @@ def test_core_includes_lifecycle_impact_and_release_gates():
     assert "cumulative argument rather than a list" in prose
     assert "broad disciplinary readership" in prose
     assert "draw on data" in prose
+    assert "whose background overlaps with the paper's broad direction" in prose
+    assert "read the exact passage aloud" in prose
 
 
 def test_reviewer_response_contract_keeps_answers_direct_and_sensitivity_reproducible():
@@ -141,6 +143,8 @@ def test_reviewer_response_contract_keeps_answers_direct_and_sensitivity_reprodu
     assert "enough local context, the key result, and its meaning" in normalized
     assert "adopted baseline model specification distinct from the sensitivity" in normalized
     assert "as required by the venue and reproducibility needs" in normalized
+    assert "understands the paper's broad research direction" in normalized
+    assert "read the completed response aloud" in normalized
 
 
 def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
