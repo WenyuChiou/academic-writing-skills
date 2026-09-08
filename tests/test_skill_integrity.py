@@ -11,6 +11,7 @@ REVIEW = ROOT / "skills" / "paper-review"
 
 
 CORE_REFERENCES = {
+    "banned_words.md",
     "lifecycle-and-routing.md",
     "overlay-contract.md",
     "prose-and-citation-editing.md",
@@ -96,10 +97,19 @@ def test_markdown_reference_routes_resolve():
             assert (skill / route).is_file(), f"missing route: {skill.name}/{route}"
 
 
+def test_markdown_links_resolve_inside_reference_files():
+    pattern = re.compile(r"\]\(([^)#]+\.md)(?:#[^)]+)?\)")
+    for skill in (CORE, REVIEW):
+        for source in (skill / "references").glob("*.md"):
+            for route in pattern.findall(read(source)):
+                assert (source.parent / route).is_file(), f"missing route: {source.name} -> {route}"
+
+
 def test_core_includes_lifecycle_impact_and_release_gates():
     skill = read(CORE / "SKILL.md")
     lifecycle = read(CORE / "references" / "lifecycle-and-routing.md")
     prose = read(CORE / "references" / "prose-and-citation-editing.md")
+    banned = read(CORE / "references" / "banned_words.md")
     release = read(CORE / "references" / "reviewer-red-team-and-release.md")
     adapters = read(CORE / "references" / "study-design-adapters.md")
     assert "lightweight mode" in skill
@@ -113,10 +123,24 @@ def test_core_includes_lifecycle_impact_and_release_gates():
     assert "S3 and S4 open blockers equal zero" in release
     assert "separate standardized coefficients" in adapters
     assert "broad field context" in prose
+    assert "contextual judgment" in banned
+    assert "signal AI-generated" not in banned
+    assert "reliable LLM-prose tells" not in banned
+    assert "`abstract-writer`" not in banned
+    assert "`verify-references`" not in banned
     assert "closest precedent" in prose
     assert "cumulative argument rather than a list" in prose
     assert "broad disciplinary readership" in prose
     assert "draw on data" in prose
+
+
+def test_reviewer_response_contract_keeps_answers_direct_and_sensitivity_reproducible():
+    workflow = read(CORE / "references" / "reviewer-response-workflow.md")
+    normalized = " ".join(workflow.split())
+    assert "must never distract from, replace, or leave incomplete" in normalized
+    assert "enough local context, the key result, and its meaning" in normalized
+    assert "adopted baseline model specification distinct from the sensitivity" in normalized
+    assert "as required by the venue and reproducibility needs" in normalized
 
 
 def test_review_uses_progressive_modules_and_conditional_ethan_overlay():

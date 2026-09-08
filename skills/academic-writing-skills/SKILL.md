@@ -158,6 +158,8 @@ After the last wording change, freeze the exact passage or artifact that will be
 
 For any prose revision, also apply the six-part functional editing audit in [prose-and-citation-editing.md](references/prose-and-citation-editing.md): functional transitions, function-preserving concision, natural scholarly prose, claim–citation alignment, observable stock or AI-like prose features, and dash/hyphen style. Treat its diagnostics as prompts for judgment, not universal bans or authorship detection.
 
+For a substantial manuscript section, abstract, rebuttal, or explicit banned-word audit, also inspect the exact candidate against [banned_words.md](references/banned_words.md). Treat every match as a contextual diagnostic rather than an automatic deletion or evidence of AI authorship, and apply any project-specific writing contract or terminology override first.
+
 Any edit after this gate invalidates its result. Re-run every affected candidate check before calling the wording checked, final, polished, or ready to paste. Never report that `academic-writing-skills` passed when only an earlier draft, the surrounding manuscript, or an unchanged source artifact was audited.
 
 ## Conduct Four Distinct Passes

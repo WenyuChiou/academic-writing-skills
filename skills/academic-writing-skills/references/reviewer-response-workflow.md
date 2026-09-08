@@ -48,8 +48,10 @@ comments.
   action, and direct the reader to the detailed response below.
 - Put the first complete explanation, design, evidence, and result under the
   earliest detailed comment that raises the issue.
-- Later related comments may point back to that response, but must still answer
-  the distinct part of the current comment.
+- Treat every detailed reviewer comment as independently readable. A later
+  related response must include enough local context, the key result, and its
+  meaning to answer the distinct concern. It may refer backward for the full
+  shared design, figure, or table instead of repeating that evidence.
 - Do not make an earlier detailed response depend on a later reviewer response.
   Forward references are appropriate only in an introductory navigation block.
 
@@ -82,6 +84,14 @@ order:
 
 For a short clarification or typographical correction, compress this sequence
 to one or two sentences instead of manufacturing unnecessary detail.
+
+When a multi-part comment requires both qualification and action, answer the
+qualified point fully before shifting emphasis. Then use an explicit transition,
+such as “However, we agree...” or “Following the reviewer’s suggestion...,” to
+identify the part the authors accept and the concrete analysis or revision they
+performed. This makes the responsive action visible after a careful defense, but
+it must never distract from, replace, or leave incomplete the answer to the first
+part of the comment.
 
 ## Match Response Length to the Scientific Weight
 
@@ -127,13 +137,39 @@ A sensitivity response must identify:
 - whether the relevant interpretation changed; and
 - where the result is reported.
 
+Organize each sensitivity response as **why → what → comparison → result →
+meaning**. If the reviewer explicitly requests a test, state how the selected
+design answers that request. If the reviewer does not explicitly request a
+test, first explain why the challenged assumption could affect the reported
+outcomes and why an additional test is informative. Then name the exact
+settings or groups compared and the outcomes used to judge the effect. Never
+introduce an experiment without explaining its purpose.
+
+Place the information needed to interpret a figure or table in the response
+prose before the evidence is presented. This includes the comparison baseline,
+the changed factor, the number of comparisons when material, the uncertainty
+summary, and the meaning of positive or negative differences. Keep table notes
+minimal and use them only for compact self-contained details; do not hide the
+experimental design, comparison logic, or substantive interpretation in a
+note.
+
+Keep the adopted baseline model specification distinct from the sensitivity
+procedure. Report the procedure in the Methods, Supporting Material, or response
+letter as required by the venue and reproducibility needs; do not describe an
+unchanged sensitivity setting as part of the adopted baseline formulation.
+Report the resulting effects and interpretation in the Results or Discussion
+when they matter to general readers, and place extended evidence in the
+Supporting Material or response letter. State the chosen destination explicitly
+and do not duplicate the same detail across all locations.
+
 Do not use internal experiment IDs, unexplained labels such as “higher” or
 “narrower,” or software terminology that the reviewer has not seen. Name the
 actual parameter interval, rule, distribution, or event sequence.
 
 When several comments concern the same experiment, give the full design and
-evidence at the first substantive occurrence. Later responses may cite that
-figure or table and explain only the implication for the current comment.
+evidence at the first substantive occurrence. Later responses must still state
+the local purpose, key result, and comment-specific meaning, but may cite the
+earlier figure or table for the shared design and full evidence.
 
 ## Separate Three Destinations
 
