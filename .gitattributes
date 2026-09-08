@@ -1,0 +1,10 @@
+# Public adapter hashes bind exact bytes across Windows and Unix checkouts.
+/skills/** text eol=lf
+/skills/**/*.[pP][nN][gG] -text
+/skills/**/*.[jJ][pP][gG] -text
+/.claude-plugin/*.json text eol=lf
+/adapter.json text eol=lf
+/LICENSE text eol=lf
+/scripts/*.py text eol=lf
+/tests/*.py text eol=lf
+/docs/workspace-adapter.md text eol=lf
