@@ -66,7 +66,14 @@ Trace data or premises from source through preparation, measurement, model or an
 
 ### Results gate
 
-Build findings from verified outputs. Give each objective or question a substantive answer. Identify orphan methods that produce no reported result and orphan results with no described method.
+Build findings from verified outputs. For each comparison, identify the reference
+group, scenario, setting, or time, report the necessary result, and then state
+what the observed pattern means for the objective or question. Numbers alone are
+not a substantive answer. Results may describe a decomposition or relationship
+supported directly by the analysis. Put literature-based explanations, untested
+mechanisms, alternative explanations, and policy implications in the Discussion.
+Identify orphan methods that produce no reported result and orphan results with
+no described method.
 
 ### Discussion gate
 

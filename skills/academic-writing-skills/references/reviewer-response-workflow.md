@@ -55,6 +55,19 @@ comments.
 - Do not make an earlier detailed response depend on a later reviewer response.
   Forward references are appropriate only in an introductory navigation block.
 
+## Build Opening and Closing Responses
+
+In an opening revision summary, give each point one function. Separate changes
+to the study or model, additional analyses, documentation, and display updates
+instead of repeating the same revision under several headings. Identify the
+reviewer or editor who motivated a change when the response template calls for
+that navigation, but leave the full evidence under the relevant detailed
+comment.
+
+Treat a reviewer's concluding overall assessment as a separate comment. When it
+requires no additional action, answer with a brief acknowledgment rather than
+repeating the revision summary or the evidence already given above.
+
 ## Draft a Major Response in This Order
 
 Use the smallest number of paragraphs needed while preserving this reasoning
@@ -81,6 +94,10 @@ order:
    manuscript is stable.
 8. **State remaining boundaries when material.** Name what the study still does
    not represent and give the reason. Do not answer with a bare “no.”
+
+Keep the opening recognition short. Do not paraphrase a long reviewer comment
+before explaining what the authors changed or why the response takes a
+different position.
 
 For a short clarification or typographical correction, compress this sequence
 to one or two sentences instead of manufacturing unnecessary detail.
@@ -124,6 +141,13 @@ obsolete outputs merely to make the response appear more substantial.
   study-specific. Explain what the values mean for this analysis instead.
 - Separate an absolute-value diagnostic from a normalized temporal comparison
   and state which question each one answers.
+- Name the comparison reference in the same sentence as every comparative
+  result. Terms such as `higher`, `lower`, `increased`, `decreased`, `remained`,
+  or `unchanged` are incomplete when the reader must infer the reference setting,
+  group, time, or scenario.
+- Cite the relevant figure or table when its first numerical result is reported.
+  Select the smallest set of values that answers the comment instead of
+  narrating every table cell.
 
 ## Explain Sensitivity and Robustness Results
 
@@ -179,13 +203,15 @@ caption style. A caption should explain how to read the figure; the prose should
 explain what the figure shows scientifically.
 
 Keep the adopted baseline model specification distinct from the sensitivity
-procedure. Report the procedure in the Methods, Supporting Material, or response
-letter as required by the venue and reproducibility needs; do not describe an
-unchanged sensitivity setting as part of the adopted baseline formulation.
-Report the resulting effects and interpretation in the Results or Discussion
-when they matter to general readers, and place extended evidence in the
-Supporting Material or response letter. State the chosen destination explicitly
-and do not duplicate the same detail across all locations.
+procedure. Do not present a robustness-only sensitivity test as part of the
+adopted model Methods when it does not change the model specification or main
+interpretation. Keep the Methods focused on the adopted specification,
+calibration, and assumptions. When the sensitivity result matters to general
+readers, add one or two sentences stating its effect at the end of the relevant
+Results passage. When the extended evidence is placed in the Supporting
+Material, direct readers to it from that passage. Otherwise, retain the evidence
+in the response letter. State the chosen destination explicitly and do not
+duplicate the same detail across all locations.
 
 Do not use internal experiment IDs, unexplained labels such as “higher” or
 “narrower,” or software terminology that the reviewer has not seen. Name the
@@ -206,6 +232,12 @@ Every response should distinguish among:
    interpretation, or the main conclusion.
 3. **Supporting Material:** reproducibility details, extended methods, full
    technical results, or instruments the authors have chosen to provide.
+
+Give a main-text table and a related Supporting Material table different reader
+functions. The main table should carry the information needed to follow the
+paper's argument or model, while the supplementary table provides provenance,
+implementation detail, or extended evidence. Do not repeat the same entries in
+both merely to appear responsive.
 
 Do not promise a manuscript or Supporting Material addition merely to sound
 accommodating. Do not claim that a change was made until it exists. During
@@ -236,6 +268,22 @@ After drafting, read the completed response aloud or simulate an ordinary spoken
 reading. Keep the technical meaning exact, but revise any sentence that sounds
 assembled rather than naturally written by a researcher, requires backtracking,
 or would make the intended reviewer ask what its subject or comparison is.
+
+## Revise an Advisor-Edited Response Draft
+
+Treat the latest advisor-edited document as the working baseline. Preserve
+usable advisor revisions and change only the marked problem, a verified factual
+dependency, or wording that remains unclear in context. Do not reconstruct the
+response from an older draft merely because it contains more detail.
+
+Keep three outputs separate: the response addressed to the reviewer, the
+corresponding manuscript or Supporting Material change, and the internal reply
+to the advisor. Write the internal reply in concise first person, normally one
+sentence beginning with a concrete action such as `I revised`, `I clarified`, or
+`I added`. Explain the original intent only when the advisor asks a question or
+reports confusion. When the advisor provides a writing strategy, acknowledge the
+advice briefly and identify where it was applied. Routine formatting,
+confirmation, and closing comments need only a short reply.
 
 ## Disagreement or an Unimplemented Request
 
@@ -272,6 +320,8 @@ When the deliverable is a Word response document:
 - preserve response color, tracked changes, margin comments, page setup, and the
   established lab template;
 - format response-only figure and table labels consistently;
+- assign response-only figure and table numbers by their final order of first
+  citation, then update every cross-reference consistently;
 - keep references in the document's established location;
 - verify cross-page comment-response blocks, table breaks, captions, equations,
   and figures after rendering; and

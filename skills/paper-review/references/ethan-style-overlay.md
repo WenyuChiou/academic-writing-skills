@@ -40,6 +40,23 @@ Treat numbered or italicized questions, explicit question signposts in Results, 
 
 Use `project-precedents.md` only after exact project identity is established. Past sample sizes, funding, questions, model versions, author roles, and vocabulary do not transfer between projects.
 
+## Work with Ethan-Edited Drafts
+
+Use the latest Ethan-edited draft as the baseline and preserve wording that is
+already accurate and clear. Make the smallest revision that resolves each
+comment, then check whether the change alters related manuscript, Supporting
+Material, figure, table, or response claims.
+
+Keep the reviewer response, the manuscript or Supporting Material revision, and
+the reply to Ethan separate. Write replies to Ethan in concise first person,
+using forms such as `I revised`, `I clarified`, or `I added`. If a comment gives
+a writing strategy, thank him briefly and say where the strategy was applied. If
+he says that wording is unclear, explain the intended meaning in plain language
+and then provide the revised wording. If he asks why a requested feature is not
+represented, place the reason immediately after the limitation or refusal.
+Formatting checks, confirmations, and closing acknowledgments should receive a
+short reply rather than a repeated scientific explanation.
+
 ## Output Additions
 
 When this overlay is active:

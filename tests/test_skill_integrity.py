@@ -142,9 +142,25 @@ def test_reviewer_response_contract_keeps_answers_direct_and_sensitivity_reprodu
     assert "must never distract from, replace, or leave incomplete" in normalized
     assert "enough local context, the key result, and its meaning" in normalized
     assert "adopted baseline model specification distinct from the sensitivity" in normalized
-    assert "as required by the venue and reproducibility needs" in normalized
+    assert "Do not present a robustness-only sensitivity test" in normalized
     assert "understands the paper's broad research direction" in normalized
     assert "read the completed response aloud" in normalized
+    assert "name the comparison reference in the same sentence" in normalized.lower()
+    assert "cite the relevant figure or table" in normalized.lower()
+    assert "robustness-only sensitivity test" in normalized
+    assert "latest advisor-edited document" in normalized
+    assert "response addressed to the reviewer" in normalized
+    assert "opening revision summary" in normalized
+    assert "brief acknowledgment" in normalized
+    assert "different reader functions" in normalized
+
+
+def test_results_gate_requires_meaning_without_discussion_overreach():
+    lifecycle = read(CORE / "references" / "lifecycle-and-routing.md")
+    normalized = " ".join(lifecycle.split())
+    assert "what the observed pattern means" in normalized
+    assert "Numbers alone are not a substantive answer" in normalized
+    assert "untested mechanisms" in normalized
 
 
 def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
@@ -162,6 +178,9 @@ def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
     assert "Support New Domain Modules" in skill
     assert "display-notation-provenance.md" in skill
     assert "only when the user explicitly requests Ethan-style review" in skill
+    assert "latest Ethan-edited draft" in ethan
+    assert "Keep the reviewer response" in ethan
+    assert "I revised" in ethan
     assert "Select the smallest sufficient set" in contract
     assert "Load this file only after" in precedents
     assert "Do not import sample sizes, funding, model versions" in precedents

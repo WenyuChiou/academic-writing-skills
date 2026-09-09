@@ -113,14 +113,16 @@ When the project, folder, manuscript, or user request identifies **Survey paper*
 
 ## Handle Reviewer Responses
 
-For rebuttal letters and response-to-reviewers documents, read
+For rebuttal letters, response-to-reviewers documents, or revisions of an
+advisor-edited response draft, read
 [reviewer-response-workflow.md](references/reviewer-response-workflow.md).
 Use its comment ledger, response-order, evidence, cross-reference, and formatted
 document checks together with the active manuscript state and any supplied lab
-examples. A high-level synthesis response may navigate to later detail, but the
-first substantive response to an issue must explain the change, evidence,
-interpretation, manuscript effect, and remaining boundary needed to answer that
-comment.
+examples. Keep reviewer-facing prose, manuscript or supplement changes, and
+internal replies to an advisor distinct. A high-level synthesis response may
+navigate to later detail, but the first substantive response to an issue must
+explain the change, evidence, interpretation, manuscript effect, and remaining
+boundary needed to answer that comment.
 
 ## Control Material Changes
 
