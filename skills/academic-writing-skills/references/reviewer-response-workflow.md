@@ -145,6 +145,10 @@ obsolete outputs merely to make the response appear more substantial.
   result. Terms such as `higher`, `lower`, `increased`, `decreased`, `remained`,
   or `unchanged` are incomplete when the reader must infer the reference setting,
   group, time, or scenario.
+- Do not infer the effect of one scenario versus another from a sensitivity
+  comparison among parameter values, distributions, rules, or model settings.
+  A setting-to-setting difference does not establish the effect of a separate
+  scenario contrast unless that contrast was calculated directly.
 - Cite the relevant figure or table when its first numerical result is reported.
   Select the smallest set of values that answers the comment instead of
   narrating every table cell.
@@ -158,7 +162,9 @@ A sensitivity response must identify:
 - what was held constant;
 - the outcomes used to judge sensitivity;
 - the direction and magnitude of the result;
-- whether the relevant interpretation changed; and
+- whether the relevant interpretation changed;
+- when specification choice is at issue, which setting is used in the formal
+  model and the independent basis for that choice; and
 - where the result is reported.
 
 Organize each sensitivity response as **why → what → comparison → result →
@@ -168,6 +174,38 @@ test, first explain why the challenged assumption could affect the reported
 outcomes and why an additional test is informative. Then name the exact
 settings or groups compared and the outcomes used to judge the effect. Never
 introduce an experiment without explaining its purpose.
+
+Conclude the result-and-interpretation portion with an explicit evidence chain:
+state whether the estimated magnitudes changed and name the exact pattern,
+interpretation, or conclusion that did or did not change. Do not write only
+that `the conclusion was unchanged`; state the conclusion itself.
+
+When the test or reviewer comment raises a specification choice, add a separate
+decision statement that identifies the setting used in the formal model and
+its already established basis, such as data, calibration, theory, study design,
+or a prespecified modeling choice. A finding that alternative settings do not
+change the main conclusion demonstrates robustness; it does not by itself
+select or validate the baseline setting. If no independent selection basis is
+available, state that the sensitivity analysis does not determine which setting
+should be adopted. Do not invent a new empirical, theoretical, or practical
+reason after seeing the sensitivity result. If the analysis is robustness-only
+and no specification decision is at issue, do not force a model-selection claim.
+
+Name the comparison setting at the level actually tested. Use the exact
+baseline value, interval, distribution, rule, or sequence for a one-factor
+experiment. Reserve labels such as `original model setting` and `revised model
+setting` for a locally defined whole-model comparison in which each version is
+explicitly described. Do not globally replace a defined whole-model label merely
+because the same phrase would be vague in a one-factor sensitivity test.
+
+When a final model decision is required, place it after the result and its
+meaning, and before the manuscript or Supporting Material destination. Make the
+sentence follow naturally from the preceding evidence rather than appending the
+same formulaic transition to every response. When one response summarizes
+several sensitivity experiments, one closing sentence may list all final
+settings and their established bases after each experiment has received its own
+local result and meaning. The separate detailed responses must still state any
+locally relevant decisions so that each comment can be read independently.
 
 Place the information needed to interpret a figure or table in the response
 prose before the evidence is presented. This includes the comparison baseline,
@@ -284,6 +322,11 @@ sentence beginning with a concrete action such as `I revised`, `I clarified`, or
 reports confusion. When the advisor provides a writing strategy, acknowledge the
 advice briefly and identify where it was applied. Routine formatting,
 confirmation, and closing comments need only a short reply.
+
+After revising the response prose, reread the advisor comment and update the
+internal reply so that it describes the change actually made. Do not leave a
+stale reply that says only `I clarified` when the revision also changes the
+comparison, interpretation, final model decision, or document destination.
 
 ## Disagreement or an Unimplemented Request
 

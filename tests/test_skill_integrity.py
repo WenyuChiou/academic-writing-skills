@@ -153,6 +153,13 @@ def test_reviewer_response_contract_keeps_answers_direct_and_sensitivity_reprodu
     assert "opening revision summary" in normalized
     assert "brief acknowledgment" in normalized
     assert "different reader functions" in normalized
+    assert "when specification choice is at issue" in normalized
+    assert "does not by itself select or validate the baseline setting" in normalized
+    assert "Do not invent a new empirical, theoretical, or practical reason" in normalized
+    assert "locally defined whole-model comparison" in normalized
+    assert "When a final model decision is required" in normalized
+    assert "does not establish the effect of a separate scenario contrast" in normalized
+    assert "Do not leave a stale reply" in normalized
 
 
 def test_results_gate_requires_meaning_without_discussion_overreach():
@@ -181,6 +188,10 @@ def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
     assert "latest Ethan-edited draft" in ethan
     assert "Keep the reviewer response" in ethan
     assert "I revised" in ethan
+    assert "when specification choice is at issue" in ethan
+    assert "Do not perform a global terminology replacement" in ethan
+    assert "robustness, not" in ethan
+    assert "Update the reply to Ethan after the revision" in " ".join(ethan.split())
     assert "Select the smallest sufficient set" in contract
     assert "Load this file only after" in precedents
     assert "Do not import sample sizes, funding, model versions" in precedents
@@ -231,6 +242,9 @@ def test_evals_cover_core_and_progressive_review_behavior():
         assert len(data["evals"]) >= 4
         ids = [item["id"] for item in data["evals"]]
         assert len(ids) == len(set(ids))
+        if skill_name == "academic-writing-skills":
+            assert "sensitivity_response_names_baseline_conclusion_and_final_setting" in ids
+            assert "sensitivity_robustness_does_not_select_baseline" in ids
         for item in data["evals"]:
             assert item["prompt"].strip()
             assert item["expected_output"].strip()

@@ -60,6 +60,18 @@
       "prompt": "Revise a cross-disciplinary literature paragraph that uses an unexplained field umbrella label, opens one sentence with 'Beyond simulation,' and says that studies 'draw on data' when they simply use those data.",
       "expected_output": "Plain scholarly prose that replaces nonessential field shorthand with a concrete description, states extensions through content rather than a transition template, uses a literal verb when no nuance is lost, and preserves technical terms that are necessary for the claim.",
       "files": []
+    },
+    {
+      "id": "sensitivity_response_names_baseline_conclusion_and_final_setting",
+      "prompt": "Revise a reviewer response about a one-factor sensitivity test. The draft compares an alternative decision rule with a vague 'revised model setting,' reports changed loss values, says only that 'the conclusion remained unchanged,' and does not say which rule is used in the manuscript. The study design already provides an independent basis for the formal rule. The test does not directly compare adaptation with no adaptation.",
+      "expected_output": "A self-contained response that names the exact baseline and alternative decision rules, reports the relevant numerical change with its comparison reference, states the specific substantive conclusion that did or did not change, identifies the rule used in the formal model and its pre-existing design basis without treating robustness as model-selection evidence, locates the sensitivity evidence outside the adopted Methods when appropriate, and does not infer an adaptation-versus-no-adaptation effect from the rule comparison.",
+      "files": []
+    },
+    {
+      "id": "sensitivity_robustness_does_not_select_baseline",
+      "prompt": "A sensitivity analysis finds that several alternative parameter values change numerical estimates but not the main conclusion. No data, calibration, theory, prespecification, or study-design reason has been supplied for preferring the baseline. Write the concluding part of the reviewer response and state the final model choice.",
+      "expected_output": "A conclusion that names the substantive finding shown to be robust, does not claim that robustness makes the baseline preferable, and explicitly states that the sensitivity test alone cannot determine the adopted parameter value or that an independent selection basis is still required. It does not invent a post hoc rationale.",
+      "files": []
     }
   ]
 }

@@ -57,6 +57,31 @@ represented, place the reason immediately after the limitation or refusal.
 Formatting checks, confirmations, and closing acknowledgments should receive a
 short reply rather than a repeated scientific explanation.
 
+When Ethan asks `so what?` about a sensitivity or robustness test, require the
+response to state, in order: what numerical result changed, which named pattern
+or conclusion remained or changed, when specification choice is at issue which
+setting is used in the formal model and its independent basis, and how the
+manuscript or Supporting Material presents the test. Do not answer with vague
+phrases such as `this finding`, `the ordering`, or `the conclusion` without
+restating the substantive comparison.
+
+When Ethan questions `current`, `revised`, `updated`, or `original` setting,
+first determine whether the phrase names a locally defined whole-model version
+or hides a one-factor comparison. Preserve an advisor-defined whole-model label
+when both versions are explicitly introduced. For a one-factor test, replace the
+label with the actual value, interval, distribution, rule, or event sequence.
+Do not perform a global terminology replacement across unrelated comments.
+
+When a final-decision sentence is needed, place it after the sensitivity result
+and its meaning. Vary the transition and sentence structure across nearby
+responses. Treat a stable pattern or conclusion as evidence of robustness, not
+as proof that the baseline setting is preferable. State the independent basis
+for the adopted setting when one has already been established; otherwise say
+that the sensitivity analysis does not determine the setting choice. Do not add
+a new rationale merely to make the decision sound stronger. Update the reply to
+Ethan after the revision so that it reports the actual decision or unresolved
+selection basis rather than only saying that the response was clarified.
+
 ## Output Additions
 
 When this overlay is active:
