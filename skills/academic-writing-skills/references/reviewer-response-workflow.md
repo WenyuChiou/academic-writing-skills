@@ -39,6 +39,39 @@ Classify the required work as one or more of:
 - revise interpretation, scope, or limitation;
 - decline or defer a request with a specific reason.
 
+## Distinguish Revision Provenance from Topical Relevance
+
+Before adding reviewer-source margin comments or declaring a manuscript change,
+compare the effective revised text with the actual submitted manuscript or other
+explicitly agreed revision baseline. Read the effective revised text—retained
+plus inserted text—without concatenating deleted or moved-from text.
+
+Classify each candidate passage as unchanged, inserted, replaced, moved,
+formatting-only, or deleted. Add a reviewer-source label only to text, displays,
+or locations that were actually changed in response to that reviewer. A margin
+label records the provenance of a revision; it is not a subject index. An
+unchanged source passage may support the response, but it should remain
+unlabeled and be recorded in the ledger as `existing text; no manuscript
+change`. The response may direct the reviewer to that existing passage without
+claiming that it was revised.
+
+If a reviewer was confused by unchanged wording, decide whether the existing
+passage already answers the concern. If it does, explain and cite it. If it does
+not, make the smallest sufficient revision and anchor the label to that change,
+not to the entire surrounding paragraph. When one edit addresses multiple
+comments, use one comment box listing the applicable reviewer IDs rather than
+duplicating adjacent labels.
+
+For model-based or computational Methods, distinguish definitions and derived
+quantities from empirical inputs, calibrated parameters, literature-informed or
+analyst-selected assumptions, and algorithm or update rules. For other study
+designs, classify the passage by its actual methodological function, such as
+sampling, measurement, intervention, procedure, coding, or analysis. Do not
+treat a definition or derived outcome as an assumption merely because it appears
+next to one. Align the response claim, relevant ledger entry, Track Changes, and
+reviewer label with the function that actually changed. Add an optional source
+or provenance field to the ledger only when the revision needs that distinction.
+
 ## Distinguish Navigation from the Full Answer
 
 Reviewers sometimes provide high-level synthesis points before numbered major

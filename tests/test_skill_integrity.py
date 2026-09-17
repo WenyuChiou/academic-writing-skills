@@ -162,6 +162,22 @@ def test_reviewer_response_contract_keeps_answers_direct_and_sensitivity_reprodu
     assert "Do not leave a stale reply" in normalized
 
 
+def test_reviewer_labels_record_revision_provenance_not_topic_membership():
+    workflow = read(CORE / "references" / "reviewer-response-workflow.md")
+    normalized = " ".join(workflow.split())
+    assert "actual submitted manuscript" in normalized
+    assert "effective revised text" in normalized
+    assert "provenance of a revision; it is not a subject index" in normalized
+    assert "existing text; no manuscript change" in normalized
+    assert "without claiming that it was revised" in normalized
+    assert "only to text, displays, or locations that were actually changed" in normalized
+    assert "unchanged source passage may support the response, but it should remain unlabeled" in normalized
+    assert "smallest sufficient revision" in normalized
+    assert "one comment box listing the applicable reviewer IDs" in normalized
+    assert "Do not treat a definition or derived outcome as an assumption" in normalized
+    assert "sampling, measurement, intervention, procedure, coding, or analysis" in normalized
+
+
 def test_results_gate_requires_meaning_without_discussion_overreach():
     lifecycle = read(CORE / "references" / "lifecycle-and-routing.md")
     normalized = " ".join(lifecycle.split())
