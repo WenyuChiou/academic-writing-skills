@@ -67,6 +67,8 @@ For grouped literature, verify that each cited source fits the named field, meth
 
 Do not certify claim–citation support from titles or memory when the claim depends on details of the source. Read the primary source, abstract, or authoritative record at the level needed for the claim. Distinguish verified support from plausible topical relevance.
 
+When cited studies report a relationship in a direction that differs from the corresponding relationship calibrated or estimated for the present sample or study area, do not append the citations as an unexplained contradiction. State the scope difference before or with the citations: the relationship reported here reflects the current sample or location, whereas the relationship may differ in other populations, locations, or settings when the cited evidence supports that qualification. Keep this disclaimer brief and evidence-backed. Do not recast a calibrated relationship as a model assumption, imply that opposing evidence automatically invalidates the study result, or invent contextual variation that the sources do not support. If the difference cannot be reconciled from the available evidence, state the unresolved contrast and reserve its interpretation for the Discussion.
+
 ## Observable Stock or AI-Like Prose
 
 Never infer AI authorship from writing style. Report observable features only: empty metadiscourse, stock transitions, generic synthesis, repeated deictic openings, excessive preview-and-summary language, symmetrical but content-light category lists, repeated cadence, vague subjects, or unsupported claims of consensus.

@@ -134,6 +134,10 @@ def test_core_includes_lifecycle_impact_and_release_gates():
     assert "draw on data" in prose
     assert "whose background overlaps with the paper's broad direction" in prose
     assert "read the exact passage aloud" in prose
+    assert "do not append the citations as an unexplained contradiction" in prose
+    assert "reflects the current sample or location" in prose
+    assert "Keep this disclaimer brief and evidence-backed" in prose
+    assert "Do not recast a calibrated relationship as a model assumption" in prose
 
 
 def test_reviewer_response_contract_keeps_answers_direct_and_sensitivity_reproducible():
