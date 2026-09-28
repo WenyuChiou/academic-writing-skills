@@ -40,6 +40,8 @@ Require a denominator, comparison set, population, time, place, and condition wh
 
 Place unsupported explanations in Discussion as possible interpretations or remove them. Never add a mechanism solely because a reviewer requests “why.”
 
+In a Limitations section, name the specific data, design, measurement, model, or validation constraint first. Then, where needed, explain how that constraint limits inference or use of the results. Do not frame the section around a generic warning to interpret results cautiously or treat a finding itself as a methodological limitation.
+
 ## Abstract and Conclusion
 
 Build the Abstract from the current evidence map:
