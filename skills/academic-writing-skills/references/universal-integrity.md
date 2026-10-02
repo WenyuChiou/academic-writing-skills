@@ -18,7 +18,9 @@ Lead paragraphs with their central function. Read only paragraph-opening sentenc
 
 Before drafting, define the paragraph's function, claim, evidence, development, and bridge. After drafting, verify that every sentence serves that contract. Read the preceding and following paragraphs before accepting a local rewrite.
 
-In Results, state the finding before or with the figure or table callout. Report evidence needed to support it, then close with the substantive answer. Do not close with another inventory of statistics, themes, paths, or cases.
+In Results, state the finding before or with the figure or table callout. Report evidence needed to support it, then give the substantive answer at the paragraph or subsection boundary where it belongs. Do not append an empty synthesis after every result or close only with another inventory of statistics, themes, paths, or cases.
+
+Test the “so what” by asking what the evidence establishes about the question: an effect, contrast, trade-off, boundary, or supported explanation. Removing an SQ/RQ label should not remove the answer. Do not make a descriptive plot carry a causal conclusion or force every visual to demonstrate the full feedback loop.
 
 Keep reproducible procedures in Methods, findings in Results, and mechanisms or implications in Discussion unless the genre explicitly integrates them.
 
@@ -40,7 +42,11 @@ Require a denominator, comparison set, population, time, place, and condition wh
 
 Place unsupported explanations in Discussion as possible interpretations or remove them. Never add a mechanism solely because a reviewer requests “why.”
 
+For model-based explanation, separate four levels: a verified model rule, an observed output, an explanation tested or directly supported by the analysis, and a plausible but untested mechanism. A rule describes what the model allows; it does not by itself prove why an aggregate trend occurred. Qualify an untested explanation and identify the diagnostic needed instead of turning model logic into causal evidence. Likewise, introducing real-world policy as background does not establish that the model implements or enforces it.
+
 In a Limitations section, name the specific data, design, measurement, model, or validation constraint first. Then, where needed, explain how that constraint limits inference or use of the results. Do not frame the section around a generic warning to interpret results cautiously or treat a finding itself as a methodological limitation.
+
+Do not soften or conceal a limitation merely to preserve a preferred conclusion. Future work can follow the inference boundary, but cannot substitute for stating it.
 
 ## Abstract and Conclusion
 
@@ -68,6 +74,10 @@ Do not add new evidence or copy the Abstract. Preserve the study's actual task v
 Use the entity that produced or contains the evidence. Do not interchange participant, response, dataset, model, simulation, or estimate.
 
 Use one stable term per concept. Allow contextual variants only when the terminology registry identifies them. Resolve vague referents locally.
+
+For a material metric, retain its definition, numerator, denominator, units, comparison, and aggregation/interpretation boundary in the project record or existing Methods/notes. The same percent symbol does not make differently normalized metrics equivalent. Distinguish a difference between percentages (percentage points) from a relative percentage change. Do not call a separately ranked curve difference an event-matched payout without that evidence.
+
+Define abbreviations at the relevant reading boundary, subject to venue and author conventions. An independently read abstract or SM may need its own first definition; a caption may need a self-contained explanation. Do not automatically redefine every abbreviation in every caption or assume definitions in the main text make all companion artifacts intelligible. Definition is not enough when the reader also needs institutional context or the metric's purpose.
 
 Do not rotate technical terms merely for variety. Separate four cases:
 
@@ -107,7 +117,11 @@ Audit the exact text that will be delivered after the final rewrite, not the sou
 
 If the project has a style or terminology profile, apply it even in lightweight mode. Treat a deterministic finding as a prompt for contextual judgment, but do not ignore it silently. If any word changes after this gate, repeat the affected checks on the new exact candidate.
 
+These checks follow requested action: a substantive paragraph review tests retained support; a grammar-only correction preserves unchanged verified support and does not claim a new citation audit. Apply whole-section functions to section work, not to every isolated sentence. State any unavailable context or source.
+
 ## Four-Pass Review
+
+Use the full passes for whole-paper/package review. Apply them within a substantially revised subsection or chapter and its affected dependencies; use the bounded candidate gate for surface edits. Existing project state is context, not evidence that a full review was requested.
 
 ### Pass 1: Argument and structure
 

@@ -40,6 +40,8 @@ Maintain one `manuscript_state.json` or an equivalent project record containing:
 
 Use `assets/manuscript_state_template.json` as a starting point. Keep the state beside the manuscript project, not inside this skill.
 
+The record supplies context, not review scope. For local work, consult only relevant source, lock, terminology, and decision entries; reuse current evidence whose inputs are unchanged. Do not initialize a new record, reopen every release gate, or restart a whole-paper audit simply because the task is another paragraph in an ongoing project.
+
 Treat the style profile as project guidance, not proof that every registered phrase is wrong. Preserve technical terms and author-approved wording even when a deterministic prose audit reports frequent use.
 
 Register established open compounds in `style_profile.preferred_open_compounds` when a project or venue requires them to remain open even before another noun. The prose audit then reports registered hyphenated variants for contextual review.
@@ -85,10 +87,12 @@ Maintain one active release candidate. Mark every other draft as historical, sup
 ## Minimum Operating Procedure
 
 1. Locate the active files and relevant sources.
-2. Populate or update the project state.
-3. Run `audit_manuscript_state.py` before substantive work.
+2. Reuse relevant project-state entries; initialize or update a record only when sustained coordination needs it.
+3. Run `audit_manuscript_state.py` for state validation or integration/release work when relevant, not as a mandatory new full-state audit for every local edit.
 4. Resolve source conflicts or retain them as explicit issues.
 5. Perform the requested review or revision.
 6. Update affected state entries and run impact checks.
 7. Run the functional-completeness retrospective.
 8. Certify readiness only if the release gate passes.
+
+Report check coverage separately from issue/evidence status: checked, not applicable, outside requested scope, or source unavailable/unverified. An excluded artifact is neither passed nor automatically a blocker for completing a narrower task; it does limit any broader readiness claim.

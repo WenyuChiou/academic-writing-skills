@@ -72,6 +72,42 @@
       "prompt": "A sensitivity analysis finds that several alternative parameter values change numerical estimates but not the main conclusion. No data, calibration, theory, prespecification, or study-design reason has been supplied for preferring the baseline. Write the concluding part of the reviewer response and state the final model choice.",
       "expected_output": "A conclusion that names the substantive finding shown to be robust, does not claim that robustness makes the baseline preferable, and explicitly states that the sensitivity test alone cannot determine the adopted parameter value or that an independent selection basis is still required. It does not invent a post hoc rationale.",
       "files": []
+    },
+    {
+      "id": "scope_sentence_grammar_only",
+      "prompt": "In an ongoing advisor-group manuscript, correct only the grammar of 'The model will randomly draws one depth for each household.' Do not change the model description or inspect other files. No manuscript state or source data is supplied.",
+      "expected_output": "A minimal grammatical correction to 'will randomly draw' that preserves the stated operation, does not initialize project state or launch a full manuscript/numerical audit, and does not certify scientific correctness or unseen artifacts.",
+      "files": []
+    },
+    {
+      "id": "scope_results_paragraph_so_what",
+      "prompt": "Review a Results paragraph using supplied verified outputs. RQ1 asks how two adaptation pathways change losses. Baseline GUL/actual loss are 100/80 for group A and 10/8 for group B; adaptation values are 95/50 and 4/2. The supplied decomposition attributes most of A's actual-loss reduction to payouts and most of B's reduction to relocation lowering GUL. The paragraph ends 'These results answer RQ1.' No other sections are requested.",
+      "expected_output": "A paragraph-level repair that reports the pathway contrast as the substantive answer, preserves the different roles of GUL and actual loss, checks the supplied comparisons, and does not treat the RQ label as an answer or invent a new causal story. It limits readiness to the paragraph and relevant context.",
+      "files": []
+    },
+    {
+      "id": "scope_subsection_multi_figure",
+      "prompt": "Review a subsection containing a loss-scenario figure, an AEP figure, and a perception trajectory figure. The figures show different descriptive components of three study questions. The draft repeats 'These patterns answer all three questions' after every figure. Only this subsection and its captions are supplied.",
+      "expected_output": "A cumulative subsection review that assigns distinct evidence functions, removes empty repeated syntheses, checks relevant captions and comparisons, and does not demand that each figure independently demonstrate the entire feedback chain. It names unavailable upstream context without calling the whole paper ready.",
+      "files": []
+    },
+    {
+      "id": "scope_chapter_reader_prerequisites",
+      "prompt": "Review a complete Methods chapter. A household-initialization subsection defines a policy-region status only after an earlier threshold table has already used it. Asset-distribution construction appears under behavior rather than exposure. The current chapter and its SM item list are supplied; the Introduction and raw data are not.",
+      "expected_output": "A chapter-level reorganization plan that introduces prerequisites before the table, places asset material with exposure, preserves remaining initialization and model settings, and updates affected SM pointers. It does not invent institutional enforcement or rewrite unsupplied chapters and distinguishes missing context from a verified error.",
+      "files": []
+    },
+    {
+      "id": "scope_whole_manuscript_claim_chain",
+      "prompt": "Review a full manuscript. The RQ asks how two groups compare in protection and burden; results show similar loss-difference/GUL percentages but different loss-difference/income percentages. The Abstract calls the groups equally protected overall, and the Conclusion ranks one group as less socially vulnerable. Only the manuscript is included, not SM or response.",
+      "expected_output": "A whole-manuscript evidence-chain review that limits similarity to the stated metric, corrects unsupported overall protection/vulnerability claims, checks affected summaries and definitions, and performs the four manuscript passes without certifying excluded SM or response.",
+      "files": []
+    },
+    {
+      "id": "scope_local_metric_cross_artifact_trigger",
+      "prompt": "Revise one definition: protection margin is now a normalized loss difference, with GUL as the denominator in Figure 7 and median household income in Figure 11. Their captions, two paragraphs, and response still call the margin both dollars and percent. Only the definition is authorized for editing; the other supplied files are read-only.",
+      "expected_output": "A precise normalized definition naming the denominator by context, with targeted checks and locations for affected figures, captions, discussion, summaries, and response. It explains that common percent units do not make the metrics identical, does not relabel the loss curves' y-axis as the margin, does not edit read-only dependencies, and reports them as unresolved rather than claiming synchronization.",
+      "files": []
     }
   ]
 }
