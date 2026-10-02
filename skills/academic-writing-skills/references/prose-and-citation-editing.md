@@ -31,6 +31,8 @@ Map each sentence to one or more required functions: claim, evidence, explanatio
 
 Use word counts, sentence counts, and comparison with neighboring paragraphs only as diagnostics. Do not impose a universal target. A shorter version is not better if it removes a required comparison level, citation, limitation, or transition.
 
+For an accepted, submitted, or advisor-edited baseline, make the smallest repair that solves the actual issue and its dependencies. Preserve functioning original wording; do not rewrite neighboring sentences for stylistic uniformity alone. If a larger structural change is necessary, identify the displaced function and destination before editing. Comment labels identify changes made for a request, not every passage that shares its topic.
+
 Inspect sentence rhythm after compression. Merge a very short sentence when it exists only to say `Overall`, `However`, or `The results are mixed`; retain a short sentence when it carries necessary emphasis or a complete substantive finding. Avoid solving density by creating a sequence of clipped sentences.
 
 ## Natural Scholarly Prose
@@ -40,6 +42,10 @@ Prefer concrete scholarly subjects, direct verbs, and terms recognizable to the 
 Write for the intended journal's broad disciplinary readership, not only specialists in the narrow topic. Define or replace a nonessential umbrella label when readers must decode it before understanding the claim. For example, use a concrete description of disaster-related tasks instead of `disaster management cycle` when the stages of that cycle are not analytically important.
 
 Maintain a clear sense of the reader. For interdisciplinary work, write for a researcher whose background overlaps with the paper's broad direction but who does not already know the study's model logic, project-specific labels, or data-processing choices. Introduce a necessary technical term, comparison, or causal step where that reader first needs it. Do not assume that familiarity with the field implies familiarity with this study.
+
+Guide the reader by prerequisites, not only acronym definitions. Introduce relevant background or institutional rules before group differences, and introduce those differences before the model setting that uses them. Explain enough at each step for the next statement to be interpretable; avoid importing implementation details into background or implying that a real-world requirement is enforced by a model that lacks the needed attribute.
+
+Prefer explicit actors, actions, and comparison references. Ask “higher than what?”, “which difference?”, “whose loss?”, and “what is the denominator?” when meaning is unclear. Replace a vague `this difference` or `these limits` with the specific result or constraint when needed, without repeating an entire definition. Plain scholarly language simplifies syntax and information order, not scientific distinctions.
 
 Prefer a literal verb when an idiomatic academic verb adds no meaning. If `draw on data` only means `use data`, write `use data`; retain `draw on` only when it conveys a broader intellectual or evidentiary dependence that `use` would lose. Apply the same test to other polished-sounding phrases rather than rotating them mechanically.
 
@@ -96,10 +102,10 @@ Review dash density at the sentence and paragraph level. A technically correct d
 After the last wording change:
 
 1. freeze the exact candidate and record its hash when supported;
-2. rerun all seven audits above on that exact text;
+2. rerun the applicable audits above on that exact text, at the requested depth and change impact;
 3. read the previous and next paragraph with it;
 4. inspect every deterministic diagnostic in context and record why any flagged form is retained;
-5. reconcile retained and removed citations with the reference list; and
+5. reconcile added, removed, and claim-affected citations with the reference list; check retained support for substantive review without re-certifying untouched sources in a grammar-only edit;
 6. perform the intended-reader and read-aloud checks on the exact candidate; and
 7. invalidate the audit if any word, citation, or punctuation mark changes afterward.
 

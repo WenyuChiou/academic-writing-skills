@@ -11,6 +11,28 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-01
+
+### Added
+
+- Scope-aware checks for sentences, paragraphs, subsections, chapters, full
+  manuscripts, and submission packages, with targeted dependency checks when
+  a local change affects definitions or claims elsewhere.
+- Six behavioral evaluation scenarios covering local edits, Results synthesis,
+  figure functions, reader prerequisites, manuscript claim chains, and
+  cross-artifact metric changes; CI protects their continued registration.
+
+### Changed
+
+- Separate task scope, writing action, scientific impact, and evidence depth;
+  do not make every local edit a full manuscript audit or initialize project
+  machinery for a one-off request.
+- Require substantive Results conclusions, distinguish observed results from
+  assumptions and possible mechanisms, and check metric denominators, units,
+  aggregation, and context-specific abbreviation definitions.
+- Preserve accepted wording through minimum necessary changes and report
+  checked, inapplicable, out-of-scope, and unavailable checks separately.
+
 ## [1.1.6] - 2026-08-10
 
 ### Changed

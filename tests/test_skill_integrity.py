@@ -61,7 +61,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.1.6"
+    assert manifest["version"] == "1.2.0"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -269,6 +269,21 @@ def test_evals_cover_core_and_progressive_review_behavior():
             assert item["prompt"].strip()
             assert item["expected_output"].strip()
             assert isinstance(item["files"], list)
+
+
+def test_scope_behavioral_probes_remain_registered():
+    """Guard probe coverage; semantic outcomes require independent evaluation."""
+    data = json.loads(read(ROOT / "evals" / "evals.json"))
+    required = {
+        "scope_sentence_grammar_only",
+        "scope_results_paragraph_so_what",
+        "scope_subsection_multi_figure",
+        "scope_chapter_reader_prerequisites",
+        "scope_whole_manuscript_claim_chain",
+        "scope_local_metric_cross_artifact_trigger",
+    }
+    registered = {item["id"] for item in data["evals"]}
+    assert required <= registered, f"Missing behavioral probes: {required - registered}"
 
 
 def test_readmes_are_bilingual_user_facing_entrypoints():
