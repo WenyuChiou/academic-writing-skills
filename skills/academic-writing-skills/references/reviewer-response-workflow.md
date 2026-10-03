@@ -39,6 +39,12 @@ Classify the required work as one or more of:
 - revise interpretation, scope, or limitation;
 - decline or defer a request with a specific reason.
 
+## Distinguish Response States and Advisor Handoffs
+
+Keep the strategy, an advisor-facing working draft, and the final reviewer-facing response distinguishable. A strategy names the proposed action and evidence needed. A working draft may develop the intended argument before all changes exist, but must identify pending analyses, edits, and locators; proposed wording is not evidence of completion. A final response reports only verified work or an evidence-backed non-change. Keep ledger status `OPEN` until the concern is actually addressed and verified.
+
+When the supplied lab workflow requires response-first advisor review, use its handoff order: comment ledger and short strategy → advisor agreement → response working draft → advisor review → authorized manuscript/SM changes → final promise-to-artifact and locator reconciliation. This is an optional project workflow, not a universal requirement to obtain advisor approval before editing. Approval of a strategy does not itself authorize new analyses or external actions. If a template prefers present or past tense in the working draft, label unfinished content explicitly rather than presenting an unperformed experiment as completed.
+
 ## Distinguish Revision Provenance from Topical Relevance
 
 Before adding reviewer-source margin comments or declaring a manuscript change,
@@ -312,8 +318,9 @@ both merely to appear responsive.
 
 Do not promise a manuscript or Supporting Material addition merely to sound
 accommodating. Do not claim that a change was made until it exists. During
-planning, use future tense. In the final response letter, use past tense after
-verifying the tracked and clean files.
+planning, use future tense or explicitly marked proposed wording. In the final
+response letter, use past tense for completed changes after verifying the
+designated files; present tense may describe current evidence or document contents.
 
 ## Tone and Vocabulary
 

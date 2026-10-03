@@ -30,6 +30,10 @@ The Introduction establishes why the study is needed and how its purpose follows
 
 Introduce the concepts or institutional background needed to understand the problem before using them to motivate group differences or research questions. Do not assume that readers already know why a named distinction matters. Keep detailed site description and reproducible procedures in the sections that perform those functions.
 
+When a gap claim describes the current state of research, check whether the literature search and close precedents are current enough to support that claim. An older source can establish a foundational problem without establishing that it remains unexamined today. Search or inspect newer and differently named work when needed; otherwise narrow the claim and state the verification limit. Do not impose a citation-age cutoff or replace foundational sources merely because they are old.
+
+When several questions are proposed, make their relationship intelligible: they may be independent, sequential, or hierarchical. Check whether each adds a distinct answer and has an evidence route; identify when one answer is needed to address another. Do not force independence, split one comparison into redundant questions, or infer causal identification merely from their order. Numbering and an Introduction roadmap remain author or venue choices.
+
 At section scope, test whether the reader can identify the problem, existing knowledge, missing piece, consequence of that gap, and the study's response. Read paragraph openings and endings together: they should advance the argument rather than repeatedly announce importance or novelty. A paragraph-level task checks its contribution to that chain and available neighboring text, not every function in the full Introduction.
 
 ## Study Area, Context, and Evidence Setting

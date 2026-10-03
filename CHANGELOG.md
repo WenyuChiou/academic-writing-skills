@@ -11,6 +11,18 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.3] - 2026-10-03
+
+### Added
+
+- Topic-sentence forward and reverse outlines, preserving actual draft evidence
+  and bounded edit scope across article genres.
+- Current-gap support and independent, sequential, or hierarchical question checks.
+- Explicit response draft/final states and optional response-first advisor handoffs.
+- Quantity-led chart selection with a filename-versus-distribution counterexample.
+- Four registered behavioral scenarios with explicit acceptance criteria and
+  a regression guard for their instruction routes and rubric registration.
+
 ## [1.3.2] - 2026-10-03
 
 ### Added

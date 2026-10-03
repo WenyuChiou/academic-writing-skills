@@ -69,7 +69,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.2"
+    assert manifest["version"] == "1.3.3"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -464,6 +464,28 @@ def test_scope_behavioral_probes_remain_registered():
     }
     registered = {item["id"] for item in data["evals"]}
     assert required <= registered, f"Missing behavioral probes: {required - registered}"
+
+
+def test_reference_refinement_probes_have_routes_and_semantic_criteria():
+    """Check runnable probe inputs; this does not certify semantic outcomes."""
+    data = json.loads(read(ROOT / "evals" / "evals.json"))
+    cases = {item["id"]: item for item in data["evals"]}
+    routes = {
+        "topic_sentence_reverse_outline_preserves_actual_draft": "lifecycle-and-routing.md",
+        "current_gap_and_sequential_questions_without_age_cutoff": "introduction-and-study-context.md",
+        "response_working_draft_does_not_certify_pending_test": "reviewer-response-workflow.md",
+        "chart_function_from_axes_not_filename": "figures-tables-and-supplements.md",
+    }
+    for case_id, reference in routes.items():
+        assert case_id in cases, f"Missing behavioral probe: {case_id}"
+        case = cases[case_id]
+        assert case["prompt"].strip() and case["expected_output"].strip()
+        criteria = case["acceptance_criteria"]
+        assert isinstance(criteria, list) and len(criteria) >= 3
+        assert all(isinstance(item, str) and item.strip() for item in criteria)
+        route = Path("skills") / "academic-writing-skills" / "references" / reference
+        assert case["files"] == [route.as_posix()]
+        assert (ROOT / route).is_file()
 
 
 def test_readmes_are_bilingual_user_facing_entrypoints():

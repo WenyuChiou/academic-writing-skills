@@ -168,6 +168,50 @@
       "prompt": "The draft cites Mondino et al. (2020) as proving an exact tract-GUL threshold and validating individual TP decay. Its bibliography has two different FEMA datasets assigned identical year letters, and a Kousky paper left uncited after a paragraph deletion. Explain targeted checks using the ABM examples without changing model settings or filling missing source metadata.",
       "expected_output": "Separate qualitative context from empirical parameter estimation/validation, verify the primary source's actual claims and transfer limits, and keep model assumptions explicit. Check dataset identity, version, year/suffix and matching keys under venue rules; inspect the uncited work's relevance before removal rather than adding a topical citation to save it. No fabricated metadata or assumed blanket APA format.",
       "files": []
+    },
+    {
+      "id": "topic_sentence_reverse_outline_preserves_actual_draft",
+      "prompt": "Use the skill to reverse-outline only a conceptual Introduction. Its four paragraph openings are: 'Water decisions connect people and infrastructure.'; 'Many tools study water decisions.'; 'Researchers use many tools to study these decisions.'; 'We compare how three modeling approaches represent decision authority.' The second paragraph's actual main point, stated later, is that the approaches place authority at different analytical levels. The third repeats its tool inventory and adds no distinct evidence. The fourth proposes a comparison, not a completed result. Identify the actual outline and the smallest repair; no Methods, Results, or other files are supplied.",
+      "expected_output": "Preserves the actual openings in the diagnostic, identifies the hidden second-paragraph function and repeated third-paragraph function, and proposes a minimal coherent topic-sentence sequence without inventing comparison findings or requiring empirical IMRAD headings or a new project record.",
+      "acceptance_criteria": [
+        "Distinguishes the observed opening sequence from a proposed improved outline.",
+        "Repairs hidden or duplicated functions rather than silently idealizing the supplied prose.",
+        "Preserves conceptual genre, missing-result status, and requested section scope."
+      ],
+      "files": ["skills/academic-writing-skills/references/lifecycle-and-routing.md"]
+    },
+    {
+      "id": "current_gap_and_sequential_questions_without_age_cutoff",
+      "prompt": "Assess only an Introduction plan using these supplied hypothetical source summaries. A foundational 1998 paper identifies uncertain collective decisions. A 2024 study compares aggregate group outcomes. A 2025 study uses a different term for the same aggregate comparison. Neither later study follows individual changes over time. The plan claims 'No study compares group outcomes' and proposes Q1 on aggregate differences and Q2 on within-person changes conditional on Q1. Explain the defensible gap and relationship of the questions. Do not search or edit a full paper.",
+      "expected_output": "Recognizes overlapping recent work and narrows the gap to the unsupported analytical level rather than declaring all old sources invalid. Describes Q1/Q2 as a potentially sequential design with distinct evidence needs, without forcing independence, claiming causal identification, or certifying an exhaustive novelty search.",
+      "acceptance_criteria": [
+        "Rejects the unsupported no-study claim while retaining the foundational source's legitimate role.",
+        "States the individual-change evidence need separately from existing aggregate comparisons.",
+        "Explains sequential questions without an arbitrary citation-age rule or causal inference."
+      ],
+      "files": ["skills/academic-writing-skills/references/introduction-and-study-context.md"]
+    },
+    {
+      "id": "response_working_draft_does_not_certify_pending_test",
+      "prompt": "Prepare a short advisor-facing response draft. The lab requests response-first review and prefers past-tense proposed wording. A reviewer asks for a sensitivity test. The advisor approved discussing a test but no analysis has been run, no execution authorization exists, and no manuscript has changed. The current draft says 'We tested the alternative and confirmed unchanged conclusions (Lines 200-210).' Explain what can be drafted now and how it becomes a final response. Do not run a model or assign line numbers.",
+      "expected_output": "Separates proposed strategy/working draft from a completed reviewer response; marks the test and manuscript changes pending and keeps the issue open. Does not fabricate robustness, accept unsupported line numbers, or infer execution permission from advisor agreement. Uses the supplied lab handoff without universalizing advisor approval.",
+      "acceptance_criteria": [
+        "Does not report an unperformed analysis, stable conclusion, or locator as verified.",
+        "Keeps the proposed test pending and distinguishes approval of discussion from execution authority.",
+        "Requires actual evidence and artifact reconciliation before final response status."
+      ],
+      "files": ["skills/academic-writing-skills/references/reviewer-response-workflow.md"]
+    },
+    {
+      "id": "chart_function_from_axes_not_filename",
+      "prompt": "Assess a hypothetical image named time-series.png. Its x-axis is log water footprint, rows are industries, curves show density distributions, and colored bands mark percentile ranges. No time variable, raw data, or export metadata is provided. Can it show how each industry's footprint changed after a policy, and what may be reused for a new figure comparing industries? Do not redraw the image or invent units.",
+      "expected_output": "Identifies a distribution/ridgeline comparison rather than a temporal trajectory, rejects the unsupported policy-change claim, and reuses only the quantity-appropriate comparison and encoding. Flags unknown density normalization, units, provenance, and final-size legibility without inventing them or transferring the exact layout automatically.",
+      "acceptance_criteria": [
+        "Classifies the display from the axes and marks rather than its filename.",
+        "Does not infer a temporal or policy effect without a time comparison.",
+        "Separates transferable encoding ideas from unverified units, normalization, and data."
+      ],
+      "files": ["skills/academic-writing-skills/references/figures-tables-and-supplements.md"]
     }
   ]
 }

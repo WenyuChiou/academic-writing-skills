@@ -81,6 +81,10 @@ Identify the active project, sources, archetype, intended audience, gap, objecti
 
 Build the extended outline as an evidence plan, not a list of headings. For each section and planned paragraph, record its reader function, central claim or question, authorized evidence, inference boundary, and bridge to the next unit. Test the outline top-down from gap to contribution and bottom-up from available evidence to supported claims before prose drafting begins.
 
+For a new draft, make that plan readable as a sequence of proposed paragraph topic sentences, each with its evidence slot and necessary qualification. Read the sequence without the supporting detail: it should explain the study's progression, not merely name topics. Mark an unsupported finding as an evidence need, not an established result. Use the genre's reader functions rather than forcing empirical headings on a conceptual or theoretical paper.
+
+For an existing draft, reverse-outline the requested section by extracting its actual opening sentences and noting the function each paragraph performs. Where an opening hides or misstates the main point, record that mismatch rather than silently replacing it with an idealized summary. Check for missing or duplicated functions, premature detail, and unsupported transitions; repair the smallest affected passage. A grammar-only edit does not trigger reverse-outlining the section, and neither operation requires a new project file.
+
 ### Paragraph and section drafting gate
 
 Draft each paragraph from a five-part contract: function, claim, evidence, development, and bridge. Check it locally and with available adjacent text. For subsection/section work, also read the topic sentences in sequence. After the final rewrite, apply the relevant exact-candidate checks; any later wording change invalidates affected checks. A section is not current merely because every planned paragraph exists; its paragraphs must form one cumulative argument with no duplicated function, orphan evidence, or unsupported transition.
