@@ -108,6 +108,42 @@
       "prompt": "Revise one definition: protection margin is now a normalized loss difference, with GUL as the denominator in Figure 7 and median household income in Figure 11. Their captions, two paragraphs, and response still call the margin both dollars and percent. Only the definition is authorized for editing; the other supplied files are read-only.",
       "expected_output": "A precise normalized definition naming the denominator by context, with targeted checks and locations for affected figures, captions, discussion, summaries, and response. It explains that common percent units do not make the metrics identical, does not relabel the loss curves' y-axis as the margin, does not edit read-only dependencies, and reports them as unresolved rather than claiming synchronization.",
       "files": []
+    },
+    {
+      "id": "chapter_closure_checks_are_content_conditional",
+      "prompt": "Complete the review of a qualitative Methods chapter describing purposive interviews and reflexive thematic analysis. No numerical model, group rates, or statistical tests are used. The prose looks fluent. Should the chapter-closure hidden-failure check be skipped, or must it include every simulation diagnostic?",
+      "expected_output": "Perform the closure check but select relevant questions about recruitment scope, researcher position, coding support, negative cases, and transferability. Do not impose calibration, numerical sensitivity, or denominators where inapplicable. Report source gaps and scope boundaries without claiming exhaustive unknown-unknown discovery.",
+      "files": []
+    },
+    {
+      "id": "results_composition_not_individual_decay",
+      "prompt": "Review only this Results paragraph: 'The neighborhood mean perception declined from 0.7 to 0.5, proving that every resident learned to feel safer.' The supplied evidence says residents may move between neighborhood categories, but has no within-person decomposition. Do not run new analyses.",
+      "expected_output": "Retain the aggregate finding while removing the universal individual-learning and causal claim. Explain that within-person change and composition may both contribute but neither contribution was isolated. Request or identify the diagnostic needed for a stronger interpretation without inventing its result or running it.",
+      "files": []
+    },
+    {
+      "id": "discussion_extension_unchanged_ranking_not_validation",
+      "prompt": "Plan a Discussion extension paragraph. A sensitivity test changes estimated losses by 20% but group A remains above B in each tested setting. No independent basis for the baseline is available. The draft says all conclusions and mechanisms are unchanged and the test validates the baseline.",
+      "expected_output": "Organize purpose, changed/held-constant design, baseline comparison, finding, and consequence. Limit stability to the observed ordering over the tested settings, preserve changed magnitudes, remove mechanism invariance and validation claims, and leave baseline selection rationale unresolved. Do not invent extra experiments or policy implications.",
+      "files": []
+    },
+    {
+      "id": "abstract_identity_without_fixed_template",
+      "prompt": "Draft an abstract for a 2024 qualitative study of 18 purposively recruited tenants in one city, using interviews and reflexive thematic analysis to examine housing instability after floods. Verified themes concern uncertain leases and disrupted support networks; no prevalence or causal estimates exist. A legacy template demands agents optimizing financial security, six fixed sentence blocks, 35-word caps, and a generalizable testbed.",
+      "expected_output": "Identify method and task, population and relevant city/time scope, supported themes and qualitative inference boundary. Treat six information functions as flexible, reject unsupported optimization/generalizability claims and unverified universal caps, and ask only for missing material facts such as the city name if necessary. Do not force a simulated mechanism or numeric prevalence.",
+      "files": []
+    },
+    {
+      "id": "visual_legibility_without_whitespace_overcorrection",
+      "prompt": "A four-panel figure has tiny legend text, an overlapping endpoint annotation, and large outer whitespace. The user asks for larger, clearer visuals and less blank space. No rendered document is available, only this description. Also shorten its caption and retain the uncertainty definition.",
+      "expected_output": "Propose improving final-size typography, repositioning the legend/annotation, and reducing only nonfunctional whitespace while preserving separation, aspect ratio, scales, and uncertainty information. Do not invent actual pixel positions or claim visual verification without rendering. Keep scientific result explanation in prose and reading information in the caption.",
+      "files": []
+    },
+    {
+      "id": "response_promises_and_rendered_locators",
+      "prompt": "Audit a response and manuscript package. The response promises a new SM sampling table that is absent, cites old panel letters after a figure split, claims an acronym removed from the manuscript, and contains guessed line ranges from XML counts. The reviewer will read a compared manuscript, but only a clean draft is rendered. SM has no line numbers. Do not modify the manuscript or rerun anything.",
+      "expected_output": "Identify the unmet promise without falsely resolving it, reconcile panel and terminology changes against actual files, and use verified SM item locators rather than guessed lines. Treat compared-version lines as unverified until that target is rendered and layout fixed. Do not certify the package or manufacture an addition, analysis, or line number.",
+      "files": []
     }
   ]
 }

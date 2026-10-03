@@ -1,7 +1,7 @@
 # Academic Writing Skills
 
 [![tests](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml/badge.svg)](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml)
-[![plugin version](https://img.shields.io/badge/plugin-v1.2.0-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.3.0-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 **把論文視為一個完整的證據系統：從研究論證與架構發想、extended outline、
@@ -9,7 +9,7 @@
 
 採用開放的 Agent Skills 格式，適用於 Claude Code、ChatGPT、Codex、
 OpenCode、Hermes Agent，以及其他相容的 AI agents。
-[English](./README.md)
+[English](./README.md) | 繁體中文
 
 ## 從研究架構到最終投稿
 
@@ -24,6 +24,7 @@ OpenCode、Hermes Agent，以及其他相容的 AI agents。
 | 研究定位與架構發想 | 釐清問題、gap、research questions、預定 contribution、證據界線與 nonclaims。 |
 | Extended outline | 為每個預定段落設定 reader function、可辯護的 claim、authorized evidence、inference limit 與 bridge。 |
 | 依證據撰寫 | 根據核准資料與目前結果發展 Methods、Results、Discussion、Conclusion、Abstract 與其他投稿材料。 |
+| 章節引導 | 逐步鋪陳讀者所需背景、區分參數來源與假設、讓結果回答問題，並確認圖表清楚與摘要能獨立理解。 |
 | 雙向 integrity review | 由上而下檢查目的到證據的對齊，也由下而上檢查證據到 contribution 的合理性。 |
 | 從頭到尾的整稿 review | 對完整稿件進行四輪 top-to-bottom review：論證與結構、證據與主張範圍、學術寫作與 flow、交付完整性。 |
 | 修改與 release | 將重大修改同步到 sections、figures、tables、supplement、metadata 與實際投稿檔案。 |

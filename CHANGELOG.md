@@ -11,6 +11,32 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-10-02
+
+### Added
+
+- Routed section guides for Introduction/study context, Methods and assumption
+  provenance, Results and supported explanations, extension-analysis Discussion
+  and Limitations, Conclusion/Abstract, and figures/tables/Supporting Material.
+- Chapter-closure blind-spot checks selected by research design and content,
+  with scope boundaries instead of an identical checklist for every paragraph.
+- Regression guards and six registered behavioral scenarios for the new guidance.
+  Static checks protect the instruction contract; behavioral probes require
+  separate evaluation and do not certify arbitrary manuscripts.
+
+### Changed
+
+- Build SM alongside Methods and Results; preserve accepted source wording and
+  propagate only necessary changes across affected artifacts.
+- Treat abstract structure as information functions, not universal sentence
+  counts, fixed phrases, numerical bans, or invented optimization/testbed claims.
+- Require final-size visual readability, functional whitespace, short captions
+  and informative table notes; keep formatting choices in project overlays.
+- Reconcile response promises with actual revisions, source comparisons with
+  validation claims, and line locators with the designated rendered version.
+- Bump the plugin version so changed skill content satisfies the existing
+  version guard. No standalone legacy skill or private project state is bundled.
+
 ## [1.2.0] - 2026-10-01
 
 ### Added
