@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "id": "academic-writing-skills",
+  "adapter_version": "1.0.0",
+  "skill_version": "1.1.6",
+  "state_schema_version": "1.1",
+  "skills": [
+    {
+      "id": "academic-writing-skills",
+      "path": "skills/academic-writing-skills/SKILL.md",
+      "mode": "write-proposals"
+    },
+    {
+      "id": "paper-review",
+      "path": "skills/paper-review/SKILL.md",
+      "mode": "review-only"
+    }
+  ],
+  "entrypoints": {
+    "state_template": "skills/academic-writing-skills/assets/manuscript_state_template.json",
+    "initialize_state": "skills/academic-writing-skills/scripts/init_manuscript_state.py"
+  },
+  "operations": {
+    "state": {
+      "script": "skills/academic-writing-skills/scripts/audit_manuscript_state.py",
+      "arguments": {
+        "positional": [
+          "state"
+        ],
+        "options": [
+          "--project-root PROJECT_ROOT",
+          "--json"
+        ]
+      },
+      "json_output": {
+        "supported": true,
+        "flag": "--json",
+        "default": false
+      },
+      "success_exit_code": 0
+    },
+    "consistency": {
+      "script": "skills/academic-writing-skills/scripts/audit_text_consistency.py",
+      "arguments": {
+        "positional": [
+          "state"
+        ],
+        "options": [
+          "--project-root PROJECT_ROOT",
+          "--json"
+        ]
+      },
+      "json_output": {
+        "supported": true,
+        "flag": "--json",
+        "default": false
+      },
+      "success_exit_code": 0
+    },
+    "prose": {
+      "script": "skills/academic-writing-skills/scripts/audit_prose_patterns.py",
+      "arguments": {
+        "positional": [
+          "state"
+        ],
+        "options": [
+          "--project-root PROJECT_ROOT",
+          "--json"
+        ]
+      },
+      "json_output": {
+        "supported": true,
+        "flag": "--json",
+        "default": false
+      },
+      "success_exit_code": 0
+    },
+    "candidate": {
+      "script": "skills/academic-writing-skills/scripts/audit_candidate_text.py",
+      "arguments": {
+        "positional": [
+          "state",
+          "candidate"
+        ],
+        "options": [
+          "--label LABEL",
+          "--json"
+        ]
+      },
+      "json_output": {
+        "supported": true,
+        "flag": "--json",
+        "default": false
+      },
+      "success_exit_code": 0
+    },
+    "docx": {
+      "script": "skills/academic-writing-skills/scripts/audit_docx_structure.py",
+      "arguments": {
+        "positional": [
+          "docx [docx ...]"
+        ],
+        "options": [
+          "--require-clean",
+          "--require-valid-comments",
+          "--json"
+        ]
+      },
+      "json_output": {
+        "supported": true,
+        "flag": "--json",
+        "default": false
+      },
+      "success_exit_code": 0
+    },
+    "regression": {
+      "script": "skills/academic-writing-skills/scripts/run_regression_tests.py",
+      "arguments": {
+        "positional": [],
+        "options": []
+      },
+      "json_output": {
+        "supported": true,
+        "flag": null,
+        "default": true
+      },
+      "success_exit_code": 0
+    }
+  },
+  "files": {
+    ".claude-plugin/plugin.json": "9ed8c4cf3803e39ee2ea591bb82a39ced90e851aa70ee2a3b3506d847fc51398",
+    "docs/workspace-adapter.md": "8848cc0f0b94fda30ca33b823b6187cbcf4ac663a75aca556ce40006c09791bc",
+    "LICENSE": "1e034229fd46b8a7748bce109e3bcc078e180bb05e276e513039e2b9a990c637",
+    "scripts/build_adapter_bundle.py": "1c876db5cda7ed32518e97f0e4aa8af76f7c9dd1def0bc386ec5afefac3a4a8f",
+    "skills/academic-writing-skills/agents/openai.yaml": "5d0471ee817805619779b1f901f6c91a1ea4dcb472968f2382a263a7fbcabfe9",
+    "skills/academic-writing-skills/assets/icon.svg": "49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee",
+    "skills/academic-writing-skills/assets/manuscript_state_template.json": "301a65dbc235dee3e3158a1725bcd5871b003282bc19b2ce51ef72be50bc12b8",
+    "skills/academic-writing-skills/references/lifecycle-and-routing.md": "1d9e4842bd2854b63bb75659ffaa28bfede7484abf516810dcfb61538b3090bf",
+    "skills/academic-writing-skills/references/overlay-contract.md": "331fdd41a90267e988b6d9d780865e3baf1de4ba7c2b66a81a26833810a55b18",
+    "skills/academic-writing-skills/references/prose-and-citation-editing.md": "82813f0d88cbea51d490785ef266d9df9e305380896af794d8d2beae572dc787",
+    "skills/academic-writing-skills/references/reviewer-red-team-and-release.md": "badc2dcd006f3785a01fb56f6490e87be39b3a2c6f829bcfed89dd0ebe20a7bb",
+    "skills/academic-writing-skills/references/reviewer-response-workflow.md": "10cf47e0ea99db0712faf53f5e76e70ad53c3df38d823d9624dfbc460b0d4b80",
+    "skills/academic-writing-skills/references/state-and-authority.md": "e03c5eb82ee1443be682f44a191dcf8842f97496cbc36ec4b383ab50b39448e9",
+    "skills/academic-writing-skills/references/study-design-adapters.md": "959968c9e3089a08302e51d4b786e4f996d08b56fc636c77c18c9a15d4aea6e0",
+    "skills/academic-writing-skills/references/universal-integrity.md": "4bd10219753b671f9b06c4b1768b2cc1137451658158ad8ed8155efb2b37466f",
+    "skills/academic-writing-skills/scripts/audit_candidate_text.py": "649d1d5c4178e0078d4668e4b3a8ff5f37257707898b9d7743ee772c37a236d0",
+    "skills/academic-writing-skills/scripts/audit_docx_structure.py": "d7e2d8ed39bf988313fb7680acb5980b2df7c495a12d7a51da745d24affe6618",
+    "skills/academic-writing-skills/scripts/audit_manuscript_state.py": "499256915d3ae3fe35bc3f8b7d1b67bee01e3f2b22544ca2d06767915f2d4867",
+    "skills/academic-writing-skills/scripts/audit_prose_patterns.py": "c451a7d77969ad4483ff066f1ff7f407913937d66f715d38fa83e2cea682cb0d",
+    "skills/academic-writing-skills/scripts/audit_text_consistency.py": "36cf497de19894e4f36ccd8efdebd856b80d29344b2599a2e24dc3070e41f323",
+    "skills/academic-writing-skills/scripts/init_manuscript_state.py": "dab125b1d2f8e1f9f37e8acb57632c01d78a8f77c734812bdb02b73813a21bed",
+    "skills/academic-writing-skills/scripts/run_regression_tests.py": "6e7e0959a617ae12a8c573923f63ce7c03b9a83615accaf38a5ff7e6c45d6ca5",
+    "skills/academic-writing-skills/SKILL.md": "3a60ade13a2ce0d998987e412f4fc7d30f9415a60bf3966f9f90e0daf1dfc151",
+    "skills/paper-review/agents/openai.yaml": "05c9007441801059768dbace3190e8ecc3a429c2632c61848ca538a2f3a96b7f",
+    "skills/paper-review/assets/icon.svg": "49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee",
+    "skills/paper-review/references/ai-llm-computational.md": "0779f02d9f2c5cb50f175c495e0ecea12bbaab532ce25fba7921ce9178637fa4",
+    "skills/paper-review/references/display-notation-provenance.md": "554d6880c4a37aaf2a3e60074bda3eaf12d1aacf79cdda19749a0de2db586651",
+    "skills/paper-review/references/ethan-style-overlay.md": "2e61dac8dc3fe4529fbb8fec900c4ab3822b649d907e089b71a2e1510bf66f13",
+    "skills/paper-review/references/flood-hydrodynamics-catastrophe.md": "d23969028392196cf607b459662b9f5eef4145eae8084fd288f5b4633ba85c29",
+    "skills/paper-review/references/overlay-contract.md": "0474eed8a66b9ac2e0a602bfa63aaffcfc294f274b44dfa5b4211edcbefc6260",
+    "skills/paper-review/references/project-precedents.md": "03361716d0572440a95554f4c6591ca6bd2a4fc2ea0f1e0bcc0255671343060b",
+    "skills/paper-review/references/quantitative-psychometrics-sem.md": "024726651c8f24ca8aa87351d16173ee8e48774e5d6afb8c86d52ca7888be94a",
+    "skills/paper-review/references/round-calibration.md": "1fa73a6c5caf21aeec0df21ca831d5a50e5a4d0a22898e8d9d48916428260528",
+    "skills/paper-review/references/water-cnhs-uncertainty.md": "4923b59b87d3154cf21f45735e25baf5fa08f6aa14aa1f3918625dcf31074550",
+    "skills/paper-review/SKILL.md": "6432e3140c697a9e5e82fe8b5db3ab08739f9c1876b6666c66ae233023c7ae4b"
+  }
+}
