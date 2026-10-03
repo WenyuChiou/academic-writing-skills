@@ -6,6 +6,7 @@
 2. Captions and table notes
 3. Synchronization and SM
 4. Project formatting and notation
+5. Worked ABM examples
 
 ## Reader Function and Final-Size Legibility
 
@@ -42,3 +43,55 @@ Treat bold callouts, range connectors, title casing, caption ordering, and acron
 For example, a project can prefer **Figures S4** to **S6**, with the references bold and `to` plain, or **Figure 7** for a single figure. This is a reusable formatting example, not a mandate for every paper. Match singular/plural forms to the actual number of referenced items. Update title labels and final lists consistently rather than adding bold to the whole document.
 
 Keep units, denominators, and quantity names consistent in captions, tables, equations, and prose. A normalized difference/GUL percentage and a normalized difference/income percentage are distinct metrics despite common percent units. Label an axis for the plotted quantity, not an annotation such as a margin between two curves. Use stable technical terms and clarify absolute differences, relative changes, and percentage-point differences where they matter.
+
+## Worked ABM Examples
+
+Use these author-requested examples to understand display functions, not to import this model's facts into another paper. The source is `ABM_manuscript_20260812_WC_clean_label.docx` (SHA-256 `5464b65aa813777fe00fe90bd41255b7be07b842487ee13db42bd4b9815c5176`). Its effective text has no tracked-change nodes. The original table and figure-caption text below are preserved; merged FI labels are repeated for Markdown. The figure is extracted without alteration. Teaching annotations are separate and do not modify the manuscript.
+
+### Original Table 1
+
+**Table 1.** Stochastic adoption threshold bounds by action, household group, and SFHA status.
+
+| Action | Household group | Bounds [lₐ, hₐ] | Rationale | Sources |
+|---|---|---|---|---|
+| FI | Homeowner inside SFHA | [0.00, 0.10] | Homeowners inside the SFHA may face insurance purchase requirements linked to federally backed mortgages. | FEMA (2025b); Kousky (2018) |
+| FI | Homeowner outside SFHA | [0.35, 0.55] | Homeowners outside the SFHA generally purchase FI voluntarily. | Browne & Hoyt (2000); Kousky (2018) |
+| FI | Renter | [0.70, 0.90] | Renters generally have lower FI adoption and are not subject to mortgage-linked purchase requirements. | Koller (2025); Kousky (2018) |
+| EH | Homeowner | [0.30, 0.60] | Elevating a house requires upfront cost and structural work. | Aerts et al. (2018); FEMA (2014) |
+| BP | Homeowner | [0.25, 0.65] | Participation depends on available funding, eligibility, and government approval. | Curran-Groome et al. (2022); Greer & Brokopp Binder (2017) |
+| RL | Renter | [0.30, 0.95] | Moving depends on costs, housing availability, employment, and social ties. | Bukvic & Owen (2017); Lee & Van Zandt (2019) |
+
+### Teaching note (added here, not in the manuscript)
+
+The source Table 1 has no separate note; its operational explanation is in Section 3.2.2. A note illustrating how to make this table independently readable is:
+
+> **Note.** FI, flood insurance; EH, house elevation; BP, buyout program; RL, relocation; SFHA, Special Flood Hazard Area. The bounds specify dimensionless intervals for uniformly drawn adoption thresholds, not empirically estimated confidence intervals or observed adoption rates. An action is adopted when its predicted probability exceeds the threshold. Lower thresholds therefore make adoption easier at the same predicted probability. The intervals are model assumptions informed by the listed rationales, not estimates from the survey regression. They do not measure household income or establish affordability.
+
+Learn the separation of functions:
+
+- **Title:** identifies what is tabulated and which group/status distinctions matter.
+- **Columns:** keep the action, population, numerical setting, rationale, and cited background distinguishable rather than hiding them in one long caption.
+- **Note:** explains how to read a value and prevents a threshold from being mistaken for a percentage, uncertainty interval, or measured rate.
+- **Methods:** retains the consequential why, operational decision rule, and assumptions; a compact note does not replace that explanation.
+
+The source citations reproduce contextual rationales; they do not substantiate these exact bounds. This worked example does not independently verify the cited papers. For a different study, distinguish evidence for a qualitative rationale from evidence estimating a numerical parameter, and include only the relevant columns and note details.
+
+### Original Figure 6
+
+![Original ABM Figure 6: six panels comparing homeowner and renter losses and financial outcomes.](../assets/examples/abm-figure-6.png)
+
+> **Figure 6.** Flood losses and financial outcomes per household for homeowners (left) and renters (right) from 2011 to 2023. Panels (a) and (b) compare cumulative GUL (red) and actual loss (blue) under the adaptation scenario (solid) and the no-adaptation baseline (dashed). Under the adaptation scenario, panels (c) and (d) show annual premiums, OOP costs, and OOP rates, while panels (e) and (f) show annual insurance payouts and payout rates. Lines and bars show medians across 50 simulation runs, and black error bars indicate the IQR. Gray shading marks major flood years (2011 and 2021).
+
+### Reading the figure-caption design
+
+Here GUL means ground-up loss, OOP means out-of-pocket, and IQR means interquartile range. These explanations are teaching annotations; the manuscript defines its terms elsewhere.
+
+- **Opening:** names the outcomes, unit of comparison, two groups, spatial arrangement, and period before describing individual panels.
+- **Panel map:** separates the cumulative scenario comparison in (a)/(b) from annual financial components in (c)/(d) and (e)/(f), making the six-panel organization readable.
+- **Encoding:** assigns color to the loss quantity and line type to the scenario. The adaptation-only scope of later panels is explicit.
+- **Statistical reading:** identifies medians, the simulation-run count, and the IQR error bars instead of calling every display an average or every interval a confidence interval.
+- **Main text:** explains the pathway contrast and its answer to the scientific question. The caption provides reading instructions, not a second Results paragraph.
+
+Preserving this source is not a blanket layout or completeness certification. Inspect remaining filled regions and shaded bands against the actual plotting source, verify rate denominators, and check readability at the final embedded size before adapting a caption. Reading this PNG does not certify its placement in a Word document.
+
+Do not copy the ABM's thresholds, six-panel layout, 50 runs, years, acronyms, or homeowner/renter comparisons into unrelated research. Reuse the decisions behind the examples: identify the display's purpose, keep data and rationale separate, explain encodings and numerical meaning, and retain evidence-supported interpretation in the relevant prose.

@@ -144,6 +144,12 @@
       "prompt": "Audit a response and manuscript package. The response promises a new SM sampling table that is absent, cites old panel letters after a figure split, claims an acronym removed from the manuscript, and contains guessed line ranges from XML counts. The reviewer will read a compared manuscript, but only a clean draft is rendered. SM has no line numbers. Do not modify the manuscript or rerun anything.",
       "expected_output": "Identify the unmet promise without falsely resolving it, reconcile panel and terminology changes against actual files, and use verified SM item locators rather than guessed lines. Treat compared-version lines as unverified until that target is rendered and layout fixed. Do not certify the package or manufacture an addition, analysis, or line number.",
       "files": []
+    },
+    {
+      "id": "abm_display_example_transfer_without_fact_copying",
+      "prompt": "Use the author-provided ABM Table 1 and Figure 6 worked examples in the display guide. First, a reader asks whether Table 1 bounds are observed adoption rates or 95% confidence intervals because citations are listed. Second, draft a caption for a separate experiment: two groups, 18 participants per group, one endpoint panel, group means and 95% confidence-interval error bars, no simulation or yearly series. Explain what transfers from the examples without changing either study's evidence.",
+      "expected_output": "Explain the ABM's threshold intervals and distinguish qualitative source rationale from empirical estimation; identify the note as a teaching addition, not original manuscript content. For the new experiment, use its actual groups, sample size, statistic and uncertainty, without importing 50 runs, six panels, GUL, years or threshold settings. Keep scientific interpretation separate from caption-reading information and do not claim figure-layout verification from text alone.",
+      "files": []
     }
   ]
 }

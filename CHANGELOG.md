@@ -11,6 +11,18 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-10-02
+
+### Added
+
+- Author-provided ABM Table 1 and Figure 6 as worked display examples, preserving
+  original table entries, caption text and the extracted figure image.
+- Separate teaching annotations for table titles, rationales, sources and notes,
+  plus figure panel mapping, encoding and uncertainty. The example note is not
+  attributed to the source manuscript; model-specific values are not templates
+  for other studies.
+- Source-text and image-fidelity tests and a bounded cross-study transfer probe.
+
 ## [1.3.0] - 2026-10-02
 
 ### Added
