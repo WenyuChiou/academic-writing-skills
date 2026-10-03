@@ -69,7 +69,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.1"
+    assert manifest["version"] == "1.3.2"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -317,6 +317,57 @@ def test_abm_example_distinguishes_source_from_teaching_additions():
     data = json.loads(read(ROOT / "evals" / "evals.json"))
     assert any(case["id"] == "abm_display_example_transfer_without_fact_copying"
                for case in data["evals"])
+
+
+def test_venue_guidance_is_routed_and_scope_conditional():
+    skill = read(CORE / "SKILL.md")
+    overlay = read(CORE / "references" / "overlay-contract.md")
+    lifecycle = read(CORE / "references" / "lifecycle-and-routing.md")
+    assert "Confirm Venue Direction, Format, and Style" in skill
+    assert "Venue Profile" in overlay
+    assert "aims and scope" in overlay and "article type" in overlay
+    assert "checked date" in overlay and "production" in overlay
+    assert "grammar-only" in overlay
+    assert "does not authorize new analyses" in overlay
+    assert "venue profile" in lifecycle
+
+
+def test_abm_map_preserves_source_and_distinguishes_denominators():
+    displays = read(CORE / "references" / "figures-tables-and-supplements.md")
+    caption = re.search(r"^> \*\*Figure 1\.\*\* (.+)$", displays, re.MULTILINE)
+    assert caption is not None
+    text = "Figure 1. " + re.sub(r"\s+", " ", caption.group(1).strip())
+    assert hashlib.sha256(text.encode()).hexdigest() == (
+        "4ab4a2d2e900a46c8f92d9235f57ae39d43b694acf8440197c764d5dfc506684"
+    )
+    data = (CORE / "assets" / "examples" / "abm-figure-1.png").read_bytes()
+    assert struct.unpack(">II", data[16:24]) == (6671, 4355)
+    assert hashlib.sha256(data).hexdigest() == (
+        "7ce2d3c69498c2805a7a3183e228f0ea60967babef3a8638a96fdfb9854bb501"
+    )
+    assert "(../assets/examples/abm-figure-1.png)" in displays
+    assert "zero" in displays and "missing" in displays
+    assert "not a household percentage" in displays
+    assert "cannot establish the coordinate reference system" in displays
+
+
+def test_borders_and_citations_distinguish_source_from_requirement():
+    displays = read(CORE / "references" / "figures-tables-and-supplements.md")
+    overlay = read(CORE / "references" / "overlay-contract.md")
+    assert "1 pt" in displays and "0.5 pt" in displays
+    assert "nonprinting Word gridlines" in displays
+    assert "not a universal three-line-table requirement" in displays
+    assert "not equivalent to inspecting the rendered table" in displays
+    assert "Mondino et al., 2020" in overlay
+    assert "not validation of the ABM's tract-level proxy" in overlay
+    assert "exact thresholds" in overlay
+    assert "2026a/2026b" in overlay
+    assert "not a generic APA edition" in overlay
+    data = json.loads(read(ROOT / "evals" / "evals.json"))
+    ids = {item["id"] for item in data["evals"]}
+    assert {"venue_first_without_scope_expansion",
+            "map_and_borders_without_false_certification",
+            "citation_rationale_not_parameter_validation"} <= ids
 
 
 def test_review_uses_progressive_modules_and_conditional_ethan_overlay():

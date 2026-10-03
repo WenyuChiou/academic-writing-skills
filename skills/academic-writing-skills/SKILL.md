@@ -28,6 +28,12 @@ Use **lightweight mode** for bounded text work. Use **managed-project mode** for
 
 In managed-project mode, read [state-and-authority.md](references/state-and-authority.md) and reuse equivalent project records. Initialize the project-state template with `scripts/init_manuscript_state.py` only when sustained coordination actually needs a record and none exists. Do not create project machinery for a one-off edit or reinitialize state merely because a new turn begins.
 
+## Confirm Venue Direction, Format, and Style
+
+For venue-directed planning, substantive restructuring, display/reference formatting, or submission checks, first confirm the target journal, article type, audience, and publication stage. Use the **Venue Profile** in [overlay-contract.md](references/overlay-contract.md) to separate scientific direction, verified requirements, stylistic examples, and project preferences. Reuse a current profile; verify changed or uncertain official requirements before applying them. A grammar-only edit does not trigger journal reselection or a whole-package audit. If no venue is selected, keep advice provisional and do not invent compliance.
+
+Use the ABM examples in the display guide and overlay contract as source-grounded reasoning aids, not journal-wide templates or certification of the original paper.
+
 ## Follow the Manuscript Lifecycle
 
 Map the work to this lifecycle without forcing the final article order to equal the writing order:

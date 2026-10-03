@@ -26,6 +26,8 @@ Do not mark a section permanently complete. Mark it current relative to a named 
 
 For a conventional empirical article without a different declared sequence, use research framing → extended evidence outline → Introduction → study context → Methods → Results → Discussion/limitations → Conclusion → rebuilt Abstract. Follow different genre or author requirements when applicable; section numbers and six headings are not universal requirements. Develop Supporting Material in parallel with Methods and Results, then reconcile it at integration rather than creating it as an afterthought.
 
+Before venue-directed outlining or formatting, establish or reuse the venue profile in [overlay-contract.md](overlay-contract.md). Check the scientific question/contribution against the journal's direction and audience separately from checking article-type, stage-specific format, and style. Scope fit is not evidence of novelty or acceptance; a mismatch is a decision for the author, not permission to change the study. At integration, recheck affected requirements against current official sources rather than relying only on a published example.
+
 ## Scope and Check Depth
 
 Route along four independent axes: **action** (for example, grammar correction versus scientific review), **textual scope**, **change impact**, and **verification depth/source availability**. A full-file punctuation pass is not automatically a full scientific review; a one-sentence metric change can require cross-file checks.
