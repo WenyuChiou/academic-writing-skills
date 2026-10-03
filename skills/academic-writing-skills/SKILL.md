@@ -39,7 +39,7 @@ Map the work to this lifecycle without forcing the final article order to equal 
 5. develop Discussion, alternatives, implications, limitations, and future work
 6. synthesize the Conclusion from the stabilized evidence map
 7. rebuild the title, Abstract, highlights, and summaries from the current manuscript
-8. reconcile references, supplements, metadata, and submission files
+8. reconcile references, parallel-developed supplements, metadata, and submission files
 9. pass release checks on the exact deliverables
 
 At every stage, test the relevant part of both directions of alignment:
@@ -48,6 +48,19 @@ At every stage, test the relevant part of both directions of alignment:
 - **bottom-up:** source evidence → result → interpretation → contribution and summary claim
 
 Read [lifecycle-and-routing.md](references/lifecycle-and-routing.md) for stage gates, review maturity, non-IMRAD routing, and change-impact classes.
+
+For planning, drafting, or reorganizing an Introduction or study-context section, read [introduction-and-study-context.md](references/introduction-and-study-context.md). It guides section functions and content placement, not fixed paragraph counts or a mandatory article structure. A bounded language edit uses the local prose checks instead.
+
+For planning or developing Methods, or substantively clarifying a setting's source, rationale, or assumption status, read [methods-and-assumptions.md](references/methods-and-assumptions.md). Distinguish the provenance of a value or rule from assumptions about its application and from evidence of validation. Use the hypothetical examples as reasoning aids, not as verified study facts.
+
+Load the remaining guides only for the requested reader function or an affected dependency:
+
+- [results-and-explanation.md](references/results-and-explanation.md): evidence-led findings, so-what/SQ closure, visual functions, and supported versus merely programmed mechanisms.
+- [discussion-and-limitations.md](references/discussion-and-limitations.md): interpretation or extension-analysis mode, sensitivity boundaries, and specific-constraint-first limitations.
+- [conclusion-and-abstract.md](references/conclusion-and-abstract.md): study identity, supported summaries, and flexible abstract information functions rather than universal sentence templates.
+- [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md): final-size legibility, captions/notes, parallel SM, numbering, and project formatting.
+
+At each chapter completion or substantial chapter revision, run the chapter-closure blind-spot check in [lifecycle-and-routing.md](references/lifecycle-and-routing.md). The checkpoint is required; select diagnostic questions by design, content, and evidence. Do not run a full chapter audit for a grammar-only edit or claim exhaustive discovery of unknown unknowns.
 
 ## Draft from Explicit Writing Contracts
 

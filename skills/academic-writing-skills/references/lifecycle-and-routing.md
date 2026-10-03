@@ -7,7 +7,8 @@
 3. Reader-function mapping
 4. Review maturity
 5. Stage gates
-6. Change-impact classes
+6. Chapter-closure blind-spot check
+7. Change-impact classes
 
 ## Modes and Lifecycle Stages
 
@@ -23,6 +24,8 @@ Distinguish three timelines:
 
 Do not mark a section permanently complete. Mark it current relative to a named evidence state or release candidate.
 
+For a conventional empirical article without a different declared sequence, use research framing → extended evidence outline → Introduction → study context → Methods → Results → Discussion/limitations → Conclusion → rebuilt Abstract. Follow different genre or author requirements when applicable; section numbers and six headings are not universal requirements. Develop Supporting Material in parallel with Methods and Results, then reconcile it at integration rather than creating it as an afterthought.
+
 ## Scope and Check Depth
 
 Route along four independent axes: **action** (for example, grammar correction versus scientific review), **textual scope**, **change impact**, and **verification depth/source availability**. A full-file punctuation pass is not automatically a full scientific review; a one-sentence metric change can require cross-file checks.
@@ -34,7 +37,7 @@ Use a common core at every scope: identify the accepted source and authorization
 | Sentence or grammar-only edit | grammatical repair, unchanged scientific meaning, local referents and notation | permission to restructure the argument or certify citations |
 | Paragraph | function, claim–evidence relation, meaning, prerequisites, local terms, previous/next context | a whole-paper audit or a required closing slogan |
 | Subsection | paragraph roles and order, missing/duplicated functions, relevant figures/numbers, cumulative substantive answer | that every figure must independently prove the entire RQ |
-| Chapter | links between subsections, chapter purpose and RQ coverage, placement of methods/findings/interpretations | full review of unrelated chapters |
+| Chapter | links between subsections, chapter purpose and RQ coverage, placement of methods/findings/interpretations, closure blind-spot check | full review of unrelated chapters |
 | Whole manuscript | gap–question–method–result–interpretation–conclusion chain; summaries, terms, references, numbers, visuals | verification of unavailable raw evidence or excluded companion files |
 | Submission package | selected manuscript, SM, response and deliverables; promises, labels, numbering, stable line references, tracked/clean state, rendering | readiness of files not selected or not inspected |
 
@@ -113,6 +116,20 @@ Synchronize supplements, figures, tables, metadata, cover materials, and reposit
 ### Top-to-bottom integration gate
 
 After all major sections exist, review the exact manuscript in four distinct passes: argument and structure; evidence and scope; scholarly prose; delivery integrity. During the prose pass, review terminology, abbreviation use, exact and semantic repetition, stock phrasing, sentence and paragraph openings, subject continuity, old-to-new information flow, and transitions. Re-run affected earlier passes whenever a prose edit changes scientific meaning or claim scope.
+
+## Chapter-Closure Blind-Spot Check
+
+At every chapter completion or substantial chapter revision, revisit the chapter's reasoning after normal drafting checks, even if no obvious problem has appeared. Timing is mandatory; diagnostic content is conditional on the actual design, claims, sources, and requested scope. A punctuation-only pass does not amount to a chapter completion or substantive review.
+
+Choose the applicable questions from the section guide and study-design adapter:
+
+- Introduction/context: does the selected case and actual evidence scope fit the promised task? Are prerequisites staged before dependent settings, and is selection being mistaken for representativeness?
+- Methods: are origin, application assumptions, and evaluation distinct? Can the described operations support the promised inference without hidden transfer, dependence, or aggregation assumptions?
+- Results: could composition, denominators, operation order, or comparison conditions change the meaning? Is a causal explanation supported beyond a rule or correlation?
+- Discussion/limitations: what exactly remained stable in an extension, and which inference does each constraint limit? Has a narrow metric become a broader construct?
+- Conclusion/Abstract: did compression drop a condition, comparator, subject, scope, or qualification, or increase causal/validation strength?
+
+Adapt rather than force the examples: qualitative work may require negative-case and transferability checks, theory premise and counterexample checks, and synthesis coverage and heterogeneity checks. Revisit only relevant dependencies; missing evidence is not proof of invalidity. Record material findings and the checked/not-applicable/out-of-scope/unverified boundary without generating a ledger for every paragraph. This is not a certification that all unknown unknowns were found.
 
 ## Change-Impact Classes
 

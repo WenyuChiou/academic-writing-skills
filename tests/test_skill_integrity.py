@@ -12,11 +12,17 @@ REVIEW = ROOT / "skills" / "paper-review"
 
 CORE_REFERENCES = {
     "banned_words.md",
+    "conclusion-and-abstract.md",
+    "discussion-and-limitations.md",
+    "figures-tables-and-supplements.md",
+    "introduction-and-study-context.md",
     "lifecycle-and-routing.md",
+    "methods-and-assumptions.md",
     "overlay-contract.md",
     "prose-and-citation-editing.md",
     "reviewer-red-team-and-release.md",
     "reviewer-response-workflow.md",
+    "results-and-explanation.md",
     "state-and-authority.md",
     "study-design-adapters.md",
     "universal-integrity.md",
@@ -61,7 +67,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.2.0"
+    assert manifest["version"] == "1.3.0"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -132,7 +138,7 @@ def test_core_includes_lifecycle_impact_and_release_gates():
     assert "cumulative argument rather than a list" in prose
     assert "broad disciplinary readership" in prose
     assert "draw on data" in prose
-    assert "whose background overlaps with the paper's broad direction" in prose
+    assert "intended scholarly audience" in prose
     assert "read the exact passage aloud" in prose
     assert "do not append the citations as an unexplained contradiction" in prose
     assert "reflects the current sample or location" in prose
@@ -188,6 +194,81 @@ def test_results_gate_requires_meaning_without_discussion_overreach():
     assert "what the observed pattern means" in normalized
     assert "Numbers alone are not a substantive answer" in normalized
     assert "untested mechanisms" in normalized
+
+
+def test_section_guides_are_routed_without_forcing_full_review():
+    skill = read(CORE / "SKILL.md")
+    for name in (
+        "introduction-and-study-context.md", "methods-and-assumptions.md",
+        "results-and-explanation.md", "discussion-and-limitations.md",
+        "conclusion-and-abstract.md", "figures-tables-and-supplements.md",
+    ):
+        assert f"](references/{name})" in skill
+    lifecycle = read(CORE / "references" / "lifecycle-and-routing.md")
+    assert "Chapter-Closure Blind-Spot Check" in lifecycle
+    assert "At every chapter completion or substantial chapter revision" in lifecycle
+    assert "Timing is mandatory; diagnostic content is conditional" in lifecycle
+    assert "not a certification that all unknown unknowns were found" in lifecycle
+    assert "Develop Supporting Material in parallel" in lifecycle
+
+
+def test_results_and_extension_analysis_keep_inference_boundaries():
+    results = read(CORE / "references" / "results-and-explanation.md")
+    discussion = read(CORE / "references" / "discussion-and-limitations.md")
+    shared = read(CORE / "references" / "universal-integrity.md")
+    assert "Results may contain findings and explanations directly supported by the analysis" in shared
+    assert "reserve extended, literature-based, or untested mechanism interpretations" in shared
+    assert "findings in Results, and mechanisms or implications in Discussion" not in shared
+    assert "one primary question" in results
+    assert "not a mandatory one-figure/one-question ratio" in results
+    assert "composition" in results and "aggregation" in results
+    assert "rule alone" in results and "causal" in results
+    assert "extension-analysis" in discussion
+    assert "not require sensitivity analyses" in discussion
+    assert "direction, ranking, magnitude, or metric" in discussion
+    assert "specific constraint" in discussion
+    assert "not a blanket ban" in discussion
+
+
+def test_summary_guidance_removes_universal_abstract_templates():
+    summary = read(CORE / "references" / "conclusion-and-abstract.md")
+    for meaning in (
+        "This study examined", "method and research task", "information functions",
+        "not six mandatory blocks", "No universal word or sentence cap",
+        "Do not invent optimization objectives", "Ask only when",
+        "raw numbers", "compression",
+    ):
+        assert meaning in summary
+
+
+def test_visual_and_response_guidance_reconciles_exact_artifacts():
+    displays = read(CORE / "references" / "figures-tables-and-supplements.md")
+    workflow = read(CORE / "references" / "reviewer-response-workflow.md")
+    prose = read(CORE / "references" / "prose-and-citation-editing.md")
+    assert "actual final display size" in displays
+    assert "nonfunctional whitespace" in displays
+    assert "not universal journal rules" in displays
+    assert "**Figures S4** to **S6**" in displays
+    assert "caption" in displays and "table note" in displays
+    assert "Promise-to-Artifact Reconciliation" in workflow
+    assert "rendered target version" in workflow
+    assert "never calculate line numbers" in workflow
+    assert "nonprobability" in workflow
+    assert "flood adaptation decision-making process" in prose
+
+
+def test_new_chapter_behavioral_probes_are_registered():
+    data = json.loads(read(ROOT / "evals" / "evals.json"))
+    required = {
+        "chapter_closure_checks_are_content_conditional",
+        "results_composition_not_individual_decay",
+        "discussion_extension_unchanged_ranking_not_validation",
+        "abstract_identity_without_fixed_template",
+        "visual_legibility_without_whitespace_overcorrection",
+        "response_promises_and_rendered_locators",
+    }
+    registered = {item["id"] for item in data["evals"]}
+    assert required <= registered
 
 
 def test_review_uses_progressive_modules_and_conditional_ethan_overlay():

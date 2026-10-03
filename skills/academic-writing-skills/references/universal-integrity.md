@@ -14,7 +14,9 @@
 
 Map purpose or gap → question or objective → method → evidence → result → interpretation → limitation → contribution. Flag missing, contradictory, or orphan links.
 
-Lead paragraphs with their central function. Read only paragraph-opening sentences in sequence; they should form a coherent section outline. Use one primary function per paragraph unless a concise transition genuinely requires two.
+Make a paragraph's topic and purpose clear in its opening sentences, usually before detailed evidence. Read those openings in sequence; they should form a coherent section outline. Use one primary function per paragraph unless a concise transition genuinely requires two.
+
+Keep the opening, development, and ending aligned with that function. The ending should complete the point established by the evidence or prepare a specific next step, not merely repeat the opening. It need not be a separate summary or transition sentence. Treat this as a reader-comprehension test, not a fixed sentence position or paragraph template.
 
 Before drafting, define the paragraph's function, claim, evidence, development, and bridge. After drafting, verify that every sentence serves that contract. Read the preceding and following paragraphs before accepting a local rewrite.
 
@@ -22,7 +24,7 @@ In Results, state the finding before or with the figure or table callout. Report
 
 Test the “so what” by asking what the evidence establishes about the question: an effect, contrast, trade-off, boundary, or supported explanation. Removing an SQ/RQ label should not remove the answer. Do not make a descriptive plot carry a causal conclusion or force every visual to demonstrate the full feedback loop.
 
-Keep reproducible procedures in Methods, findings in Results, and mechanisms or implications in Discussion unless the genre explicitly integrates them.
+Keep reproducible procedures in Methods. Results may contain findings and explanations directly supported by the analysis; reserve extended, literature-based, or untested mechanism interpretations and implications for Discussion. Adapt these boundaries when the genre explicitly integrates the sections.
 
 ## Evidence and Claim Scope
 
@@ -60,6 +62,8 @@ Build the Abstract from the current evidence map:
 6. contribution, implication, or use boundary
 
 Give every main question a substantive answer. Preserve enough named relations, group contrasts, directions, and qualifications to make the answer intelligible without internal codes or figures. Treat the word limit as a ceiling, not a reason to erase essential meaning.
+
+Identify the method and what it does, who or what is studied, and the time, place, dataset, or analytical scope necessary to interpret the answer. Apply a word limit only when it comes from the active venue or author contract. Use [conclusion-and-abstract.md](conclusion-and-abstract.md) for flexible information functions, direct Conclusion openings, and compression checks; do not convert that sequence into fixed sentence counts or unsupported testbed/optimization claims.
 
 Build the Conclusion around:
 
@@ -103,6 +107,8 @@ Trace material numbers and metadata to sources. Check units, denominators, round
 Require support for external facts, prior findings, established definitions, data sources, parameters, thresholds, and methodological rationales. Verify in-text citations against the reference list and the claim they support.
 
 Explain each visual's main pattern, relevant evidence, uncertainty, and relation to the question. Explain mechanisms only when supported. Inspect captions, panels, legends, axes, units, callouts, resolution, readability, and cross-file numbering.
+
+Inspect visuals at their actual final document size, not only a zoomed source. Use [figures-tables-and-supplements.md](figures-tables-and-supplements.md) for readable labels, balanced whitespace, caption/note functions, and cross-artifact checks. Project choices such as bold references or a plain range connector remain preferences, not universal venue standards.
 
 ## Exact-Candidate Gate
 

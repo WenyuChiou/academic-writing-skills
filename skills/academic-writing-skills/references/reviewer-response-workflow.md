@@ -123,8 +123,8 @@ order:
    figure. State what changed, what remained stable, and how the evidence
    addresses the concern.
 7. **Identify manuscript changes.** Name the actual sections, figures, tables, or
-   Supporting Material entries. Use final line numbers only after the clean
-   manuscript is stable.
+   Supporting Material entries. Use final line numbers only after the designated
+   reviewer-facing manuscript and its layout are stable.
 8. **State remaining boundaries when material.** Name what the study still does
    not represent and give the reason. Do not answer with a bare “no.”
 
@@ -401,10 +401,62 @@ When the deliverable is a Word response document:
 - keep references in the document's established location;
 - verify cross-page comment-response blocks, table breaks, captions, equations,
   and figures after rendering; and
-- do not fill line-number placeholders until the clean manuscript is stable.
+- do not fill line-number placeholders until the designated manuscript version
+  and its layout are stable.
 
 Use the available `docx` or Word-document skill for tracked-change and OOXML
 operations.
+
+## Promise-to-Artifact Reconciliation
+
+For a revision-package check, inspect in both directions: every response promise
+must point to an implemented and verified change or a justified non-change, and
+every material manuscript/SM change should be reported under a reviewer concern
+only when it directly addresses that concern. Do not turn every editorial change
+into a new promise, add topical labels to unchanged text, or silently mark an
+unmet promise resolved. Preserve an open issue when the required addition or
+analysis is absent. A writing audit does not authorize rerunning a model.
+
+Track the actual destination and changed function. Initialization, annual update,
+decision thresholds, and enforcement are distinct; evidence for one does not
+establish another. Check that consequential assumptions are in Methods rather
+than disclosed only in Limitations. A source supporting an institutional rationale
+does not estimate a numerical threshold. Cross-sectional survey evidence does
+not validate within-person annual dynamics. For a nonprobability sample, do not
+present a simple-random-sampling margin of error as the sample's demonstrated
+precision. Describe repeated-run uncertainty at the level it actually measures.
+
+Distinguish source comparison from direct validation. Geographic coverage,
+sampling unit, inclusion criteria, and denominator must match or be qualified:
+an average per paid claim is not an average per all households, and a regional
+record is not necessarily an observation within the modeled domain. State what
+a diagnostic actually evaluates; do not imply that documenting this mismatch
+invalidates every component or that a modeled trajectory is observed enrollment.
+
+After reorganizing figures, tables, sections, or SM, verify each reference by its
+purpose, including panel letters, captions, lists, acronym choices, and relevant
+response promises. Match the terminology actually retained in the manuscript;
+do not claim use of an abbreviation that was removed. Check citations against
+the supported clause and reference list, including author-year suffixes. Before
+deleting a reference, inspect its other usages. A new citation needs claim-level
+support, not just a relevant title or a desire to cite recent work.
+
+Select and record the rendered target version for response locators. It may be a
+clean manuscript or a compared/marked manuscript according to the delivery
+contract; never calculate line numbers from XML paragraph counts or reuse them
+from another version or markup view. Freeze text, page setup, line-number
+configuration, and display mode before reading displayed line numbers. If
+pagination changes, recheck affected ranges rather than assuming a small edit
+has no effect. For an SM without line numbering, cite its Text/Figure/Table item;
+do not transfer main-text lines or leave final XX/XXX placeholders. When the
+target cannot be rendered, mark locators unverified rather than guessing.
+
+Derive a revised response from the accepted advisor-edited baseline. If clean and
+compared response versions are requested, clean that baseline and compare the
+verified final revision against it, preserving reviewer text and required labels.
+Inspect the effective revised text and rendered deliverables, not concatenated
+deleted/inserted prose. Report what was actually checked before calling the
+package ready.
 
 ## Checks After a Model or Evidence Revision
 
@@ -492,7 +544,8 @@ numbers and the explanation of the results:
       captures.
 - [ ] Terminology, abbreviations, mathematical notation, tense, and response
       formatting are consistent.
-- [ ] Final line numbers refer to the clean revised manuscript.
+- [ ] Final line numbers refer to the designated rendered reviewer-facing
+      manuscript version; unnumbered SM uses verified item locators.
 - [ ] New prose passes claim-evidence, claim-scope, terminology,
       forbidden-variant, repetition, stock-phrase, project-discouraged-phrase,
       and formatted-document checks.
