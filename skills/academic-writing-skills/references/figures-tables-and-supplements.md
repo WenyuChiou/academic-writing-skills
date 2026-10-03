@@ -7,6 +7,7 @@
 3. Synchronization and SM
 4. Project formatting and notation
 5. Worked ABM examples
+6. Maps, borders, and grids
 
 ## Reader Function and Final-Size Legibility
 
@@ -95,3 +96,35 @@ Here GUL means ground-up loss, OOP means out-of-pocket, and IQR means interquart
 Preserving this source is not a blanket layout or completeness certification. Inspect remaining filled regions and shaded bands against the actual plotting source, verify rate denominators, and check readability at the final embedded size before adapting a caption. Reading this PNG does not certify its placement in a Word document.
 
 Do not copy the ABM's thresholds, six-panel layout, 50 runs, years, acronyms, or homeowner/renter comparisons into unrelated research. Reuse the decisions behind the examples: identify the display's purpose, keep data and rationale separate, explain encodings and numerical meaning, and retain evidence-supported interpretation in the relevant prose.
+
+## Maps, Borders, and Grids
+
+Apply the active [venue profile](overlay-contract.md) first. Do not infer a journal requirement from a familiar map style, a Markdown table, or a single published article.
+
+### Map reading and spatial meaning
+
+Identify whether a map supplies study context or answers an analytical question. Show the relevant location, basin/administrative boundaries, analysis domain, and sampling/model units distinctly. An inset is useful when readers need geographic orientation, not obligatory decoration. Keep the study region large enough to read without removing necessary context; inspect inset, labels, scale, legend, and main map together at final size.
+
+Explain the mapped quantity, unit, denominator, reference period, and classification. Show class boundaries without overlaps or unexplained gaps; distinguish a valid zero from missing/no-data areas. Use a sequential scale for an ordered magnitude, and a justified diverging scale for changes around a meaningful reference. For bivariate maps, explain both dimensions and each color's interpretation. Neither darker color nor polygon size establishes a larger household count or causal effect.
+
+Retain data source/version/date, coordinate reference system or projection where relevant to distances/areas, and basemap attribution/licensing in the appropriate caption, Methods, or SM. Verify these from editable GIS/source records; do not infer them from a screenshot. Scale bars and orientation aids must remain valid after resizing or reprojection; use a north arrow or coordinate labels when they help orientation, not as an automatic requirement. When comparing maps, reconcile extents, class breaks, normalization, and legend semantics or explain changes. A local color change need not overturn a whole-study conclusion, but its stated spatial interpretation must be updated.
+
+### Original ABM Figure 1
+
+![Original ABM Figure 1: Passaic River Basin locator and tract-area SFHA categories](../assets/examples/abm-figure-1.png)
+
+> **Figure 1.** The study area of this paper: the Passaic River Basin and the flood modeling domain with percentages of each census tract’s area within the Special Flood Hazard Area (SFHA).
+
+**Teaching annotation, not source-caption content:** the left panel locates the basin; the enlarged right panel distinguishes the dashed flood-model domain from tract polygons and the river. Four light-to-dark blue classes show tract area in SFHA: 0–1%, >1–10%, >10–30%, and >30%. This is not a household percentage or a direct observation of individual SFHA status. Table/model assignment rules require separate explanation. Scale bars and county labels are examples of geographic reading aids, not inherited requirements for every map.
+
+The original extracted image and caption are preserved. This PNG cannot establish the coordinate reference system, source-layer vintage, classification calculation, or accuracy of the scale bars. Verify those from GIS records when adapting or certifying a map; the example is not a geographic or final-Word-layout audit.
+
+### Table rules versus plot grids
+
+Choose table borders from the active venue/template and the structure readers need. Distinguish actual printable borders from nonprinting Word gridlines. A minimal top/header/bottom pattern often suffices for a simple table; grouping rules or other accessible layouts may be justified. Avoid unnecessary cell boxing, but do not remove required boundaries or force the same style on every venue and complex table.
+
+**Observed ABM Table 1 formatting:** direct Word OOXML specifies top and bottom horizontal rules of **1 pt**, a **0.5 pt** rule below the header, and no left/right, internal vertical, or internal row rules. All interior rows were checked for cell-border overrides. This is a source-format example, not a universal three-line-table requirement or prescribed line weight. The Markdown reproduction above conveys entries, not Word borders; inspecting OOXML is not equivalent to inspecting the rendered table, its page breaks, or repeated headers.
+
+The [AGU LaTeX submission guide dated January 2023](https://www.agu.org/-/media/Files/Publications/Latex_submission_guidelines_Jan162023.pdf) discourages vertical table lines. That is a venue/template-specific source, not proof that all journals require these ABM line weights; refresh applicability through the venue profile. Do not transfer an older template's other rules without checking current instructions.
+
+For plots, distinguish axis spines, reference lines, and reading grids from table borders. Retain lines that support scale-reading or a meaningful baseline; mute unnecessary grids that compete with data. Decide top/right spines and tick density from the plot's function and venue, not a blanket aesthetic ban. Recheck the data, labels, uncertainty, and final-size legibility after changing any of these elements.

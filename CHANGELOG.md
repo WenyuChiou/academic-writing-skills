@@ -11,6 +11,18 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.2] - 2026-10-03
+
+### Added
+
+- Venue-first direction, format and style checks with dated official WRR/AGU
+  examples; bounded edits reuse applicable profiles without a whole-paper audit.
+- Map semantics, GIS provenance, table borders and plot grids, grounded in the
+  original ABM Figure 1 and inspected Table 1 Word settings, not universal rules.
+- Separate claim-support and reference-format checks, with actual ABM TP and
+  dataset citation examples and explicit assumption/validation boundaries.
+- Source-fidelity regression guards and three registered portability probes.
+
 ## [1.3.1] - 2026-10-02
 
 ### Added

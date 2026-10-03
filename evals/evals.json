@@ -150,6 +150,24 @@
       "prompt": "Use the author-provided ABM Table 1 and Figure 6 worked examples in the display guide. First, a reader asks whether Table 1 bounds are observed adoption rates or 95% confidence intervals because citations are listed. Second, draft a caption for a separate experiment: two groups, 18 participants per group, one endpoint panel, group means and 95% confidence-interval error bars, no simulation or yearly series. Explain what transfers from the examples without changing either study's evidence.",
       "expected_output": "Explain the ABM's threshold intervals and distinguish qualitative source rationale from empirical estimation; identify the note as a teaching addition, not original manuscript content. For the new experiment, use its actual groups, sample size, statistic and uncertainty, without importing 50 runs, six panels, GUL, years or threshold settings. Keep scientific interpretation separate from caption-reading information and do not claim figure-layout verification from text alone.",
       "files": []
+    },
+    {
+      "id": "venue_first_without_scope_expansion",
+      "prompt": "Plan a qualitative education paper for an unselected journal using the WRR/ABM examples. Then repair only grammar in a separate accepted hydrology sentence whose venue profile is current. A colleague says the skill requires APA7, six sections, a new simulation, and another journal search for every sentence.",
+      "expected_output": "Clarify or keep provisional the education venue/article type/audience; do not apply WRR requirements universally or invent an analysis. Separate direction, format and style, source authority and submission stage. Keep the grammar-only edit bounded with unchanged applicable profile, not journal reselection or full audit.",
+      "files": []
+    },
+    {
+      "id": "map_and_borders_without_false_certification",
+      "prompt": "Use the ABM map and table examples to assess a described map with blue tract-area percentages, no GIS metadata, and a caption claiming percent residents insured. There is no rendered Word file. The target venue permits grouped table rules, but a colleague insists every table must copy ABM's three-line weights and every plot must lose its top/right spines.",
+      "expected_output": "Flag denominator/quantity mismatch without inferring household values; retain unknown CRS/vintage/scale and final-layout checks as unverified. Explain conditional map/border/grid choices and actual source formatting, not universal line weights or spine rules. Do not certify layout or invent metadata from an image.",
+      "files": []
+    },
+    {
+      "id": "citation_rationale_not_parameter_validation",
+      "prompt": "The draft cites Mondino et al. (2020) as proving an exact tract-GUL threshold and validating individual TP decay. Its bibliography has two different FEMA datasets assigned identical year letters, and a Kousky paper left uncited after a paragraph deletion. Explain targeted checks using the ABM examples without changing model settings or filling missing source metadata.",
+      "expected_output": "Separate qualitative context from empirical parameter estimation/validation, verify the primary source's actual claims and transfer limits, and keep model assumptions explicit. Check dataset identity, version, year/suffix and matching keys under venue rules; inspect the uncited work's relevance before removal rather than adding a topical citation to save it. No fabricated metadata or assumed blanket APA format.",
+      "files": []
     }
   ]
 }
