@@ -1,6 +1,8 @@
+import hashlib
 import json
 import re
 import subprocess
+import struct
 import sys
 from pathlib import Path
 
@@ -67,7 +69,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.0"
+    assert manifest["version"] == "1.3.1"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -269,6 +271,52 @@ def test_new_chapter_behavioral_probes_are_registered():
     }
     registered = {item["id"] for item in data["evals"]}
     assert required <= registered
+
+
+def test_abm_display_examples_preserve_verified_source_text():
+    displays = read(CORE / "references" / "figures-tables-and-supplements.md")
+    table_section = displays.split("### Original Table 1", 1)[1].split(
+        "### Teaching note", 1
+    )[0]
+    rows = [line for line in table_section.splitlines() if line.startswith("|")]
+    data = [[re.sub(r"\s+", " ", cell.strip()) for cell in row.strip("|").split("|")]
+            for row in rows[2:]]
+    assert len(data) == 6 and all(len(row) == 5 for row in data)
+    canonical_table = "\n".join("|".join(row) for row in data)
+    assert hashlib.sha256(canonical_table.encode()).hexdigest() == (
+        "dac3dd913a33fde402a1b39781e79fd70eb48d9156f10626cc8ade4ec085543c"
+    )
+    caption = re.search(r"^> \*\*Figure 6\.\*\* (.+)$", displays, re.MULTILINE)
+    assert caption is not None
+    canonical_caption = "Figure 6. " + re.sub(r"\s+", " ", caption.group(1).strip())
+    assert hashlib.sha256(canonical_caption.encode()).hexdigest() == (
+        "65d6e2976a61796dab18897e950227932e20b11b3c311c987244f46fb4e5111e"
+    )
+
+
+def test_abm_figure_example_preserves_original_asset():
+    image = CORE / "assets" / "examples" / "abm-figure-6.png"
+    data = image.read_bytes()
+    assert data[:8] == b"\x89PNG\r\n\x1a\n"
+    assert struct.unpack(">II", data[16:24]) == (1433, 1765)
+    assert hashlib.sha256(data).hexdigest() == (
+        "3e1461f1c0468534d3bc3b73e1f222bef6d6f09cdb2e4b458a8b66f39e60dd0c"
+    )
+    displays = read(CORE / "references" / "figures-tables-and-supplements.md")
+    assert "(../assets/examples/abm-figure-6.png)" in displays
+
+
+def test_abm_example_distinguishes_source_from_teaching_additions():
+    displays = read(CORE / "references" / "figures-tables-and-supplements.md")
+    assert "ABM_manuscript_20260812_WC_clean_label.docx" in displays
+    assert "5464b65aa813777fe00fe90bd41255b7be07b842487ee13db42bd4b9815c5176" in displays
+    assert "### Teaching note (added here, not in the manuscript)" in displays
+    assert "not empirically estimated confidence intervals" in displays
+    assert "do not substantiate these exact bounds" in displays
+    assert "Do not copy the ABM's thresholds, six-panel layout, 50 runs" in displays
+    data = json.loads(read(ROOT / "evals" / "evals.json"))
+    assert any(case["id"] == "abm_display_example_transfer_without_fact_copying"
+               for case in data["evals"])
 
 
 def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
