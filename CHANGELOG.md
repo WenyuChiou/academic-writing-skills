@@ -11,6 +11,17 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.4] - 2026-10-05
+
+### Added
+
+- Explicit pre-draft checks for logic within paragraphs and progression between
+  paragraphs, scaled to the requested writing or revision scope.
+- Pattern-first Results guidance: use necessary values to support a finding
+  rather than mechanically enumerate variables, groups, or panels.
+- A shared direct-syntax check that preserves technical distinctions,
+  conditions, uncertainty, and coherent connections between sentences.
+
 ## [1.3.3] - 2026-10-03
 
 ### Added

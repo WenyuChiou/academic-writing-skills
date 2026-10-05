@@ -18,9 +18,22 @@ Make a paragraph's topic and purpose clear in its opening sentences, usually bef
 
 Keep the opening, development, and ending aligned with that function. The ending should complete the point established by the evidence or prepare a specific next step, not merely repeat the opening. It need not be a separate summary or transition sentence. Treat this as a reader-comprehension test, not a fixed sentence position or paragraph template.
 
-Before drafting, define the paragraph's function, claim, evidence, development, and bridge. After drafting, verify that every sentence serves that contract. Read the preceding and following paragraphs before accepting a local rewrite.
+Before drafting, define the paragraph's function, claim, evidence, development, and bridge. Check the planned logic below before choosing wording, then verify the same relations in the completed prose.
+
+### Pre-draft logic check
+
+For section or subsection work, arrange the paragraph functions before drafting individual paragraphs. For a local substantive rewrite, inspect the supplied paragraph and its available neighbors; do not expand a bounded edit into whole-section restructuring. If adjacent text is unavailable, state that limit rather than inventing its content or certifying continuity.
+
+- **Between paragraphs:** identify what the preceding paragraph establishes, what the current paragraph adds, and what the next paragraph needs. Check that the order supplies necessary background and definitions, advances the argument, and avoids duplicated functions or unexplained jumps. Name the actual relation, such as contrast, extension, qualification, or consequence; a connector cannot supply missing reasoning.
+- **Within a paragraph:** identify its main point and how each planned sentence develops, supports, explains, or qualifies it. Make comparisons and referents explicit, introduce prerequisites before using them, and check that the ending follows from the evidence. Do not treat temporal order or a plausible sequence as proof of causation.
+
+After drafting, read the paragraph as a whole and its boundary sentences with the neighboring paragraphs. Use simple, direct sentence structures with visible subjects and actions; preserve technical distinctions, necessary conditions, and uncertainty. Simplifying syntax must not produce disconnected fragments. Use [prose-and-citation-editing.md](prose-and-citation-editing.md) for the detailed prose checks.
+
+### Results progression
 
 In Results, state the finding before or with the figure or table callout. Report evidence needed to support it, then give the substantive answer at the paragraph or subsection boundary where it belongs. Do not append an empty synthesis after every result or close only with another inventory of statistics, themes, paths, or cases.
+
+Lead with the main pattern or comparison, then use necessary numbers or other evidence to support it. Do not merely report values in variable, group, or panel order and leave the reader to discover the finding. Use [results-and-explanation.md](results-and-explanation.md) for evidence ordering and its qualifications.
 
 Test the “so what” by asking what the evidence establishes about the question: an effect, contrast, trade-off, boundary, or supported explanation. Removing an SQ/RQ label should not remove the answer. Do not make a descriptive plot carry a causal conclusion or force every visual to demonstrate the full feedback loop.
 

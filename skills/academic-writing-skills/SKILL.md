@@ -78,7 +78,9 @@ Before drafting an outline, section, or paragraph, identify its reader function,
 4. development: how the evidence is explained without adding a mechanism
 5. bridge: what relation leads into the next paragraph
 
-Draft only after the contract is coherent. After drafting, compare the paragraph against the contract and re-read its previous and next paragraphs. Do not polish a paragraph into fluency if its function, evidence, or placement is wrong.
+Before drafting or substantively rewriting, run the pre-draft logic check in [universal-integrity.md](references/universal-integrity.md): check both the progression within a paragraph and the relation between adjacent paragraphs. Match the depth to the requested scope; a local edit does not require replanning the whole section.
+
+Draft only after the contract and information order are coherent. After drafting, compare the paragraph against the contract and re-read its previous and next paragraphs. Do not polish a paragraph into fluency if its function, evidence, or placement is wrong.
 
 Also identify the intended reader's likely knowledge. For interdisciplinary papers and reviewer responses, assume a reader who understands the broader research area but does not know the study's internal terminology, model sequence, data transformations, or earlier drafting history. Supply the minimum context that reader needs at the point of use; do not make the reader reconstruct it from later text.
 
