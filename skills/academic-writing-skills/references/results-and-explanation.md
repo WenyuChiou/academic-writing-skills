@@ -14,6 +14,8 @@ Use this guide for planning, drafting, or substantively reviewing findings, incl
 
 Organize a result unit around **finding → necessary evidence → meaning → substantive answer**. These are information functions, not four mandatory sentences. State what was found, identify the comparison, report enough evidence to judge it, and explain what it establishes about the question. Put reproducible procedures in Methods; refer back briefly when a design detail is needed to understand a finding.
 
+Choose the main pattern or comparison before arranging the supporting values. Do not mechanically enumerate variables, groups, or panels: the reader should know what the values demonstrate, rather than have to infer the finding from a numerical list. Variable, panel, or chronological order is appropriate when it advances a clear analytical argument. A finding can be heterogeneous, uncertain, or show no clear change; pattern-first writing does not authorize a stronger claim or an invented mechanism.
+
 Give the “so what” where the paragraph or subsection completes its analytical point. It can identify a pathway contrast, trade-off, boundary, supported relationship, or negative finding. Do not end with only statistics, “These results answer SQ1,” or a vague declaration of importance. Temporarily remove the question label and introductory metadiscourse: the answer must remain intelligible. Numbered SQ/RQ labels are optional navigation, not evidence.
 
 ## Visuals and Substantive Answers
