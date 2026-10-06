@@ -22,6 +22,7 @@ CORE_REFERENCES = {
     "methods-and-assumptions.md",
     "overlay-contract.md",
     "prose-and-citation-editing.md",
+    "professor-teaching-cases.md",
     "reviewer-red-team-and-release.md",
     "reviewer-response-workflow.md",
     "results-and-explanation.md",
@@ -69,7 +70,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.4"
+    assert manifest["version"] == "1.3.5"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -486,6 +487,57 @@ def test_reference_refinement_probes_have_routes_and_semantic_criteria():
         route = Path("skills") / "academic-writing-skills" / "references" / reference
         assert case["files"] == [route.as_posix()]
         assert (ROOT / route).is_file()
+
+
+def test_professor_teaching_cases_are_routed_and_source_bounded():
+    """Guard routing and boundaries, not the model's semantic performance."""
+    name = "professor-teaching-cases.md"
+    assert f"](references/{name})" in read(CORE / "SKILL.md")
+    text = read(CORE / "references" / name)
+    headings = (
+        "Paragraphs and Extended Outlines", "Abstracts with Missing Findings",
+        "Reviewer Responses and Actual Work Status",
+        "Figures and Tables: Existing ABM Check Entries",
+    )
+    for heading in headings:
+        assert f"## {heading}" in text
+    positions = [text.index(f"## {heading}") for heading in headings]
+    assert positions == sorted(positions)
+    for field in ("Problem", "Trigger", "Judgment", "Minimal repair", "Boundary"):
+        assert text.count(f"**{field}:**") == 4
+    for boundary in (
+        "teaching paraphrases", "not universal rules",
+        "do not redistribute the complete private documents",
+        "do not force a Study", "do not invent a result",
+        "keep the concern open", "not a current data, reference, venue",
+        "not duplicate caption rules",
+    ):
+        assert boundary in " ".join(text.split())
+    for source_id in (
+        "1LXp2SjM4eNSgC5i2axud4egZv1C_RzIN",
+        "1xGAM52kDe0kY4TqZGPDMkdG9x6_kjP_s",
+        "1oykntLNoC6pt7_eZiNXsBqG-enj3Jo5r",
+        "1VGBJxzK7pFxgo19w_sC_zLtr55Zkmur5",
+    ):
+        assert f"https://docs.google.com/document/d/{source_id}/edit" in text
+
+
+def test_professor_teaching_behavioral_probes_have_scoped_inputs():
+    """Registered cases need independent answers before claiming behavior PASS."""
+    data = json.loads(read(ROOT / "evals" / "evals.json"))
+    cases = {case["id"]: case for case in data["evals"]}
+    route = "skills/academic-writing-skills/references/professor-teaching-cases.md"
+    for case_id in (
+        "teaching_case_grammar_only_preserves_scope",
+        "teaching_case_conceptual_outline_no_imrad",
+        "teaching_case_abstract_missing_findings",
+        "teaching_case_response_pending_not_completed",
+    ):
+        case = cases[case_id]
+        assert case["files"] == ["skills/academic-writing-skills/SKILL.md", route]
+        assert len(case["acceptance_criteria"]) >= 3
+        assert all(item.strip() for item in case["acceptance_criteria"])
+        assert case["prompt"].strip() and case["expected_output"].strip()
 
 
 def test_readmes_are_bilingual_user_facing_entrypoints():

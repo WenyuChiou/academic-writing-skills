@@ -34,6 +34,8 @@ For venue-directed planning, substantive restructuring, display/reference format
 
 Use the ABM examples in the display guide and overlay contract as source-grounded reasoning aids, not journal-wide templates or certification of the original paper.
 
+For a worked example of an outline, abstract, reviewer response, or display check, load [professor-teaching-cases.md](references/professor-teaching-cases.md) when requested or when a matching task needs a concrete demonstration. Select the relevant case; do not load all examples or expand a grammar-only edit into a section review.
+
 ## Follow the Manuscript Lifecycle
 
 Map the work to this lifecycle without forcing the final article order to equal the writing order:
