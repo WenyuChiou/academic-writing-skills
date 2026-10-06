@@ -212,6 +212,50 @@
         "Separates transferable encoding ideas from unverified units, normalization, and data."
       ],
       "files": ["skills/academic-writing-skills/references/figures-tables-and-supplements.md"]
+    },
+    {
+      "id": "teaching_case_grammar_only_preserves_scope",
+      "prompt": "Fix only the grammar of this sentence: 'The model estimate daily demand.' Do not change the method or inspect other sections. The professor's teaching examples are available.",
+      "expected_output": "Returns a meaning-preserving grammatical repair without planning or reverse-outlining a section, importing source facts, or claiming broader verification.",
+      "acceptance_criteria": [
+        "Repairs the verb agreement without altering the scientific claim.",
+        "Does not expand the requested sentence-level task.",
+        "Does not claim method, citation, or whole-paper verification."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/professor-teaching-cases.md"]
+    },
+    {
+      "id": "teaching_case_conceptual_outline_no_imrad",
+      "prompt": "Help outline only a conceptual classification paper. It will compare how approaches represent authority, introduce classification axes, illustrate them, and discuss boundaries. No geographic case or experimental findings exist. Its current opening sequence repeats tool inventories before revealing the authority comparison. Use the professor-derived outline lesson.",
+      "expected_output": "Identifies the repeated inventory function and proposes a coherent topic-sentence progression for a conceptual argument, preserving proposed rather than completed claims and the limited scope.",
+      "acceptance_criteria": [
+        "Diagnoses repeated functions and stages the authority comparison before dependent detail.",
+        "Does not require a Study Area or empirical Methods/Results headings.",
+        "Does not fabricate findings, citations, or completed classification validation."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/professor-teaching-cases.md"]
+    },
+    {
+      "id": "teaching_case_abstract_missing_findings",
+      "prompt": "Revise an abstract plan, not a final abstract. The supplied information says a resource-system model is coupled with users' choices to study allocation in a basin. It spends most sentences on background and components and gives the purpose last. No results or current manuscript are supplied. Can the last sentence say the framework improves management?",
+      "expected_output": "Compresses redundant background, stages study identity before implementation detail, and requests the missing verified contribution rather than inventing a benefit or treating the objective as a result.",
+      "acceptance_criteria": [
+        "Improves information order without a universal sentence count.",
+        "Rejects the unsupported management-improvement claim and identifies missing findings.",
+        "Leaves the working abstract incomplete/pending rather than certifying it final."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/professor-teaching-cases.md"]
+    },
+    {
+      "id": "teaching_case_response_pending_not_completed",
+      "prompt": "Write a short advisor-facing response strategy for a reviewer requesting an alternative-method test. No test has been run, no execution was authorized, and no manuscript has changed. A proposed draft says 'We confirmed unchanged conclusions (Lines 120-130).' The advisor wants a response-first workflow. Do not execute or edit files.",
+      "expected_output": "Marks the test and edits pending, rejects the unsupported completion claim and locator, and outlines the direct answer/evidence/meaning/artifact sequence needed after authorized work is verified.",
+      "acceptance_criteria": [
+        "Does not report the pending test, stable conclusion, or line range as verified.",
+        "Keeps the concern open and does not infer execution authority from drafting approval.",
+        "Distinguishes the working strategy from a verified final response without universalizing advisor review."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/professor-teaching-cases.md"]
     }
   ]
 }

@@ -11,6 +11,17 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.5] - 2026-10-06
+
+### Added
+
+- Task-loaded professor-derived teaching cases for outlines, incomplete abstracts,
+  reviewer responses, and check entries into the existing ABM display examples.
+- Explicit source/teaching boundaries and four scoped behavioral probes, without
+  making private examples or professor-specific templates universal requirements.
+- Regression checks for case structure, source boundaries, loading routes, and
+  the requested teaching-category order.
+
 ## [1.3.4] - 2026-10-05
 
 ### Added
