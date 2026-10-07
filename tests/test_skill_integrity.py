@@ -16,6 +16,7 @@ CORE_REFERENCES = {
     "banned_words.md",
     "conclusion-and-abstract.md",
     "discussion-and-limitations.md",
+    "execution-and-acceptance.md",
     "figures-tables-and-supplements.md",
     "introduction-and-study-context.md",
     "lifecycle-and-routing.md",
@@ -33,6 +34,7 @@ CORE_REFERENCES = {
 CORE_SCRIPTS = {
     "audit_candidate_text.py",
     "audit_docx_structure.py",
+    "audit_handoff.py",
     "audit_manuscript_state.py",
     "audit_prose_patterns.py",
     "audit_text_consistency.py",
@@ -70,7 +72,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.5"
+    assert manifest["version"] == "1.3.6"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 

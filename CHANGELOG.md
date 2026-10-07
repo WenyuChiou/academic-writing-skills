@@ -11,6 +11,25 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.6] - 2026-10-07
+
+### Added
+
+- First-draft execution and handoff checks with located findings for cumulative
+  progression, intended-reader comprehension, caption/body/SM allocation,
+  saved-file layout, new edit identity, and the basis for venue formatting.
+- An optional read-only coverage-record checker that rejects missing or stale
+  evidence and distinguishes complete coverage from editorial certification.
+- Failure-case regressions and behavioral probes for the first-handoff boundary,
+  without making a project-specific comparison order, caption length, spacing,
+  or author identity universal.
+
+### Changed
+
+- Explicitly separate language-scan success from section or formatted-artifact
+  acceptance. Allow useful provisional work with unavailable checks disclosed.
+- Refresh the portable adapter's complete public-file closure for this release.
+
 ## [1.3.5] - 2026-10-06
 
 ### Added

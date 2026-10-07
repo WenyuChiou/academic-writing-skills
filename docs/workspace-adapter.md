@@ -2,7 +2,7 @@
 
 `adapter.json` exposes the existing academic writing and paper review skills to
 an explicitly configured local workspace consumer. Adapter version `1.0.0`
-uses manifest schema `1`, plugin skill version `1.3.5`, and manuscript state
+uses manifest schema `1`, plugin skill version `1.3.6`, and manuscript state
 schema `1.1`. It needs no private checkout, host-specific path, network service,
 or installed project overlay. No scientific rule or audit script is replaced.
 
@@ -69,6 +69,12 @@ directory. Candidate input is a UTF-8 file containing the exact proposed text;
 the label defaults to `candidate`. All six operations return `0` on success.
 The regression script runs deterministic offline fixtures in a temporary
 directory. Audit findings still require scientific and editorial judgment.
+
+The bundle also includes the optional `audit_handoff.py RECORD --json` coverage
+checker and its execution guide. It is not a seventh registered adapter operation;
+consumers must explicitly support its CLI before invoking it. Complete coverage
+and matching hashes do not establish prose quality, venue compliance, or truthful
+review evidence. Existing six operation contracts are unchanged.
 
 ## Consumer and maintenance boundaries
 
