@@ -1,7 +1,7 @@
 # Academic Writing Skills
 
 [![tests](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml/badge.svg)](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml)
-[![plugin version](https://img.shields.io/badge/plugin-v1.3.5-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.3.6-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 **Develop and review a manuscript as one connected evidence system—from
@@ -123,6 +123,7 @@ as limitations; they are never invented.
 
 ## Learn more
 
+- [First-draft handoff checks](./skills/academic-writing-skills/references/execution-and-acceptance.md): scoped flow, caption, layout, identity, and format-basis evidence; a clean language scan is not whole-section acceptance.
 - [Worked display examples](./skills/academic-writing-skills/references/figures-tables-and-supplements.md): ABM Table 1 and Figures 1/6, with original content, observed Word borders, and separate teaching annotations.
 - [Venue and citation guidance](./skills/academic-writing-skills/references/overlay-contract.md): journal direction, format and style first; claim support separate from reference formatting, with ABM examples.
 

@@ -84,6 +84,8 @@ Before drafting or substantively rewriting, run the pre-draft logic check in [un
 
 Draft only after the contract and information order are coherent. After drafting, compare the paragraph against the contract and re-read its previous and next paragraphs. Do not polish a paragraph into fluency if its function, evidence, or placement is wrong.
 
+For substantive drafting or formatted-file editing, read [execution-and-acceptance.md](references/execution-and-acceptance.md) **before drafting**. Use its reader-route and caption/body/SM allocation, then perform its scoped checks before the first handoff. Preserve the author's primary comparison before dependent subgroup or model detail; this does not prescribe a universal comparison order.
+
 Also identify the intended reader's likely knowledge. For interdisciplinary papers and reviewer responses, assume a reader who understands the broader research area but does not know the study's internal terminology, model sequence, data transformations, or earlier drafting history. Supply the minimum context that reader needs at the point of use; do not make the reader reconstruct it from later text.
 
 ## Apply Universal Integrity Gates
@@ -169,6 +171,7 @@ For managed projects, use the bundled scripts when relevant:
 - `scripts/audit_text_consistency.py`: extract text from supported files and scan registered locked strings, prohibited variants, and fact conflicts
 - `scripts/audit_prose_patterns.py`: report exact duplication, repeated openings and phrases, stock phrasing, and candidate nontechnical word overuse without claiming AI authorship
 - `scripts/audit_candidate_text.py`: scan the exact proposed passage against the active project terminology, forbidden variants, and prose profile and record its hash
+- `scripts/audit_handoff.py`: optionally validate scope-dependent coverage records and exact-file hashes; `COVERAGE_COMPLETE` is not editorial or scientific certification
 - `scripts/audit_docx_structure.py`: inspect Word OOXML using exact tag names for tracked changes, revision authors, comments, parent-linked replies, reply authors, fields, and placeholders
 - `scripts/run_regression_tests.py`: verify the audit tools against bundled failure cases
 
@@ -183,6 +186,8 @@ After the last wording change, freeze the exact passage or artifact that will be
 3. run terminology, forbidden-variant, repetition, stock-phrase, and project-discouraged-phrase checks on the exact candidate itself;
 4. inspect and resolve each deterministic finding in context, or record an explicit author-approved reason to retain it; and
 5. record which candidate was checked, using its hash when a deterministic candidate audit is available.
+
+Before the **first draft handoff**, record concrete, located findings for reader comprehension, cumulative progression, and every affected caption, saved layout, venue-format basis, and new edit/reply identity using [execution-and-acceptance.md](references/execution-and-acceptance.md). Keep lightweight records inline or reuse existing project records; JSON is optional. Missing or unavailable checks remain incomplete, not passed. A language-scan `PASS` never substitutes for these checks. Provisional drafts may be delivered with explicit limits, but not as fully checked or journal-compliant artifacts.
 
 For prose revision, select the applicable functional checks in [prose-and-citation-editing.md](references/prose-and-citation-editing.md): transitions, function-preserving concision, natural scholarly prose, claim–citation alignment, observable stock or AI-like features, and dash/hyphen style. A punctuation edit needs meaning preservation, not a new literature audit. Treat diagnostics as prompts for judgment, not universal bans or authorship detection.
 

@@ -1,7 +1,7 @@
 # Academic Writing Skills
 
 [![tests](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml/badge.svg)](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml)
-[![plugin version](https://img.shields.io/badge/plugin-v1.3.5-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.3.6-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 **把論文視為一個完整的證據系統：從研究論證與架構發想、extended outline、
@@ -114,6 +114,7 @@ inference limit 與 bridge。暫時不要撰寫完整正文。
 
 ## 進一步說明
 
+- [初稿交付檢查](./skills/academic-writing-skills/references/execution-and-acceptance.md)：依範圍記錄 flow、caption、版面、編輯者及格式依據；用詞掃描通過不等於整節驗收。
 - [圖表實例](./skills/academic-writing-skills/references/figures-tables-and-supplements.md)：ABM Table 1 與 Figures 1/6，保留原內容、核對 Word 框線，並分開標示教學說明。
 - [期刊與引用準則](./skills/academic-writing-skills/references/overlay-contract.md)：先確認期刊方向、格式與風格，再分開核對引用支持及文獻格式，附 ABM 案例。
 

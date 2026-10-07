@@ -214,6 +214,28 @@
       "files": ["skills/academic-writing-skills/references/figures-tables-and-supplements.md"]
     },
     {
+      "id": "first_handoff_reader_route_and_caption_allocation",
+      "prompt": "Prepare only the first draft of this comparison Results subsection for a broad research audience. The project asks how survey evidence differs from generated responses; specific model comparisons are secondary. Supplied findings: survey and generated means are close for attachment; generated insurance ratings are higher; generated response variability is lower. The current plan opens with two model-specific paragraphs, then defines the survey comparison. Its caption repeats selection procedures, three caveats from Methods, and the entire interpretation. The saved Word artifact and a rendered page are unavailable. The author requests a concise caption and a draft for discussion, not submission certification. No citations or other sections are supplied.",
+      "expected_output": "Stages the author-locked primary comparison before model detail; builds a cumulative, readable subsection from only supplied evidence. Allocates caption reading essentials separately from body interpretation and Methods detail without deleting necessary statistic definitions. Records scoped first-handoff findings and unavailable final-layout checks; delivers a provisional draft without a whole-paper audit, fabricated render, fixed word limit, or universal Human-first rule.",
+      "acceptance_criteria": [
+        "The primary comparison and dependent findings progress coherently rather than follow model/panel inventory.",
+        "Caption and body serve distinct reader functions; required reading conventions survive compression.",
+        "Missing render remains unverified at the first handoff despite any clean language scan."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/execution-and-acceptance.md"]
+    },
+    {
+      "id": "first_handoff_format_basis_and_new_author_identity",
+      "prompt": "Assess a first Word draft handoff after caption shortening. The author explicitly asked to retain the accepted 1.5 spacing and to use their project identity for new edits and replies. A language scan is clean. Captions now use 1.0 spacing inherited from a replacement style; the editor calls it a journal requirement without official instructions. New replies are authored by Assistant, while legitimate historical reviewer comments have different authors. The file changed after its previous render. No current render or official venue source is accessible. Explain the next safe actions and what can be reported now; do not edit files or browse.",
+      "expected_output": "Separates language success from first-handoff acceptance, flags the unapproved spacing/source claim and wrong new author identity, preserves historical authors, and requires relevant rechecks after the file change. Reuses the author-approved baseline where authorized and keeps unavailable venue/render checks provisional without claiming compliance or fabricating evidence.",
+      "acceptance_criteria": [
+        "Does not treat a clean scan or stale render as current formatted-file acceptance.",
+        "Distinguishes author preference from verified journal mandate without universal spacing rules.",
+        "Verifies new-edit identity while preserving historical reviewer metadata and declares the remaining limits."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/execution-and-acceptance.md"]
+    },
+    {
       "id": "teaching_case_grammar_only_preserves_scope",
       "prompt": "Fix only the grammar of this sentence: 'The model estimate daily demand.' Do not change the method or inspect other sections. The professor's teaching examples are available.",
       "expected_output": "Returns a meaning-preserving grammatical repair without planning or reverse-outlining a section, importing source facts, or claiming broader verification.",
