@@ -60,6 +60,202 @@
       "prompt": "Revise a cross-disciplinary literature paragraph that uses an unexplained field umbrella label, opens one sentence with 'Beyond simulation,' and says that studies 'draw on data' when they simply use those data.",
       "expected_output": "Plain scholarly prose that replaces nonessential field shorthand with a concrete description, states extensions through content rather than a transition template, uses a literal verb when no nuance is lost, and preserves technical terms that are necessary for the claim.",
       "files": []
+    },
+    {
+      "id": "sensitivity_response_names_baseline_conclusion_and_final_setting",
+      "prompt": "Revise a reviewer response about a one-factor sensitivity test. The draft compares an alternative decision rule with a vague 'revised model setting,' reports changed loss values, says only that 'the conclusion remained unchanged,' and does not say which rule is used in the manuscript. The study design already provides an independent basis for the formal rule. The test does not directly compare adaptation with no adaptation.",
+      "expected_output": "A self-contained response that names the exact baseline and alternative decision rules, reports the relevant numerical change with its comparison reference, states the specific substantive conclusion that did or did not change, identifies the rule used in the formal model and its pre-existing design basis without treating robustness as model-selection evidence, locates the sensitivity evidence outside the adopted Methods when appropriate, and does not infer an adaptation-versus-no-adaptation effect from the rule comparison.",
+      "files": []
+    },
+    {
+      "id": "sensitivity_robustness_does_not_select_baseline",
+      "prompt": "A sensitivity analysis finds that several alternative parameter values change numerical estimates but not the main conclusion. No data, calibration, theory, prespecification, or study-design reason has been supplied for preferring the baseline. Write the concluding part of the reviewer response and state the final model choice.",
+      "expected_output": "A conclusion that names the substantive finding shown to be robust, does not claim that robustness makes the baseline preferable, and explicitly states that the sensitivity test alone cannot determine the adopted parameter value or that an independent selection basis is still required. It does not invent a post hoc rationale.",
+      "files": []
+    },
+    {
+      "id": "scope_sentence_grammar_only",
+      "prompt": "In an ongoing advisor-group manuscript, correct only the grammar of 'The model will randomly draws one depth for each household.' Do not change the model description or inspect other files. No manuscript state or source data is supplied.",
+      "expected_output": "A minimal grammatical correction to 'will randomly draw' that preserves the stated operation, does not initialize project state or launch a full manuscript/numerical audit, and does not certify scientific correctness or unseen artifacts.",
+      "files": []
+    },
+    {
+      "id": "scope_results_paragraph_so_what",
+      "prompt": "Review a Results paragraph using supplied verified outputs. RQ1 asks how two adaptation pathways change losses. Baseline GUL/actual loss are 100/80 for group A and 10/8 for group B; adaptation values are 95/50 and 4/2. The supplied decomposition attributes most of A's actual-loss reduction to payouts and most of B's reduction to relocation lowering GUL. The paragraph ends 'These results answer RQ1.' No other sections are requested.",
+      "expected_output": "A paragraph-level repair that reports the pathway contrast as the substantive answer, preserves the different roles of GUL and actual loss, checks the supplied comparisons, and does not treat the RQ label as an answer or invent a new causal story. It limits readiness to the paragraph and relevant context.",
+      "files": []
+    },
+    {
+      "id": "scope_subsection_multi_figure",
+      "prompt": "Review a subsection containing a loss-scenario figure, an AEP figure, and a perception trajectory figure. The figures show different descriptive components of three study questions. The draft repeats 'These patterns answer all three questions' after every figure. Only this subsection and its captions are supplied.",
+      "expected_output": "A cumulative subsection review that assigns distinct evidence functions, removes empty repeated syntheses, checks relevant captions and comparisons, and does not demand that each figure independently demonstrate the entire feedback chain. It names unavailable upstream context without calling the whole paper ready.",
+      "files": []
+    },
+    {
+      "id": "scope_chapter_reader_prerequisites",
+      "prompt": "Review a complete Methods chapter. A household-initialization subsection defines a policy-region status only after an earlier threshold table has already used it. Asset-distribution construction appears under behavior rather than exposure. The current chapter and its SM item list are supplied; the Introduction and raw data are not.",
+      "expected_output": "A chapter-level reorganization plan that introduces prerequisites before the table, places asset material with exposure, preserves remaining initialization and model settings, and updates affected SM pointers. It does not invent institutional enforcement or rewrite unsupplied chapters and distinguishes missing context from a verified error.",
+      "files": []
+    },
+    {
+      "id": "scope_whole_manuscript_claim_chain",
+      "prompt": "Review a full manuscript. The RQ asks how two groups compare in protection and burden; results show similar loss-difference/GUL percentages but different loss-difference/income percentages. The Abstract calls the groups equally protected overall, and the Conclusion ranks one group as less socially vulnerable. Only the manuscript is included, not SM or response.",
+      "expected_output": "A whole-manuscript evidence-chain review that limits similarity to the stated metric, corrects unsupported overall protection/vulnerability claims, checks affected summaries and definitions, and performs the four manuscript passes without certifying excluded SM or response.",
+      "files": []
+    },
+    {
+      "id": "scope_local_metric_cross_artifact_trigger",
+      "prompt": "Revise one definition: protection margin is now a normalized loss difference, with GUL as the denominator in Figure 7 and median household income in Figure 11. Their captions, two paragraphs, and response still call the margin both dollars and percent. Only the definition is authorized for editing; the other supplied files are read-only.",
+      "expected_output": "A precise normalized definition naming the denominator by context, with targeted checks and locations for affected figures, captions, discussion, summaries, and response. It explains that common percent units do not make the metrics identical, does not relabel the loss curves' y-axis as the margin, does not edit read-only dependencies, and reports them as unresolved rather than claiming synchronization.",
+      "files": []
+    },
+    {
+      "id": "chapter_closure_checks_are_content_conditional",
+      "prompt": "Complete the review of a qualitative Methods chapter describing purposive interviews and reflexive thematic analysis. No numerical model, group rates, or statistical tests are used. The prose looks fluent. Should the chapter-closure hidden-failure check be skipped, or must it include every simulation diagnostic?",
+      "expected_output": "Perform the closure check but select relevant questions about recruitment scope, researcher position, coding support, negative cases, and transferability. Do not impose calibration, numerical sensitivity, or denominators where inapplicable. Report source gaps and scope boundaries without claiming exhaustive unknown-unknown discovery.",
+      "files": []
+    },
+    {
+      "id": "results_composition_not_individual_decay",
+      "prompt": "Review only this Results paragraph: 'The neighborhood mean perception declined from 0.7 to 0.5, proving that every resident learned to feel safer.' The supplied evidence says residents may move between neighborhood categories, but has no within-person decomposition. Do not run new analyses.",
+      "expected_output": "Retain the aggregate finding while removing the universal individual-learning and causal claim. Explain that within-person change and composition may both contribute but neither contribution was isolated. Request or identify the diagnostic needed for a stronger interpretation without inventing its result or running it.",
+      "files": []
+    },
+    {
+      "id": "discussion_extension_unchanged_ranking_not_validation",
+      "prompt": "Plan a Discussion extension paragraph. A sensitivity test changes estimated losses by 20% but group A remains above B in each tested setting. No independent basis for the baseline is available. The draft says all conclusions and mechanisms are unchanged and the test validates the baseline.",
+      "expected_output": "Organize purpose, changed/held-constant design, baseline comparison, finding, and consequence. Limit stability to the observed ordering over the tested settings, preserve changed magnitudes, remove mechanism invariance and validation claims, and leave baseline selection rationale unresolved. Do not invent extra experiments or policy implications.",
+      "files": []
+    },
+    {
+      "id": "abstract_identity_without_fixed_template",
+      "prompt": "Draft an abstract for a 2024 qualitative study of 18 purposively recruited tenants in one city, using interviews and reflexive thematic analysis to examine housing instability after floods. Verified themes concern uncertain leases and disrupted support networks; no prevalence or causal estimates exist. A legacy template demands agents optimizing financial security, six fixed sentence blocks, 35-word caps, and a generalizable testbed.",
+      "expected_output": "Identify method and task, population and relevant city/time scope, supported themes and qualitative inference boundary. Treat six information functions as flexible, reject unsupported optimization/generalizability claims and unverified universal caps, and ask only for missing material facts such as the city name if necessary. Do not force a simulated mechanism or numeric prevalence.",
+      "files": []
+    },
+    {
+      "id": "visual_legibility_without_whitespace_overcorrection",
+      "prompt": "A four-panel figure has tiny legend text, an overlapping endpoint annotation, and large outer whitespace. The user asks for larger, clearer visuals and less blank space. No rendered document is available, only this description. Also shorten its caption and retain the uncertainty definition.",
+      "expected_output": "Propose improving final-size typography, repositioning the legend/annotation, and reducing only nonfunctional whitespace while preserving separation, aspect ratio, scales, and uncertainty information. Do not invent actual pixel positions or claim visual verification without rendering. Keep scientific result explanation in prose and reading information in the caption.",
+      "files": []
+    },
+    {
+      "id": "response_promises_and_rendered_locators",
+      "prompt": "Audit a response and manuscript package. The response promises a new SM sampling table that is absent, cites old panel letters after a figure split, claims an acronym removed from the manuscript, and contains guessed line ranges from XML counts. The reviewer will read a compared manuscript, but only a clean draft is rendered. SM has no line numbers. Do not modify the manuscript or rerun anything.",
+      "expected_output": "Identify the unmet promise without falsely resolving it, reconcile panel and terminology changes against actual files, and use verified SM item locators rather than guessed lines. Treat compared-version lines as unverified until that target is rendered and layout fixed. Do not certify the package or manufacture an addition, analysis, or line number.",
+      "files": []
+    },
+    {
+      "id": "abm_display_example_transfer_without_fact_copying",
+      "prompt": "Use the author-provided ABM Table 1 and Figure 6 worked examples in the display guide. First, a reader asks whether Table 1 bounds are observed adoption rates or 95% confidence intervals because citations are listed. Second, draft a caption for a separate experiment: two groups, 18 participants per group, one endpoint panel, group means and 95% confidence-interval error bars, no simulation or yearly series. Explain what transfers from the examples without changing either study's evidence.",
+      "expected_output": "Explain the ABM's threshold intervals and distinguish qualitative source rationale from empirical estimation; identify the note as a teaching addition, not original manuscript content. For the new experiment, use its actual groups, sample size, statistic and uncertainty, without importing 50 runs, six panels, GUL, years or threshold settings. Keep scientific interpretation separate from caption-reading information and do not claim figure-layout verification from text alone.",
+      "files": []
+    },
+    {
+      "id": "venue_first_without_scope_expansion",
+      "prompt": "Plan a qualitative education paper for an unselected journal using the WRR/ABM examples. Then repair only grammar in a separate accepted hydrology sentence whose venue profile is current. A colleague says the skill requires APA7, six sections, a new simulation, and another journal search for every sentence.",
+      "expected_output": "Clarify or keep provisional the education venue/article type/audience; do not apply WRR requirements universally or invent an analysis. Separate direction, format and style, source authority and submission stage. Keep the grammar-only edit bounded with unchanged applicable profile, not journal reselection or full audit.",
+      "files": []
+    },
+    {
+      "id": "map_and_borders_without_false_certification",
+      "prompt": "Use the ABM map and table examples to assess a described map with blue tract-area percentages, no GIS metadata, and a caption claiming percent residents insured. There is no rendered Word file. The target venue permits grouped table rules, but a colleague insists every table must copy ABM's three-line weights and every plot must lose its top/right spines.",
+      "expected_output": "Flag denominator/quantity mismatch without inferring household values; retain unknown CRS/vintage/scale and final-layout checks as unverified. Explain conditional map/border/grid choices and actual source formatting, not universal line weights or spine rules. Do not certify layout or invent metadata from an image.",
+      "files": []
+    },
+    {
+      "id": "citation_rationale_not_parameter_validation",
+      "prompt": "The draft cites Mondino et al. (2020) as proving an exact tract-GUL threshold and validating individual TP decay. Its bibliography has two different FEMA datasets assigned identical year letters, and a Kousky paper left uncited after a paragraph deletion. Explain targeted checks using the ABM examples without changing model settings or filling missing source metadata.",
+      "expected_output": "Separate qualitative context from empirical parameter estimation/validation, verify the primary source's actual claims and transfer limits, and keep model assumptions explicit. Check dataset identity, version, year/suffix and matching keys under venue rules; inspect the uncited work's relevance before removal rather than adding a topical citation to save it. No fabricated metadata or assumed blanket APA format.",
+      "files": []
+    },
+    {
+      "id": "topic_sentence_reverse_outline_preserves_actual_draft",
+      "prompt": "Use the skill to reverse-outline only a conceptual Introduction. Its four paragraph openings are: 'Water decisions connect people and infrastructure.'; 'Many tools study water decisions.'; 'Researchers use many tools to study these decisions.'; 'We compare how three modeling approaches represent decision authority.' The second paragraph's actual main point, stated later, is that the approaches place authority at different analytical levels. The third repeats its tool inventory and adds no distinct evidence. The fourth proposes a comparison, not a completed result. Identify the actual outline and the smallest repair; no Methods, Results, or other files are supplied.",
+      "expected_output": "Preserves the actual openings in the diagnostic, identifies the hidden second-paragraph function and repeated third-paragraph function, and proposes a minimal coherent topic-sentence sequence without inventing comparison findings or requiring empirical IMRAD headings or a new project record.",
+      "acceptance_criteria": [
+        "Distinguishes the observed opening sequence from a proposed improved outline.",
+        "Repairs hidden or duplicated functions rather than silently idealizing the supplied prose.",
+        "Preserves conceptual genre, missing-result status, and requested section scope."
+      ],
+      "files": ["skills/academic-writing-skills/references/lifecycle-and-routing.md"]
+    },
+    {
+      "id": "current_gap_and_sequential_questions_without_age_cutoff",
+      "prompt": "Assess only an Introduction plan using these supplied hypothetical source summaries. A foundational 1998 paper identifies uncertain collective decisions. A 2024 study compares aggregate group outcomes. A 2025 study uses a different term for the same aggregate comparison. Neither later study follows individual changes over time. The plan claims 'No study compares group outcomes' and proposes Q1 on aggregate differences and Q2 on within-person changes conditional on Q1. Explain the defensible gap and relationship of the questions. Do not search or edit a full paper.",
+      "expected_output": "Recognizes overlapping recent work and narrows the gap to the unsupported analytical level rather than declaring all old sources invalid. Describes Q1/Q2 as a potentially sequential design with distinct evidence needs, without forcing independence, claiming causal identification, or certifying an exhaustive novelty search.",
+      "acceptance_criteria": [
+        "Rejects the unsupported no-study claim while retaining the foundational source's legitimate role.",
+        "States the individual-change evidence need separately from existing aggregate comparisons.",
+        "Explains sequential questions without an arbitrary citation-age rule or causal inference."
+      ],
+      "files": ["skills/academic-writing-skills/references/introduction-and-study-context.md"]
+    },
+    {
+      "id": "response_working_draft_does_not_certify_pending_test",
+      "prompt": "Prepare a short advisor-facing response draft. The lab requests response-first review and prefers past-tense proposed wording. A reviewer asks for a sensitivity test. The advisor approved discussing a test but no analysis has been run, no execution authorization exists, and no manuscript has changed. The current draft says 'We tested the alternative and confirmed unchanged conclusions (Lines 200-210).' Explain what can be drafted now and how it becomes a final response. Do not run a model or assign line numbers.",
+      "expected_output": "Separates proposed strategy/working draft from a completed reviewer response; marks the test and manuscript changes pending and keeps the issue open. Does not fabricate robustness, accept unsupported line numbers, or infer execution permission from advisor agreement. Uses the supplied lab handoff without universalizing advisor approval.",
+      "acceptance_criteria": [
+        "Does not report an unperformed analysis, stable conclusion, or locator as verified.",
+        "Keeps the proposed test pending and distinguishes approval of discussion from execution authority.",
+        "Requires actual evidence and artifact reconciliation before final response status."
+      ],
+      "files": ["skills/academic-writing-skills/references/reviewer-response-workflow.md"]
+    },
+    {
+      "id": "chart_function_from_axes_not_filename",
+      "prompt": "Assess a hypothetical image named time-series.png. Its x-axis is log water footprint, rows are industries, curves show density distributions, and colored bands mark percentile ranges. No time variable, raw data, or export metadata is provided. Can it show how each industry's footprint changed after a policy, and what may be reused for a new figure comparing industries? Do not redraw the image or invent units.",
+      "expected_output": "Identifies a distribution/ridgeline comparison rather than a temporal trajectory, rejects the unsupported policy-change claim, and reuses only the quantity-appropriate comparison and encoding. Flags unknown density normalization, units, provenance, and final-size legibility without inventing them or transferring the exact layout automatically.",
+      "acceptance_criteria": [
+        "Classifies the display from the axes and marks rather than its filename.",
+        "Does not infer a temporal or policy effect without a time comparison.",
+        "Separates transferable encoding ideas from unverified units, normalization, and data."
+      ],
+      "files": ["skills/academic-writing-skills/references/figures-tables-and-supplements.md"]
+    },
+    {
+      "id": "teaching_case_grammar_only_preserves_scope",
+      "prompt": "Fix only the grammar of this sentence: 'The model estimate daily demand.' Do not change the method or inspect other sections. The professor's teaching examples are available.",
+      "expected_output": "Returns a meaning-preserving grammatical repair without planning or reverse-outlining a section, importing source facts, or claiming broader verification.",
+      "acceptance_criteria": [
+        "Repairs the verb agreement without altering the scientific claim.",
+        "Does not expand the requested sentence-level task.",
+        "Does not claim method, citation, or whole-paper verification."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/professor-teaching-cases.md"]
+    },
+    {
+      "id": "teaching_case_conceptual_outline_no_imrad",
+      "prompt": "Help outline only a conceptual classification paper. It will compare how approaches represent authority, introduce classification axes, illustrate them, and discuss boundaries. No geographic case or experimental findings exist. Its current opening sequence repeats tool inventories before revealing the authority comparison. Use the professor-derived outline lesson.",
+      "expected_output": "Identifies the repeated inventory function and proposes a coherent topic-sentence progression for a conceptual argument, preserving proposed rather than completed claims and the limited scope.",
+      "acceptance_criteria": [
+        "Diagnoses repeated functions and stages the authority comparison before dependent detail.",
+        "Does not require a Study Area or empirical Methods/Results headings.",
+        "Does not fabricate findings, citations, or completed classification validation."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/professor-teaching-cases.md"]
+    },
+    {
+      "id": "teaching_case_abstract_missing_findings",
+      "prompt": "Revise an abstract plan, not a final abstract. The supplied information says a resource-system model is coupled with users' choices to study allocation in a basin. It spends most sentences on background and components and gives the purpose last. No results or current manuscript are supplied. Can the last sentence say the framework improves management?",
+      "expected_output": "Compresses redundant background, stages study identity before implementation detail, and requests the missing verified contribution rather than inventing a benefit or treating the objective as a result.",
+      "acceptance_criteria": [
+        "Improves information order without a universal sentence count.",
+        "Rejects the unsupported management-improvement claim and identifies missing findings.",
+        "Leaves the working abstract incomplete/pending rather than certifying it final."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/professor-teaching-cases.md"]
+    },
+    {
+      "id": "teaching_case_response_pending_not_completed",
+      "prompt": "Write a short advisor-facing response strategy for a reviewer requesting an alternative-method test. No test has been run, no execution was authorized, and no manuscript has changed. A proposed draft says 'We confirmed unchanged conclusions (Lines 120-130).' The advisor wants a response-first workflow. Do not execute or edit files.",
+      "expected_output": "Marks the test and edits pending, rejects the unsupported completion claim and locator, and outlines the direct answer/evidence/meaning/artifact sequence needed after authorized work is verified.",
+      "acceptance_criteria": [
+        "Does not report the pending test, stable conclusion, or line range as verified.",
+        "Keeps the concern open and does not infer execution authority from drafting approval.",
+        "Distinguishes the working strategy from a verified final response without universalizing advisor review."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/professor-teaching-cases.md"]
     }
   ]
 }

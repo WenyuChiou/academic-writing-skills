@@ -2,7 +2,7 @@
 
 `adapter.json` exposes the existing academic writing and paper review skills to
 an explicitly configured local workspace consumer. Adapter version `1.0.0`
-uses manifest schema `1`, plugin skill version `1.1.6`, and manuscript state
+uses manifest schema `1`, plugin skill version `1.3.5`, and manuscript state
 schema `1.1`. It needs no private checkout, host-specific path, network service,
 or installed project overlay. No scientific rule or audit script is replaced.
 
@@ -38,7 +38,8 @@ The helper packages the same bytes that it hashed during verification.
 `files` maps each repository-relative slash path to its lowercase SHA256 digest.
 It includes the plugin metadata, license, this guide, build helper, and both
 skills' complete `SKILL.md`, `scripts`, `references`, `assets`, and `agents`
-trees. Bytecode and tool caches are excluded. The manifest itself is included in
+trees, including nested reference material and binary example figures. Bytecode
+and tool caches are excluded. The manifest itself is included in
 the archive and identified by the verifier's `manifest_sha256`; it cannot contain
 its own digest. Hashes cover exact bytes, including line endings.
 
@@ -83,3 +84,12 @@ When public source bytes change, review the change and update their recorded
 hashes. Keep `skill_version` aligned with `.claude-plugin/plugin.json`, and keep
 the declared state schema aligned with the template. A plugin release remains a
 separate workflow; adding this adapter does not bump the plugin version.
+
+The adapter ships the current public skill tree without changing its scientific
+content. After synchronizing a newer main branch, refresh the complete file map,
+not only existing hashes: newly added references and binary assets are dependencies
+too. Run the full repository tests as well as the verifier, then build, extract,
+and verify a bundle before publishing the adapter update. Keep binary assets
+marked `-text` in Git and text files normalized to LF so Windows checkouts preserve
+the exact public bytes. These checks validate packaging and deterministic client
+behavior; they do not constitute scientific validation or model evaluation.

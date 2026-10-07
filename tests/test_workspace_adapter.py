@@ -74,7 +74,8 @@ def test_binary_assets_are_not_git_text():
 
 def test_valid_manifest_and_complete_bundle(bundle: Path) -> None:
     manifest, files = builder.verify_bundle(bundle)
-    assert manifest["skill_version"] == "1.1.6"
+    plugin = json.loads((bundle / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
+    assert manifest["skill_version"] == plugin["version"]
     assert manifest["state_schema_version"] == "1.1"
     assert {skill["mode"] for skill in manifest["skills"]} == {"write-proposals", "review-only"}
     assert set(files) == {"adapter.json", *manifest["files"]}
@@ -260,3 +261,74 @@ def test_cache_is_excluded_from_archive(bundle: Path, tmp_path: Path) -> None:
     builder.build_bundle(bundle, output)
     with zipfile.ZipFile(output) as archive:
         assert not any("__pycache__" in name for name in archive.namelist())
+
+
+def test_repository_manifest_covers_current_public_tree():
+    """Verify the source, not just a fixture copied from the manifest's own list."""
+    manifest, verified = builder.verify_bundle(ROOT)
+    tracked = subprocess.run(
+        ["git", "ls-files", "-z", "skills"], cwd=ROOT,
+        capture_output=True, check=True,
+    ).stdout.decode("utf-8").split("\0")
+    public = {name for name in tracked if name}
+    assert public <= set(manifest["files"])
+    assert all(verified[name] == (ROOT / name).read_bytes() for name in public)
+
+
+def test_git_line_ending_contract_for_current_manifest():
+    manifest = json.loads((ROOT / "adapter.json").read_text(encoding="utf-8"))
+    names = ["adapter.json", *manifest["files"]]
+    result = subprocess.run(
+        ["git", "check-attr", "text", "eol", "--", *names], cwd=ROOT,
+        text=True, capture_output=True, check=True,
+    )
+    for name in names:
+        if Path(name).suffix.lower() in {".png", ".jpg"}:
+            assert f"{name}: text: unset" in result.stdout
+        else:
+            assert f"{name}: text: set" in result.stdout
+            assert f"{name}: eol: lf" in result.stdout
+            assert b"\r\n" not in (ROOT / name).read_bytes()
+
+
+@pytest.mark.parametrize("name", [
+    "skills/paper-review/references/new/nested.md",
+    "skills/academic-writing-skills/assets/examples/new.png",
+])
+def test_new_nested_and_binary_dependencies_cannot_be_omitted(bundle, name):
+    path = bundle / name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(b"new dependency")
+    with pytest.raises(builder.AdapterError, match="incomplete public closure"):
+        builder.verify_bundle(bundle)
+
+
+@pytest.mark.parametrize("name", [".env", "private.json", "credentials.txt", "key.pem"])
+def test_undeclared_secret_files_fail_closed(bundle, name):
+    (bundle / "skills/paper-review/assets" / name).write_bytes(b"private")
+    with pytest.raises(builder.AdapterError):
+        builder.verify_bundle(bundle)
+
+
+def test_manifest_operation_never_executes(bundle, tmp_path):
+    sentinel = tmp_path / "executed"
+    edit_manifest(bundle, lambda data: data["operations"]["regression"].update({
+        "command": f"touch {sentinel}"
+    }))
+    result = run_script(bundle, "scripts/build_adapter_bundle.py", "--check")
+    assert result.returncode == 2
+    assert "operation contract mismatch" in result.stdout
+    assert not sentinel.exists()
+
+
+def test_output_symlink_does_not_modify_target(bundle, tmp_path):
+    existing = tmp_path / "existing.zip"
+    existing.write_bytes(b"keep")
+    output = tmp_path / "linked.zip"
+    try:
+        output.symlink_to(existing)
+    except OSError as exc:
+        pytest.skip(f"native symlink creation unavailable: {exc}")
+    with pytest.raises(builder.AdapterError, match="symlink or reparse point"):
+        builder.build_bundle(bundle, output)
+    assert existing.read_bytes() == b"keep"

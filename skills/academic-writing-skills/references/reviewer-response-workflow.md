@@ -39,6 +39,45 @@ Classify the required work as one or more of:
 - revise interpretation, scope, or limitation;
 - decline or defer a request with a specific reason.
 
+## Distinguish Response States and Advisor Handoffs
+
+Keep the strategy, an advisor-facing working draft, and the final reviewer-facing response distinguishable. A strategy names the proposed action and evidence needed. A working draft may develop the intended argument before all changes exist, but must identify pending analyses, edits, and locators; proposed wording is not evidence of completion. A final response reports only verified work or an evidence-backed non-change. Keep ledger status `OPEN` until the concern is actually addressed and verified.
+
+When the supplied lab workflow requires response-first advisor review, use its handoff order: comment ledger and short strategy → advisor agreement → response working draft → advisor review → authorized manuscript/SM changes → final promise-to-artifact and locator reconciliation. This is an optional project workflow, not a universal requirement to obtain advisor approval before editing. Approval of a strategy does not itself authorize new analyses or external actions. If a template prefers present or past tense in the working draft, label unfinished content explicitly rather than presenting an unperformed experiment as completed.
+
+## Distinguish Revision Provenance from Topical Relevance
+
+Before adding reviewer-source margin comments or declaring a manuscript change,
+compare the effective revised text with the actual submitted manuscript or other
+explicitly agreed revision baseline. Read the effective revised text—retained
+plus inserted text—without concatenating deleted or moved-from text.
+
+Classify each candidate passage as unchanged, inserted, replaced, moved,
+formatting-only, or deleted. Add a reviewer-source label only to text, displays,
+or locations that were actually changed in response to that reviewer. A margin
+label records the provenance of a revision; it is not a subject index. An
+unchanged source passage may support the response, but it should remain
+unlabeled and be recorded in the ledger as `existing text; no manuscript
+change`. The response may direct the reviewer to that existing passage without
+claiming that it was revised.
+
+If a reviewer was confused by unchanged wording, decide whether the existing
+passage already answers the concern. If it does, explain and cite it. If it does
+not, make the smallest sufficient revision and anchor the label to that change,
+not to the entire surrounding paragraph. When one edit addresses multiple
+comments, use one comment box listing the applicable reviewer IDs rather than
+duplicating adjacent labels.
+
+For model-based or computational Methods, distinguish definitions and derived
+quantities from empirical inputs, calibrated parameters, literature-informed or
+analyst-selected assumptions, and algorithm or update rules. For other study
+designs, classify the passage by its actual methodological function, such as
+sampling, measurement, intervention, procedure, coding, or analysis. Do not
+treat a definition or derived outcome as an assumption merely because it appears
+next to one. Align the response claim, relevant ledger entry, Track Changes, and
+reviewer label with the function that actually changed. Add an optional source
+or provenance field to the ledger only when the revision needs that distinction.
+
 ## Distinguish Navigation from the Full Answer
 
 Reviewers sometimes provide high-level synthesis points before numbered major
@@ -48,10 +87,25 @@ comments.
   action, and direct the reader to the detailed response below.
 - Put the first complete explanation, design, evidence, and result under the
   earliest detailed comment that raises the issue.
-- Later related comments may point back to that response, but must still answer
-  the distinct part of the current comment.
+- Treat every detailed reviewer comment as independently readable. A later
+  related response must include enough local context, the key result, and its
+  meaning to answer the distinct concern. It may refer backward for the full
+  shared design, figure, or table instead of repeating that evidence.
 - Do not make an earlier detailed response depend on a later reviewer response.
   Forward references are appropriate only in an introductory navigation block.
+
+## Build Opening and Closing Responses
+
+In an opening revision summary, give each point one function. Separate changes
+to the study or model, additional analyses, documentation, and display updates
+instead of repeating the same revision under several headings. Identify the
+reviewer or editor who motivated a change when the response template calls for
+that navigation, but leave the full evidence under the relevant detailed
+comment.
+
+Treat a reviewer's concluding overall assessment as a separate comment. When it
+requires no additional action, answer with a brief acknowledgment rather than
+repeating the revision summary or the evidence already given above.
 
 ## Draft a Major Response in This Order
 
@@ -75,13 +129,25 @@ order:
    figure. State what changed, what remained stable, and how the evidence
    addresses the concern.
 7. **Identify manuscript changes.** Name the actual sections, figures, tables, or
-   Supporting Material entries. Use final line numbers only after the clean
-   manuscript is stable.
+   Supporting Material entries. Use final line numbers only after the designated
+   reviewer-facing manuscript and its layout are stable.
 8. **State remaining boundaries when material.** Name what the study still does
    not represent and give the reason. Do not answer with a bare “no.”
 
+Keep the opening recognition short. Do not paraphrase a long reviewer comment
+before explaining what the authors changed or why the response takes a
+different position.
+
 For a short clarification or typographical correction, compress this sequence
 to one or two sentences instead of manufacturing unnecessary detail.
+
+When a multi-part comment requires both qualification and action, answer the
+qualified point fully before shifting emphasis. Then use an explicit transition,
+such as “However, we agree...” or “Following the reviewer’s suggestion...,” to
+identify the part the authors accept and the concrete analysis or revision they
+performed. This makes the responsive action visible after a careful defense, but
+it must never distract from, replace, or leave incomplete the answer to the first
+part of the comment.
 
 ## Match Response Length to the Scientific Weight
 
@@ -114,6 +180,17 @@ obsolete outputs merely to make the response appear more substantial.
   study-specific. Explain what the values mean for this analysis instead.
 - Separate an absolute-value diagnostic from a normalized temporal comparison
   and state which question each one answers.
+- Name the comparison reference in the same sentence as every comparative
+  result. Terms such as `higher`, `lower`, `increased`, `decreased`, `remained`,
+  or `unchanged` are incomplete when the reader must infer the reference setting,
+  group, time, or scenario.
+- Do not infer the effect of one scenario versus another from a sensitivity
+  comparison among parameter values, distributions, rules, or model settings.
+  A setting-to-setting difference does not establish the effect of a separate
+  scenario contrast unless that contrast was calculated directly.
+- Cite the relevant figure or table when its first numerical result is reported.
+  Select the smallest set of values that answers the comment instead of
+  narrating every table cell.
 
 ## Explain Sensitivity and Robustness Results
 
@@ -124,16 +201,103 @@ A sensitivity response must identify:
 - what was held constant;
 - the outcomes used to judge sensitivity;
 - the direction and magnitude of the result;
-- whether the relevant interpretation changed; and
+- whether the relevant interpretation changed;
+- when specification choice is at issue, which setting is used in the formal
+  model and the independent basis for that choice; and
 - where the result is reported.
+
+Organize each sensitivity response as **why → what → comparison → result →
+meaning**. If the reviewer explicitly requests a test, state how the selected
+design answers that request. If the reviewer does not explicitly request a
+test, first explain why the challenged assumption could affect the reported
+outcomes and why an additional test is informative. Then name the exact
+settings or groups compared and the outcomes used to judge the effect. Never
+introduce an experiment without explaining its purpose.
+
+Conclude the result-and-interpretation portion with an explicit evidence chain:
+state whether the estimated magnitudes changed and name the exact pattern,
+interpretation, or conclusion that did or did not change. Do not write only
+that `the conclusion was unchanged`; state the conclusion itself.
+
+When the test or reviewer comment raises a specification choice, add a separate
+decision statement that identifies the setting used in the formal model and
+its already established basis, such as data, calibration, theory, study design,
+or a prespecified modeling choice. A finding that alternative settings do not
+change the main conclusion demonstrates robustness; it does not by itself
+select or validate the baseline setting. If no independent selection basis is
+available, state that the sensitivity analysis does not determine which setting
+should be adopted. Do not invent a new empirical, theoretical, or practical
+reason after seeing the sensitivity result. If the analysis is robustness-only
+and no specification decision is at issue, do not force a model-selection claim.
+
+Name the comparison setting at the level actually tested. Use the exact
+baseline value, interval, distribution, rule, or sequence for a one-factor
+experiment. Reserve labels such as `original model setting` and `revised model
+setting` for a locally defined whole-model comparison in which each version is
+explicitly described. Do not globally replace a defined whole-model label merely
+because the same phrase would be vague in a one-factor sensitivity test.
+
+When a final model decision is required, place it after the result and its
+meaning, and before the manuscript or Supporting Material destination. Make the
+sentence follow naturally from the preceding evidence rather than appending the
+same formulaic transition to every response. When one response summarizes
+several sensitivity experiments, one closing sentence may list all final
+settings and their established bases after each experiment has received its own
+local result and meaning. The separate detailed responses must still state any
+locally relevant decisions so that each comment can be read independently.
+
+Place the information needed to interpret a figure or table in the response
+prose before the evidence is presented. This includes the comparison baseline,
+the changed factor, the number of comparisons when material, the uncertainty
+summary, and the meaning of positive or negative differences. Keep table notes
+minimal and use them only for compact self-contained details; do not hide the
+experimental design, comparison logic, or substantive interpretation in a
+note.
+
+Before reporting the first value from a table or figure, add one direct sentence
+that states what the exhibit compares, which outcomes it reports, and how its
+values are summarized. Make the title name the outcome and comparison reference
+explicitly; labels such as “sensitivity results” or “comparison” are not enough.
+Use the prose, rather than the caption or note, to explain why the comparison was
+made and what the result means. Restrict a table note to information required to
+read the entries, such as units, denominator, summary statistic, uncertainty
+notation, or the meaning of a sign.
+
+Choose the evidence format according to the reviewer’s question. Use a table for
+a compact comparison of endpoint values or several exact mappings. Use a time-
+series figure when the concern concerns order, timing, trajectories, or path
+dependence. Do not include both a table and figure for the same values unless
+each answers a distinct part of the comment.
+
+Keep the response prose and figure caption distinct. In the prose, introduce the
+scientific comparison in one sentence, report the result, and explain its meaning
+for the reviewer’s concern. Do not walk the reader through panel letters, colors,
+line styles, markers, or bands unless one of those encodings is itself part of
+the argument. Put panel assignments, visual encodings, sample or run counts, and
+uncertainty definitions in the caption or legend. Match the caption structure and
+terminology already used by the manuscript rather than inventing a response-only
+caption style. A caption should explain how to read the figure; the prose should
+explain what the figure shows scientifically.
+
+Keep the adopted baseline model specification distinct from the sensitivity
+procedure. Do not present a robustness-only sensitivity test as part of the
+adopted model Methods when it does not change the model specification or main
+interpretation. Keep the Methods focused on the adopted specification,
+calibration, and assumptions. When the sensitivity result matters to general
+readers, add one or two sentences stating its effect at the end of the relevant
+Results passage. When the extended evidence is placed in the Supporting
+Material, direct readers to it from that passage. Otherwise, retain the evidence
+in the response letter. State the chosen destination explicitly and do not
+duplicate the same detail across all locations.
 
 Do not use internal experiment IDs, unexplained labels such as “higher” or
 “narrower,” or software terminology that the reviewer has not seen. Name the
 actual parameter interval, rule, distribution, or event sequence.
 
 When several comments concern the same experiment, give the full design and
-evidence at the first substantive occurrence. Later responses may cite that
-figure or table and explain only the implication for the current comment.
+evidence at the first substantive occurrence. Later responses must still state
+the local purpose, key result, and comment-specific meaning, but may cite the
+earlier figure or table for the shared design and full evidence.
 
 ## Separate Three Destinations
 
@@ -146,15 +310,26 @@ Every response should distinguish among:
 3. **Supporting Material:** reproducibility details, extended methods, full
    technical results, or instruments the authors have chosen to provide.
 
+Give a main-text table and a related Supporting Material table different reader
+functions. The main table should carry the information needed to follow the
+paper's argument or model, while the supplementary table provides provenance,
+implementation detail, or extended evidence. Do not repeat the same entries in
+both merely to appear responsive.
+
 Do not promise a manuscript or Supporting Material addition merely to sound
 accommodating. Do not claim that a change was made until it exists. During
-planning, use future tense. In the final response letter, use past tense after
-verifying the tracked and clean files.
+planning, use future tense or explicitly marked proposed wording. In the final
+response letter, use past tense for completed changes after verifying the
+designated files; present tense may describe current evidence or document contents.
 
 ## Tone and Vocabulary
 
 - Use professional appreciation when the comment led to a meaningful change,
   but do not begin every paragraph with the same formula.
+- Write for a reviewer who understands the paper's broad research direction but
+  may not know the model's internal sequence, project-specific terms, or earlier
+  drafting history. Explain each necessary term, comparison, and causal step at
+  first use instead of expecting the reviewer to reconstruct them.
 - Lead with the answer, followed by evidence and the manuscript change.
 - Use terminology already present in the manuscript. Define an abbreviation on
   first use within a reviewer section when the reader may not have seen it.
@@ -166,6 +341,32 @@ verifying the tracked and clean files.
   adjacent paragraphs do not read as disconnected bullets or repeated “We...”
   statements.
 - Do not overstate completion, robustness, validation, or generalizability.
+
+After drafting, read the completed response aloud or simulate an ordinary spoken
+reading. Keep the technical meaning exact, but revise any sentence that sounds
+assembled rather than naturally written by a researcher, requires backtracking,
+or would make the intended reviewer ask what its subject or comparison is.
+
+## Revise an Advisor-Edited Response Draft
+
+Treat the latest advisor-edited document as the working baseline. Preserve
+usable advisor revisions and change only the marked problem, a verified factual
+dependency, or wording that remains unclear in context. Do not reconstruct the
+response from an older draft merely because it contains more detail.
+
+Keep three outputs separate: the response addressed to the reviewer, the
+corresponding manuscript or Supporting Material change, and the internal reply
+to the advisor. Write the internal reply in concise first person, normally one
+sentence beginning with a concrete action such as `I revised`, `I clarified`, or
+`I added`. Explain the original intent only when the advisor asks a question or
+reports confusion. When the advisor provides a writing strategy, acknowledge the
+advice briefly and identify where it was applied. Routine formatting,
+confirmation, and closing comments need only a short reply.
+
+After revising the response prose, reread the advisor comment and update the
+internal reply so that it describes the change actually made. Do not leave a
+stale reply that says only `I clarified` when the revision also changes the
+comparison, interpretation, final model decision, or document destination.
 
 ## Disagreement or an Unimplemented Request
 
@@ -202,13 +403,67 @@ When the deliverable is a Word response document:
 - preserve response color, tracked changes, margin comments, page setup, and the
   established lab template;
 - format response-only figure and table labels consistently;
+- assign response-only figure and table numbers by their final order of first
+  citation, then update every cross-reference consistently;
 - keep references in the document's established location;
 - verify cross-page comment-response blocks, table breaks, captions, equations,
   and figures after rendering; and
-- do not fill line-number placeholders until the clean manuscript is stable.
+- do not fill line-number placeholders until the designated manuscript version
+  and its layout are stable.
 
 Use the available `docx` or Word-document skill for tracked-change and OOXML
 operations.
+
+## Promise-to-Artifact Reconciliation
+
+For a revision-package check, inspect in both directions: every response promise
+must point to an implemented and verified change or a justified non-change, and
+every material manuscript/SM change should be reported under a reviewer concern
+only when it directly addresses that concern. Do not turn every editorial change
+into a new promise, add topical labels to unchanged text, or silently mark an
+unmet promise resolved. Preserve an open issue when the required addition or
+analysis is absent. A writing audit does not authorize rerunning a model.
+
+Track the actual destination and changed function. Initialization, annual update,
+decision thresholds, and enforcement are distinct; evidence for one does not
+establish another. Check that consequential assumptions are in Methods rather
+than disclosed only in Limitations. A source supporting an institutional rationale
+does not estimate a numerical threshold. Cross-sectional survey evidence does
+not validate within-person annual dynamics. For a nonprobability sample, do not
+present a simple-random-sampling margin of error as the sample's demonstrated
+precision. Describe repeated-run uncertainty at the level it actually measures.
+
+Distinguish source comparison from direct validation. Geographic coverage,
+sampling unit, inclusion criteria, and denominator must match or be qualified:
+an average per paid claim is not an average per all households, and a regional
+record is not necessarily an observation within the modeled domain. State what
+a diagnostic actually evaluates; do not imply that documenting this mismatch
+invalidates every component or that a modeled trajectory is observed enrollment.
+
+After reorganizing figures, tables, sections, or SM, verify each reference by its
+purpose, including panel letters, captions, lists, acronym choices, and relevant
+response promises. Match the terminology actually retained in the manuscript;
+do not claim use of an abbreviation that was removed. Check citations against
+the supported clause and reference list, including author-year suffixes. Before
+deleting a reference, inspect its other usages. A new citation needs claim-level
+support, not just a relevant title or a desire to cite recent work.
+
+Select and record the rendered target version for response locators. It may be a
+clean manuscript or a compared/marked manuscript according to the delivery
+contract; never calculate line numbers from XML paragraph counts or reuse them
+from another version or markup view. Freeze text, page setup, line-number
+configuration, and display mode before reading displayed line numbers. If
+pagination changes, recheck affected ranges rather than assuming a small edit
+has no effect. For an SM without line numbering, cite its Text/Figure/Table item;
+do not transfer main-text lines or leave final XX/XXX placeholders. When the
+target cannot be rendered, mark locators unverified rather than guessing.
+
+Derive a revised response from the accepted advisor-edited baseline. If clean and
+compared response versions are requested, clean that baseline and compare the
+verified final revision against it, preserving reviewer text and required labels.
+Inspect the effective revised text and rendered deliverables, not concatenated
+deleted/inserted prose. Report what was actually checked before calling the
+package ready.
 
 ## Checks After a Model or Evidence Revision
 
@@ -296,7 +551,8 @@ numbers and the explanation of the results:
       captures.
 - [ ] Terminology, abbreviations, mathematical notation, tense, and response
       formatting are consistent.
-- [ ] Final line numbers refer to the clean revised manuscript.
+- [ ] Final line numbers refer to the designated rendered reviewer-facing
+      manuscript version; unnumbered SM uses verified item locators.
 - [ ] New prose passes claim-evidence, claim-scope, terminology,
       forbidden-variant, repetition, stock-phrase, project-discouraged-phrase,
       and formatted-document checks.

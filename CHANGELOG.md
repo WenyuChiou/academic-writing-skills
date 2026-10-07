@@ -11,6 +11,112 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.5] - 2026-10-06
+
+### Added
+
+- Task-loaded professor-derived teaching cases for outlines, incomplete abstracts,
+  reviewer responses, and check entries into the existing ABM display examples.
+- Explicit source/teaching boundaries and four scoped behavioral probes, without
+  making private examples or professor-specific templates universal requirements.
+- Regression checks for case structure, source boundaries, loading routes, and
+  the requested teaching-category order.
+
+## [1.3.4] - 2026-10-05
+
+### Added
+
+- Explicit pre-draft checks for logic within paragraphs and progression between
+  paragraphs, scaled to the requested writing or revision scope.
+- Pattern-first Results guidance: use necessary values to support a finding
+  rather than mechanically enumerate variables, groups, or panels.
+- A shared direct-syntax check that preserves technical distinctions,
+  conditions, uncertainty, and coherent connections between sentences.
+
+## [1.3.3] - 2026-10-03
+
+### Added
+
+- Topic-sentence forward and reverse outlines, preserving actual draft evidence
+  and bounded edit scope across article genres.
+- Current-gap support and independent, sequential, or hierarchical question checks.
+- Explicit response draft/final states and optional response-first advisor handoffs.
+- Quantity-led chart selection with a filename-versus-distribution counterexample.
+- Four registered behavioral scenarios with explicit acceptance criteria and
+  a regression guard for their instruction routes and rubric registration.
+
+## [1.3.2] - 2026-10-03
+
+### Added
+
+- Venue-first direction, format and style checks with dated official WRR/AGU
+  examples; bounded edits reuse applicable profiles without a whole-paper audit.
+- Map semantics, GIS provenance, table borders and plot grids, grounded in the
+  original ABM Figure 1 and inspected Table 1 Word settings, not universal rules.
+- Separate claim-support and reference-format checks, with actual ABM TP and
+  dataset citation examples and explicit assumption/validation boundaries.
+- Source-fidelity regression guards and three registered portability probes.
+
+## [1.3.1] - 2026-10-02
+
+### Added
+
+- Author-provided ABM Table 1 and Figure 6 as worked display examples, preserving
+  original table entries, caption text and the extracted figure image.
+- Separate teaching annotations for table titles, rationales, sources and notes,
+  plus figure panel mapping, encoding and uncertainty. The example note is not
+  attributed to the source manuscript; model-specific values are not templates
+  for other studies.
+- Source-text and image-fidelity tests and a bounded cross-study transfer probe.
+
+## [1.3.0] - 2026-10-02
+
+### Added
+
+- Routed section guides for Introduction/study context, Methods and assumption
+  provenance, Results and supported explanations, extension-analysis Discussion
+  and Limitations, Conclusion/Abstract, and figures/tables/Supporting Material.
+- Chapter-closure blind-spot checks selected by research design and content,
+  with scope boundaries instead of an identical checklist for every paragraph.
+- Regression guards and six registered behavioral scenarios for the new guidance.
+  Static checks protect the instruction contract; behavioral probes require
+  separate evaluation and do not certify arbitrary manuscripts.
+
+### Changed
+
+- Build SM alongside Methods and Results; preserve accepted source wording and
+  propagate only necessary changes across affected artifacts.
+- Treat abstract structure as information functions, not universal sentence
+  counts, fixed phrases, numerical bans, or invented optimization/testbed claims.
+- Require final-size visual readability, functional whitespace, short captions
+  and informative table notes; keep formatting choices in project overlays.
+- Reconcile response promises with actual revisions, source comparisons with
+  validation claims, and line locators with the designated rendered version.
+- Bump the plugin version so changed skill content satisfies the existing
+  version guard. No standalone legacy skill or private project state is bundled.
+
+## [1.2.0] - 2026-10-01
+
+### Added
+
+- Scope-aware checks for sentences, paragraphs, subsections, chapters, full
+  manuscripts, and submission packages, with targeted dependency checks when
+  a local change affects definitions or claims elsewhere.
+- Six behavioral evaluation scenarios covering local edits, Results synthesis,
+  figure functions, reader prerequisites, manuscript claim chains, and
+  cross-artifact metric changes; CI protects their continued registration.
+
+### Changed
+
+- Separate task scope, writing action, scientific impact, and evidence depth;
+  do not make every local edit a full manuscript audit or initialize project
+  machinery for a one-off request.
+- Require substantive Results conclusions, distinguish observed results from
+  assumptions and possible mechanisms, and check metric denominators, units,
+  aggregation, and context-specific abbreviation definitions.
+- Preserve accepted wording through minimum necessary changes and report
+  checked, inapplicable, out-of-scope, and unavailable checks separately.
+
 ## [1.1.6] - 2026-08-10
 
 ### Changed

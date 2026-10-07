@@ -1,7 +1,7 @@
 # Academic Writing Skills
 
 [![tests](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml/badge.svg)](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml)
-[![plugin version](https://img.shields.io/badge/plugin-v1.1.6-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.3.5-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 **Develop and review a manuscript as one connected evidence system—from
@@ -26,6 +26,7 @@ Submission verification`
 | Research framing and architecture | Clarifies the problem, gap, questions, intended contribution, evidence boundaries, and nonclaims. |
 | Extended outline | Assigns every planned paragraph a reader function, defensible claim, authorized evidence, inference limit, and bridge. |
 | Evidence-led drafting | Develops Methods, Results, Discussion, Conclusion, Abstract, and other artifacts from approved sources and current results. |
+| Section guidance | Stages reader prerequisites, separates parameter sources from assumptions, connects findings to questions, and checks readable visuals and independently understandable summaries. |
 | Bidirectional integrity | Checks top-down alignment from purpose to evidence and bottom-up alignment from evidence to contribution. |
 | Full top-to-bottom review | Reads the complete manuscript in four distinct passes: argument and structure; evidence and scope; scholarly writing and flow; delivery integrity. |
 | Revision and release | Propagates material changes across sections, figures, tables, supplements, metadata, and the exact submission package. |
@@ -121,6 +122,9 @@ Missing results, citations, assumptions, and reviewer preferences are reported
 as limitations; they are never invented.
 
 ## Learn more
+
+- [Worked display examples](./skills/academic-writing-skills/references/figures-tables-and-supplements.md): ABM Table 1 and Figures 1/6, with original content, observed Word borders, and separate teaching annotations.
+- [Venue and citation guidance](./skills/academic-writing-skills/references/overlay-contract.md): journal direction, format and style first; claim support separate from reference formatting, with ABM examples.
 
 - [Full usage guide](./docs/USER_GUIDE.md) — task inputs, more platform-neutral
   prompts, review stages, technical modules, and long-running project support.
