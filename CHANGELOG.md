@@ -11,6 +11,23 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.7] - 2026-10-07
+
+### Added
+
+- Contextual sentence-frame-family checks for adjacent `We first / We then /
+  We next` wording, with paragraph anchors and exact-candidate coverage.
+- Regression boundaries for necessary procedural order, paragraph breaks,
+  wrapped prose, noninitial anchors, multiple runs, and literal rather than
+  connective uses of `beyond`.
+
+### Changed
+
+- Review sentence-pattern families rather than only identical openings, while
+  preserving technical terms, matched comparisons, and actual dependencies.
+- Diagnose sentence-opening `Taken together` alongside `Beyond X,` and prefer
+  concrete content without imposing a phrase ban or cosmetic synonym rotation.
+
 ## [1.3.6] - 2026-10-07
 
 ### Added

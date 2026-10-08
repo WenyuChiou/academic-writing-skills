@@ -13,7 +13,7 @@ from pathlib import Path
 from audit_docx_structure import inspect
 from audit_manuscript_state import audit
 from audit_candidate_text import MANUAL_CHECKS, audit_candidate
-from audit_prose_patterns import audit as audit_prose, sentences
+from audit_prose_patterns import audit as audit_prose, audit_text as audit_prose_text, sentences
 from audit_text_consistency import audit as audit_text
 
 
@@ -241,6 +241,77 @@ def main() -> int:
             "direct reader-accessible wording was incorrectly flagged",
         )
         tests.append("context-sensitive connective and indirect-verb review")
+
+        sequence = (
+            "We first fit the income distributions. "
+            "We then sample incomes from these distributions. "
+            "We next calculate losses relative to income."
+        )
+        frames = [item for item in audit_prose_text(sequence, "candidate", {}) if item["code"] == "PROSE013"]
+        require(len(frames) == 1 and frames[0]["count"] == 3, "varying procedural sentence frames were missed")
+        require(frames[0]["paragraph"] == 1 and frames[0]["sentence_start"] == 1, "frame finding lacks a local anchor")
+        require(frames[0]["sentence_end"] == 3, "frame finding has an incorrect end anchor")
+        anchored = [item for item in audit_prose_text("The inputs are fixed. " + sequence, "anchored", {}) if item["code"] == "PROSE013"]
+        require(len(anchored) == 1 and anchored[0]["sentence_start"] == 2 and anchored[0]["sentence_end"] == 4, "noninitial frame anchors are incorrect")
+        separated = [item for item in audit_prose_text(sequence + " The inputs are fixed. " + sequence, "separated", {}) if item["code"] == "PROSE013"]
+        require([(item["sentence_start"], item["sentence_end"]) for item in separated] == [(1, 3), (5, 7)], "multiple disjoint frame runs were merged or misanchored")
+        require("preserve" in frames[0]["message"], "procedural ordering was treated as an automatic error")
+        require(
+            any(item["code"] == "PROSE013" for item in audit_candidate(sequence, "candidate", state)),
+            "exact-candidate gate missed procedural frame repetition",
+        )
+        tests.append("varying sentence-frame family and exact-candidate coverage")
+
+        for label, passage in {
+            "two necessary steps": "We first fit the distributions. We then sample incomes.",
+            "separate paragraphs": "We first fit distributions.\n\nWe then sample incomes.\n\nWe next calculate losses.",
+            "wrapped paragraph": "We first fit\nthe distributions. We then sample\nincomes. We next calculate losses.",
+            "intervening finding": "We first fit distributions. The fit meets the stated criterion. We then sample incomes. We next calculate losses.",
+            "content-led repair": "We fit the income distributions and sample incomes from them. The sampled incomes are then used to calculate losses relative to income.",
+        }.items():
+            expected = label == "wrapped paragraph"
+            actual = any(item["code"] == "PROSE013" for item in audit_prose_text(passage, label, {}))
+            require(actual == expected, f"sentence-frame boundary failed: {label}")
+        tests.append("procedural-frame scope and necessary-order boundaries")
+
+        frames_docx = root / "frames.docx"
+        make_docx(frames_docx, "".join(
+            f"<w:p><w:r><w:t>{sentence}</w:t></w:r></w:p>"
+            for sentence in (
+                "We first fit distributions.", "We then sample incomes.", "We next calculate losses.",
+            )
+        ))
+        frames_state = copy.deepcopy(state)
+        frames_state["artifacts"][0]["path"] = frames_docx.name
+        require(
+            not any(item["code"] == "PROSE013" for item in audit_prose(frames_state, root)),
+            "DOCX paragraph boundaries were flattened into one procedural run",
+        )
+        tests.append("DOCX procedural-frame paragraph boundaries")
+
+        for passage in (
+            "Taken together, the findings distinguish losses before and after payouts.",
+            "Taken together the findings distinguish the two loss measures.",
+            "Beyond insurance, relocation changes exposure.",
+        ):
+            require(
+                any(item["code"] == "PROSE012" for item in audit_prose_text(passage, "connective", {})),
+                f"contextual transition was missed: {passage}",
+            )
+        require(
+            not any(item["code"] == "PROSE012" for item in audit_prose_text(
+                "Floodwater extended beyond the study boundary. Samples were taken together for analysis.",
+                "literal uses", {},
+            )),
+            "literal beyond or nonconnective taken together was treated as a stock opening",
+        )
+        tests.append("Taken together review and literal beyond boundary")
+
+        require(
+            any("sentence-opening families" in check and "necessary procedural order" in check for check in MANUAL_CHECKS),
+            "manual candidate gate omitted structural variety and procedural-order preservation",
+        )
+        tests.append("sentence-family manual acceptance gate")
 
         require(
             any(

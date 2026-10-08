@@ -2,7 +2,7 @@
 
 `adapter.json` exposes the existing academic writing and paper review skills to
 an explicitly configured local workspace consumer. Adapter version `1.0.0`
-uses manifest schema `1`, plugin skill version `1.3.6`, and manuscript state
+uses manifest schema `1`, plugin skill version `1.3.7`, and manuscript state
 schema `1.1`. It needs no private checkout, host-specific path, network service,
 or installed project overlay. No scientific rule or audit script is replaced.
 

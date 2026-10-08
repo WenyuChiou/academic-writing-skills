@@ -37,6 +37,12 @@ SHORT_TRANSITION_OPENINGS = {
     "additionally", "furthermore", "however", "moreover", "overall", "therefore",
 }
 INDIRECT_ACADEMIC_VERB_RE = re.compile(r"\b(?:draw|draws|drawing|drew|drawn)\s+on\b", re.IGNORECASE)
+CONNECTIVE_FRAME_RE = re.compile(
+    r"^\s*(?:Beyond\s+[^,]{1,80},|Taken\s+together\b\s*,?)", re.IGNORECASE,
+)
+PROCEDURAL_FRAME_RE = re.compile(
+    r"^\s*We\s+(?:first|second|third|then|next|finally|subsequently)\b", re.IGNORECASE,
+)
 
 
 def tokens(text: str) -> list[str]:
@@ -86,6 +92,28 @@ def phrase_is_protected(phrase: str, protected: set[str]) -> bool:
     return any(item == phrase or item in phrase for item in protected)
 
 
+def procedural_frame_findings(text: str, artifact: str) -> list[dict[str, Any]]:
+    """Flag one bounded frame family, not general syntactic sameness or bad order."""
+    findings: list[dict[str, Any]] = []
+    for paragraph_index, paragraph in enumerate(re.split(r"\n\s*\n", text), start=1):
+        sentence_list = sentences(paragraph)
+        run: list[str] = []
+        for index, sentence in enumerate(sentence_list + [""]):
+            if PROCEDURAL_FRAME_RE.match(sentence):
+                run.append(sentence)
+                continue
+            if len(run) >= 3:
+                findings.append({
+                    "code": "PROSE013", "artifact": artifact,
+                    "match": " | ".join(run), "count": len(run),
+                    "paragraph": paragraph_index,
+                    "sentence_start": index - len(run) + 1, "sentence_end": index,
+                    "message": "repeated procedural sentence-frame family; inspect local cadence and preserve necessary procedural order, not automatic deletion",
+                })
+            run = []
+    return findings
+
+
 def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
     profile = state.get("style_profile", {})
@@ -93,6 +121,7 @@ def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str
     protected_words = {word for phrase in protected for word in phrase.split()}
     sentence_list = sentences(text)
     sentence_tokens = [tokens(item) for item in sentence_list]
+    findings.extend(procedural_frame_findings(text, artifact))
 
     for start in range(len(sentence_tokens) - 1):
         run = []
@@ -137,9 +166,9 @@ def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str
 
     for sentence in sentence_list:
         matches: list[str] = []
-        beyond = re.match(r"^\s*Beyond\s+[^,]{1,80},", sentence, flags=re.IGNORECASE)
-        if beyond:
-            matches.append(beyond.group(0))
+        connective = CONNECTIVE_FRAME_RE.match(sentence)
+        if connective:
+            matches.append(connective.group(0).strip())
         matches.extend(match.group(0) for match in INDIRECT_ACADEMIC_VERB_RE.finditer(sentence))
         if matches:
             findings.append({
@@ -248,7 +277,11 @@ def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
         path = (project_root / item["path"]).resolve()
         artifact = str(item.get("id", item["path"]))
         try:
-            findings.extend(audit_text(extract_text(path), artifact, state))
+            text = extract_text(path)
+            # DOCX extraction emits one line per paragraph; wrapped text files do not.
+            if path.suffix.lower() == ".docx":
+                text = text.replace("\n", "\n\n")
+            findings.extend(audit_text(text, artifact, state))
         except (OSError, ValueError) as exc:
             findings.append({"code": "PROSE000", "artifact": artifact, "message": str(exc)})
     return findings
