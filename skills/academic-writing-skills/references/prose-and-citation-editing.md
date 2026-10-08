@@ -57,6 +57,21 @@ Prefer a literal verb when an idiomatic academic verb adds no meaning. If `draw 
 
 Read for cadence as well as grammar. Flag repeated sentence shapes, excessive parallel lists, long noun stacks, vague agents such as `researchers` or `studies` when the field or evidence source is clearer, and repeated demonstrative openings such as `This`, `These`, or `Such`. Revise only when the change improves meaning, flow, or evidence linkage.
 
+### Sentence-pattern variety without changing logic
+
+Separate a stable argument order from repeated grammatical scaffolding. A passage may correctly move from finding to evidence to explanation while unnecessarily repeating the same sentence shape. Review sentence-opening families, not only identical strings: `We first ... / We then ... / We next ...`, `These results show ... / These findings indicate ...`, or repeated `By ... , we ...` clauses can sound repetitive even when their verbs differ.
+
+For paragraph work, inspect the whole paragraph and its available neighbors. For subsection or section work, also read paragraph openings and endings in sequence for recurrent scaffolding. A one-sentence grammar correction does not authorize rewriting adjacent paragraphs for variety. The deterministic scan flags three adjacent procedural `We` frames within a paragraph as a review cue; it does not parse every sentence structure, establish a universal quota, or certify broader stylistic variety.
+
+Preserve the actual sequence, dependencies, technical terms, actors, and comparison. Where useful, combine dependent steps, make the relevant data or result the subject, or remove a sequencing word that adds no information. Do not simply rotate `then` into `next`, change every sentence to passive voice, or replace a defined technical term to evade repetition. Retain deliberate parallelism for matched comparisons and procedural sequences when it helps the reader; record the reason rather than treating a diagnostic as an automatic error.
+
+For example, this hypothetical wording can be repaired without changing the procedure:
+
+- Before: `We first fit the income distributions. We then sample incomes from these distributions. We next calculate losses relative to income.`
+- Minimal repair: `We fit the income distributions and sample incomes from them. The sampled incomes are then used to calculate losses relative to income.`
+
+Use sentence-opening `Beyond X,` and `Taken together,` sparingly, not as default bridges or summaries. Prefer naming the added evidence, actual boundary, or combined finding directly. Retain `Beyond X,` when it identifies a genuine extension and `Taken together,` when the sentence actually synthesizes distinct evidence. Do not replace them mechanically with another stock connector. Literal wording such as `floodwater extended beyond the boundary` is not a stock transition. Both openings receive contextual diagnostics; project-specific stronger preferences remain in the prose profile.
+
 After drafting, read the exact passage aloud or simulate how a researcher would naturally say it. The test is not whether the prose sounds conversational. It is whether the sentence can be spoken at an ordinary pace, whether its subject and action remain clear, and whether the listener can follow the information in the order presented. Rewrite passages that sound assembled, require backtracking, or contain wording a researcher would be unlikely to say.
 
 ## Gap Statements and Comparative Framing

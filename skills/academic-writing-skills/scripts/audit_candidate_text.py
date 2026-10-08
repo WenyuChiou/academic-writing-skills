@@ -18,6 +18,7 @@ MANUAL_CHECKS = [
     "functional transitions and cumulative information flow",
     "literature-example ordering from broad context to the closest precedent and gap, or another explicit evidentiary logic",
     "function-preserving concision and sentence rhythm",
+    "sentence-opening families and repeated clause shapes, including We first/We then/We next; preserve necessary procedural order without cosmetic synonym or voice rotation",
     "natural scholarly subjects, syntax, and disciplinary accessibility",
     "reader accessibility, including nonessential field shorthand, transition templates, and indirect verbs",
     "claim-to-citation support and reference-list changes",
