@@ -29,6 +29,8 @@ For example, in a hypothetical scenario test, both groups' estimated losses chan
 
 Begin with the specific constraint in the data, design, measurement, model, validation, or represented outcomes; follow with the inference or use it limits. The opening's job is to identify the study limitation, not merely warn about “interpreting results.” This is a function rule, not a blanket ban on that phrase wherever a concrete constraint and consequence are clear.
 
+Before drafting or finalizing, separate a choice, uncertainty, or design boundary from a correctable execution problem. The choice of a source, indicator, or model is not by itself a manuscript defect; identify the uncertainty or coverage boundary associated with it and the particular estimate or inference affected. Verify what the source or diagnostic actually establishes. If the type or consequence of uncertainty is unknown, do not fill the gap with a generic claim that the results are unreliable or biased. Correct correctable errors or missing required work, or state accurately why they remain unresolved, rather than presenting them as research limitations.
+
 Frame a limitation as a boundary created by the study's data, measurement choices,
 model representation, assumptions, validation design, or scope—not as a defect in
 the manuscript. Name the choice or condition and explain what it makes uncertain

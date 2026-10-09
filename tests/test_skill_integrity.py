@@ -72,7 +72,12 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.8"
+    assert manifest["version"] == "1.3.9"
+    guide_version = re.search(
+        r"plugin skill version `([^`]+)`", read(ROOT / "docs" / "workspace-adapter.md")
+    )
+    assert guide_version is not None
+    assert guide_version.group(1) == manifest["version"]
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -548,6 +553,12 @@ def test_reader_continuity_and_limitation_allocation_probes_are_registered():
     execution = "skills/academic-writing-skills/references/execution-and-acceptance.md"
     limitations = "skills/academic-writing-skills/references/discussion-and-limitations.md"
     required = {
+        "cross_disciplinary_paragraph_pairs_and_CFA_limit": [
+            "skills/academic-writing-skills/SKILL.md", execution,
+        ],
+        "limitation_source_uncertainty_not_manuscript_defect": [
+            "skills/academic-writing-skills/SKILL.md", execution, limitations,
+        ],
         "limitations_reader_continuity_and_consequence_allocation": [
             "skills/academic-writing-skills/SKILL.md", execution, limitations,
         ],
@@ -567,15 +578,21 @@ def test_reader_continuity_and_limitation_allocation_probes_are_registered():
 
     prose = " ".join(read(ROOT / execution).split())
     discussion = " ".join(read(ROOT / limitations).split())
-    assert "adjacent-sentence transition" in prose
-    assert "adding a transition word alone is not a repair" in prose
+    skill = " ".join(read(CORE / "SKILL.md").split())
+    assert "every adjacent sentence pair" in prose
+    assert "what the next sentence adds and why it follows" in prose
+    assert "Adding a transition word alone is not a repair" in prose
     assert "Do not force an explicit connector between every sentence" in prose
+    assert "cross-disciplinary reader" in prose
+    assert "before the first handoff and after any substantive revision" in skill
     assert "Allocate Limitation Claims to Their Actual Consequences" in discussion
     assert "does not show that it caused a nonsignificant finding" in discussion
     assert "a new sample can check" in discussion
     assert "state each one and its distinct consequence" in discussion
     assert "not as a defect in" in discussion
     assert "correctable analytical" in discussion
+    assert "choice, uncertainty, or design boundary" in discussion
+    assert "correctable errors or missing required work" in discussion
 
 
 def test_readmes_are_bilingual_user_facing_entrypoints():
