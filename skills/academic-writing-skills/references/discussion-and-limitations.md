@@ -29,6 +29,16 @@ For example, in a hypothetical scenario test, both groups' estimated losses chan
 
 Begin with the specific constraint in the data, design, measurement, model, validation, or represented outcomes; follow with the inference or use it limits. The opening's job is to identify the study limitation, not merely warn about “interpreting results.” This is a function rule, not a blanket ban on that phrase wherever a concrete constraint and consequence are clear.
 
+Frame a limitation as a boundary created by the study's data, measurement choices,
+model representation, assumptions, validation design, or scope—not as a defect in
+the manuscript. Name the choice or condition and explain what it makes uncertain
+or what inference it cannot support. For example, uncertainty in a selected
+geospatial dataset may bound the precision of exposure estimates; it does not
+mean the paper itself is defective. Do not disguise a correctable analytical
+error, unsupported claim, or omitted required analysis as a limitation: fix it or
+state the unresolved issue accurately. This framing clarifies the source of the
+boundary without minimizing its consequence.
+
 Group related constraints into a paragraph and order them by dependency or consequence. A useful planning sequence is **constraint → affected component or inference → boundary → optional targeted remedy**. Combine these functions when concise; do not impose a fixed paragraph count, require ordinal starters, or tack a future-work sentence onto every limitation.
 
 Check that consequential assumptions were already disclosed at their operational use in Methods. Limitations can explain their implications but should not reveal the model's actual design for the first time. Separate missing empirical validation from known failure. Lack of household-level evaluation, for example, may narrow claim accuracy without erasing the value of a verified aggregate diagnostic.
@@ -36,6 +46,37 @@ Check that consequential assumptions were already disclosed at their operational
 Do not invent the direction of bias when it is unknown, call an unexpected finding a methodological limitation, or soften a known omission to preserve a desired narrative. Missing recovery conditions or household resources can restrict a vulnerability interpretation even when modeled property-loss calculations are sound. Match the boundary to the actual construct, not a generic “more data are needed.”
 
 Future work is optional. When included, connect it to the named constraint and state what additional inference it could permit. Do not offer a broad wishlist in place of the present limitation or imply that a proposed remedy has already been implemented.
+
+### Allocate Limitation Claims to Their Actual Consequences
+
+Before drafting a limitations paragraph, sort candidate material into a genuine
+constraint on inference or use, a diagnostic or procedure, a substantive result,
+or a scope boundary. A nonsignificant result, a repeated model run, a technical
+adjustment, or a study's finite scope is not automatically a limitation; retain
+it only when it identifies a specific conclusion or use that the design cannot
+support. Do not relabel an unexpected or nonsignificant finding as a method
+failure.
+
+Keep related but distinct constraints separate. For example, unequal group
+sample sizes may reduce precision or the ability to detect a difference, while
+uncertain measurement comparability limits whether group-level construct
+differences can be interpreted. The sample-size difference alone does not show
+that it caused a nonsignificant finding, and identical item wording does not
+establish measurement equivalence. When the evidence identifies multiple
+material constraints, state each one and its distinct consequence rather than
+letting one stand in for another or dropping it during compression. State only
+the consequence supported by the design and diagnostics.
+
+Allocate detail by reader function: the main text names the constraint and the
+inference it limits; Methods or Supporting Material carries procedures and
+extended numerical diagnostics when those details are needed for reproducibility.
+Do not remove a real inference concern just because its diagnostic is technical.
+When future work is useful, make each remedy answer a distinct constraint—for
+example, a new sample can check whether selected questions work in other
+households, while longitudinal follow-up can compare stated willingness with
+later behavior. Neither remedy by itself establishes equivalence or causality.
+These are conditional distinctions, not a universal checklist of statistical
+tests or required data.
 
 ## Hidden Inference Checks
 

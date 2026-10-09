@@ -72,7 +72,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.7"
+    assert manifest["version"] == "1.3.8"
     assert "progressive" in manifest["description"].lower()
     assert "domain" in manifest["description"].lower()
 
@@ -540,6 +540,42 @@ def test_professor_teaching_behavioral_probes_have_scoped_inputs():
         assert len(case["acceptance_criteria"]) >= 3
         assert all(item.strip() for item in case["acceptance_criteria"])
         assert case["prompt"].strip() and case["expected_output"].strip()
+
+
+def test_reader_continuity_and_limitation_allocation_probes_are_registered():
+    data = json.loads(read(ROOT / "evals" / "evals.json"))
+    cases = {case["id"]: case for case in data["evals"]}
+    execution = "skills/academic-writing-skills/references/execution-and-acceptance.md"
+    limitations = "skills/academic-writing-skills/references/discussion-and-limitations.md"
+    required = {
+        "limitations_reader_continuity_and_consequence_allocation": [
+            "skills/academic-writing-skills/SKILL.md", execution, limitations,
+        ],
+        "limitations_frame_research_boundary_not_paper_defect": [
+            "skills/academic-writing-skills/SKILL.md", limitations,
+        ],
+        "bounded_copyedit_preserves_coherent_expert_prose": [
+            "skills/academic-writing-skills/SKILL.md", execution,
+        ],
+    }
+    for case_id, routed_files in required.items():
+        case = cases[case_id]
+        assert case["files"] == routed_files
+        assert case["prompt"].strip() and case["expected_output"].strip()
+        assert len(case["acceptance_criteria"]) >= 3
+        assert all(item.strip() for item in case["acceptance_criteria"])
+
+    prose = " ".join(read(ROOT / execution).split())
+    discussion = " ".join(read(ROOT / limitations).split())
+    assert "adjacent-sentence transition" in prose
+    assert "adding a transition word alone is not a repair" in prose
+    assert "Do not force an explicit connector between every sentence" in prose
+    assert "Allocate Limitation Claims to Their Actual Consequences" in discussion
+    assert "does not show that it caused a nonsignificant finding" in discussion
+    assert "a new sample can check" in discussion
+    assert "state each one and its distinct consequence" in discussion
+    assert "not as a defect in" in discussion
+    assert "correctable analytical" in discussion
 
 
 def test_readmes_are_bilingual_user_facing_entrypoints():
