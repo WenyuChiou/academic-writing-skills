@@ -11,6 +11,25 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.8] - 2026-10-08
+
+### Added
+
+- A substantive reader-continuity check for dependent sentence pairs that names
+  the relation and evidence rather than relying on transition words alone.
+- Limitation-allocation guidance that separates inference constraints from
+  procedures and findings, distinguishes precision from measurement
+  comparability, frames constraints as consequences of data/design choices
+  rather than manuscript defects, and links each future-data remedy to its
+  specific question.
+- Behavioral probes for limitation reasoning and for preserving scope on a
+  bounded copyedit.
+
+### Changed
+
+- Make independent cold-reader review useful for complex or repeated
+  comprehension failures without requiring delegation for every local edit.
+
 ## [1.3.7] - 2026-10-07
 
 ### Added

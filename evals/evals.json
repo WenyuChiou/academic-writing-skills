@@ -278,6 +278,43 @@
         "Distinguishes the working strategy from a verified final response without universalizing advisor review."
       ],
       "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/professor-teaching-cases.md"]
+    },
+    {
+      "id": "limitations_reader_continuity_and_consequence_allocation",
+      "prompt": "Revise only this limitations passage for a broad disaster-research audience, using the audited facts below. Draft: 'HC had fewer respondents than LC, so it may explain why the group results differed. Both groups received the same questionnaire, but the measurement checks were inconsistent. We selected and assessed questions using the same survey sample. Ten repeated generated-response runs were averaged, so the results have ten observations. The covariance matrix was adjusted; some factor correlations equaled one and residual variance estimates were zero. HC pathways were statistically significant, whereas LC pathways were not. Future studies should validate the model and examine purchase over time.' Audited facts: HC n=148 and LC n=788; the smaller HC sample may reduce precision or ability to detect differences, but does not establish why any particular result was nonsignificant. Identical item wording does not establish measurement comparability, and the checks are inconsistent. Separate within-group significance tests do not test a between-group difference; nonsignificance is not equivalence. Questions were selected and assessed on the same data, not checked on an independent household sample. Detailed covariance and fit diagnostics are in SM Table S18. Repeated generated-response runs are computational repeats, not new independent households; the aggregation protocol is already in Methods. A new household sample could check selected questions; longitudinal follow-up could compare stated willingness with later purchase. State what the current design can and cannot support, allocate only necessary technical detail to the main text, and propose a minimal revision plan. Do not invent analyses or findings.",
+      "expected_output": "Separates sample-size precision from measurement comparability and avoids attributing nonsignificance to the smaller group. Limits cross-group construct claims because comparability checks are inconsistent; does not infer a group difference from separate within-group significance or equivalence from nonsignificance. Treats same-data question selection as unvalidated on an independent household sample. Keeps repeated model runs out of the limitations unless tied to a concrete unsupported claim, leaves extended diagnostics in SM Table S18, and names their relevant inference consequence in reader-level language. Distinguishes a new household sample for checking selected questions from longitudinal follow-up for stated willingness versus later purchase. Organizes the explanation so each sentence's relation to the next is clear without relying on added transition words alone.",
+      "acceptance_criteria": [
+        "States that the smaller HC sample may reduce precision or ability to detect a difference, keeps this distinct from measurement comparability, and does not attribute a particular nonsignificant result to sample size.",
+        "Does not treat identical wording as measurement equivalence, within-group significance as a between-group test, or nonsignificance as equivalence.",
+        "Does not count computational repeats as additional independent households or list repeated runs as a limitation without a specific consequence.",
+        "Explains the inference consequence in the main-text plan while leaving detailed covariance/fit diagnostics in the existing SM location.",
+        "Matches the independent-sample remedy to question selection and longitudinal follow-up to stated willingness versus later purchase.",
+        "Provides a coherent sentence-to-sentence route, not merely a sequence of short statements connected by stock transitions."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/execution-and-acceptance.md", "skills/academic-writing-skills/references/discussion-and-limitations.md"]
+    },
+    {
+      "id": "limitations_frame_research_boundary_not_paper_defect",
+      "prompt": "Draft a short limitation for a hypothetical flood-risk study that uses an established regional hazard dataset with known uncertainty in mapped flood extent. The calculations and data handling were checked and are correct; no analysis is missing. Explain the appropriate framing, the inference boundary, and what must not be implied. Also state what the author should do instead if an actual coding or calculation error is discovered.",
+      "expected_output": "Frames uncertainty as a constraint arising from the selected hazard data and explains which exposure-related inference is consequently bounded. Does not say the manuscript is defective or imply that correct use of uncertain data is an error. Clearly distinguishes that boundary from a genuine correctable coding/calculation error, which should be fixed rather than presented as a limitation. Does not overstate the dataset's direction or magnitude of bias.",
+      "acceptance_criteria": [
+        "Attributes the limitation to a real data, design, measurement, model, validation, or scope condition and names the affected inference.",
+        "Does not describe correct use of uncertain source data as a flaw in the manuscript or research execution.",
+        "Routes an actual correctable coding/calculation error to correction, not limitation framing.",
+        "Does not invent the direction or magnitude of dataset uncertainty."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/discussion-and-limitations.md"]
+    },
+    {
+      "id": "bounded_copyedit_preserves_coherent_expert_prose",
+      "prompt": "The surrounding methods paragraph is coherent and already defines its technical terms. Correct only the missing comma in this sentence: 'In this sample the HC group had 148 respondents.' Do not otherwise revise or inspect the section.",
+      "expected_output": "Makes only the requested punctuation correction. Does not force a plain-language rewrite, add connectors, require an independent reader, expand scope to the section, or launch unnecessary analysis.",
+      "acceptance_criteria": [
+        "Performs only the authorized punctuation edit and preserves scientific meaning.",
+        "Does not impose the substantive sentence-pair or limitations workflow on a bounded surface edit.",
+        "Does not claim extra verification or request unavailable facts."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/execution-and-acceptance.md"]
     }
   ]
 }
