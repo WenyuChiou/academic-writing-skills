@@ -86,6 +86,8 @@ Draft only after the contract and information order are coherent. After drafting
 
 For substantive drafting or formatted-file editing, read [execution-and-acceptance.md](references/execution-and-acceptance.md) **before drafting**. Use its reader-route and caption/body/SM allocation, then perform its scoped checks before the first handoff. Preserve the author's primary comparison before dependent subgroup or model detail; this does not prescribe a universal comparison order.
 
+Make sentence-to-sentence reader continuity a high-priority acceptance gate before the first handoff and after any substantive revision. For limitation prose, also apply the constraint-versus-defect triage in [discussion-and-limitations.md](references/discussion-and-limitations.md): describe a documented boundary and its consequence; correct fixable errors instead of recasting them as limitations. Keep this expanded gate out of a grammar-only local edit.
+
 Also identify the intended reader's likely knowledge. For interdisciplinary papers and reviewer responses, assume a reader who understands the broader research area but does not know the study's internal terminology, model sequence, data transformations, or earlier drafting history. Supply the minimum context that reader needs at the point of use; do not make the reader reconstruct it from later text.
 
 ## Apply Universal Integrity Gates

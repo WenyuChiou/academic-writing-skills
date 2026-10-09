@@ -11,6 +11,16 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.9] - 2026-10-09
+
+### Added
+
+- Elevate sentence-to-sentence continuity for interdisciplinary readers to a
+  first-handoff and post-substantive-revision acceptance gate.
+- Add a limitation triage that separates documented data/indicator/design
+  boundaries from fixable errors, with scoped behavioral probes for CFA
+  interpretation and source uncertainty versus processing errors.
+
 ## [1.3.8] - 2026-10-08
 
 ### Added

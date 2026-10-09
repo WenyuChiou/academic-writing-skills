@@ -315,6 +315,34 @@
         "Does not claim extra verification or request unavailable facts."
       ],
       "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/execution-and-acceptance.md"]
+    },
+    {
+      "id": "cross_disciplinary_paragraph_pairs_and_CFA_limit",
+      "prompt": "Revise only this limitations paragraph for an informed reader outside psychometrics. The preceding text already defines the high-capacity (HC) and low-capacity (LC) groups and gives their sample sizes (148 and 788). Draft: 'The paragraph reports three social vulnerability index (SVI) measures for HC and LC. In addition, two CFA models of large-language-model (LLM) responses failed to converge. This measurement limitation also affects the findings. These models do not capture the same decision-making relationships.' Facts: CFA means confirmatory factor analysis, which checks whether response patterns support the proposed latent constructs; CFA has not yet been expanded in this section. Both CFA models failed to converge, so they do not support a claim that LLM responses reproduce that latent structure. The three SVI measures are separate descriptive results; no evidence says CFA failures change those values. 'The same decision-making relationships' is undefined and unsupported by the supplied text. Make the smallest coherent revision and explain its logic. Do not invent results, imply causation, or add a connector without stating the relation.",
+      "expected_output": "Keeps the descriptive SVI comparison distinct from the CFA limitation, expands confirmatory factor analysis at first use and explains its purpose in plain terms. States that failed convergence limits claims about whether LLM responses reproduce the proposed latent structure, without implying that the descriptive SVI values are invalid or changed. Removes or qualifies the empty restatement and the unsupported 'same decision-making relationships' phrase. Makes the relation between sentences clear from their content rather than a connector alone, while preserving the supplied groups and sample sizes.",
+      "acceptance_criteria": [
+        "A cross-disciplinary reader can distinguish the descriptive SVI results from the latent-structure check and explain what the failed CFA convergence does and does not support.",
+        "Defines confirmatory factor analysis at first use and gives its function without adding unsupported psychometric claims.",
+        "Does not claim CFA failure changes, invalidates, or explains the separate SVI values.",
+        "Removes or grounds the vague statement about capturing the same decision-making relationships.",
+        "Repairs the actual sentence relation or redundancy; a transition word alone is not accepted as the repair.",
+        "Preserves correct group labels and sample sizes and does not force redundant definitions or connectors."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/execution-and-acceptance.md"]
+    },
+    {
+      "id": "limitation_source_uncertainty_not_manuscript_defect",
+      "prompt": "Assess a limitation for an interdisciplinary flood-risk study. The authors selected an index labeled MSRI because it is available for each study area. Its source documentation says that the estimates contain uncertainty, but the supplied excerpt does not identify the uncertainty's type, magnitude, direction, or affected components. The data processing was checked and no required analysis is missing. A draft says: 'Our manuscript is flawed because we used an unreliable MSRI, which may bias all conclusions.' State what is and is not a defensible limitation, what must be verified before writing its consequence, and what to do if an actual coding error is found. Do not expand MSRI, invent its properties, or browse.",
+      "expected_output": "Does not describe the manuscript as defective merely because the selected source/index has documented uncertainty. Separates the source/indicator choice from the uncertainty associated with its estimates, and requires checking the source documentation and identifying which measure or inference is affected before stating a consequence. Does not call all conclusions unreliable or infer bias direction. If those details remain unavailable, marks the specific consequence unverified rather than filling the gap with generic language. States that an actual coding/data-processing error should be corrected and rechecked, not reframed as a limitation. Does not expand MSRI or invent why it was selected beyond the supplied coverage fact.",
+      "acceptance_criteria": [
+        "Frames the limitation as uncertainty associated with the selected source/index, not as a defect in the manuscript or the mere fact of choosing it.",
+        "Requires evidence for the uncertainty type and for the specific affected measure or inference before stating a broad consequence.",
+        "Does not claim a direction or magnitude of bias or that all conclusions are affected.",
+        "Keeps unavailable uncertainty details explicitly unverified instead of masking them with generic wording.",
+        "Routes an actual correctable coding or data-processing error to correction and rechecking.",
+        "Does not expand or reinterpret the supplied MSRI label."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/execution-and-acceptance.md", "skills/academic-writing-skills/references/discussion-and-limitations.md"]
     }
   ]
 }
