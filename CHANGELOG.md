@@ -11,6 +11,27 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.10] - 2026-10-11
+
+### Added
+
+- Meaning-first checks for noun chains, short comparison labels and opaque
+  possessives, preserving established technical terms and requiring focused
+  clarification when a relationship is not specified.
+- A cross-disciplinary plain-language gate that introduces necessary concepts
+  before dependent claims and preserves quantities, comparison references,
+  uncertainty and the supported strength of inference.
+- Ten scoped behavioral evaluation cases and two registration regressions for
+  these checks. Synthetic writing probes informed targeted repairs; neither
+  these probes nor registration tests certify comprehension by all readers.
+
+### Changed
+
+- Route local clarity checks through the existing prose reference without
+  expanding bounded edits into whole-manuscript rewrites or imposing noun-count
+  bans and mechanical synonym substitutions.
+- Refresh the portable adapter and plugin metadata for version 1.3.10.
+
 ## [1.3.9] - 2026-10-09
 
 ### Added
@@ -674,6 +695,7 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   domain-neutral.
 
 [Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/commits/main
+[1.3.10]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.9...v1.3.10
 [1.1.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.1.0...main
 [1.1.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v0.3.3...v1.0.0

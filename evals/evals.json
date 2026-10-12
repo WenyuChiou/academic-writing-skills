@@ -343,6 +343,116 @@
         "Does not expand or reinterpret the supplied MSRI label."
       ],
       "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/execution-and-acceptance.md", "skills/academic-writing-skills/references/discussion-and-limitations.md"]
+    },
+    {
+      "id": "noun_chain_explicit_relations_preserve_constructs",
+      "prompt": "Revise only these three phrases for a broad scholarly reader using the supplied meanings: 'renter flood insurance purchase willingness' measures renters' stated willingness to buy flood insurance, not enrollment; 'human insurance policy responses' concerns people's responses to insurance policies, not responses collected by insurers; 'insured household wellness scores' reports scores for insured households on a construct explicitly named wellness. Make the relations easy to understand without replacing constructs or adding findings.",
+      "expected_output": "Unpacks the phrases into clear possessives, prepositional phrases, or clauses, such as renters' willingness to buy flood insurance, people's responses to insurance policies, and wellness scores for insured households. Chooses each relation from the supplied meaning, does not apply the same preposition mechanically, and preserves wellness and willingness as distinct constructs. Does not imply observed purchases, causal effects, or new results.",
+      "acceptance_criteria": [
+        "Each revision identifies whose construct, what people respond to, or which population is scored without a new opaque noun chain.",
+        "Preserves wellness and willingness rather than substituting welfare, well-being, enrollment, or observed behavior.",
+        "Does not add results, causation, or unsupported institutional details."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
+    },
+    {
+      "id": "noun_chain_ambiguous_relation_not_guessed",
+      "prompt": "Make 'community insurance response wellness measure' clear for a manuscript. No definition, surrounding sentence, or instrument documentation is supplied. It could mean a measure of community wellness after responses to insurance, a measure of insurance-related responses collected from the community, or something else. Provide a safe next step, not an invented study description.",
+      "expected_output": "Explains briefly that the central construct and relationships are unresolved, asks a focused question about what the measure records and for whom, or offers alternatives explicitly conditional on the intended meaning. Does not pick a meaning silently, conflate wellness with willingness, or claim insurance improved wellness.",
+      "acceptance_criteria": [
+        "Keeps the missing relation explicit and requests only the information necessary to resolve it, or labels alternatives as conditional.",
+        "Does not silently select a construct, population, direction, mechanism, or instrument.",
+        "Does not use a mechanical of/to insertion or an invented causal claim as the repair."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
+    },
+    {
+      "id": "noun_chain_technical_terms_not_blanket_banned",
+      "prompt": "The manuscript uses the official program name 'National Flood Insurance Program', the defined statistic 'median household income', and the conventional method name 'random forest regression'. An editor wants to split every phrase with three or more nouns using 'of' or 'to'. Assess that request and improve only the separate phrase 'household insurance purchase willingness' if it means households' willingness to buy insurance.",
+      "expected_output": "Preserves the official name, defined statistic, and conventional method, rejects a blanket noun-count rule, and rewrites only the supplied opaque willingness phrase by expressing who is willing to do what. Treats noun count as a diagnostic rather than a ban and does not rotate technical terms for variety.",
+      "acceptance_criteria": [
+        "Retains all three supplied technical or official names exactly.",
+        "Repairs the generic willingness phrase without changing willingness into insurance adoption.",
+        "Explains that clarity and meaning, not a universal noun-count quota, determine whether to unpack a phrase."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
+    },
+    {
+      "id": "noun_chain_local_edit_preserves_scope_and_qualifiers",
+      "prompt": "Improve only this sentence: 'We measured renter flood insurance purchase willingness in 2024.' The defined construct is stated willingness to buy flood insurance; the study does not observe purchases. The adjacent paragraph, headings, figures, and reference list are locked and out of scope. Make the sentence easier to read without adding facts or editing those artifacts.",
+      "expected_output": "Makes a local repair such as 'We measured renters' willingness to buy flood insurance in 2024.' Preserves the actor, construct, past-tense measurement, and year, without claiming observed purchases or rewriting locked adjacent material. Does not launch a whole-manuscript audit or certify checks it did not perform.",
+      "acceptance_criteria": [
+        "Preserves measured willingness, the renter population, and 2024 without an opaque replacement noun chain.",
+        "Does not add actual purchasing, causal interpretation, prevalence, or measurement details.",
+        "Restricts the edit to the authorized sentence and does not claim broader verification."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
+    },
+    {
+      "id": "noun_chain_short_comparison_names_quantity_groups",
+      "prompt": "Revise the running-prose label 'Group mean differences were significant' using these hypothetical facts: insured respondents reported a higher mean willingness to buy flood insurance than uninsured respondents (4.2 versus 3.6 on the same scale; p = .03). These facts are illustrative, not findings from a real manuscript. Name the groups and measured concept directly, preserve the comparator, and do not infer actual purchases or an insurance effect. Also assess whether a table heading 'Mean difference' must be changed when that table explicitly names the two groups and construct.",
+      "expected_output": "States directly that insured respondents reported greater mean willingness to buy flood insurance than uninsured respondents and explicitly preserves statistical significance. The supplied numeric details may be retained when useful. Explains that the three-word label's problem is missing relations, not noun count. Preserves the clear table heading because its quantity and comparison are locally defined, without promoting an author-specific prose preference into a universal statistical-term ban.",
+      "acceptance_criteria": [
+        "Identifies insured and uninsured respondents, mean willingness to buy flood insurance, the comparison direction, and statistical significance.",
+        "Does not turn reported willingness into observed purchases or imply insurance causes willingness.",
+        "Retains the locally defined table heading and rejects a universal ban on mean comparisons."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
+    },
+    {
+      "id": "noun_chain_possessive_source_construct_not_stacked",
+      "prompt": "Improve only 'Human respondents' insurance willingness exceeded LLM-generated respondents' insurance willingness.' The hypothetical result concerns self-reported willingness to buy flood insurance in human survey responses and willingness stated in LLM-generated responses; it does not observe purchases or test causes. Neither converting the first phrase to 'human respondent insurance willingness' nor renaming the construct is acceptable. Make the data sources, action, and comparator immediately identifiable.",
+      "expected_output": "Uses a clear subject and verb, for example human respondents reported greater willingness to buy flood insurance than LLM-generated respondents. Alternatively uses short, explicit phrases that retain both data sources and the construct. Does not keep the opaque possessive stack, erase the comparison, claim actual purchases, or attribute human intentions to observed model behavior.",
+      "acceptance_criteria": [
+        "Names both human and LLM-generated respondents and what the stated willingness concerns.",
+        "Preserves the human-greater-than-generated direction without implying actual purchases or a causal effect.",
+        "Does not repair the wording solely with a possessive, synonym rotation, or a mechanical preposition insertion."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
+    },
+    {
+      "id": "noun_chain_repair_preserves_direction_significance_causality",
+      "prompt": "Make these hypothetical running-prose results understandable, preserving every supplied qualification: 'Group mean differences in willingness favored insured respondents over uninsured respondents (4.2 versus 3.6), but were not statistically significant (p = .18). Human respondent insurance willingness had a positive association with perceived flood risk; the observational survey does not establish causation.' In both results, willingness means stated willingness to buy flood insurance. A proposed rewrite says: 'Insured and uninsured respondents were equally willing to buy insurance. Higher flood risk made human respondents buy more insurance.' Evaluate that rewrite and supply a safe minimal alternative. Do not invent equivalence tests, causal identification, or actual purchase data.",
+      "expected_output": "Rejects both semantic distortions. States that insured respondents reported higher mean willingness to buy flood insurance than uninsured respondents but the difference was not statistically significant; preserves values and p when reporting them. States the positive association between perceived flood risk and reported willingness without turning it into a causal effect or observed purchases. Keeps both groups, the measured concept, and the observational limit explicit.",
+      "acceptance_criteria": [
+        "Preserves the positive direction and nonsignificance together, not equality or equivalence.",
+        "Preserves both comparison groups and willingness rather than actual purchases.",
+        "Rejects the causal rewrite and retains the observational association and inference limit."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
+    },
+    {
+      "id": "plain_scholarly_cross_field_prerequisites_and_uncertainty",
+      "prompt": "Revise these synthetic results for a scientifically literate reader from another field, retaining the supplied results and limits. Ecology: 'Urban tree canopy pollinator species richness association was positive.' In 40 observational plots, canopy is the share of land covered by tree crowns and richness is the number of pollinator species observed; greater canopy was associated with more species (Spearman rho=.45), not an established effect of planting trees. Machine learning: 'Cross-domain classification performance superiority was 3%.' On a site not used in training, model A correctly classified 82% of cases and B 79%; difference 3 percentage points, 95% confidence interval -1 to 7 percentage points. This interval includes zero and establishes neither superiority nor equivalence; this site only. Social science: a randomized trial of 500 jobseekers found that assignment to a travel voucher rather than none increased mean job applications in the following month from 1.1 to 1.4. Random assignment supports an effect of assignment in this trial, not a measured employment or income effect. Introduce only necessary prerequisites; do not add findings, citations, or a mechanism.",
+      "expected_output": "Names the observed units, quantities and comparators through clear subjects and verbs. Explains tree canopy/species richness and accuracy minimally where needed, retaining the supplied sample sizes, values, units, timing and uncertainty. Keeps ecology observational, explains why the zero-crossing accuracy interval does not establish superiority or equivalence, and preserves the supported effect of randomized voucher assignment on applications within the trial. Does not substitute employment for applications, generalize to unstudied sites or populations, or create another opaque noun chain.",
+      "acceptance_criteria": [
+        "A cross-disciplinary reader can identify each population or unit, measured quantity, comparator and direction from the revised prose without internal labels.",
+        "Preserves 40/.45, 82/79 and 3 percentage points with the -1 to 7 interval, and 500/1.1/1.4 with the one-month trial scope.",
+        "Retains observational versus identified-effect distinctions and does not claim equality, employment/income outcomes, generalizability or an untested mechanism."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
+    },
+    {
+      "id": "plain_scholarly_local_scope_and_unknown_construct",
+      "prompt": "Make only 'Community response resilience gain improved' clear enough for a reader from another field. No construct definition, comparison, unit, intervention or adjacent text is supplied, and the surrounding section is locked. The author asks for plain scholarly language, not invented results or a full-section rewrite. Explain the safe next step. Do not promise that all readers will understand every technical method.",
+      "expected_output": "Identifies the missing measured concept and comparison and asks a focused clarification or offers explicitly conditional alternatives. Does not silently rename resilience, invent an intervention, direction or mechanism, rewrite locked neighboring material, or certify section flow without context. Treats cross-disciplinary access as a target with minimum necessary explanation, not a guarantee or a requirement to remove every technical term.",
+      "acceptance_criteria": [
+        "Leaves the unresolved construct and relationship explicit rather than replacing them with a fluent but invented result.",
+        "Requests only necessary missing information or labels alternative wording as conditional, while keeping the authorized local scope; does not presume an intervention or demand neighboring text solely to offer local help.",
+        "Does not claim universal reader comprehension, a full-section flow check, new empirical evidence or a causal explanation."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
+    },
+    {
+      "id": "plain_scholarly_standalone_terms_and_comparators",
+      "prompt": "Write two standalone synthetic results for a researcher from another field. Machine learning: model A correctly classified 82% and model B 79% at one site not used in training; difference 3 percentage points, 95% confidence interval -1 to 7 percentage points, establishing neither superiority nor equivalence. Biology: cultured cells assigned to a compound had 40% fewer messenger RNA copies from gene X than control cells after exposure; messenger RNA here is RNA transcribed from a gene, and protein abundance was not measured. Keep the comparisons, values and inference limits, explain only necessary terms, avoid unexplained CI or dense nested definitions, and do not add findings or a clinical implication.",
+      "expected_output": "Uses clear subjects and grammatically direct comparisons. Spells out confidence interval in this standalone passage, retains percentage-point units and site scope, and states that neither superiority nor equality is established. Identifies compound-treated versus control cells, explains the supplied RNA role minimally, and does not infer protein production or clinical effects. Preserves the findings without replacing essential information with shorter but opaque wording.",
+      "acceptance_criteria": [
+        "The independent reading boundary contains the necessary term explanations without hidden acronym definitions or nested qualifications that obscure the main comparison.",
+        "Retains 82/79, the 3-percentage-point difference, -1 to 7 interval, site-only scope and the absence of superiority/equivalence evidence.",
+        "Retains gene X, the 40% compound-versus-control RNA difference and the unmeasured protein boundary, with no invented clinical claim."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
     }
   ]
 }

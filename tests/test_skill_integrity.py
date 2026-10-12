@@ -72,7 +72,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.9"
+    assert manifest["version"] == "1.3.10"
     guide_version = re.search(
         r"plugin skill version `([^`]+)`", read(ROOT / "docs" / "workspace-adapter.md")
     )
@@ -593,6 +593,89 @@ def test_reader_continuity_and_limitation_allocation_probes_are_registered():
     assert "correctable analytical" in discussion
     assert "choice, uncertainty, or design boundary" in discussion
     assert "correctable errors or missing required work" in discussion
+
+
+def test_noun_chain_guidance_and_behavioral_cases_are_registered():
+    """Guard relational editing instructions, not observed model performance."""
+    skill = read(CORE / "SKILL.md")
+    prose = read(CORE / "references" / "prose-and-citation-editing.md")
+    assert "noun-chain clarity" in skill
+    for requirement in (
+        "Unpack Noun Chains by Meaning",
+        "central concept",
+        "whose, what responds to what",
+        "Do not mechanically insert",
+        "wellness, well-being, welfare, and willingness",
+        "ask a focused question",
+        "not a universal word-count limit",
+        "established technical terms",
+        "short comparison labels",
+        "Do not treat a possessive as a sufficient repair",
+        "direction, magnitude, statistical significance, equivalence, and causal strength",
+    ):
+        assert requirement in prose
+    cases = {
+        case["id"]: case
+        for case in json.loads(read(ROOT / "evals" / "evals.json"))["evals"]
+    }
+    routes = [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/prose-and-citation-editing.md",
+    ]
+    for case_id in (
+        "noun_chain_explicit_relations_preserve_constructs",
+        "noun_chain_ambiguous_relation_not_guessed",
+        "noun_chain_technical_terms_not_blanket_banned",
+        "noun_chain_local_edit_preserves_scope_and_qualifiers",
+        "noun_chain_short_comparison_names_quantity_groups",
+        "noun_chain_possessive_source_construct_not_stacked",
+        "noun_chain_repair_preserves_direction_significance_causality",
+    ):
+        assert case_id in cases, f"Missing behavioral case: {case_id}"
+        case = cases[case_id]
+        assert case["files"] == routes
+        assert case["prompt"].strip() and case["expected_output"].strip()
+        assert len(case["acceptance_criteria"]) >= 3
+        assert all(item.strip() for item in case["acceptance_criteria"])
+
+
+def test_plain_scholarly_language_guards_and_cases_are_registered():
+    """Check instruction coverage, not measured reader comprehension."""
+    skill = read(CORE / "SKILL.md")
+    prose = read(CORE / "references" / "prose-and-citation-editing.md")
+    assert "cross-disciplinary comprehension" in skill
+    for requirement in (
+        "Plain Scholarly Language Across Fields",
+        "minimum prerequisite",
+        "reading boundary",
+        "paraphrase",
+        "numerator, denominator, units, time, population",
+        "supported causal claim",
+        "not a guarantee",
+        "without adding evidence or an untested mechanism",
+        "expand new acronyms",
+        "Do not presume an intervention",
+    ):
+        assert requirement in prose
+    cases = {
+        case["id"]: case
+        for case in json.loads(read(ROOT / "evals" / "evals.json"))["evals"]
+    }
+    routes = [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/prose-and-citation-editing.md",
+    ]
+    for case_id in (
+        "plain_scholarly_cross_field_prerequisites_and_uncertainty",
+        "plain_scholarly_local_scope_and_unknown_construct",
+        "plain_scholarly_standalone_terms_and_comparators",
+    ):
+        assert case_id in cases, f"Missing behavioral case: {case_id}"
+        case = cases[case_id]
+        assert case["files"] == routes
+        assert case["prompt"].strip() and case["expected_output"].strip()
+        assert len(case["acceptance_criteria"]) >= 3
+        assert all(item.strip() for item in case["acceptance_criteria"])
 
 
 def test_readmes_are_bilingual_user_facing_entrypoints():

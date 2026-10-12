@@ -102,7 +102,7 @@ Always consider these gates within the requested scope and directly affected dep
 6. **Cross-artifact synchronization:** propagate material changes to every affected section and companion artifact.
 7. **Version integrity:** identify one active release and distinguish it from historical references.
 8. **Release integrity:** never use `FINAL`, `VERIFIED`, or `SUBMISSION_READY` while a high-severity blocker or unresolved required source remains.
-9. **Prose integrity:** preserve one term per concept, distinguish necessary technical repetition from avoidable verbal repetition, and verify paragraph-to-paragraph flow without using synonym rotation to hide repetition.
+9. **Prose integrity:** preserve one term per concept, check cross-disciplinary comprehension and noun-chain clarity using [prose-and-citation-editing.md](references/prose-and-citation-editing.md), distinguish necessary technical repetition from avoidable verbal repetition, and verify paragraph-to-paragraph flow without using synonym rotation to hide repetition.
 
 Read [universal-integrity.md](references/universal-integrity.md) for paragraph, abstract, conclusion, evidence, terminology, citation, and four-pass review rules.
 
