@@ -90,6 +90,8 @@ Make sentence-to-sentence reader continuity a high-priority acceptance gate befo
 
 Also identify the intended reader's likely knowledge. For interdisciplinary papers and reviewer responses, assume a reader who understands the broader research area but does not know the study's internal terminology, model sequence, data transformations, or earlier drafting history. Supply the minimum context that reader needs at the point of use; do not make the reader reconstruct it from later text.
 
+For an explicit independent readability review, a concept-dependent substantive section, or repeated comprehension failures, load [independent-reader-review.md](references/independent-reader-review.md). Use its scoped cold-reader procedure and worked examples to catch unexplained terms at first use; do not impose multi-agent review on a grammar-only edit or present AI reader roles as human validation.
+
 ## Apply Universal Integrity Gates
 
 Always consider these gates within the requested scope and directly affected dependencies. Determine applicability; do not rerun every whole-paper check for every local edit:

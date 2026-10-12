@@ -63,6 +63,11 @@ Aim for a scientifically literate reader from another field to understand the ma
 
 Keep this check separate from sentence length or readability scores. An independent reader-style assessment can identify a remaining comprehension problem, but a model's fluent paraphrase is not proof of comprehension by actual readers across all fields. In tests, compare exact source facts and revisions as well as the takeaway; do not reward shorter wording that changes scientific meaning.
 
+For an explicit independent review or repeated reader-access failures, use
+[independent-reader-review.md](independent-reader-review.md) to distinguish what
+is known at first use from a definition supplied later. Its cold-reader findings
+complement these local prose checks; they do not impose extra agents on every edit.
+
 ### Unpack Noun Chains by Meaning
 
 During drafting and scoped prose review, flag noun phrases that pack several modifiers around a central concept and make the reader guess their relationships. Four or five stacked nouns are a strong review cue, not a universal word-count limit; a shorter phrase can also be ambiguous. Apply the same check to affected headings, captions, and table labels without expanding a local edit into a whole-document audit.

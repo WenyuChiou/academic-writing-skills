@@ -51,6 +51,13 @@ state or JSON file merely to revise a sentence.
 | Editor identity | For formatted edits or metadata changes, verify the explicit expected identity against **new** revision/comment/reply authors and applicable file properties. Preserve historical authors and comments; do not rewrite everyone as the current author or infer identity from the assistant/model name. |
 | Venue basis | When venue-directed formatting is applied, identify the dated official requirement, author/project preference, or observed example. Do not present a local spacing or caption choice as a journal mandate. Unavailable official guidance stays unverified; provisional formatting may proceed without compliance certification. |
 
+For an explicit independent readability review, a concept-dependent substantive
+section, or repeated comprehension failures, use the scoped protocol in
+[independent-reader-review.md](independent-reader-review.md). Independent readers
+inspect the same complete unit without author explanations; a self-check remains
+labeled as such when separate readers are unavailable. A grammar-only edit still
+uses the local walkthrough above, not an automatic multi-agent audit.
+
 Use `checked` only with a concrete locator, finding, and resolved/open outcome.
 An open finding remains incomplete even if the check ran. Distinguish `not_run`,
 `unavailable` (with reason), and `not_applicable` (because the check is outside the
