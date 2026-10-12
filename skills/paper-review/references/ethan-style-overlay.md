@@ -91,3 +91,5 @@ When this overlay is active:
 - include cross-round status only with prior evidence
 - end with exact next-round instructions
 - state which neutral method and domain modules also ran
+
+When a group rubric is supplied, use [review-checklist-and-cases.md](review-checklist-and-cases.md) for its applicable code mapping. Do not infer the rubric's exact rules or project requirements from archived examples alone.

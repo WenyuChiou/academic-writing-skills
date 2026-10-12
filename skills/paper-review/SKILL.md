@@ -27,6 +27,8 @@ Prefer an explicit review round. If none is supplied, use `developmental`, `subs
 
 Read [overlay-contract.md](references/overlay-contract.md) before applying optional modules. Read [round-calibration.md](references/round-calibration.md) only when review maturity or cross-round progress is in scope.
 
+For a supplied rubric, coded check report, or version-comparison review, use [review-checklist-and-cases.md](references/review-checklist-and-cases.md) to record applicable checks and evidence-backed repairs. It adds traceability and worked cases, not another mandatory full-paper pass.
+
 ## Select Modules Progressively
 
 Infer candidate modules from the current conversation, title, Abstract, questions, Methods, tables, figures, equations, and supplement. Select the smallest set that covers the actual study. State the selected modules in the review header.

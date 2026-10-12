@@ -11,6 +11,32 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.12] - 2026-10-12
+
+### Added
+
+- An on-demand review-checklist reference with evidence, authority, coverage and
+  issue status kept distinct; supplied rubric preferences remain source-bound.
+- Cross-domain cases for actual clarification versus relocation, repairs without
+  replies, expected findings and methods contributions, and original-resolution
+  verification of apparent diagram sign conflicts.
+- Paired defect/no-change probes for generated-record screening and bounded
+  equivalence, plus comparison-unit and claim traceability in existing records.
+
+### Changed
+
+- Route the checklist only for supplied rubrics, coded reviews or version
+  comparisons, without expanding grammar-only edits into full-paper audits.
+- Refresh version metadata and the complete portable adapter for version 1.3.12.
+
+### Validation
+
+- Registration checks verify routing and fixture integrity, not scientific or
+  editorial performance. The behavioral probes are bounded synthetic checks;
+  they do not establish general detection rates or submission readiness.
+- Four fresh independent crop-scheduling and alloy-comparison probe decisions
+  met the paired defect/no-change criteria without raw-data verification.
+
 ## [1.3.11] - 2026-10-12
 
 ### Added
