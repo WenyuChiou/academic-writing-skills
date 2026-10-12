@@ -18,6 +18,7 @@ CORE_REFERENCES = {
     "discussion-and-limitations.md",
     "execution-and-acceptance.md",
     "figures-tables-and-supplements.md",
+    "independent-reader-review.md",
     "introduction-and-study-context.md",
     "lifecycle-and-routing.md",
     "methods-and-assumptions.md",
@@ -72,7 +73,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.10"
+    assert manifest["version"] == "1.3.11"
     guide_version = re.search(
         r"plugin skill version `([^`]+)`", read(ROOT / "docs" / "workspace-adapter.md")
     )
@@ -676,6 +677,68 @@ def test_plain_scholarly_language_guards_and_cases_are_registered():
         assert case["prompt"].strip() and case["expected_output"].strip()
         assert len(case["acceptance_criteria"]) >= 3
         assert all(item.strip() for item in case["acceptance_criteria"])
+
+
+def test_independent_reader_review_routes_and_cases_are_registered():
+    """Guard the protocol and fixtures, not actual human comprehension."""
+    skill = read(CORE / "SKILL.md")
+    guide = " ".join(read(CORE / "references" / "independent-reader-review.md").split())
+    for text in (
+        skill,
+        read(CORE / "references" / "execution-and-acceptance.md"),
+        read(CORE / "references" / "prose-and-citation-editing.md"),
+    ):
+        assert "independent-reader-review.md" in text
+    for requirement in (
+        "same complete unit",
+        "without author explanations",
+        "first-use boundary",
+        "later definition",
+        "Missing prerequisite",
+        "Do not use majority voting",
+        "not genuine human-reader evidence",
+        "grammar-only",
+        "no fixed model",
+        "Do not invent",
+        "positive control",
+        "front-load every operational detail",
+        "caption together with the figure",
+        "source-dependent question",
+        "optional preference",
+        "no change needed",
+        "Different summaries and tests",
+        "Evidence needed",
+    ):
+        assert requirement in guide
+    cases = {
+        case["id"]: case
+        for case in json.loads(read(ROOT / "evals" / "evals.json"))["evals"]
+    }
+    routes = [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/independent-reader-review.md",
+    ]
+    for case_id in (
+        "reader_review_sudden_pathway_label",
+        "reader_review_definition_arrives_late",
+        "reader_review_expansion_without_meaning",
+        "reader_review_denominator_changes_role",
+        "reader_review_ambiguous_referent",
+        "reader_review_standalone_caption_boundary",
+        "reader_review_defined_term_positive_control",
+        "reader_review_local_grammar_scope",
+        "reader_review_staged_methods_positive_control",
+        "reader_review_discussion_extension_positive_control",
+        "reader_review_display_joint_context",
+        "reader_review_statistics_source_dependency",
+        "reader_review_distinct_statistics_positive_control",
+        "reader_review_selection_rule_pair",
+    ):
+        assert case_id in cases, f"Missing behavioral case: {case_id}"
+        case = cases[case_id]
+        assert case["files"] == routes
+        assert case["prompt"].strip() and case["expected_output"].strip()
+        assert len(case["acceptance_criteria"]) >= 3
 
 
 def test_readmes_are_bilingual_user_facing_entrypoints():

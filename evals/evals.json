@@ -453,6 +453,160 @@
         "Retains gene X, the 40% compound-versus-control RNA difference and the unmeasured protein boundary, with no invented clinical claim."
       ],
       "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/prose-and-citation-editing.md"]
+    },
+    {
+      "id": "reader_review_sudden_pathway_label",
+      "prompt": "Independently review this entire hypothetical paragraph for an informed cross-field reader: 'Households may buy insurance or move. Owners may also elevate their homes. These pathways differ by tenure.' Report the first point requiring a guess, its missing prerequisite, a source-grounded paragraph paraphrase, and the smallest safe repair. The author has not specified whether pathways means available options or an ordered sequence. Do not invent that meaning or a flood-loss result.",
+      "expected_output": "Locates pathways as an unmapped label after concrete actions, distinguishes options from sequences, and requests the intended meaning or gives explicitly conditional repairs. Paraphrases the available actions without adding temporal or causal findings. Does not ban pathway as a word.",
+      "acceptance_criteria": [
+        "Identifies the exact first-use phrase and absent action-to-label mapping.",
+        "Does not select an unsupported sequence or mechanism from specialist knowledge.",
+        "Keeps the repair local, conditional when needed, and preserves established actions."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_definition_arrives_late",
+      "prompt": "Cold-read both sentences, in order: 'Functional redundancy was higher at site A than at site B. Here functional redundancy means that several species perform the same ecological function.' Identify comprehension at first use, even if the second sentence resolves it. Give a minimal repair using only supplied meaning; do not add a measurement formula or infer that the sites differ in resilience.",
+      "expected_output": "Records the initial missing definition and the later resolution separately; moves or integrates the supplied definition before the comparative claim. Preserves site A versus B and does not infer resilience or a method from the construct name.",
+      "acceptance_criteria": [
+        "Does not call first use clear solely because the full paragraph eventually contains a definition.",
+        "Repairs prerequisite order rather than adding a transition word alone.",
+        "Preserves the construct, comparison and evidentiary boundary."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_expansion_without_meaning",
+      "prompt": "Review: 'We calculated the Community Recovery Index (CRI). CRI increased after the event.' Only this text is available. Is expanding CRI enough for a reader to interpret the result? Locate what is missing and give the safe next step, not an invented formula, benefit, or causal explanation.",
+      "expected_output": "States that the expanded name does not establish the measured dimension or direction and requests the index definition needed to interpret an increase. Does not infer improved welfare, construct a formula, or certify recovery from the label.",
+      "acceptance_criteria": [
+        "Identifies the missing quantity/role at the interpretation sentence.",
+        "Does not equate acronym expansion with conceptual explanation.",
+        "Leaves unprovided facts unresolved and keeps clarification scoped."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_denominator_changes_role",
+      "prompt": "Review two synthetic sentences: 'Insurance covered 40% of property loss. Protection was 8% after considering income.' Supplied meaning: the second measure is the loss covered by insurance divided by annual household income, not covered loss divided by property loss. Flag any unexplained shift and minimally repair it without changing the values or implying coverage fell, improved welfare, or affordability.",
+      "expected_output": "Locates the second measure's absent denominator/mapping and explicitly names loss covered relative to annual income. Preserves 40% of loss and 8% of income as different normalizations, with no directional comparison of like quantities or unmeasured welfare claim.",
+      "acceptance_criteria": [
+        "Makes the numerator and different denominator explicit.",
+        "Preserves the exact supplied percentages and household/time basis.",
+        "Does not compare the two percentages as a drop in insurance coverage."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_ambiguous_referent",
+      "prompt": "Read the entire paragraph: 'Owners had higher property losses than renters. Renters had higher insurance enrollment than owners. This difference motivates our analysis.' Which comparison does the last sentence name? Report a located finding and safe repair. The intended referent is not supplied; do not guess it, erase either comparison, or change this into a causal claim.",
+      "expected_output": "Locates this difference as ambiguous because two comparisons precede it. Requests the intended comparison or offers conditional wording that names losses or enrollment explicitly. Preserves both observed comparisons and does not impose a ban on demonstratives.",
+      "acceptance_criteria": [
+        "Names both possible antecedents instead of guessing one.",
+        "Provides a minimal, explicitly conditional repair or focused question.",
+        "Keeps comparisons and inference limits intact."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_standalone_caption_boundary",
+      "prompt": "Assess this caption as a standalone entry point: 'AEP and the margin by tenure.' Supplied body definitions: aggregate exceedance probability (AEP) relates annual loss to its exceedance probability; the margin is the difference between named ground-up-loss and actual-loss curves at the same probability, divided by ground-up loss in this figure. Red is ground-up loss, blue is actual loss; panels a/b are owners/renters. Propose only the minimum caption additions required to decode the figure, without duplicating unspecified extended procedures or inventing numbers.",
+      "expected_output": "Restores the full AEP term and minimum relation, names the curves, panel/color mappings and percentage-of-ground-up-loss margin. Treats the caption as its own reading boundary, not as clear because definitions are elsewhere. Avoids new numerical results and a methods dump.",
+      "acceptance_criteria": [
+        "Provides decoding prerequisites at the standalone caption boundary.",
+        "Preserves the supplied normalization, quantities, colors and panels.",
+        "Does not claim a fresh rendered-layout or scientific verification."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_defined_term_positive_control",
+      "prompt": "Review this complete paragraph for terminology access: 'Species richness is the number of species observed in a plot. Richness was higher in shaded plots than in unshaded plots.' Do not manufacture a comprehension fault or add textbook definitions simply to produce a finding. State the paragraph's source-grounded contribution and the limit of this review; this comparison alone does not establish a causal shade effect.",
+      "expected_output": "Recognizes that the term and comparator are available before the result, reports no terminology repair needed, and paraphrases the higher observed species count in shaded plots. Does not add a causal conclusion or certify other study methods.",
+      "acceptance_criteria": [
+        "Retains the defined technical construct without redundant explanation.",
+        "Reports a no-issue outcome for the reviewed scope rather than inventing defects.",
+        "Preserves the descriptive comparison and limits the claimed check."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_local_grammar_scope",
+      "prompt": "Correct only the grammar in 'The samples was stored at 4°C.' Surrounding content is locked. Do you need two independent full-section readers for this task? Return the correction and the scope of the actual check without adding procedures or a manuscript-wide assurance.",
+      "expected_output": "Changes was to were and retains 4°C. Uses a local meaning/grammar check rather than launching a whole-section review, and does not claim independent reviewers or scientific verification occurred.",
+      "acceptance_criteria": [
+        "Preserves the sample, storage statement and temperature.",
+        "Does not expand authorized scope or invent procedural detail.",
+        "Truthfully labels the limited check and avoids automatic multi-agent review."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_staged_methods_positive_control",
+      "prompt": "Read this complete hypothetical unit for an interdisciplinary audience. Introduction: 'Community networks connect residents who exchange practical help. We examine how these networks support recovery after a storm.' Methods: 'We interviewed 20 residents selected to include different ages and housing situations. We coded descriptions of help received.' Review comprehension and placement, without redesigning the research.",
+      "expected_output": "Recognizes that the concept and purpose are accessible before operational detail. Does not require interview selection or coding procedures in the Introduction or manufacture quantitative cutoffs. Limits the no-change judgment to supplied comprehension and placement.",
+      "acceptance_criteria": [
+        "Distinguishes conceptual setup from legitimately deferred operational detail.",
+        "Does not impose quantitative tests or IMRAD additions on qualitative research.",
+        "Preserves the study's sample and stated scope."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_discussion_extension_positive_control",
+      "prompt": "Review this hypothetical Discussion excerpt from a conceptual article: 'Our argument assumes that information can be shared. To examine its boundary, we now consider two departments forbidden to exchange information. In this case the proposed coordination rule cannot operate across departments.' Is local progression clear? Do not impose an empirical article template or invent a study area or experiment.",
+      "expected_output": "Recognizes an introduced counterexample and its consequence as a legitimate local extension. Does not move it to Results or invent missing empirical methods solely because it is in Discussion.",
+      "acceptance_criteria": [
+        "Paraphrases the premise, counterexample and bounded consequence from the text.",
+        "Reports no structural repair required for this supplied unit.",
+        "Does not generalize the counterexample beyond its stated premise."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_display_joint_context",
+      "prompt": "Review this standalone geology display using all provided parts. Caption: 'SI at the three sampling sites.' Axis: 'SI (dimensionless)'. Legend: 'Saturation index (SI) indicates mineral saturation; SI > 0 means supersaturation, SI = 0 equilibrium, SI < 0 undersaturation. Circles denote observations.' Review only decoding; no underlying observations or rendered image are supplied.",
+      "expected_output": "Uses caption, axis and legend jointly and reports no acronym or direction repair needed. Does not demand the same definition be duplicated in the caption or claim visual-layout or scientific validation.",
+      "acceptance_criteria": [
+        "Uses the available legend before alleging an undefined quantity.",
+        "Keeps optional editorial preferences separate from an actual obstruction.",
+        "Does not invent site differences or certify an unrendered figure."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_statistics_source_dependency",
+      "prompt": "A biology figure caption labels group summaries as medians; an indistinct cropped image appears to show 2.7 for a score described as integer-valued. Sample size, aggregation order, plot code and full display are unavailable. Review the possible mismatch and state the smallest safe next step. Do not change the scientific file.",
+      "expected_output": "Records a source-dependent question, requests full display and aggregation/code evidence, and withholds a definite mean-versus-median correction. Does not infer invalid analysis or replace median globally from the crop alone.",
+      "acceptance_criteria": [
+        "Keeps observed wording separate from uncertain image reading and aggregation.",
+        "Names the evidence needed to decide whether a correction is warranted.",
+        "Does not turn suspicion into an asserted error, new result or global edit."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_distinct_statistics_positive_control",
+      "prompt": "Review this hypothetical complete result: 'The figure shows median healing times by group. A separate test compares the groups' mean healing times, with a confidence interval for that mean difference.' Both summaries are explicitly labeled, and no contradiction or underlying data is supplied. Assess readability, not the choice of analysis.",
+      "expected_output": "Recognizes distinct, explicitly labeled statistical roles. Does not call using medians in a display and means in a separate test inherently inconsistent or force one statistic throughout.",
+      "acceptance_criteria": [
+        "Keeps the display summary and test estimand distinct.",
+        "Does not infer statistical invalidity or invent numerical evidence.",
+        "Reports the limited no-change outcome without certifying the study."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "reader_review_selection_rule_pair",
+      "prompt": "Review two independent machine-learning excerpts. A: 'We trained 12 seeds. The prespecified seed 0 supplies the primary benchmark; other seeds assess prediction-distribution stability only, not stability of all benchmark metrics.' B: 'We trained 12 seeds and used one for the primary benchmark.' Locate any unresolved selection question, preserving scope and without assuming misconduct.",
+      "expected_output": "Retains A's declared selection and limited stability claim. For B asks which seed and how selected; does not infer favorable selection, demand a new analysis automatically, or claim all metrics were tested.",
+      "acceptance_criteria": [
+        "Does not report a missing rule already present in A.",
+        "Classifies B as requiring a source-dependent clarification rather than proven selective reporting.",
+        "Keeps the repair to the missing selection bridge and preserves uncertainty scope."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
     }
   ]
 }

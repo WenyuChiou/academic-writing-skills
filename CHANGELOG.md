@@ -11,6 +11,34 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.11] - 2026-10-12
+
+### Added
+
+- An on-demand independent-reader guide for first-use meanings, paragraph
+  progression and source-grounded findings, with two cold readers and an
+  optional informed precision check rather than mandatory repeated reviews.
+- Fourteen scoped behavioral cases and registration regressions covering
+  undefined concepts, changed denominators, caption context, legitimate deferred
+  method detail, research-design differences and source-dependent questions.
+
+### Changed
+
+- Distinguish acronym expansion from study-specific meaning, and paraphrase
+  Results patterns and their contribution without requiring stock so-what
+  sentences, explicit question labels or unsupported mechanisms.
+- Calibrate findings against available context and preserve no-change outcomes;
+  grammar-only edits do not trigger whole-section or multi-agent review.
+- Refresh plugin metadata and the complete portable adapter for version 1.3.11.
+
+### Validation
+
+- Scoped independent AI-reader trials informed the guide and its calibration.
+  A final eight-unit paired pilot met all criteria both before and after the
+  narrow clarification; it demonstrates no incremental detection improvement.
+  Synthetic trials and registration checks are not human-comprehension evidence
+  or a guarantee of effectiveness across all manuscripts.
+
 ## [1.3.10] - 2026-10-11
 
 ### Added
