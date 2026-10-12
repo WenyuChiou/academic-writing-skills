@@ -50,6 +50,7 @@ REVIEW_REFERENCES = {
     "overlay-contract.md",
     "project-precedents.md",
     "quantitative-psychometrics-sem.md",
+    "review-checklist-and-cases.md",
     "round-calibration.md",
     "water-cnhs-uncertainty.md",
 }
@@ -73,7 +74,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.11"
+    assert manifest["version"] == "1.3.12"
     guide_version = re.search(
         r"plugin skill version `([^`]+)`", read(ROOT / "docs" / "workspace-adapter.md")
     )
@@ -413,6 +414,33 @@ def test_review_uses_progressive_modules_and_conditional_ethan_overlay():
     assert "Never upgrade a thread to `RESOLVED`" in rounds
     assert "response letter or resolved comment thread" in skill
     assert "acting as Prof. Ethan Yang" not in skill
+
+
+def test_review_checklist_cases_are_routed_and_probes_registered():
+    """Verify route/fixture integrity, not editorial or semantic performance."""
+    reference = "review-checklist-and-cases.md"
+    assert f"](references/{reference})" in read(REVIEW / "SKILL.md")
+    assert f"]({reference})" in read(REVIEW / "references" / "ethan-style-overlay.md")
+    assert (REVIEW / "references" / reference).is_file()
+    data = json.loads(read(ROOT / "evals" / "paper-review.json"))
+    cases = {case["id"]: case for case in data["evals"]}
+    ids = {
+        "coded_rubric_preserves_genre_and_authority",
+        "moved_paragraph_without_requested_denominator",
+        "repaired_score_without_comment_reply",
+        "expected_input_contrast_and_distinct_methods_contribution",
+        "downscaled_diagram_sign_is_not_confirmed_error",
+        "unreported_generated_record_selection",
+        "transparent_retained_record_comparison_control",
+        "nonsignificant_difference_not_equivalence",
+        "supported_bounded_equivalence_control",
+    }
+    route = f"skills/paper-review/references/{reference}"
+    for case_id in ids:
+        case = cases[case_id]
+        assert case["files"] == [route]
+        assert len(case["acceptance_criteria"]) >= 3
+        assert all(criterion.strip() for criterion in case["acceptance_criteria"])
 
 
 def test_state_template_is_valid_and_starts_working():

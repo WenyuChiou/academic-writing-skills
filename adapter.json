@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "academic-writing-skills",
   "adapter_version": "1.0.0",
-  "skill_version": "1.3.11",
+  "skill_version": "1.3.12",
   "state_schema_version": "1.1",
   "skills": [
     {
@@ -128,9 +128,9 @@
     }
   },
   "files": {
-    ".claude-plugin/plugin.json": "4ea4e1b2b9507a2965b46e4523377f19749e56155dfaea4c58e69b698270e6c4",
+    ".claude-plugin/plugin.json": "b486394acc12ef75b9651f42e4c9d7e40f885aaafdfd4dd892a435adc113c80e",
     "LICENSE": "1e034229fd46b8a7748bce109e3bcc078e180bb05e276e513039e2b9a990c637",
-    "docs/workspace-adapter.md": "ee992cfe5d9f4be1f7c286e8d1a718a52c306e159d8b243fed18ca97932ee1fd",
+    "docs/workspace-adapter.md": "f13a99981eccce7aa674f6232e3027c79c97556cac2e9d704898402ee0937287",
     "scripts/build_adapter_bundle.py": "1c876db5cda7ed32518e97f0e4aa8af76f7c9dd1def0bc386ec5afefac3a4a8f",
     "skills/academic-writing-skills/SKILL.md": "9bb4a4bae2f34f3c1d9197291c303a254555d3cb9407148d2233ceea025bb833",
     "skills/academic-writing-skills/agents/openai.yaml": "5d0471ee817805619779b1f901f6c91a1ea4dcb472968f2382a263a7fbcabfe9",
@@ -164,16 +164,17 @@
     "skills/academic-writing-skills/scripts/audit_text_consistency.py": "36cf497de19894e4f36ccd8efdebd856b80d29344b2599a2e24dc3070e41f323",
     "skills/academic-writing-skills/scripts/init_manuscript_state.py": "dab125b1d2f8e1f9f37e8acb57632c01d78a8f77c734812bdb02b73813a21bed",
     "skills/academic-writing-skills/scripts/run_regression_tests.py": "dbb939f438510b8c75392ee76dda6d9b2e07136f374cfd74056fc0a8ea8f9695",
-    "skills/paper-review/SKILL.md": "6432e3140c697a9e5e82fe8b5db3ab08739f9c1876b6666c66ae233023c7ae4b",
+    "skills/paper-review/SKILL.md": "4ae798c33bc20f19c52881e8a4a42f322d896dbb884d76411317985ee5c7500b",
     "skills/paper-review/agents/openai.yaml": "05c9007441801059768dbace3190e8ecc3a429c2632c61848ca538a2f3a96b7f",
     "skills/paper-review/assets/icon.svg": "49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee",
     "skills/paper-review/references/ai-llm-computational.md": "0779f02d9f2c5cb50f175c495e0ecea12bbaab532ce25fba7921ce9178637fa4",
     "skills/paper-review/references/display-notation-provenance.md": "554d6880c4a37aaf2a3e60074bda3eaf12d1aacf79cdda19749a0de2db586651",
-    "skills/paper-review/references/ethan-style-overlay.md": "fbcbd0841ff2c6b6eb1a25cf6b8f111cf97299541906f8c341ff920ede1cddca",
+    "skills/paper-review/references/ethan-style-overlay.md": "8f9aec0f388304a39f487215292c13bcca090944ba2a96f9a03c603cf4b36347",
     "skills/paper-review/references/flood-hydrodynamics-catastrophe.md": "d23969028392196cf607b459662b9f5eef4145eae8084fd288f5b4633ba85c29",
     "skills/paper-review/references/overlay-contract.md": "0474eed8a66b9ac2e0a602bfa63aaffcfc294f274b44dfa5b4211edcbefc6260",
     "skills/paper-review/references/project-precedents.md": "03361716d0572440a95554f4c6591ca6bd2a4fc2ea0f1e0bcc0255671343060b",
     "skills/paper-review/references/quantitative-psychometrics-sem.md": "024726651c8f24ca8aa87351d16173ee8e48774e5d6afb8c86d52ca7888be94a",
+    "skills/paper-review/references/review-checklist-and-cases.md": "f51b422c545f4f2e78d19fa38fdbb88067a1637e55ae2ef1069d2c378075a7f3",
     "skills/paper-review/references/round-calibration.md": "1fa73a6c5caf21aeec0df21ca831d5a50e5a4d0a22898e8d9d48916428260528",
     "skills/paper-review/references/water-cnhs-uncertainty.md": "4923b59b87d3154cf21f45735e25baf5fa08f6aa14aa1f3918625dcf31074550"
   }
