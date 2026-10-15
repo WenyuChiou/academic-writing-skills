@@ -65,6 +65,12 @@ declared scope/effects). Never turn unavailable sources, an author waiver, or a
 clean banned-word scan into a pass. Missing neighboring text limits continuity
 verification, but does not prevent a clearly labeled provisional local draft.
 
+For a context-dependent dispute or regression exercise, use the matching
+[evidence-context cases](evidence-context-cases.md). They distinguish a missing
+rule from an execution or acceptance gap. Preserve the original claim and source
+facts when testing a repair; a smoother sentence is unacceptable if it drops the
+comparison, changes a measured construct, or strengthens the inference.
+
 ## Optional deterministic coverage checker
 
 For repeated or multi-file handoffs, use `scripts/audit_handoff.py RECORD --json`

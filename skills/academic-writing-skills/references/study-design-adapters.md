@@ -23,6 +23,22 @@ Do not infer that unequal sample sizes automatically require an independent-samp
 
 For latent-variable or structural models, distinguish measurement fit, structural fit, standardized and unstandardized coefficients, model comparison, group invariance, and descriptive path comparison. Poor measurement does not forbid reporting, but it narrows construct-level claims.
 
+After item selection, trace the administered instrument → retained items →
+score meaning → claims using that score. Removing items can narrow a construct
+without changing the original questionnaire. Shared item wording does not prove
+measurement equivalence; different retained item sets do not prove that different
+questionnaires were administered. Keep these questions separate from whether
+structural coefficients can be reported or compared.
+
+For repeated analyses, identify the observation unit, run selection/aggregation,
+source of variability, tested contrast, and multiplicity family before reconciling
+numbers. Different adjusted p-values can be valid when the same raw test belongs
+to different declared comparison families. Distinguish within-model significance
+from a direct between-group test, and nonsignificance from equivalence. For counts,
+compare event definitions as well as values: affected runs, warning events, and
+failed records are not interchangeable. Missing provenance is a verification
+question, not proof that a number is wrong.
+
 ## Experimental and Quasi-Experimental
 
 Check allocation, controls, treatment fidelity, preregistration when claimed, attrition, interference, power, outcome timing, estimator, missingness, multiple outcomes, robustness, and whether causal language matches identification.
@@ -48,6 +64,11 @@ Check exact model identifiers and dates, system and user prompts, context constr
 Map every input-conditioned attribute to the output claim. Test whether a reported pattern could follow directly from prompt conditioning, grouped questions, shared profiles, state leakage, or model architecture. Require ablations only when the claim depends on separating those explanations; otherwise state the limitation.
 
 For repeated synthetic responses tied to the same source profiles, identify whether the estimand is marginal, paired, repeated, or hierarchical before selecting a test. Do not treat separate standardized coefficients as formal evidence of equality or difference without an appropriate comparison.
+
+When input profiles change while a human or other reference remains fixed,
+attribute the observed contrast to comparisons under those input conditions.
+It does not show how the reference population would respond to changed inputs,
+or reveal an internal model mechanism without evidence designed to test it.
 
 ## Evidence Synthesis
 

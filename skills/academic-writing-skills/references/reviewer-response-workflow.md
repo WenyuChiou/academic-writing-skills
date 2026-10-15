@@ -26,6 +26,11 @@ subquestions and evidence within the response-strategy cell or add optional
 columns when a complex revision needs them; do not create a second incompatible
 ledger schema.
 
+If an old concern no longer applies, record why for that subquestion and check
+the others independently. Do not delete a multi-issue thread merely because one
+part was superseded. A reply, DOI lookup, or generated render establishes only
+that action, not completed analysis, claim-level support, or visual inspection.
+
 Use the manuscript-state status contract: `OPEN` for unresolved work,
 `RESOLVED` for a completed and verified response, and `WAIVED` only when an
 identified authority accepts the remaining issue and risk.

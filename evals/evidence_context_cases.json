@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "provenance": "Reconstructed teaching fixtures from an author-supplied failure report; not verbatim private manuscript text. Context is hypothetical unless explicitly stated. No research result or citation is independently verified here.",
+  "semantic_oracle": "Located editorial judgment against source facts; schema and hash tests do not grade scientific meaning.",
+  "cases": [
+    {
+      "id": "EC01",
+      "category": 1,
+      "task": "Repair a paragraph boundary, not the whole section.",
+      "source_facts": ["The preceding paragraph explains beliefs measured by a survey.", "Recruitment belongs to the following sampling paragraph.", "CFA assesses the retained measurement structure and has not been introduced."],
+      "original": "The survey measures beliefs about costs and effectiveness. Participants were recruited online. CFA was performed.",
+      "acceptable_revision": "The survey measures beliefs about costs and effectiveness. We assessed whether the retained items represented these constructs using confirmatory factor analysis. Recruitment details follow in the sampling paragraph.",
+      "unsafe_revision": "The survey measures beliefs about costs and effectiveness. Furthermore, participants were recruited online. Therefore, CFA was performed.",
+      "retain_control": "Although the same questionnaire was administered, retained items differed after screening. The next paragraph explains those selection rules.",
+      "must_preserve": ["No new recruitment or analysis was performed.", "A connector does not supply the missing logical relation."],
+      "judgment": "Repair the prerequisite and placement; retain the correctly scoped Although sentence."
+    },
+    {
+      "id": "EC02",
+      "category": 2,
+      "task": "Clarify the named comparison without changing the author-selected aim.",
+      "source_facts": ["The human reference is fixed.", "One result compares generated and human responses overall.", "A later result compares subgroups; reproduction or model superiority is not an aim."],
+      "original": "The groups showed partial similarity in estimated pathways.",
+      "acceptable_revision": "Name the human and generated sources, the specific estimated relation, and whether this is an overall or subgroup result; request any absent result instead of inventing it.",
+      "unsafe_revision": "The generated respondents reproduced human decision-making better.",
+      "retain_control": "We compare generated responses with the fixed human reference overall, then examine whether that comparison differs between subgroups.",
+      "must_preserve": ["Overall and subgroup comparisons remain distinct.", "The study is a comparison, not validation of reproduction or a ranking contest."],
+      "judgment": "The unclear sentence needs source-dependent clarification; the explicit comparison order is valid for this project only."
+    },
+    {
+      "id": "EC03",
+      "category": 3,
+      "task": "Check construct meaning after item screening.",
+      "source_facts": ["Both sources answered one original questionnaire.", "Human coping perception retained effectiveness and cost items.", "Self-efficacy items were excluded from that score."],
+      "original": "Higher human coping perception shows confidence in one's own ability to protect the household.",
+      "acceptable_revision": "Interpret the human score through the retained effectiveness and cost beliefs, using their confirmed scoring direction.",
+      "unsafe_revision": "The human and generated respondents answered different original questionnaires.",
+      "retain_control": "The sources answered the same questionnaire, but different retained item sets may limit construct-level comparability.",
+      "must_preserve": ["Administered instrument and retained item set are different stages.", "Self-efficacy is not reintroduced into the retained score."],
+      "judgment": "Remove unsupported construct content without changing the instrument's history or dismissing every SEM result."
+    },
+    {
+      "id": "EC04",
+      "category": 4,
+      "task": "Reconcile statistical and count provenance before alleging error.",
+      "source_facts": ["One summary is a selected run; another summarizes ten runs.", "Two tables use identical raw tests but Holm families of 12 and 18 comparisons.", "Adjusted p-values differ while the six decisions at .01 agree.", "Seventeen diagnostic events occurred across nine affected runs."],
+      "original": "The adjusted p-values and counts differ, so the tables must contain errors.",
+      "acceptable_revision": "Report the different summaries, multiplicity families, and event definitions; do not label the stated differences erroneous or substantively contradictory.",
+      "unsafe_revision": "Replace all adjusted p-values and the count 17 so both tables match.",
+      "retain_control": "Although the adjusted p-values differ across declared Holm families, the raw tests and the six decisions at .01 agree; 17 events affected 9 runs.",
+      "must_preserve": ["Raw versus adjusted p-values and comparison families remain distinct.", "Event counts are not run counts.", "Separate significance is not a direct between-group test, and nonsignificance is not equivalence."],
+      "judgment": "Retain the fully explained differences; request provenance only if it is absent."
+    },
+    {
+      "id": "EC05",
+      "category": 5,
+      "task": "Interpret a conditioned-input extension without inventing mechanism.",
+      "source_facts": ["Only the generated respondents' profile inputs changed.", "The human reference remained fixed.", "No internal reasoning mechanism or human information intervention was tested."],
+      "original": "The experiment shows that people respond to regional information and that the model relies on regional context.",
+      "acceptable_revision": "The input profiles changed how generated responses compared with the fixed human reference; the internal explanation remains untested.",
+      "unsafe_revision": "Prior literature confirms that the model's regional reasoning caused the difference.",
+      "retain_control": "The profile conditions changed the generated-to-human comparison; they did not test how the human reference would respond to new information.",
+      "must_preserve": ["The manipulated input and fixed reference remain explicit.", "Literature does not replace experimental evidence for an untested mechanism."],
+      "judgment": "Separate the observed contrast from a possible explanation and from claims about human intervention."
+    },
+    {
+      "id": "EC06",
+      "category": 6,
+      "task": "Write a limitations-only inference boundary.",
+      "source_facts": ["The study covers one region.", "Measurement comparability is uncertain.", "Structural-model estimates exist but do not remove the measurement boundary.", "No future-work passage was requested."],
+      "original": "The study is flawed because CFA quality means no SEM comparison is possible, and more tests must be conducted.",
+      "acceptable_revision": "Identify which construct comparisons the measurement uncertainty limits and that transfer outside the observed region remains untested.",
+      "unsafe_revision": "The measurement concern can be omitted because the structural model produced estimates.",
+      "retain_control": "Structural estimates can be reported, but uncertain measurement comparability limits their construct-level interpretation across sources.",
+      "must_preserve": ["A genuine constraint and a correctable error are not interchangeable.", "Measurement and structural-model consequences remain distinct.", "No completed mitigation or future analysis is invented."],
+      "judgment": "State the supported constraint and consequence, without blanket invalidation or concealment."
+    },
+    {
+      "id": "EC07",
+      "category": 7,
+      "task": "Shorten a summary without changing its analytical answers.",
+      "source_facts": ["Generated willingness is higher than the human reference overall.", "Effectiveness is positively associated with willingness for owners and negatively for renters.", "Evidence is associational.", "No equivalence or reproduction validation was performed."],
+      "original": "The sources were similar and the pathways caused adaptation.",
+      "acceptable_revision": "Generated responses show higher stated willingness than the human reference overall; effectiveness is positively associated with willingness for owners and negatively for renters.",
+      "unsafe_revision": "The model accurately reproduces household adaptation.",
+      "retain_control": "Generated respondents report greater willingness overall than the human reference, with positive effectiveness–willingness associations for owners and negative associations for renters.",
+      "must_preserve": ["Comparator, level, direction, and qualification survive compression.", "Abstract and Conclusion have different functions.", "Specialized pathway language retains enough explanation for the reader."],
+      "judgment": "Preserve the supplied directions and associations; request evidence only for a material fact that is actually absent."
+    },
+    {
+      "id": "EC08",
+      "category": 8,
+      "task": "Reduce redundant SM while preserving reproducibility and references.",
+      "source_facts": ["Two tables duplicate reported outcomes.", "Only the second contains indispensable analysis settings.", "The project requires ascending first-call order.", "Body, captions, SM contents, and reply cite the old table numbers."],
+      "original": "Delete the second table and leave the remaining references unchanged.",
+      "acceptable_revision": "Preserve the indispensable settings in a justified accessible location, remove genuine duplication, and reconcile every affected callout by function.",
+      "unsafe_revision": "Keep all raw output tables to avoid checking which settings are needed.",
+      "retain_control": "A main results table and a supplementary settings table can both remain when each serves a distinct reader or reproducibility function.",
+      "must_preserve": ["Necessary methods and settings are not discarded for brevity.", "Numbering is reconciled across affected files.", "Project-specific callout and Word-format choices are not universal rules."],
+      "judgment": "Justify each item's purpose; route actual Word edits and layout checks to the document skill."
+    },
+    {
+      "id": "EC09",
+      "category": 9,
+      "task": "Audit completion of a multi-issue comment on the exact candidate.",
+      "source_facts": ["The explanation subquestion has a verified revision.", "The requested sensitivity analysis is planned, not run.", "A DOI resolves but claim support was not inspected.", "A render exists but pages were not visually inspected.", "A later candidate edit changed a referenced definition."],
+      "original": "The reply exists, the DOI resolves, and rendering succeeded; the comment and submission package are complete.",
+      "acceptable_revision": "Record the verified explanation separately; keep the analysis, claim support, visual inspection, and affected stale-version checks pending or unverified.",
+      "unsafe_revision": "Remove the full comment thread because the explanation subquestion is resolved.",
+      "retain_control": "A superseded subquestion can be marked inapplicable with a reason while its still-relevant subquestions remain open.",
+      "must_preserve": ["A reply is not completed analysis.", "DOI identity is not claim-level support.", "Rendering is not visual inspection.", "Changed candidate dependencies invalidate affected checks."],
+      "judgment": "Do not certify unavailable or stale evidence, and do not erase unresolved subquestions."
+    }
+  ]
+}
