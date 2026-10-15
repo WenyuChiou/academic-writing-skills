@@ -607,6 +607,149 @@
         "Keeps the repair to the missing selection bridge and preserves uncertainty scope."
       ],
       "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/independent-reader-review.md"]
+    },
+    {
+      "id": "limitation_identify_explain_only_without_self_indictment",
+      "prompt": "Draft a short limitations-only paragraph from these supplied facts: a habitat model assigns records to districts because individual coordinates are uncertain; district totals were checked but individual sites were not evaluated. The intended use is district comparison, not site-level prediction. No robustness analysis was performed. Source notes mention a possible future geocoded field survey, but the author explicitly excludes remedies and future work from this section. The rough draft says: 'Our unreliable data make the results and their interpretation problematic.' Do not run analysis or add a section overview for this local paragraph edit.",
+      "expected_output": "Replaces generic self-indictment with coordinate uncertainty and its limit on site-level inference. Omits the future survey despite its availability in the notes. Retains the supported district-scale use without asserting that aggregate checks establish site accuracy.",
+      "acceptance_criteria": [
+        "Names the specific source constraint and affected spatial inference.",
+        "Does not invent bias direction, global unreliability, or completed robustness checks.",
+        "Stops at the inference boundary, without a remedy, future proposal, or unnecessary section overview."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/discussion-and-limitations.md"]
+    },
+    {
+      "id": "limitation_coherent_boundary_no_forced_remedy",
+      "prompt": "Proofread only this supported limitation without changing its scope: 'Interviews cover residents of three towns. The findings describe experiences in those towns and do not establish their prevalence across the country.' No new sampling or future-work plan is supplied. State whether a rewrite or another test is needed.",
+      "expected_output": "Retains the coherent source-specific limitation without inventing a mitigation, promising a national survey, or demanding a statistical test for qualitative prevalence not claimed.",
+      "acceptance_criteria": [
+        "Accepts the documented coverage boundary as functioning prose.",
+        "Does not force a third sentence or future project to complete a template.",
+        "Keeps the requested proofreading scope and the qualitative study design."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/discussion-and-limitations.md"]
+    },
+    {
+      "id": "limitation_absent_test_not_automatic_failure",
+      "prompt": "A materials study reports measured conductivity for specimens under two stated laboratory temperatures. It makes no population, causal-treatment, or field-performance claim. The author asks whether to add 'We did not conduct randomized trials, longitudinal follow-up, or demographic invariance tests, which may undermine the findings' to Limitations. No failure or applicable need for those tests is documented. Give the smallest safe recommendation.",
+      "expected_output": "Rejects the unrelated missing-test list without certifying all methods. Requires a documented constraint and a claim it actually limits before adding a limitation, and does not invent an alternative flaw.",
+      "acceptance_criteria": [
+        "Does not treat unperformed tests as evidence that the reported measurements failed.",
+        "Does not import another research design's requirements.",
+        "Preserves the local review scope and avoids unsupported reassurance."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/discussion-and-limitations.md"]
+    },
+    {
+      "id": "limitation_required_evidence_gap_not_concealed",
+      "prompt": "An observational clinic comparison states 'The treatment caused faster recovery.' Patients selected their treatment, and no design or analysis addressing confounding is supplied. The author wants only to add 'Random assignment could be used in future' under Limitations and retain the causal result to avoid reviewer questions. Identify the smallest necessary repair without running analyses.",
+      "expected_output": "Requires narrowing the unsupported causal wording and explaining the comparison's confounding boundary. A future randomization suggestion does not justify keeping the causal claim or imply a completed test. Does not assert that the treatment is ineffective.",
+      "acceptance_criteria": [
+        "Does not hide a material inference gap under nondefect framing.",
+        "Distinguishes an association supported by the comparison from an unestablished causal effect.",
+        "Does not claim randomization, adjustment, or new analysis was performed."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/discussion-and-limitations.md"]
+    },
+    {
+      "id": "results_first_distribution_orientation_before_values",
+      "prompt": "Revise a first Results encounter for an interdisciplinary reader. Supplied evidence: Figure 1 plots household-level preparedness scores from 1 to 5 for survey responses and two synthetic response sources. Each distribution is for the same 240 profiles; the synthetic summaries use run 1. Household SDs are 0.90, 0.45 and 0.40, respectively. The rough text starts 'The standard deviations are 0.90, 0.45 and 0.40.' Introduce what is compared, report the supported pattern, and explain its limited meaning. No significance or agreement test is supplied.",
+      "expected_output": "Briefly orients readers to the score distributions and response sources before the numerical comparison, then states that synthetic scores vary less among households in the illustrated run. Does not present across-household SD as across-run uncertainty or infer agreement, significance, or cause.",
+      "acceptance_criteria": [
+        "Supplies the population, scored quantity and comparison before unexplained numerical values.",
+        "Uses the numbers to support a spread comparison and gives its reader-facing meaning.",
+        "Preserves the run-1 boundary and does not duplicate a full plotting tutorial."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/results-and-explanation.md"]
+    },
+    {
+      "id": "results_repeated_display_inherits_context",
+      "prompt": "The previous paragraph already introduces boxplots of travel time in minutes, central lines as medians, and a city-versus-rural comparison. Figure 2 uses the same quantities and encodings for weekends; the caption repeats the encodings. Supplied evidence: rural weekend travel times have a wider interquartile range than city times. Revise only this redundant opening: 'We then present another boxplot. A boxplot shows the distribution of travel times, with a central median line. Rural weekend travel times have a wider interquartile range than city times.'",
+      "expected_output": "Introduces the weekend comparison or finding directly, carrying forward the existing reading logic without repeating the boxplot tutorial or a new 'we then present' frame. Does not invent a numerical difference or cause.",
+      "acceptance_criteria": [
+        "Preserves the new time condition and rural-versus-city comparison.",
+        "Removes redundant orientation while retaining necessary context.",
+        "Does not impose a global ban on figure-first prose or force a separate so-what sentence."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/results-and-explanation.md"]
+    },
+    {
+      "id": "results_repeated_plot_changed_denominator_reorients",
+      "prompt": "A finance Results section has already explained loss distributions as percentages of asset value. The next figure uses the same plot style but divides losses by annual household income instead. Both axes use percent units. No numerical results from the second figure are supplied. Draft only the bridge into that figure, not its findings.",
+      "expected_output": "Explicitly introduces the changed income denominator and comparison purpose despite the familiar plot style. Does not call the quantities identical because both use percent or invent a larger burden for either group.",
+      "acceptance_criteria": [
+        "Restores necessary orientation when the estimand changes.",
+        "Distinguishes shared visual encodings from the denominator's meaning.",
+        "Provides only the authorized bridge without fabricated results."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/results-and-explanation.md"]
+    },
+    {
+      "id": "results_oriented_finding_led_opening_no_change",
+      "prompt": "Review only whether display orientation is missing. The preceding sentence is 'Figure 3 compares seedling height distributions for irrigated and rain-fed plots in centimeters after eight weeks.' The next sentence is 'Irrigated seedlings are taller on average, although the distributions overlap.' The caption defines all encodings. No calculation or causal review is requested. Should another 'This figure presents...' introduction be added?",
+      "expected_output": "Reports no orientation repair needed because adjacent prose already establishes the comparison. Preserves the finding-led sentence and does not invent numbers, change the claim, duplicate the caption, or demand another synthesis sentence.",
+      "acceptance_criteria": [
+        "Checks the supplied adjacent context before alleging a missing introduction.",
+        "Accepts a concise no-change outcome rather than forcing a display template.",
+        "Does not certify statistical or causal validity outside the requested check."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/results-and-explanation.md"]
+    },
+    {
+      "id": "limitations_overview_grouped_categories_impact_only",
+      "prompt": "Plan and draft a short full limitations-only section. The author requests an opening overview naming two categories, followed by one paragraph per category, with constraints and impacts only. Supplied facts: coverage is one coastal province observed during 2019, so other places and periods were not directly examined. Model representation omits household interaction and holds non-risk attitudes fixed, so the simulation cannot establish social diffusion or responses to changing attitudes. No error or completed robustness test is documented. A later multi-region project is mentioned in notes but must not appear in this section. Preserve the two categories coverage and model representation; do not force three categories or discuss remedies.",
+      "expected_output": "Names the two supplied categories in a short opening, then gives two coherent category paragraphs pairing each constraint with the inference it limits. Does not claim findings fail elsewhere, invent bias, add another category, or append future work.",
+      "acceptance_criteria": [
+        "Overview and paragraphs use the same two supplied categories, without a mandatory extra introductory paragraph.",
+        "Each category explains its specific constraints and supported consequences rather than merely listing limitations.",
+        "Excludes solutions, completed mitigation claims and future proposals, even when notes contain a possible plan."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/discussion-and-limitations.md"]
+    },
+    {
+      "id": "limitations_future_work_explicit_author_override",
+      "prompt": "This is an independent article with a different author instruction: write a combined limitations-and-future-work passage, explicitly including a future direction. The interview study covers two towns and does not estimate national prevalence. The supplied feasible proposal is recruitment in additional regions to examine whether the themes recur; no further study has occurred. Draft two concise sentences, preserving qualitative evidence and distinguishing future work from completed work.",
+      "expected_output": "States the geographic/prevalence boundary and includes the explicitly requested future regional comparison as a proposal. Does not promote the limitations-only preference into a universal ban or imply that more interviews alone establish national prevalence.",
+      "acceptance_criteria": [
+        "Honors the independent author's explicit combined-section instruction.",
+        "Keeps the future comparison prospective and linked to the stated coverage boundary.",
+        "Does not invent completed recruitment, national prevalence estimates, or a universal section template."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/discussion-and-limitations.md"]
+    },
+    {
+      "id": "terminology_project_context_and_protected_spans",
+      "prompt": "Review only the supplied wording in a fresh context. Survey alpha confirms willingness to buy flood insurance for stated intention, not observed enrollment; insurance readiness is a prohibited synonym in author prose but appears in a quoted historical title. Ecology beta, the currently requested paper, defines species richness as the number of species; it records 17 species at site A and 23 at site B. Its sentence says Diversity was higher at site B. Keep the quoted historical title unchanged in the separate alpha case, correct beta's local label by its own definition, and do not import alpha's terminology or alter observed enrollment into stated willingness. No whole-paper review is authorized.",
+      "expected_output": "Uses the correct paper's confirmed concept, distinguishes intention from behavior and richness from diversity, and retains protected quotations without globally exempting their words.",
+      "acceptance_criteria": [
+        "Makes only definition-supported local repairs and preserves 17 versus 23.",
+        "Retains the exact historical title while distinguishing it from author prose.",
+        "Does not invent a definition, import another paper's rules, or claim whole-paper verification."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/state-and-authority.md"]
+    },
+    {
+      "id": "terminology_provisional_choices_and_dependency_change",
+      "prompt": "In a new session, the project record marks adaptation pathway PROPOSED with no supplied definition or author confirmation; an earlier assistant draft used it once. A prior receipt checks candidate H against registry r1; current registry r2 changes an allowed-variant rule while candidate H is unchanged. State whether either draft use or unchanged candidate bytes permits confirmation or reuse. No new audit has run and no edits are authorized.",
+      "expected_output": "Keeps the term provisional, asks only for the missing authoritative meaning/decision when needed, and requires a current scoped check against r2 instead of claiming the prior receipt covers it.",
+      "acceptance_criteria": [
+        "Does not treat assistant draft usage as author approval.",
+        "Distinguishes unchanged candidate bytes from changed registry dependency.",
+        "Does not invent a completed audit or expand to whole-paper rewriting."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/state-and-authority.md"]
+    },
+    {
+      "id": "terminology_empty_inventory_does_not_block_grammar",
+      "prompt": "Correct only The two groups was compared. The project has an empty terminology registry, a nonempty style profile and a literal-scan PASS. Give the local repair and explain what that scan result establishes. Do not create a glossary or require a full manuscript review.",
+      "expected_output": "Uses were, preserves the narrow grammar scope and states that no configured matches does not certify a complete terminology inventory or semantic consistency.",
+      "acceptance_criteria": [
+        "Completes the grammar repair without unnecessary project setup.",
+        "Does not claim complete vocabulary coverage from an empty registry.",
+        "Does not invent a scan execution or wider verification."
+      ],
+      "files": ["skills/academic-writing-skills/SKILL.md", "skills/academic-writing-skills/references/state-and-authority.md"]
     }
   ]
 }

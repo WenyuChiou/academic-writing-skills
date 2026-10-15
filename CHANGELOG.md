@@ -11,6 +11,21 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.13] - 2026-10-14
+
+### Changed
+
+- Add a category overview and grouped limitation paragraphs using an
+  evidence-grounded identify/explain check; keep remedies and future plans out
+  of a limitations-only section, without hiding real inference gaps.
+- Distinguish first display orientation from repeated-display context, preserving
+  finding-led Results and reopening changed measures or comparison units.
+- Reuse source-bound terminology records across drafting sessions, keeping
+  proposals distinct from confirmed choices and contextual protected names.
+- Align local artifact-role checks with whole-file checks and bind candidate
+  receipts to state/rule hashes; disclose empty inventories and unresolved scope
+  without presenting literal scan success as semantic certification.
+
 ## [1.3.12] - 2026-10-12
 
 ### Added

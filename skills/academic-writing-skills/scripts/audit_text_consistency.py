@@ -75,10 +75,27 @@ def prohibited_variants(term: dict[str, Any]) -> list[str]:
     return [str(value) for value in values if str(value).strip()]
 
 
+def artifact_role(state: dict[str, Any], artifact: str) -> str | None:
+    """Resolve an active artifact ID without guessing from filenames or labels."""
+    roles = {
+        item.get("role") for item in state.get("artifacts", [])
+        if item.get("id") == artifact and item.get("status", "ACTIVE") == "ACTIVE"
+    }
+    return next(iter(roles)) if len(roles) == 1 and None not in roles else None
+
+
+def applies_to_role(entry: dict[str, Any], role: str | None, key: str) -> bool:
+    """Unknown scope preserves conservative diagnostics, not a scope certificate."""
+    return role is None or not entry.get(key) or role in entry[key]
+
+
 def audit_fragment(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str, Any]]:
     """Audit a candidate fragment without requiring whole-manuscript locks or facts."""
     findings: list[dict[str, Any]] = []
+    role = artifact_role(state, artifact)
     for lock in state.get("semantic_locks", []):
+        if not applies_to_role(lock, role, "required_roles"):
+            continue
         for variant in lock.get("forbidden_variants", []):
             if contains_variant(text, str(variant)):
                 findings.append({
@@ -87,6 +104,8 @@ def audit_fragment(text: str, artifact: str, state: dict[str, Any]) -> list[dict
                     "message": "forbidden semantic variant found in candidate text",
                 })
     for term in state.get("terminology", []):
+        if not applies_to_role(term, role, "scope_roles"):
+            continue
         for variant in prohibited_variants(term):
             if contains_variant(text, variant):
                 findings.append({
@@ -95,6 +114,8 @@ def audit_fragment(text: str, artifact: str, state: dict[str, Any]) -> list[dict
                     "message": "prohibited term variant found in candidate text",
                 })
     for fact in state.get("facts", []):
+        if not applies_to_role(fact, role, "scope_roles"):
+            continue
         for variant in fact.get("forbidden_strings", []):
             if contains_variant(text, str(variant), True):
                 findings.append({
