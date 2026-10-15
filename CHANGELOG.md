@@ -11,6 +11,18 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.14] - 2026-10-15
+
+### Changed
+
+- Add on-demand context-rich evidence cases with acceptable, unsafe, and
+  no-change controls; distinguish fixture integrity, coverage provenance, and
+  bounded semantic behavior checks from editorial or scientific certification.
+- Clarify retained-item construct lineage, statistical summary/multiplicity/count
+  provenance, fixed-reference profile comparisons, and superseded subquestions.
+  Preserve existing prose, limitations, SM, and exact-candidate safeguards without
+  introducing universal templates or word bans.
+
 ## [1.3.13] - 2026-10-14
 
 ### Changed
@@ -764,6 +776,7 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   domain-neutral.
 
 [Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/commits/main
+[1.3.14]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.13...v1.3.14
 [1.3.10]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.9...v1.3.10
 [1.1.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.1.0...main
 [1.1.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.0.0...v1.1.0
