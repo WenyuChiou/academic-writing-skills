@@ -54,6 +54,52 @@ Use machine-auditable registry fields consistently:
 
 Do not store a prose reminder such as `term/rule` inside `semantic_locks` and then claim the lock audit passed. Convert it to the schema above or record it as a decision that requires manual verification. A registry entry that cannot be audited must be reported as such rather than silently skipped.
 
+### Persistent terminology procedure
+
+Use the existing project record or equivalent glossary, not chat recall, as the
+shared vocabulary for sustained writing. Bind it to the active manuscript's
+identity and authoritative version. A copied record or a matching topic does not
+establish authority for another paper. For a one-off edit, relevant author-supplied
+terms can stay inline; do not require a new project file.
+
+1. Before writing, read the relevant confirmed concepts, definitions, preferred
+   terms, explicitly allowed variants/acronyms, and scope. Identify concepts that
+   must remain distinct. Record definition/source and confirmation provenance
+   where needed; do not invent a definition from an unfamiliar label.
+2. During writing, preserve names of defined concepts rather than rotating
+   synonyms. An author's explicit terminology decision or designated authoritative
+   definition can confirm an entry; an assistant's draft usage cannot. Keep new
+   suggestions and unresolved meanings separately, such as in
+   `terminology_proposals`, with their source and reason. If an entry is explicitly
+   marked `PROPOSED`, do not treat it as confirmed on resumption. Existing legacy
+   entries without status retain their configured scan behavior, not invented
+   approval provenance.
+3. When a new phrase appears, determine whether it is an approved variant, a
+   distinct concept, or a possible naming inconsistency. Propose the smallest
+   repair or ask only when the unresolved meaning affects the requested claim.
+   Do not ban every new phrase or merge willingness, observed behavior, welfare,
+   and other distinct constructs. Protect quotations, reference titles, official
+   instrument names, and valid inflections in their actual contexts; do not make
+   a word globally exempt merely because one occurrence is protected.
+4. At the requested section boundary, reconcile new confirmed choices and pending
+   proposals. For an author-approved rename, identify affected prose, displays,
+   and companion files before changing them. Conflicting confirmed decisions stay
+   unresolved until authority resolves them; recency alone is not approval.
+5. Check the exact deliverable against the current record. Retain candidate and
+   state hashes, rule versions/hashes, and checked scope in audit evidence when
+   supported. A changed registry, rule, scope, or candidate invalidates related
+   prior evidence even if the paragraph itself is unchanged.
+
+An empty registry needs a bounded proposal pass over available authoritative
+material only when the task requires terminology coordination. It does not block
+a grammar repair. Report confirmed applicable entries, unresolved concepts, and
+literal scan findings separately. `PASS` means no configured scan findings, not
+complete vocabulary coverage or semantic correctness. If artifact role is unknown,
+disclose that limit; do not claim role-specific clearance. The local CLI can resolve
+a role when `--label` exactly matches an active artifact ID in the supplied state.
+Quoted matches remain contextual diagnostics; scripts do not establish whether
+two previously unregistered expressions name the same concept.
+
 ## Lock and Change Rules
 
 Use an exact lock only for content the user has explicitly finalized or that must remain verbatim, such as a formal research question. Use a semantic lock when wording may vary but the scientific task and scope must remain stable.

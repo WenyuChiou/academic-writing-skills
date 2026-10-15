@@ -27,7 +27,23 @@ For example, in a hypothetical scenario test, both groups' estimated losses chan
 
 ## Limitations Paragraph Planning
 
-Begin with the specific constraint in the data, design, measurement, model, validation, or represented outcomes; follow with the inference or use it limits. The opening's job is to identify the study limitation, not merely warn about “interpreting results.” This is a function rule, not a blanket ban on that phrase wherever a concrete constraint and consequence are clear.
+Plan the section before individual constraints. For a multi-category section,
+begin with a short overview naming the actual major categories, then develop
+one paragraph per major category. Start each category paragraph with its main
+constraint; explain the related specific limitations and their consequences in
+a logical order. Check that the overview and paragraph categories match. The
+category count and labels come from the study, not a fixed three-part template.
+An overview sentence can lead directly into the first category; it need not
+become a separate introductory paragraph. Do not add a section overview when
+the task is only to revise an individual sentence or paragraph.
+
+Within each category paragraph, begin with the specific constraint in the data,
+design, measurement, model, validation, or represented outcomes; follow with the
+inference or use it limits. This opening identifies a study limitation rather
+than merely warning about “interpreting results.” The section-level overview
+and category-level explanation perform different jobs.
+This is not a blanket ban on discussing interpretation when the wording names
+a specific constraint and its consequence.
 
 Before drafting or finalizing, separate a choice, uncertainty, or design boundary from a correctable execution problem. The choice of a source, indicator, or model is not by itself a manuscript defect; identify the uncertainty or coverage boundary associated with it and the particular estimate or inference affected. Verify what the source or diagnostic actually establishes. If the type or consequence of uncertainty is unknown, do not fill the gap with a generic claim that the results are unreliable or biased. Correct correctable errors or missing required work, or state accurately why they remain unresolved, rather than presenting them as research limitations.
 
@@ -41,13 +57,54 @@ error, unsupported claim, or omitted required analysis as a limitation: fix it o
 state the unresolved issue accurately. This framing clarifies the source of the
 boundary without minimizing its consequence.
 
-Group related constraints into a paragraph and order them by dependency or consequence. A useful planning sequence is **constraint → affected component or inference → boundary → optional targeted remedy**. Combine these functions when concise; do not impose a fixed paragraph count, require ordinal starters, or tack a future-work sentence onto every limitation.
+Group related constraints into a paragraph and order them by dependency or
+consequence. Use **constraint → affected component or inference → boundary**.
+Combine these functions when concise; do not impose a fixed paragraph count or
+require ordinal starters.
+
+Use **identify → explain the effect** as the paragraph drafting check:
+
+1. **Identify:** name a documented constraint and its source, such as the sampling
+   frame, observation window, spatial resolution, or deliberately omitted process.
+   A finite sample or a chosen method is not a defect by itself.
+2. **Explain:** connect that constraint to the particular estimate, comparison, or
+   use it limits. Do not leap from a local uncertainty to "the results are
+   unreliable" or "our interpretation is problematic." A small sample can limit
+   precision; it does not alone establish bias or lack of generalizability.
+
+For a limitations-only section, stop at the supported consequence. Do not append
+solutions, mitigation claims, future tests, or research plans, even if a possible
+remedy appears in the source notes. Keep those in a separately requested passage
+or an explicitly requested combined limitations-and-future-work section. Respect
+the author's selected structure and any verified venue requirement; this is not
+a prohibition on future work elsewhere in an article.
+
+For example, a study conducted in one region directly examines that setting;
+transfer to other regions remains untested. This does not establish that the
+findings are false elsewhere. Name the relevant geographic, population, or
+contextual boundary rather than making a blanket claim of nongeneralizability.
+
+Before listing a test that was not performed, ask which claim requires it and
+whether the current wording makes that claim. Do not add a checklist of absent
+tests merely because they exist in the field. An unperformed test is not evidence
+of failure, and a generic future-test sentence does not repair a missing logical
+link. If a stronger claim genuinely lacks required evidence, narrow or correct
+the claim and disclose the remaining gap; do not hide it to avoid reviewer
+questions or recast a fixable analytical problem as an inherent study limitation.
+
+After shortening, check that the source of the constraint still explains the
+boundary. A generic statement that validation was limited must not replace a
+relevant data-source uncertainty. Reject an inapplicable proposed limitation
+locally; do not turn that decision into "the study has no limitations."
 
 Check that consequential assumptions were already disclosed at their operational use in Methods. Limitations can explain their implications but should not reveal the model's actual design for the first time. Separate missing empirical validation from known failure. Lack of household-level evaluation, for example, may narrow claim accuracy without erasing the value of a verified aggregate diagnostic.
 
 Do not invent the direction of bias when it is unknown, call an unexpected finding a methodological limitation, or soften a known omission to preserve a desired narrative. Missing recovery conditions or household resources can restrict a vulnerability interpretation even when modeled property-loss calculations are sound. Match the boundary to the actual construct, not a generic “more data are needed.”
 
-Future work is optional. When included, connect it to the named constraint and state what additional inference it could permit. Do not offer a broad wishlist in place of the present limitation or imply that a proposed remedy has already been implemented.
+When a future-work passage or combined section is explicitly requested, connect
+each proposal to the named constraint and the additional inference it could
+permit. Keep completed mitigation, planned work, and optional suggestions
+distinct. Do not imply that a proposed remedy has already been implemented.
 
 ### Allocate Limitation Claims to Their Actual Consequences
 
@@ -73,7 +130,8 @@ Allocate detail by reader function: the main text names the constraint and the
 inference it limits; Methods or Supporting Material carries procedures and
 extended numerical diagnostics when those details are needed for reproducibility.
 Do not remove a real inference concern just because its diagnostic is technical.
-When future work is useful, make each remedy answer a distinct constraint—for
+In a separately requested future-work or combined passage, make each remedy
+answer a distinct constraint—for
 example, a new sample can check whether selected questions work in other
 households, while longitudinal follow-up can compare stated willingness with
 later behavior. Neither remedy by itself establishes equivalence or causality.

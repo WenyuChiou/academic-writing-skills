@@ -12,7 +12,7 @@
 
 Use this guide for planning, drafting, or substantively reviewing findings, including synthesis findings, propositions, and benchmark evaluations under other headings. Preserve functioning submitted or advisor-edited text; repair the missing function rather than rewriting the section wholesale.
 
-Organize a result unit around **finding → necessary evidence → meaning → substantive answer**. These are information functions, not four mandatory sentences. State what was found, identify the comparison, report enough evidence to judge it, and explain what it establishes about the question. Put reproducible procedures in Methods; refer back briefly when a design detail is needed to understand a finding.
+Once the reader knows what is being compared, organize a result unit around **finding → necessary evidence → meaning → substantive answer**. Supply any missing display orientation first, as described below. These are information functions, not four mandatory sentences. State what was found, identify the comparison, report enough evidence to judge it, and explain what it establishes about the question. Put reproducible procedures in Methods; refer back briefly when a design detail is needed to understand a finding.
 
 Choose the main pattern or comparison before arranging the supporting values. Do not mechanically enumerate variables, groups, or panels: the reader should know what the values demonstrate, rather than have to infer the finding from a numerical list. Variable, panel, or chronological order is appropriate when it advances a clear analytical argument. A finding can be heterogeneous, uncertain, or show no clear change; pattern-first writing does not authorize a stronger claim or an invented mechanism.
 
@@ -23,6 +23,34 @@ Give the “so what” where the paragraph or subsection completes its analytica
 Prefer one primary question or analytical purpose per figure or table. This is not a mandatory one-figure/one-question ratio: related panels can support one cumulative comparison, and several visuals can jointly answer a question. Split unrelated panel groups when their different purposes obscure the argument; do not multiply figures merely to comply with a ratio.
 
 Before a display, supply the question or comparison when the context needs it. After the necessary evidence, state the answer at the natural unit boundary. Do not repeat a full preview and synthesis around every panel. Trace values to the actual outputs and displays, checking baseline, group, time, units, denominator, aggregation, summary statistic, uncertainty, and rounding. Displayed rounded endpoints need not reproduce a percentage calculated from unrounded values; verify the underlying calculation and explain rounding when material rather than changing values to force agreement.
+
+### First and Repeated Display Encounters
+
+At the first encounter with an unfamiliar display or comparison, briefly tell the
+reader what evidence it shows, which entities or conditions are compared, and
+what to look for before reporting values. For a distribution, distinguish scores
+or measurements, the population, and whether the comparison concerns location,
+spread, or shape. Explain a nonobvious encoding only when needed for that finding;
+leave the full legend and plotting procedure in the caption and Methods. The
+orientation may already be supplied by adjacent prose; do not add a duplicate.
+
+Then state the observed pattern, support it with the relevant values, and explain
+its supported meaning at the paragraph or subsection's natural closure. "Figure X
+presents the results" alone does not orient a reader, but neither a figure-first
+opening nor the verb "presents" is inherently wrong when its subject and purpose
+are already clear. Do not replace a useful finding-led opening with metadiscourse.
+In the explanation, name whose values vary and at what level; a phrase such as
+"less variation in the summaries" can obscure variation among people, sites, or
+repeated runs. Concision must preserve that distinction.
+
+For later displays using the same established reading logic, carry that context
+forward and introduce only the new population, condition, comparison, or finding.
+Do not repeat the plot tutorial, legend, or "we first / we then present" frame for
+each figure. Reintroduce meaning when the quantity, denominator, population,
+encoding, or uncertainty changes, or when the unit must stand alone. A shared
+plot type does not establish a shared estimand. Apply the same decision to tables,
+maps, qualitative displays, and evidence syntheses rather than assuming every
+Results section contains distribution plots.
 
 Use [figures-tables-and-supplements.md](figures-tables-and-supplements.md) for caption, note, visual-size, and synchronization checks.
 
