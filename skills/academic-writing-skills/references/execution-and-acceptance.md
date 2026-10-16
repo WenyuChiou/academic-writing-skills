@@ -5,6 +5,34 @@ formatted artifact, not only after the author finds a problem. It operationalize
 the existing integrity gates; it does not add a fixed article structure or a new
 scientific standard. A language scan alone is never section acceptance.
 
+## Select the stage checklist
+
+Use the action, requested unit, change impact, and available sources together.
+The same shared project state supplies terms, facts, decisions, and open issues;
+the following are views of the work, not five new ledgers. An existing outline
+or writing contract can supply the plan if it still matches the active evidence.
+
+| Checkpoint | Perform | Retain or reference |
+| --- | --- | --- |
+| Outline / section planning | Identify reader prerequisites, paragraph functions, evidence slots, inference boundaries, and bridges. Read topic sentences as an argument. For an existing outline, inspect actual functions rather than inventing a better history. | Function sequence and evidence needs; unsupported results remain needs. Adapt to conceptual, qualitative, and other designs without forcing IMRAD. |
+| Before paragraph drafting / substantive rewrite | Establish function, claim, evidence, development, and bridge; order sentences and inspect available neighbors before wording. | A compact writing plan or the relevant current outline/contract locator. A grammar-only repair needs meaning preservation, not a new plan. |
+| Post-edit handoff | Inspect the exact candidate using the applicable checks below; compare it with the plan, meaning, sources, and adjacent prose. | Candidate/version, located findings, resolutions, and remaining limits. A one-off chat edit can keep this inline. |
+| Chapter closure | Read openings/endings across the chapter; check its answer and the design-relevant blind spots in the lifecycle guide. Reconcile confirmed terms, proposals, decisions, and open issues. | A chapter summary of actual findings, selected diagnostics and their evidence limits, plus changes or confirmed no-change to the shared vocabulary. |
+| Whole-paper review | Complete the four passes: argument/structure, evidence/scope, scholarly writing, delivery integrity. Inspect affected companion artifacts only when in scope or triggered. | Separate located results for each pass and a functional-completeness retrospective. Do not replace all four with one clean language scan. |
+
+Record the pre-draft plan before producing new prose; do not backfill a note and
+claim it establishes that order. A review-only task evaluates existing text and
+does not require pretending a pre-draft plan was executed. For substantial
+subsection/chapter work, apply the four passes within that unit, not unrelated
+chapters. A whole-file punctuation pass is still not a scientific full review.
+
+Keep ordinary handoffs short: what was checked/changed and the specific remaining
+limit are usually enough. At chapter/full-review boundaries, expand the record
+so the next round can reuse decisions and find unresolved items. Do not narrate
+every sentence-pair check or create a file for each paragraph. A no-issue result
+still identifies the passage and what was actually inspected; stock assurances
+are not evidence. Missing sources stay unavailable, not passed.
+
 ## Before writing: agree on the reader's route
 
 Reuse the active contract and sources. Name the reader's likely knowledge, the
@@ -78,10 +106,18 @@ to validate a **coverage record**, not the quality or truth of its findings. It
 requires no managed manuscript state. Reuse existing records when equivalent;
 do not manufacture a second bookkeeping system to satisfy this format.
 
-The JSON contract is:
+The JSON contract supports legacy version `1` and stage-aware version `2`:
 
-- `schema_version`: integer `1`; `scope`: `sentence`, `paragraph`, `section`, or
+- `schema_version`: integer `1` or `2`; `scope`: `sentence`, `paragraph`, `section`, or
   `package`; `change`: `surface` or `substantive`.
+- Version `2` also requires `action`: `plan`, `draft`, `revise`, `proofread`, or
+  `review`; and `checkpoint`: `outline`, `handoff`, `chapter_closure`, or
+  `full_review`. Select them from the actual request/work, not whichever profile
+  needs fewer checks. `proofread` is surface-only. `chapter_closure` uses
+  substantive `section` scope; `full_review` uses `package` scope. These two
+  checkpoints use `draft`, `revise`, or `review`, not planning or proofreading.
+  The `outline` checkpoint is for planning/developing/reviewing an outline, not a
+  way to bypass prose review; grammar-only outline edits use `handoff`.
 - `features`: four explicit booleans: `displays`, `formatted_file`,
   `venue_formatting`, `metadata_changes`. Declare effects honestly; the checker
   cannot infer them from document contents. Formatted edits require identity
@@ -91,7 +127,8 @@ The JSON contract is:
   At least one role is `candidate`; other roles are `context`, `evidence`, or
   `render`. Include the current adjacent prose/contract and affected sources or
   render evidence used in the checks so changed dependencies invalidate coverage.
-- `checks`: names from the table, in snake case. Each `checked` entry has
+- `checks`: applicable names from the table and version-2 stage checks below,
+  in snake case. Each `checked` entry has
   `outcome` (`resolved` or `open`), nonempty `artifact_ids`, `locator`, and
   `finding`. Pending entries have a status and `reason`.
 - Checked `final_layout` references an artifact with role `render`, bound in
@@ -111,11 +148,49 @@ For a meaning-preserving sentence edit with no file/display/venue effects, only
 For substantive work, `progression_and_framing` is also required. Extra applicable
 checks follow the effects above; a required check cannot be marked not applicable.
 
+Version `2` adds these coverage requirements:
+
+- `functional_completeness` for every task, scoped to what was requested.
+- `writing_plan` for `plan`, `draft`, or substantive `revise`; reference the
+  current outline/contract or record its function, claim, evidence, development,
+  and bridge. No new pre-draft claim is required for review-only work.
+- `argument_structure`, `evidence_scope`, `scholarly_writing`, and
+  `delivery_integrity` for `full_review`, whole-package `review`, or substantive
+  section/package drafting, revision, or review. The outline checkpoint and
+  planning-only work do not trigger these completed-prose passes.
+- `chapter_closure` and `terminology_reconciliation` at chapter closure;
+  whole-paper review also requires `terminology_reconciliation`. Report unresolved
+  meanings separately. A verified finding that no terms or decisions changed is
+  acceptable; do not invent glossary updates to satisfy the checklist.
+
+Use the same locator/finding/outcome contract for these checks. If a source is
+unavailable, record the affected required check as unavailable or open; do not
+use the existence of a record to turn an unresolved scientific claim into a
+resolved one. A plan entry may point to an earlier outline; it need not copy it.
+
+Include the actual shared state, adjacent text, sources, and relevant rule files
+as hashed context/evidence artifacts when a check depends on them. A changed
+artifact makes the record stale. The result lists `stale_artifact_ids` and
+`invalidated_checks` for explicitly declared dependencies, so retain unaffected
+evidence and recheck the affected items before refreshing hashes. This list is
+not a semantic impact detector: an omitted or newly discovered dependency still
+requires judgment and an expanded impact check.
+
+Legacy records keep their original scope/effect behavior and report
+`coverage_basis: legacy_v1`, with no workflow coverage. They cannot declare the
+new workflow fields or stage checks without explicitly upgrading to version `2`.
+A version-2 result reports `coverage_basis: workflow_v2`; that means declared
+stage coverage, not proof of execution. Do not rewrite old receipts as if the new
+checks had already occurred. For a local edit, inline findings remain acceptable;
+the JSON checker is optional and does not force managed-project setup.
+
 The CLI is read-only and uses the standard library. It returns `0` for
 `COVERAGE_COMPLETE`, `1` for `INCOMPLETE`, and `2` for invalid records or read errors.
 Every result explicitly states that editorial quality is **not certified**.
 It cannot detect fabricated notes, dishonest applicability declarations, semantic
 errors, or a render made from the wrong document merely by validating hashes.
+`execution_order_certified` is always false: structured records do not prove
+chronology, honest reading, comprehension, or scientific correctness.
 
 ## Close the handoff honestly
 

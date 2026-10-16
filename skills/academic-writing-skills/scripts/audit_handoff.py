@@ -18,10 +18,18 @@ import stat
 
 FEATURES = {"displays", "formatted_file", "venue_formatting", "metadata_changes"}
 BASE_CHECKS = {"meaning_and_evidence", "language_scan", "reader_walkthrough"}
+REVIEW_PASSES = {"argument_structure", "evidence_scope", "scholarly_writing",
+                 "delivery_integrity"}
+WORKFLOW_CHECKS = REVIEW_PASSES | {
+    "writing_plan", "chapter_closure", "terminology_reconciliation",
+    "functional_completeness",
+}
 ALL_CHECKS = BASE_CHECKS | {
     "progression_and_framing", "caption_allocation", "final_layout",
     "editor_identity", "venue_basis",
-}
+} | WORKFLOW_CHECKS
+ACTIONS = {"plan", "draft", "revise", "proofread", "review"}
+CHECKPOINTS = {"outline", "handoff", "chapter_closure", "full_review"}
 ROLES = {"candidate", "context", "evidence", "render"}
 HASH = re.compile(r"[0-9a-f]{64}")
 
@@ -40,7 +48,51 @@ def required_checks(record: dict) -> set[str]:
         checks.add("editor_identity")
     if features["venue_formatting"]:
         checks.add("venue_basis")
+    if record["schema_version"] == 2:
+        action, checkpoint = record["action"], record["checkpoint"]
+        checks.add("functional_completeness")
+        if action in {"plan", "draft"} or action == "revise" and record["change"] == "substantive":
+            checks.add("writing_plan")
+        unit_review = (record["scope"] in {"section", "package"}
+                       and record["change"] == "substantive"
+                       and action in {"draft", "revise", "review"})
+        whole_review = record["scope"] == "package" and action == "review"
+        if checkpoint != "outline" and (unit_review or whole_review or checkpoint == "full_review"):
+            checks.update(REVIEW_PASSES)
+        if checkpoint == "chapter_closure":
+            checks.add("chapter_closure")
+        if checkpoint in {"chapter_closure", "full_review"} or whole_review and checkpoint != "outline":
+            checks.add("terminology_reconciliation")
     return checks
+
+
+def workflow_errors(record: dict) -> list[str]:
+    """Validate declared workflow, not the honesty or timing of its execution."""
+    if record.get("schema_version") == 1:
+        return ["workflow fields require schema_version 2"] if any(
+            key in record for key in ("action", "checkpoint")
+        ) else []
+    if record.get("schema_version") != 2:
+        return []  # the version check reports this separately
+    errors = []
+    action, checkpoint = record.get("action"), record.get("checkpoint")
+    if not isinstance(action, str) or action not in ACTIONS:
+        errors.append("action must be plan, draft, revise, proofread, or review")
+    if not isinstance(checkpoint, str) or checkpoint not in CHECKPOINTS:
+        errors.append("checkpoint must be outline, handoff, chapter_closure, or full_review")
+    if errors:
+        return errors
+    if action == "proofread" and record.get("change") != "surface":
+        errors.append("proofread requires surface change; classify substantive work honestly")
+    if checkpoint == "outline" and action == "proofread":
+        errors.append("grammar-only outline edits use the handoff checkpoint")
+    if checkpoint in {"chapter_closure", "full_review"}:
+        scope = "section" if checkpoint == "chapter_closure" else "package"
+        if record.get("scope") != scope or action not in {"draft", "revise", "review"}:
+            errors.append(f"{checkpoint} requires {scope} scope and draft, revise, or review action")
+        if checkpoint == "chapter_closure" and record.get("change") != "substantive":
+            errors.append("chapter_closure requires substantive work, not a surface-only pass")
+    return errors
 
 
 def nonempty(value) -> bool:
@@ -64,12 +116,13 @@ def audit_record(record, root: Path) -> dict:
     """Check record shape, current bytes, applicable coverage, and open findings."""
     invalid, pending = [], []
     required = set()
-    artifacts = {}
+    artifacts, stale = {}, set()
     if not isinstance(record, dict):
         invalid.append("record must be a JSON object")
         record = {}
-    if type(record.get("schema_version")) is not int or record.get("schema_version") != 1:
-        invalid.append("schema_version must be integer 1")
+    version = record.get("schema_version")
+    if type(version) is not int or version not in {1, 2}:
+        invalid.append("schema_version must be integer 1 or 2")
     if not isinstance(record.get("scope"), str) or record["scope"] not in {"sentence", "paragraph", "section", "package"}:
         invalid.append("scope must be sentence, paragraph, section, or package")
     if not isinstance(record.get("change"), str) or record["change"] not in {"surface", "substantive"}:
@@ -79,6 +132,7 @@ def audit_record(record, root: Path) -> dict:
         type(value) is not bool for value in features.values()
     ):
         invalid.append("features must declare all four boolean applicability flags")
+    invalid.extend(workflow_errors(record))
     if not invalid:
         required = required_checks(record)
     entries = record.get("artifacts")
@@ -100,8 +154,10 @@ def audit_record(record, root: Path) -> dict:
         path = root / entry["path"]  # absolute paths supported; relative to record
         try:
             if sha256_file(path) != entry["sha256"]:
+                stale.add(name)
                 invalid.append(f"SHA256 mismatch: {name}; recheck affected candidate/dependencies")
         except (OSError, ValueError) as exc:
+            stale.add(name)
             invalid.append(f"unreadable artifact {name}: {exc}")
     if not any(entry["role"] == "candidate" for entry in artifacts.values()):
         invalid.append("at least one exact candidate artifact is required")
@@ -112,6 +168,8 @@ def audit_record(record, root: Path) -> dict:
     unknown = set(checks) - ALL_CHECKS
     if unknown:
         invalid.append(f"unknown checks: {sorted(unknown)}")
+    if version == 1 and set(checks) & WORKFLOW_CHECKS:
+        invalid.append("workflow checks require schema_version 2; legacy coverage is scope/effects only")
     for name in sorted(required | (set(checks) & ALL_CHECKS)):
         check = checks.get(name)
         if check is None:
@@ -158,7 +216,16 @@ def audit_record(record, root: Path) -> dict:
     return {
         "status": "INVALID" if invalid else "INCOMPLETE" if pending else "COVERAGE_COMPLETE",
         "required_checks": sorted(required), "findings": invalid + pending,
+        "coverage_basis": "workflow_v2" if version == 2 else "legacy_v1" if version == 1 else "unrecognized",
+        "workflow": {key: record.get(key) for key in ("action", "checkpoint")} if version == 2 else None,
+        "stale_artifact_ids": sorted(stale),
+        "invalidated_checks": sorted(
+            name for name, check in checks.items()
+            if isinstance(check, dict) and isinstance(check.get("artifact_ids"), list)
+            and any(isinstance(value, str) and value in stale for value in check["artifact_ids"])
+        ),
         "editorial_quality_certified": False,
+        "execution_order_certified": False,
         "limit": "Validates declared coverage and file hashes only; human/agent judgment and truthful evidence remain necessary.",
     }
 
@@ -182,7 +249,8 @@ def main(argv=None) -> int:
     try:
         result = audit_record(load_record(args.record), args.record.absolute().parent)
     except (OSError, UnicodeError, ValueError) as exc:
-        result = {"status": "ERROR", "findings": [str(exc)], "editorial_quality_certified": False}
+        result = {"status": "ERROR", "findings": [str(exc)],
+                  "editorial_quality_certified": False, "execution_order_certified": False}
     if args.json:
         print(json.dumps(result, indent=2, ensure_ascii=True))
     else:

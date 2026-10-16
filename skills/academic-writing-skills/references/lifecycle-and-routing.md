@@ -24,6 +24,10 @@ Distinguish three timelines:
 
 Do not mark a section permanently complete. Mark it current relative to a named evidence state or release candidate.
 
+Use the stage checklist in [execution-and-acceptance.md](execution-and-acceptance.md)
+for writing-plan, post-edit, chapter-closure, and four-pass evidence. Reuse one
+project record; the checklist changes with the task, not with the chat session.
+
 For a conventional empirical article without a different declared sequence, use research framing → extended evidence outline → Introduction → study context → Methods → Results → Discussion/limitations → Conclusion → rebuilt Abstract. Follow different genre or author requirements when applicable; section numbers and six headings are not universal requirements. Develop Supporting Material in parallel with Methods and Results, then reconcile it at integration rather than creating it as an afterthought.
 
 Before venue-directed outlining or formatting, establish or reuse the venue profile in [overlay-contract.md](overlay-contract.md). Check the scientific question/contribution against the journal's direction and audience separately from checking article-type, stage-specific format, and style. Scope fit is not evidence of novelty or acceptance; a mismatch is a decision for the author, not permission to change the study. At integration, recheck affected requirements against current official sources rather than relying only on a published example.

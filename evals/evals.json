@@ -882,6 +882,118 @@
         "skills/academic-writing-skills/references/execution-and-acceptance.md",
         "skills/academic-writing-skills/references/evidence-context-cases.md"
       ]
+    },
+    {
+      "id": "staged_workflow_01",
+      "prompt": "Correct grammar only; this is a one-off edit, and there is no project glossary.\n\"The interviews was recorded with participant consent.\"",
+      "expected_output": "Only was→were is repaired; consent and meaning are unchanged. No project files or whole-paper audit are introduced.",
+      "acceptance_criteria": [
+        "Only was→were is repaired; consent and meaning are unchanged.",
+        "No project files or whole-paper audit are introduced."
+      ],
+      "files": [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/execution-and-acceptance.md",
+        "skills/academic-writing-skills/references/state-and-authority.md"
+      ]
+    },
+    {
+      "id": "staged_workflow_02",
+      "prompt": "Rewrite this paragraph for an interdisciplinary audience. Briefly show the\nwriting plan before the revised paragraph and state the remaining checking\nlimits. Do not change the study's scientific scope.\n\nPrevious paragraph: \"We compared summer afternoon temperatures in two simulated\nstreet designs, with identical weather inputs.\"\n\nCurrent paragraph: \"Design A has 30% canopy cover, design B has 10% canopy cover.\nThe first one had 31 degrees and the second one had 33 degrees Celsius. These\nresults validate that trees cool real cities and improve health.\"\n\nNext paragraph: \"We next test whether the temperature contrast persists under\ndifferent wind conditions.\"\n\nAuthoritative output: simulated mean afternoon temperatures are 31 °C for A and\n33 °C for B. No observations or health outcomes were collected. The author has\nconfirmed \"canopy cover\" as the term for the fraction of street area covered by\ntree crowns. No error bars or source files have been supplied.",
+      "expected_output": "A concise plan precedes the revision and post-edit checking has concrete limits. The simulated temperature contrast remains; no empirical validation or health claim is invented.",
+      "acceptance_criteria": [
+        "A concise plan precedes the revision and post-edit checking has concrete limits.",
+        "The simulated temperature contrast remains; no empirical validation or health claim is invented."
+      ],
+      "files": [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/execution-and-acceptance.md",
+        "skills/academic-writing-skills/references/state-and-authority.md"
+      ]
+    },
+    {
+      "id": "staged_workflow_03",
+      "prompt": "Review comprehension only and suggest minimal repairs. Do not rewrite defined\ntechnical terminology just to avoid repetition.\n\n\"We used latent class analysis (LCA) to group respondents by their reported\ntravel preferences. LCA identifies groups with similar response patterns. Class A\npreferred buses, whereas Class B preferred cycling. The transition burden fell\nin both classes. This pathway explains why people changed their commuting.\"\n\nOnly one cross-sectional survey was conducted. Neither \"transition burden\" nor\n\"pathway\" is defined in the supplied material; there are no longitudinal data.",
+      "expected_output": "Defined LCA terminology is preserved; undefined labels and unsupported change/causation are located. The smallest repair does not invent meanings.",
+      "acceptance_criteria": [
+        "Defined LCA terminology is preserved; undefined labels and unsupported change/causation are located.",
+        "The smallest repair does not invent meanings."
+      ],
+      "files": [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/execution-and-acceptance.md",
+        "skills/academic-writing-skills/references/state-and-authority.md"
+      ]
+    },
+    {
+      "id": "staged_workflow_04",
+      "prompt": "Resume a local paragraph edit using the active Paper Delta record below. Keep\nthe same construct, improve clarity, and note any unresolved name without\ninventing a definition or creating a new project record.\n\nPaper Delta: confirmed term \"intention to enroll\", defined as a stated likelihood\non a 0–1 survey scale; allowed abbreviation: none. Author decision D4 confirms\nthis wording. \"enrollment readiness\" is PROPOSED, not approved. Paper Omega's\nseparate glossary defines \"enrollment\" as a completed registration.\n\nParagraph: \"Enrollment readiness was greater after the briefing. This enrollment\nmeans participants actually registered.\"\n\nEvidence: respondents reported mean intentions of 0.4 before and 0.6 after a\nbriefing; actual registrations were not observed. No causal design is documented.",
+      "expected_output": "Confirmed intention to enroll remains distinct from actual enrollment and an unapproved proposal. Paper-specific authority is reused without copying another glossary.",
+      "acceptance_criteria": [
+        "Confirmed intention to enroll remains distinct from actual enrollment and an unapproved proposal.",
+        "Paper-specific authority is reused without copying another glossary."
+      ],
+      "files": [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/execution-and-acceptance.md",
+        "skills/academic-writing-skills/references/state-and-authority.md"
+      ]
+    },
+    {
+      "id": "staged_workflow_05",
+      "prompt": "An unchanged Results sentence was checked last week. Reassess only what is\naffected by the current author-approved metric definition. Identify which old\nchecks can or cannot be reused; do not re-audit unrelated sections.\n\nUnchanged sentence: \"Treatment response was larger in Group A than Group B.\"\nLast week's definition: treatment response = absolute score decrease.\nCurrent definition: treatment response = score decrease divided by baseline\nscore, expressed as a percentage; the preferred term remains \"treatment response\".\nGroup A scores: baseline 100, follow-up 80. Group B: baseline 20, follow-up 10.\nThe old receipt bound the unchanged sentence and the old definition. The Methods\ndefinition, Table 2, and an Abstract comparison use this metric. The separate\nIntroduction history paragraph and reference titles are unchanged and unrelated.",
+      "expected_output": "Relative decreases are A20% and B50%; the comparison and dependent receipt are rechecked. Methods, Table 2 and Abstract are affected; unrelated history is not reopened.",
+      "acceptance_criteria": [
+        "Relative decreases are A20% and B50%; the comparison and dependent receipt are rechecked.",
+        "Methods, Table 2 and Abstract are affected; unrelated history is not reopened."
+      ],
+      "files": [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/execution-and-acceptance.md",
+        "skills/academic-writing-skills/references/state-and-authority.md"
+      ]
+    },
+    {
+      "id": "staged_workflow_06",
+      "prompt": "Plan an extended outline for a conceptual article about when transparency and\nprivacy can conflict in public archives. It will develop propositions from\nexplicit premises and examine counterexamples. No study area, participants,\nexperiment, numerical results, or empirical dataset exists. Supply paragraph\nfunctions and evidence needs rather than writing a full paper.",
+      "expected_output": "The outline follows premises, propositions, counterexamples and boundaries. No empirical sections, participants, data or findings are invented.",
+      "acceptance_criteria": [
+        "The outline follows premises, propositions, counterexamples and boundaries.",
+        "No empirical sections, participants, data or findings are invented."
+      ],
+      "files": [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/execution-and-acceptance.md",
+        "skills/academic-writing-skills/references/state-and-authority.md"
+      ]
+    },
+    {
+      "id": "staged_workflow_07",
+      "prompt": "First close the supplied Results section, then conduct a whole-paper review of\nthis short unformatted draft. Locate concrete problems, preserve correct\ndefinitions, and distinguish what is checked from what remains unverifiable.\n\nAbstract A1: \"The intervention caused attendance to rise in all schools.\"\nIntroduction I1: \"We ask whether attendance differs between participating and\nnonparticipating schools.\"\nMethods M1: \"We compared 20 self-selected participating schools and 20 other\nschools in one district. This was observational, not randomized.\"\nMethods M2: \"Attendance rate is days attended divided by possible attendance\ndays. The same definition is used for both groups.\"\nResults R1: \"Participating schools averaged 92% attendance and other schools 90%.\nThe reported two-sided comparison had p = 0.12.\"\nResults R2: \"Twelve of 20 participating schools reported increased attendance,\nrepresenting 75% of participating schools.\"\nConclusion C1: \"These results prove the intervention increased attendance in\nevery school across the country.\"\nSource note: the supplied summary confirms R1 and the count 12 of 20. No raw\nschool-level data, code, formatted document, figures, or external sources are\navailable. There are no citations or reference entries in this toy draft.",
+      "expected_output": "The count is 60%, not75%; causal, universal and national claims are limited. Four separate review functions carry located findings; unavailable raw evidence/layout is not certified.",
+      "acceptance_criteria": [
+        "The count is 60%, not75%; causal, universal and national claims are limited.",
+        "Four separate review functions carry located findings; unavailable raw evidence/layout is not certified."
+      ],
+      "files": [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/execution-and-acceptance.md",
+        "skills/academic-writing-skills/references/state-and-authority.md"
+      ]
+    },
+    {
+      "id": "staged_workflow_08",
+      "prompt": "Revise for clarity without adding findings, and tell me whether this paragraph\ncan be called fully verified. The cited survey and validation outputs cannot be\naccessed in this task. Do not claim you have modified another artifact.\n\n\"The model was validated by the survey. This demonstrates the model predicts\nhousehold decisions accurately in all regions. See Table S3 for the test.\"\n\nAvailable information: the survey supplied parameters; no validation analysis or\nits results have been provided. Table S3 is not available.",
+      "expected_output": "Parameterization is not validation and no universal prediction claim is added. Unavailable survey/Table S3 remain unverified; no external edit is claimed.",
+      "acceptance_criteria": [
+        "Parameterization is not validation and no universal prediction claim is added.",
+        "Unavailable survey/Table S3 remain unverified; no external edit is claimed."
+      ],
+      "files": [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/execution-and-acceptance.md",
+        "skills/academic-writing-skills/references/state-and-authority.md"
+      ]
     }
   ]
 }
