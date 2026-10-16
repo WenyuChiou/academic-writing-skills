@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "academic-writing-skills",
   "adapter_version": "1.0.0",
-  "skill_version": "1.3.15",
+  "skill_version": "1.3.16",
   "state_schema_version": "1.1",
   "skills": [
     {
@@ -128,9 +128,9 @@
     }
   },
   "files": {
-    ".claude-plugin/plugin.json": "d60648f1c4083c10f841aac9938d7de278680ee3b02d13cdf35ab397be8ca6c3",
+    ".claude-plugin/plugin.json": "0e2b00b20f1f3aa242dd32a0505f2e7fb4bb8fda94f8fabb7a46614deeaf4d65",
     "LICENSE": "1e034229fd46b8a7748bce109e3bcc078e180bb05e276e513039e2b9a990c637",
-    "docs/workspace-adapter.md": "81838c8194536824c3ee18d01dd045fa2d1a1fc393794da0e92f4fb399da691b",
+    "docs/workspace-adapter.md": "45b17f55fc0506f30c823edf0fd5506e3480745567f4cc4f9fdd5c5227839caa",
     "scripts/build_adapter_bundle.py": "1c876db5cda7ed32518e97f0e4aa8af76f7c9dd1def0bc386ec5afefac3a4a8f",
     "skills/academic-writing-skills/SKILL.md": "0e54b704864da6590db8293d1eadc1078298e8536eacf320eb0444b6c3e925e6",
     "skills/academic-writing-skills/agents/openai.yaml": "5d0471ee817805619779b1f901f6c91a1ea4dcb472968f2382a263a7fbcabfe9",

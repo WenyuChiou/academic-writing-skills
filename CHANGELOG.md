@@ -11,6 +11,23 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.16] - 2026-10-16
+
+### Added
+
+- A README workflow cover starting with Frame & Outline, with a shared
+  terminology record across all five writing and review stages.
+- A separate 1280x640 social-preview image identifying this plugin as part of
+  ai-research-skills, plus regression checks for image delivery and README entry points.
+
+### Changed
+
+- Shorten and align the English and Traditional Chinese READMEs, explaining the
+  two skills, task-scoped checks, shared records, four-pass review, installation,
+  and five directly usable prompts. Update the usage-guide introductions to match.
+- Refresh plugin and adapter release metadata without changing skill behavior,
+  the state schema, or the portable bundle's public-file closure.
+
 ## [1.3.15] - 2026-10-15
 
 ### Added

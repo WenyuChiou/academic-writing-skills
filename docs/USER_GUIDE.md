@@ -1,7 +1,7 @@
 # Usage Guide
 
 This guide contains the optional detail removed from the main README. Most
-users can start with the two prompts on the repository front page. Every
+users can start with the task prompts on the repository front page. Every
 example below is platform-neutral: it names the skill in ordinary text instead
 of relying on a client-specific invocation prefix.
 

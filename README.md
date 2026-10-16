@@ -1,138 +1,107 @@
 # Academic Writing Skills
 
 [![tests](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml/badge.svg)](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml)
-[![plugin version](https://img.shields.io/badge/plugin-v1.3.15-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.3.16-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-**Develop and review a manuscript as one connected evidence system—from
-argument architecture and the extended outline to drafting, full-manuscript
-review, revision, and final submission.**
+Part of [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills).
 
-Built on the open Agent Skills format. Designed for Claude Code, ChatGPT,
-Codex, OpenCode, Hermes Agent, and other skills-compatible agents.
+Plan a paper's research focus and argument architecture, write connected paragraphs, and review the full manuscript.
+
 [繁體中文](./README.zh-TW.md)
+
+![Workflow: Frame and Outline, Plan and Write, Check and Revise, Section Review, and Full-Paper Review; one shared terminology record supports every stage.](./docs/images/workflow-cover.png)
+
+## What you can do
+
+One plugin provides two skills:
+
+- [academic-writing-skills](./skills/academic-writing-skills/SKILL.md): plan, draft, revise, and coordinate manuscript changes.
+- [paper-review](./skills/paper-review/SKILL.md): assess the manuscript and report located findings; review-only by default.
+
+| Task | What it helps you produce |
+|---|---|
+| Frame & outline | A research focus, gap, questions, evidence boundaries, and an extended outline. |
+| Plan & write | Paragraph plans and drafts with clear links between ideas. |
+| Check & revise | Checks of meaning, terminology, evidence, flow, citations, and affected figures or tables. |
+| Review | Section reviews and four-pass critiques of the whole manuscript. |
+| Coordinate revisions | Aligned manuscript, supplement, figures, tables, reviewer responses, and submission files. |
 
 ## From research architecture to submission
 
-A general-purpose AI can improve one paragraph while missing what changed
-elsewhere in the paper. These skills manage the complete manuscript lifecycle:
+Plan each paragraph's point, evidence, and links before writing; recheck the revised text afterward. At section closure, review the argument across paragraphs.
 
-`Research framing → Argument architecture → Extended outline → Evidence-led
-drafting → Bidirectional alignment → Full-manuscript review → Revision →
-Submission verification`
+Full-paper review reads top-to-bottom in four passes: **argument and structure; evidence and scope; scholarly writing; delivery integrity**. Check alignment top-down, from questions to evidence, and bottom-up, from evidence to conclusions. Revisit affected sections when a material issue is found.
 
-| Stage | What the workflow does |
-|---|---|
-| Research framing and architecture | Clarifies the problem, gap, questions, intended contribution, evidence boundaries, and nonclaims. |
-| Extended outline | Assigns every planned paragraph a reader function, defensible claim, authorized evidence, inference limit, and bridge. |
-| Evidence-led drafting | Develops Methods, Results, Discussion, Conclusion, Abstract, and other artifacts from approved sources and current results. |
-| Section guidance | Stages reader prerequisites, separates parameter sources from assumptions, connects findings to questions, and checks readable visuals and independently understandable summaries. |
-| Bidirectional integrity | Checks top-down alignment from purpose to evidence and bottom-up alignment from evidence to contribution. |
-| Full top-to-bottom review | Reads the complete manuscript in four distinct passes: argument and structure; evidence and scope; scholarly writing and flow; delivery integrity. |
-| Revision and release | Propagates material changes across sections, figures, tables, supplements, metadata, and the exact submission package. |
+**One shared terminology record runs throughout.** For sustained work, reuse the paper's definitions, preferred terms, and allowed variants. Read confirmed entries before writing and record agreed updates. Proposed names remain separate until the author confirms them.
 
-Top-down review follows the gap or purpose through the questions, methods,
-evidence, and conclusions. Bottom-up review starts from source evidence and
-tests whether each result, interpretation, contribution, and summary claim is
-actually supported.
-
-## Two skills, one manuscript system
-
-| Skill | Use it when... |
-|---|---|
-| [`academic-writing-skills`](./skills/academic-writing-skills/SKILL.md) | You want to frame, outline, draft, revise, synchronize, or prepare a manuscript and its companion files for submission. |
-| [`paper-review`](./skills/paper-review/SKILL.md) | You want an evidence-safe reviewer critique, revision-round check, or submission audit without editing the manuscript. |
-
-`paper-review` is review-only by default. After choosing which comments to
-apply, use `academic-writing-skills` to make the revisions and propagate their
-effects through the manuscript system.
+Checks scale to the task. A local grammar edit does not trigger every stage or require a new management file. Cross-file changes also reopen affected summaries, references, and supplements.
 
 ## Install and use
 
-The prompts below are platform-neutral: name the skill in ordinary language.
-Compatible agents may also activate it automatically or offer their own skill
-selector or shortcut.
-
-| Client | Skill support |
-|---|---|
-| Claude Code | Install the plugin through the marketplace commands below. |
-| ChatGPT and Codex | Use the installed skill or plugin through the available Skills interface; both support the open Agent Skills format. |
-| OpenCode | Place the two skill folders in `.agents/skills/`, `.opencode/skills/`, or another supported skill directory. |
-| Hermes Agent | Place them in `~/.hermes/skills/` or configure the repository's `skills/` folder as an external skill directory. |
-
-For Claude Code:
+For Claude Code, install through the ai-research-skills marketplace:
 
 ```bash
 claude plugin marketplace add WenyuChiou/ai-research-skills
 claude plugin install academic-writing-skills@ai-research-skills --scope user
 ```
 
-One installation provides both skills. To update later:
+Update with `claude plugin update academic-writing-skills@ai-research-skills`.
 
-```bash
-claude plugin update academic-writing-skills@ai-research-skills
-```
-
-For Codex, OpenCode, Hermes Agent, or another Agent Skills client, clone this
-repository and copy or link both folders under `skills/` into a directory the
-client scans. A shared `.agents/skills/` directory can serve Codex and
-OpenCode; Hermes Agent can also scan that directory when configured as an
-external source.
+For Codex or ChatGPT, use the available skill/plugin interface. For other Agent Skills clients, copy both folders under `skills/` into a supported directory: `.agents/skills/` or `.opencode/skills/` for OpenCode, or `~/.hermes/skills/` for Hermes Agent.
 
 ## Try it
 
-Attach the exact active manuscript, section, or outline. Add figures, tables,
-supplements, reviewer comments, prior versions, or venue guidance when they
-control the task.
+Attach the active text and sources. Add figures, tables, the supplement, review comments, or venue guidance only when relevant. Use the skill names in ordinary language.
 
-### Develop an extended outline
+### Frame a paper and build an outline
 
 ```text
-Use the academic-writing-skills skill to develop an extended outline from the
-attached materials. Establish the gap, research questions, planned evidence,
-intended contribution, and nonclaims. Give every planned paragraph a function,
-claim, authorized evidence, inference limit, and bridge. Do not draft the full
-manuscript yet.
+Use the academic-writing-skills skill to frame this paper and build an extended outline.
+Identify the gap, questions, evidence, and each paragraph's purpose.
+Do not draft the manuscript yet.
 ```
 
-### Review the complete manuscript
+### Plan and draft a section
 
 ```text
-Use the paper-review skill to conduct a four-pass top-to-bottom review of the
-attached manuscript and supplement: argument and structure; evidence and scope;
-scholarly writing and flow; and delivery integrity. Rank issues by scientific
-and reproducibility risk, anchor each comment to the files, and do not edit
-them.
+Use the academic-writing-skills skill to plan this section, then draft it paragraph by paragraph.
+Before each paragraph, state its point, evidence, inference limits, and connection to adjacent text.
+After writing, recheck meaning, terminology, and flow.
 ```
 
-## What it protects
+### Check a paragraph
 
-- Question-to-evidence alignment from research architecture through the final
-  summaries.
-- Scientific meaning, locked decisions, claim scope, and explicit nonclaims.
-- Consistency across the manuscript, Abstract, figures, tables, supplements,
-  reviewer responses, metadata, and submission files.
-- Terminology, necessary versus avoidable repetition, paragraph flow, and
-  stock phrasing without cosmetic synonym swapping.
-- Relevant technical risks in equations and derived displays, surveys and
-  psychometrics/SEM, simulations and AI/LLM studies, water and flood models,
-  and revision rounds.
+```text
+Use the academic-writing-skills skill to check this paragraph's definitions, terminology, flow, and repetition.
+Preserve established technical terms and scientific meaning.
+Report missing evidence instead of inventing it.
+```
 
-Missing results, citations, assumptions, and reviewer preferences are reported
-as limitations; they are never invented.
+### Review the whole paper
 
-## Learn more
+```text
+Use the paper-review skill to review this manuscript and supplement in four passes:
+argument and structure; evidence and scope; scholarly writing; delivery integrity.
+Locate each finding and explain its evidence and consequence. Do not edit the files.
+```
 
-- [First-draft handoff checks](./skills/academic-writing-skills/references/execution-and-acceptance.md): scoped flow, caption, layout, identity, and format-basis evidence; a clean language scan is not whole-section acceptance.
-- [Worked display examples](./skills/academic-writing-skills/references/figures-tables-and-supplements.md): ABM Table 1 and Figures 1/6, with original content, observed Word borders, and separate teaching annotations.
-- [Venue and citation guidance](./skills/academic-writing-skills/references/overlay-contract.md): journal direction, format and style first; claim support separate from reference formatting, with ABM examples.
+### Align a reviewer response
 
-- [Full usage guide](./docs/USER_GUIDE.md) — task inputs, more platform-neutral
-  prompts, review stages, technical modules, and long-running project support.
-- [Release history](./CHANGELOG.md)
+```text
+Use the academic-writing-skills skill to align this response with the latest manuscript and supplement.
+Preserve accurate author wording. Flag unmet promises and unverified cross-references.
+Do not claim a change is complete unless the relevant files support it.
+```
 
-Part of the
-[agentic AI learning roadmap](https://github.com/WenyuChiou/awesome-agentic-ai-zh).
+## Boundaries and further reading
+
+Review modules adapt to the study, including equations, psychometrics/SEM, AI/LLM, water, and flood models. These skills support source verification and author judgment; they do not replace them. Missing results or sources remain unverified, not invented.
+
+- [Full usage guide](./docs/USER_GUIDE.md): inputs, more prompts, review stages, and project records.
+- [Display examples](./skills/academic-writing-skills/references/figures-tables-and-supplements.md): figures, captions, tables, and supplements.
+- [Venue and citation guidance](./skills/academic-writing-skills/references/overlay-contract.md).
+- [Release history](./CHANGELOG.md).
 
 ## License
 
