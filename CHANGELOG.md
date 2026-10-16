@@ -11,6 +11,31 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.15] - 2026-10-15
+
+### Added
+
+- A task-scoped stage checklist connecting outline, pre-draft plans, post-edit
+  checks, chapter closure and four-pass manuscript review to located evidence.
+- Stage-aware handoff coverage schema 2 with explicit action/checkpoint routing,
+  declared dependency invalidation and compatibility with legacy scope records.
+- Thirty-two regression tests and eight reusable cross-domain writing probes.
+
+### Changed
+
+- Reuse one paper-bound state and terminology record, keeping proposed names
+  separate from confirmed choices. Keep ordinary handoffs concise and expand
+  records at chapter/full-review boundaries without forcing project machinery
+  or JSON on a local grammar edit.
+- Refresh plugin and portable-adapter metadata; coverage does not certify
+  chronology, honest execution, scientific correctness or prose quality.
+
+### Validation
+
+- The eight-case paired synthetic writing check met the same criteria before
+  and after the change (8/8 versus 8/8). It demonstrates no incremental prose
+  quality or efficiency improvement and is not human-reader validation.
+
 ## [1.3.14] - 2026-10-15
 
 ### Changed

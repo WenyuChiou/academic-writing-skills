@@ -56,6 +56,12 @@ Do not store a prose reminder such as `term/rule` inside `semantic_locks` and th
 
 ### Persistent terminology procedure
 
+Curate recurring constructs, consequential metrics, abbreviations, and easily
+confused labels, not every ordinary word. Keep the one shared record beside the
+paper. Its existing `project`, `artifacts`, `contract`, `facts`, `alignment`,
+`decisions`, and `issues` supply authority and continuity; an outline or check
+record can reference them instead of copying a second inventory.
+
 Use the existing project record or equivalent glossary, not chat recall, as the
 shared vocabulary for sustained writing. Bind it to the active manuscript's
 identity and authoritative version. A copied record or a matching topic does not
@@ -99,6 +105,23 @@ disclose that limit; do not claim role-specific clearance. The local CLI can res
 a role when `--label` exactly matches an active artifact ID in the supplied state.
 Quoted matches remain contextual diagnostics; scripts do not establish whether
 two previously unregistered expressions name the same concept.
+
+For a confirmed entry, retain `definition`, `allowed_variants`, and
+`confirmation_source` alongside the existing auditable fields when these are
+needed to distinguish meanings. For example, an author's decision may confirm
+`intention to enroll` as a reported likelihood while reserving `enrollment` for
+observed registration. The two are not synonyms. A suggested replacement belongs
+in `terminology_proposals`, with its question/source and `status: PROPOSED`,
+until authority resolves it. These descriptive fields support human/agent
+judgment; literal scans do not verify a definition or confirmation source.
+
+On resumption, match the paper identity and active version, then read only the
+relevant entries and open decisions. At a chapter boundary, reconcile new
+confirmed decisions and still-pending proposals in this same record. A changed
+definition can invalidate a comparison even when its sentence is unchanged;
+identify affected Methods, displays, summaries, and checks before reusing old
+evidence. Do not restart unrelated checks. Use the stage procedure in
+[execution-and-acceptance.md](execution-and-acceptance.md) to record that boundary.
 
 ## Lock and Change Rules
 
