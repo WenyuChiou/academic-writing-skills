@@ -1,12 +1,13 @@
 # Academic Writing Skills
 
-[![tests](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml/badge.svg)](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml)
-[![plugin version](https://img.shields.io/badge/plugin-v1.3.16-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.3.17-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 Part of [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills).
 
 Plan a paper's research focus and argument architecture, write connected paragraphs, and review the full manuscript.
+
+Use with **Codex**, **Claude Code**, **OpenCode**, **Hermes Agent**, and other AI agents that support the Agent Skills format. Available tools and integrations depend on the host.
 
 [繁體中文](./README.zh-TW.md)
 

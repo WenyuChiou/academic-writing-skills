@@ -11,6 +11,17 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.17] - 2026-10-16
+
+### Changed
+
+- Remove the testing badge from both README openings and explicitly name Codex,
+  Claude Code, OpenCode, Hermes Agent, and other Agent Skills-compatible agents.
+  Keep host-dependent tool/integration limits clear. The approved cover and
+  social-preview images are unchanged, as are internal tests and CI behavior.
+- Add regression coverage for the README presentation and align release metadata.
+  Skill behavior, state schema and runtime public-file closure are unchanged.
+
 ## [1.3.16] - 2026-10-16
 
 ### Added

@@ -1,12 +1,13 @@
 # Academic Writing Skills
 
-[![tests](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml/badge.svg)](https://github.com/WenyuChiou/academic-writing-skills/actions/workflows/test.yml)
-[![plugin version](https://img.shields.io/badge/plugin-v1.3.16-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.3.17-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 本專案是 [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) 的一部分。
 
 從研究定位與架構發想、連貫的逐段撰寫，到整篇論文的檢查與審查。
+
+可搭配 **Codex**、**Claude Code**、**OpenCode**、**Hermes Agent**，以及其他支援 Agent Skills 格式的 AI agents 使用。可用工具與整合功能依 host 而定。
 
 [English](./README.md) | 繁體中文
 
