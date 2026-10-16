@@ -47,6 +47,45 @@ lesson from an unverified claim about that source's current contents.
 - **Boundary:** an opening sequence is a diagnostic, not proof that all supporting
   reasoning is correct. Preserve the article genre and requested edit scope.
 
+### Observed outline format and reusable skeleton
+
+The author supplied a local Word example on 2026-10-16: *Journal Paper Extended
+Outline Example-Typology Manuscript (Earth's Future) (1).docx*, SHA-256
+`ca93baf25baa0c8abf4c844b977d46d4822bbe3f38515c643d5375cd0d48a4a8`.
+Its first line says, "Use the first sentence of each paragraph in the manuscript
+to develop the outline." The document uses a working title and decimal nesting:
+section → argument topic → paragraph-opening sentence. Its Introduction is more
+developed than later sections, which still contain topic labels; do not treat
+those labels as a complete paragraph plan. This is a content/numbering observation
+from the supplied file, not a rendered-layout or citation audit.
+
+For a new manuscript, propose opening sentences. For an existing manuscript,
+extract its actual first sentences before proposing repairs. Intermediate argument
+labels organize the plan; they need not become published subsection headings.
+When the author requests this example's format, use a readable hierarchy such as:
+
+```text
+Title: [Working title]
+1. Introduction
+   1.1. [Background and research need]
+      1.1.1. [Proposed first sentence of paragraph 1.] (verified citation)
+   1.2. [Closest precedents and remaining gap]
+      1.2.1. [Proposed first sentence of paragraph 2.] (verified citation)
+   1.3. [Study response]
+      1.3.1. [Proposed first sentence stating the study objective.]
+2. [Next section appropriate to this article's genre]
+   2.1. [Argument topic or actual subsection]
+      2.1.1. [Proposed first sentence of its opening paragraph.] [Figure/table]
+References: [Verified works cited in the outline]
+```
+
+This skeleton illustrates levels, not a required three-paragraph Introduction or
+a universal article structure. Add concise supporting points, source gaps, and
+inference limits beneath the relevant sentence when the task needs them. Keep
+the opening-sentence sequence easy to read; a planning table may support it but
+does not replace it when this format is requested. Reuse the format without
+copying the source's typology claims, section inventory, or unverified references.
+
 **Hypothetical example, not source text.** Three paragraph openings name a field,
 list its tools, and list more tools. The second paragraph later explains that the
 tools place decision authority at different levels; the third adds no distinct

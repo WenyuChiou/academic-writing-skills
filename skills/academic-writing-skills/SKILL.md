@@ -36,7 +36,7 @@ For venue-directed planning, substantive restructuring, display/reference format
 
 Use the ABM examples in the display guide and overlay contract as source-grounded reasoning aids, not journal-wide templates or certification of the original paper.
 
-For a worked example of an outline, abstract, reviewer response, or display check, load [professor-teaching-cases.md](references/professor-teaching-cases.md) when requested or when a matching task needs a concrete demonstration. Select the relevant case; do not load all examples or expand a grammar-only edit into a section review.
+For an extended-outline request, read the paragraph-opening format and worked skeleton in [professor-teaching-cases.md](references/professor-teaching-cases.md). Follow an author-supplied example first; make the argument readable through actual or proposed paragraph-opening sentences, with citations and evidence needs attached where relevant. Use the other cases there for a requested abstract, reviewer-response, or display demonstration; do not load all examples or expand a grammar-only edit into a section review.
 
 ## Follow the Manuscript Lifecycle
 
