@@ -14,6 +14,16 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 @pytest.mark.parametrize("name", ["README.md", "README.zh-TW.md"])
+def test_readme_names_agent_clients_without_a_testing_badge(name):
+    text = (ROOT / name).read_text(encoding="utf-8")
+    assert "actions/workflows/test.yml/badge.svg" not in text
+    opening = text.split("## ", 1)[0]
+    for client in ("Codex", "Claude Code", "OpenCode", "Hermes Agent", "Agent Skills"):
+        assert client in opening, (name, client)
+    assert "depend on the host" in opening or "依 host 而定" in opening
+
+
+@pytest.mark.parametrize("name", ["README.md", "README.zh-TW.md"])
 def test_readme_links_parent_project_cover_and_five_task_prompts(name):
     text = (ROOT / name).read_text(encoding="utf-8")
     assert "[ai-research-skills](https://github.com/WenyuChiou/ai-research-skills)" in text
