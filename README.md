@@ -11,7 +11,9 @@ Use with **Codex**, **Claude Code**, **OpenCode**, **Hermes Agent**, and other A
 
 [繁體中文](./README.zh-TW.md)
 
-![Workflow: Frame and Outline, Plan and Write, Check and Revise, Section Review, and Full-Paper Review; one shared terminology record supports every stage.](./docs/images/workflow-cover.png)
+![Academic writing workflow: Ground, Develop, Draft, Review, and Revise, with evidence linked to the manuscript and a revision loop back to development and drafting.](./docs/images/workflow-cover.png)
+
+*Cover illustration created with ChatGPT’s built-in image generation (raster PNG).*
 
 ## What you can do
 
