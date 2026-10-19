@@ -11,7 +11,9 @@
 
 [English](./README.md) | 繁體中文
 
-![流程：研究定位與大綱、規劃與撰寫、檢查與修改、章節審查、整篇審查；共用詞彙紀錄貫穿每個階段。](./docs/images/workflow-cover.png)
+![學術寫作流程：以證據為基礎（Ground）、發展論證（Develop）、撰稿（Draft）、審閱（Review）、修訂（Revise），將證據連結至手稿，並回到論證與撰稿階段反覆修訂。](./docs/images/workflow-cover.png)
+
+*封面插圖由 ChatGPT 內建影像生成功能製作，為 PNG 點陣圖。*
 
 ## 可以協助什麼
 
