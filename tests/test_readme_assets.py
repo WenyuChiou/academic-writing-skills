@@ -66,7 +66,7 @@ def test_workflow_and_shared_record_boundaries_remain_visible(name, required):
 @pytest.mark.parametrize(
     ("name", "expected_size", "maximum_bytes"),
     [
-        ("workflow-cover.png", (1891, 831), 2_000_000),
+        ("workflow-cover.png", (1774, 887), 2_000_000),
         ("social-preview.png", (1280, 640), 1_000_000),
     ],
 )
