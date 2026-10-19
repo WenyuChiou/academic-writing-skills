@@ -11,6 +11,24 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.20] - 2026-10-19
+
+### Changed
+
+- Explain each supplementary item's reader function at first substantive use,
+  verify its actual contents, and keep later pointers concise. Preserve useful
+  parenthetical references and avoid a navigation sentence for every result.
+  In review-only tasks, retain clear pointers unless a concrete reader problem
+  warrants a change.
+- Keep numbering dependencies, single-run inference, cross-run summaries, and
+  respondent versus run-level variation distinct in supplementary references.
+
+### Added
+
+- Ten hypothetical supplementary-reference cases with retention, limited-scope,
+  qualitative, unavailable-source, and statistical-reading controls. Structural
+  and packaging regressions are separate from semantic behavior assessment.
+
 ## [1.3.19] - 2026-10-19
 
 ### Changed

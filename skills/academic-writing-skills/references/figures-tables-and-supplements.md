@@ -33,6 +33,16 @@ Make a symbol's meaning clear before a reader must interpret it. A normal equati
 
 Develop SM alongside Methods and Results. Keep essential method logic and main-question evidence in the manuscript; place instruments, derivations, settings, and extended evidence in SM with a clear main-text pointer. Related main and supplementary tables need different reader functions, not duplicate complete entries.
 
+### Purposeful supplementary references
+
+At the first substantive use of a supplementary Text, Table, or Figure, make its function clear: definitions, criteria, selected items, detailed results, run summaries, or diagnostics. Check the actual item before describing what it provides; a nearby number is not evidence that it supports the claim. Once that function is established, a brief later pointer can suffice. In review-only tasks, leave a clear, correct pointer in place unless a concrete reader problem warrants a change.
+
+Integrate the reference into the sentence when that improves flow. For example, `The selected questions are listed in Table S11` identifies the content, while a criterion statement can end with `as described in Text S4`. Prefer a natural sentence-end reference to an unnecessary insertion between the subject and verb. These are examples, not fixed wording or a universal ban on parenthetical callouts. Apply an author's preference against unexplained parenthetical references within that project's scope.
+
+Do not add a standalone navigation sentence for every result, mechanically list every related supplementary item, or repeat an item's full purpose at every mention. Place the pointer with the evidence it actually supports, keeping the main result and comparison prominent. Distinguish a displayed run from summaries across runs, and variation among respondents from variation among run-level statistics; a cross-run summary does not make a single-run significance test apply to every run.
+
+Respect the active numbering convention and verify grouped references against their individual functions. If narrative order and required citation order conflict, flag the numbering dependency rather than attaching an unrelated table to a result merely to preserve numerical order.
+
 For accepted/submitted revisions, retain functioning original SM wording and organization unless a changed result, promised addition, verified error, or necessary dependency requires repair. Move rather than silently discard displaced material when it is still needed. Do not add commentary merely to make an unchanged supplement appear revised.
 
 After reordering, removing, combining, or splitting items, reconcile main-text callouts, panel letters, in-document captions, final figure/table lists, SM contents, notes, and response references. Inspect each old reference by its function; do not blindly replace an old item number that could now refer to something else. Align reported numbers with underlying outputs and saved final figure files. Preserve editable sources and direct reproducibility dependencies under the project's agreed storage convention.

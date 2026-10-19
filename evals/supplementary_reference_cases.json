@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "provenance": "Invented teaching cases, not private manuscript text or verified research findings.",
+  "evaluation_boundary": "Fixture and packaging checks do not establish semantic correctness; read actual responses against the evidence and scope before reporting behavior results.",
+  "cases": [
+    {
+      "id": "SM01", "action": "revise", "function": "First substantive supplementary pointer",
+      "facts": ["Table S2 lists the five selected survey questions, not respondents or regression estimates.", "This is the table's first mention."],
+      "text": "Respondents answered five questions (Table S2).",
+      "criteria": ["Identify the selected-question function without inventing table contents.", "Keep the five questions and avoid a redundant navigation paragraph."]
+    },
+    {
+      "id": "SM02", "action": "retain", "function": "Already clear first and later pointers",
+      "facts": ["Table S2 lists the selected questions.", "Its function has already been established in the supplied passage."],
+      "text": "The selected questions are listed in Table S2. Three questions concern travel cost. The remaining two concern reliability (Table S2).",
+      "criteria": ["Retain the functioning pointers without repeating the table's full purpose.", "Do not add a standalone navigation sentence or replace terms merely for variety."]
+    },
+    {
+      "id": "SM03", "action": "qualify", "function": "Unavailable supplementary source",
+      "facts": ["Text S4 has not been supplied and its contents cannot be inspected.", "Only the main-text excerpt is available."],
+      "text": "The procedure is described in Text S4.",
+      "criteria": ["Keep the source's contents unverified and request the item if needed.", "Do not invent a calibration, selection, validation, or results function."]
+    },
+    {
+      "id": "SM04", "action": "revise", "function": "Wrong item and numbering dependency",
+      "facts": ["Table S3 contains selection criteria; Table S4 contains regression coefficients.", "The current narrative cites S4 before S3; the venue requires first-mention numbering."],
+      "text": "We selected the items using the criteria in Table S4.",
+      "criteria": ["Identify S3 as the relevant evidence, not S4, and flag the numbering dependency.", "Do not preserve an irrelevant pointer or silently renumber unseen captions and cross-references."]
+    },
+    {
+      "id": "SM05", "action": "revise", "function": "Single-run inference versus cross-run summary",
+      "facts": ["Table S8 reports p=.03 in run 8 only.", "Table S9 summarizes mean scores across 12 runs but contains no cross-run significance analysis."],
+      "text": "The effect was significant across all 12 runs (Tables S8 and S9).",
+      "criteria": ["Limit the reported significance to run 8, retaining p=.03.", "Describe S9 as a cross-run score summary, not evidence of significance in every run."]
+    },
+    {
+      "id": "SM06", "action": "proofread", "function": "Grammar-only scope control",
+      "facts": ["The user requests only a subject-verb agreement correction.", "No supplementary table or neighboring section has been supplied."],
+      "text": "The selected items is reported in Table S2.",
+      "criteria": ["Correct is to are without changing the item reference or substantive meaning.", "Do not invent table contents, require a whole-section audit, or add management files."]
+    },
+    {
+      "id": "SM07", "action": "revise", "function": "Qualitative source functions",
+      "facts": ["Text S1 defines the qualitative coding categories.", "Table S2 provides illustrative quotations, not prevalence estimates."],
+      "text": "We coded interview accounts (Text S1; Table S2).",
+      "criteria": ["Distinguish category definitions from illustrative quotations in a concise pointer.", "Do not introduce an experimental template, invented counts, or population prevalence."]
+    },
+    {
+      "id": "SM08", "action": "retain", "function": "Useful parenthetical reference control",
+      "facts": ["The author permits parenthetical references.", "Table S6 reports the stated diagnostic comparison and this sentence is a sufficient first explanation."],
+      "text": "Residual diagnostics show no systematic pattern across the two fitting methods (Table S6).",
+      "criteria": ["Keep the clear parenthetical pointer and the qualified diagnostic claim.", "Do not impose a universal sentence-end formula or a ban on parentheses."]
+    },
+    {
+      "id": "SM09", "action": "revise", "function": "Respondent versus run-level variation",
+      "facts": ["Figure S3 plots the distribution of mean scores across 20 simulation runs.", "It contains no individual respondent scores or confidence interval."],
+      "text": "Respondents vary widely in their scores, as shown in Figure S3.",
+      "criteria": ["Identify variation among run-level mean scores, retaining the 20-run scope.", "Do not interpret the plot as respondent heterogeneity or a confidence interval."]
+    },
+    {
+      "id": "SM10", "action": "retain", "function": "No mandatory SM pointer for every result",
+      "facts": ["The paragraph reports the main Figure 2 comparison completely.", "No supplementary item is needed to interpret this local result."],
+      "text": "Figure 2 shows shorter waiting times in clinic A than in clinic B, although their appointment counts are similar.",
+      "criteria": ["Retain the functioning main result without adding a supplementary reference.", "Do not invent an SM item or demand that every finding have a separate navigation sentence."]
+    }
+  ]
+}
