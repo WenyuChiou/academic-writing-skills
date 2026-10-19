@@ -11,6 +11,16 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.18] - 2026-10-16
+
+### Changed
+
+- Make the paragraph-opening extended-outline example explicit in the writing
+  skill's routing and teaching cases. Add a reusable hierarchy grounded in an
+  author-supplied example, while keeping article structure and paragraph counts
+  genre-dependent and preserving source-verification boundaries.
+- Align plugin, adapter, documentation, and integrity-test version metadata.
+
 ## [1.3.17] - 2026-10-16
 
 ### Changed
