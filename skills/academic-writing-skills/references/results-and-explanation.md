@@ -18,6 +18,8 @@ Choose the main pattern or comparison before arranging the supporting values. Do
 
 Give the “so what” where the paragraph or subsection completes its analytical point. It can identify a pathway contrast, trade-off, boundary, supported relationship, or negative finding. Do not end with only statistics, “These results answer SQ1,” or a vague declaration of importance. Temporarily remove the question label and introductory metadiscourse: the answer must remain intelligible. Numbered SQ/RQ labels are optional navigation, not evidence.
 
+Build that explanation in coherent result units, rather than postponing all meaning until an omnibus closing sentence. Several values can support one finding: keep them together, explain what that comparison establishes, then let the next unit deepen, contrast with, or qualify it. For example, establish what score levels mean before changing to dispersion, and distinguish individual relationships from a whole-model comparison before drawing a group-level conclusion. The required bridge is the analytical relation, not another connector. Do not insert an interpretation after every number, repeat the question at every paragraph, or split a functioning multi-value finding.
+
 ## Visuals and Substantive Answers
 
 Prefer one primary question or analytical purpose per figure or table. This is not a mandatory one-figure/one-question ratio: related panels can support one cumulative comparison, and several visuals can jointly answer a question. Split unrelated panel groups when their different purposes obscure the argument; do not multiply figures merely to comply with a ratio.
@@ -74,6 +76,9 @@ At chapter closure, select applicable questions using [lifecycle-and-routing.md]
 | Replications, error bars, or intervals | What uncertainty is represented: stochastic runs, measurement, sampling, parameters, or sequences? Do not convert conditional simulation variability into coverage of all uncertainties. |
 | Spatial categories or changed colors | Do colors represent levels, changes, or joint categories? A category boundary can conceal a small nonzero change; a color change is not by itself evidence of a new mechanism or reversal of the main conclusion. |
 | Similar-looking outcomes | Is similarity descriptive, or was equivalence/agreement tested with defined criteria? Do not invent a formal test. |
+| Scores from different constructs on a shared scale | Does the stated benchmark support the interpretation of each score? A common range or midpoint does not establish which construct is more important, stronger, or more influential. Descriptive values can remain when their scoring meanings are clear. |
+| Component tests followed by a group or model claim | Does evidence test that exact contrast and level? Separate within-group significance cannot establish a between-group difference; several nonsignificant components cannot establish whole-model equality. Preserve a central negative finding without upgrading it to equivalence. |
+| Statistical significance followed by an importance claim | Is practical importance supported by magnitude, uncertainty, a relevant benchmark, and study context? A small p-value alone supplies none of these. |
 | Qualitative themes or synthesis counts | Are counts illustrations, coded occurrences, or prevalence estimates? Retain negative cases and evidence boundaries; do not promote frequency to population generality. |
 | Theorem or framework application | Which premise or requirement supports the conclusion? A demonstration does not establish every claimed boundary condition or broad utility. |
 

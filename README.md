@@ -1,6 +1,6 @@
 # Academic Writing Skills
 
-[![plugin version](https://img.shields.io/badge/plugin-v1.3.18-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.3.19-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 Part of [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills).
