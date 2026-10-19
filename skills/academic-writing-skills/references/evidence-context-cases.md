@@ -141,3 +141,42 @@ support from DOI identity, or certifying layout because rendering succeeded.
 deliverables. Bind checks to the exact candidate and affected dependencies; a
 later relevant change invalidates earlier acceptance. Required unavailable checks
 stay incomplete. A grammar-only edit does not trigger this full package review.
+
+## 10. Layered explanation without extra prose rituals
+
+These invented examples illustrate the Results and functional-transition guides;
+they are not quotations, validated findings, or vocabulary to copy into a paper.
+The regression prompts are in `evals/layered_continuity_cases.json` at the
+repository root. Preserve source facts and assess the actual reader relation,
+not a keyword count.
+
+**Result unit:** two neighborhood groups score 3.6 and 3.8 on a five-point
+confidence scale with neutral midpoint 3; their interquartile ranges are 1.2 and
+0.6. A list ending only with “These results are important” leaves the reader to
+decode both level and spread. A minimal repair is: “Both groups report confidence
+above the neutral midpoint (3.6 and 3.8 versus 3). Their responses differ more in
+spread: the interquartile range is 1.2 in the first group and 0.6 in the second.”
+This interprets the supplied scale and names the next comparison without adding
+a causal explanation or a claim of practical importance. Keep a clear original
+multi-number comparison; do not attach a separate so-what sentence to every value.
+
+**Change of analytical level:** a relationship is statistically detectable in one
+group but not another. That does not test whether the groups differ. State the
+individual findings, then request the relevant group/model comparison if the
+intended conclusion requires it. Do not manufacture that test or remove an
+important nonsignificant result. Even a shared response scale does not rank
+different constructs by influence or importance.
+
+**Beyond Results:** “Prior studies examine adoption counts. We compare the reasons
+people give for adoption” leaves the gap implicit. If the supplied literature
+supports it, name the unexamined reasons, then explain how the present comparison
+addresses that gap. Similarly, connect a regional data boundary to the inference
+outside that region, not to an unsupported declaration that the whole study is
+unreliable. A bridge names the relation; “therefore” alone supplies no evidence.
+
+**No-change controls:** retain a coherent finding with several supporting values,
+a timely and correctly bounded interpretation, and a later display introduced by
+only its genuinely new comparison. Descriptive cross-construct values may remain
+when the reader knows their scoring meanings and no unsupported ranking is made.
+For a single-sentence repair, inspect available neighbors only; missing context
+limits the flow verdict, not permission to invent or replan a whole section.

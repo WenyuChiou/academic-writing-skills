@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "provenance": "New hypothetical fixtures motivated by author-reported reader obstacles; not verbatim private manuscript text, current study data, or verified scientific findings.",
+  "evaluation_boundary": "Semantic grading requires reading the actual revision against the source facts and reader function. Structural tests do not certify comprehension, science, execution order, or token savings.",
+  "cases": [
+    {
+      "id": "LC01", "function": "Result units: level then spread", "action": "revise",
+      "facts": ["Confidence uses a five-point scale with neutral midpoint 3.", "Means in neighborhoods North and South are 3.6 and 3.8; IQRs are 1.2 and 0.6.", "No causal or practical-importance analysis is supplied."],
+      "text": "North has a mean of 3.6 and an IQR of 1.2. South has a mean of 3.8 and an IQR of 0.6. These results are important for understanding confidence.",
+      "criteria": ["Interpret both means against the neutral midpoint without ranking importance.", "Name the change from score level to spread and whose spread is compared.", "Retain both means and both IQRs as one coherent comparison, not four isolated takeaways.", "Replace the generic ending without inventing causation or practical importance."]
+    },
+    {
+      "id": "LC02", "function": "Individual relationships to model-level claim", "action": "revise",
+      "facts": ["In group A, effectiveness is positively associated with willingness: coefficient .30, p=.02.", "In group B, the coefficient is .20, p=.11.", "No direct between-group or whole-model comparison is available."],
+      "text": "Effectiveness is significant in A (.30, p=.02) and not in B (.20, p=.11). Therefore, the groups have different decision models.",
+      "criteria": ["Retain the named effectiveness–willingness relationship and both coefficient/p-value pairs.", "Distinguish individual within-group evidence from a between-group/model claim.", "Leave the absent direct comparison unresolved; do not invent a test.", "Do not turn association into causation, nonsignificance into equality, or omit group B."]
+    },
+    {
+      "id": "LC03", "function": "Literature grouping to supported gap", "action": "revise",
+      "facts": ["The supplied review covers studies counting completed transit trips.", "Those studies do not compare travelers' stated reasons for choosing a route.", "The present study compares stated reasons, not observed route changes."],
+      "text": "Earlier studies count completed trips. Furthermore, travelers use different routes. We compare travelers' stated reasons for choosing a route.",
+      "criteria": ["Make the unexamined reasons the bridge from reviewed evidence to the current comparison.", "Do not imply an exhaustive novelty search or no prior travel research.", "Keep stated reasons distinct from observed behavior or causal explanation.", "Repair the specific relation rather than only replacing Furthermore."]
+    },
+    {
+      "id": "LC04", "function": "Background to design choice", "action": "revise",
+      "facts": ["The archive reports annual district totals, not household locations.", "The model assigns households to districts and samples conditions within each district.", "No household-specific spatial validation was performed."],
+      "text": "The archive reports annual district totals. We next assign households to districts and sample conditions within each district. This validates household exposure.",
+      "criteria": ["Explain how the data's district resolution bounds the assignment/design choice.", "Preserve assignment and within-district sampling rather than adding household locations.", "Remove the unsupported household-validation claim without condemning all modeling.", "Do not invent validation, data, or a new analysis."]
+    },
+    {
+      "id": "LC05", "function": "Finding to bounded Discussion implication", "action": "revise",
+      "facts": ["In a cross-sectional survey, people reporting flexible hours also report fewer missed appointments.", "No policy intervention, causal identification, or health outcome is measured.", "Discussion may explain what the observed association motivates considering."],
+      "text": "Flexible hours are associated with fewer missed appointments. Taken together, flexible-hour policies improve health.",
+      "criteria": ["Tie the implication to reported appointment attendance rather than an unmeasured health endpoint.", "Keep the association observational and do not claim an identified policy effect.", "Supply a substantive relation rather than another generic connector.", "Do not invent effect sizes, analyses, or evidence from citations."]
+    },
+    {
+      "id": "LC06", "function": "Limitation to affected inference", "action": "revise",
+      "facts": ["Observations come from one coastal city.", "No evidence establishes transfer to inland cities.", "The requested passage is limitations-only, not future-work planning."],
+      "text": "The observations come from one coastal city. This is a serious flaw in our findings. More tests should be conducted.",
+      "criteria": ["Name the specific transfer boundary for inland cities.", "Connect the documented scope to the affected inference, not blanket invalidity.", "Do not assert bias direction or a failed test without evidence.", "Do not invent mitigation or add unsolicited future-work instructions."]
+    },
+    {
+      "id": "LC07", "function": "Unresolved comparator and variable pair", "action": "revise",
+      "facts": ["An excerpt says a score is higher but supplies neither the comparison group nor the scored construct.", "An association is reported without naming either measured variable.", "No surrounding text is available."],
+      "text": "Their scores are higher. The association is positive, explaining the difference.",
+      "criteria": ["Identify the missing construct/comparator and variable pair specifically.", "Do not invent people, measures, a direction between named variables, or causation.", "Offer a provisional structure or focused request rather than a fabricated completed result.", "Limit the flow verdict to the excerpt; do not claim a whole-manuscript omission."]
+    },
+    {
+      "id": "LC08", "function": "Shared scale is not an importance ranking", "action": "revise",
+      "facts": ["Perceived cost and perceived effectiveness are distinct constructs on five-point agreement scales.", "Means are 4.0 for cost and 3.5 for effectiveness.", "No relationship with adoption or importance ranking has been tested."],
+      "text": "Cost averages 4.0 and effectiveness 3.5. Therefore, cost is the stronger driver of adoption.",
+      "criteria": ["Retain both descriptive values and distinguish their construct meanings.", "Remove the unsupported driver/importance ranking, not the valid description.", "Do not treat a shared response range as comparable causal influence.", "Do not request or claim a new analysis as if already completed."]
+    },
+    {
+      "id": "LC09", "function": "Connectors and SQ labels are not progression", "action": "revise",
+      "facts": ["Room temperature means are 18 and 21 degrees C under settings A and B.", "Variation is reported across rooms, with standard deviations 1 and 4 degrees C.", "The question concerns the temperature–consistency trade-off; causal attribution is not available."],
+      "text": "First, A averages 18 degrees C and B 21 degrees C. Next, standard deviations are 1 and 4 degrees C. Therefore, these results answer SQ2 and are meaningful.",
+      "criteria": ["Interpret the warmer average in B together with greater between-room variation.", "Explicitly connect the two quantities to the stated trade-off.", "Preserve all four values, settings, units, and room-level variation.", "Do not pass the generic ending merely because it names SQ2 or use causal language."]
+    },
+    {
+      "id": "LC10", "function": "Significance versus practical importance", "action": "revise",
+      "facts": ["The mean observational score difference is .02, p=.001.", "No scale range, uncertainty interval, or practical benchmark is supplied.", "No equivalence test was performed."],
+      "text": "The .02 difference (p=.001) proves an important improvement; the remaining nonsignificant paths prove the models equivalent.",
+      "criteria": ["Retain .02 and p=.001 as the reported statistical result.", "Keep practical importance unresolved without scale/context/uncertainty evidence.", "Reject equivalence inferred from nonsignificant component paths.", "Do not add a causal improvement or manufacture the missing tests."]
+    },
+    {
+      "id": "LC11", "function": "Clear timely explanation control", "action": "review",
+      "facts": ["Five-point confidence scale has neutral midpoint 3.", "North and South means are 3.6 and 3.8; IQRs are 1.2 and 0.6.", "The passage makes a descriptive comparison only."],
+      "text": "Both neighborhoods report confidence above the neutral midpoint (North 3.6 and South 3.8 versus 3). Responses differ more in spread: the IQR is 1.2 in North and 0.6 in South.",
+      "criteria": ["Retain the functioning passage without an obligatory rewrite.", "Recognize the existing level-to-spread relation and supported scale interpretation.", "Do not add a so-what after every value or an SQ label.", "Do not invent a formal comparison or an importance ranking."]
+    },
+    {
+      "id": "LC12", "function": "Coherent multi-value negative finding control", "action": "review",
+      "facts": ["Accuracy is .71 and .72 for systems A and B, with a direct difference interval of [-.03, .05].", "The study's central question is whether accuracy differs between these systems.", "No equivalence bounds were prespecified."],
+      "text": "We found no clear accuracy difference between A (.71) and B (.72): the interval for the difference spans zero [-.03, .05]. This does not establish equivalence.",
+      "criteria": ["Retain the central negative finding and all supplied values.", "Preserve the coherent single comparison rather than splitting it into ritual units.", "Do not change no-clear-difference into equality or infer equivalence.", "Do not demand a positive finding, mechanism, or extra closing sentence."]
+    },
+    {
+      "id": "LC13", "function": "Established display and descriptive constructs control", "action": "review",
+      "facts": ["Prior text defines the five-point agreement scale and the reading logic of this plot type.", "Cost and effectiveness are distinct beliefs, not importance measures.", "Figure 3 introduces only a new population, apprentices."],
+      "text": "For apprentices, Figure 3 shows mean agreement with perceived cost of 4.0 and perceived effectiveness of 3.5. These values describe the two beliefs, not their relative influence on adoption.",
+      "criteria": ["Retain the valid descriptive cross-construct comparison.", "Do not repeat the full plotting tutorial or acronym definitions already established.", "Do not infer influence from the scale or blanket-ban shared-scale descriptions.", "Preserve the newly introduced apprentice population and both values."]
+    },
+    {
+      "id": "LC14", "function": "Local grammar scope control", "action": "proofread",
+      "facts": ["Only correct the subject–verb agreement in the middle sentence.", "The prior sentence defines trials as repeated measurements of the same apparatus.", "No other editing or management artifact is requested."],
+      "text": "Trials repeat measurements of the same apparatus. Each trial provide a temperature reading. The next paragraph describes calibration.",
+      "criteria": ["Change provide to provides and preserve the two neighboring sentences.", "Do not reorganize the paragraph or require a new literature/model review.", "Do not add terminology/state/checklist files.", "Do not claim broader scientific verification from this grammar check."]
+    },
+    {
+      "id": "LC15", "function": "Association repair retains exact scientific facts", "action": "revise",
+      "facts": ["Adults reporting greater trust report greater willingness to register: r=.24, 95% CI [.10,.37].", "Actual registration was not observed.", "Data are observational, with no identified causal effect."],
+      "text": "Trust drives uptake (r=.24, 95% CI [.10,.37]), making the service effective.",
+      "criteria": ["Name trust and reported willingness to register as the associated pair.", "Retain r=.24 and 95% CI [.10,.37].", "Do not infer actual registration, causal effect, or service effectiveness.", "Connect interpretation to the measured relation without inventing a mechanism."]
+    },
+    {
+      "id": "LC16", "function": "Acronym load versus essential technical terms", "action": "revise",
+      "facts": ["Earlier text defines RC as perceived route cost, SC as schedule confidence, and WI as willingness to use transit.", "RC is negatively associated with WI; SC is positively associated with WI.", "No relative influence or causal comparison is supplied."],
+      "text": "RC–WI is negative and SC–WI is positive. Therefore, RC, SC, and WI answer the question about transit preferences.",
+      "criteria": ["Explain the two signed relationships in concrete terms despite earlier acronym definitions.", "Preserve cost, confidence, and willingness as distinct registered concepts.", "Replace the generic answer with what the relationships establish, without ranking or causation.", "Do not expand every abbreviation mechanically or invent observed transit use."]
+    }
+  ]
+}

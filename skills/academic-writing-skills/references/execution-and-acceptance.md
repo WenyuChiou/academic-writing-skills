@@ -99,6 +99,15 @@ rule from an execution or acceptance gap. Preserve the original claim and source
 facts when testing a repair; a smoother sentence is unacceptable if it drops the
 comparison, changes a measured construct, or strengthens the inference.
 
+For layered findings, the walkthrough also locates where each coherent evidence
+unit acquires its meaning and what the next unit adds. Check changes of quantity
+or analytical level, not just paragraph boundaries. A final synthesis cannot
+repair an earlier unsupported ranking or missing comparison. Record the actual
+obstruction or a justified no-change finding; the presence of connectors, SQ
+labels, definitions, or shorter sentences is not acceptance evidence. Use the
+worked controls in evidence-context case 10 for this narrow exercise; do not
+create a second checklist or audit unrelated sections for a local edit.
+
 ## Optional deterministic coverage checker
 
 For repeated or multi-file handoffs, use `scripts/audit_handoff.py RECORD --json`

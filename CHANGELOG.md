@@ -11,6 +11,25 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.19] - 2026-10-19
+
+### Changed
+
+- Make explanation timely within coherent result units, with explicit bridges
+  when the quantity or analytical level changes. Keep functioning multi-value
+  findings and central negative results rather than adding prose rituals.
+- Strengthen existing continuity checks across literature, context, Methods,
+  Discussion, and limitations; assess acronym load as well as definitions.
+- Clarify shared-scale, significance, practical-importance, and whole-model
+  inference boundaries without adding a new checklist or state schema.
+
+### Added
+
+- Sixteen hypothetical behavior cases with protected facts and no-change controls,
+  plus fixture/routing regressions. Semantic behavior is assessed separately;
+  deterministic checks do not certify reader comprehension or scientific accuracy.
+- Worked layered-explanation examples in the existing context-case guide.
+
 ## [1.3.18] - 2026-10-16
 
 ### Changed
