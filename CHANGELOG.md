@@ -11,6 +11,25 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.21] - 2026-10-20
+
+### Changed
+
+- Make process descriptions traceable through inputs, actions, outputs, and
+  paragraph handoffs. Distinguish configuration from repeated actions and
+  optional additions from prerequisites, diagnostics, and stopping branches.
+- Integrate the existing reader walkthrough with a source-bound workflow test
+  and a hypothetical worked example. Keep grammar-only work narrow, preserve
+  clear conceptual or procedural prose, and expose unavailable method facts.
+- Keep automated scan results, parent walkthrough findings, and actual
+  independent-reader evidence separate without another checklist or ledger.
+
+### Added
+
+- Twelve hypothetical cross-domain cases, including no-change, locked-wording,
+  missing-evidence, local-neighbor, and grammar-only controls. Fixture and public
+  file checks do not establish semantic correctness or human comprehension.
+
 ## [1.3.20] - 2026-10-19
 
 ### Changed

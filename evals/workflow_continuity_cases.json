@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "provenance": "Invented cross-domain teaching controls; not private manuscript text or verified research results.",
+  "evaluation_boundary": "Fixture and package checks do not establish semantic correctness, real reading, human comprehension or measured improvement.",
+  "cases": [
+    {
+      "id": "RC01",
+      "task": "revise",
+      "facts": [
+        "Staff quality-control daily readings to produce a corrected series.",
+        "Forecasts consume that corrected series, not the raw readings.",
+        "A terminology scan found no configured phrase conflicts."
+      ],
+      "text": "Staff prepare the daily readings. The forecast model uses the corrected series.\n\nThe quality-control step produces the corrected series.",
+      "expected_action": "repair",
+      "criteria": [
+        "Put production of the corrected series before its forecast use and preserve its identity.",
+        "Explain the actual dependency; a clean scan or added connector alone is not acceptance."
+      ]
+    },
+    {
+      "id": "RC02",
+      "task": "review",
+      "facts": [
+        "The uncertainty summary and spatial plot are independent products of the same dataset.",
+        "No execution order or concurrent implementation is documented."
+      ],
+      "text": "We calculate the uncertainty summary. Then we produce the spatial plot.",
+      "expected_action": "qualify",
+      "criteria": [
+        "Identify unsupported sequential implication without asserting that independent products are computed simultaneously.",
+        "Do not invent an implementation order; distinguish optional phrasing from verified execution."
+      ]
+    },
+    {
+      "id": "RC03",
+      "task": "revise",
+      "facts": [
+        "Before each simulation run, users select the input variables once.",
+        "During the run, a data service updates their values daily.",
+        "Users do not manually reselect variables each day."
+      ],
+      "text": "Each morning, users define the model inputs. The simulation then uses those inputs.",
+      "expected_action": "repair",
+      "criteria": [
+        "Separate once-per-run variable selection from daily updates by the data service.",
+        "Preserve actor and frequency; do not invent additional daily manual tasks."
+      ]
+    },
+    {
+      "id": "RC04",
+      "task": "revise",
+      "facts": [
+        "The forecast is calculated before comparison with observations.",
+        "The later diagnostic records forecast error.",
+        "Diagnostic findings neither stop nor modify the forecast."
+      ],
+      "text": "The forecast is compared with observations. If the diagnostic fails, the forecast stops.",
+      "expected_action": "repair",
+      "criteria": [
+        "Remove the invented stop/veto and retain report-only diagnostic behavior.",
+        "Keep forecast generation distinct from the later observation comparison."
+      ]
+    },
+    {
+      "id": "RC05",
+      "task": "revise",
+      "facts": [
+        "Every survey interview uses a core questionnaire.",
+        "An optional interview module can supply contextual examples.",
+        "The optional module is not required to analyze core questionnaire responses."
+      ],
+      "text": "We administer the core questionnaire. Once the contextual interview module is complete, we analyze the responses.",
+      "expected_action": "repair",
+      "criteria": [
+        "Do not make the optional module a prerequisite for core analysis.",
+        "Retain the module's contextual function without forcing an experimental workflow onto survey description."
+      ]
+    },
+    {
+      "id": "RC06",
+      "task": "review",
+      "facts": [
+        "Only the paragraph is supplied; no implementation or protocol can be consulted.",
+        "The actor, update frequency and effect of the check are unspecified."
+      ],
+      "text": "The inputs are prepared. The process checks them and continues.",
+      "expected_action": "qualify",
+      "criteria": [
+        "State which workflow facts are unavailable and what would establish them.",
+        "Do not fill the gap with daily automation, a human operator, validation success, or a stop policy."
+      ]
+    },
+    {
+      "id": "RC07",
+      "task": "review",
+      "facts": [
+        "The author has locked the wording and requested diagnosis only.",
+        "A supplied protocol says recorded values are screened before the analyst estimates the model."
+      ],
+      "text": "The analyst estimates the model from recorded values. The values are screened after estimation.",
+      "expected_action": "diagnose_only",
+      "criteria": [
+        "Locate the conflict and describe a conditional/minimal repair without rewriting the author-locked text.",
+        "Do not claim an applied correction or fully accepted passage."
+      ]
+    },
+    {
+      "id": "RC08",
+      "task": "review",
+      "facts": [
+        "Users choose variables once before a run.",
+        "A service refreshes their values daily; complete values feed the forecast.",
+        "Missing required values stop that day's calculation."
+      ],
+      "text": "Users choose the variables before a run. A service refreshes their values daily. The forecast uses these updated values; if a required value is missing, that day's calculation stops.",
+      "expected_action": "retain",
+      "criteria": [
+        "Retain this clear sequence and branch; no additional transition or restated definition is required.",
+        "Do not add unreported mechanics or create a review ledger."
+      ]
+    },
+    {
+      "id": "RC09",
+      "task": "revise",
+      "facts": [
+        "The author's local comment asks to clarify that raw measurements go into quality control.",
+        "Quality control outputs corrected measurements, which then feed the model.",
+        "The following sentence refers to 'these measurements'."
+      ],
+      "text": "The measurements enter the model's quality-control step. These measurements drive the forecast.",
+      "expected_action": "repair",
+      "criteria": [
+        "Address the raw-input comment and inspect the neighbor so the forecast unambiguously uses corrected measurements.",
+        "Do not preserve an ambiguous 'these' simply because the annotated phrase was repaired."
+      ]
+    },
+    {
+      "id": "RC10",
+      "task": "proofread",
+      "facts": [
+        "Correct agreement only in the first sentence.",
+        "The second sentence and all technical meaning are locked."
+      ],
+      "text": "The samples was stored at 4°C. The assay measured enzyme activity.",
+      "expected_action": "surface_only",
+      "criteria": [
+        "Change only 'was' to 'were', preserving the temperature, assay sentence and meaning.",
+        "Do not audit the full section, demand workflow evidence, or create project files."
+      ]
+    },
+    {
+      "id": "RC11",
+      "task": "review",
+      "facts": [
+        "This conceptual paragraph contrasts two ethical positions, not procedural stages.",
+        "No temporal or causal sequence is asserted."
+      ],
+      "text": "One position evaluates decisions by their consequences. The other evaluates whether decisions satisfy duties. The contrast concerns the basis for evaluation, not the order in which decisions occur.",
+      "expected_action": "retain",
+      "criteria": [
+        "Retain the explicit conceptual contrast without imposing input/action/output stages.",
+        "Do not demand a study area, experimental results or pipeline bridge."
+      ]
+    },
+    {
+      "id": "RC12",
+      "task": "review",
+      "facts": [
+        "For each batch, complete files are required before scoring.",
+        "Incomplete batches stop before scoring.",
+        "Only batches with reference labels receive an optional later diagnostic; it reports differences without altering scores."
+      ],
+      "text": "Each batch is checked for required files. If a file is missing, processing stops before scoring; otherwise, the complete batch is scored. For batches with reference labels, an optional later diagnostic reports differences without altering the scores.",
+      "expected_action": "retain",
+      "criteria": [
+        "Retain the clear prerequisite, stop branch and optional report-only diagnostic.",
+        "Do not remove helpful conditional connectors or invent parallel execution."
+      ]
+    }
+  ]
+}

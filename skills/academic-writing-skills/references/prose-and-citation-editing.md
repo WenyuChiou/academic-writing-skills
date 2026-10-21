@@ -27,6 +27,29 @@ When a literature paragraph contains several examples, choose an evidence order 
 
 Group sources that perform the same evidentiary function in one sentence or clause when their claims can be represented accurately. Use `For example` to introduce a representative set when it clarifies the move from a broad claim to concrete evidence, but do not repeat example markers before every citation. Place the closest precedent immediately before the gap when it establishes the comparison boundary. As a diagnostic, temporarily remove the citations: the remaining prose should still read as a cumulative argument rather than a list of study summaries.
 
+### Workflow handoff test
+
+For passages explaining a process, inspect the complete requested unit and the available boundary sentences after repairing a local comment. Apply this test where order or dependencies matter; a conceptual comparison or literature synthesis need not be recast as a pipeline. Scale the reading to the change: a punctuation edit does not reopen an unrelated chapter, but a repaired paragraph opening can affect its neighboring handoff.
+
+1. Identify each paragraph's reader function. Follow the information through the steps: what is available, what operation uses it, what is produced, and where that output is used next. A component inventory is insufficient when readers need a procedure.
+2. Inspect every affected adjacent sentence pair. State what the second sentence adds and identify its link to the first in the prose itself. Resolve unclear actors, referents, prerequisites, or unexplained changes of subject. At each paragraph boundary, check whether the prior ending prepares the next opening; move a detail when its placement interrupts that link. Do not add a redundant bridge when the opening already supplies it.
+3. Distinguish initial user configuration from actions repeated during execution. For example, selecting which variables a model receives is different from updating their values at each time step. Make the actor and frequency clear when confusing them would misdescribe the user workflow. If the source does not establish them, record that gap rather than inventing manual work, automation, or a schedule.
+4. Preserve the actual branches. Distinguish a sequential step, an optional addition, a condition for proceeding, a diagnostic assessment, and an action that changes or stops execution. Do not turn a data dependency into simultaneous execution, a diagnostic into an automatic veto, or temporal order into causation. Establish these facts from the supplied method; an example cannot supply missing implementation evidence.
+5. Select connectors by their supported relation. `Then` can mark a subsequent step; `once` or `after` can mark a prerequisite; `if` introduces a condition. Retain them when they help the reader. Avoid imposing a connector quota, mechanical synonym rotation, or a connector at every sentence opening.
+6. Read the resulting passage at an ordinary researcher's pace and paraphrase the route using only the text. Check whether the intended disciplinary reader can identify the inputs, actions, outputs, and branch consequences without knowledge of the drafting discussion. Repair the smallest remaining obstruction and repeat the affected reading after the final wording change.
+
+#### Worked example: daily forecasting
+
+This is a hypothetical teaching example, not a claim about an actual package. Assume the source establishes that users select the input variables before a run; their values are updated daily; forecasting uses complete inputs; missing inputs stop that day's calculation; and an optional later comparison with observations records diagnostic results without changing the forecast.
+
+**Before:** "At the start of each day, users define the inputs. The model calculates a forecast. An optional check compares it with observations. Missing inputs stop the calculation. Then the input values are updated."
+
+**Findings:** The opening implies daily manual configuration. The daily values appear after the calculation that needs them. The missing-input condition arrives after the forecast, and the diagnostic's consequence is unstated. Adding `then` does not repair those errors.
+
+**After:** "Users first select the input variables supplied to the forecasting model. Their values are updated each day. If required inputs are missing, that day's calculation stops; otherwise, the model uses the updated values to calculate a forecast. Once observations become available, an optional comparison records the difference between the forecast and observations without changing the forecast."
+
+**Acceptance basis:** The revised route is configuration -> daily values -> forecast, with the missing-input condition before a completed calculation and the optional later diagnostic kept distinct from forecast generation. The change preserves the assumed source facts; it does not establish that a real implementation follows them. Preserve an already clear passage that expresses the same relations without these particular connectors.
+
 ## Function-Preserving Concision
 
 Map each sentence to one or more required functions: claim, evidence, explanation, qualification, synthesis, or bridge. Remove or combine duplicated functions before deleting scientific content. Compress repeated examples, parallel literature inventories, and restated criteria while preserving the narrow claim, its evidence, inference limit, and bridge.
