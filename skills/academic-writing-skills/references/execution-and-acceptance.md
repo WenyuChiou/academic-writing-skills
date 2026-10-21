@@ -59,6 +59,8 @@ Remove repeated procedures from captions, but retain an essential sample/run
 convention, uncertainty definition, denominator, or exclusion if omitting it would
 mislead the reader. Do not enforce a universal caption word count.
 
+For a process description, use the [workflow handoff test](prose-and-citation-editing.md#workflow-handoff-test) on the complete requested unit and its affected neighbors, not just the annotated phrase. Preserve clear accepted prose and scientific meaning; this does not trigger an unrelated whole-paper review or extra agents.
+
 ## Before handoff: perform, then record
 
 After the last edit, inspect the **exact** candidate and its affected dependencies.
@@ -85,6 +87,8 @@ section, or repeated comprehension failures, use the scoped protocol in
 inspect the same complete unit without author explanations; a self-check remains
 labeled as such when separate readers are unavailable. A grammar-only edit still
 uses the local walkthrough above, not an automatic multi-agent audit.
+
+Keep reporting bases separate: a scan reports configured pattern matches; the parent walkthrough reports a located reader obstruction or a justified no-change finding; an independent reader report identifies that reader's actual scope and limits. For example, a workflow finding can identify that one paragraph now supplies the updated inputs used by the next. A component list or generic "flow checked" is not that evidence. Keep local findings inline rather than printing every sentence-pair observation or creating another ledger. Unresolved comprehension findings remain open, even when a scan passes.
 
 Use `checked` only with a concrete locator, finding, and resolved/open outcome.
 An open finding remains incomplete even if the check ran. Distinguish `not_run`,
