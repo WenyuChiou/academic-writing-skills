@@ -20,6 +20,23 @@ Give the “so what” where the paragraph or subsection completes its analytica
 
 Build that explanation in coherent result units, rather than postponing all meaning until an omnibus closing sentence. Several values can support one finding: keep them together, explain what that comparison establishes, then let the next unit deepen, contrast with, or qualify it. For example, establish what score levels mean before changing to dispersion, and distinguish individual relationships from a whole-model comparison before drawing a group-level conclusion. The required bridge is the analytical relation, not another connector. Do not insert an interpretation after every number, repeat the question at every paragraph, or split a functioning multi-value finding.
 
+For a comparison developed across analytical layers, identify what the current
+layer contributes, not merely where it appears in the sequence. Before drafting,
+state what aspect is compared, what its evidence can establish, and what a later
+comparison will add or must keep in view. After drafting, recover those relations
+from the prose itself with the question labels and stock framing removed. A list
+of results followed by "this is the first level" or "this answers RQ2" does not
+supply the missing relation. Keep several values together when they support one
+finding; do not prescribe a purpose sentence or a roadmap for every paragraph.
+
+Distinguish the current layer's finding from its relevance to later interpretation.
+For example, different measurement inputs can contextualize a score comparison
+without explaining every score difference or prohibiting a subsequent relationship
+comparison. State only the consequence supported by the supplied design. Keep
+evidence and its explanation together; place technical table pointers where they
+help rather than interrupt that unit. Use [evidence-context case 11](evidence-context-cases.md#11-comparison-contribution-is-not-a-sequence-label)
+when this particular execution gap recurs; retain functioning prose unchanged.
+
 ## Visuals and Substantive Answers
 
 Prefer one primary question or analytical purpose per figure or table. This is not a mandatory one-figure/one-question ratio: related panels can support one cumulative comparison, and several visuals can jointly answer a question. Split unrelated panel groups when their different purposes obscure the argument; do not multiply figures merely to comply with a ratio.

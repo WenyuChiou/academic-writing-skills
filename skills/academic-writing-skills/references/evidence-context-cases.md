@@ -180,3 +180,29 @@ only its genuinely new comparison. Descriptive cross-construct values may remain
 when the reader knows their scoring meanings and no unsupported ranking is made.
 For a single-sentence repair, inspect available neighbors only; missing context
 limits the flow verdict, not permission to invent or replan a whole section.
+
+## 11. Comparison contribution is not a sequence label
+
+**Context:** an invented study compares respondent and generated responses using
+the same administered questionnaire. Its measurement section compares retained
+question sets and model fit; later sections compare scores and relationships.
+**Failure:** reporting retained counts and fit indices, then ending with "the
+first level answers RQ2," leaves the contribution unexplained even if every
+sentence pair sounds connected. Counts concern measurement inputs; fit concerns
+how closely the measurement model describes response patterns. Neither alone
+establishes common construct meaning or an internal decision mechanism.
+**Minimal repair:** explain the particular measurement contrast supported by the
+facts and why the later score/relationship comparison needs that context. Keep
+the evidence and supported meaning adjacent, without an intervening technical
+table inventory. A correct concise pointer may remain; it is not inherently a jump.
+**Reject:** changing "different retained questions" into different questionnaires
+administered; ranking quality by counts; or saying poorer fit forbids all later
+structural comparisons. Do not invent formal invariance or missing item wording.
+**No-change control:** a paragraph already explains that different retained sets
+give scores different inputs and prepares the score comparison. Keep it without
+adding "first level," an RQ label, or another conclusion sentence.
+**Transfer boundary:** species coverage can likewise contextualize a later
+ecological comparison, but does not require a CFA-first sequence or establish
+accuracy without ground truth. The point is a recoverable contribution, not one
+paper's analysis order. Synthetic prompts and counterexamples are in
+`evals/comparison_layer_cases.json`; assess actual prose, not keyword presence.

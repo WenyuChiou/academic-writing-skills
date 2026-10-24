@@ -61,6 +61,8 @@ mislead the reader. Do not enforce a universal caption word count.
 
 For a process description, use the [workflow handoff test](prose-and-citation-editing.md#workflow-handoff-test) on the complete requested unit and its affected neighbors, not just the annotated phrase. Preserve clear accepted prose and scientific meaning; this does not trigger an unrelated whole-paper review or extra agents.
 
+For an anchored revision, use [comment-scoped-revision.md](comment-scoped-revision.md) before drafting. Bind the current source hash, effective selected wording, full thread and requested action; read surrounding prose without unlocking it. Compare source and candidate afterward, identify actual changed and unchanged sentences, and locate the evidence for any minimal expansion. Keep file edits, replies and resolution separately authorized. Uncertain or stale anchors are not a passed scope check; a zero outside-selection diff does not excuse a broken dependency or missing answer.
+
 ## Before handoff: perform, then record
 
 After the last edit, inspect the **exact** candidate and its affected dependencies.
@@ -111,6 +113,16 @@ obstruction or a justified no-change finding; the presence of connectors, SQ
 labels, definitions, or shorter sentences is not acceptance evidence. Use the
 worked controls in evidence-context case 10 for this narrow exercise; do not
 create a second checklist or audit unrelated sections for a local edit.
+
+For a multi-layer comparison, add one substantive paraphrase to this same
+walkthrough: which part of the question this layer addresses, what the evidence
+establishes at that level, and what the next comparison adds or must account for.
+Locate the wording that lets a reader recover those relations without project
+history or SQ/"first level" labels. Smooth sentence pairs and correct numbers
+are insufficient if that contribution is absent. Do not invent a bridge when no
+later comparison is in scope, or treat diagnostics as an unstated permission gate.
+See evidence-context case 11 for failure and no-change controls. A self-check is
+not an independent reader result; preserve that distinction in the handoff.
 
 ## Optional deterministic coverage checker
 

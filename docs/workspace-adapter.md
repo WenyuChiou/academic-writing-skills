@@ -2,7 +2,7 @@
 
 `adapter.json` exposes the existing academic writing and paper review skills to
 an explicitly configured local workspace consumer. Adapter version `1.0.0`
-uses manifest schema `1`, plugin skill version `1.3.21`, and manuscript state
+uses manifest schema `1`, plugin skill version `1.3.22`, and manuscript state
 schema `1.1`. It needs no private checkout, host-specific path, network service,
 or installed project overlay. No scientific rule or audit script is replaced.
 
@@ -75,6 +75,13 @@ checker and its execution guide. It is not a seventh registered adapter operatio
 consumers must explicitly support its CLI before invoking it. Complete coverage
 and matching hashes do not establish prose quality, venue compliance, or truthful
 review evidence. Existing six operation contracts are unchanged.
+
+The optional read-only `inspect_comment_targets.py DOCX` helper is also bundled
+but unregistered. It reports the current source hash, comment selections and
+thread/anchor diagnostics; `--expected-sha256 HASH` rejects a stale snapshot.
+Successful extraction is not editing authorization, Word Range/layout validation,
+or proof that a candidate respected its scope. Consumers must explicitly support
+this helper rather than forwarding arbitrary arguments through `docx`.
 
 ## Consumer and maintenance boundaries
 

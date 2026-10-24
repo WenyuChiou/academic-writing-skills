@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "purpose": "Synthetic prose-behavior prompts; criteria require editorial judgment, not keyword certification.",
+  "cases": [
+    {
+      "id": "CL01",
+      "kind": "layer_contribution",
+      "request": "Improve the two-paragraph comparison while retaining the supported facts and useful wording. Explain its contribution before the later score and relationship comparisons. Propose text only.",
+      "source": "The comparison begins with the questions retained to measure four beliefs (Figure 3a). The respondent responses retain 18 questions, compared with 16 for generator A and 23 for generator B. For perceived costs, the counts are six, four, and eight. Appendix Table A lists the generated-response loadings; Table B compares retained question sets. These results show different retained sets.\n\nMeasurement quality is assessed with comparative fit index (CFI), Tucker–Lewis index (TLI), and root mean square error of approximation (RMSEA) (Figure 3b). Higher CFI and TLI and lower RMSEA indicate closer fit of the measurement models to the response patterns. Respondent CFI is 0.95; generator means are 0.81 and 0.67. Neither generator meets all stated criteria. The generated responses have poorer fit. This answers RQ2.",
+      "facts": ["The same questionnaire was administered to all sources.", "The research question compares measurement structure, quality, score distributions, and estimated relationships; subsequent sections address scores and relationships.", "Scores use the retained questions. Counts do not rank quality. No formal measurement-invariance test is supplied.", "The reported fit comparison is descriptive and does not prohibit the subsequent relationship comparison.", "Table A gives loadings and Table B compares question sets. No additional fit values are available."],
+      "criteria": ["Explain the measurement contribution, not just that it comes first.", "Distinguish retained-question structure from model fit quality.", "Explain why subsequent scores need the retained-set context without asserting that all later differences are caused by selection.", "Retain all supplied counts, model labels, and index values; do not invent missing indices or an invariance result."]
+    },
+    {
+      "id": "CL02",
+      "kind": "smooth_label_only",
+      "request": "Assess the paragraph's logic and make only a necessary repair. Propose text only.",
+      "source": "This is the first level of our comparison. The calibration errors are 2 and 5 units for instruments A and B. This directly answers RQ2 and provides an important basis for the next analysis.",
+      "facts": ["RQ2 compares calibration accuracy and event detection.", "Calibration error measures departure from a reference; smaller is closer. Event detection is compared next and has not been tested in this paragraph."],
+      "criteria": ["Do not accept first-level or RQ wording as an answer.", "Explain the supported calibration contrast and distinguish it from event detection."]
+    },
+    {
+      "id": "CL03",
+      "kind": "inventory_with_omnibus_ending",
+      "request": "Repair the interpretation and progression without adding unreported analyses.",
+      "source": "Approach A has error 2, recall 0.80, and latency 30 ms. Approach B has error 5, recall 0.93, and latency 70 ms. These findings show important differences among the approaches and address RQ1.",
+      "facts": ["Error is calibration error in units; smaller is closer to the reference.", "Recall is the fraction of actual events detected; higher detects more. Latency is time per prediction.", "RQ1 concerns trade-offs between calibration, event detection, and speed. No significance or deployment threshold is supplied."],
+      "criteria": ["Give meaning to the calibration/detection/speed trade-off rather than merely repeating all values in a final sentence.", "Do not infer a universally superior approach or statistically significant difference."]
+    },
+    {
+      "id": "CL04",
+      "kind": "interrupted_evidence_meaning",
+      "request": "Make the evidence-to-meaning sequence clear with the smallest necessary change.",
+      "source": "Both sources received the same questions, but retained sets contain 18 and 16 questions. Table A lists the technical loadings and estimation settings. Scores are therefore calculated from different retained sets, which is relevant to the score comparison that follows.",
+      "facts": ["Table A contains detailed loadings/settings and is not needed to understand why different retained sets produce different score inputs.", "Keep the table callout, supplied counts, and descriptive scope."],
+      "criteria": ["Keep the evidence and its explanation together if moving the pointer repairs the interruption.", "Do not ban supplementary callouts or remove needed reproducibility information."]
+    },
+    {
+      "id": "CL05",
+      "kind": "false_analysis_gate",
+      "request": "Correct only the unsupported inference; keep the reported fit result.",
+      "source": "The generated responses have lower measurement-model fit. Consequently, their structural relationships cannot be compared with the respondent relationships.",
+      "facts": ["The study reports a descriptive relationship comparison with measurement differences as context.", "No supplied design decision makes a fit threshold an authorization gate. Formal invariance has not been established."],
+      "criteria": ["Retain the fit finding but remove the unsupported prohibition.", "Do not replace the prohibition with a claim that equivalent constructs or true mechanisms have been established."]
+    },
+    {
+      "id": "CL06",
+      "kind": "false_instrument_change",
+      "request": "Repair the factual wording and explain the narrow implication.",
+      "source": "Different questionnaires were given to respondents and generated sources, so their scores measure different real decisions.",
+      "facts": ["Every source answered the same administered questionnaire.", "Only the questions retained for scoring differ. Scores measure stated beliefs, not observed decisions. No internal mechanism was tested."],
+      "criteria": ["Distinguish administered questionnaire from retained sets.", "Do not assert observed decisions, causal mechanisms, or complete construct nonequivalence."]
+    },
+    {
+      "id": "CL07",
+      "kind": "functioning_no_label",
+      "request": "Assess whether the purpose and progression are clear. Keep the paragraph unchanged if it works.",
+      "source": "We compare the questions used to build each score because the same administered questionnaire need not yield the same retained measurement. The two sources retain 18 and 16 questions. Their scores consequently draw on different item sets; the next comparison examines the score distributions with that difference in view.",
+      "facts": ["All claims and numbers in this passage are supported.", "No quality ranking or formal invariance claim is intended."],
+      "criteria": ["Accept the functioning contribution and bridge without requiring an RQ label, first-level phrase, or additional conclusion.", "Prefer no change; do not rewrite for stylistic variety."]
+    },
+    {
+      "id": "CL08",
+      "kind": "cross_domain",
+      "request": "Improve the ecological comparison's meaning and bridge, if needed. Do not add a survey or statistical-model template.",
+      "source": "The methods detect 12 and 8 plant species in the same plots. The methods differ. We next examine their estimates of seasonal change.",
+      "facts": ["The study compares species detection and seasonal-change estimates.", "Detection differences mean the seasonal estimates may draw on different observed species sets.", "There is no complete ground-truth inventory, so more detections do not establish greater accuracy. No CFA or SEM is involved."],
+      "criteria": ["Connect species coverage to the context of the seasonal comparison.", "Do not rank accuracy, prescribe CFA, or claim the detected-set difference caused a particular seasonal result."]
+    },
+    {
+      "id": "CL09",
+      "kind": "scoped_advisor_edit",
+      "request": "Revise only the selected sentence to explain the result. Preserve the advisor's surrounding text exactly.",
+      "source": "Figure 12 compares the two instruments against a fixed reference. Their errors are 2 and 5 units, which are different. Appendix C supplies calibration settings.",
+      "selection": "Their errors are 2 and 5 units, which are different.",
+      "facts": ["Error is distance from the reference; smaller means closer. Instrument order is A, then B. No significance or causal mechanism was tested."],
+      "criteria": ["Give the supported accuracy contrast in the selection, retaining 2 and 5.", "Preserve both unselected sentences exactly and do not add a roadmap or RQ label."]
+    },
+    {
+      "id": "CL10",
+      "kind": "missing_item_meaning",
+      "request": "Explain what the item-selection example contributes without inventing missing source material. If needed, give a provisional local repair and state the limit.",
+      "source": "The sources retain different item sets. Item X17 is omitted in the first source and retained in the second. This is an important difference.",
+      "facts": ["The actual wording and construct assignment of X17 are unavailable.", "Scores use retained items, but no reported score contrast or direction is supplied."],
+      "criteria": ["Do not fabricate X17 wording or infer a particular substantive belief from its code.", "Explain the limited scoring-input implication or request the missing wording, without declaring all item-code examples unacceptable."]
+    }
+  ]
+}

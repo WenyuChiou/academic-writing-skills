@@ -11,6 +11,45 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.22] - 2026-10-24
+
+### Changed
+
+- Bind comment-driven revisions to the current effective selection and full
+  thread. Preserve usable unselected wording and distinguish reading scope from
+  edit scope; explicit larger instructions and demonstrated minimal dependencies
+  remain valid exceptions. Check the exact candidate diff and its reader functions.
+- Treat source changes, missing/deleted/multiple anchors and unresolved thread
+  mappings as uncertainty, not permission to guess. Keep file editing, proposed
+  wording, replies and resolution separately authorized; older examples supply
+  style and argument structure rather than current study facts.
+- Make the existing reader walkthrough recover a comparison layer's contribution,
+  supported finding and relevance to the next comparison from the actual prose.
+  Correct sentence pairs, values and question labels alone do not establish that
+  relation; no fixed roadmap or analysis-permission gate is introduced.
+
+### Added
+
+- An optional read-only comment-target inspector with snapshot SHA256 binding,
+  revised-text projection, range/point/overlap diagnostics and reply relationships.
+  It is not a new registered adapter operation, an editor or a quality certificate.
+- Synthetic OOXML/CLI tests and sixteen hypothetical revision cases, including
+  no-change, explicit expansion, true dependencies, locked neighbors, conceptual
+  prose, stale sources and proposal-only controls. Structural passes and actual
+  revision behavior are assessed separately; no general improvement is claimed.
+- Ten synthetic comparison-layer controls cover empty sequence labels, numerical
+  inventories, interrupted explanations, unsupported analysis gates, source drift,
+  no-change, limited scope, missing evidence and a non-survey application.
+
+### Fixed
+
+- Preserve lexical nonbreaking hyphens in comment selections; mark font-specific
+  symbols, conditional hyphens and complex-field spans as uncertain instead of
+  silently treating an incomplete projection as a plain text range. Use XML order
+  to avoid flagging protected content outside the selection at the same text offset.
+- Return ASCII-safe JSON on CLI success and error paths, preserving decoded Unicode
+  text and paths under non-UTF-8 output encodings. Add direct regression controls.
+
 ## [1.3.21] - 2026-10-20
 
 ### Changed
