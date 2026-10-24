@@ -14,6 +14,7 @@ REVIEW = ROOT / "skills" / "paper-review"
 
 CORE_REFERENCES = {
     "banned_words.md",
+    "comment-scoped-revision.md",
     "conclusion-and-abstract.md",
     "discussion-and-limitations.md",
     "execution-and-acceptance.md",
@@ -41,6 +42,7 @@ CORE_SCRIPTS = {
     "audit_prose_patterns.py",
     "audit_text_consistency.py",
     "init_manuscript_state.py",
+    "inspect_comment_targets.py",
     "run_regression_tests.py",
 }
 REVIEW_REFERENCES = {
@@ -75,7 +77,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.21"
+    assert manifest["version"] == "1.3.22"
     guide_version = re.search(
         r"plugin skill version `([^`]+)`", read(ROOT / "docs" / "workspace-adapter.md")
     )

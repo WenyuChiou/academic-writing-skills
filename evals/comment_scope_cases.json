@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "provenance": "Invented cross-domain cases, not private manuscript text or professor quotations.",
+  "evaluation_boundary": "Structural checks do not establish semantic correctness; assess the actual revision diff and preserved meaning separately. No human-readability or general improvement claim.",
+  "cases": [
+    {
+      "id": "SC01", "anchor_kind": "range",
+      "source_text": "Figure 8 compares the two groups. Scores range from 0 to 100. Group A had a mean of 91.2. Group B had a mean of 82.5. The difference was 8.7 points. This indicates greater reported willingness in group A. The comparison is descriptive. Instrument and CFA details are in Text S3.",
+      "selected_text": "Group A had a mean of 91.2. Group B had a mean of 82.5. The difference was 8.7 points. This indicates greater reported willingness in group A. The comparison is descriptive.",
+      "comment": "Connect these numerical results to their meaning, following the style of the older example.",
+      "reference_example": "An older study reported higher willingness in A than B, with mean scores of 77.4 and 69.0. Use its structure, not its facts.",
+      "request": "Propose the revision requested by this comment. Keep the current study facts.",
+      "facts": ["These are descriptive willingness scores, not purchases.", "Current means are 91.2 and 82.5; the difference is 8.7 points. No significance or causal inference is provided."],
+      "expected_action": "local_repair",
+      "criteria": ["Keep the unselected figure orientation, scoring definition and SM/CFA pointer exact.", "Link the current comparison to reported willingness without copying old values or adding behavior, significance or causation."]
+    },
+    {
+      "id": "SC02", "anchor_kind": "range",
+      "source_text": "Figure 4 compares the groups. Group A reported greater willingness, with mean scores of 84.6 versus 78.2 for group B. The instrument is described in Text S3.",
+      "selected_text": "Group A reported greater willingness, with mean scores of 84.6 versus 78.2 for group B.",
+      "comment": "Are the numbers and meaning already connected clearly? Keep it if so.",
+      "request": "Review this comment; do not force a rewrite.",
+      "facts": ["The group means and construct are correct.", "No further interpretation is requested."],
+      "expected_action": "retain",
+      "criteria": ["Preserve the full source text exactly.", "Explain the justified no-change outcome without inventing a deficiency."]
+    },
+    {
+      "id": "SC03", "anchor_kind": "range",
+      "source_text": "Figure 4 is shown here. Scores range from 0 to 100. A scored 84.6. B scored 78.2. The descriptive difference in willingness was 6.4 points. Instrument details are in Text S3.",
+      "selected_text": "A scored 84.6.",
+      "comment": "Rewrite this whole paragraph, including its opening, so the comparison and its meaning are connected. Keep the scoring explanation and SM pointer.",
+      "request": "Apply the comment's explicitly requested paragraph scope, as a proposal.",
+      "facts": ["The source numbers and pointer are current.", "The comparison is descriptive, not a causal finding."],
+      "expected_action": "explicit_expansion",
+      "criteria": ["Recognize paragraph-level authorization despite a short selected span.", "Retain orientation, scoring, current comparison, meaning and SM pointer without importing facts."]
+    },
+    {
+      "id": "SC04", "anchor_kind": "range",
+      "source_text": "Figure 4 compares group A and group B. The shaded bands in Figure 4 show the IQR. The sample includes 32 observations.",
+      "selected_text": "Figure 4 compares group A and group B.",
+      "comment": "Update this figure reference after the renumbering.",
+      "request": "The comparison is now Figure 5. Correct the selected reference and necessary dependencies only.",
+      "facts": ["The display formerly numbered 4 is now 5.", "The band definition and sample size are unchanged."],
+      "expected_action": "dependency_expansion",
+      "criteria": ["Update both referring figure numbers, identifying the adjacent dependency.", "Keep all other words, the IQR definition and sample size exact."]
+    },
+    {
+      "id": "SC05", "anchor_kind": "range",
+      "source_text": "Figure 4 compares group A and group B. The shaded bands in Figure 4 show the IQR.",
+      "selected_text": "Figure 4 compares group A and group B.",
+      "comment": "Update this reference after renumbering.",
+      "request": "It is now Figure 5, but do not change the second sentence yet. Propose the local change and identify any remaining issue.",
+      "facts": ["Both callouts refer to the same display.", "The second sentence is explicitly locked for this turn."],
+      "expected_action": "locked_dependency",
+      "criteria": ["Keep the locked neighbor exact and identify the unresolved reference dependency.", "Do not claim the entire paragraph is fully reconciled."]
+    },
+    {
+      "id": "SC06", "anchor_kind": "range",
+      "source_text": "3 Findings\nThe two sites are compared below. Site A had 12 observed species. Site B had 8 observed species.\n4 Discussion\nThe original discussion remains unchanged.",
+      "selected_text": "3 Findings",
+      "comment": "Revise all of Section 3, not just this heading, to explain what species richness means before the comparison and state the main finding. Leave Section 4 unchanged.",
+      "request": "Propose the requested Section 3 revision.",
+      "facts": ["Species richness means the number of observed species.", "These are observed counts at two sites, not an experimentally identified treatment effect."],
+      "expected_action": "explicit_expansion",
+      "criteria": ["Do not restrict the edit to the heading anchor.", "Define the quantity and connect the descriptive comparison while preserving Section 4 exactly."]
+    },
+    {
+      "id": "SC07", "anchor_kind": "stale",
+      "source_text": "Figure 4 compares the groups. A reported a mean of 84.6; B reported 78.2. Details are in Text S3.",
+      "selected_text": "A reported a mean of 84.6; B reported 78.2.",
+      "comment": "Connect the comparison to reported willingness.",
+      "request": "Use the current document. The prior packet identified comment 0; verify the snapshot and target before proposing a change.",
+      "facts": ["The old packet predates a saved revision; an expected source SHA256 is supplied with the generated fixture.", "Current group values remain 84.6 and 78.2; the construct is reported willingness."],
+      "expected_action": "refresh_target",
+      "criteria": ["Reject the old snapshot binding and reread the current comment/anchor rather than applying stale ID0.", "Use the uniquely confirmed current target and keep surrounding wording exact, or state a genuine unresolved mapping."]
+    },
+    {
+      "id": "SC08", "anchor_kind": "missing",
+      "source_text": "Several comparisons appear in this section. The first concerns reported willingness. The second concerns observed enrollment.",
+      "selected_text": null,
+      "comment": "Connect this result to its meaning.",
+      "request": "Inspect this comment before proposing an edit; the selected text is not available in my copy.",
+      "facts": ["The current package contains a comment definition but no anchor markers.", "Willingness and enrollment are distinct outcomes."],
+      "expected_action": "uncertain_target",
+      "criteria": ["Do not guess which comparison was selected or rewrite the entire section.", "Report the missing anchor and request only the target needed to proceed."]
+    },
+    {
+      "id": "SC09", "anchor_kind": "deleted_only",
+      "source_text": "The current analysis includes 31 observations. The instrument is described in Text S3.",
+      "selected_text": null,
+      "comment": "Clarify the sample in this sentence.",
+      "request": "Inspect the selected text in the revised view before proposing a repair.",
+      "facts": ["The anchor contains only a deleted old sentence stating 30 observations.", "The retained analysis uses 31 observations; the old selection is not current text."],
+      "expected_action": "uncertain_target",
+      "criteria": ["Distinguish the deleted-only selection from current wording and do not restore 30.", "Keep current content unchanged until the intended current target is established."]
+    },
+    {
+      "id": "SC10", "anchor_kind": "overlap",
+      "source_text": "Figure 4 compares groups. A scored 84.6 and B scored 78.2. The descriptive difference was 6.4 points in reported willingness. Details are in Text S3.",
+      "selected_text": "A scored 84.6 and B scored 78.2. The descriptive difference was 6.4 points in reported willingness.",
+      "comment": "Connect these numbers to their meaning.",
+      "request": "Handle the two compatible overlapping comments together as one proposal.",
+      "facts": ["A second comment selects the difference sentence and asks to retain the word descriptive.", "The comments concern willingness, not observed behavior or causal effects."],
+      "expected_action": "coordinated_overlap",
+      "criteria": ["Preserve both comments' distinct requirements within the selected union without redundant rewrites.", "Keep the unselected opening and SM pointer exact; overlap alone is not a blocker."]
+    },
+    {
+      "id": "SC11", "anchor_kind": "range",
+      "source_text": "Figure 4 compares groups. A averaged 84.6 and B averaged 78.2.\nThese values show greater reported willingness in group B. Details are in Text S3.",
+      "selected_text": "A averaged 84.6 and B averaged 78.2.\nThese values show greater reported willingness in group B.",
+      "comment": "Make these results and the interpretation read as a connected argument.",
+      "request": "Propose a repair across the actual selection, retaining the two-paragraph structure and unselected wording.",
+      "facts": ["The anchor spans the end of one paragraph and start of another.", "The facts are descriptive group means of willingness."],
+      "expected_action": "cross_paragraph",
+      "criteria": ["Cover the full cross-paragraph selection, not just the first containing paragraph.", "Preserve two paragraphs and the unselected opening/pointer; retain current numbers and inferential scope."]
+    },
+    {
+      "id": "SC12", "anchor_kind": "reply",
+      "source_text": "Figure 4 compares groups. A scored 84.6 and B scored 78.2. Details are in Text S3.",
+      "selected_text": "A scored 84.6 and B scored 78.2.",
+      "comment": "Link the numbers to their meaning.",
+      "request": "Use the whole current comment thread for a single proposed revision; do not add a reply or resolve it.",
+      "facts": ["The attached reply says the construct is reported willingness, not actual purchases.", "That reply clarifies the same parent request, not a separate edit target."],
+      "expected_action": "thread_local_repair",
+      "criteria": ["Use the parent's selection and the reply's clarification in one local proposal.", "Do not create a second independent target, write a reply or resolve the thread."]
+    },
+    {
+      "id": "SC13", "anchor_kind": "range",
+      "source_text": "We compare two groups. A had a higher descriptive mean score than B. See Text S3 for the instrument.",
+      "selected_text": "A had a higher descriptive mean score than B.",
+      "comment": "Say what the score measures.",
+      "request": "Discuss the proposed wording only. Do not change the file, comments, replies or resolved states.",
+      "facts": ["The score measures reported willingness to participate.", "There is no evidence of actual participation."],
+      "expected_action": "proposal_only",
+      "criteria": ["Clarify willingness within the selected sentence and keep unselected wording exact.", "Make no source mutation and distinguish a proposal from a completed file edit."]
+    },
+    {
+      "id": "SC14", "anchor_kind": "range",
+      "source_text": "We used a standard assay. The samples was stored at 4°C. No other change is needed.",
+      "selected_text": "was",
+      "comment": "Correct the agreement here.",
+      "request": "Fix this selected grammar error only.",
+      "facts": ["Samples is plural.", "The assay description and temperature must not change."],
+      "expected_action": "surface_only",
+      "criteria": ["Change only was to were.", "Do not expand the task into a paragraph review, new ledger or methods rewrite."]
+    },
+    {
+      "id": "SC15", "anchor_kind": "range",
+      "source_text": "The article compares two accounts of justice. The second account is different in its emphasis on mutual obligations. No experiment is proposed.",
+      "selected_text": "different in its emphasis on mutual obligations",
+      "comment": "Make this comparison more direct.",
+      "request": "Propose a local wording repair without changing the conceptual argument.",
+      "facts": ["This is a conceptual comparison, not an empirical study.", "The distinction is the second account's emphasis on mutual obligations."],
+      "expected_action": "local_repair",
+      "criteria": ["Preserve the conceptual distinction, unselected text and grammatical fit.", "Do not add results, research questions, figures, mechanisms or an IMRAD template."]
+    },
+    {
+      "id": "SC16", "anchor_kind": "multiple",
+      "source_text": "The first comparison concerns willingness. The second concerns enrollment. Their measures are not interchangeable.",
+      "selected_text": null,
+      "comment": "Clarify this comparison.",
+      "request": "Inspect the actual current selection before proposing wording.",
+      "facts": ["The package contains two disjoint range pairs using the same comment ID.", "There is no author confirmation identifying which range was intended."],
+      "expected_action": "uncertain_target",
+      "criteria": ["Report multiple anchors rather than silently choosing or merging targets.", "Keep the source unchanged and ask for the intended scope."]
+    }
+  ]
+}

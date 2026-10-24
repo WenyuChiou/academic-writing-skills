@@ -58,6 +58,8 @@ Use word counts, sentence counts, and comparison with neighboring paragraphs onl
 
 For an accepted, submitted, or advisor-edited baseline, make the smallest repair that solves the actual issue and its dependencies. Preserve functioning original wording; do not rewrite neighboring sentences for stylistic uniformity alone. If a larger structural change is necessary, identify the displaced function and destination before editing. Comment labels identify changes made for a request, not every passage that shares its topic.
 
+When a comment selects only part of that baseline, use [comment-scoped-revision.md](comment-scoped-revision.md) to establish the actual current anchor and thread, preserve unselected wording, and justify any necessary expansion. Reading the whole paragraph for continuity does not authorize rewriting it. An older example guides the argument or style; use current facts and numbers, not the example's study claims.
+
 Inspect sentence rhythm after compression. Merge a very short sentence when it exists only to say `Overall`, `However`, or `The results are mixed`; retain a short sentence when it carries necessary emphasis or a complete substantive finding. Avoid solving density by creating a sequence of clipped sentences.
 
 ## Natural Scholarly Prose

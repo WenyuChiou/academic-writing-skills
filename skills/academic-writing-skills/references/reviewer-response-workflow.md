@@ -359,6 +359,12 @@ usable advisor revisions and change only the marked problem, a verified factual
 dependency, or wording that remains unclear in context. Do not reconstruct the
 response from an older draft merely because it contains more detail.
 
+For an anchored advisor comment, use [comment-scoped-revision.md](comment-scoped-revision.md)
+to read its current selection and complete thread before proposing a repair.
+Preserve usable unselected wording; report the precise changed sentences and any
+evidence-backed dependency beyond that boundary. An internal reply or resolved
+state is a separate action, not an automatic part of editing the prose.
+
 Keep three outputs separate: the response addressed to the reviewer, the
 corresponding manuscript or Supporting Material change, and the internal reply
 to the advisor. Write the internal reply in concise first person, normally one

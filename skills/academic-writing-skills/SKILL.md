@@ -86,6 +86,8 @@ Before drafting or substantively rewriting, run the pre-draft logic check in [un
 
 Draft only after the contract and information order are coherent. After drafting, compare the paragraph against the contract and re-read its previous and next paragraphs. Do not polish a paragraph into fluency if its function, evidence, or placement is wrong.
 
+For comment- or selection-driven edits, first apply [comment-scoped-revision.md](references/comment-scoped-revision.md): verify the current selected text and full thread, separate reading from editing scope, and compare the exact candidate with the authorized boundary. Do not substitute the whole paragraph for the selection or treat a broader explicit instruction as title-only because its anchor is a heading.
+
 For substantive drafting or formatted-file editing, read [execution-and-acceptance.md](references/execution-and-acceptance.md) **before drafting**. Use its reader-route and caption/body/SM allocation, then perform its scoped checks before the first handoff. Preserve the author's primary comparison before dependent subgroup or model detail; this does not prescribe a universal comparison order.
 
 Use that guide's stage checklist to connect outline, pre-draft planning, post-edit checks, chapter closure, and full review to concrete records. Keep local handoffs concise and expand the record at chapter/full-review boundaries; reuse the shared project state rather than creating another glossary or checklist system.
