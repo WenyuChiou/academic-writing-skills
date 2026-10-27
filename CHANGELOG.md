@@ -11,6 +11,40 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.23] - 2026-10-27
+
+### Changed
+
+- Make the existing summary route recover the current research goal, work,
+  comparison units/dimensions/levels and scope before choosing sentences.
+  Preserve clear author wording and the requested paragraph functions;
+  recruitment, geography or a model comparison must not replace the goal.
+- Apply that distinction in the existing exact-candidate reader walkthrough.
+  A sequence of correct steps, SQ labels, a stored plan or a clean word scan
+  does not establish that the completed paragraph communicates the study.
+  Surface-only edits, already clear prose, conceptual and qualitative designs
+  retain their scope; no fixed question count or opening template is introduced.
+- Separate concern closure from edit completion in the existing comment ledger
+  and handoff: preserve the original selection/question, locate the current
+  answer, and record addressed/partial/open/unverifiable with a reason without
+  replacing manuscript-state statuses or resolving Word comments. Language scans
+  and preservation checks do not certify that a reader's original doubt is gone.
+- Clarify bilingual README inputs/outputs for passage, section and whole-paper
+  work, with compact navigation across sections and companion files. Shorten
+  the writing skill and plugin descriptions without changing skill identities,
+  adapter operations, permissions or invocation policy.
+
+### Added
+
+- One hypothetical research-identity teaching case with transfer and no-change
+  controls; seven public fictional writing requests and structural route/link/
+  bilingual table checks. Private application prose and unapproved candidates
+  remain task-local. Structural coverage is not a semantic quality certificate.
+- A concern-closure teaching case and six hypothetical cross-design controls
+  covering rationale, connector-only edits, distinct tests, no-change, multi-part
+  requests and unavailable sources. Actual private-case reader reports remain
+  separate from the fixture/routing tests; no manuscript or comment was changed.
+
 ## [1.3.22] - 2026-10-24
 
 ### Changed

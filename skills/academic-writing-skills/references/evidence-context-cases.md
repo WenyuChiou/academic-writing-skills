@@ -206,3 +206,70 @@ ecological comparison, but does not require a CFA-first sequence or establish
 accuracy without ground truth. The point is a recoverable contribution, not one
 paper's analysis order. Synthetic prompts and counterexamples are in
 `evals/comparison_layer_cases.json`; assess actual prose, not keyword presence.
+
+## 12. Research identity before sentence compression
+
+**Context:** a hypothetical cold-chain study asks when low-cost temperature
+sensors can support delivery monitoring. Two sensor types are evaluated against
+a calibrated reference. Overall work compares bias, variability and calibration
+stability; warm/cold-condition comparisons cover bias and variability only.
+The Conclusion's first paragraph identifies the study; the next reports findings.
+**Failure:** “We sampled forty deliveries in one city. We compared differences
+between warm and cold conditions between sensors” foregrounds data collection,
+leaves the reference and dimensions unclear, and obscures the scientific goal.
+Simply replacing it with “This study compared sensors at several levels” remains
+too vague. Extending calibration-stability assessment to subgroups invents work.
+**Minimal repair:** retain a clear purpose sentence; explain the observation/
+reference comparison and distinguish overall from condition-specific dimensions
+in connected prose. Keep the city as the data boundary, not a substitute purpose.
+**Reject:** a plausible but invented safety benefit, causal or population claim,
+or moving result interpretation into the study-identity paragraph contrary to
+the author's plan. A polished list of steps is not a recoverable argument.
+
+**No-change and scope controls:** keep an opening that already connects a tree-
+cover question to observational temperature records and its stated comparisons.
+Fixing only one agreement error does not require reconstructing the whole study.
+A conceptual paper may develop two propositions without a field site; a
+qualitative paper may organize its work without numbered SQs. Neither needs a
+three-question empirical template. When the Introduction/aim is unavailable,
+state that limit rather than promote a supplied method into an inferred goal.
+**Transfer boundary:** distinguish the role of a recruited sample from a shared
+scenario supplied to another source; correcting one must not erase the goal or
+imply that all participants inhabit that scenario. These are role distinctions,
+not one paper's locations, sample counts or mandatory paragraph structure.
+Seven public hypothetical requests are in `evals/research_identity_cases.json`;
+the private application and actual paired proposals remain task-local. Judge
+their complete prose against source facts, preservation and reader progression;
+fixture/link checks do not certify comprehension or first-handoff compliance.
+
+## 13. A rewrite is not concern closure
+
+**Context:** an invented qualitative study compares how rural and urban care
+teams repair missing referral information. The advisor asks why those groups
+are compared and how the sample sentence follows the literature gap.
+**Failure:** changing “The teams differ” to “We compare rural and urban teams,
+classified by clinic location” names the groups and basis but does not supply
+the reason for the comparison. “We then interviewed twelve teams” adds order,
+not the missing relation. A no-findings language scan and a preserved document
+are different checks; neither answers the advisor's question.
+**Minimal action:** in the existing ledger, locate the original selection and
+full concern, then test the current passage against what the reader needs to
+understand. If the rationale is not supplied, retain an open/partial assessment
+and request the missing basis rather than inventing why rural teams differ.
+Record an answered part separately from an unanswered part of the same comment.
+**No-change controls:** a revised sentence may already name the response sources,
+the procedure behind a quality claim, or the direction of an association. Keep
+it when that answers the specific concern; do not demand a full Methods account
+in a short summary. A reasoned non-change can close the concern without a rewrite.
+**Different comparisons:** a null test of overall relationships between groups
+does not establish a null difference in a single outcome, nor contradict a
+comparison between two data sources. Identify the actual quantity, population,
+level and test before deciding whether the prose links them adequately.
+**Transfer boundary:** these decisions apply to conceptual arguments, field
+studies and experiments as well as surveys. They do not require a fixed
+“because” sentence, subgroup method, analysis order or author-template wording.
+Missing source access limits the particular claim it prevents checking; it is
+not automatic evidence that every visible correction is unverifiable. The
+original range, current answer and closure reason belong in the same existing
+comment record. Public hypothetical controls are in
+`evals/comment_concern_cases.json`; real document text remains task-local.
