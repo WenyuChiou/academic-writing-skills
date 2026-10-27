@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "academic-writing-skills",
   "adapter_version": "1.0.0",
-  "skill_version": "1.3.22",
+  "skill_version": "1.3.23",
   "state_schema_version": "1.1",
   "skills": [
     {
@@ -128,20 +128,20 @@
     }
   },
   "files": {
-    ".claude-plugin/plugin.json": "839f2ee08a59e06232266948ab66a6080b5baa620705cae0557de299ffc9706e",
+    ".claude-plugin/plugin.json": "078bf44662ea1947372d02962848ebc61ea591b481a09f3ee70f9b645fb1751b",
     "LICENSE": "1e034229fd46b8a7748bce109e3bcc078e180bb05e276e513039e2b9a990c637",
-    "docs/workspace-adapter.md": "69e14a7c8eff77b54ae20e667ff705a8fafbbd91f293e5e79972b5e66582fd06",
+    "docs/workspace-adapter.md": "d2b3809a62058071e1b1c119aa1f16cca869e86b7e99479464893efd1849e007",
     "scripts/build_adapter_bundle.py": "1c876db5cda7ed32518e97f0e4aa8af76f7c9dd1def0bc386ec5afefac3a4a8f",
-    "skills/academic-writing-skills/SKILL.md": "b948d18c4cb6b2c4b6a537d3b3c368cc30903340079d47ee427fce548bbf6405",
+    "skills/academic-writing-skills/SKILL.md": "15c4caad3803d6d0ba96057bf907ab60b8a3c3f2e5668f4bddab16cce045e288",
     "skills/academic-writing-skills/agents/openai.yaml": "5d0471ee817805619779b1f901f6c91a1ea4dcb472968f2382a263a7fbcabfe9",
     "skills/academic-writing-skills/assets/examples/abm-figure-1.png": "7ce2d3c69498c2805a7a3183e228f0ea60967babef3a8638a96fdfb9854bb501",
     "skills/academic-writing-skills/assets/examples/abm-figure-6.png": "3e1461f1c0468534d3bc3b73e1f222bef6d6f09cdb2e4b458a8b66f39e60dd0c",
     "skills/academic-writing-skills/assets/icon.svg": "49315dda7125ec5fc77ef5f2b96126d8b2121c6e72944b4702972e90f321d3ee",
     "skills/academic-writing-skills/assets/manuscript_state_template.json": "abfecf6c9a27d20196c887c858f64b6c6cb252053e576602e4767b7c68974d45",
     "skills/academic-writing-skills/references/banned_words.md": "64255506e74955c9b5fa140555d45b6c8c19804ae0bddabdecf804bde7a44a70",
-    "skills/academic-writing-skills/references/conclusion-and-abstract.md": "4db6b6b94e0c33d3239b5b348f8b6707f6154e893c3d586c9d4843f4bf64f3dc",
+    "skills/academic-writing-skills/references/conclusion-and-abstract.md": "8fd28b534b1d4dab88a5513ca446fee37b3e5951a75f38c2531e103eb926e424",
     "skills/academic-writing-skills/references/discussion-and-limitations.md": "31b82d02b15e858d60c2751518f9c15f16d40b483ebb1f4cc02099c7710db792",
-    "skills/academic-writing-skills/references/execution-and-acceptance.md": "7c906438ae0f9f6d7083436867241f1997a9a134d9bf5e0b1fde7ae8408b9e17",
+    "skills/academic-writing-skills/references/execution-and-acceptance.md": "3b7c3047ac1b4881963e75614631819b4cced7be6fa1b04f9dedc4cb4c05dd45",
     "skills/academic-writing-skills/references/figures-tables-and-supplements.md": "149d0aa2f63aa87f3f50cef3f24e2fd2313415a39fec79ea6c2ad1b676324f1c",
     "skills/academic-writing-skills/references/independent-reader-review.md": "db616410e03ec6c98bebe67f37b1f0d70baee20f94ac054768de00f63e47ff85",
     "skills/academic-writing-skills/references/introduction-and-study-context.md": "a23143b5b1cd8b013f5bfcec073af2ef44aa92a20d7976bd0277d542b5333b5f",
@@ -152,7 +152,7 @@
     "skills/academic-writing-skills/references/prose-and-citation-editing.md": "9e0fc9c39f30fe590193dbb29e81e38df7a289b281cccd32ed7693e430561ac2",
     "skills/academic-writing-skills/references/results-and-explanation.md": "7c6868fba694d1860e05671576239a0815e61cd0ea7fa0f9db26bf00da870741",
     "skills/academic-writing-skills/references/reviewer-red-team-and-release.md": "badc2dcd006f3785a01fb56f6490e87be39b3a2c6f829bcfed89dd0ebe20a7bb",
-    "skills/academic-writing-skills/references/reviewer-response-workflow.md": "24034162b72021225081508ab4b9f10d84adfd36f7c5ff60bc85083d97ec4966",
+    "skills/academic-writing-skills/references/reviewer-response-workflow.md": "79f389bf52fbc3972f8392f40e2e4a4d0d208dd9d0bb9429e477e5e5fb1b1587",
     "skills/academic-writing-skills/references/state-and-authority.md": "fbeb7bd26b13b745ad78f19fc66a4c63c9af608b6c4460d433c0f7af49a4621e",
     "skills/academic-writing-skills/references/study-design-adapters.md": "8cc1386f7ccfd194e66258c972c85a8bd27c5cc74505003897804bac8099e82f",
     "skills/academic-writing-skills/references/universal-integrity.md": "5f7335a39209ce301ad3f0c0a8e553bc8dbe1cb474f4afbe601e47af23c1a183",
@@ -177,8 +177,8 @@
     "skills/paper-review/references/review-checklist-and-cases.md": "f51b422c545f4f2e78d19fa38fdbb88067a1637e55ae2ef1069d2c378075a7f3",
     "skills/paper-review/references/round-calibration.md": "1fa73a6c5caf21aeec0df21ca831d5a50e5a4d0a22898e8d9d48916428260528",
     "skills/paper-review/references/water-cnhs-uncertainty.md": "4923b59b87d3154cf21f45735e25baf5fa08f6aa14aa1f3918625dcf31074550",
-    "skills/academic-writing-skills/references/evidence-context-cases.md": "3d9860ce06537df5ebecfd817063a9fe8398c9408b23c50d39b598fec2cd0f2a",
-    "skills/academic-writing-skills/references/comment-scoped-revision.md": "e73ebd7c251577fe05b003dddb4429adf389505e596002da10ddfcca8f5bfa2a",
+    "skills/academic-writing-skills/references/evidence-context-cases.md": "69cb547847ed02e57d060bc932dcec7679255c87376d86c3de97d785a2bf8805",
+    "skills/academic-writing-skills/references/comment-scoped-revision.md": "a9d951e4d705e548f290eb52f1df4a19869d2c1c5cbeeca083a105ea2c6b74bd",
     "skills/academic-writing-skills/scripts/inspect_comment_targets.py": "4eef6956f751b0de2597f32f279679c64c3600f6d8a3e03ce6d4cf84dffb782b"
   }
 }

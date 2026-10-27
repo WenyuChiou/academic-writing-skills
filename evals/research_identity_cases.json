@@ -1,0 +1,75 @@
+{
+  "purpose": "Hypothetical research-identity writing requests. No expected wording or semantic certificate; assess full proposals against supplied facts and scope. Private application cases are not included.",
+  "cases": [
+    {
+      "id": "Q2",
+      "request": "Revise this Conclusion opening to identify the study coherently in about 90 words. Keep the current research purpose and evidence scope. The next paragraph contains findings; do not introduce findings here.",
+      "source_facts": {
+        "introduction": "Our purpose is to understand how soil conditions influence nitrogen retention in urban wetlands.",
+        "design": "Water chemistry observations at six urban wetlands informed a process model. Two questions concern differences in retention among sites and whether the model describes changes between wet and dry periods.",
+        "scope": "The sites are a demonstration in one metropolitan region, not a representative sample of all urban wetlands."
+      },
+      "paragraph": "We first sampled six urban wetlands in the metropolitan region. We then developed a process model. We then compared differences between sites between wet and dry periods. This study compared observations with model outputs."
+    },
+    {
+      "id": "Q3",
+      "request": "Repair only this Conclusion study-summary paragraph, retaining the research focus. Make the comparisons understandable without listing numbered questions.",
+      "source_facts": {
+        "purpose": "Understand when a low-cost temperature sensor can support monitoring of cold-chain deliveries.",
+        "unit": "Two sensor types were evaluated against a calibrated reference over 40 deliveries.",
+        "overall": "Overall comparisons examine bias, variability, and calibration stability.",
+        "subgroups": "Warm and cold delivery conditions are compared only for bias and variability; subgroup calibration stability was not assessed.",
+        "next": "The following paragraph synthesizes the observed errors and operating limits."
+      },
+      "paragraph": "This study compared two types. The overall and group analyses considered bias, variability, and calibration stability. We compared differences between warm and cold deliveries between the two sensor types. The deliveries were made in one city."
+    },
+    {
+      "id": "Q4",
+      "request": "Minimally revise this qualitative study's Conclusion opening for flow. There are no numbered research questions. Do not add a statistical or experimental framework.",
+      "source_facts": {
+        "purpose": "Understand how nurses identify and repair missing information during shift handovers.",
+        "work": "Interviews with 24 nurses and observations of handovers at three hospitals were interpreted thematically.",
+        "scope": "Accounts describe the participating hospitals; no representative population claim or causal intervention is supported."
+      },
+      "paragraph": "This study explored how nurses identify and repair missing information during shift handovers. Interviews and observations were used. Twenty-four nurses took part at three hospitals. We analyzed themes."
+    },
+    {
+      "id": "Q5",
+      "request": "Make the Conclusion opening more specific and readable without changing this conceptual paper into an empirical study. Preserve the first sentence.",
+      "source_facts": {
+        "purpose": "Clarify how accountability is divided when public agencies contract maintenance to private providers.",
+        "work": "Distinguish legal responsibility from operational control and develop two propositions about mismatches between them.",
+        "nonclaims": "No field site, survey, experiment, validation dataset or result estimates; two propositions are not two mandatory empirical questions."
+      },
+      "paragraph": "This paper clarifies how accountability is divided between public agencies and private maintenance providers. It discusses different aspects at different levels. The two propositions concern responsibility and control."
+    },
+    {
+      "id": "Q6",
+      "request": "Check this Conclusion opening for clarity and alignment. If it is already clear, retain it rather than paraphrasing for variety. The next paragraph reports results.",
+      "source_facts": {
+        "purpose": "Understand whether urban tree cover moderates summer street temperatures.",
+        "work": "Relate canopy observations to street temperature records from 12 neighborhoods over two summers.",
+        "levels": "Assess the association across neighborhoods and separately for shaded and unshaded streets.",
+        "scope": "An observational association, not an intervention or universal climate claim."
+      },
+      "paragraph": "This study examined whether urban tree cover moderates summer street temperatures. We related canopy observations to temperature records from 12 neighborhoods over two summers, assessing the association across neighborhoods and separately for shaded and unshaded streets."
+    },
+    {
+      "id": "Q7",
+      "request": "Fix only subject–verb agreement in the second sentence below. Keep the first and third sentences unchanged; do not restructure the Conclusion or ask for the Introduction.",
+      "source_facts": {
+        "scope": "Surface-only local edit; the first and third sentences are locked."
+      },
+      "paragraph": "This study examined neighborhood heat exposure. The analysis of street temperatures were based on two summers of observations. The results are summarized below."
+    },
+    {
+      "id": "Q8",
+      "request": "Help revise this Conclusion opening to explain the study purpose. Use only the evidence provided; if a needed fact is missing, identify the gap without inventing a goal or finding.",
+      "source_facts": {
+        "available": "The report compares forecasts from three models against one monitoring dataset using RMSE.",
+        "unavailable": "No Introduction, approved aim, study population, findings or intended use is supplied."
+      },
+      "paragraph": "This study compared three forecasting models using RMSE."
+    }
+  ]
+}

@@ -35,6 +35,14 @@ Use the manuscript-state status contract: `OPEN` for unresolved work,
 `RESOLVED` for a completed and verified response, and `WAIVED` only when an
 identified authority accepts the remaining issue and risk.
 
+For each concern, apply the closure assessment in
+[comment-scoped-revision.md](comment-scoped-revision.md#test-concern-closure-separately-from-edit-completion)
+within this ledger: original selected wording/version, actual question, current
+answer and located evidence, plus addressed/partly addressed/open/unverifiable
+with a reason. These assessments do not replace the state statuses above.
+Verify the answer, not merely that the promised rewrite exists; a grouped reply
+cannot close a distinct unanswered subquestion. Preserve working current wording.
+
 Classify the required work as one or more of:
 
 - clarify an existing method or result;

@@ -1,0 +1,47 @@
+{
+  "purpose": "Hypothetical concern-closure exercises. Read the complete supplied context and explain the judgment; no fixed label or keyword is a semantic grading certificate.",
+  "cases": [
+    {
+      "id": "rationale",
+      "comment": "Why compare evening and daytime staff?",
+      "original_selection": "We compare evening and daytime staff.",
+      "current_context": "Staff report different workloads. We compare evening and daytime staff, classified by their scheduled hours.",
+      "source_limit": "No reason linking shift to the stated research question is supplied. Do not invent one."
+    },
+    {
+      "id": "connector",
+      "comment": "The transition from the theoretical distinction to the field site is unexplained.",
+      "original_selection": "We studied eight schools.",
+      "current_context": "Formal authority and daily responsibility need not coincide. We then studied eight schools.",
+      "source_limit": "A conceptual/field argument; no universal IMRAD order is required."
+    },
+    {
+      "id": "distinct_tests",
+      "comment": "Does the seasonal result contradict the comparison with the reference instrument?",
+      "original_selection": "There was no seasonal difference.",
+      "current_context": "Compared with the calibrated reference, readings were higher for both instrument types across all observations. Within each instrument type, mean bias did not differ significantly between warm and cold periods. The first test concerns reference agreement; the second concerns seasonal variation.",
+      "source_limit": "Treat these stated findings as supplied facts for prose review, not independently verified calculations."
+    },
+    {
+      "id": "answered_no_change",
+      "comment": "What does the positive association mean?",
+      "original_selection": "The association was positive.",
+      "current_context": "Respondents who reported greater trust also reported stronger willingness to volunteer.",
+      "source_limit": "Association only; no observed volunteering or causal effect. Preserve a functioning clarification."
+    },
+    {
+      "id": "multipart",
+      "comment": "Explain how people were recruited and whether the same participants returned for follow-up.",
+      "original_selection": "Participants completed interviews.",
+      "current_context": "Participants were recruited through community centers. The interviews concerned access to public services.",
+      "source_limit": "Follow-up participant identities are unavailable. Do not close both parts because recruitment is named."
+    },
+    {
+      "id": "source_unavailable",
+      "comment": "Please check whether the promised diagram now includes the comparison group.",
+      "original_selection": null,
+      "current_context": "The author reports that Figure 3 was updated. Neither the diagram nor a readable caption is supplied.",
+      "source_limit": "A report of editing is not visible evidence of diagram contents. Request the exact artifact rather than infer success or a defect."
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 # Academic Writing Skills
 
-[![plugin version](https://img.shields.io/badge/plugin-v1.3.22-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.3.23-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 本專案是 [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) 的一部分。
 
-從研究定位與架構發想、連貫的逐段撰寫，到整篇論文的檢查與審查。
+從大綱到修回文件，協助建立研究論證、連貫地逐段撰寫，並核對目前證據能支持哪些主張。
 
 可搭配 **Codex**、**Claude Code**、**OpenCode**、**Hermes Agent**，以及其他支援 Agent Skills 格式的 AI agents 使用。可用工具與整合功能依 host 而定。
 
@@ -22,17 +22,28 @@
 - [academic-writing-skills](./skills/academic-writing-skills/SKILL.md)：規劃、撰寫、修改，並同步稿件的相關變動。
 - [paper-review](./skills/paper-review/SKILL.md)：審查稿件，列出有具體位置的問題；預設不直接修改檔案。
 
-| 任務 | 協助產出的內容 |
+| 範圍 | 提供什麼 | 會收到什麼 |
+|---|---|---|
+| 一個段落 | 目前文字、相關前後文／來源，以及要保留的措辭 | 範圍內的修改建議或編輯、具體位置的檢查結果與未解的證據需求 |
+| 一個章節 | 目前目的／大綱、證據與各段功能 | 功能規劃、連貫正文或範圍內的審查，不直接重寫整篇 |
+| 全文或修回文件 | 明確的現行正文與相關 companion files | 四輪審查結果、受影響的跨檔核對，以及明確標示的未核實事項 |
+
+### 涵蓋內容與指南選用
+
+寫作 skill 依請求與稿件選用相關指南；不必每次載入所有章節，也不用自行挑選技術模組。
+
+| 工作 | 對應指南 |
 |---|---|
-| 研究定位與大綱 | 研究方向、缺口、問題、證據界線，以及 extended outline。 |
-| 規劃與撰寫 | 段落規劃與草稿，並釐清想法之間的銜接。 |
-| 檢查與修改 | 核對意思、術語、證據、連貫性、引用，以及受影響的圖表。 |
-| 審查 | 章節審查，以及整篇論文的四輪檢查。 |
-| 同步修改 | 對齊正文、補充資料、圖表、reviewer response 與投稿檔案。 |
+| 研究定位、大綱、引言與研究背景 | [生命週期](./skills/academic-writing-skills/references/lifecycle-and-routing.md)及[引言／背景](./skills/academic-writing-skills/references/introduction-and-study-context.md) |
+| 方法、資料與假設 | [方法與假設](./skills/academic-writing-skills/references/methods-and-assumptions.md) |
+| 結果、討論與研究限制 | [結果](./skills/academic-writing-skills/references/results-and-explanation.md)及[討論／限制](./skills/academic-writing-skills/references/discussion-and-limitations.md) |
+| 結論與摘要 | [研究身分、綜整與濃縮](./skills/academic-writing-skills/references/conclusion-and-abstract.md) |
+| 圖、表、SM 與參考文獻 | [圖表／SM](./skills/academic-writing-skills/references/figures-tables-and-supplements.md)及[文字／引用](./skills/academic-writing-skills/references/prose-and-citation-editing.md) |
+| Reviewer response 與修回對照 | [回覆流程](./skills/academic-writing-skills/references/reviewer-response-workflow.md) |
 
 ## 從研究架構到最終投稿
 
-寫之前，先規劃每段的重點、證據與銜接；寫完後，複查實際修改的文字。章節收尾時，再檢查段落之間是否形成連貫論證。
+從架構發想釐清研究定位與大綱，再規劃與撰寫連貫的段落，並分清楚研究目標和用來完成目標的方法。檢查與修改針對實際文字，不只看規劃或字詞掃描；章節審查再確認各段是否形成連貫論證。依 comment 修訂時，分別確認文字已改好，以及原本的疑問是否已回答。
 
 整篇審查會從頭到尾進行四輪：**論證與結構、證據與主張範圍、學術表達、交付完整性**。由上而下核對問題到證據，也由下而上確認證據能否支持結論；發現重大問題時，回查受影響的章節。
 
@@ -73,12 +84,13 @@ Codex 或 ChatGPT 可使用可用的 skill／plugin 介面。其他 Agent Skills
 寫完後，複查意思、術語與連貫性。
 ```
 
-### 檢查一個段落
+### 修改一個段落
 
 ```text
-請使用 academic-writing-skills skill，檢查這段的定義、術語、連貫性與重複。
-保留已確立的專業用詞及科學意義。
-缺少證據的地方請指出，不要自行編造。
+請使用 academic-writing-skills skill，只修改這個段落。
+需要時參照提供的引言／大綱，保留研究目標、比較關係與適用範圍。
+保留清楚的作者原句及已確立的專業用詞。
+檢查實際修改後的意思與連貫性；缺少的證據請指出。
 ```
 
 ### 審查整篇論文

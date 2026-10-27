@@ -1,6 +1,6 @@
 ---
 name: academic-writing-skills
-description: Plan, outline, draft, review, revise, or proofread academic manuscripts, journal articles, theses, conference papers, abstracts, supplementary materials, and submission packages across disciplines and study designs. Use for extended-outline development, section or paragraph drafting, developmental editing, top-to-bottom and bottom-up integrity checks, reviewer-style revision, method and evidence alignment, terminology control, repetition and flow review, observable stock or AI-like prose patterns, citation consistency, natural scholarly prose, claim-scope control, cross-file synchronization, change-impact review, or final submission readiness.
+description: Frame and outline academic papers, plan and revise connected paragraphs, and align claims with evidence across manuscript sections, abstracts, supplements, references, and reviewer responses. Use for scoped drafting, substantive revision, proofreading, or cross-file integration. Preserve the author's research goal, terminology, clear wording, and inference limits; scale checks to the requested passage, section, or submission package.
 ---
 
 # Academic Writing Skills
@@ -67,7 +67,7 @@ Load the remaining guides only for the requested reader function or an affected 
 
 - [results-and-explanation.md](references/results-and-explanation.md): evidence-led findings, so-what/SQ closure, visual functions, and supported versus merely programmed mechanisms.
 - [discussion-and-limitations.md](references/discussion-and-limitations.md): interpretation or extension-analysis mode, sensitivity boundaries, and specific-constraint-first limitations.
-- [conclusion-and-abstract.md](references/conclusion-and-abstract.md): study identity, supported summaries, and flexible abstract information functions rather than universal sentence templates.
+- [conclusion-and-abstract.md](references/conclusion-and-abstract.md): recover the current research goal, work, comparison levels and scope before summary drafting; preserve clear author wording and distinguish study identity from findings.
 - [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md): final-size legibility, captions/notes, parallel SM, numbering, and project formatting.
 
 At each chapter completion or substantial chapter revision, run the chapter-closure blind-spot check in [lifecycle-and-routing.md](references/lifecycle-and-routing.md). The checkpoint is required; select diagnostic questions by design, content, and evidence. Do not run a full chapter audit for a grammar-only edit or claim exhaustive discovery of unknown unknowns.
@@ -86,7 +86,7 @@ Before drafting or substantively rewriting, run the pre-draft logic check in [un
 
 Draft only after the contract and information order are coherent. After drafting, compare the paragraph against the contract and re-read its previous and next paragraphs. Do not polish a paragraph into fluency if its function, evidence, or placement is wrong.
 
-For comment- or selection-driven edits, first apply [comment-scoped-revision.md](references/comment-scoped-revision.md): verify the current selected text and full thread, separate reading from editing scope, and compare the exact candidate with the authorized boundary. Do not substitute the whole paragraph for the selection or treat a broader explicit instruction as title-only because its anchor is a heading.
+For comment- or selection-driven edits, first apply [comment-scoped-revision.md](references/comment-scoped-revision.md): verify the original/current selected text and full thread, separate reading from editing scope, and compare the exact candidate with the authorized boundary. Assess whether the original concern is answered separately from whether wording changed. Do not substitute the whole paragraph for the selection or treat a broader explicit instruction as title-only because its anchor is a heading.
 
 For substantive drafting or formatted-file editing, read [execution-and-acceptance.md](references/execution-and-acceptance.md) **before drafting**. Use its reader-route and caption/body/SM allocation, then perform its scoped checks before the first handoff. Preserve the author's primary comparison before dependent subgroup or model detail; this does not prescribe a universal comparison order.
 

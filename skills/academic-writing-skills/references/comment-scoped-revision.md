@@ -63,6 +63,44 @@ to its meaning and relevant question without adding an unrequested explanation.
 
 ## Verify the exact candidate and report the actual change
 
+### Test concern closure separately from edit completion
+
+In the existing comment ledger or inline finding, retain the original source
+version and selected span, the full concern, the exact current wording and its
+locator, and the reason that wording does or does not answer the concern. Keep
+an original selection separate from its containing paragraph and from the new
+selection: a later rewrite can move a range or change what its ID selects.
+The range identifies the target; surrounding prose may supply the answer.
+
+Before saying a comment is addressed, restate what an unfamiliar reader must
+be able to understand, then locate that answer in the current reading unit.
+For a logic comment, ask whether the original misunderstanding could still
+reasonably arise, not only whether the sentence was rewritten. Naming groups
+or a classification rule need not explain why their comparison matters; a
+connector or a corrected place name need not supply a missing study rationale.
+When findings appear to conflict, distinguish outcomes, groups, analytical
+levels and tests before inferring a contradiction or a successful repair.
+
+Use a reasoned assessment within that same record:
+
+- **Addressed:** the available current wording answers every part of this
+  concern; a justified no-change can qualify. Quote the answer, not just a reply.
+- **Partly addressed:** identify both the part answered and the question still
+  left to the reader. Do not report the whole thread as complete.
+- **Open:** the required relation or correction is still absent or incorrect.
+- **Unverifiable:** identify the missing source/selection/context and what
+  cannot be judged. A visible grammar correction can still be checked from a
+  quoted comment without claiming its original document anchor was verified.
+
+These are concern assessments, not new manuscript-state statuses or Word
+resolution actions. Keep ledger status `OPEN` for partial, open or required
+unverifiable concerns; use `RESOLVED` only for a verified answer and `WAIVED`
+only under the existing authority contract. Grouped replies must preserve each
+subconcern's coverage. Distinguish this judgment from edit/format preservation,
+word-count checks, language scans and independent-reader evidence. Preserve a
+working repair rather than rewriting it to demonstrate activity. See
+[evidence-context case 13](evidence-context-cases.md#13-a-rewrite-is-not-concern-closure).
+
 Compare source and candidate at the selected-span level. Identify which sentences
 changed and which surrounding wording remained exact. Include any necessary
 expansion and its evidence; do not claim an unchanged paragraph if only its topic

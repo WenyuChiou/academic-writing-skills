@@ -42,6 +42,16 @@ established, what is added next, and what question the sequence answers. For a
 bounded paragraph, inspect only its available neighbors. Do not silently invent
 missing context or impose a whole-paper rewrite on a local edit.
 
+For a substantive study-summary revision, use the identity preparation in
+[conclusion-and-abstract.md](conclusion-and-abstract.md) before wording. Recover
+the current aim and the role of each research component, including comparison
+units/dimensions/levels and relevant scope; reuse the existing paragraph plan.
+An aim is not interchangeable with the method or dataset used to pursue it.
+An author-locked paragraph order controls where study identification, findings
+and extensions belong. This is not triggered by a chapter keyword in a
+surface-only edit, and it does not require the author to repeat context already
+available in the current Introduction.
+
 Keep the primary comparison visible before its dependent detail. If the author
 asks for human-versus-LLM comparison, introduce that comparison before differences
 between individual LLMs. In another study the primary contrast may be treatments,
@@ -64,6 +74,13 @@ For a process description, use the [workflow handoff test](prose-and-citation-ed
 For an anchored revision, use [comment-scoped-revision.md](comment-scoped-revision.md) before drafting. Bind the current source hash, effective selected wording, full thread and requested action; read surrounding prose without unlocking it. Compare source and candidate afterward, identify actual changed and unchanged sentences, and locate the evidence for any minimal expansion. Keep file edits, replies and resolution separately authorized. Uncertain or stale anchors are not a passed scope check; a zero outside-selection diff does not excuse a broken dependency or missing answer.
 
 ## Before handoff: perform, then record
+
+For comment-driven work, record edit completion and concern closure separately
+using the existing [comment-scope procedure](comment-scoped-revision.md#test-concern-closure-separately-from-edit-completion).
+Locate the answer to the original question in the current reading unit, or
+identify the part still unanswered/unverifiable. A clean wording scan, changed
+selection or accurate diff is not that judgment. Reuse the existing finding or
+ledger; no new schema, fixed sentence form or full-paper audit is required.
 
 After the last edit, inspect the **exact** candidate and its affected dependencies.
 Record a located finding for each applicable check; a tick or a stock assurance
@@ -123,6 +140,15 @@ are insufficient if that contribution is absent. Do not invent a bridge when no
 later comparison is in scope, or treat diagnostics as an unstated permission gate.
 See evidence-context case 11 for failure and no-change controls. A self-check is
 not an independent reader result; preserve that distinction in the handoff.
+
+For summary prose, the same walkthrough also tests whether a reader can recover
+the research goal and the work that addresses it, rather than only an inventory
+of methods or comparisons. Bind the paraphrase to the exact post-edit candidate
+and current source; check whether shortening or a scope correction displaced the
+goal or merged overall and subgroup analyses. Locate the retained clear wording
+and the repaired relation, or record a justified no-change result. See
+evidence-context case 12. A scan, a plan on file or an SQ label does not establish
+that the completed paragraph communicates those relations.
 
 ## Optional deterministic coverage checker
 

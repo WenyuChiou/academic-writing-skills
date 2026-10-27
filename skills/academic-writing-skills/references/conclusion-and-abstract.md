@@ -13,6 +13,30 @@ Synthesize **what the study did → what it established → what that adds and w
 
 State both the method and research task, the subject or system, and relevant place, time, or analytical scope. Naming a framework is not the same as explaining what it was used to investigate. Preserve the actual task verb and distinguish developing a method, demonstrating an application, comparing groups, and validating a prediction.
 
+Before choosing sentences for a substantive summary revision, recover the
+study's identity from the current Introduction, approved outline and author
+request. In the existing writing plan, distinguish the **goal** (what
+understanding or decision the study seeks to improve) from the **work** used to
+address it. Name the studied entities, comparison reference, dimensions and
+overall/subgroup levels only where the design supports them. Do not turn a
+method, model comparison, recruitment platform or demonstration region into a
+replacement goal. A paper without numbered questions still has a purpose; do
+not manufacture SQs or a fixed number of sentences to express it.
+
+Follow the requested paragraph functions. If an opening paragraph identifies
+what the study did and a later paragraph synthesizes findings, keep those roles
+distinct. Retain an already clear opening and usable author sentences; repair
+only the missing relation or scope. An older professor example supplies a style
+reference, not current sample counts, group names or approved wording.
+
+Separate the roles of a recruited population, study site, contextual scenario
+and demonstration case. Correct a geographic description without deleting the
+scientific purpose or hiding a known boundary behind “study context.” If
+measurement quality was examined overall but subgroup work covered only
+distributions and relationships, do not extend every overall dimension to each
+subgroup. See [evidence-context case 12](evidence-context-cases.md#12-research-identity-before-sentence-compression)
+for a hypothetical example and no-change controls.
+
 Synthesize answers in question or analytical order rather than replaying each figure. Retain the main contrast, comparator, direction, and any condition essential to meaning. Describe a mechanism only at the strength supported by the analysis. Use the main Results as the evidentiary basis and Discussion to qualify them; do not introduce a new finding or promote an extension into the headline merely because it sounds broader.
 
 End with a concrete contribution, implication, or use boundary justified by those answers. Policy feasibility and affordability claims need relevant evidence; a comparison of losses alone does not establish them. No fixed paragraph count is required. Do not copy the Abstract, force a grand recommendation, or equate the number of available options with their actual effectiveness.
@@ -47,3 +71,14 @@ When composing another abstract-writing skill, classify its rules with [overlay-
 After shortening either summary, compare it with the current evidence map. Check whether compression dropped a denominator, population, baseline, time window, model-only qualifier, or inference boundary. Ensure that descriptive similarity did not become equivalence, a model rule did not become a demonstrated cause, and a conditional metric did not become overall protection or vulnerability.
 
 Read the exact Abstract alone. Can a broad disciplinary reader explain the method, research task, subject, relevant scope, main answer, and contribution? Read the Conclusion separately: does it synthesize the actual study rather than make a new claim? Recheck both after material changes elsewhere. Use [lifecycle-and-routing.md](lifecycle-and-routing.md) for the chapter-closure check and [prose-and-citation-editing.md](prose-and-citation-editing.md) for plain scholarly syntax.
+
+For a study-identity paragraph, first paraphrase from the completed prose alone
+what the authors sought to understand, what they did toward that goal, and who
+or what was compared on which dimensions and levels. Then compare that reading
+with the authoritative plan. A series of correct “we first / we then” steps,
+repeated “comparison” clauses, or ambiguous nested “between” phrases may still
+lose the purpose or hierarchy. Repair that loss, not technical repetition that
+keeps the comparison clear. Removing SQ labels must not remove the relations.
+Missing authority limits the verdict; do not invent a goal to fill the opening.
+This functional check belongs to the existing reader walkthrough, not a second
+checklist or proof that a future assistant will comply.

@@ -1,11 +1,11 @@
 # Academic Writing Skills
 
-[![plugin version](https://img.shields.io/badge/plugin-v1.3.22-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.3.23-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 Part of [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills).
 
-Plan a paper's research focus and argument architecture, write connected paragraphs, and review the full manuscript.
+Develop a research argument, write connected paragraphs, and check what the current evidence supports—from an outline to a revision package.
 
 Use with **Codex**, **Claude Code**, **OpenCode**, **Hermes Agent**, and other AI agents that support the Agent Skills format. Available tools and integrations depend on the host.
 
@@ -22,17 +22,29 @@ One plugin provides two skills:
 - [academic-writing-skills](./skills/academic-writing-skills/SKILL.md): plan, draft, revise, and coordinate manuscript changes.
 - [paper-review](./skills/paper-review/SKILL.md): assess the manuscript and report located findings; review-only by default.
 
-| Task | What it helps you produce |
+| Scope | Provide | Receive |
+|---|---|---|
+| One passage | Current text, relevant neighbors/sources and wording to preserve | A bounded proposal or edit, located checks and unresolved evidence needs |
+| One section | Current purpose/outline, evidence and paragraph roles | A function plan, connected prose or a scoped review—not a whole-paper rewrite |
+| Whole paper or revision package | Exact active manuscript and relevant companion files | Four-pass findings, affected cross-file checks and explicit unverified items |
+
+### Coverage and guide selection
+
+The writing skill selects the relevant guide from the request and manuscript;
+you do not need to load every section or choose technical modules manually.
+
+| Work | Relevant guidance |
 |---|---|
-| Frame & outline | A research focus, gap, questions, evidence boundaries, and an extended outline. |
-| Plan & write | Paragraph plans and drafts with clear links between ideas. |
-| Check & revise | Checks of meaning, terminology, evidence, flow, citations, and affected figures or tables. |
-| Review | Section reviews and four-pass critiques of the whole manuscript. |
-| Coordinate revisions | Aligned manuscript, supplement, figures, tables, reviewer responses, and submission files. |
+| Framing, outline, Introduction and study context | [Lifecycle](./skills/academic-writing-skills/references/lifecycle-and-routing.md) and [Introduction/context](./skills/academic-writing-skills/references/introduction-and-study-context.md) |
+| Methods, data and assumptions | [Methods and assumptions](./skills/academic-writing-skills/references/methods-and-assumptions.md) |
+| Results, Discussion and Limitations | [Results](./skills/academic-writing-skills/references/results-and-explanation.md) and [Discussion/limitations](./skills/academic-writing-skills/references/discussion-and-limitations.md) |
+| Conclusion and Abstract | [Study identity, synthesis and compression](./skills/academic-writing-skills/references/conclusion-and-abstract.md) |
+| Figures, tables, SM and references | [Displays/SM](./skills/academic-writing-skills/references/figures-tables-and-supplements.md) and [prose/citations](./skills/academic-writing-skills/references/prose-and-citation-editing.md) |
+| Reviewer response and revision alignment | [Response workflow](./skills/academic-writing-skills/references/reviewer-response-workflow.md) |
 
 ## From research architecture to submission
 
-Plan each paragraph's point, evidence, and links before writing; recheck the revised text afterward. At section closure, review the argument across paragraphs.
+The workflow is **Frame & outline → Plan & write → Check & revise**. Develop the argument architecture from the paper's purpose and evidence, then check the actual prose—not only a plan or language scan. Distinguish the goal from the methods used to pursue it. Section reviews check the argument across paragraphs; comment-driven reviews distinguish a completed edit from an answered concern.
 
 Full-paper review reads top-to-bottom in four passes: **argument and structure; evidence and scope; scholarly writing; delivery integrity**. Check alignment top-down, from questions to evidence, and bottom-up, from evidence to conclusions. Revisit affected sections when a material issue is found.
 
@@ -73,12 +85,13 @@ Before each paragraph, state its point, evidence, inference limits, and connecti
 After writing, recheck meaning, terminology, and flow.
 ```
 
-### Check a paragraph
+### Revise one paragraph
 
 ```text
-Use the academic-writing-skills skill to check this paragraph's definitions, terminology, flow, and repetition.
-Preserve established technical terms and scientific meaning.
-Report missing evidence instead of inventing it.
+Use the academic-writing-skills skill to revise only this paragraph.
+Use the supplied Introduction/outline when needed to preserve the research goal,
+comparisons and scope. Keep clear author wording and established technical terms.
+Check the exact revision for meaning and flow; identify missing evidence.
 ```
 
 ### Review the whole paper
