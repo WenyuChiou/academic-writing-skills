@@ -1,0 +1,88 @@
+{
+  "provenance": "Fictional cross-design writing requests, not manuscript excerpts or verified research findings.",
+  "cases": [
+    {
+      "id": "RC01",
+      "task": "Revise this Results paragraph for clear connected prose, with the smallest necessary changes. Preserve the supplied evidence and inference limits.",
+      "source_facts": [
+        "Two prediction methods were evaluated on the same observations.",
+        "Mean absolute error was 1.2 for A and 2.4 for B.",
+        "The 95th percentile of absolute error was 4.8 for A and 3.6 for B.",
+        "No overall superiority or formal robustness criterion was tested."
+      ],
+      "passage": "Method A had a mean absolute error of 1.2. Method B had 2.4. The 95th percentile was 4.8 for A. It was 3.6 for B. Method A was more robust."
+    },
+    {
+      "id": "RC02",
+      "task": "Revise this Results paragraph for clear connected prose, with the smallest necessary changes. Preserve the supplied evidence and inference limits.",
+      "source_facts": [
+        "The survey score and its direction were defined in the preceding paragraph.",
+        "Group means were 0.61 for A and 0.60 for B.",
+        "Between-person standard deviations were 0.08 for A and 0.22 for B.",
+        "Respondents were not matched across groups; agreement and equivalence were not tested."
+      ],
+      "passage": "The mean scores were 0.61 and 0.60 for groups A and B. The standard deviations were 0.08 and 0.22. Responses in A were concentrated. Agreement was better."
+    },
+    {
+      "id": "RC03",
+      "task": "Review this Results paragraph for readability and make only necessary changes. Keep clear wording unchanged.",
+      "source_facts": [
+        "Species richness is correctly defined here.",
+        "The observations support the stated shade comparison, not a causal effect of shade.",
+        "No numerical values need to be added."
+      ],
+      "passage": "Species richness is the number of species observed in a plot. Richness was higher in shaded plots than in unshaded plots. This comparison describes the sampled plots; it does not establish an effect of shade."
+    },
+    {
+      "id": "RC04",
+      "task": "Revise this qualitative Results paragraph for clear connected prose, with the smallest necessary changes. Preserve the supplied evidence and inference limits.",
+      "source_facts": [
+        "Interviewees described delayed repairs and explicitly attributed some delays to unavailable replacement parts.",
+        "The study did not independently measure causal effects or population prevalence.",
+        "No quotation or participant count is available to add."
+      ],
+      "passage": "Interviewees described delayed repairs. Replacement parts were unavailable. Supply shortages caused delays. This was a major pattern."
+    },
+    {
+      "id": "RC05",
+      "task": "Revise this modeling Results paragraph for clear connected prose, with the smallest necessary changes. Preserve the supplied evidence and inference limits.",
+      "source_facts": [
+        "Insurance reduces loss after payouts but not physical damage in this model.",
+        "Mean perception scores declined over the simulated period.",
+        "Moving to another district can change exposure under the model rules.",
+        "No decomposition has determined which process explains the aggregate perception decline."
+      ],
+      "passage": "Insurance reduced loss after payouts. Mean perception declined. Households could move. Moving explains the decline."
+    },
+    {
+      "id": "RC06",
+      "task": "Revise this Results paragraph for clear connected prose, with the smallest necessary changes. Preserve the supplied evidence and inference limits.",
+      "source_facts": [
+        "The amount covered by insurance was 40% of property loss.",
+        "That same covered amount equaled 8% of annual household income.",
+        "These are two denominators for the same amount, not before/after values.",
+        "No affordability or welfare outcome was measured."
+      ],
+      "passage": "Insurance covered 40% of property loss. Income was considered. Protection fell to 8%. This difference shows a smaller benefit."
+    },
+    {
+      "id": "RC07",
+      "task": "Make this conceptual argument easier to follow with minimal changes. Do not turn it into an empirical Results section.",
+      "source_facts": [
+        "The framework distinguishes technical compatibility from governance responsibilities.",
+        "Its conditional argument is that shared interfaces can enable data exchange, while governance must specify who can authorize that exchange.",
+        "No experiment, organizational outcome, or proof of convergence is reported."
+      ],
+      "passage": "Shared interfaces enable exchange. Governance assigns authority. Organizations converge. The framework is validated."
+    },
+    {
+      "id": "RC08",
+      "task": "Correct only the grammar in the supplied sentence. Do not add interpretation or review surrounding sections.",
+      "source_facts": [
+        "The temperature and storage procedure are locked.",
+        "Only subject–verb agreement is in scope."
+      ],
+      "passage": "The samples was stored at 4°C."
+    }
+  ]
+}

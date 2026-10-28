@@ -11,6 +11,31 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.3.24] - 2026-10-28
+
+### Changed
+
+- Make the existing Results reader walkthrough inspect the boundary between a
+  finding and its explanation as continuous prose. Identify the observed
+  comparison being interpreted; repair missing relations through a named
+  referent, necessary comparison, premise order or appropriate clause joining.
+- Preserve useful short sentences and existing clear prose. Sentence length,
+  added connectors and fluent wording do not establish logical continuity;
+  missing evidence must not be replaced with an invented mechanism.
+- Route repeated result-explanation discontinuities through the existing
+  independent cold-reader procedure, with located findings rather than a
+  generic fluency verdict. No new mandatory agent count, review round, state
+  schema, audit operation or manuscript-wide rewrite is introduced.
+
+### Added
+
+- Eight fictional cross-design writing requests covering average/tail error,
+  means/spread, qualitative attribution, model-rule versus explanation,
+  normalization, conceptual reasoning and no-change/grammar-only controls.
+  Fixture and route checks validate packaging only; actual paired writing and
+  anonymous reader findings are assessed separately, not as semantic unit tests
+  or a guarantee that future writing will be error-free.
+
 ## [1.3.23] - 2026-10-27
 
 ### Changed
@@ -968,6 +993,7 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   domain-neutral.
 
 [Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/commits/main
+[1.3.24]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.23...v1.3.24
 [1.3.14]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.13...v1.3.14
 [1.3.10]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.9...v1.3.10
 [1.1.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.1.0...main

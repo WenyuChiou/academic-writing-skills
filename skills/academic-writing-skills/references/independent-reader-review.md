@@ -70,6 +70,12 @@ Check especially:
    comparisons precede it? Does the next sentence introduce a new concept or
    mechanism without explaining its relationship to the reported evidence?
 
+For result explanations, also notice prose that reads like notes despite correct
+grammar. Locate the adjacent sentences where the explanation loses its connection
+to a specific finding; use the [result–explanation continuity check](results-and-explanation.md#resultexplanation-continuity)
+to distinguish a missing relation from useful short sentences. Do not infer a
+mechanism to fill the gap, or flag a passage merely because its sentences are short.
+
 Necessary technical terms may remain. Prefer a short definition or mapping
 before first use, a concrete subject and verb, or an explicit comparator over
 synonym rotation, noun stacks, or textbook digressions. Do not require every
@@ -130,7 +136,8 @@ For each substantive obstruction, record:
   not supplied at that point; identify any later definition separately.
 - **Consequence:** what the reader cannot decide or might misinterpret.
 - **Smallest repair:** move a supplied definition, map a label to earlier content,
-  name a referent, or ask for a missing fact. Mark conditional wording explicitly.
+  name a referent, connect an observation to its supported interpretation, or ask
+  for a missing fact. Mark conditional wording explicitly.
 - **Evidence needed:** for an unresolved source-dependent question, identify what
   would settle it and withhold an asserted correction until it is available.
 

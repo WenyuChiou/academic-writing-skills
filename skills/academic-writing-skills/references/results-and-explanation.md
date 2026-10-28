@@ -75,6 +75,28 @@ Use [figures-tables-and-supplements.md](figures-tables-and-supplements.md) for c
 
 ## Mechanisms and Logical Flow
 
+### Result–explanation continuity
+
+Read a result and its explanation as continuous prose, not as separately polished
+sentences. At their boundary, identify the specific observed comparison that the
+explanation interprets and what that interpretation adds. A sequence of correct
+short sentences can still read like disconnected notes when it changes subject,
+comparison, denominator or analytical level without supplying that relation.
+
+Repair that relation with the smallest change: name the result being explained,
+put a necessary comparison beside it, reorder a premise, or join clauses when
+their contrast, condition or qualification belongs together. Do not join every
+short sentence, impose a minimum length, or add a stock connector. Preserve clear
+short prose and technical distinctions; if the relation needs unavailable evidence,
+state that limit rather than inventing a cause to make the passage flow.
+
+For example, given only similar group means and a smaller between-person spread
+in group A, `The means were similar. A was concentrated. The groups agreed.`
+does not communicate the comparison safely. A minimal repair is `The groups had
+similar mean scores, but responses varied less among people in group A.` This
+connects the supplied findings without claiming matched agreement or equivalence.
+It is a hypothetical illustration, not a rule to merge all results into one sentence.
+
 Separate a model or procedural rule, the observed output, an explanation supported by decomposition or another appropriate analysis, and a plausible but untested interpretation. A rule alone does not establish why an aggregate pattern occurred. A citation supporting a real-world mechanism does not demonstrate its operation in the present dataset or simulation.
 
 Connect explanation to the reported pattern through an explicit relation. “A therefore B” requires evidence for that link, not just plausible sequencing. If an explanation is untested, qualify it and place its extended interpretation in Discussion when the genre separates Results and Discussion. A concise Results qualification can prevent a misleading reading without becoming a speculative causal narrative.
