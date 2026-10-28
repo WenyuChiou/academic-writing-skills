@@ -107,6 +107,11 @@ inspect the same complete unit without author explanations; a self-check remains
 labeled as such when separate readers are unavailable. A grammar-only edit still
 uses the local walkthrough above, not an automatic multi-agent audit.
 
+When Results prose reads like disconnected notes, use the
+[result–explanation continuity check](results-and-explanation.md#resultexplanation-continuity)
+within that walkthrough. Locate the repaired relation or a justified no-change
+finding; sentence length and added connectors are not acceptance criteria.
+
 Keep reporting bases separate: a scan reports configured pattern matches; the parent walkthrough reports a located reader obstruction or a justified no-change finding; an independent reader report identifies that reader's actual scope and limits. For example, a workflow finding can identify that one paragraph now supplies the updated inputs used by the next. A component list or generic "flow checked" is not that evidence. Keep local findings inline rather than printing every sentence-pair observation or creating another ledger. Unresolved comprehension findings remain open, even when a scan passes.
 
 Use `checked` only with a concrete locator, finding, and resolved/open outcome.
