@@ -4,13 +4,18 @@
 prompts 開始。以下範例皆採平台中立寫法：以一般文字指定 skill 名稱，不依賴
 特定 client 的調用符號。
 
-[English](./USER_GUIDE.md)
+[English](./USER_GUIDE.md) | [简体中文](./USER_GUIDE.zh-CN.md)
+
+
+本候選版尚未發布。以下範例使用繁中入口 `academic-writing-skills-zh-tw` 與
+`paper-review-zh-tw`；同一功能擇一語言即可。指引語言不決定論文交付語言，
+例如可用繁中討論、保留英文正文。
 
 ## 選擇 skill
 
 需要規劃、撰寫、修改、同步或準備投稿材料時，使用
-`academic-writing-skills`；只需要審查與找出問題時，使用
-`paper-review`。要求 review 預設不代表授權修改檔案。
+`academic-writing-skills-zh-tw`；只需要審查與找出問題時，使用
+`paper-review-zh-tw`。要求 review 預設不代表授權修改檔案。
 
 ## 建議提供的資料
 
@@ -47,7 +52,7 @@ TARGET / STAGE: [venue，以及 developmental / substantive / integration / subm
 ### 建立 extended outline
 
 ```text
-請使用 academic-writing-skills skill，根據附件建立 extended outline。確認 gap、
+請使用 academic-writing-skills-zh-tw skill，根據附件建立 extended outline。確認 gap、
 research questions、methods、現有 evidence、預定 contribution 與 nonclaims。
 每個 planned paragraph 都列出 function、claim、authorized evidence、
 inference limit 與 bridge。暫時不要撰寫完整正文。
@@ -56,7 +61,7 @@ inference limit 與 bridge。暫時不要撰寫完整正文。
 ### 撰寫 section
 
 ```text
-請使用 academic-writing-skills skill，依照已核准的 outline 與提供的 sources 撰寫
+請使用 academic-writing-skills-zh-tw skill，依照已核准的 outline 與提供的 sources 撰寫
 Section 2.3。保留所有 locked terms、numbers 與 citations，並逐段檢查
 claim、evidence、development 以及與前後文字的銜接。
 ```
@@ -64,7 +69,7 @@ claim、evidence、development 以及與前後文字的銜接。
 ### 檢查術語與流暢度
 
 ```text
-請使用 academic-writing-skills skill 修改這一節的 terminology consistency、可避免的
+請使用 academic-writing-skills-zh-tw skill 修改這一節的 terminology consistency、可避免的
 非技術詞重複、stock phrasing 與 paragraph flow。保留必要的 technical
 repetition，不要改變科學意義、數值、citations 或 claim strength。
 ```
@@ -72,7 +77,7 @@ repetition，不要改變科學意義、數值、citations 或 claim strength。
 ### 套用選定的 review comments
 
 ```text
-請使用 academic-writing-skills skill 處理 review items 1、3、5。需要 missing source
+請使用 academic-writing-skills-zh-tw skill 處理 review items 1、3、5。需要 missing source
 或 author decision 的項目繼續列為 open，並將每一項 material change 同步到
 受影響的 sections、displays、supplement、Abstract 與 Conclusion。
 ```
@@ -80,7 +85,7 @@ repetition，不要改變科學意義、數值、citations 或 claim strength。
 ### 驗證 revision round
 
 ```text
-請使用 paper-review skill 比較 current manuscript、reviewer comments、response
+請使用 paper-review-zh-tw skill 比較 current manuscript、reviewer comments、response
 letter 與 prior version。將每個 issue 分為 resolved、partial、open、
 regressed、waived、new 或 not verifiable；不能只依 response letter 判定所有
 受影響檔案都已完成修改。
@@ -89,7 +94,7 @@ regressed、waived、new 或 not verifiable；不能只依 response letter 判�
 ### 檢查投稿檔案
 
 ```text
-請使用 paper-review skill，在 submission stage 檢查 exact manuscript、supplement、
+請使用 paper-review-zh-tw skill，在 submission stage 檢查 exact manuscript、supplement、
 figures、tables、highlights、cover letter、declarations 與 metadata。列出
 release blockers；只有實際檔案全部支持時，才能標示 SUBMISSION_READY。
 ```
@@ -105,7 +110,7 @@ release blockers；只有實際檔案全部支持時，才能標示 SUBMISSION_R
 
 ## 自動選擇 review modules
 
-`paper-review` 會根據稿件本身選擇最小且足夠的技術 references，使用者不需
+`paper-review-zh-tw` 會根據稿件本身選擇最小且足夠的技術 references，使用者不需
 手動指定 modules。現有涵蓋範圍包括：
 
 - equations、notation 與 derived-display provenance；
@@ -122,6 +127,10 @@ project-precedent overlay 只有在相關 context 被明確要求或確認時才
 ## 長期專案
 
 一次性的修改不需額外設定。反覆修改的多檔案專案可以建立 manuscript state：
+
+以下指令以完整 checkout 的根目錄為起點，使用其中的英文共用工具。
+若只手動安裝某語言的 skill，請將 script 路徑改成該資料夾實際安裝的位置；
+後面的 pytest 範例只適用於完整 checkout，不是一般使用者的必要步驟。
 
 ```bash
 python skills/academic-writing-skills/scripts/init_manuscript_state.py manuscript_state.json

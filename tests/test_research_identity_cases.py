@@ -46,11 +46,22 @@ def _table_widths(text):
 def test_readme_local_targets_resolve_and_locale_table_topology_matches():
     english = (ROOT / "README.md").read_text(encoding="utf-8")
     chinese = (ROOT / "README.zh-TW.md").read_text(encoding="utf-8")
-    for text in (english, chinese):
+    simplified = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
+    for text in (english, chinese, simplified):
         for target in _local_targets(text):
             assert (ROOT / target).exists(), target
     # A structural guard only; bilingual meaning receives independent review.
     assert _table_widths(english) == _table_widths(chinese)
+    assert _table_widths(english) == _table_widths(simplified)
     assert len(re.findall(r"^## ", english, re.M)) == len(re.findall(r"^## ", chinese, re.M))
-    guide_targets = lambda text: {path for path in _local_targets(text) if path.startswith("./skills/")}
-    assert guide_targets(english) == guide_targets(chinese)
+    assert len(re.findall(r"^## ", english, re.M)) == len(re.findall(r"^## ", simplified, re.M))
+    def guide_targets(text):
+        targets=set()
+        for path in _local_targets(text):
+            if path.startswith("./skills/"):
+                for base in ("academic-writing-skills", "paper-review"):
+                    for suffix in ("zh-tw", "zh-cn"):
+                        path=path.replace(f"/{base}-{suffix}/",f"/{base}/")
+                targets.add(path)
+        return targets
+    assert guide_targets(english) == guide_targets(chinese) == guide_targets(simplified)

@@ -77,7 +77,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.3.24"
+    assert manifest["version"] == "1.4.0"
     guide_version = re.search(
         r"plugin skill version `([^`]+)`", read(ROOT / "docs" / "workspace-adapter.md")
     )
@@ -816,13 +816,18 @@ def test_readmes_are_bilingual_user_facing_entrypoints():
     assert "由上而下" in chinese
     assert "由下而上" in chinese
     assert "從頭到尾" in chinese
-    assert "請使用 academic-writing-skills skill" in chinese
-    assert "請使用 paper-review skill" in chinese
+    assert "請使用 academic-writing-skills-zh-tw skill" in chinese
+    assert "請使用 paper-review-zh-tw skill" in chinese
     assert "[English](./README.md)" in chinese
     assert "[完整使用指南](./docs/USER_GUIDE.zh-TW.md)" in chinese
 
     relative_link = re.compile(r"\]\((\./[^)#]+)")
-    for source in (ROOT / "README.md", ROOT / "README.zh-TW.md"):
+    simplified = read(ROOT / "README.zh-CN.md")
+    assert "请使用 academic-writing-skills-zh-cn skill" in simplified
+    assert "请使用 paper-review-zh-cn skill" in simplified
+    assert "安装版本" in simplified
+    assert "marketplace 跟踪 `main`" in simplified
+    for source in (ROOT / "README.md", ROOT / "README.zh-TW.md", ROOT / "README.zh-CN.md"):
         for route in relative_link.findall(read(source)):
             assert (ROOT / route.removeprefix("./")).exists(), (
                 f"broken README link: {source.name} -> {route}"
@@ -833,8 +838,10 @@ def test_user_facing_prompts_are_platform_neutral():
     paths = [
         ROOT / "README.md",
         ROOT / "README.zh-TW.md",
+        ROOT / "README.zh-CN.md",
         ROOT / "docs" / "USER_GUIDE.md",
         ROOT / "docs" / "USER_GUIDE.zh-TW.md",
+        ROOT / "docs" / "USER_GUIDE.zh-CN.md",
         CORE / "agents" / "openai.yaml",
         REVIEW / "agents" / "openai.yaml",
     ]

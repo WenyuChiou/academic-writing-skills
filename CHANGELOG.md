@@ -11,6 +11,19 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+### Added
+
+- Traditional and Simplified Chinese entries for academic writing and paper
+  review, with64 translated entry/reference documents and Chinese usage guides.
+- Source-bound locale integrity checks for stale translations, protected English
+  examples, local references, and exact safe helper/asset mirrors.
+
+### Changed
+
+- Prepare plugin1.4.0 metadata and six-entry adapter packaging. The English
+  guidance, six audit operations, manuscript-state schema and review-only
+  permissions are unchanged. A plugin release/cache rollout is separate.
+
 ## [1.3.24] - 2026-10-28
 
 ### Changed

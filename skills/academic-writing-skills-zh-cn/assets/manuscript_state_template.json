@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.1",
+  "project": {
+    "id": "replace-with-project-id",
+    "title": "",
+    "archetype": "empirical",
+    "study_designs": [],
+    "lifecycle_stage": "outline",
+    "review_maturity": "developmental",
+    "target_venue": "",
+    "active_release": "working"
+  },
+  "artifacts": [
+    {
+      "id": "main",
+      "path": "manuscript.docx",
+      "role": "main_manuscript",
+      "status": "ACTIVE",
+      "required_for_release": true
+    }
+  ],
+  "authority_sources": [
+    {
+      "id": "analysis-output",
+      "kind": "verified_primary_evidence",
+      "path_or_reference": "",
+      "scope": ["methods", "results", "numbers"],
+      "status": "UNVERIFIED",
+      "last_verified": ""
+    }
+  ],
+  "contract": {
+    "gap": "",
+    "task": "",
+    "outcomes": [],
+    "questions": [
+      {
+        "id": "Q1",
+        "text": "",
+        "lock": "SEMANTIC"
+      }
+    ],
+    "contribution": "",
+    "nonclaims": []
+  },
+  "semantic_locks": [],
+  "terminology": [],
+  "terminology_proposals": [],
+  "style_profile": {
+    "language_variant": "",
+    "protected_terms": [],
+    "discouraged_phrases": [],
+    "preferred_open_compounds": [],
+    "allowed_repetitions": [],
+    "sentence_opening_words": 4,
+    "phrase_words": 5,
+    "phrase_min_occurrences": 3
+  },
+  "facts": [],
+  "alignment": [
+    {
+      "question_id": "Q1",
+      "method": "",
+      "evidence": "",
+      "result": "",
+      "interpretation": "",
+      "limitation": "",
+      "contribution": "",
+      "status": "PLANNED"
+    }
+  ],
+  "dimensions": [],
+  "decisions": [],
+  "issues": [],
+  "release": {
+    "status": "WORKING",
+    "candidate_artifact_ids": ["main"],
+    "required_checks": [
+      "argument_structure",
+      "evidence_scope",
+      "scholarly_writing",
+      "delivery_integrity",
+      "functional_completeness"
+    ],
+    "completed_checks": [],
+    "checked_hashes": {},
+    "visual_check": "NOT_RUN"
+  }
+}

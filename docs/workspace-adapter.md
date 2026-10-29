@@ -2,7 +2,7 @@
 
 `adapter.json` exposes the existing academic writing and paper review skills to
 an explicitly configured local workspace consumer. Adapter version `1.0.0`
-uses manifest schema `1`, plugin skill version `1.3.24`, and manuscript state
+uses manifest schema `1`, plugin skill version `1.4.0`, and manuscript state
 schema `1.1`. It needs no private checkout, host-specific path, network service,
 or installed project overlay. No scientific rule or audit script is replaced.
 
@@ -10,6 +10,15 @@ The writing skill may propose manuscript changes. The paper review skill is
 review-only. These modes describe authority boundaries; installing or verifying
 a bundle does not authorize editing a manuscript or running its scripts.
 Project overlays remain optional, explicitly supplied project inputs.
+
+The bundle includes Traditional Chinese (`-zh-tw`) and Simplified Chinese
+(`-zh-cn`) entries for each capability, without changing the English entries or
+the six operation signatures. Choose one language entry per capability. Locale
+folders contain byte-identical helper and asset mirrors for standalone installs;
+adapter operations still target the one canonical English runtime. The read-only
+`scripts/check_localizations.py` checks translation coverage, source freshness
+and protected material against `locales/translation-manifest.json`. It does not
+certify semantic fidelity or prove that a human or agent performed a review.
 
 ## Verify and package
 
@@ -37,7 +46,7 @@ The helper packages the same bytes that it hashed during verification.
 
 `files` maps each repository-relative slash path to its lowercase SHA256 digest.
 It includes the plugin metadata, license, this guide, build helper, and both
-skills' complete `SKILL.md`, `scripts`, `references`, `assets`, and `agents`
+capabilities' English and Chinese `SKILL.md`, `scripts`, `references`, `assets`, and `agents`
 trees, including nested reference material and binary example figures. Bytecode
 and tool caches are excluded. The manifest itself is included in
 the archive and identified by the verifier's `manifest_sha256`; it cannot contain
