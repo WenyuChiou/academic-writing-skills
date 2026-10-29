@@ -21,6 +21,10 @@ import zipfile
 SKILLS = {
     "academic-writing-skills": "write-proposals",
     "paper-review": "review-only",
+    "academic-writing-skills-zh-tw": "write-proposals",
+    "paper-review-zh-tw": "review-only",
+    "academic-writing-skills-zh-cn": "write-proposals",
+    "paper-review-zh-cn": "review-only",
 }
 CORE = "skills/academic-writing-skills"
 OPERATIONS = {
@@ -40,6 +44,8 @@ PUBLIC_EXTRAS = {
     "LICENSE",
     "scripts/build_adapter_bundle.py",
     "docs/workspace-adapter.md",
+    "scripts/check_localizations.py",
+    "locales/translation-manifest.json",
 }
 CACHE_PARTS = {"__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
 SECRET_PARTS = {"secrets", "credentials", "private", "id_rsa", "id_ed25519"}

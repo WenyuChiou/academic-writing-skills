@@ -1,0 +1,13 @@
+interface:
+  display_name: "学术写作（简体中文）"
+  short_description: "以证据规划论证与连贯段落，依指定范围撰写、修改并复查稿件"
+  default_prompt: "请使用 academic-writing-skills-zh-cn skill 依目前的研究阶段与指定范围协助这份稿件。"
+  icon_small: "assets/icon.svg"
+  icon_large: "assets/icon.svg"
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

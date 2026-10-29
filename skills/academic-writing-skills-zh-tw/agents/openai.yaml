@@ -1,0 +1,13 @@
+interface:
+  display_name: "學術寫作（繁體中文）"
+  short_description: "以證據規劃論證與連貫段落，依指定範圍撰寫、修改並複查稿件"
+  default_prompt: "請使用 academic-writing-skills-zh-tw skill 依目前的研究階段與指定範圍協助這份稿件。"
+  icon_small: "assets/icon.svg"
+  icon_large: "assets/icon.svg"
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

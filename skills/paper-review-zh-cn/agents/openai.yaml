@@ -1,0 +1,13 @@
+interface:
+  display_name: "论文审查（简体中文）"
+  short_description: "依研究设计与证据审阅稿件，指出具体位置、影响及尚待确认事项"
+  default_prompt: "请使用 paper-review-zh-cn skill 审阅这份稿件，先不要修改档案。"
+  icon_small: "assets/icon.svg"
+  icon_large: "assets/icon.svg"
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

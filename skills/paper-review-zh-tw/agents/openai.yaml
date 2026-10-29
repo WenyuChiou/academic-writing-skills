@@ -1,0 +1,13 @@
+interface:
+  display_name: "論文審查（繁體中文）"
+  short_description: "依研究設計與證據審閱稿件，指出具體位置、影響及尚待確認事項"
+  default_prompt: "請使用 paper-review-zh-tw skill 審閱這份稿件，先不要修改檔案。"
+  icon_small: "assets/icon.svg"
+  icon_large: "assets/icon.svg"
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

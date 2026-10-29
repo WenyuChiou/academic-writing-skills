@@ -1,6 +1,6 @@
 # Academic Writing Skills
 
-[![plugin version](https://img.shields.io/badge/plugin-v1.3.24-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.4.0-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 Part of [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills).
@@ -9,7 +9,7 @@ Develop a research argument, write connected paragraphs, and check what the curr
 
 Use with **Codex**, **Claude Code**, **OpenCode**, **Hermes Agent**, and other AI agents that support the Agent Skills format. Available tools and integrations depend on the host.
 
-[繁體中文](./README.zh-TW.md)
+[繁體中文](./README.zh-TW.md) | [简体中文](./README.zh-CN.md)
 
 ![Academic writing workflow: Ground, Develop, Draft, Review, and Revise, with evidence linked to the manuscript and a revision loop back to development and drafting.](./docs/images/workflow-cover.png)
 
@@ -17,10 +17,22 @@ Use with **Codex**, **Claude Code**, **OpenCode**, **Hermes Agent**, and other A
 
 ## What you can do
 
-One plugin provides two skills:
+One plugin provides two capabilities, with English, Traditional Chinese and Simplified Chinese entries:
 
 - [academic-writing-skills](./skills/academic-writing-skills/SKILL.md): plan, draft, revise, and coordinate manuscript changes.
 - [paper-review](./skills/paper-review/SKILL.md): assess the manuscript and report located findings; review-only by default.
+
+| Capability | English | 繁體中文 | 简体中文 |
+|---|---|---|---|
+| Plan, draft and revise | [academic-writing-skills](./skills/academic-writing-skills/SKILL.md) | [academic-writing-skills-zh-tw](./skills/academic-writing-skills-zh-tw/SKILL.md) | [academic-writing-skills-zh-cn](./skills/academic-writing-skills-zh-cn/SKILL.md) |
+| Review without editing by default | [paper-review](./skills/paper-review/SKILL.md) | [paper-review-zh-tw](./skills/paper-review-zh-tw/SKILL.md) | [paper-review-zh-cn](./skills/paper-review-zh-cn/SKILL.md) |
+
+Choose one language entry per capability; do not load all three for the same task.
+For manual installs, a review entry also needs the writing entry in the same language.
+The Chinese entries translate the guidance, not the manuscript automatically.
+Keep the author's requested output language, confirmed terminology and scope.
+Executable helpers, schemas and English editing examples retain their original form.
+English word-pattern audits remain English-language checks, not a Chinese grammar checker.
 
 | Scope | Provide | Receive |
 |---|---|---|
@@ -54,6 +66,12 @@ Checks scale to the task. A local grammar edit does not trigger every stage or r
 
 ## Install and use
 
+**Install version:** the four Chinese entries are included in this source tree.
+The marketplace tracks `main`; check the installed plugin version after updating.
+GitHub releases, catalog metadata and local caches are updated separately.
+For a manual install, copy the selected skill folder into the host's supported
+skill directory; keep its references, scripts and assets together.
+
 For Claude Code, install through the ai-research-skills marketplace:
 
 ```bash
@@ -63,7 +81,7 @@ claude plugin install academic-writing-skills@ai-research-skills --scope user
 
 Update with `claude plugin update academic-writing-skills@ai-research-skills`.
 
-For Codex or ChatGPT, use the available skill/plugin interface. For other Agent Skills clients, copy both folders under `skills/` into a supported directory: `.agents/skills/` or `.opencode/skills/` for OpenCode, or `~/.hermes/skills/` for Hermes Agent.
+For Codex or ChatGPT, use the available skill/plugin interface. For other Agent Skills clients, copy the selected capability/language folders under `skills/` into a supported directory: `.agents/skills/` or `.opencode/skills/` for OpenCode, or `~/.hermes/skills/` for Hermes Agent.
 
 ## Try it
 
