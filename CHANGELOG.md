@@ -11,6 +11,8 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-11-06
+
 ### Changed
 
 - Verify each in-scope Word data table and continuation page at handoff using
@@ -1015,6 +1017,8 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   domain-neutral.
 
 [Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/commits/main
+[1.4.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.4.0...v1.4.1
+[1.4.0]: https://github.com/WenyuChiou/academic-writing-skills/releases/tag/v1.4.0
 [1.3.24]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.23...v1.3.24
 [1.3.14]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.13...v1.3.14
 [1.3.10]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.9...v1.3.10
