@@ -11,6 +11,12 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+### Changed
+
+- Verify each in-scope Word data table and continuation page at handoff using
+  the exact saved Word layout. Record printable borders, heading spans,
+  continuation headers and notes separately from verified venue requirements.
+
 ## [1.4.0] - 2026-10-29
 
 ### Added

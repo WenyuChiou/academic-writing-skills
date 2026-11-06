@@ -131,6 +131,18 @@ Retain data source/version/date, coordinate reference system or projection where
 
 The original extracted image and caption are preserved. This PNG cannot establish the coordinate reference system, source-layer vintage, classification calculation, or accuracy of the scale bars. Verify those from GIS records when adapting or certifying a map; the example is not a geographic or final-Word-layout audit.
 
+### Verify Word data tables in Print Layout
+
+**Scope and evidence.** Inventory each data table in the exact saved Word files in scope, including the main text and any appendix or supplement covered by the handoff. Include every continuation page, even when a continuation is a separate Word table object. Check formula or other layout-only tables separately for their actual function. For a wording-only edit, do not add a table audit unless table layout is affected or the user requested it.
+
+**Inspect the pages.** Use Word Print Layout with nonprinting table gridlines hidden, or inspect pages obtained natively from Word for the exact saved version. Use normal reading size and enlarge ambiguous areas to distinguish a faint or missing line from thumbnail loss. OOXML, style names, gridlines, and an alternate renderer are not substitutes for the requested Word presentation. If it is unavailable, report the visual check as unverified; a structural diagnosis can still be useful.
+
+**Check each table and continuation.** Confirm that intended or required printable rules are visible and that readers can distinguish headings, the data area, major groups, and table notes where present. Trace grouped, stacked, or merged headings to the columns and units they actually govern; do not guess intended data assignments. On each continuation page check the headings needed to read that page, row and group legibility, and the association of any notes with the correct table. Do not treat a passing first page or an OOXML repeat-header flag as proof for later pages.
+
+**Separate readability and venue findings.** Record the file/version (e.g., SHA-256), table ID, physical page(s), Word view or native rendering procedure, observed outcome, and open or unverified items. Use the current official source for the journal, article type, manuscript stage, and artifact (main text versus appendix or supplement); record the source, scope, and date checked. If no applicable rule is verified, label suggestions as layout advice and venue compliance as unverified, even if the pages are readable.
+
+The [ASCE Author Center, Tables](https://ascelibrary.org/author-center/preparing-manuscript) is a venue-specific example for an ASCE journal manuscript such as JWRPM: its table-format guidance uses horizontal rules for headings, major sections, and footnotes rather than vertical rules. Verify its current applicability and any separate companion-file instructions before applying it. Do not treat it as a WRR rule or impose a universal number or weight of lines.
+
 ### Table rules versus plot grids
 
 Choose table borders from the active venue/template and the structure readers need. Distinguish actual printable borders from nonprinting Word gridlines. A minimal top/header/bottom pattern often suffices for a simple table; grouping rules or other accessible layouts may be justified. Avoid unnecessary cell boxing, but do not remove required boundaries or force the same style on every venue and complex table.

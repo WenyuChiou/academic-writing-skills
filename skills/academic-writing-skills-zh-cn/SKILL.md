@@ -249,6 +249,8 @@ description: "为学术论文建立研究定位与大纲、规划并修订相互
 <a id="work-with-formatted-files"></a>
 ## 处理格式化文件
 
+若 Word 交付或版面审查涵盖数据表，请使用 [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md) 的逐表打印布局检查，并纳入[格式化文件验收](references/execution-and-acceptance.md)的记录。未影响表格或分页的局部文字修改，不会触发整套文件的逐表审查。
+
 文件格式操作与视觉验证请使用专门的文件、试算表、简报或 PDF 技能。本技能规范学术诚信；它不能取代特定格式的版面呈现、修订追踪或 OOXML 工作流程。
 
 <a id="report-the-outcome"></a>
