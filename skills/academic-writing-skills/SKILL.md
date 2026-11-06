@@ -236,6 +236,8 @@ Read [reviewer-red-team-and-release.md](references/reviewer-red-team-and-release
 
 ## Work with Formatted Files
 
+For a Word handoff or layout review that covers data tables, use the per-table print-layout check in [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md) and record it in the [formatted-file acceptance check](references/execution-and-acceptance.md). A narrow wording edit with no table or pagination impact does not trigger a package-wide table audit.
+
 Use the dedicated document, spreadsheet, presentation, or PDF skill for file-format operations and visual verification. This skill governs scholarly integrity; it does not replace format-specific rendering, tracked-change, or OOXML workflows.
 
 ## Report the Outcome

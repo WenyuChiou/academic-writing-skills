@@ -249,6 +249,8 @@ description: "為學術論文建立研究定位與大綱、規劃並修訂相互
 <a id="work-with-formatted-files"></a>
 ## 處理格式化檔案
 
+若 Word 交付或版面審查涵蓋資料表，請使用 [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md) 的逐表列印版面檢查，並納入[格式化檔案驗收](references/execution-and-acceptance.md)的紀錄。未影響表格或分頁的局部文字修改，不會觸發整套文件的逐表審查。
+
 檔案格式操作與視覺驗證請使用專門的文件、試算表、簡報或 PDF 技能。本技能規範學術誠信；它不能取代特定格式的版面呈現、修訂追蹤或 OOXML 工作流程。
 
 <a id="report-the-outcome"></a>
