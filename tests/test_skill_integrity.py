@@ -77,7 +77,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.4.1"
+    assert manifest["version"] == "1.4.2"
     guide_version = re.search(
         r"plugin skill version `([^`]+)`", read(ROOT / "docs" / "workspace-adapter.md")
     )
@@ -208,7 +208,10 @@ def test_results_gate_requires_meaning_without_discussion_overreach():
     normalized = " ".join(lifecycle.split())
     assert "what the observed pattern means" in normalized
     assert "Numbers alone are not a substantive answer" in normalized
-    assert "untested mechanisms" in normalized
+    assert "an untested mechanism" in normalized
+    assert "author-approved arrangement" in normalized
+    assert "an integrated section" in normalized
+    assert "retain its unresolved status in either arrangement" in normalized
 
 
 def test_section_guides_are_routed_without_forcing_full_review():

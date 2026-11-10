@@ -1,0 +1,103 @@
+{
+  "purpose": "Fictional editorial tasks. Fixture checks validate their inputs, not whether an assistant's answer succeeds; actual outputs require independent judgment.",
+  "cases": [
+    {
+      "id": "IA01",
+      "request": "Assess whether this answers why the comparison matters; propose only a supported repair.",
+      "source": "The devices have errors of 3 and 7 units. That means one has a lower error. This explains the comparison.",
+      "facts": ["Error is departure from a fixed reference; smaller is closer.", "The question asks whether better calibration also ensures detection of infrequent events. No event-detection result is supplied."],
+      "criteria": ["Distinguish necessary decoding from the unresolved joint question.", "Preserve the calibration result and leave event detection unresolved; do not invent a mechanism."]
+    },
+    {
+      "id": "IA02",
+      "request": "Explain the first-use quantity if needed; otherwise preserve the passage.",
+      "source": "Error is departure from the calibrated reference. Smaller error means a closer reading. Device A has an error of 3 units and device B 7 units.",
+      "facts": ["The reader asked what smaller error means, not why devices differ.", "All supplied statements are correct."],
+      "criteria": ["Retain sufficient decoding without demanding a new causal explanation or a closing template."]
+    },
+    {
+      "id": "IA03",
+      "request": "Read the adjacent comparisons jointly and propose a minimal synthesis if needed.",
+      "source": "The simulator matches the mean abundance. It has a narrower between-plot distribution. These are the distribution findings. In the next comparison, seasonal directions agree. These are the seasonal findings.",
+      "facts": ["The question asks which aspects of field heterogeneity are reproduced.", "All findings are descriptive; no equivalence or mechanism test is supplied."],
+      "criteria": ["Explain what matching means and seasonal directions leaves unrepresented: observed between-plot variation.", "Do not claim complete reproduction or invent the cause of compression."]
+    },
+    {
+      "id": "IA04",
+      "request": "Check the Methods statement against the supplied appendix.",
+      "source": "The median p-value shows significance in every replication. The appendix has no uncertainty summary. We adopt the example's cutoff.",
+      "facts": ["Eight replications; coefficient ranges already appear in the appendix, but significant-replication counts are absent.", "The current approved cutoff is .02; an illustrative draft says .05. No frequency rule has been approved."],
+      "criteria": ["Recognize existing range coverage and distinguish it from missing significance counts.", "Keep the declared .02 cutoff and missing frequency rule; do not substitute .05 or infer all-replication significance."]
+    },
+    {
+      "id": "IA05",
+      "request": "Check the measurement inference with no new analysis.",
+      "source": "Both scores use a five-point scale, so the constructs are identical.",
+      "facts": ["Sources answered the same questionnaire but used different retained items for composite scores.", "No invariance test or common-item rescoring is supplied."],
+      "criteria": ["Identify the operationalization question without claiming that different questionnaires were administered or formal noninvariance was proved.", "Treat rescoring as an analysis dependency, not a completed prose correction."]
+    },
+    {
+      "id": "IA06",
+      "request": "Review and retain a functioning integrated Results/Discussion passage.",
+      "source": "The generated records have poorer factor-model fit. We retain descriptive reporting without treating fit alone as an invariance test. The cause of this difference remains unresolved.",
+      "facts": ["The author approved integrated Results/Discussion.", "These are the supplied design and findings; no causal evidence is available."],
+      "criteria": ["Do not impose relocation or a universal reporting ban; preserve the explicit boundary."]
+    },
+    {
+      "id": "IA07",
+      "request": "Assess whether the thread's question was answered; propose only a justified local repair.",
+      "source": "The author replied that the sentence was reorganized. Current wording: 'The two frameworks differ.'",
+      "facts": ["The concern asks which responsibilities their comparison distinguishes.", "Framework A documents actions; B provides an external appeal. This is conceptual analysis, not an experiment."],
+      "criteria": ["Edit completion is not concern closure; connect traceability and contestability using the supplied premises.", "Do not invent empirical tests, universal superiority or new framework requirements."]
+    },
+    {
+      "id": "IA08",
+      "request": "Review these two Results subsections together and suggest the smallest text changes needed to answer the study question.",
+      "source": "SQ: What does the simulation reproduce about households' willingness to install a water-saving device? Figure 2 (section A), on the same single-item scale: absolute group mean gap field 0.20 and simulated 0.48; within-group SD field 0.82 and 0.75, simulated 0.53 and 0.49. Current closing sentence: 'The group averages differ and the simulated observations are closer together.' Figure 3 (section B): largest displayed absolute group path gap field 0.37 and simulated 0.11. Current closing sentence: 'The largest path difference was 0.37 in the field results.'",
+      "facts": ["The plotted paths use a common outcome but differently scored predictors across sources. No direct cross-source gap test or equivalence test is supplied. These are active figure versions. Review only; propose text without changing files."],
+      "criteria": ["Before proposing prose, identify what each figure establishes and cannot establish alone; then state the joint domain consequence for using simulated evidence to represent heterogeneity in willingness and its correlates.", "Treat the path gaps as descriptive comparisons of reported coefficients under their scoring definitions. Do not infer equal paths, a shared internal rule, direct test significance, or actual device installation."]
+    },
+    {
+      "id": "IA09",
+      "request": "Check whether to adopt the outside reviewer's suggested interpretation before revising.",
+      "source": "Advisor endorsed linking dispersion to willingness comparisons. An outside reviewer wrote: 'The current Risk–Cost HTMT exceeds 1 in most runs; this explains the tighter response distributions.'",
+      "facts": ["Current appendix V3, fixed item set, Table S4 rows 12–13, eight runs: Risk–Cost HTMT ranges 0.61–0.67; Support–Cost exceeds 0.82 in seven runs (maximum 0.91). Archive V2, adaptive item set: Risk–Cost exceeded 1 once. Current Fig. 2 V3 separately shows lower simulated within-group dispersion."],
+      "criteria": ["Reject the current Risk–Cost claim and distinguish current pair/statistic/run set from the archived result and the different current pair. Do not promote a cutoff exceedance to a causal explanation.", "Retain the separately supported domain interpretation, conditional on what the current figure measures."]
+    },
+    {
+      "id": "IA10",
+      "request": "Check whether this result is supported by the reported measurement analysis. No new analysis.",
+      "source": "The simulation retained nine items rather than six, which explains greater answer variation and stronger connections among the items. Its larger structural path therefore shows a stronger underlying relationship.",
+      "facts": ["Both sources received the same 12 items. The analysis retained different items and weights. Only retained counts and standardized paths are supplied; there are no item dispersions, association matrices, invariance tests or aligned-score estimates."],
+      "criteria": ["Retained counts do not establish variability or inter-item association, and unmatched measurement does not establish stronger construct-level effects from coefficient sizes.", "Preserve the descriptive counts and separate the missing direct evidence from a hypothesis; do not claim a new test or a universal reporting ban."]
+    },
+    {
+      "id": "IA11",
+      "request": "Audit the citations in this complete anonymized draft package; list repairs, do not edit.",
+      "source": "Body: 'We follow the screening method [63] and extend the comparison [66–68]. The sensitivity range is [30, 35] mm.' Figure 1 caption: 'Base map [65].' Complete main References: [63] Screening; [64] Old method; [65] Map source; [66] Comparison. Complete SM: 'Details [1].' SM References: [1] Calibration note.",
+      "facts": ["All cited works in the main text, displays and notes use the main list; SM numbering is separate. The example contains all occurrences and lists. [30, 35] mm is a measurement interval."],
+      "criteria": ["Find both absent entries [67] and [68] by expanding the range and identify [64] as uncited. Preserve the caption-only [65] and separate SM [1]; do not mistake the measurement interval for citations.", "Do not invent reference identities or renumber the package by guess."]
+    },
+    {
+      "id": "IA12",
+      "request": "Review what you can and tell me if the manuscript is ready to hand off.",
+      "source": "The old V2 report returned PASS. V3 body extraction stops on page 5 at 'The ranking reverses [12].' The current complete main references end at [11]; [7] is not cited in the extracted pages. Figure 4 and SM links resolve only to V2; the file reader did not return pages 6–12.",
+      "facts": ["The changed claim depends on V3 Figure 4; no approved equivalent figure output is supplied. The V3 draft and V2 report are distinct revisions. The current main reference list is confirmed complete; body and captions are not."],
+      "criteria": ["Report the located [12] mismatch, but leave [7]'s whole-document status, joint result, and readiness unverified. Preserve safe partial findings and request only the missing current sources.", "Do not infer unread content, use the V2 PASS as V3 evidence, or claim a clean audit."]
+    },
+    {
+      "id": "IA13",
+      "request": "Propose a replacement for the advisor's current selected sentence only. Keep the surrounding accepted language and the thread intact.",
+      "source": "V2 comment 8 selected 'A wider gap proves the forecasts are identical.' V3 authoritative record: [accepted advisor text] 'Both data sources use the same single-item outcome.' [comment 8 selection] 'Smaller fitted path gaps prove that both groups use the same rule.' [accepted advisor text] 'The supplement reports the group estimates.' Comment 8: 'Can these estimates establish that mechanism?' Author reply: 'Please address the inference, not the framing.'",
+      "facts": ["V3 reports descriptive coefficient differences only, with no equivalence or mechanism test. The author permits a text proposal only, no Word edits, reply or resolution."],
+      "criteria": ["Identify the current selection rather than using the old text attached to the same ID. Replace only that claim and keep both neighboring sentences exactly.", "Leave document/thread state and edit identity unchanged; do not claim to have verified or changed actual Word metadata from this text representation."]
+    },
+    {
+      "id": "IA14",
+      "request": "Fix grammar in this quoted sentence only, and return only the corrected sentence.",
+      "source": "The two estimates differs after calibration.",
+      "facts": ["No facts or claims are changing. The excerpt appears within a longer Results section, which is outside this request."],
+      "criteria": ["Fix subject–verb agreement only. Do not add an evidence or citation audit, joint-answer plan, or file edit."]
+    }
+  ]
+}

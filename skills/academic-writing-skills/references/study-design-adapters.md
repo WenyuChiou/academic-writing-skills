@@ -30,6 +30,19 @@ measurement equivalence; different retained item sets do not prove that differen
 questionnaires were administered. Keep these questions separate from whether
 structural coefficients can be reported or compared.
 
+Carry a measurement caveat into the claims that depend on it. A shared numerical
+scale does not make differently scored composites the same operational measure;
+a shared single item may have a different comparability basis. Poor CFA fit alone
+does not establish noninvariance or forbid descriptive reporting. A common-item
+or item-level check can address a scoring question when appropriate, but is an
+analysis decision: rescoring distributions does not automatically replace
+separately estimated measurement or structural models.
+
+A larger retained item count does not establish more variable responses or
+stronger inter-item associations. Check dispersion or association directly.
+Do not read a difference in coefficient size as a difference in construct-level
+relationship strength when the measures or model specifications are not aligned.
+
 For repeated analyses, identify the observation unit, run selection/aggregation,
 source of variability, tested contrast, and multiplicity family before reconciling
 numbers. Different adjusted p-values can be valid when the same raw test belongs
@@ -38,6 +51,13 @@ from a direct between-group test, and nonsignificance from equivalence. For coun
 compare event definitions as well as values: affected runs, warning events, and
 failed records are not interchangeable. Missing provenance is a verification
 question, not proof that a number is wrong.
+
+Check the existing main-text and SM coverage before reporting a summary absent.
+Coefficient ranges, median coefficients, median p-values and counts of significant
+runs answer different questions. A median p-value or an averaged household SD
+does not establish significance in every run. Resolve placeholders from verified
+methods, preserve the author-approved threshold, and flag a conflicting example
+or missing frequency rule without inventing a cutoff.
 
 ## Experimental and Quasi-Experimental
 

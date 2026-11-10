@@ -161,7 +161,17 @@ For grouped literature, verify that each cited source fits the named field, meth
 
 Do not certify claim–citation support from titles or memory when the claim depends on details of the source. Read the primary source, abstract, or authoritative record at the level needed for the claim. Distinguish verified support from plausible topical relevance.
 
-When cited studies report a relationship in a direction that differs from the corresponding relationship calibrated or estimated for the present sample or study area, do not append the citations as an unexplained contradiction. State the scope difference before or with the citations: the relationship reported here reflects the current sample or location, whereas the relationship may differ in other populations, locations, or settings when the cited evidence supports that qualification. Keep this disclaimer brief and evidence-backed. Do not recast a calibrated relationship as a model assumption, imply that opposing evidence automatically invalidates the study result, or invent contextual variation that the sources do not support. If the difference cannot be reconciled from the available evidence, state the unresolved contrast and reserve its interpretation for the Discussion.
+For numbered citations added, removed or renumbered, and for a reference audit,
+check both directions against the current citation scope: every in-text number
+must resolve to the intended reference, and every entry in a cited-works list
+must have an in-scope citation or a documented exception. Include applicable
+captions, notes and SM; establish whether they share the numbering or have their
+own list. Distinguish missing entries, wrong identities and uncited candidates.
+A partial extraction can establish a located mismatch but not a clean inventory
+or an orphan across unread material. Do not delete entries or renumber unseen
+citations based on that partial check.
+
+When cited studies report a relationship in a direction that differs from the corresponding relationship calibrated or estimated for the present sample or study area, do not append the citations as an unexplained contradiction. State the scope difference before or with the citations: the relationship reported here reflects the current sample or location, whereas the relationship may differ in other populations, locations, or settings when the cited evidence supports that qualification. Keep this disclaimer brief and evidence-backed. Do not recast a calibrated relationship as a model assumption, imply that opposing evidence automatically invalidates the study result, or invent contextual variation that the sources do not support. If the difference cannot be reconciled from the available evidence, state the unresolved contrast and follow the author-approved integrated or separate Results and Discussion arrangement.
 
 ## Observable Stock or AI-Like Prose
 

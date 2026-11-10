@@ -35,3 +35,8 @@ Separate response reliability or consistency, measurement quality, distributiona
 Check whether baselines, human references, gold labels, external benchmarks, judge models, or expert ratings match the claim. For LLM-as-judge designs, check judge independence, rubric, position and verbosity bias, calibration, agreement, and human adjudication where required.
 
 Verify exact model, run, scenario, prompt, call, and sample counts across text, tables, figures, supplements, and code. Unknown runtime, tokens, cost, failures, or retention conditions must remain unknown rather than becoming zero.
+
+Distinguish coefficient ranges, median p-values and significant-run counts.
+Inspect existing SM coverage and the declared threshold before calling evidence
+missing or all-run consistent. A suggested example is not authority to replace
+that threshold or invent a run-frequency rule.

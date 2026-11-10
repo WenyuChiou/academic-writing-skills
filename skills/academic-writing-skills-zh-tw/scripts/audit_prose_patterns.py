@@ -11,7 +11,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-from audit_text_consistency import extract_text
+from audit_text_consistency import active_scan_inputs
 
 
 TOKEN_RE = re.compile(r"[A-Za-z]+(?:['’-][A-Za-z]+)*")
@@ -271,19 +271,20 @@ def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str
 
 def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
-    for item in state.get("artifacts", []):
-        if item.get("status") != "ACTIVE" or not item.get("path"):
-            continue
-        path = (project_root / item["path"]).resolve()
-        artifact = str(item.get("id", item["path"]))
-        try:
-            text = extract_text(path)
+    scanned = False
+    for item, text, error in active_scan_inputs(state, project_root):
+        artifact = str(item.get("id", item.get("path", "project")))
+        if error is not None:
+            findings.append({"code": "PROSE000", "artifact": artifact, "message": error})
+        else:
+            scanned = True
             # DOCX extraction emits one line per paragraph; wrapped text files do not.
-            if path.suffix.lower() == ".docx":
+            if Path(item["path"]).suffix.lower() == ".docx":
                 text = text.replace("\n", "\n\n")
             findings.extend(audit_text(text, artifact, state))
-        except (OSError, ValueError) as exc:
-            findings.append({"code": "PROSE000", "artifact": artifact, "message": str(exc)})
+    if not scanned and not findings:
+        findings.append({"code": "PROSE000", "artifact": "project",
+                         "message": "no active artifact text was scanned"})
     return findings
 
 

@@ -28,6 +28,12 @@ For mediation, check temporal and causal assumptions and use appropriate uncerta
 
 Poor reliability or measurement fit does not automatically prohibit descriptive reporting, but it narrows construct-level and structural claims. State that boundary explicitly.
 
+Trace that boundary into later score, coefficient-magnitude and subgroup claims.
+Check whether retained item sets and scoring define comparable quantities; a
+single shared question is distinct from a source-specific composite. Poor fit
+alone is not a formal demonstration of noninvariance. A proposed scoring repair
+does not automatically revise separately estimated structural models.
+
 ## Results, Tables, and Claims
 
 Trace every reported coefficient, test, sample count, and fit statistic to the correct model and subgroup. Verify signs, reference groups, units, rounding, confidence intervals, p-values, and table or figure labels.

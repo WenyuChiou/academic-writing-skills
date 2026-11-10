@@ -88,6 +88,13 @@ is not evidence that the check ran. Existing project notes can hold these record
 For a local chat edit, a concise inline record is enough; do not create a project
 state or JSON file merely to revise a sentence.
 
+For a substantive claim that depends on multiple artifacts, first bind the current
+manuscript and its effective revision view to the exact supporting figure, table,
+SM or analysis version. Record the locator and relevant comparison definition.
+When a required artifact or range was not read, extraction failed, or identity
+does not match, mark that specific claim or check unverified and continue the
+verified portion. A successful read or scan of another file cannot clear it.
+
 | Check | Required action and acceptance evidence |
 | --- | --- |
 | Meaning and evidence | Compare the candidate with locked meaning and source evidence; locate any changed claims or citations. For grammar-only work, preserve unchanged verified support and do not claim a fresh literature audit. |
@@ -145,6 +152,19 @@ are insufficient if that contribution is absent. Do not invent a bridge when no
 later comparison is in scope, or treat diagnostics as an unstated permission gate.
 See evidence-context case 11 for failure and no-change controls. A self-check is
 not an independent reader result; preserve that distinction in the handoff.
+
+For a challenged result explanation, point to the exact wording that adds
+comparative understanding beyond decoding the preceding observation. State
+which evidence supports that addition and which why question remains open.
+For multi-layer Results, compare the delivered joint finding with the pre-draft
+[joint-answer plan](results-and-explanation.md#plan-the-joint-answer-before-rewriting).
+Locate each supporting comparison, its limit and the domain implication in the
+candidate; a separate paraphrase of every display cannot substitute for that answer.
+A correct plain-language restatement, relevant citation or cautious-sounding
+cause is not, by itself, closure of a request for that additional understanding.
+Keep first-use decoding and an already sufficient answer. Report configured
+scans, this semantic judgment, actual independent-reader findings, comment
+closure and formatted-file checks separately; none certifies the others.
 
 For summary prose, the same walkthrough also tests whether a reader can recover
 the research goal and the work that addresses it, rather than only an inventory

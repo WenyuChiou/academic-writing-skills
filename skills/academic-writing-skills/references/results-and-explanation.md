@@ -18,16 +18,36 @@ Choose the main pattern or comparison before arranging the supporting values. Do
 
 Give the “so what” where the paragraph or subsection completes its analytical point. It can identify a pathway contrast, trade-off, boundary, supported relationship, or negative finding. Do not end with only statistics, “These results answer SQ1,” or a vague declaration of importance. Temporarily remove the question label and introductory metadiscourse: the answer must remain intelligible. Numbered SQ/RQ labels are optional navigation, not evidence.
 
+Test what the explanation adds. Decoding a score or coefficient can be necessary
+at first use and can fully answer a request for its meaning. If the question asks
+what a comparison teaches us, decoding the same observation again is insufficient:
+identify the supported distinction, consequence or boundary learned from that
+comparison. Read the relevant evidence together before adding another sentence.
+A match in one dimension need not reproduce the reference on another; for example,
+matching one group's spread can coexist with a different between-group pattern.
+Retain functioning explanations and definitions rather than demanding a new
+mechanism or a closing formula after each number.
+
 Build that explanation in coherent result units, rather than postponing all meaning until an omnibus closing sentence. Several values can support one finding: keep them together, explain what that comparison establishes, then let the next unit deepen, contrast with, or qualify it. For example, establish what score levels mean before changing to dispersion, and distinguish individual relationships from a whole-model comparison before drawing a group-level conclusion. The required bridge is the analytical relation, not another connector. Do not insert an interpretation after every number, repeat the question at every paragraph, or split a functioning multi-value finding.
 
-For a comparison developed across analytical layers, identify what the current
-layer contributes, not merely where it appears in the sequence. Before drafting,
-state what aspect is compared, what its evidence can establish, and what a later
-comparison will add or must keep in view. After drafting, recover those relations
-from the prose itself with the question labels and stock framing removed. A list
-of results followed by "this is the first level" or "this answers RQ2" does not
-supply the missing relation. Keep several values together when they support one
-finding; do not prescribe a purpose sentence or a roadmap for every paragraph.
+### Plan the joint answer before rewriting
+
+When displays or subsections jointly address a question in scope, map the
+question to the verified finding and limit of each display or subsection before
+polishing any of them. State what none answers alone, the supported joint answer,
+and what it changes for the study's substantive interpretation. Keep this plan
+in the existing writing contract or a brief note; it need not appear verbatim
+in the manuscript. If a required layer is unavailable, leave the joint answer
+open rather than inferring it from the available layer. A local wording edit
+uses only affected context and does not trigger a section rewrite.
+
+After drafting, recover the joint answer from the prose with question labels
+and stock framing removed. "This is the first level" does not explain the
+relationship. In a hypothetical example, wider group mean separation can coexist with less
+within-group spread and smaller descriptive group differences in fitted paths.
+These answer different questions about group averages, variation and relationships;
+they establish neither equal paths nor a shared internal rule. Keep several
+values together when they support one finding; no fixed paragraph template applies.
 
 Distinguish the current layer's finding from its relevance to later interpretation.
 For example, different measurement inputs can contextualize a score comparison
@@ -36,6 +56,13 @@ comparison. State only the consequence supported by the supplied design. Keep
 evidence and its explanation together; place technical table pointers where they
 help rather than interrupt that unit. Use [evidence-context case 11](evidence-context-cases.md#11-comparison-contribution-is-not-a-sequence-label)
 when this particular execution gap recurs; retain functioning prose unchanged.
+
+At section closure, read the layers jointly: what becomes clear only when their
+findings are combined? Distinguish score levels, within-group spread, group gaps
+and relationships when those are the actual comparison dimensions. Preserve the
+author's reference direction and test level; a descriptive contrast or separate
+within-source p-values do not establish a tested difference between sources.
+If the joint contribution is already explicit, retain it without a new summary.
 
 ## Visuals and Substantive Answers
 
@@ -98,6 +125,22 @@ connects the supplied findings without claiming matched agreement or equivalence
 It is a hypothetical illustration, not a rule to merge all results into one sentence.
 
 Separate a model or procedural rule, the observed output, an explanation supported by decomposition or another appropriate analysis, and a plausible but untested interpretation. A rule alone does not establish why an aggregate pattern occurred. A citation supporting a real-world mechanism does not demonstrate its operation in the present dataset or simulation.
+
+A hedge such as “may” or “consistent with” does not supply missing evidence.
+For a requested why, state the supported comparative meaning, then separate any
+plausible explanation from the evidence needed to assess it. An on-topic citation
+must support the particular explanation attached to it; a prior theory or general
+association does not establish this model's training data, internal rule or cause.
+Leave that causal question open when the supplied evidence cannot answer it.
+
+Treat an advisor, reviewer or external AI suggestion as a proposed interpretation, not a
+verified numerical or mechanistic source. Before adopting it, match the statistic,
+variable pair, score/item definition, model version and run set to the current
+output. Separate the observed pattern, its study-level meaning, a proposed
+mechanism and the test needed for that mechanism; keep independently supported
+synthesis even if a proposed explanation or statistic fails verification.
+
+An unavailable test is not evidence that it was never run. When comparing maxima, check whether they refer to the same component before drawing a component-level conclusion.
 
 Connect explanation to the reported pattern through an explicit relation. “A therefore B” requires evidence for that link, not just plausible sequencing. If an explanation is untested, qualify it and place its extended interpretation in Discussion when the genre separates Results and Discussion. A concise Results qualification can prevent a misleading reading without becoming a speculative causal narrative.
 
