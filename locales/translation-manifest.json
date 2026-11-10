@@ -5,15 +5,15 @@
     "zh-TW",
     "zh-CN"
   ],
-  "review_state": "source-and-targeted-semantic-review-complete; unreleased-candidate",
+  "review_state": "source-bound; unreleased candidate awaiting independent review",
   "method": "Antigravity draft; parent located repairs; OpenCC tw2s with bounded locale glossary; not semantic approval",
   "translations": [
     {
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/SKILL.md",
       "target": "skills/academic-writing-skills-zh-tw/SKILL.md",
-      "source_sha256": "7778ea92830d78118aaad5d47a425e0f1e9d78817771359ee9c7560835fab3ab",
-      "target_sha256": "e56485857dad27dec340ad2b427eb80c9205b8de701ed643bdd0aa2a6ac149c7"
+      "source_sha256": "2d2aecea9862f85df91f4a802295fe4ce58170c8a5b0d9fce935040e83380d67",
+      "target_sha256": "dc5e934e1844bb9c233939ac47fca0249e8d4698a4bce804523fb02da4a3ea70"
     },
     {
       "locale": "zh-TW",
@@ -54,8 +54,8 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/execution-and-acceptance.md",
       "target": "skills/academic-writing-skills-zh-tw/references/execution-and-acceptance.md",
-      "source_sha256": "f19b3078e6a2157bbb08e90c1b2e9a1714fd2ceaab8dbbd57d58a37e9b3bd372",
-      "target_sha256": "58b4e563ba8edd0925277dbb24596daf198aa708480dc6245e06e9435137513f"
+      "source_sha256": "209f711d9d026315f526d4c321f984c65dd5e96893a2c6aa5822fcec52a7fff6",
+      "target_sha256": "9fc0494afb1447c078f3c13e21e4d79262fcba99dc7cd7ca8874a9c6f5108849"
     },
     {
       "locale": "zh-TW",
@@ -82,8 +82,8 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/lifecycle-and-routing.md",
       "target": "skills/academic-writing-skills-zh-tw/references/lifecycle-and-routing.md",
-      "source_sha256": "d7d828f38d8ad610ead488e3bbcf183d5e9fca432895aa76917cee86608b68d7",
-      "target_sha256": "104b75b4c21edd8c973bbe11f85dbcc852cde30ef47d93c13e0bfa96c1143c2c"
+      "source_sha256": "3c49421b13bec7c90e2d3c01d6603658139ef04f8fe5159419a4daa1565554fe",
+      "target_sha256": "7c1b2f9a7897824fa97f6e565b16b6e85ca548f3c2a23c16d4446640c71703a0"
     },
     {
       "locale": "zh-TW",
@@ -110,15 +110,15 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/prose-and-citation-editing.md",
       "target": "skills/academic-writing-skills-zh-tw/references/prose-and-citation-editing.md",
-      "source_sha256": "9e0fc9c39f30fe590193dbb29e81e38df7a289b281cccd32ed7693e430561ac2",
-      "target_sha256": "19b3629d3d058135f394eb3768ef0d5199d5a07da96b0e0af5343422bd9a0c9f"
+      "source_sha256": "3e1c2466c9736f7d1cdc0a6d78a476a7a15d6ad9cef18fa2654e2da18c2936fd",
+      "target_sha256": "3d020ca601bffb0d821a4deb58ad253ec7bbe17cf0876c908b68e73fb061a612"
     },
     {
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/results-and-explanation.md",
       "target": "skills/academic-writing-skills-zh-tw/references/results-and-explanation.md",
-      "source_sha256": "af1f113f70907bba5db3d14e1456ad2fb7a3d70cb304c9106ca96d48b2a60407",
-      "target_sha256": "157f769aa5569329e29ae9659be6e07ddb72cf05cc3dd6a19bd838ed354e260e"
+      "source_sha256": "bce3039a776a9c8a1bca08698efb42abfc6c0102c414078ac046184fd1021d81",
+      "target_sha256": "00a900983987f63fc391699b8df45a5540822005624a22ceed23c5f0773bdf4d"
     },
     {
       "locale": "zh-TW",
@@ -145,8 +145,8 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/study-design-adapters.md",
       "target": "skills/academic-writing-skills-zh-tw/references/study-design-adapters.md",
-      "source_sha256": "8cc1386f7ccfd194e66258c972c85a8bd27c5cc74505003897804bac8099e82f",
-      "target_sha256": "0e01896e53334bfd7a1dcbeeb7c2d6cedf63a3c6ce9f1d0ca1cb45b4b59507e4"
+      "source_sha256": "22b489a8fcab1422bee6b0d7f979ce35f663559925f16152393297f07cc8457f",
+      "target_sha256": "2f7600ef59b949fb6ccddebddc1941d61f1a3355185c9fbd669f39a1e436f40b"
     },
     {
       "locale": "zh-TW",
@@ -166,8 +166,8 @@
       "locale": "zh-TW",
       "source": "skills/paper-review/references/ai-llm-computational.md",
       "target": "skills/paper-review-zh-tw/references/ai-llm-computational.md",
-      "source_sha256": "0779f02d9f2c5cb50f175c495e0ecea12bbaab532ce25fba7921ce9178637fa4",
-      "target_sha256": "03fe200c3e342dcae8d16f7e055b0c32f0853c12ae419647614effce61218e4c"
+      "source_sha256": "a3bccdfcfaa6fb4284d6be357cc0479a111666f07d67c343d471fd1d4d91d342",
+      "target_sha256": "481bf85a86612010a3f71068b948bb613bf6237eda0e539084ca17abfa506af1"
     },
     {
       "locale": "zh-TW",
@@ -208,8 +208,8 @@
       "locale": "zh-TW",
       "source": "skills/paper-review/references/quantitative-psychometrics-sem.md",
       "target": "skills/paper-review-zh-tw/references/quantitative-psychometrics-sem.md",
-      "source_sha256": "024726651c8f24ca8aa87351d16173ee8e48774e5d6afb8c86d52ca7888be94a",
-      "target_sha256": "56bae0a237e58e8b6d58d4733c99cb124c57095b35182986a94b80ed74b402cf"
+      "source_sha256": "1924d4a85ebee0fd6e301f172d29de9a556869292595405b1639208682374ea0",
+      "target_sha256": "a60be6a9a701fdc062887cd69c5b4cda4344fabe20e0b0be58d0d792d89bcd94"
     },
     {
       "locale": "zh-TW",
@@ -236,8 +236,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/SKILL.md",
       "target": "skills/academic-writing-skills-zh-cn/SKILL.md",
-      "source_sha256": "7778ea92830d78118aaad5d47a425e0f1e9d78817771359ee9c7560835fab3ab",
-      "target_sha256": "fa7958f02c79af83bceb6eaa9fbcc4ed3b2743b1c16af38e653da53dd06fe5c0"
+      "source_sha256": "2d2aecea9862f85df91f4a802295fe4ce58170c8a5b0d9fce935040e83380d67",
+      "target_sha256": "440bc2129cc0ea1cbe64c45b095ee0aa9ea92c08c5502b2713df1910ce243a87"
     },
     {
       "locale": "zh-CN",
@@ -278,8 +278,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/execution-and-acceptance.md",
       "target": "skills/academic-writing-skills-zh-cn/references/execution-and-acceptance.md",
-      "source_sha256": "f19b3078e6a2157bbb08e90c1b2e9a1714fd2ceaab8dbbd57d58a37e9b3bd372",
-      "target_sha256": "65fcb8cf33bf76ec6267baa83da34a9f565eabb0d51d796a5ce5f1259fd9225e"
+      "source_sha256": "209f711d9d026315f526d4c321f984c65dd5e96893a2c6aa5822fcec52a7fff6",
+      "target_sha256": "1c7c279b38c54d0dc8d5d25d9748aa698bf49d611f202265da53825ed3d1c75e"
     },
     {
       "locale": "zh-CN",
@@ -306,8 +306,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/lifecycle-and-routing.md",
       "target": "skills/academic-writing-skills-zh-cn/references/lifecycle-and-routing.md",
-      "source_sha256": "d7d828f38d8ad610ead488e3bbcf183d5e9fca432895aa76917cee86608b68d7",
-      "target_sha256": "17bdacf6a4ea9c754a5b4d862b1aca8a289f094f385d1e3ab3f4abbdcfc23f66"
+      "source_sha256": "3c49421b13bec7c90e2d3c01d6603658139ef04f8fe5159419a4daa1565554fe",
+      "target_sha256": "5095dfc50db10d9579139a3ef5284b4b1a52ea4284ab82dae56e05183305bb6c"
     },
     {
       "locale": "zh-CN",
@@ -334,15 +334,15 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/prose-and-citation-editing.md",
       "target": "skills/academic-writing-skills-zh-cn/references/prose-and-citation-editing.md",
-      "source_sha256": "9e0fc9c39f30fe590193dbb29e81e38df7a289b281cccd32ed7693e430561ac2",
-      "target_sha256": "0c28317da340d84c06fc8c0a7eb9dfa5e8d9b3204310408e54eff77d14bca631"
+      "source_sha256": "3e1c2466c9736f7d1cdc0a6d78a476a7a15d6ad9cef18fa2654e2da18c2936fd",
+      "target_sha256": "56636401086f1c7e75b5858e6b42dde7619a03cec78bec570d5fdc3e1a2b73cb"
     },
     {
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/results-and-explanation.md",
       "target": "skills/academic-writing-skills-zh-cn/references/results-and-explanation.md",
-      "source_sha256": "af1f113f70907bba5db3d14e1456ad2fb7a3d70cb304c9106ca96d48b2a60407",
-      "target_sha256": "24cb516a9d6dc9945f8c713f7f8cd13ffc252faf5029339cea01d3b75f70a8c3"
+      "source_sha256": "bce3039a776a9c8a1bca08698efb42abfc6c0102c414078ac046184fd1021d81",
+      "target_sha256": "372018f3c49c8bd1eacb875d001e3b51026762ab912b7139ac357f873e54ab8f"
     },
     {
       "locale": "zh-CN",
@@ -369,8 +369,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/study-design-adapters.md",
       "target": "skills/academic-writing-skills-zh-cn/references/study-design-adapters.md",
-      "source_sha256": "8cc1386f7ccfd194e66258c972c85a8bd27c5cc74505003897804bac8099e82f",
-      "target_sha256": "c979935957a45c2b703a0db62fff5c7f44214fca838a9d7a89c9d4d121bb87db"
+      "source_sha256": "22b489a8fcab1422bee6b0d7f979ce35f663559925f16152393297f07cc8457f",
+      "target_sha256": "a547168e3a5121d43f31b8622c1b71a80a85a37c74ca5b6d398e1abef171f6ac"
     },
     {
       "locale": "zh-CN",
@@ -390,8 +390,8 @@
       "locale": "zh-CN",
       "source": "skills/paper-review/references/ai-llm-computational.md",
       "target": "skills/paper-review-zh-cn/references/ai-llm-computational.md",
-      "source_sha256": "0779f02d9f2c5cb50f175c495e0ecea12bbaab532ce25fba7921ce9178637fa4",
-      "target_sha256": "0557ef2674fb914b86325411c8bc365302bcb425e1c944832ee4691764d719a3"
+      "source_sha256": "a3bccdfcfaa6fb4284d6be357cc0479a111666f07d67c343d471fd1d4d91d342",
+      "target_sha256": "59f29ff48ca1232c5cc674fa47077f53747afd5ed8575be9fc5caa824c9bfdcf"
     },
     {
       "locale": "zh-CN",
@@ -432,8 +432,8 @@
       "locale": "zh-CN",
       "source": "skills/paper-review/references/quantitative-psychometrics-sem.md",
       "target": "skills/paper-review-zh-cn/references/quantitative-psychometrics-sem.md",
-      "source_sha256": "024726651c8f24ca8aa87351d16173ee8e48774e5d6afb8c86d52ca7888be94a",
-      "target_sha256": "f4ba4cffe526b4130d140a703768e86f4c2cb4028f7652fca8269f587ebe7f6d"
+      "source_sha256": "1924d4a85ebee0fd6e301f172d29de9a556869292595405b1639208682374ea0",
+      "target_sha256": "916ebc06108cf171a419f750d4e77ad8e68afe666806534a7761b4c3320388eb"
     },
     {
       "locale": "zh-CN",

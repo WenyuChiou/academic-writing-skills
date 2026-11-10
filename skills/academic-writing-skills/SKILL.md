@@ -70,6 +70,12 @@ Load the remaining guides only for the requested reader function or an affected 
 - [conclusion-and-abstract.md](references/conclusion-and-abstract.md): recover the current research goal, work, comparison levels and scope before summary drafting; preserve clear author wording and distinguish study identity from findings.
 - [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md): final-size legibility, captions/notes, parallel SM, numbering, and project formatting.
 
+When a substantive Results task spans displays or subsections that answer one
+question, use the [joint-answer plan](references/results-and-explanation.md#plan-the-joint-answer-before-rewriting) before changing individual paragraphs.
+A bounded selection may need those sources as reading context; it does not authorize wider edits.
+
+For a proposed interpretation from an advisor, reviewer or external AI, including in a rebuttal, apply the current-evidence checks in [results-and-explanation.md](references/results-and-explanation.md).
+
 At each chapter completion or substantial chapter revision, run the chapter-closure blind-spot check in [lifecycle-and-routing.md](references/lifecycle-and-routing.md). The checkpoint is required; select diagnostic questions by design, content, and evidence. Do not run a full chapter audit for a grammar-only edit or claim exhaustive discovery of unknown unknowns.
 
 ## Draft from Explicit Writing Contracts
@@ -147,6 +153,10 @@ Never promote an overlay rule into a universal rule. When an overlay conflicts w
 
 When the project, folder, manuscript, or user request identifies **Survey paper**, **PiDS**, or a **WC_vX** manuscript, use the installed `survey-paper-wcvx` skill as the project-state and reviewer-round overlay together with these universal integrity gates. Keep that project's filenames, author identity, priority scheme, and version rules within the project overlay.
 
+Verify that the named overlay is available before claiming it ran. If absent,
+use supplied authoritative project records for the scoped task and disclose the
+missing overlay; do not invent its rules or attribute earlier failures to it.
+
 ## Handle Reviewer Responses
 
 For rebuttal letters, response-to-reviewers documents, or revisions of an
@@ -200,6 +210,8 @@ After the last wording change, freeze the exact passage or artifact that will be
 Before the **first draft handoff**, record concrete, located findings for reader comprehension, cumulative progression, and every affected caption, saved layout, venue-format basis, and new edit/reply identity using [execution-and-acceptance.md](references/execution-and-acceptance.md). Keep lightweight records inline or reuse existing project records; JSON is optional. Missing or unavailable checks remain incomplete, not passed. A language-scan `PASS` never substitutes for these checks. Provisional drafts may be delivered with explicit limits, but not as fully checked or journal-compliant artifacts.
 
 For prose revision, select the applicable functional checks in [prose-and-citation-editing.md](references/prose-and-citation-editing.md): transitions, function-preserving concision, natural scholarly prose, claim–citation alignment, observable stock or AI-like features, and dash/hyphen style. A punctuation edit needs meaning preservation, not a new literature audit. Treat diagnostics as prompts for judgment, not universal bans or authorship detection.
+
+For a reference audit or changes to numbered citations, use the two-way reconciliation in [prose-and-citation-editing.md](references/prose-and-citation-editing.md), even when no prose revision is requested.
 
 For a substantial manuscript section, abstract, rebuttal, or explicit banned-word audit, also inspect the exact candidate against [banned_words.md](references/banned_words.md). Treat every match as a contextual diagnostic rather than an automatic deletion or evidence of AI authorship, and apply any project-specific writing contract or terminology override first.
 

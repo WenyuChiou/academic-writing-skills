@@ -10,6 +10,9 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import zipfile
+
+import pytest
 
 SCRIPTS = Path(os.environ.get("TERM_SCRIPTS", str(Path(__file__).resolve().parents[1] / "skills" / "academic-writing-skills" / "scripts"))).resolve()
 sys.path.insert(0, str(SCRIPTS))
@@ -57,6 +60,104 @@ def run_cli(tmp_path, state, text="Households reported willingness to buy flood 
 
 def test_registered_variant_is_detected():
     assert "TERM001" in codes(consistency.audit_fragment("Insurance readiness increased.", "main", profile()))
+
+@pytest.mark.parametrize(("script", "expected_code"), [
+    ("audit_text_consistency.py", "TEXT000"),
+    ("audit_prose_patterns.py", "PROSE000"),
+])
+def test_malformed_text_input_does_not_report_pass(tmp_path, script, expected_code):
+    text_path = tmp_path / "partial.txt"
+    text_path.write_bytes(b"Insurance read\xffiness increased.")
+    state = profile()
+    state["artifacts"] = [
+        {"id": "main", "path": text_path.name, "role": "main_manuscript", "status": "ACTIVE"}
+    ]
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps(state), encoding="utf-8")
+    result = subprocess.run(
+        [sys.executable, "-X", "utf8", str(SCRIPTS / script), str(state_path), "--json"],
+        capture_output=True, text=True, encoding="utf-8", timeout=20, check=False,
+    )
+    report = json.loads(result.stdout)
+    assert result.returncode == 1 and report["status"] == "FINDINGS", report
+    assert expected_code in codes(report["findings"])
+
+
+@pytest.mark.parametrize(("script", "expected_code"), [
+    ("audit_text_consistency.py", "TEXT000"),
+    ("audit_prose_patterns.py", "PROSE000"),
+])
+@pytest.mark.parametrize("case", [
+    "empty-state", "missing-path", "blank-text", "bom-only", "bad-docx",
+    "header-only", "missing-body", "duplicate-body", "unknown-xml-encoding", "legacy-status",
+])
+def test_no_usable_text_is_a_source_finding(tmp_path, script, expected_code, case):
+    state = profile()
+    if case != "empty-state":
+        artifact = {"id": "main", "role": "main_manuscript", "status": "ACTIVE"}
+        state["artifacts"] = [artifact]
+        if case == "bad-docx":
+            artifact["path"] = "bad.docx"
+            (tmp_path / artifact["path"]).write_bytes(b"not a Word archive")
+        elif case in {"header-only", "missing-body", "duplicate-body", "unknown-xml-encoding"}:
+            artifact["path"] = "partial.docx"
+            ns = consistency.WORD_NS
+            with zipfile.ZipFile(tmp_path / artifact["path"], "w") as archive:
+                archive.writestr(
+                    "word/header1.xml",
+                    f'<w:hdr xmlns:w="{ns}"><w:p><w:r><w:t>Header text</w:t></w:r></w:p></w:hdr>',
+                )
+                if case == "missing-body":
+                    archive.writestr("word/document.xml", f'<w:document xmlns:w="{ns}"/>')
+                elif case == "duplicate-body":
+                    archive.writestr(
+                        "word/document.xml",
+                        f'<w:document xmlns:w="{ns}"><w:body/><w:body><w:p><w:r>'
+                        '<w:t>Insurance readiness increased.</w:t></w:r></w:p></w:body></w:document>',
+                    )
+                elif case == "unknown-xml-encoding":
+                    archive.writestr(
+                        "word/document.xml",
+                        f'<?xml version="1.0" encoding="unknown-codec"?><w:document xmlns:w="{ns}"><w:body/></w:document>',
+                    )
+        elif case in {"blank-text", "bom-only", "legacy-status"}:
+            artifact["path"] = "source.txt"
+            content = {"blank-text": b"\n", "bom-only": b"\xef\xbb\xbf", "legacy-status": b"\xff"}
+            (tmp_path / artifact["path"]).write_bytes(content[case])
+            if case == "legacy-status":
+                del artifact["status"]
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps(state), encoding="utf-8")
+    result = subprocess.run(
+        [sys.executable, "-X", "utf8", str(SCRIPTS / script), str(state_path), "--json"],
+        capture_output=True, text=True, encoding="utf-8", timeout=20, check=False,
+    )
+    assert result.returncode == 1, (result.stdout, result.stderr)
+    report = json.loads(result.stdout)
+    assert report["status"] == "FINDINGS" and expected_code in codes(report["findings"])
+
+
+def test_valid_utf8_with_bom_still_supplies_scan_text(tmp_path):
+    path = tmp_path / "valid.txt"
+    path.write_text("Café", encoding="utf-8-sig")
+    assert consistency.extract_text(path) == "Café"
+
+
+def test_unread_lock_scope_does_not_turn_into_a_missing_lock(tmp_path):
+    state = profile()
+    state["semantic_locks"] = [
+        {"id": "wording", "kind": "EXACT", "canonical": "Recorded calibration.",
+         "required_roles": ["main_manuscript"]}
+    ]
+    state["artifacts"] = [
+        {"id": "a", "role": "main_manuscript", "status": "ACTIVE", "path": "unread.txt"},
+        {"id": "b", "role": "main_manuscript", "status": "ACTIVE", "path": "read.txt"},
+    ]
+    (tmp_path / "unread.txt").write_bytes(b"\xff")
+    (tmp_path / "read.txt").write_text("Insurance readiness increased.", encoding="utf-8")
+    found = codes(consistency.audit(state, tmp_path))
+    assert {"TEXT000", "TERM001"} <= found
+    assert "LOCK001" not in found
 
 
 def test_preferred_term_is_not_flagged():

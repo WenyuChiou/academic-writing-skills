@@ -38,8 +38,19 @@ def docx_text(path: Path) -> str:
             name for name in archive.namelist()
             if re.fullmatch(r"word/(document|footnotes|endnotes|header\d+|footer\d+)\.xml", name)
         ]
+        if names.count("word/document.xml") != 1:
+            raise ValueError("expected exactly one word/document.xml main document part")
         for name in sorted(names):
-            root = ET.fromstring(archive.read(name))
+            data = archive.read(name)
+            try:
+                root = ET.fromstring(data)
+            except LookupError as exc:
+                raise ValueError(f"unsupported XML encoding in {name}: {exc}") from exc
+            if name == "word/document.xml":
+                bodies = root.findall(f"{{{WORD_NS}}}body")
+                if root.tag != f"{{{WORD_NS}}}document" or len(bodies) != 1:
+                    raise ValueError("word/document.xml must contain exactly one supported document body")
+                root = bodies[0]
             for paragraph in root.iter(f"{{{WORD_NS}}}p"):
                 text = _accepted_paragraph_text(paragraph)
                 if text:
@@ -51,8 +62,27 @@ def extract_text(path: Path) -> str:
     if path.suffix.lower() == ".docx":
         return docx_text(path)
     if path.suffix.lower() in TEXT_SUFFIXES:
-        return path.read_text(encoding="utf-8", errors="replace")
+        # Replacement characters can hide the very text a scan must verify.
+        return path.read_text(encoding="utf-8-sig")
     raise ValueError(f"unsupported file type: {path.suffix}")
+
+
+def active_scan_inputs(state: dict[str, Any], root: Path):
+    """Yield an artifact and its text or a concrete source-read error."""
+    for item in state.get("artifacts", []):
+        if item.get("status", "ACTIVE") != "ACTIVE":
+            continue
+        path = item.get("path")
+        try:
+            if not isinstance(path, str) or not path.strip():
+                raise ValueError("active artifact has no usable path")
+            text = extract_text((root / path).resolve())
+            if not text.strip():
+                raise ValueError("active artifact contains no scannable text")
+        except (OSError, ValueError, zipfile.BadZipFile, ET.ParseError) as exc:
+            yield item, None, str(exc)
+        else:
+            yield item, text, None
 
 
 def contains(text: str, needle: str, case_sensitive: bool = False) -> bool:
@@ -128,14 +158,16 @@ def audit_fragment(text: str, artifact: str, state: dict[str, Any]) -> list[dict
 def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
     artifacts: dict[str, dict[str, Any]] = {}
-    for item in state.get("artifacts", []):
-        if item.get("status") != "ACTIVE" or not item.get("path"):
-            continue
-        path = (project_root / item["path"]).resolve()
-        try:
-            artifacts[item.get("id", item["path"])] = {**item, "text": extract_text(path)}
-        except (OSError, ValueError, zipfile.BadZipFile, ET.ParseError) as exc:
-            findings.append({"code": "TEXT000", "artifact": item.get("id"), "message": str(exc)})
+    unread_roles = set()
+    for item, text, error in active_scan_inputs(state, project_root):
+        if error is not None:
+            unread_roles.add(item.get("role"))
+            findings.append({"code": "TEXT000", "artifact": item.get("id"), "message": error})
+        else:
+            artifacts[item.get("id", item["path"])] = {**item, "text": text}
+    if not artifacts:
+        return findings or [{"code": "TEXT000", "artifact": "project",
+                             "message": "no active artifact text was scanned"}]
 
     def selected(required_roles: list[str] | None) -> list[dict[str, Any]]:
         if not required_roles:
@@ -144,8 +176,11 @@ def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
 
     for lock in state.get("semantic_locks", []):
         canonical = str(lock.get("canonical", ""))
-        target_items = selected(lock.get("required_roles"))
-        if lock.get("kind") == "EXACT" and canonical and not any(contains(item["text"], canonical, True) for item in target_items):
+        roles = lock.get("required_roles")
+        target_items = selected(roles)
+        scope_unread = bool(unread_roles) and (not roles or None in unread_roles or unread_roles.intersection(roles))
+        if (lock.get("kind") == "EXACT" and canonical and not scope_unread
+                and not any(contains(item["text"], canonical, True) for item in target_items)):
             findings.append({"code": "LOCK001", "lock": lock.get("id"), "message": "required exact lock not found"})
         for variant in lock.get("forbidden_variants", []):
             for item in target_items:

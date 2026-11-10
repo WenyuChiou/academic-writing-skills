@@ -11,6 +11,38 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.4.2] - 2026-11-08
+
+### Changed
+
+- Make the existing Results walkthrough distinguish necessary first-use decoding
+  from a supported comparative interpretation and a joint cross-layer finding.
+  Keep reference direction and inferential levels explicit without requiring
+  a speculative mechanism or a closing sentence after every value.
+- Plan the shared question's answer before rewriting across Results layers;
+  bind its evidence to the current figures, supplement and analysis definition.
+  Check proposed external interpretations against the current sources, and
+  reconcile numbered citations in both directions without certifying partial reads.
+- Carry measurement/scoring caveats and repeated-run reporting rules into
+  dependent claims. Distinguish ranges, median p-values and significant-run
+  counts; inspect existing supplementary coverage before reporting omissions.
+- Align interpretation placement with an author-approved integrated or separate
+  Results/Discussion arrangement, and disclose an unavailable project overlay.
+  Mirror the scoped guidance in Traditional and Simplified Chinese.
+
+### Added
+
+- Fourteen fictional editorial cases covering interpretation, measurement,
+  cross-layer synthesis, replication, citation reconciliation, source and
+  selection identity, partial evidence and narrow no-change controls. Their
+  deterministic tests check input integrity, not semantic task performance.
+
+### Fixed
+
+- Report undecodable, empty, missing or malformed inputs as source-read
+  findings in consistency and prose scans. Avoid a clean scan with no
+  readable material, and withhold missing-lock conclusions for unread scopes.
+
 ## [1.4.1] - 2026-11-06
 
 ### Changed
@@ -1017,6 +1049,7 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   domain-neutral.
 
 [Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/commits/main
+[1.4.2]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/WenyuChiou/academic-writing-skills/releases/tag/v1.4.0
 [1.3.24]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.23...v1.3.24

@@ -105,9 +105,12 @@ what the observed pattern means for the objective or question. Numbers alone are
 not a substantive answer. Add interpretation where the paragraph or subsection's
 function requires it, not a ritual closing sentence after every plot. Temporarily
 remove the SQ/RQ label: the remaining statement must still answer something.
-Results may describe a decomposition or relationship
-supported directly by the analysis. Put literature-based explanations, untested
-mechanisms, alternative explanations, and policy implications in the Discussion.
+Results may describe a decomposition or relationship supported directly by the
+analysis. Follow the declared genre and author-approved arrangement for extended
+interpretation: a separate Discussion normally carries literature-based
+explanations, alternatives and implications, while an integrated section can
+develop them alongside findings. Placement never strengthens the evidence for
+an untested mechanism; retain its unresolved status in either arrangement.
 Identify orphan methods that produce no reported result and orphan results with
 no described method.
 

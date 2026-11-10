@@ -78,6 +78,10 @@ description: "為學術論文建立研究定位與大綱、規劃並修訂相互
 - [conclusion-and-abstract.md](references/conclusion-and-abstract.md)：在起草總結前，先釐清當前研究目標、工作、比較層級與處理範圍；保留作者清晰的措辭，並將研究主體定位與研究發現區分開來。
 - [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md)：最終尺寸清晰度、圖表說明/註記、平行補充資料（SM）、編號與專案格式。
 
+若實質性 Results 任務跨越共同回答同一研究問題的圖表或小節，請在修改個別段落前使用[共同答案規劃](references/results-and-explanation.md#plan-the-joint-answer-before-rewriting)。局部選取範圍可能需要讀取相關來源，但不因此擴大編輯權限。
+
+對顧問、審稿人或外部 AI 提出的結果詮釋（含回覆審稿意見時），採用 [results-and-explanation.md](references/results-and-explanation.md) 的現行證據核對。
+
 在每章完成或進行實質章節修訂時，請執行 [lifecycle-and-routing.md](references/lifecycle-and-routing.md) 中的章節結尾盲點檢查。此檢查點為必備；請依據設計、內容與證據選擇診斷問題。切勿針對僅限文法的編輯執行完整章節審查，亦不可聲稱已徹底窮盡發掘所有未知的未知。
 
 <a id="draft-from-explicit-writing-contracts"></a>
@@ -160,6 +164,8 @@ description: "為學術論文建立研究定位與大綱、規劃並修訂相互
 
 當專案、資料夾、稿件或使用者需求識別出 **Survey paper**、**PiDS** 或 **WC_vX** 稿件時，請使用已安裝的 `survey-paper-wcvx` 技能作為專案狀態與審查輪次疊加層，並與這些通用誠信關卡一併運作。將該專案的檔案名稱、作者身分、優先級機制與版本規則保留在專案疊加層內。
 
+在聲稱已套用具名疊加層之前，確認它確實可用。若不存在，使用所提供且具權威的專案紀錄完成限定範圍的工作，並揭露缺少該疊加層；不捏造其規則，也不據此斷言先前失誤的原因。
+
 <a id="handle-reviewer-responses"></a>
 ## 處理審稿意見回覆
 
@@ -210,6 +216,8 @@ description: "為學術論文建立研究定位與大綱、規劃並修訂相互
 在**初稿首次交付**之前，使用 [execution-and-acceptance.md](references/execution-and-acceptance.md) 記錄讀者理解、累積推進，以及每個受影響的圖表說明、已儲存版面、發表管道格式依據與新編輯/回覆身分的具體且具明確位置的發現。保持輕量記錄行內呈現或重複使用現有專案記錄；JSON 為選填。缺失或無法進行的檢查仍屬未完成，而非已通過。語言掃描 `PASS` 絕不能替代這些檢查。臨時草稿可在註明明確限制的情況下交付，但不得作為已完整檢查或符合期刊規定的產出物交付。
 
 進行散文修訂時，請選取 [prose-and-citation-editing.md](references/prose-and-citation-editing.md) 中適用的功能性檢查：轉折詞、保留功能的精簡性、自然學術散文、主張–文獻引用對齊、可觀察到的陳腔濫調或類似 AI 的特徵，以及破折號/連字號風格。標點符號編輯需要的是保持原意，而非重新進行文獻審查。將診斷結果視為引導判斷的提示，而非通用禁令或作者身分偵測。
+
+稽核參考文獻或變更編號引用時，即使未要求潤稿，也使用 [prose-and-citation-editing.md](references/prose-and-citation-editing.md) 的雙向核對。
 
 針對實質稿件章節、摘要、反駁信或明確的禁用詞審查，亦須依據 [banned_words.md](references/banned_words.md) 檢查精確的候選文字。將每個相符項視為脈絡診斷，而非自動刪除或 AI 撰寫的證據，並優先套用任何專案特定的寫作契約或術語覆寫設定。
 
