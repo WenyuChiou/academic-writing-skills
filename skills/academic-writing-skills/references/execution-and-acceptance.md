@@ -195,9 +195,13 @@ The JSON contract supports legacy version `1` and stage-aware version `2`:
   The `outline` checkpoint is for planning/developing/reviewing an outline, not a
   way to bypass prose review; grammar-only outline edits use `handoff`.
 - `features`: four explicit booleans: `displays`, `formatted_file`,
-  `venue_formatting`, `metadata_changes`. Declare effects honestly; the checker
-  cannot infer them from document contents. Formatted edits require identity
-  verification even if metadata was not deliberately changed.
+  `venue_formatting`, `metadata_changes`. Version 2 requires formatted-file
+  coverage for common Word, PDF, RTF, HTML, presentation, and spreadsheet
+  candidates by suffix;
+  it cannot infer other effects from file contents. A Word file used solely
+  as a prose source for a text-only handoff is context, not a formatted
+  deliverable. Formatted edits require identity verification even if metadata
+  was not deliberately changed.
 - `artifacts`: nonempty list of `{id, path, role, sha256}` records. Paths are
   absolute or relative to the coverage file; hashes cover exact file bytes.
   At least one role is `candidate`; other roles are `context`, `evidence`, or
@@ -207,8 +211,17 @@ The JSON contract supports legacy version `1` and stage-aware version `2`:
   in snake case. Each `checked` entry has
   `outcome` (`resolved` or `open`), nonempty `artifact_ids`, `locator`, and
   `finding`. Pending entries have a status and `reason`.
-- Checked `final_layout` references an artifact with role `render`, bound in
-  the review finding to the exact saved candidate and rendering procedure.
+- Checked `final_layout` lists each in-scope formatted candidate and its render
+  evidence in the same check. In version 2, each referenced `render` records
+  the candidate's `source_id` and `source_sha256` captured when rendering. A
+  missing binding leaves coverage incomplete; a changed source hash requires
+  re-rendering and reinspection. In a formatted handoff, all candidates need
+  a binding by default, including companions with unrecognized suffixes.
+  A genuinely non-layout deliverable, such as a plain-text note, can supply
+  a nonempty `layout_exclusion_reason`; recognized formatted candidates cannot.
+  Locate the inspected pages and record the rendering procedure in the finding.
+  A matching binding does not prove what was rendered or visually inspected.
+  Version 1 records remain legacy coverage without per-file binding validation.
   Checked `editor_identity` also records `expected_author` and
   `new_edit_authors`; these concern this edit, not all historical authors.
   An empty list requires `absence_reason` documenting inspected absence of new

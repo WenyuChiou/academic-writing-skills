@@ -32,6 +32,11 @@ ACTIONS = {"plan", "draft", "revise", "proofread", "review"}
 CHECKPOINTS = {"outline", "handoff", "chapter_closure", "full_review"}
 ROLES = {"candidate", "context", "evidence", "render"}
 HASH = re.compile(r"[0-9a-f]{64}")
+FORMATTED_SUFFIXES = {
+    ".doc", ".docm", ".docx", ".odt", ".rtf", ".pdf", ".htm", ".html",
+    ".odp", ".ppt", ".pptm", ".pptx",
+    ".ods", ".xls", ".xlsm", ".xlsx",
+}
 
 
 def required_checks(record: dict) -> set[str]:
@@ -112,6 +117,28 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def check_layout_bindings(ids, artifacts, targets, invalid, pending):
+    """Require a declared current-source binding for each scoped format candidate."""
+    covered = set()
+    for name in ids:
+        entry = artifacts[name]
+        if entry["role"] != "render":
+            continue
+        source_id = entry.get("source_id")
+        source_hash = entry.get("source_sha256")
+        if source_id is None and source_hash is None:
+            pending.append(f"final_layout: render {name} has no source_id or source_sha256")
+        elif (not isinstance(source_id, str) or source_id not in artifacts
+              or artifacts[source_id]["role"] != "candidate" or source_id not in ids):
+            invalid.append(f"final_layout: render {name} source_id must be a referenced candidate")
+        elif source_hash != artifacts[source_id]["sha256"]:
+            invalid.append(f"final_layout: render {name} source_sha256 differs from {source_id}; re-render")
+        else:
+            covered.add(source_id)
+    if missing := sorted(targets - covered):
+        pending.append(f"final_layout: missing source-bound render evidence for {', '.join(missing)}")
+
+
 def audit_record(record, root: Path) -> dict:
     """Check record shape, current bytes, applicable coverage, and open findings."""
     invalid, pending = [], []
@@ -128,9 +155,10 @@ def audit_record(record, root: Path) -> dict:
     if not isinstance(record.get("change"), str) or record["change"] not in {"surface", "substantive"}:
         invalid.append("change must be surface or substantive")
     features = record.get("features")
-    if not isinstance(features, dict) or set(features) != FEATURES or any(
-        type(value) is not bool for value in features.values()
-    ):
+    valid_features = isinstance(features, dict) and set(features) == FEATURES and all(
+        type(value) is bool for value in features.values()
+    )
+    if not valid_features:
         invalid.append("features must declare all four boolean applicability flags")
     invalid.extend(workflow_errors(record))
     if not invalid:
@@ -159,8 +187,26 @@ def audit_record(record, root: Path) -> dict:
         except (OSError, ValueError) as exc:
             stale.add(name)
             invalid.append(f"unreadable artifact {name}: {exc}")
-    if not any(entry["role"] == "candidate" for entry in artifacts.values()):
+    candidates = {name for name, entry in artifacts.items() if entry["role"] == "candidate"}
+    formatted = {name for name in candidates
+                 if Path(artifacts[name]["path"]).suffix.casefold() in FORMATTED_SUFFIXES}
+    if not candidates:
         invalid.append("at least one exact candidate artifact is required")
+    if version == 2 and formatted and valid_features and not features["formatted_file"]:
+        invalid.append("features.formatted_file must be true for formatted candidates: "
+                       + ", ".join(sorted(formatted)))
+    layout_targets = set(candidates)
+    if version == 2 and valid_features and features["formatted_file"]:
+        for name in sorted(candidates):
+            entry = artifacts[name]
+            if "layout_exclusion_reason" not in entry:
+                continue
+            if name in formatted or not nonempty(entry["layout_exclusion_reason"]):
+                invalid.append(f"layout_exclusion_reason: {name} must be nonformatted and have a reason")
+            else:
+                layout_targets.remove(name)
+        if not layout_targets:
+            invalid.append("features.formatted_file requires at least one in-scope layout candidate")
     checks = record.get("checks")
     if not isinstance(checks, dict):
         invalid.append("checks must be an object")
@@ -200,8 +246,11 @@ def audit_record(record, root: Path) -> dict:
             invalid.append(f"{name}: checked outcome must be resolved or open")
         elif check["outcome"] == "open":
             pending.append(f"{name}: reviewed but unresolved")
-        if name == "final_layout" and not any(artifacts[value]["role"] == "render" for value in ids):
-            invalid.append("final_layout: checked requires final-file render evidence, not XML alone")
+        if name == "final_layout":
+            if not any(artifacts[value]["role"] == "render" for value in ids):
+                invalid.append("final_layout: checked requires final-file render evidence, not XML alone")
+            elif version == 2:
+                check_layout_bindings(ids, artifacts, layout_targets, invalid, pending)
         if name == "venue_basis":
             if not isinstance(check.get("basis"), str) or check["basis"] not in {"verified_requirement", "project_preference", "example"} or not nonempty(check.get("source")):
                 invalid.append("venue_basis: classify requirement/preference/example and identify its source")
@@ -255,6 +304,10 @@ def main(argv=None) -> int:
         print(json.dumps(result, indent=2, ensure_ascii=True))
     else:
         print(result["status"] + " (coverage only; not editorial certification)")
+        if "coverage_basis" in result:
+            print(f"coverage_basis: {result['coverage_basis']}")
+        if result.get("coverage_basis") == "legacy_v1":
+            print("legacy coverage does not validate workflow stages or per-file render bindings")
         for finding in result["findings"]:
             print("- " + finding)
     return {"COVERAGE_COMPLETE": 0, "INCOMPLETE": 1, "INVALID": 2, "ERROR": 2}[result["status"]]

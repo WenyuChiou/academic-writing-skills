@@ -11,6 +11,19 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.4.3] - 2026-11-12
+
+### Fixed
+
+- Require source-version-bound layout evidence for each formatted candidate in
+  a stage-aware handoff; catch missing companion renders and stale renders
+  even after a candidate's declared hash is refreshed. Mixed-format companions
+  require evidence unless explicitly identified as non-layout deliverables.
+- Catch common formatted document candidates mislabeled as text-only in stage-aware records, while
+  keeping a Word file used only as context outside the layout gate.
+- Label plain-text scan results as configured checks and keep manual syntax
+  and reader-flow review visible. Identify legacy handoff coverage explicitly.
+
 ## [1.4.2] - 2026-11-08
 
 ### Changed
@@ -1049,7 +1062,8 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   domain-neutral.
 
 [Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/commits/main
-[1.4.2]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.4.1...v1.4.2
+[1.4.3]: https://github.com/WenyuChiou/academic-writing-skills/compare/f1e27b9b6991b898dda576b76846fc728cd2f8b0...v1.4.3
+[1.4.2]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.4.1...f1e27b9b6991b898dda576b76846fc728cd2f8b0
 [1.4.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/WenyuChiou/academic-writing-skills/releases/tag/v1.4.0
 [1.3.24]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.3.23...v1.3.24
