@@ -91,10 +91,10 @@
 
 - `schema_version`：整数 `1` 或 `2`；`scope`：`sentence`、`paragraph`、`section` 或 `package`；`change`：`surface` 或 `substantive`。
 - 版本 `2` 亦需要 `action`：`plan`、`draft`、`revise`、`proofread` 或 `review`；以及 `checkpoint`：`outline`、`handoff`、`chapter_closure` 或 `full_review`。请依据实际的请求／工作来选择，而非选择检核项目较少的设定档。`proofread` 仅限表面。`chapter_closure` 使用实质的 `section` 处理范围；`full_review` 使用 `package` 处理范围。这两个检核点使用 `draft`、`revise` 或 `review`，而非规划或校对。`outline` 检核点用于规划／推展／审查大纲，而非规避行文审查的手段；纯文法的大纲修改使用 `handoff`。
-- `features`：四个明确的布林值：`displays`、`formatted_file`、`venue_formatting`、`metadata_changes`。第 2 版检查器按扩展名要求 Word、PDF、演示文稿和电子表格交付文件接受排版检查；其他影响仍无法从文件内容推断。只交付纯文本时，作为文字来源的 Word 文件属于参考资料。即使未刻意修改元数据，格式化编辑仍需验证身份。
+- `features`：四个明确的布林值：`displays`、`formatted_file`、`venue_formatting`、`metadata_changes`。第 2 版检查器按扩展名要求 Word、PDF、RTF、HTML、演示文稿和电子表格交付文件接受排版检查；其他影响仍无法从文件内容推断。只交付纯文本时，作为文字来源的 Word 文件属于参考资料。即使未刻意修改元数据，格式化编辑仍需验证身份。
 - `artifacts`：非空的 `{id, path, role, sha256}` 记录清单。路径为绝对路径或相对于涵盖文件的路径；杂凑值涵盖精确的文件位元组。至少有一个角色为 `candidate`；其他角色为 `context`、`evidence` 或 `render`。请纳入检核中使用的目前相邻文字／约定以及受影响的来源或渲染证据，以便在依赖项变更时使涵盖度失效。
 - `checks`：来自表格与下方版本 2 阶段检核的适用名称，以蛇形命名法（snake case）表示。每个 `checked` 项目皆具备 `outcome`（`resolved` 或 `open`）、非空的 `artifact_ids`、`locator` 与 `finding`。待处理项目具备状态与 `reason`。
-- 已检核的 `final_layout` 在同一条检查中列出各份排版交付文件及其渲染证据。第 2 版中，每个引用的 `render` 要记录渲染时的来源 `source_id` 和 `source_sha256`。缺少绑定时，检查覆盖仍不完整；来源哈希值变化后，须重新渲染并检查。如果交付文件的扩展名均不在识别列表中，但已声明为排版交付，每份交付文件都须绑定。请标明检查过的页面和渲染方式。绑定匹配并不能证明实际渲染或目视检查了哪些内容。第 1 版仍可读取，但不验证逐文件绑定。已检核的 `editor_identity` 亦记录 `expected_author` 与 `new_edit_authors`；这些涉及本次编辑，而非所有历史作者。清单若为空，则需要 `absence_reason` 记录经检查后确实无新增修订／意见／回复作者以及适用的身分文件属性；切勿纯粹为了通过关卡而填入虚构作者。
+- 已检核的 `final_layout` 在同一条检查中列出各份排版交付文件及其渲染证据。第 2 版中，每个引用的 `render` 要记录渲染时的来源 `source_id` 和 `source_sha256`。缺少绑定时，检查覆盖仍不完整；来源哈希值变化后，须重新渲染并检查。混合交付时，每份候选交付文件默认都需要排版证据，即使扩展名不在识别列表中。没有版面可检查的交付文件（如纯文本附件）可用非空的 `layout_exclusion_reason` 说明原因；已识别的排版格式不可排除。请标明检查过的页面和渲染方式。绑定匹配并不能证明实际渲染或目视检查了哪些内容。第 1 版仍可读取，但不验证逐文件绑定。已检核的 `editor_identity` 亦记录 `expected_author` 与 `new_edit_authors`；这些涉及本次编辑，而非所有历史作者。清单若为空，则需要 `absence_reason` 记录经检查后确实无新增修订／意见／回复作者以及适用的身分文件属性；切勿纯粹为了通过关卡而填入虚构作者。
 - 已检核的 `venue_basis` 亦记录 `basis`（`verified_requirement`、`project_preference` 或 `example`）与 `source`（载明日期之官方来源或明确指示／范例定位标记）。来源字串不由本工具独立查证。
 
 对于无文件／图表展示／发表场域影响且保留原意的句子修改，仅需要 `meaning_and_evidence`、`language_scan` 与 `reader_walkthrough`。对于实质工作，亦需要 `progression_and_framing`。额外适用的检核依据上述影响而定；必要的检核不得标记为不适用。

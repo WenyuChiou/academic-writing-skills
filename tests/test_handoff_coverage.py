@@ -129,6 +129,31 @@ def test_v2_layout_requires_receipts_for_both_formatted_files(package, tmp_path)
     assert any("supplement.DOCX" in finding for finding in result["findings"])
 
 
+@pytest.mark.parametrize("name", ["appendix.rtf", "appendix.typeset"])
+def test_v2_layout_does_not_skip_a_mixed_format_companion(package, tmp_path, name):
+    package["artifacts"].append(artifact(tmp_path, name, "candidate", "Formatted companion"))
+    result = audit.audit_record(package, tmp_path)
+    assert result["status"] == "INCOMPLETE"
+    assert any(name in finding for finding in result["findings"])
+
+
+def test_v2_mixed_text_candidate_can_explicitly_exclude_layout(package, tmp_path):
+    note = artifact(tmp_path, "response.txt", "candidate", "Text-only note")
+    package["artifacts"].append(note)
+    assert audit.audit_record(package, tmp_path)["status"] == "INCOMPLETE"
+    note["layout_exclusion_reason"] = "The accompanying plain-text note has no saved page layout."
+    assert audit.audit_record(package, tmp_path)["status"] == "COVERAGE_COMPLETE"
+    note["layout_exclusion_reason"] = " "
+    assert audit.audit_record(package, tmp_path)["status"] == "INVALID"
+
+
+def test_v2_known_formatted_candidate_cannot_exclude_layout(package, tmp_path):
+    package["artifacts"][0]["layout_exclusion_reason"] = "Skip formatting."
+    result = audit.audit_record(package, tmp_path)
+    assert result["status"] == "INVALID"
+    assert any("layout_exclusion_reason" in finding for finding in result["findings"])
+
+
 def test_v2_layout_rejects_old_render_even_after_source_hash_is_refreshed(package, tmp_path):
     main = package["artifacts"][0]
     path = tmp_path / main["path"]

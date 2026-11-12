@@ -33,7 +33,8 @@ CHECKPOINTS = {"outline", "handoff", "chapter_closure", "full_review"}
 ROLES = {"candidate", "context", "evidence", "render"}
 HASH = re.compile(r"[0-9a-f]{64}")
 FORMATTED_SUFFIXES = {
-    ".doc", ".docm", ".docx", ".odt", ".pdf", ".odp", ".ppt", ".pptm", ".pptx",
+    ".doc", ".docm", ".docx", ".odt", ".rtf", ".pdf", ".htm", ".html",
+    ".odp", ".ppt", ".pptm", ".pptx",
     ".ods", ".xls", ".xlsm", ".xlsx",
 }
 
@@ -194,6 +195,18 @@ def audit_record(record, root: Path) -> dict:
     if version == 2 and formatted and valid_features and not features["formatted_file"]:
         invalid.append("features.formatted_file must be true for formatted candidates: "
                        + ", ".join(sorted(formatted)))
+    layout_targets = set(candidates)
+    if version == 2 and valid_features and features["formatted_file"]:
+        for name in sorted(candidates):
+            entry = artifacts[name]
+            if "layout_exclusion_reason" not in entry:
+                continue
+            if name in formatted or not nonempty(entry["layout_exclusion_reason"]):
+                invalid.append(f"layout_exclusion_reason: {name} must be nonformatted and have a reason")
+            else:
+                layout_targets.remove(name)
+        if not layout_targets:
+            invalid.append("features.formatted_file requires at least one in-scope layout candidate")
     checks = record.get("checks")
     if not isinstance(checks, dict):
         invalid.append("checks must be an object")
@@ -237,7 +250,7 @@ def audit_record(record, root: Path) -> dict:
             if not any(artifacts[value]["role"] == "render" for value in ids):
                 invalid.append("final_layout: checked requires final-file render evidence, not XML alone")
             elif version == 2:
-                check_layout_bindings(ids, artifacts, formatted or candidates, invalid, pending)
+                check_layout_bindings(ids, artifacts, layout_targets, invalid, pending)
         if name == "venue_basis":
             if not isinstance(check.get("basis"), str) or check["basis"] not in {"verified_requirement", "project_preference", "example"} or not nonempty(check.get("source")):
                 invalid.append("venue_basis: classify requirement/preference/example and identify its source")

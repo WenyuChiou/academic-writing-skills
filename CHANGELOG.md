@@ -17,7 +17,8 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 - Require source-version-bound layout evidence for each formatted candidate in
   a stage-aware handoff; catch missing companion renders and stale renders
-  even after a candidate's declared hash is refreshed.
+  even after a candidate's declared hash is refreshed. Mixed-format companions
+  require evidence unless explicitly identified as non-layout deliverables.
 - Catch common formatted document candidates mislabeled as text-only in stage-aware records, while
   keeping a Word file used only as context outside the layout gate.
 - Label plain-text scan results as configured checks and keep manual syntax

@@ -196,7 +196,8 @@ The JSON contract supports legacy version `1` and stage-aware version `2`:
   way to bypass prose review; grammar-only outline edits use `handoff`.
 - `features`: four explicit booleans: `displays`, `formatted_file`,
   `venue_formatting`, `metadata_changes`. Version 2 requires formatted-file
-  coverage for Word, PDF, presentation, and spreadsheet candidates by suffix;
+  coverage for common Word, PDF, RTF, HTML, presentation, and spreadsheet
+  candidates by suffix;
   it cannot infer other effects from file contents. A Word file used solely
   as a prose source for a text-only handoff is context, not a formatted
   deliverable. Formatted edits require identity verification even if metadata
@@ -214,8 +215,10 @@ The JSON contract supports legacy version `1` and stage-aware version `2`:
   evidence in the same check. In version 2, each referenced `render` records
   the candidate's `source_id` and `source_sha256` captured when rendering. A
   missing binding leaves coverage incomplete; a changed source hash requires
-  re-rendering and reinspection. When no candidate has a recognized formatted
-  suffix, a declared formatted handoff requires a binding for each candidate.
+  re-rendering and reinspection. In a formatted handoff, all candidates need
+  a binding by default, including companions with unrecognized suffixes.
+  A genuinely non-layout deliverable, such as a plain-text note, can supply
+  a nonempty `layout_exclusion_reason`; recognized formatted candidates cannot.
   Locate the inspected pages and record the rendering procedure in the finding.
   A matching binding does not prove what was rendered or visually inspected.
   Version 1 records remain legacy coverage without per-file binding validation.
