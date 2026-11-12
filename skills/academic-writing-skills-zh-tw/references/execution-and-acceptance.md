@@ -91,10 +91,10 @@
 
 - `schema_version`：整數 `1` 或 `2`；`scope`：`sentence`、`paragraph`、`section` 或 `package`；`change`：`surface` 或 `substantive`。
 - 版本 `2` 亦需要 `action`：`plan`、`draft`、`revise`、`proofread` 或 `review`；以及 `checkpoint`：`outline`、`handoff`、`chapter_closure` 或 `full_review`。請依據實際的請求／工作來選擇，而非選擇檢核項目較少的設定檔。`proofread` 僅限表面。`chapter_closure` 使用實質的 `section` 處理範圍；`full_review` 使用 `package` 處理範圍。這兩個檢核點使用 `draft`、`revise` 或 `review`，而非規劃或校對。`outline` 檢核點用於規劃／推展／審查大綱，而非規避行文審查的手段；純文法的大綱修改使用 `handoff`。
-- `features`：四個明確的布林值：`displays`、`formatted_file`、`venue_formatting`、`metadata_changes`。請誠實宣告影響；檢核器無法從文件內容推斷影響。即使未刻意變更中繼資料，格式化編輯仍需驗證身分。
+- `features`：四個明確的布林值：`displays`、`formatted_file`、`venue_formatting`、`metadata_changes`。第 2 版檢核器依副檔名要求 Word、PDF、簡報與試算表交付檔接受排版檢查；其他影響仍無法從檔案內容推斷。只交付純文字時，作為文字來源的 Word 檔屬於參考資料。即使未刻意變更中繼資料，格式化編輯仍需驗證身分。
 - `artifacts`：非空的 `{id, path, role, sha256}` 記錄清單。路徑為絕對路徑或相對於涵蓋檔案的路徑；雜湊值涵蓋精確的檔案位元組。至少有一個角色為 `candidate`；其他角色為 `context`、`evidence` 或 `render`。請納入檢核中使用的目前相鄰文字／約定以及受影響的來源或渲染證據，以便在依賴項變更時使涵蓋度失效。
 - `checks`：來自表格與下方版本 2 階段檢核的適用名稱，以蛇形命名法（snake case）表示。每個 `checked` 項目皆具備 `outcome`（`resolved` 或 `open`）、非空的 `artifact_ids`、`locator` 與 `finding`。待處理項目具備狀態與 `reason`。
-- 已檢核的 `final_layout` 參照角色為 `render` 的產物，並在審查發現中與已儲存的精確候選對象及渲染程序綁定。已檢核的 `editor_identity` 亦記錄 `expected_author` 與 `new_edit_authors`；這些涉及本次編輯，而非所有歷史作者。清單若為空，則需要 `absence_reason` 記錄經檢查後確實無新增修訂／意見／回覆作者以及適用的身分檔案屬性；切勿純粹為了通過關卡而填入虛構作者。
+- 已檢核的 `final_layout` 在同一筆檢查中列出各份排版交付檔及其渲染證據。第 2 版中，每個引用的 `render` 要記錄渲染當時的來源 `source_id` 和 `source_sha256`。缺少綁定時，涵蓋範圍仍不完整；來源雜湊變動時，須重新渲染並檢查。若交付檔的副檔名都不在辨識清單內，但已宣告是排版交付，每份交付檔都須有綁定。請標出看過的頁面和渲染方式。綁定相符並不能證明實際渲染或目視檢查了哪些內容。第 1 版仍可讀取，但不驗證逐檔綁定。已檢核的 `editor_identity` 亦記錄 `expected_author` 與 `new_edit_authors`；這些涉及本次編輯，而非所有歷史作者。清單若為空，則需要 `absence_reason` 記錄經檢查後確實無新增修訂／意見／回覆作者以及適用的身分檔案屬性；切勿純粹為了通過關卡而填入虛構作者。
 - 已檢核的 `venue_basis` 亦記錄 `basis`（`verified_requirement`、`project_preference` 或 `example`）與 `source`（載明日期之官方來源或明確指示／範例定位標記）。來源字串不由本工具獨立查證。
 
 對於無檔案／圖表展示／發表場域影響且保留原意的句子修改，僅需要 `meaning_and_evidence`、`language_scan` 與 `reader_walkthrough`。對於實質工作，亦需要 `progression_and_framing`。額外適用的檢核依據上述影響而定；必要的檢核不得標記為不適用。

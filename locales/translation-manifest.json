@@ -54,8 +54,8 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/execution-and-acceptance.md",
       "target": "skills/academic-writing-skills-zh-tw/references/execution-and-acceptance.md",
-      "source_sha256": "209f711d9d026315f526d4c321f984c65dd5e96893a2c6aa5822fcec52a7fff6",
-      "target_sha256": "9fc0494afb1447c078f3c13e21e4d79262fcba99dc7cd7ca8874a9c6f5108849"
+      "source_sha256": "16725d9fb58c83b3dcc335fa8763c0c51f8cf144cfdbc27549902df88976ed55",
+      "target_sha256": "f0cd4107cd05d9fdee527942fd2254233482e84bd3e7b625a8c963a3e975ea1a"
     },
     {
       "locale": "zh-TW",
@@ -278,8 +278,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/execution-and-acceptance.md",
       "target": "skills/academic-writing-skills-zh-cn/references/execution-and-acceptance.md",
-      "source_sha256": "209f711d9d026315f526d4c321f984c65dd5e96893a2c6aa5822fcec52a7fff6",
-      "target_sha256": "1c7c279b38c54d0dc8d5d25d9748aa698bf49d611f202265da53825ed3d1c75e"
+      "source_sha256": "16725d9fb58c83b3dcc335fa8763c0c51f8cf144cfdbc27549902df88976ed55",
+      "target_sha256": "80454db7e76df728316fdbdc6588c8d1bc6519abc70ca585262b6e32a7606f89"
     },
     {
       "locale": "zh-CN",

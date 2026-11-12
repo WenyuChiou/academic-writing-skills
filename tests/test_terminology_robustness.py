@@ -297,3 +297,17 @@ def test_unknown_scope_notice_also_covers_locks_and_facts_without_terms(tmp_path
     )
     assert run.returncode == 1
     assert "artifact role unresolved" in run.stdout
+
+
+def test_plain_clean_candidate_scan_preserves_manual_reader_boundary(tmp_path):
+    report, _ = run_cli(tmp_path, profile())
+    assert report["status"] == "PASS"
+    run = subprocess.run(
+        [sys.executable, "-X", "utf8", str(SCRIPTS / "audit_candidate_text.py"),
+         str(tmp_path / "state.json"), str(tmp_path / "candidate.txt")],
+        text=True, capture_output=True, encoding="utf-8", timeout=20, check=False,
+    )
+    assert run.returncode == 0
+    assert "configured scan only" in run.stdout
+    assert f"{len(report['manual_checks_required'])} manual checks" in run.stdout
+    assert "sentence-to-sentence flow" in run.stdout

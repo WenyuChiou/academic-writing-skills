@@ -130,7 +130,8 @@ def main() -> int:
     if args.as_json:
         print(json.dumps(result, indent=2, ensure_ascii=False))
     else:
-        print(f"{result['status']}: {len(result['findings'])} finding(s)")
+        print(f"{result['status']}: {len(result['findings'])} finding(s) (configured scan only)")
+        print(f"{len(MANUAL_CHECKS)} manual checks remain; review syntax and sentence-to-sentence flow separately.")
         print(f"candidate_sha256: {result['candidate_sha256']}")
         if "terminology_coverage" in result:
             coverage = result["terminology_coverage"]
