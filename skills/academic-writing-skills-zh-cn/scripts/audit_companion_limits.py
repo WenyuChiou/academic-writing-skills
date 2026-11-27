@@ -413,6 +413,7 @@ def _extract_bib_keys(bib_text: str) -> set[str]:
         entry_type = match.group(1).lower()
         open_ch = match.group(2)
         close_ch = "}" if open_ch == "{" else ")"
+        ignore_quotes = entry_type == "comment"
         body_start = match.end()
         idx = body_start
         brace_depth = 0
@@ -438,7 +439,7 @@ def _extract_bib_keys(bib_text: str) -> set[str]:
                     in_quotes = False
                 idx += 1
                 continue
-            if ch == '"':
+            if ch == '"' and not ignore_quotes:
                 in_quotes = True
             elif ch == "{":
                 brace_depth = 1

@@ -6,10 +6,14 @@ from __future__ import annotations
 import argparse
 import ast
 import json
+import math
 import re
 import struct
 from pathlib import Path
 from typing import Any
+
+
+NONLINEAR_SCALES = {"log", "symlog", "logit", "function", "functionlog"}
 
 
 CUR_MINUS_RE = re.compile(r"\$-(?=[0-9])")
@@ -252,6 +256,84 @@ def _lint_legends_in_scope(
     return findings
 
 
+def _collect_scope_calls(stmts: list[ast.stmt]) -> list[ast.Call]:
+    """Collect Call AST nodes within the current lexical scope without entering nested defs/classes."""
+    calls: list[ast.Call] = []
+
+    def walk_exprs(node: ast.AST) -> None:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            return
+        if isinstance(node, ast.Call):
+            calls.append(node)
+        for child in ast.iter_child_nodes(node):
+            if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                continue
+            walk_exprs(child)
+
+    for stmt in stmts:
+        walk_exprs(stmt)
+    return calls
+
+
+def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str) -> list[dict[str, Any]]:
+    """Check tick spacing per lexical scope while accounting for nonlinear axis scales (log, symlog, logit)."""
+    calls = _collect_scope_calls(stmts)
+    scale_map: dict[tuple[str, str], str] = {}
+    for node in calls:
+        if not isinstance(node.func, ast.Attribute):
+            continue
+        attr = node.func.attr
+        receiver = node.func.value.id if isinstance(node.func.value, ast.Name) else ""
+        if attr in {"set_xscale", "set_yscale"} and node.args:
+            if isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str):
+                scale_map[(receiver, "x" if attr == "set_xscale" else "y")] = node.args[0].value.lower()
+        elif attr in {"xscale", "yscale"} and node.args:
+            if isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str):
+                scale_map[("*", "x" if attr == "xscale" else "y")] = node.args[0].value.lower()
+        elif attr == "semilogx":
+            scale_map[(receiver or "*", "x")] = "log"
+        elif attr == "semilogy":
+            scale_map[(receiver or "*", "y")] = "log"
+        elif attr == "loglog":
+            scale_map[(receiver or "*", "x")] = "log"
+            scale_map[(receiver or "*", "y")] = "log"
+
+    findings: list[dict[str, Any]] = []
+    for node in calls:
+        if not isinstance(node.func, ast.Attribute) or not node.args:
+            continue
+        attr = node.func.attr
+        if attr not in {"set_yticks", "set_xticks"}:
+            continue
+        line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
+        if "# intentional-ticks" in line_text:
+            continue
+        ticks = _literal_number_list(node.args[0])
+        if not ticks:
+            continue
+        receiver = node.func.value.id if isinstance(node.func.value, ast.Name) else ""
+        axis_ch = "x" if attr == "set_xticks" else "y"
+        scale = scale_map.get((receiver, axis_ch)) or scale_map.get(("*", axis_ch), "linear")
+        ordered = sorted(ticks)
+        if scale == "log":
+            if not all(val > 0 for val in ordered):
+                continue
+            transformed = [math.log10(val) for val in ordered]
+        elif scale in NONLINEAR_SCALES:
+            continue
+        else:
+            transformed = ordered
+        gaps = [round(b - a, 9) for a, b in zip(transformed, transformed[1:]) if b > a]
+        if len(gaps) >= 3:
+            hi_gap = max(gaps)
+            if hi_gap > 0 and min(gaps) <= 0.55 * hi_gap:
+                findings.append({
+                    "code": "FIG004", "artifact": artifact, "line": node.lineno,
+                    "message": f"uneven close neighbor ticks {ordered}; remove neighbor tick colliding with reference cutoff",
+                })
+    return findings
+
+
 def lint_python_script(path: Path) -> list[dict[str, Any]]:
     """Inspect a Python plotting script AST for baked-in titles, inside legends, glyph traps, and paired y-axis drift."""
     source = path.read_text(encoding="utf-8")
@@ -301,23 +383,12 @@ def lint_python_script(path: Path) -> list[dict[str, Any]]:
                 "message": f"baked-in figure/axis title via .{attr}(); move title to manuscript caption",
             })
 
-        if attr in {"set_yticks", "set_xticks"} and node.args and "# intentional-ticks" not in line_text:
-            ticks = _literal_number_list(node.args[0])
-            if ticks:
-                ordered = sorted(ticks)
-                gaps = [round(b - a, 9) for a, b in zip(ordered, ordered[1:]) if b > a]
-                if len(gaps) >= 3:
-                    hi_gap = max(gaps)
-                    if hi_gap > 0 and min(gaps) <= 0.55 * hi_gap:
-                        findings.append({
-                            "code": "FIG004", "artifact": str(path), "line": node.lineno,
-                            "message": f"uneven close neighbor ticks {ordered}; remove neighbor tick colliding with reference cutoff",
-                        })
-
+    findings.extend(_lint_ticks_in_scope(tree.body, lines, str(path)))
     findings.extend(_lint_legends_in_scope(tree.body, lines, str(path)))
     findings.extend(_check_paired_ylim_in_scope(tree.body, lines, str(path)))
     for node in ast.walk(tree):
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            findings.extend(_lint_ticks_in_scope(node.body, lines, str(path)))
             findings.extend(_check_paired_ylim_in_scope(node.body, lines, str(path)))
 
     return findings

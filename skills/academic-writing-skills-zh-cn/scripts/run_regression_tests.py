@@ -526,7 +526,12 @@ def main() -> int:
             "ax1.set_ylim(0, 10)\n"
             "ax2.set_ylim(0, 10)\n"
             "fig_b, ax1 = plt.subplots()\n"
-            "ax1.set_ylim(0, 100)\n",
+            "ax1.set_ylim(0, 100)\n"
+            "fig_log, ax_log = plt.subplots()\n"
+            "ax_log.set_xscale('log')\n"
+            "ax_log.set_xticks([1, 10, 100, 1000])\n"
+            "ax_log.set_yscale('symlog')\n"
+            "ax_log.set_yticks([0, 1, 10, 100])\n",
             encoding="utf-8",
         )
         require(lint_python_script(clean_separate_figs) == [], f"false positive on mathtext / nested def / separate figs: {lint_python_script(clean_separate_figs)}")
@@ -564,6 +569,7 @@ def main() -> int:
             "@article{multiA,\n  title={A}\n}\n"
             "@article{multiB,\n  title={B}\n}\n"
             "@comment{ @article{disabled2021, title={Disabled}} }\n"
+            "@comment{Reviewer called this \"unfinished.}\n"
             "@article(paren2024,\n  title={Effect of treatment (pilot study},\n  note=\"Quoted ) paren\",\n  year={2024}\n)\n"
             "@article{uncited2023,\n  title={Extra}\n}\n",
             encoding="utf-8",
