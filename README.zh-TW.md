@@ -1,6 +1,6 @@
 # Academic Writing Skills
 
-[![plugin version](https://img.shields.io/badge/plugin-v1.4.3-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.5.0-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 本專案是 [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) 的一部分。
@@ -123,6 +123,18 @@ Codex 或 ChatGPT 可使用可用的 skill／plugin 介面。其他 Agent Skills
 保留作者已寫好且正確的句子，指出未達成的承諾與無法核實的交叉引用。
 只有相關檔案確實支持時，才能說某項修改已完成。
 ```
+
+## 修改前與修改後對照
+
+以**合成教學案例**（以大型語言模型輔助分析社區防洪調適問卷並投稿水資源期刊）說明實際差別：
+
+| 面向 | 修改前（未使用 skills） | 修改後（使用 `academic-writing-skills-zh-tw` ＋ `paper-review-zh-tw`） |
+|---|---|---|
+| **撰稿順序與術語** | 直接寫出正文：*"Beyond zero-shot persona conditioning, LLM agents replicated insurance behavior (`RMSE = 0.04`)."* 水資源讀者看不懂專有名詞的作用。 | **先輸出草稿前藍圖等待確認**，全文維持水資源領域口吻，並在首次出現時以功能性白話帶出借用術語（如「無須微調權重、依匿名家戶條件生成評分的文字模型」）。 |
+| **主張邊界與條件** | 引言誇稱「尚無研究探討…」，且摘要與結論遺漏複合提示條件（同時增補脈絡與拉長文本）的限制。 | 依先例界定具體研究缺口，將誤差對齊群體平均層級（`Under the augmented condition...`），並同步更新摘要、結果與結論邊界。 |
+| **圖表與跨檔防漏** | 圖內重複印大標題、圖例壓住誤差棒、柱頂塞數值、`$-40K` 錯置，且 SM 附表與 Highlights 各自矛盾。 | 採無標題純淨圖面、`(a)` `(b)` 圖外圖例、`-$40K`、三線表（標註 `N` 與 `95% CI`），並在定稿前逐項檢查分母、附表定義與字數上限。 |
+
+**核心差別：** 先對齊敘事邏輯與讀者門檻再動筆，完稿後再透過十項防漏檢核擋下跨檔案數字、分母與圖表版面失誤。完整藍圖與審稿範例見[完整使用指南](./docs/USER_GUIDE.zh-TW.md#before-and-after-walkthrough)。
 
 ## 適用界線與進一步說明
 

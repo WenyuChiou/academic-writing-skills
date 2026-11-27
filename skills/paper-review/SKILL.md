@@ -68,8 +68,10 @@ Apply the base skill's four passes, then use the selected modules to deepen—no
 2. **Design and methods:** verify sampling or source selection, measurement, model logic, estimand, assumptions, uncertainty, comparison design, and reproducibility as applicable.
 3. **Results and claim scope:** verify question-to-result coverage, statistical or computational evidence, alternative explanations, mechanisms, and formal versus descriptive comparisons.
 4. **Discussion and synthesis:** distinguish direct findings, literature-supported interpretation, plausible alternatives, implications, limitations, and speculation.
-5. **Displays and notation:** verify figures, tables, equations, captions, units, symbols, panels, text–display agreement, and the provenance of derived quantities. When the display-and-notation module applies, use its symbol ledger and provenance trace rather than checking each artifact in isolation.
-6. **Writing and delivery:** verify terminology, repetition, observable stock phrasing, flow, summaries, citations, companion files, metadata, and named-stage readiness.
+5. **Displays and notation:** verify figures, tables, equations, captions, units, symbols, panels, text–display agreement, and the provenance of derived quantities. When the display-and-notation module applies, use its symbol ledger and provenance trace rather than checking each artifact in isolation. Also verify visual hygiene on rendered figures (no baked-in figure titles, no in-plot value/threshold text clutter, non-colliding threshold ticks, external non-overlapping legends, and `-` before `$`), and keep schematic architecture/flowchart edits out of data-plot scripts.
+6. **Writing and delivery:** verify terminology, repetition, observable stock phrasing, flow, summaries, citations, companion files (`Highlights` character caps, standalone `Figure_Captions`, `Outline`, dataset archive IDs/DOIs, AI disclosures), metadata, and named-stage readiness.
+
+For large multi-artifact packages, execute passes or companion-file checks in explicit chunks rather than collapsing under output pressure into a superficial overview that omits SM tables, captions, or cross-surface checks; apply the **Ten-Point Anti-Miss Pre-Delivery Ledger** from `academic-writing-skills`.
 
 For every material issue, inherit the base skill's scope, S0–S4 severity, evidence status, issue status, authority needed, affected artifacts, and blocking stage. If an optional reviewer overlay uses `MUST`, `SHOULD`, `QUERY`, or `PREFERENCE`, keep those labels separate from severity.
 

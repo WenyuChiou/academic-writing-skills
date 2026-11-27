@@ -171,3 +171,13 @@ that prose was AI-generated or that a technical term is overused.
 python -m pytest tests/ -q
 python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
+
+<a id="before-and-after-walkthrough"></a>
+## Worked before-and-after example (synthetic)
+
+Suppose you submit a hydrology/adaptation study that evaluates synthetic survey outputs from an LLM alongside field survey waves.
+
+1. **Before writing prose (`Pre-Draft Alignment Blueprint`):** Instead of drafting straight into prose, `academic-writing-skills` pauses and shows:
+   - **Paragraph blueprint (`WHAT / WHY / HOW`):** Move 1 (Watershed risk & survey cost) -> Move 2 (Route-grouped prior work: statistical projections vs mechanistic ABMs, strengths and limits) -> Move 3 (Bounded gap in multi-wave community updating) -> Move 4 (Augmented-prompt evaluation + `SQ1–SQ2` with explicit nonclaims against individual clinical/behavioral replacement).
+   - **Host-register & guest-term onboarding:** First mention of `zero-shot LLM` explains it functionally as a general-purpose text model prompted with anonymized household records without parameter retraining.
+2. **Claim, transition, and display tightening:** Replaces *"Moreover, no study replicated behavior (`RMSE = 0.04`)"* with *"While existing field panels capture storm-triggered decisions, they remain costly to repeat across rapidly changing basins; under the augmented-history prompt, mean county projections followed observed Wave 2 directions (`RMSE = 0.04`), whereas individual-level change tracking lagged a simple zero-change baseline."* Captions carry the takeaway; plots omit baked-in titles and in-bar numbers; schematic workflows route to diagram tools (`diagram-design`); three-line tables declare `N`, `95% CI`, and any legacy-subset sensitivity row explicitly.

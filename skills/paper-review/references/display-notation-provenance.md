@@ -51,3 +51,7 @@ Distinguish:
 - **cross-artifact regression:** a later edit updates one artifact but leaves equations, captions, supplement, or summaries stale
 
 Apply the base severity and evidence-status system. Do not make a cosmetic notation preference blocking unless ambiguity, reproducibility, or claim interpretation is materially affected.
+
+## Boundary Between Quantitative Displays and Architecture Diagrams
+
+Check schematic workflows and system architecture diagrams strictly for **text–diagram consistency** (matching construct labels, arrow/stage direction, condition definitions, and sample/step counts). Do not treat Matplotlib box-and-arrow plots as the standard format for architecture diagrams; schematic diagrams belong in dedicated vector/HTML workflows (`diagram-design`). For quantitative data figures and tables on rendered pages, check for baked-in image titles that duplicate captions, in-plot value or threshold text colliding with bars/error intervals, crowded neighbor ticks beside reference lines (such as `0.10` adjacent to `0.08`), inside legends covering data, misplaced minus signs (`$-40K` instead of `-$40K`), and mismatched test–summary alignment (parametric stars plotted on medians or vice versa).

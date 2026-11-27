@@ -281,6 +281,21 @@ errors, or a render made from the wrong document merely by validating hashes.
 `execution_order_certified` is always false: structured records do not prove
 chronology, honest reading, comprehension, or scientific correctness.
 
+## Ten-Point Anti-Miss Pre-Delivery Ledger
+
+Before certifying a substantive section, revision package, or submission release, explicitly verify every applicable item rather than relying on a single prose scan or summary check:
+
+1. **Cohort, attrition, and completion arithmetic:** verify that initial records, linked longitudinal frames, analytic `N`, subgroup sums, and `N × waves × conditions × repetitions` totals close mathematically, accounting explicitly for any shared baseline wave.
+2. **Denominator and legacy construct parity:** verify that every rate, mean, and error states its exact denominator and that supplementary table inventories distinguish revised constructs (e.g., a four-item scale) from any legacy sensitivity subset (e.g., a three-item score).
+3. **Cross-surface propagation of bundled conditions:** when an experimental or prompt condition changes multiple inputs simultaneously (for example, adding prior experiences while lengthening prompts or overlapping development records), propagate explicit condition scoping (`"Under [Condition]..."`) across Title/Highlights, Abstract, Results, Discussion, and Conclusion.
+4. **Symmetric SM-to-Main psychometric and sensitivity disclosure:** disclose material SM limits symmetrically where the main claim depends on them, including weak reliability/AVE, invariance deviations (`p`-values and subgroup `n`), sensitivity flips across classification bands versus exact signs, and collapsed simulation runs.
+5. **Null is not equivalence and baseline precision:** never describe nonsignificant differences as equal; separate beating a naive carry-forward or zero-change rule from individual-level predictive sufficiency.
+6. **Results–mechanism firewall:** flag untested causal or training-data mechanisms inserted into Results, even when softened with hedging words (`may`, `could`).
+7. **Cross-model and cross-condition table parity:** confirm runtime, token, seed, digest, and failure counts are reported comparably across every evaluated model and condition rather than omitted for a subset.
+8. **Companion package and submission metadata sync:** reconcile `Main` with `SM`, standalone `Figure_Captions` files, word-count-limited `Abstract`, character-count-limited `Highlights`, `Outline`, Word alt-text/numbering, dataset archive release IDs/DOIs, and AI assistance disclosures.
+9. **Rendered page-by-page visual check:** inspect rendered PDF/PNG pages at reading size for baked-in titles, in-plot text clutter, colliding axis ticks near reference thresholds, coordinate/label misplacement, page-break splits between graphics and captions, and currency minus signs (`-$40K`).
+10. **Anti-timeout chunked execution:** when a full submission package risks context or runtime timeout, inspect and report passes sequentially or artifact-by-artifact rather than compressing the review into a high-level summary that skips SM tables, captions, or declarations.
+
 ## Close the handoff honestly
 
 Report the candidate checked, the applicable coverage completed, and the specific

@@ -168,3 +168,13 @@ python skills/academic-writing-skills/scripts/run_regression_tests.py
 python -m pytest tests/ -q
 python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
+
+<a id="before-and-after-walkthrough"></a>
+## 修改前与修改后实战示例（合成案例）
+
+假设你将一篇结合问卷调查与 LLM 模拟估算的适应行为论文投往水资源管理期刊：
+
+1. **撰写正文前（`Pre-Draft Alignment Blueprint`）：** `academic-writing-skills-zh-cn` 会先暂停并输出对齐蓝图：
+   - **段落功能表（`WHAT / WHY / HOW`）：** 步骤 1（流域适应风险与多波问卷成本）→ 步骤 2（分流文献综述：统计外推与智能体模型的优势及结构局限）→ 步骤 3（跨波次群体与个体更新的具体缺口）→ 步骤 4（增补历史提示条件评估与 `SQ1–SQ2`，并明确标明不得推断“足以替代实地受试者”）。
+   - **期刊语境与术语首次引导：** 全文以流域管理与家庭适应决策为主语，首次提及 `zero-shot LLM` 时用功能白话说明其为“不重训权重、依据匿名档案生成问卷评分的文本模型”。
+2. **修订主张、衔接与图表：** 将 *"Moreover, no study replicated behavior (`RMSE = 0.04`)"* 改为 *"While existing field panels capture storm-triggered decisions, they remain costly to repeat across rapidly changing basins; under the augmented-history prompt, mean county projections followed observed Wave 2 directions (`RMSE = 0.04`), whereas individual-level change tracking lagged a simple zero-change baseline."*；图内去除大标题与柱顶数字、架构流程图改用 `diagram-design`、三线表加注样本分母 `N`、`95% CI` 及旧版题项敏感度说明。

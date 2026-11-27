@@ -64,6 +64,20 @@ def test_workflow_and_shared_record_boundaries_remain_visible(name, required):
 
 
 @pytest.mark.parametrize(
+    ("name", "expected_heading"),
+    [
+        ("README.md", "## Before and after"),
+        ("README.zh-TW.md", "## 修改前與修改後對照"),
+        ("README.zh-CN.md", "## 修改前与修改后对照"),
+    ],
+)
+def test_readmes_include_before_and_after_example(name, expected_heading):
+    text = (ROOT / name).read_text(encoding="utf-8")
+    assert expected_heading in text
+    assert "#before-and-after-walkthrough" in text
+
+
+@pytest.mark.parametrize(
     ("name", "expected_size", "maximum_bytes"),
     [
         ("workflow-cover.png", (1774, 887), 2_000_000),

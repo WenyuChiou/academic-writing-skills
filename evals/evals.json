@@ -994,6 +994,34 @@
         "skills/academic-writing-skills/references/execution-and-acceptance.md",
         "skills/academic-writing-skills/references/state-and-authority.md"
       ]
+    },
+    {
+      "id": "pre_draft_alignment_pause_and_register",
+      "prompt": "Draft a full four-paragraph Introduction for a hydrology journal manuscript that uses locally run zero-shot LLMs to estimate household storm adaptation surveys across waves. Do not skip planning.",
+      "expected_output": "Pauses before writing full section prose and outputs the Pre-Draft Alignment Blueprint first: first-sentence extended outline following the four-move funnel, paragraph WHAT/WHY/HOW table with claim/evidence/boundary/bridge, and host hydrology-journal register with first-use plain-language explanations of borrowed AI terms.",
+      "acceptance_criteria": [
+        "Pauses before drafting full prose and outputs first-sentence outline plus WHAT/WHY/HOW blueprint",
+        "Preserves the target hydrology journal voice and plans first-use onboarding for guest LLM terms",
+        "Avoids unsupported no-study overclaims and follows the four-move Introduction funnel"
+      ],
+      "files": [
+        "skills/academic-writing-skills/SKILL.md",
+        "skills/academic-writing-skills/references/introduction-and-study-context.md",
+        "skills/academic-writing-skills/references/prose-and-citation-editing.md"
+      ]
+    },
+    {
+      "id": "default_figure_standard_and_diagram_routing",
+      "prompt": "Generate our manuscript's system workflow diagram in Matplotlib alongside a two-panel trajectory and RMSEA bar plot with the 0.08 cutoff written inside the bars and titles on top of the figure.",
+      "expected_output": "Excludes workflow/architecture diagram drawing from Matplotlib and routes schematic diagrams to diagram-design (HTML/SVG grid + orthogonal layout + text-diagram consistency audit). Produces the quantitative two-panel figure with zero baked-in title, (a)/(b) tags, external legend, zero in-bar values or floating threshold text, dedicated 0.08 y-tick without neighbor collision, and axis-label cutoff note.",
+      "acceptance_criteria": [
+        "Routes conceptual/workflow diagram to diagram-design rather than Matplotlib",
+        "Removes baked-in figure title and in-plot value or threshold text",
+        "Places legend outside axes and replaces floating threshold labels with a dedicated axis tick and axis-label note"
+      ],
+      "files": [
+        "skills/academic-writing-skills/references/figures-tables-and-supplements.md"
+      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Academic Writing Skills
 
-[![plugin version](https://img.shields.io/badge/plugin-v1.4.3-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.5.0-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 本项目是 [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) 的一部分。
@@ -123,6 +123,18 @@ Codex 或 ChatGPT 可使用可用的 skill／plugin 介面。其他 Agent Skills
 保留作者已写好且正确的句子，指出未达成的承诺与无法核实的交叉引用。
 只有相关文件确实支持时，才能说某项修改已完成。
 ```
+
+## 修改前与修改后对照
+
+以**合成教学示例**（使用大语言模型辅助分析社区防洪适应问卷并投稿水资源期刊）说明实际差异：
+
+| 维度 | 修改前（未使用 skills） | 修改后（使用 `academic-writing-skills-zh-cn` ＋ `paper-review-zh-cn`） |
+|---|---|---|
+| **撰稿顺序与术语** | 直接写出正文：*"Beyond zero-shot persona conditioning, LLM agents replicated insurance behavior (`RMSE = 0.04`)."* 水资源读者不理解跨领域术语的作用。 | **先输出草稿前蓝图等待确认**，全文保持水资源学科语境，并在首次出现时用功能性白话解释借用术语（如“无需微调参数、依据去标识化家庭档案生成评分的文本模型”）。 |
+| **主张边界与条件** | 引言夸称“尚无研究探讨…”，且摘要与结论遗漏复合提示条件（同时增补历史信息与延长文本）的局限。 | 依据先例界定具体研究缺口，将误差限定于群体均值层面（`Under the augmented condition...`），并同步传播至摘要、结果与结论。 |
+| **图表与跨文件核查** | 图内误印大标题、图例遮挡误差棒、柱顶塞数值、`$-40K` 错位，且补充材料附表与亮点句各自矛盾。 | 采用无标题纯净图面、`(a)` `(b)` 图外图例、`-$40K`、三线表（标明 `N` 与 `95% CI`），并在定稿前逐项核对分母、附表构念定义与字符上限。 |
+
+**核心差异：** 先对齐叙事逻辑与读者门槛再起草，定稿前再通过十项防漏核查拦截跨文件数字、分母与图表版面失误。完整蓝图与审稿示例见[完整使用指南](./docs/USER_GUIDE.zh-CN.md#before-and-after-walkthrough)。
 
 ## 适用界线与进一步说明
 

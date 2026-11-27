@@ -11,6 +11,19 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-11-26
+
+### Added
+
+- Mandatory Pre-Draft Alignment Blueprint (`Pause Before Full Section Prose`) for new Introductions, core sections, and structural reorganizations: outputs a first-sentence outline, `WHAT / WHY / HOW` + claim/evidence/boundary/bridge table, and host-journal register with plain-language first-use onboarding of borrowed terms before drafting full paragraphs.
+- Four-move Introduction narrative funnel and scope-contrast transition pattern across English, Traditional Chinese, and Simplified Chinese guides.
+- Default scientific data-figure and three-line table conventions (zero baked-in figure titles, `(a)` `(b)` `(c)` panel tags, generous print-size typography and `wspace`, outside-axis legends, no in-plot value/threshold text clutter, dedicated cutoff ticks, boxplot+jitter for >10 constructs, `-$40K` formatting, and CJK-safe font stacks), while excluding conceptual/architecture flowcharts from Matplotlib and routing them to diagram workflows (`diagram-design`).
+- Ten-Point Anti-Miss Pre-Delivery Ledger across `execution-and-acceptance.md`, `paper-review/SKILL.md`, and the psychometric/LLM domain modules, plus chunked anti-timeout review discipline and synthetic Before/After walkthroughs in all three READMEs and usage guides.
+
+### Changed
+
+- Extended `audit_candidate_text.py` manual checks and `run_regression_tests.py` (now 28 checks, mirrored identically across `-zh-tw` and `-zh-cn`) to cover host-journal term onboarding and cross-surface propagation of bundled condition caveats.
+
 ## [1.4.3] - 2026-11-12
 
 ### Fixed

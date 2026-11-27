@@ -24,9 +24,9 @@ Determine the actual source and target tasks or distributions before accepting t
 
 Check exact model identifiers and access dates, provider or local build when relevant, system and user prompts, context construction, conversation state, sampling settings, runs, seeds when available, parser and validator logic, failures, retries, selected-run rules, aggregation, workload, cost when reported, privacy, data retention, and reproducibility artifacts.
 
-Map every conditioned input attribute to the output claim. Test whether a pattern could follow from profiles, labels, prompt grouping, question order, shared history, sampling, filtering, or parsing. Require an ablation only when the claim depends on separating those explanations; otherwise state the limitation.
+Map every conditioned input attribute to the output claim. Test whether a pattern could follow from profiles, labels, prompt grouping, question order, shared history, prompt length, development-record overlap, sampling, filtering, or parsing. Require an ablation only when the claim depends on separating those explanations; otherwise require explicit bundled-condition scoping (`"Under [Condition]..."`) across **all summary surfaces** (Highlights, Abstract, Results, Discussion, Conclusion).
 
-For repeated synthetic responses tied to source profiles, determine whether the estimand is marginal, paired, repeated, or hierarchical. Do not treat repeated generations as independent human participants.
+For repeated synthetic responses tied to source profiles, determine whether the estimand is marginal, paired, repeated, or hierarchical. Do not treat repeated generations as independent human participants. Verify exact completion arithmetic across shared baseline waves (`unique prompts x repetitions` matching total calls) and require comparable reporting of runtime, token counts, seeds, model digests, and parser failures across every evaluated model.
 
 Separate response reliability or consistency, measurement quality, distributional similarity, task performance, behavioral feasibility, behavioral validity, and real-world generalizability. LLM consistency is not behavioral validity, and generated rationales are not direct evidence of human mechanisms.
 

@@ -8,6 +8,8 @@ Use for surveys, scales, questionnaires, behavioral constructs, psychometrics, E
 
 Check sampling frame, inclusion and exclusion, missingness, weights, clustering, pairing, repeated observations, subgroup size, measurement timing, multiplicity, effect sizes, and uncertainty. Identify the estimand before selecting or judging a test.
 
+For longitudinal panel or multi-wave cohort studies, trace arithmetic closure from initial frame to linked respondents and analytic `N`, verify any fixed minimum-item inclusion threshold across waves, and confirm that recall windows match between predictors/experiences and outcomes (e.g., past-year events paired with past-week symptoms).
+
 Do not assume unequal sample size requires an independent-sample test. Determine whether observations are independent, paired, nested, weighted, clustered, or repeated. Separate within-group significance from a direct between-group test.
 
 ## Measurement and Psychometrics
@@ -37,5 +39,7 @@ does not automatically revise separately estimated structural models.
 ## Results, Tables, and Claims
 
 Trace every reported coefficient, test, sample count, and fit statistic to the correct model and subgroup. Verify signs, reference groups, units, rounding, confidence intervals, p-values, and table or figure labels.
+
+Reconcile main-text tables with supplementary inventories when revised subscales coexist with legacy item groupings (for example, a four-item current construct vs a three-item legacy score). Check sensitivity to classification thresholds (e.g., stability bands vs exact directional sign) symmetrically when a sensitivity shift reverses or weakens a subgroup comparison, and never infer individual-level clinical or behavioral sufficiency solely from beating a zero-change carry-forward baseline when absolute error remains larger than observed human change.
 
 Use `reliability and validity assessment` when that is the actual task. Reserve `validated`, `equivalent`, `reproduced`, and `invariant` for analyses and criteria that support those claims.

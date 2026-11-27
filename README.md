@@ -1,6 +1,6 @@
 # Academic Writing Skills
 
-[![plugin version](https://img.shields.io/badge/plugin-v1.4.3-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.5.0-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 Part of [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills).
@@ -127,6 +127,18 @@ Use the academic-writing-skills skill to align this response with the latest man
 Preserve accurate author wording. Flag unmet promises and unverified cross-references.
 Do not claim a change is complete unless the relevant files support it.
 ```
+
+## Before and after
+
+Using a **synthetic example** (a watershed adaptation survey analyzed with a large language model):
+
+| Dimension | Before (without the skills) | After (with `academic-writing-skills` + `paper-review`) |
+|---|---|---|
+| **Drafting order & jargon** | Writes paragraphs right away: *"Beyond zero-shot persona conditioning, our LLM agents replicated household insurance behavior (`RMSE = 0.04`)."* Readers in water policy must guess what persona conditioning does. | **Pauses with a Pre-Draft Blueprint first**, keeps a water-resources voice, and onboards borrowed terms at first use (*"text models conditioned on anonymized household profiles without retraining"*). |
+| **Claim & condition scope** | Claims *"no study has tested..."* in Introduction and drops context limits in Abstract/Conclusion, leaving an augmented-prompt confound unstated. | Grounds the gap in concrete precedents, bounds `"RMSE = 0.04"` to group-mean direction (`Under the augmented condition...`), and propagates the limit across Abstract, Results, and Conclusion. |
+| **Figures & tables** | Baked-in plot title, inside legend hiding error bars, numbers stamped on bars, `$-40K` typos, and unprinted caption/SM mismatches. | Caption-only title, `(a)` `(b)` outside legend, clean threshold tick (`RMSEA <= 0.08`), `-$40K`, three-line table (`N`, `95% CI`), and synced SM/Abstract/Highlights checks. |
+
+**Key difference:** you confirm the logic chain, glossary, and scope *before* full drafting, then catch cross-file arithmetic, denominator, and layout drift before submission. See [the usage guide](./docs/USER_GUIDE.md#before-and-after-walkthrough) for the full pre-draft blueprint and review output.
 
 ## Boundaries and further reading
 
