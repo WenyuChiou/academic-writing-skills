@@ -547,16 +547,22 @@ def main() -> int:
             "fig_clf = plt.figure()\n"
             "ax_clf = fig_clf.add_subplot(111)\n"
             "ax_clf.set_yscale('log')\n"
+            "ax_clf_sub = plt.subplot(111)\n"
+            "ax_clf_sub.set_yticks([1, 10, 100, 1000])\n"
             "fig_clf.clf()\n"
             "ax_clf = fig_clf.add_subplot(111)\n"
             "ax_clf.set_yticks([1, 2, 3, 4])\n"
+            "fig_sup = plt.figure()\n"
+            "ax_sup = fig_sup.add_subplot(111)\n"
+            "ax_sup.set_xticks([0.00, 0.04, 0.08, 0.10, 0.12])\n"
+            "ax_sup.set_xticks([0.00, 0.04, 0.08, 0.12])\n"
             "class PlotBox:\n"
             "    fig_cls, ax_cls = plt.subplots()\n"
             "    ax_cls.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n",
             encoding="utf-8",
         )
         require(
-            [item["line"] for item in lint_python_script(scale_isolation) if item["code"] == "FIG004"] == [10, 13, 34],
+            [item["line"] for item in lint_python_script(scale_isolation) if item["code"] == "FIG004"] == [10, 13, 40],
             f"scale isolation / log / ClassDef FIG004 mismatch: {lint_python_script(scale_isolation)}",
         )
         clean_separate_figs = root / "separate_figs.py"
@@ -588,6 +594,7 @@ def main() -> int:
             "ax_log.set_yscale('symlog')\n"
             "ax_log.set_yticks([0, 1, 10, 100])\n"
             "def title(s):\n    return s\n"
+            "def local_import_scope():\n    from matplotlib.pyplot import title\n    _ = title\n"
             "_ = title('not a plot title')\n",
             encoding="utf-8",
         )
