@@ -27,11 +27,10 @@ LATEX_FLOAT_ENV_RE = re.compile(
 )
 LATEX_TABULAR_BEGIN_RE = re.compile(r"\\begin\{(tabular\*?|tabularx|longtable)\}")
 LATEX_CITE_CMD_RE = re.compile(
-    r"\\(?:cite(?:t(?:itle|ext)?|p|alt|alp|author|yearpar|year|num|url|field|list|name|date|s)?|"
+    r"\\(?:cite(?:t(?:itle)?|p|alt|alp|author|yearpar|year|num|url|field|list|name|date|s)?|"
     r"(?:paren|text|auto|foot|full|super|smart|no|multi|vol|fvol|pvol|tvol)cites?)\*?(?![A-Za-z])",
     re.IGNORECASE,
 )
-BIB_ENTRY_RE = re.compile(r"@([a-zA-Z]+)\s*[{(]\s*([^,\s{}()]+)\s*,")
 
 
 def _strip_latex_comments(text: str) -> str:
@@ -54,14 +53,19 @@ def _extract_balanced_braces(text: str, open_pos: int) -> tuple[str, int] | None
     if open_pos >= len(text) or text[open_pos] != "{":
         return None
     depth = 0
-    for idx in range(open_pos, len(text)):
+    idx = open_pos
+    while idx < len(text):
         ch = text[idx]
+        if ch == "\\":
+            idx += 2
+            continue
         if ch == "{":
             depth += 1
         elif ch == "}":
             depth -= 1
             if depth == 0:
                 return text[open_pos + 1:idx], idx + 1
+        idx += 1
     return None
 
 
@@ -347,6 +351,11 @@ def check_latex_tables(path: Path) -> list[dict[str, Any]]:
     return findings
 
 
+def _skip_optional_cite_args(text: str, pos: int) -> int:
+    opt = re.match(r"(?:\s*(?:\([^)]*\)|\[[^\]]*\]))*\s*", text[pos:])
+    return pos + (opt.end() if opt else 0)
+
+
 def _extract_cite_keys_from_tex(text: str) -> tuple[set[str], bool]:
     cited: set[str] = set()
     nocite_all = False
@@ -354,9 +363,17 @@ def _extract_cite_keys_from_tex(text: str) -> tuple[set[str], bool]:
         cmd = match.group(0).lstrip("\\").rstrip("*").lower()
         pos = match.end()
         is_multicite = cmd.endswith("s") or "multicite" in cmd
+        is_volcite = "volcite" in cmd
         while pos < len(text):
-            opt = re.match(r"(?:\s*\[[^\]]*\])*\s*", text[pos:])
-            pos += opt.end() if opt else 0
+            pos = _skip_optional_cite_args(text, pos)
+            if is_volcite:
+                if pos >= len(text) or text[pos] != "{":
+                    break
+                vol_grp = _extract_balanced_braces(text, pos)
+                if not vol_grp:
+                    break
+                _, pos = vol_grp
+                pos = _skip_optional_cite_args(text, pos)
             if pos >= len(text) or text[pos] != "{":
                 break
             grp = _extract_balanced_braces(text, pos)
@@ -375,33 +392,67 @@ def _extract_cite_keys_from_tex(text: str) -> tuple[set[str], bool]:
 
 
 def _extract_bib_keys(bib_text: str) -> set[str]:
-    """Extract active BibTeX entry keys while skipping complete balanced @comment/@preamble/@string blocks."""
-    lines = [line for line in bib_text.splitlines() if not line.lstrip().startswith("%")]
-    cleaned = "\n".join(lines)
+    """Extract active BibTeX entry keys while skipping comments and balanced @comment/@preamble/@string blocks."""
     keys: set[str] = set()
     header_re = re.compile(r"@([a-zA-Z]+)\s*([{(])")
+    n = len(bib_text)
     pos = 0
-    while pos < len(cleaned):
-        match = header_re.search(cleaned, pos)
-        if not match:
+    while pos < n:
+        at_idx = bib_text.find("@", pos)
+        pct_idx = bib_text.find("%", pos)
+        if pct_idx != -1 and (at_idx == -1 or pct_idx < at_idx):
+            nl_idx = bib_text.find("\n", pct_idx)
+            pos = n if nl_idx == -1 else nl_idx + 1
+            continue
+        if at_idx == -1:
             break
+        match = header_re.match(bib_text, at_idx)
+        if not match:
+            pos = at_idx + 1
+            continue
         entry_type = match.group(1).lower()
         open_ch = match.group(2)
         close_ch = "}" if open_ch == "{" else ")"
-        start = match.end() - 1
-        depth = 0
-        idx = start
-        while idx < len(cleaned):
-            ch = cleaned[idx]
-            if ch == open_ch:
-                depth += 1
+        body_start = match.end()
+        idx = body_start
+        brace_depth = 0
+        paren_depth = 0
+        in_quotes = False
+        end_body = n
+        while idx < n:
+            ch = bib_text[idx]
+            if ch == "\\":
+                idx += 2
+                continue
+            if brace_depth > 0:
+                if ch == "{":
+                    brace_depth += 1
+                elif ch == "}":
+                    brace_depth -= 1
+                idx += 1
+                continue
+            if in_quotes:
+                if ch == "{":
+                    brace_depth = 1
+                elif ch == '"':
+                    in_quotes = False
+                idx += 1
+                continue
+            if ch == '"':
+                in_quotes = True
+            elif ch == "{":
+                brace_depth = 1
+            elif open_ch == "(" and ch == "(":
+                paren_depth += 1
             elif ch == close_ch:
-                depth -= 1
-                if depth == 0:
+                if open_ch == "(" and paren_depth > 0:
+                    paren_depth -= 1
+                else:
+                    end_body = idx
                     idx += 1
                     break
             idx += 1
-        block_body = cleaned[start + 1:idx - 1 if depth == 0 else idx]
+        block_body = bib_text[body_start:end_body]
         if entry_type not in {"comment", "preamble", "string"}:
             key_match = re.match(r"\s*([^,\s{}()]+)\s*,", block_body)
             if key_match:

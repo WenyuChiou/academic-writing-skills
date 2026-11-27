@@ -18,6 +18,13 @@ VALID_NEGATIVE_MATHTEXT_RE = re.compile(
 )
 
 
+_SKIP_EXPR_CHILDREN = (
+    (ast.stmt, ast.excepthandler, ast.match_case)
+    if hasattr(ast, "match_case")
+    else (ast.stmt, ast.excepthandler)
+)
+
+
 def _iter_expr_calls(node: ast.AST):
     """Yield Call AST nodes within a single statement's expressions without descending into nested statements or defs."""
     if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
@@ -25,7 +32,7 @@ def _iter_expr_calls(node: ast.AST):
     if isinstance(node, ast.Call):
         yield node
     for child in ast.iter_child_nodes(node):
-        if isinstance(child, (ast.stmt, ast.excepthandler)):
+        if isinstance(child, _SKIP_EXPR_CHILDREN):
             continue
         yield from _iter_expr_calls(child)
 
@@ -123,30 +130,40 @@ def _check_paired_ylim_in_scope(stmts: list[ast.stmt], lines: list[str], artifac
                 for target in stmt.targets:
                     for name in _extract_target_names(target):
                         current_axis.pop(name, None)
-            for node in _iter_expr_calls(stmt):
-                if not isinstance(node.func, ast.Attribute) or not isinstance(node.func.value, ast.Name):
-                    continue
-                receiver = node.func.value.id
-                ax_id = current_axis.get(receiver)
-                if ax_id is None:
-                    continue
-                attr = node.func.attr
-                line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
-                if attr == "set_ylabel" and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str):
-                    ylabels[ax_id] = node.args[0].value
-                elif attr == "set_ylim" and "# intentional-ylim-diff" not in line_text:
-                    pair = _extract_float_pair(node.args)
-                    if pair is not None:
-                        final_ylim[ax_id] = (node.lineno, pair[0], pair[1])
+            def inspect_calls(root_node: ast.AST) -> None:
+                for node in _iter_expr_calls(root_node):
+                    if not isinstance(node.func, ast.Attribute) or not isinstance(node.func.value, ast.Name):
+                        continue
+                    receiver = node.func.value.id
+                    ax_id = current_axis.get(receiver)
+                    if ax_id is None:
+                        continue
+                    attr = node.func.attr
+                    line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
+                    if attr == "set_ylabel" and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str):
+                        ylabels[ax_id] = node.args[0].value
+                    elif attr == "set_ylim" and "# intentional-ylim-diff" not in line_text:
+                        pair = _extract_float_pair(node.args)
+                        if pair is not None:
+                            final_ylim[ax_id] = (node.lineno, pair[0], pair[1])
+
+            inspect_calls(stmt)
             if hasattr(stmt, "body") and isinstance(stmt.body, list):
                 walk_scope(stmt.body)
             if hasattr(stmt, "orelse") and isinstance(stmt.orelse, list):
                 walk_scope(stmt.orelse)
             for handler in getattr(stmt, "handlers", []):
+                if getattr(handler, "type", None) is not None:
+                    inspect_calls(handler.type)
                 if hasattr(handler, "body") and isinstance(handler.body, list):
                     walk_scope(handler.body)
             if hasattr(stmt, "finalbody") and isinstance(stmt.finalbody, list):
                 walk_scope(stmt.finalbody)
+            for case in getattr(stmt, "cases", []):
+                if getattr(case, "guard", None) is not None:
+                    inspect_calls(case.guard)
+                if hasattr(case, "body") and isinstance(case.body, list):
+                    walk_scope(case.body)
 
     walk_scope(stmts)
     for fig_group in fig_axes.values():
@@ -180,18 +197,21 @@ def _lint_legends_in_scope(
             if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
                 walk(stmt.body, set(active_figs) | {"fig"})
                 continue
-            for node in _iter_expr_calls(stmt):
-                if not isinstance(node.func, ast.Attribute):
-                    continue
-                attr = node.func.attr
-                receiver = node.func.value.id if isinstance(node.func.value, ast.Name) else ""
-                line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
-                if attr == "legend" and receiver not in active_figs and "# intentional-legend" not in line_text:
-                    if not any(kw.arg == "bbox_to_anchor" for kw in node.keywords):
-                        findings.append({
-                            "code": "FIG002", "artifact": artifact, "line": node.lineno,
-                            "message": f"inside-axes {receiver or 'ax'}.legend() may cover data; place outside axes or use fig.legend(...)",
-                        })
+            def inspect_legend_calls(root_node: ast.AST, figs: set[str]) -> None:
+                for node in _iter_expr_calls(root_node):
+                    if not isinstance(node.func, ast.Attribute):
+                        continue
+                    attr = node.func.attr
+                    receiver = node.func.value.id if isinstance(node.func.value, ast.Name) else ""
+                    line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
+                    if attr == "legend" and receiver not in figs and "# intentional-legend" not in line_text:
+                        if not any(kw.arg == "bbox_to_anchor" for kw in node.keywords):
+                            findings.append({
+                                "code": "FIG002", "artifact": artifact, "line": node.lineno,
+                                "message": f"inside-axes {receiver or 'ax'}.legend() may cover data; place outside axes or use fig.legend(...)",
+                            })
+
+            inspect_legend_calls(stmt, active_figs)
             if isinstance(stmt, ast.Assign):
                 for t in stmt.targets:
                     for name in _extract_target_names(t):
@@ -216,10 +236,17 @@ def _lint_legends_in_scope(
             if hasattr(stmt, "orelse") and isinstance(stmt.orelse, list):
                 walk(stmt.orelse, active_figs)
             for handler in getattr(stmt, "handlers", []):
+                if getattr(handler, "type", None) is not None:
+                    inspect_legend_calls(handler.type, active_figs)
                 if hasattr(handler, "body") and isinstance(handler.body, list):
                     walk(handler.body, active_figs)
             if hasattr(stmt, "finalbody") and isinstance(stmt.finalbody, list):
                 walk(stmt.finalbody, active_figs)
+            for case in getattr(stmt, "cases", []):
+                if getattr(case, "guard", None) is not None:
+                    inspect_legend_calls(case.guard, active_figs)
+                if hasattr(case, "body") and isinstance(case.body, list):
+                    walk(case.body, active_figs)
 
     walk(nodes, current_fig_vars)
     return findings

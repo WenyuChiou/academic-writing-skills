@@ -479,10 +479,17 @@ def main() -> int:
             "plt.rcParams.update({'axes.unicode_minus': False})\n"
             "plot = plt.figure()\n"
             "plot = plot.add_subplot(111)\n"
-            "plot.legend()\n",
+            "plot.legend()\n"
+            "fig_mc, ax_mc = plt.subplots()\n"
+            "match 1:\n"
+            "    case 1:\n"
+            "        ax_mc.legend()\n",
             encoding="utf-8",
         )
-        require(any(item["code"] == "FIG002" for item in lint_python_script(rebound_leg)), "reassigned plot axis legend missed FIG002")
+        require(
+            sum(1 for item in lint_python_script(rebound_leg) if item["code"] == "FIG002") == 2,
+            "reassigned or match-case axis legend missed FIG002",
+        )
         add_sub_plot = root / "add_sub.py"
         add_sub_plot.write_text(
             "import matplotlib.pyplot as plt\n"
@@ -491,7 +498,9 @@ def main() -> int:
             "p1 = canvas.add_subplot(1, 2, 1)\n"
             "p2 = canvas.add_subplot(1, 2, 2)\n"
             "p1.set_ylim(0, 10)\n"
-            "p2.set_ylim(0, 20)\n",
+            "match 1:\n"
+            "    case 1:\n"
+            "        p2.set_ylim(0, 20)\n",
             encoding="utf-8",
         )
         require(any(item["code"] == "FIG005" for item in lint_python_script(add_sub_plot)), "add_subplot Fig005 missed")
@@ -537,7 +546,8 @@ def main() -> int:
             "\\newcites{supp}{Supplementary references}\n"
             "\\section{Results}\n"
             "It is not merely an LLM; it is a watershed shift \\parencite{smith2024,missing2025}.\n"
-            "See \\citeurl{url2024}, \\citeyearpar{yr2024}, and \\parencites[see][]{multiA}[cf.]{multiB}.\n"
+            "See \\citeurl{url2024}, \\citeyearpar{yr2024}, \\citetext{see also \\citealp{paren2024}}, "
+            "\\volcite{2}[14]{smith2024}, and \\parencites[see][]{multiA}[cf.]{multiB}.\n"
             "The change was $-0.25$ units overall.\n"
             "\\begin{figure}\\caption{Accuracy by group. Shaded bands show standard deviations.}\\end{figure}\n"
             "\\begin{table}\\begin{tabular}[t]{p{3cm}|c}\\hline\\hline A & \\$-40K \\\\\\hline\\end{tabular}\\end{table}\n"
@@ -554,6 +564,7 @@ def main() -> int:
             "@article{multiA,\n  title={A}\n}\n"
             "@article{multiB,\n  title={B}\n}\n"
             "@comment{ @article{disabled2021, title={Disabled}} }\n"
+            "@article(paren2024,\n  title={Effect of treatment (pilot study},\n  note=\"Quoted ) paren\",\n  year={2024}\n)\n"
             "@article{uncited2023,\n  title={Extra}\n}\n",
             encoding="utf-8",
         )
