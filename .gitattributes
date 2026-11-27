@@ -2,6 +2,7 @@
 /skills/** text eol=lf
 /skills/**/*.[pP][nN][gG] -text
 /skills/**/*.[jJ][pP][gG] -text
+/docs/images/**/*.[pP][nN][gG] -text
 /.claude-plugin/*.json text eol=lf
 /adapter.json text eol=lf
 /locales/*.json text eol=lf

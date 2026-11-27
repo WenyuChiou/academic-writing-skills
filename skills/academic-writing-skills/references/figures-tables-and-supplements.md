@@ -152,3 +152,37 @@ Choose table borders from the active venue/template and the structure readers ne
 The [AGU LaTeX submission guide dated January 2023](https://www.agu.org/-/media/Files/Publications/Latex_submission_guidelines_Jan162023.pdf) discourages vertical table lines. That is a venue/template-specific source, not proof that all journals require these ABM line weights; refresh applicability through the venue profile. Do not transfer an older template's other rules without checking current instructions.
 
 For plots, distinguish axis spines, reference lines, and reading grids from table borders. Retain lines that support scale-reading or a meaningful baseline; mute unnecessary grids that compete with data. Decide top/right spines and tick density from the plot's function and venue, not a blanket aesthetic ban. Recheck the data, labels, uncertainty, and final-size legibility after changing any of these elements.
+
+## Default Scientific Figure, Table, and Diagram Boundaries
+
+When the user asks for scientific data figures, data tables, or manuscript illustrations without specifying a conflicting journal rule, follow these defaults across English, Traditional Chinese, and Simplified Chinese deliverables:
+
+### Exclude Flowcharts and Architecture Schematics from Data-Plot Code
+
+Do **not** draw conceptual frameworks, system architectures, or workflow flowcharts inside Matplotlib data-plotting scripts. Route architecture and workflow schematics to a dedicated diagram workflow such as `diagram-design` (HTML and inline SVG on an aligned pixel grid with orthogonal obstacle-clearing connectors, bounded element count, and automated layout geometry verification). Within `academic-writing-skills`, verify only **text–diagram consistency**: identical construct names, arrow/stage direction, condition labels, and sample/step counts across prose, caption, and diagram.
+
+### Default Quantitative Data Figure Standard
+
+Unless an active [venue profile](overlay-contract.md) requires otherwise:
+
+1. **Zero baked-in titles or subtitles inside the figure image:** place the title and interpretive takeaway in the manuscript caption so the plotted canvas maximizes data legibility.
+2. **Lowercase parenthesized panel labels:** place bold `(a)`, `(b)`, `(c)` consistently above-left outside each plotting frame.
+3. **Generous typography and spacious composition:** size labels for print readability (`14–16 pt` axis labels, `13–15 pt` tick/legend text at standard two-panel figure width) with wide inter-panel gaps (`wspace >= 0.35`) rather than cramped panels.
+4. **External non-overlapping legends:** place shared multi-panel legends outside the axes (centered above or below with `frameon=False`), never inside the plotting box covering bars, curves, or error bars.
+5. **No value labels printed on bars/points and no floating threshold text inside axes:** keep exact numbers in companion three-line tables or captions. Represent evaluation cutoffs with a dashed reference line, a **dedicated cutoff tick** on the axis (omitting colliding neighbor ticks such as `0.10` beside `0.08`), and an axis-label parenthetical such as `RMSEA (threshold <= 0.08)`.
+6. **Many-category layout conditioned on compatible source data:** when `>10` scenarios, runs, or items share compatible underlying observations and an explicit grouping rationale, summarize them with horizontal boxplots and jittered points while reporting item-level numbers in a companion table; when each category has only a single distinct point estimate without a justified pooling structure, preserve individual category identities with a dot plot, small multiples, or a table rather than pooling unrelated constructs.
+7. **Accessible palette, currency signs, test–summary clarity, and trilingual fonts:** use a high-contrast colorblind-safe palette (`#333333` observed/human benchmark, `#0072B2` blue, `#D55E00` vermilion); place the minus sign before currency symbols (`-$40K`, never `$-40K`); ensure significance markers (`*`) reflect what the statistical test actually compares and state both the plotted summary and the test target in the caption whenever they differ; and configure safe font stacks (`Arial` for English, `Microsoft JhengHei` with math `$\leq$` for Traditional Chinese, `Microsoft YaHei` or `SimHei` for Simplified Chinese, plus `axes.unicode_minus = False`).
+
+### Default Three-Line Data Table Standard
+
+Use horizontal top rule (`1 pt`), header-bottom rule (`0.5 pt`), and bottom rule (`1 pt`) with **no vertical rules**, enable `tblHeader=1` on continuation pages, prevent single-row orphan table starts at page bottoms, align decimal columns, and state exact `N`/denominators, uncertainty definitions, and any legacy-versus-primary construct scope explicitly in the table note.
+
+```python
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11.2, 4.6))
+fig.subplots_adjust(wspace=0.38, top=0.80, bottom=0.16)
+# No fig.suptitle(...); put title and takeaway in caption only.
+ax2.axhline(0.08, color="#333333", linestyle="--", linewidth=1.6)
+ax2.set_yticks([0.00, 0.04, 0.08, 0.12])  # omit 0.10 so 0.08 never collides
+ax2.set_ylabel("RMSEA (threshold <= 0.08)", fontsize=15)
+fig.legend(loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=3, frameon=False, fontsize=14)
+```

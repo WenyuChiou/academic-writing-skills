@@ -171,3 +171,14 @@ that prose was AI-generated or that a technical term is overused.
 python -m pytest tests/ -q
 python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
+
+<a id="before-and-after-walkthrough"></a>
+## Worked before-and-after example (synthetic)
+
+Suppose you submit a hydrology/adaptation study that evaluates synthetic survey outputs from an LLM alongside field survey waves.
+
+1. **Before writing prose (`Pre-Draft Alignment Blueprint`):** Instead of drafting straight into prose, `academic-writing-skills` pauses and shows:
+   - **Paragraph blueprint (`WHAT / WHY / HOW`):** Move 1 (Watershed risk & survey cost) -> Move 2 (Route-grouped prior work: statistical projections vs mechanistic ABMs, strengths and limits) -> Move 3 (Bounded gap in multi-wave community updating) -> Move 4 (Augmented-prompt evaluation + `SQ1–SQ2` with explicit nonclaims against individual clinical/behavioral replacement).
+   - **Host-register & guest-term onboarding:** First mention of `zero-shot LLM` explains it functionally as a general-purpose text model prompted with anonymized household records without parameter retraining.
+2. **Claim, transition, and display tightening:** Replaces *"In today's rapidly evolving landscape... LLM agents accurately replicate human behavior (`RMSE = 0.04`) and can replace field surveys"* with *"While multi-wave household surveys track storm-driven insurance shifts, repeating them across changing basins is costly; under the history-augmented prompt (which also lengthens the input prompt) on N = 840 households, Wave 2 group-mean error reached 0.04 on the 0–1 scale, whereas individual change errors lagged a zero-change carry-forward baseline and cannot replace field surveys."*
+3. **Four representative Before/After displays (`./images/examples/`):** Clean `(a)`/`(b)` multi-panel figures with external legends (`ex1_multipanel_en.png`), threshold-tick bar plots without in-bar text (`ex2_threshold_en.png`), boxplot + jitter for >10 pre-grouped scenarios with compatible data (`-$40K` formatting; dot plot or table when ungrouped, `ex3_distribution_en.png`), and three-line tables stating `N`, `95% CI`, and legacy-subset notes (`ex4_table_en.png`).

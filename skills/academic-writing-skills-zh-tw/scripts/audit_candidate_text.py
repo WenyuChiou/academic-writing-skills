@@ -25,6 +25,8 @@ MANUAL_CHECKS = [
     "observable stock or AI-like prose features without authorship inference",
     "dash and hyphen style, including grammatical role, established open compounds, density, and suspended compounds",
     "necessary technical repetition versus avoidable restatement",
+    "host-journal register and plain-language functional explanation at first use of guest-domain or statistical terms",
+    "cross-surface propagation of bundled condition caveats, denominators, and legacy-versus-primary construct scope",
 ]
 
 

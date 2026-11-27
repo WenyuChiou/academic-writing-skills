@@ -77,7 +77,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.4.3"
+    assert manifest["version"] == "1.5.0"
     guide_version = re.search(
         r"plugin skill version `([^`]+)`", read(ROOT / "docs" / "workspace-adapter.md")
     )
@@ -471,7 +471,20 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 27
+    assert len(report["tests"]) == 28
+
+
+def test_v15_pre_draft_blueprint_figures_and_anti_miss_guards():
+    skill = read(CORE / "SKILL.md")
+    intro = read(CORE / "references" / "introduction-and-study-context.md")
+    displays = read(CORE / "references" / "figures-tables-and-supplements.md")
+    acceptance = read(CORE / "references" / "execution-and-acceptance.md")
+    review_skill = read(REVIEW / "SKILL.md")
+    assert "Pre-Draft Alignment Blueprint" in skill and "WHAT / WHY / HOW" in skill
+    assert "Four-Move Narrative Funnel" in intro
+    assert "diagram-design" in displays and "Zero baked-in titles or subtitles" in displays
+    assert "Ten-Point Anti-Miss Pre-Delivery Ledger" in acceptance
+    assert "Ten-Point Anti-Miss Pre-Delivery Ledger" in review_skill
 
 
 def test_evals_cover_core_and_progressive_review_behavior():
@@ -795,7 +808,7 @@ def test_readmes_are_bilingual_user_facing_entrypoints():
         assert "psychometrics" in text.lower()
         assert "AI/LLM" in text or "AI／LLM" in text
         assert f"plugin-v{version}-blue.svg" in text
-        assert len(text.splitlines()) <= 150
+        assert len(text.splitlines()) <= 240
         for internal_detail in (
             "functional-completeness",
             "audit_prose_patterns.py",

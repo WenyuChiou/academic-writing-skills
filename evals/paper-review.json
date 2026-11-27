@@ -117,6 +117,16 @@
       "prompt": "Compare a reviewer comment, an author reply saying fixed, and the current manuscript. The requested sensitivity definition was added to Methods but the figure caption and supplement still use the old definition.",
       "expected_output": "A round-calibrated regression audit that separates instruction, author claim, and verified current changes; classifies the issue as partial rather than resolved; and names the stale caption and supplement as affected artifacts.",
       "files": []
+    },
+    {
+      "id": "anti_miss_bundled_condition_and_companion_sync",
+      "prompt": "Review a longitudinal survey + LLM simulation package where Results caveats a bundled History prompt condition (longer prompts and overlapping development records) and SM Table S8 retains a 3-item legacy subscale while Tables S4-S7 use 4 items, yet Highlights, Abstract, and Conclusion still claim unqualified history improvements and SM Table S3 omits the difference.",
+      "expected_output": "Loads ai-llm-computational, quantitative-psychometrics-sem, and display-notation-provenance modules plus the Ten-Point Anti-Miss Pre-Delivery Ledger; flags incomplete propagation of the bundled condition caveat across Highlights, Abstract, and Conclusion, requires explicit legacy-vs-primary subscale disambiguation in SM table inventories, and checks companion metadata limits.",
+      "files": [
+        "skills/paper-review/SKILL.md",
+        "skills/paper-review/references/ai-llm-computational.md",
+        "skills/paper-review/references/quantitative-psychometrics-sem.md"
+      ]
     }
   ]
 }

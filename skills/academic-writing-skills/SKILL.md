@@ -90,6 +90,12 @@ Before drafting an outline, section, or paragraph, identify its reader function,
 
 Before drafting or substantively rewriting, run the pre-draft logic check in [universal-integrity.md](references/universal-integrity.md): check both the progression within a paragraph and the relation between adjacent paragraphs. Match the depth to the requested scope; a local edit does not require replanning the whole section.
 
+For a **new Introduction, multi-paragraph core section draft, or substantive section reorganization** (excluding grammar-only repairs, single-paragraph local revisions, and requests that explicitly instruct immediate full-prose drafting), output a **Pre-Draft Alignment Blueprint** first and **pause for author confirmation** before writing full section prose:
+
+1. **First-sentence extended outline:** numbered topic sentences showing the end-to-end logical chain from broad problem and grouped prior work to the specific gap and study response.
+2. **Paragraph blueprint (`WHAT / WHY / HOW`):** for each planned paragraph, state its reader function (`WHAT`), rationale (`WHY`), analytical execution (`HOW`), narrowest core claim, authorized evidence, inference boundary or nonclaim, and bridge into the next paragraph.
+3. **Host-journal register & guest-term first-use table:** identify the target venue's core readership and list every borrowed cross-disciplinary, AI/LLM, or statistical term with its first-use location, plain-language functional role, and directional meaning; cut unexplainable jargon.
+
 Draft only after the contract and information order are coherent. After drafting, compare the paragraph against the contract and re-read its previous and next paragraphs. Do not polish a paragraph into fluency if its function, evidence, or placement is wrong.
 
 For comment- or selection-driven edits, first apply [comment-scoped-revision.md](references/comment-scoped-revision.md): verify the original/current selected text and full thread, separate reading from editing scope, and compare the exact candidate with the authorized boundary. Assess whether the original concern is answered separately from whether wording changed. Do not substitute the whole paragraph for the selection or treat a broader explicit instruction as title-only because its anchor is a heading.
@@ -241,6 +247,7 @@ After every review, revision round, audit, or release check, explicitly revisit 
 7. Were deterministic, structural, and visual checks used where applicable, and were their limits stated?
 8. Is the exact deliverable—not an intermediate copy—the one inspected?
 9. Did the exact post-edit candidate pass the applicable project profile, and were all findings resolved or explicitly retained with a reason?
+10. For substantive multi-artifact or submission work, did all items in the **Ten-Point Anti-Miss Pre-Delivery Ledger** in [execution-and-acceptance.md](references/execution-and-acceptance.md) pass (cohort/run closure, denominator and legacy construct sync, bundled-condition propagation, symmetric SM fit disclosure, companion caption/Highlight/Abstract alignment, and visual page-by-page checks)?
 
 Apply these questions to the agreed scope, not every possible artifact. If a required answer is no or unknown, continue safe in-scope work or report the limit. Distinguish **checked**, **not applicable**, **outside requested scope**, and **source unavailable/unverified**; an excluded check is not a pass. Never collapse this retrospective into a generic “all checks passed.”
 

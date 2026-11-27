@@ -21,6 +21,15 @@ Use the functions below to plan the requested unit. They may be combined, distri
 
 The Introduction establishes why the study is needed and how its purpose follows from the available knowledge.
 
+### Four-Move Narrative Funnel and Pre-Draft Register Check
+
+Before drafting full Introduction prose, organize the narrative along four connected moves and confirm them with the author via the **Pre-Draft Alignment Blueprint** (first-sentence outline, `WHAT / WHY / HOW` + claim/evidence/boundary/bridge table, and host-journal register + first-use guest-term onboarding table):
+
+1. **Move 1 — Broad domain problem and stakes:** open at a level anchored to the target journal's core readership and name the scientific or decision stake immediately.
+2. **Move 2 — Subfield approaches by analytical route (strengths and limitations):** group existing studies by conceptual or methodological route rather than writing a paper-by-paper chronological list, stating **both what each route establishes and the structural limitation relevant to the study**.
+3. **Move 3 — Specific unresolved gap and consequence:** derive a bounded missing comparison, scale, population, or mechanism directly from Move 2's limitations; explain why resolving it matters without unsupported `"no study"` overclaims when narrower precedents exist.
+4. **Move 4 — Study response and sequential questions:** state whether the study proposes a new method or strengthens/evaluates an existing one, match the host journal's voice (e.g., speaking in water-resources or domain decision terms while onboarding borrowed AI/statistical terms inline at first use), and state sequential research questions aligned with Methods, Results, and Conclusion.
+
 | Reader function | Drafting decision | Avoid |
 |---|---|---|
 | Establish the problem and its importance | Begin at a level that leads directly to the actual problem; identify the understanding or decision at stake. | A broad opening whose relevance to this study appears only much later. |

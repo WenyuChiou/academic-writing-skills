@@ -369,8 +369,18 @@ def main() -> int:
         split_state["artifacts"][0]["path"] = split_docx.name
         split_state["facts"] = []
         split_state["terminology"] = []
-        require(not audit_text(split_state, root), "exact lock split across Word runs was missed")
+        require(
+            not audit_text(split_state, root),
+            "exact lock split across Word runs was missed",
+        )
         tests.append("DOCX split-run text reconstruction")
+
+        require(
+            any("host-journal register" in check for check in MANUAL_CHECKS)
+            and any("bundled condition caveats" in check for check in MANUAL_CHECKS),
+            "manual candidate gate omitted host-register onboarding or bundled-condition propagation",
+        )
+        tests.append("host-register onboarding and bundled-condition manual checks")
 
     print(json.dumps({"status": "PASS", "tests": tests}, indent=2))
     return 0
