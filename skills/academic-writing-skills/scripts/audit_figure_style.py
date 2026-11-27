@@ -166,11 +166,27 @@ def _check_paired_ylim_in_scope(stmts: list[ast.stmt], lines: list[str], artifac
     return findings
 
 
+def _collect_figure_var_names(tree: ast.AST) -> set[str]:
+    """Identify variable names bound to Matplotlib Figure instances."""
+    fig_vars = {"fig"}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.value, ast.Call):
+            func = node.value.func
+            attr = func.attr if isinstance(func, ast.Attribute) else (func.id if isinstance(func, ast.Name) else None)
+            target = node.targets[0]
+            if attr == "figure":
+                fig_vars.update(_extract_target_names(target))
+            elif attr == "subplots" and isinstance(target, (ast.Tuple, ast.List)) and len(target.elts) == 2:
+                fig_vars.update(_extract_target_names(target.elts[0]))
+    return fig_vars
+
+
 def lint_python_script(path: Path) -> list[dict[str, Any]]:
     """Inspect a Python plotting script AST for baked-in titles, inside legends, glyph traps, and paired y-axis drift."""
     source = path.read_text(encoding="utf-8")
     lines = source.splitlines()
     tree = ast.parse(source, filename=str(path))
+    fig_vars = _collect_figure_var_names(tree)
     findings: list[dict[str, Any]] = []
     uses_jhenghei = "Microsoft JhengHei" in source
     has_unicode_minus_false = bool(re.search(
@@ -215,7 +231,7 @@ def lint_python_script(path: Path) -> list[dict[str, Any]]:
                 "message": f"baked-in figure/axis title via .{attr}(); move title to manuscript caption",
             })
 
-        if attr == "legend" and receiver != "fig" and "# intentional-legend" not in line_text:
+        if attr == "legend" and receiver not in fig_vars and "# intentional-legend" not in line_text:
             has_outside_anchor = any(kw.arg == "bbox_to_anchor" for kw in node.keywords)
             if not has_outside_anchor:
                 findings.append({
