@@ -289,8 +289,34 @@ def _subplot_spec_key(call: ast.Call) -> tuple[int, ...] | None:
     return tuple(vals)
 
 
-def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str) -> list[dict[str, Any]]:
+def _collect_pyplot_bindings(tree: ast.AST) -> tuple[set[str], set[str]]:
+    """Collect imported pyplot module aliases and directly imported pyplot title symbols."""
+    pyplot_aliases = {"plt", "pyplot"}
+    imported_title_names: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                if alias.name == "matplotlib.pyplot" and alias.asname:
+                    pyplot_aliases.add(alias.asname)
+        elif isinstance(node, ast.ImportFrom):
+            if node.module == "matplotlib":
+                for alias in node.names:
+                    if alias.name == "pyplot":
+                        pyplot_aliases.add(alias.asname or "pyplot")
+            elif node.module == "matplotlib.pyplot":
+                for alias in node.names:
+                    if alias.name in {"title", "suptitle"}:
+                        imported_title_names.add(alias.asname or alias.name)
+                    elif alias.name == "*":
+                        imported_title_names.update({"title", "suptitle"})
+    return pyplot_aliases, imported_title_names
+
+
+def _lint_ticks_in_scope(
+    stmts: list[ast.stmt], lines: list[str], artifact: str, pyplot_aliases: set[str] | None = None
+) -> list[dict[str, Any]]:
     """Track axis scales per binding lifetime and class/function/module scope to avoid cross-figure leakage."""
+    aliases = pyplot_aliases if pyplot_aliases is not None else {"plt", "pyplot"}
     current_axis: dict[str, int] = {}
     current_fig_vars: dict[str, int] = {}
     subplot_slots: dict[tuple[int, tuple[int, ...]], int] = {}
@@ -317,10 +343,16 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
             current_plt_axis = alloc_id()
         return current_plt_axis
 
+    def drop_slot(old_id: int | None) -> None:
+        if old_id is None:
+            return
+        for key in [k for k, v in subplot_slots.items() if v == old_id]:
+            subplot_slots.pop(key, None)
+
     def resolve_subplot_axis(call: ast.Call, receiver: str) -> int:
         fig_id = (
             current_fig_vars.setdefault(receiver, alloc_id())
-            if receiver and receiver not in {"plt", "pyplot"}
+            if receiver and receiver not in aliases
             else current_plt_fig
         )
         spec = _subplot_spec_key(call)
@@ -351,16 +383,31 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
             attr, receiver = _call_name(node)
             if not attr:
                 continue
-            if attr in {"figure", "clf"}:
+            is_plt_recv = receiver in aliases
+            if attr == "figure":
                 current_plt_fig = alloc_id()
                 current_plt_axis = None
-            elif attr in {"subplot", "add_subplot"}:
+            elif attr == "clf":
+                if receiver and not is_plt_recv:
+                    current_fig_vars[receiver] = alloc_id()
+                else:
+                    current_plt_fig = alloc_id()
+                current_plt_axis = None
+            elif attr == "subplot":
                 current_plt_axis = resolve_subplot_axis(node, receiver)
-            elif attr == "subplots":
-                current_plt_fig = alloc_id()
+            elif attr in {"subplots", "add_subplot"}:
+                if attr == "subplots":
+                    current_plt_fig = alloc_id()
                 current_plt_axis = alloc_id()
-            elif attr in {"axes", "cla"}:
+            elif attr == "axes":
                 current_plt_axis = alloc_id()
+            elif attr == "cla":
+                if receiver and not is_plt_recv:
+                    drop_slot(current_axis.get(receiver))
+                    current_axis[receiver] = alloc_id()
+                else:
+                    drop_slot(current_plt_axis)
+                    current_plt_axis = alloc_id()
             elif attr in {"set_xscale", "set_yscale"} and receiver:
                 scale_val = _extract_scale_arg(node)
                 if scale_val is not None:
@@ -372,7 +419,7 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
             elif attr in {"semilogx", "semilogy", "loglog"}:
                 ax_id = (
                     get_axis(receiver)
-                    if receiver and receiver not in {"plt", "pyplot"}
+                    if receiver and not is_plt_recv
                     else ensure_plt_axis()
                 )
                 if attr in {"semilogx", "loglog"}:
@@ -387,6 +434,13 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
                 if ticks:
                     ax_id = get_axis(receiver) if receiver else alloc_id()
                     tick_calls.append((node.lineno, ax_id, "x" if attr == "set_xticks" else "y", ticks))
+            elif attr in {"yticks", "xticks"} and node.args and (is_plt_recv or not receiver):
+                line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
+                if "# intentional-ticks" in line_text:
+                    continue
+                ticks = _literal_number_list(node.args[0])
+                if ticks:
+                    tick_calls.append((node.lineno, ensure_plt_axis(), "x" if attr == "xticks" else "y", ticks))
 
     def walk_scope(nodes: list[ast.stmt]) -> None:
         nonlocal current_plt_axis, current_plt_fig
@@ -421,14 +475,14 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
                             current_axis.pop(fn, None)
                             current_fig_vars[fn] = current_plt_fig
                         current_plt_axis = None
-                    elif attr in {"subplot", "add_subplot"}:
+                    elif attr == "subplot":
                         handled_rhs = True
                         skip_call = stmt.value
                         ax_id = resolve_subplot_axis(stmt.value, call_recv)
                         for name in _extract_target_names(target):
                             current_axis[name] = ax_id
                         current_plt_axis = ax_id
-                    elif attr in {"add_axes", "axes"}:
+                    elif attr in {"add_subplot", "add_axes", "axes"}:
                         handled_rhs = True
                         skip_call = stmt.value
                         bind_new_axes(_extract_target_names(target), reset_plt=True)
@@ -492,6 +546,7 @@ def lint_python_script(path: Path) -> list[dict[str, Any]]:
     source = path.read_text(encoding="utf-8")
     lines = source.splitlines()
     tree = ast.parse(source, filename=str(path))
+    pyplot_aliases, imported_title_names = _collect_pyplot_bindings(tree)
     findings: list[dict[str, Any]] = []
     uses_jhenghei = "Microsoft JhengHei" in source
     has_unicode_minus_false = bool(re.search(
@@ -527,21 +582,30 @@ def lint_python_script(path: Path) -> list[dict[str, Any]]:
         if not isinstance(node, ast.Call):
             continue
         line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
-        attr = node.func.attr if isinstance(node.func, ast.Attribute) else None
-        receiver = node.func.value.id if isinstance(node.func, ast.Attribute) and isinstance(node.func.value, ast.Name) else ""
+        call_name, receiver = _call_name(node)
 
-        if attr in {"suptitle", "set_title"} and "# intentional-title" not in line_text:
+        is_title_call = (
+            (
+                isinstance(node.func, ast.Attribute)
+                and (
+                    call_name in {"suptitle", "set_title"}
+                    or (receiver in pyplot_aliases and call_name == "title")
+                )
+            )
+            or (isinstance(node.func, ast.Name) and call_name in imported_title_names)
+        )
+        if is_title_call and "# intentional-title" not in line_text:
             findings.append({
                 "code": "FIG001", "artifact": str(path), "line": node.lineno,
-                "message": f"baked-in figure/axis title via .{attr}(); move title to manuscript caption",
+                "message": f"baked-in figure/axis title via .{call_name}(); move title to manuscript caption",
             })
 
-    findings.extend(_lint_ticks_in_scope(tree.body, lines, str(path)))
+    findings.extend(_lint_ticks_in_scope(tree.body, lines, str(path), pyplot_aliases))
     findings.extend(_lint_legends_in_scope(tree.body, lines, str(path)))
     findings.extend(_check_paired_ylim_in_scope(tree.body, lines, str(path)))
     for node in ast.walk(tree):
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-            findings.extend(_lint_ticks_in_scope(node.body, lines, str(path)))
+            findings.extend(_lint_ticks_in_scope(node.body, lines, str(path), pyplot_aliases))
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             findings.extend(_check_paired_ylim_in_scope(node.body, lines, str(path)))
 

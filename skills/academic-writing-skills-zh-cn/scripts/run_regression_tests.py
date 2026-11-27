@@ -473,6 +473,19 @@ def main() -> int:
         )
         fig_codes = {item["code"] for item in lint_python_script(bad_plot)}
         require({"FIG001", "FIG002", "FIG003", "FIG004", "FIG005"}.issubset(fig_codes), f"figure linter missed codes: {sorted(fig_codes)}")
+        plt_title_script = root / "plt_title_only.py"
+        plt_title_script.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "fig, ax = plt.subplots()\n"
+            "plt.title('Accuracy by condition')\n"
+            "fig.savefig('t.png')\n",
+            encoding="utf-8",
+        )
+        require(
+            {item["code"] for item in lint_python_script(plt_title_script)} == {"FIG001"},
+            f"plt.title FIG001 missed: {lint_python_script(plt_title_script)}",
+        )
         rebound_leg = root / "rebound_legend.py"
         rebound_leg.write_text(
             "import matplotlib.pyplot as plt\n"
@@ -531,13 +544,19 @@ def main() -> int:
             "plt.figure()\n"
             "ax_sub_new = plt.subplot(111)\n"
             "ax_sub_new.set_yticks([1, 2, 3, 4])\n"
+            "fig_clf = plt.figure()\n"
+            "ax_clf = fig_clf.add_subplot(111)\n"
+            "ax_clf.set_yscale('log')\n"
+            "fig_clf.clf()\n"
+            "ax_clf = fig_clf.add_subplot(111)\n"
+            "ax_clf.set_yticks([1, 2, 3, 4])\n"
             "class PlotBox:\n"
             "    fig_cls, ax_cls = plt.subplots()\n"
             "    ax_cls.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n",
             encoding="utf-8",
         )
         require(
-            [item["line"] for item in lint_python_script(scale_isolation) if item["code"] == "FIG004"] == [10, 13, 28],
+            [item["line"] for item in lint_python_script(scale_isolation) if item["code"] == "FIG004"] == [10, 13, 34],
             f"scale isolation / log / ClassDef FIG004 mismatch: {lint_python_script(scale_isolation)}",
         )
         clean_separate_figs = root / "separate_figs.py"
@@ -567,7 +586,9 @@ def main() -> int:
             "ax_log.set_xscale('log')\n"
             "ax_log.set_xticks([1, 10, 100, 1000])\n"
             "ax_log.set_yscale('symlog')\n"
-            "ax_log.set_yticks([0, 1, 10, 100])\n",
+            "ax_log.set_yticks([0, 1, 10, 100])\n"
+            "def title(s):\n    return s\n"
+            "_ = title('not a plot title')\n",
             encoding="utf-8",
         )
         require(lint_python_script(clean_separate_figs) == [], f"false positive on mathtext / nested def / separate figs: {lint_python_script(clean_separate_figs)}")
