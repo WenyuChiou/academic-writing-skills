@@ -504,6 +504,35 @@ def main() -> int:
             encoding="utf-8",
         )
         require(any(item["code"] == "FIG005" for item in lint_python_script(add_sub_plot)), "add_subplot Fig005 missed")
+        scale_isolation = root / "scale_isolation.py"
+        scale_isolation.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "fig1, ax = plt.subplots()\n"
+            "ax.set_yscale('log')\n"
+            "plt.yscale('log')\n"
+            "fig2, ax = plt.subplots()\n"
+            "ax.set_yticks([1, 2, 3, 4])\n"
+            "fig3, ax_bad = plt.subplots()\n"
+            "ax_bad.set_yscale('log')\n"
+            "ax_bad.set_yticks([1, 10, 12, 100])\n"
+            "fig_mp, (ax_mp1, ax_mp2) = plt.subplots(1, 2)\n"
+            "plt.yscale('log')\n"
+            "ax_mp1.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n"
+            "ax_mp2.set_yticks([1, 10, 100, 1000])\n"
+            "plt.yscale('log')\n"
+            "plt.figure()\n"
+            "ax_g = plt.gca()\n"
+            "ax_g.set_yticks([1, 2, 3, 4])\n"
+            "class PlotBox:\n"
+            "    fig_cls, ax_cls = plt.subplots()\n"
+            "    ax_cls.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n",
+            encoding="utf-8",
+        )
+        require(
+            [item["line"] for item in lint_python_script(scale_isolation) if item["code"] == "FIG004"] == [10, 13, 21],
+            f"scale isolation / log / ClassDef FIG004 mismatch: {lint_python_script(scale_isolation)}",
+        )
         clean_separate_figs = root / "separate_figs.py"
         clean_separate_figs.write_text(
             "import matplotlib.pyplot as plt\n"

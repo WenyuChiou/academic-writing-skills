@@ -256,64 +256,164 @@ def _lint_legends_in_scope(
     return findings
 
 
-def _collect_scope_calls(stmts: list[ast.stmt]) -> list[ast.Call]:
-    """Collect Call AST nodes within the current lexical scope without entering nested defs/classes."""
-    calls: list[ast.Call] = []
+def _call_name(call: ast.Call) -> tuple[str | None, str]:
+    if isinstance(call.func, ast.Attribute):
+        receiver = call.func.value.id if isinstance(call.func.value, ast.Name) else ""
+        return call.func.attr, receiver
+    if isinstance(call.func, ast.Name):
+        return call.func.id, ""
+    return None, ""
 
-    def walk_exprs(node: ast.AST) -> None:
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-            return
-        if isinstance(node, ast.Call):
-            calls.append(node)
-        for child in ast.iter_child_nodes(node):
-            if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-                continue
-            walk_exprs(child)
 
-    for stmt in stmts:
-        walk_exprs(stmt)
-    return calls
+def _extract_scale_arg(call: ast.Call) -> str | None:
+    arg = call.args[0] if call.args else next((kw.value for kw in call.keywords if kw.arg == "value"), None)
+    if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
+        return arg.value.lower()
+    return None
 
 
 def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str) -> list[dict[str, Any]]:
-    """Check tick spacing per lexical scope while accounting for nonlinear axis scales (log, symlog, logit)."""
-    calls = _collect_scope_calls(stmts)
-    scale_map: dict[tuple[str, str], str] = {}
-    for node in calls:
-        if not isinstance(node.func, ast.Attribute):
-            continue
-        attr = node.func.attr
-        receiver = node.func.value.id if isinstance(node.func.value, ast.Name) else ""
-        if attr in {"set_xscale", "set_yscale"} and node.args:
-            if isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str):
-                scale_map[(receiver, "x" if attr == "set_xscale" else "y")] = node.args[0].value.lower()
-        elif attr in {"xscale", "yscale"} and node.args:
-            if isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str):
-                scale_map[("*", "x" if attr == "xscale" else "y")] = node.args[0].value.lower()
-        elif attr == "semilogx":
-            scale_map[(receiver or "*", "x")] = "log"
-        elif attr == "semilogy":
-            scale_map[(receiver or "*", "y")] = "log"
-        elif attr == "loglog":
-            scale_map[(receiver or "*", "x")] = "log"
-            scale_map[(receiver or "*", "y")] = "log"
+    """Track axis scales per binding lifetime and class/function/module scope to avoid cross-figure leakage."""
+    current_axis: dict[str, int] = {}
+    current_plt_axis: int | None = None
+    scale_by_axis: dict[tuple[int, str], str] = {}
+    tick_calls: list[tuple[int, int, str, list[float]]] = []
+    next_id = 0
 
+    def alloc_id() -> int:
+        nonlocal next_id
+        next_id += 1
+        return next_id
+
+    def get_axis(name: str) -> int:
+        if name not in current_axis:
+            current_axis[name] = alloc_id()
+        return current_axis[name]
+
+    def ensure_plt_axis() -> int:
+        nonlocal current_plt_axis
+        if current_plt_axis is None:
+            current_plt_axis = alloc_id()
+        return current_plt_axis
+
+    def bind_new_axes(names: list[str], reset_plt: bool = False) -> None:
+        nonlocal current_plt_axis
+        created: list[int] = []
+        for name in names:
+            ax_id = alloc_id()
+            current_axis[name] = ax_id
+            created.append(ax_id)
+        if reset_plt:
+            current_plt_axis = created[-1] if created else alloc_id()
+        elif created:
+            current_plt_axis = created[-1]
+
+    def inspect_expr(root_node: ast.AST, skip_call: ast.Call | None = None) -> None:
+        nonlocal current_plt_axis
+        for node in _iter_expr_calls(root_node):
+            if node is skip_call:
+                continue
+            attr, receiver = _call_name(node)
+            if not attr:
+                continue
+            if attr in {"figure", "clf"}:
+                current_plt_axis = None
+            elif attr in {"subplots", "subplot", "axes", "cla"}:
+                current_plt_axis = alloc_id()
+            elif attr in {"set_xscale", "set_yscale"} and receiver:
+                scale_val = _extract_scale_arg(node)
+                if scale_val is not None:
+                    scale_by_axis[(get_axis(receiver), "x" if attr == "set_xscale" else "y")] = scale_val
+            elif attr in {"xscale", "yscale"}:
+                scale_val = _extract_scale_arg(node)
+                if scale_val is not None:
+                    scale_by_axis[(ensure_plt_axis(), "x" if attr == "xscale" else "y")] = scale_val
+            elif attr in {"semilogx", "semilogy", "loglog"}:
+                ax_id = (
+                    get_axis(receiver)
+                    if receiver and receiver not in {"plt", "pyplot"}
+                    else ensure_plt_axis()
+                )
+                if attr in {"semilogx", "loglog"}:
+                    scale_by_axis[(ax_id, "x")] = "log"
+                if attr in {"semilogy", "loglog"}:
+                    scale_by_axis[(ax_id, "y")] = "log"
+            elif attr in {"set_yticks", "set_xticks"} and node.args:
+                line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
+                if "# intentional-ticks" in line_text:
+                    continue
+                ticks = _literal_number_list(node.args[0])
+                if ticks:
+                    ax_id = get_axis(receiver) if receiver else alloc_id()
+                    tick_calls.append((node.lineno, ax_id, "x" if attr == "set_xticks" else "y", ticks))
+
+    def walk_scope(nodes: list[ast.stmt]) -> None:
+        nonlocal current_plt_axis
+        for stmt in nodes:
+            if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                continue
+            skip_call: ast.Call | None = None
+            if isinstance(stmt, ast.Assign):
+                handled_rhs = False
+                if len(stmt.targets) == 1 and isinstance(stmt.value, ast.Call):
+                    attr, _ = _call_name(stmt.value)
+                    target = stmt.targets[0]
+                    if attr == "subplots":
+                        handled_rhs = True
+                        skip_call = stmt.value
+                        if isinstance(target, (ast.Tuple, ast.List)) and len(target.elts) == 2:
+                            for fn in _extract_target_names(target.elts[0]):
+                                current_axis.pop(fn, None)
+                            bind_new_axes(_extract_target_names(target.elts[1]), reset_plt=True)
+                        else:
+                            for fn in _extract_target_names(target):
+                                current_axis.pop(fn, None)
+                            current_plt_axis = alloc_id()
+                    elif attr == "figure":
+                        handled_rhs = True
+                        skip_call = stmt.value
+                        for fn in _extract_target_names(target):
+                            current_axis.pop(fn, None)
+                        current_plt_axis = None
+                    elif attr in {"add_subplot", "add_axes", "subplot", "axes"}:
+                        handled_rhs = True
+                        skip_call = stmt.value
+                        bind_new_axes(_extract_target_names(target), reset_plt=True)
+                    elif attr == "gca":
+                        handled_rhs = True
+                        skip_call = stmt.value
+                        plt_ax = ensure_plt_axis()
+                        for name in _extract_target_names(target):
+                            current_axis[name] = plt_ax
+                if not handled_rhs:
+                    for t in stmt.targets:
+                        for name in _extract_target_names(t):
+                            current_axis.pop(name, None)
+            elif isinstance(stmt, ast.AnnAssign):
+                for name in _extract_target_names(stmt.target):
+                    current_axis.pop(name, None)
+            inspect_expr(stmt, skip_call=skip_call)
+            if hasattr(stmt, "body") and isinstance(stmt.body, list):
+                walk_scope(stmt.body)
+            if hasattr(stmt, "orelse") and isinstance(stmt.orelse, list):
+                walk_scope(stmt.orelse)
+            for handler in getattr(stmt, "handlers", []):
+                if getattr(handler, "type", None) is not None:
+                    inspect_expr(handler.type)
+                if hasattr(handler, "body") and isinstance(handler.body, list):
+                    walk_scope(handler.body)
+            if hasattr(stmt, "finalbody") and isinstance(stmt.finalbody, list):
+                walk_scope(stmt.finalbody)
+            for case in getattr(stmt, "cases", []):
+                if getattr(case, "guard", None) is not None:
+                    inspect_expr(case.guard)
+                if hasattr(case, "body") and isinstance(case.body, list):
+                    walk_scope(case.body)
+
+    walk_scope(stmts)
     findings: list[dict[str, Any]] = []
-    for node in calls:
-        if not isinstance(node.func, ast.Attribute) or not node.args:
-            continue
-        attr = node.func.attr
-        if attr not in {"set_yticks", "set_xticks"}:
-            continue
-        line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
-        if "# intentional-ticks" in line_text:
-            continue
-        ticks = _literal_number_list(node.args[0])
-        if not ticks:
-            continue
-        receiver = node.func.value.id if isinstance(node.func.value, ast.Name) else ""
-        axis_ch = "x" if attr == "set_xticks" else "y"
-        scale = scale_map.get((receiver, axis_ch)) or scale_map.get(("*", axis_ch), "linear")
+    for lineno, ax_id, axis_ch, ticks in tick_calls:
+        scale = scale_by_axis.get((ax_id, axis_ch), "linear")
         ordered = sorted(ticks)
         if scale == "log":
             if not all(val > 0 for val in ordered):
@@ -328,7 +428,7 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
             hi_gap = max(gaps)
             if hi_gap > 0 and min(gaps) <= 0.55 * hi_gap:
                 findings.append({
-                    "code": "FIG004", "artifact": artifact, "line": node.lineno,
+                    "code": "FIG004", "artifact": artifact, "line": lineno,
                     "message": f"uneven close neighbor ticks {ordered}; remove neighbor tick colliding with reference cutoff",
                 })
     return findings
@@ -387,8 +487,9 @@ def lint_python_script(path: Path) -> list[dict[str, Any]]:
     findings.extend(_lint_legends_in_scope(tree.body, lines, str(path)))
     findings.extend(_check_paired_ylim_in_scope(tree.body, lines, str(path)))
     for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
             findings.extend(_lint_ticks_in_scope(node.body, lines, str(path)))
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             findings.extend(_check_paired_ylim_in_scope(node.body, lines, str(path)))
 
     return findings
