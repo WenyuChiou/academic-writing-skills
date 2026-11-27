@@ -150,7 +150,7 @@ Below is a **synthetic cross-disciplinary example** (a watershed flood-adaptatio
 |---|---|
 | **1. Multi-panel `(a)` `(b)` layout, external legend & colorblind palette** | ![Multi-panel trajectory Before vs After](./docs/images/examples/ex1_multipanel_en.png) |
 | **2. Threshold bar plot without value/text collision (`RMSEA <= 0.08`)** | ![Threshold RMSEA bar plot Before vs After](./docs/images/examples/ex2_threshold_en.png) |
-| **3. Summarizing >10 constructs as boxplot + jitter (`-$40K` formatting)** | ![Distribution summary Before vs After](./docs/images/examples/ex3_distribution_en.png) |
+| **3. Summarizing >10 pre-grouped scenarios as boxplot + jitter (`-$40K` formatting; dot plot if ungrouped)** | ![Distribution summary Before vs After](./docs/images/examples/ex3_distribution_en.png) |
 | **4. Three-line table with explicit `N`, `95% CI` & legacy-scale note** | ![Three-line data table Before vs After](./docs/images/examples/ex4_table_en.png) |
 
 ## Boundaries and further reading

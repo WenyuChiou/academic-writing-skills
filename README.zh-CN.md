@@ -146,7 +146,7 @@ Codex 或 ChatGPT 可使用可用的 skill／plugin 介面。其他 Agent Skills
 |---|---|
 | **1. 多子图 `(a)` `(b)` 布局、图外共用图例与色盲友好配色** | ![多子图轨迹对比修改前后](./docs/images/examples/ex1_multipanel_zh-CN.png) |
 | **2. 误差阈值线去除柱顶与图内文字遮挡（`RMSEA ≤ 0.08`）** | ![误差阈值图修改前后](./docs/images/examples/ex2_threshold_zh-CN.png) |
-| **3. 超过 10 个构念改用箱线＋抖动散点汇总（`-$40K` 格式）** | ![多构念分布汇总修改前后](./docs/images/examples/ex3_distribution_zh-CN.png) |
+| **3. 超过 10 个已分组情景改用箱线＋抖动散点汇总（`-$40K` 格式；无合理分组时改用点图）** | ![多构念分布汇总修改前后](./docs/images/examples/ex3_distribution_zh-CN.png) |
 | **4. 学术三线表（标明样本量 `N`、`95% CI` 与新旧题项范围注释）** | ![三线表修改前后](./docs/images/examples/ex4_table_zh-CN.png) |
 
 ## 适用界线与进一步说明

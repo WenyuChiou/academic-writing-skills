@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "source_revision": "70e6d20921160fcf541bc4137ec4f6ca2875a069",
+  "source_revision": "7bf670623d9d3d79e6696063536e436ec222f2be",
   "locales": [
     "zh-TW",
     "zh-CN"
@@ -61,8 +61,8 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/figures-tables-and-supplements.md",
       "target": "skills/academic-writing-skills-zh-tw/references/figures-tables-and-supplements.md",
-      "source_sha256": "e8c80b7b940b891167246e0da35e488157b7bdb97dce147aef5191af0495190f",
-      "target_sha256": "04cd7a37826cb2770200344dce26b053673dbb159be37ce7285ab813c639e0c2"
+      "source_sha256": "57505ef35069427b3e2d48fbeaed7d9e78485f984d04ec4e7ee956c1a104702d",
+      "target_sha256": "a45d58b2f3cd2d3d44e8761b7e783fc05412588cabe5ff5978ffbf314b8f7e9f"
     },
     {
       "locale": "zh-TW",
@@ -173,8 +173,8 @@
       "locale": "zh-TW",
       "source": "skills/paper-review/references/display-notation-provenance.md",
       "target": "skills/paper-review-zh-tw/references/display-notation-provenance.md",
-      "source_sha256": "dccadbdb42ca61d4bc9dc1feba661eeb28db6fb5636444c916c12d5f7780afed",
-      "target_sha256": "56e0fa5779abb091217104e3e5b0a24af060ef5f819be3e0e9717f940cba84c0"
+      "source_sha256": "4c9e278cf4464d2bc583722c6c143e99777f5b6b1ad59ee7db1f14ace09c28b2",
+      "target_sha256": "dd280ceca2ef5bb4c6bb490b2b5b15d2ed4b2f56390f4048d9c5f625186fdd6f"
     },
     {
       "locale": "zh-TW",
@@ -285,8 +285,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/figures-tables-and-supplements.md",
       "target": "skills/academic-writing-skills-zh-cn/references/figures-tables-and-supplements.md",
-      "source_sha256": "e8c80b7b940b891167246e0da35e488157b7bdb97dce147aef5191af0495190f",
-      "target_sha256": "8010abd09fc98e867443a6ee4fbe5b4e102f9d2b71f2b22000b661e53109e964"
+      "source_sha256": "57505ef35069427b3e2d48fbeaed7d9e78485f984d04ec4e7ee956c1a104702d",
+      "target_sha256": "9ded322f79cbe2774b783b491b464bcc2acb592c9e041326e3f8423d58b09984"
     },
     {
       "locale": "zh-CN",
@@ -397,8 +397,8 @@
       "locale": "zh-CN",
       "source": "skills/paper-review/references/display-notation-provenance.md",
       "target": "skills/paper-review-zh-cn/references/display-notation-provenance.md",
-      "source_sha256": "dccadbdb42ca61d4bc9dc1feba661eeb28db6fb5636444c916c12d5f7780afed",
-      "target_sha256": "1e37250d024aba692c0d7fa7106b2174ee9c538e66c0cdd96b6e3182d8c20fbe"
+      "source_sha256": "4c9e278cf4464d2bc583722c6c143e99777f5b6b1ad59ee7db1f14ace09c28b2",
+      "target_sha256": "9b97940d7d42e90829f09e6b5f39f1f932276c3327fb6df39b678ceb5d302210"
     },
     {
       "locale": "zh-CN",
