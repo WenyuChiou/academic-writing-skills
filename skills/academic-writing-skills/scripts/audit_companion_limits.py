@@ -19,12 +19,15 @@ HIDDEN_TAGS = {f"{W_PREFIX}del", f"{W_PREFIX}moveFrom", f"{W_PREFIX}instrText"}
 SEP_TAGS = {f"{W_PREFIX}br", f"{W_PREFIX}cr", f"{W_PREFIX}tab"}
 CAPTION_RE = re.compile(r"((?:Figure|Table)\s+S?\d+)\s*[.:]\s*(.*)", re.IGNORECASE)
 BLOCK_BREAK_RE = re.compile(r"^(?:#{1,6}\s|```|---+$|\*\*\*+$)")
-MISPLACED_CURRENCY_MINUS_RE = re.compile(r"\\?\$-(?=[0-9])")
+MISPLACED_CURRENCY_MINUS_RE = re.compile(r"(?<!\\)\$-(?=[0-9])")
+TEX_MISPLACED_CURRENCY_MINUS_RE = re.compile(r"\\\$-(?=(?:\\text\{)?[0-9])")
 MISSING_BRACKET_SPACE_RE = re.compile(r"\d\[(?:\d|[-+])")
-LATEX_FLOAT_ENV_RE = re.compile(r"\\begin\{(figure|table)\*?\}(.*?)\\end\{\1\*?\}", re.DOTALL | re.IGNORECASE)
-LATEX_TABULAR_RE = re.compile(r"\\begin\{(?:tabular\*?|tabularx|longtable)\}(?:\{[^}]*\})?\{([^}]*)\}(.*?)\\end\{(?:tabular\*?|tabularx|longtable)\}", re.DOTALL)
+LATEX_FLOAT_ENV_RE = re.compile(
+    r"\\begin\{(figure\*?|table\*?|longtable)\}(.*?)\\end\{\1\}", re.DOTALL | re.IGNORECASE
+)
+LATEX_TABULAR_BEGIN_RE = re.compile(r"\\begin\{(tabular\*?|tabularx|longtable)\}")
 LATEX_CITE_RE = re.compile(r"\\(?:[a-zA-Z]*cite[a-zA-Z*]*|nocite)\s*(?:\[[^\]]*\]\s*)*\{([^}]+)\}")
-BIB_ENTRY_RE = re.compile(r"@([a-zA-Z]+)\s*[{(]\s*([^,\s]+)\s*,")
+BIB_ENTRY_RE = re.compile(r"@([a-zA-Z]+)\s*[{(]\s*([^,\s{}()]+)\s*,")
 
 
 def _strip_latex_comments(text: str) -> str:
@@ -58,6 +61,32 @@ def _extract_balanced_braces(text: str, open_pos: int) -> tuple[str, int] | None
     return None
 
 
+def _iter_latex_tables(text: str) -> list[tuple[str, str]]:
+    """Extract (col_spec, body) for LaTeX tabular/tabular*/tabularx/longtable environments with optional [pos]."""
+    tables: list[tuple[str, str]] = []
+    for match in LATEX_TABULAR_BEGIN_RE.finditer(text):
+        env = match.group(1)
+        pos = match.end()
+        opt = re.match(r"\s*(?:\[[^\]]*\]\s*)?", text[pos:])
+        pos += opt.end() if opt else 0
+        if env in {"tabular*", "tabularx"}:
+            width = _extract_balanced_braces(text, pos)
+            if not width:
+                continue
+            pos = width[1]
+            opt2 = re.match(r"\s*(?:\[[^\]]*\]\s*)?", text[pos:])
+            pos += opt2.end() if opt2 else 0
+        col_extract = _extract_balanced_braces(text, pos)
+        if not col_extract:
+            continue
+        col_spec, body_start = col_extract
+        end_match = re.search(rf"\\end\{{{re.escape(env)}\}}", text[body_start:])
+        if not end_match:
+            continue
+        tables.append((col_spec, text[body_start:body_start + end_match.start()]))
+    return tables
+
+
 def _collect_visible_text(node: ET.Element, parts: list[str]) -> None:
     if node.tag in HIDDEN_TAGS:
         return
@@ -70,17 +99,27 @@ def _collect_visible_text(node: ET.Element, parts: list[str]) -> None:
         _collect_visible_text(child, parts)
 
 
-def _extract_docx_paragraphs(path: Path) -> list[str]:
-    """Read accepted visible paragraphs from a Word .docx package, skipping w:del/w:moveFrom/w:instrText and keeping breaks."""
-    with zipfile.ZipFile(path, "r") as archive:
-        root = ET.fromstring(archive.read("word/document.xml"))
-    paragraphs: list[str] = []
-    for para in root.iter(f"{W_PREFIX}p"):
+def _walk_visible_paragraphs(node: ET.Element, paragraphs: list[str]) -> None:
+    """Traverse Word XML top-down, pruning hidden revision containers before inspecting paragraphs."""
+    if node.tag in HIDDEN_TAGS:
+        return
+    if node.tag == f"{W_PREFIX}p":
         parts: list[str] = []
-        _collect_visible_text(para, parts)
+        _collect_visible_text(node, parts)
         line = re.sub(r"[ \t]+", " ", "".join(parts)).strip()
         if line:
             paragraphs.append(line)
+        return
+    for child in node:
+        _walk_visible_paragraphs(child, paragraphs)
+
+
+def _extract_docx_paragraphs(path: Path) -> list[str]:
+    """Read accepted visible paragraphs from a Word .docx package, skipping w:del/w:moveFrom/w:instrText."""
+    with zipfile.ZipFile(path, "r") as archive:
+        root = ET.fromstring(archive.read("word/document.xml"))
+    paragraphs: list[str] = []
+    _walk_visible_paragraphs(root, paragraphs)
     return paragraphs
 
 
@@ -124,10 +163,7 @@ def check_abstract(path: Path, max_words: int = 250) -> list[dict[str, Any]]:
     text = "\n".join(read_lines(path))
     if path.suffix.lower() == ".tex":
         abs_match = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", text, re.DOTALL)
-        if abs_match:
-            text = _unwrap_latex_inline(abs_match.group(1))
-        else:
-            text = _unwrap_latex_inline(text)
+        text = _unwrap_latex_inline(abs_match.group(1) if abs_match else text)
     words = re.findall(r"[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*", text)
     if len(words) > max_words:
         return [{
@@ -143,12 +179,17 @@ def _extract_tex_captions(path: Path) -> dict[str, str]:
     counters = {"figure": 0, "table": 0}
     captions: dict[str, str] = {}
     for match in LATEX_FLOAT_ENV_RE.finditer(text):
-        kind = match.group(1).lower()
+        env = match.group(1).lower()
+        kind = "figure" if env.startswith("figure") else "table"
         body = match.group(2)
-        cap_cmd = re.search(r"\\caption(?:\[[^\]]*\])?\s*\{", body)
+        search_area = body.split(r"\endfirsthead", 1)[0] if env == "longtable" and r"\endfirsthead" in body else body
+        cap_cmd = re.search(r"\\caption(?!\*)(?:\[[^\]]*\])?\s*\{", search_area)
+        if not cap_cmd and search_area is not body:
+            cap_cmd = re.search(r"\\caption(?!\*)(?:\[[^\]]*\])?\s*\{", body)
+            search_area = body
         if not cap_cmd:
             continue
-        extracted = _extract_balanced_braces(body, cap_cmd.end() - 1)
+        extracted = _extract_balanced_braces(search_area, cap_cmd.end() - 1)
         if not extracted:
             continue
         raw_cap = _unwrap_latex_inline(extracted[0])
@@ -219,10 +260,11 @@ def check_caption_sync(manuscript: Path, captions: Path) -> list[dict[str, Any]]
 
 
 def check_text_formatting(path: Path) -> list[dict[str, Any]]:
-    """Check misplaced negative currency signs ($-40K / \\$-40K) and missing space before [CI]."""
+    """Check misplaced negative currency signs (without flagging valid LaTeX $-0.25$ math) and missing space before [CI]."""
     text = "\n".join(read_lines(path))
     findings: list[dict[str, Any]] = []
-    for match in MISPLACED_CURRENCY_MINUS_RE.finditer(text):
+    cur_pattern = TEX_MISPLACED_CURRENCY_MINUS_RE if path.suffix.lower() == ".tex" else MISPLACED_CURRENCY_MINUS_RE
+    for match in cur_pattern.finditer(text):
         findings.append({
             "code": "COMP004", "artifact": str(path), "match": match.group(0),
             "message": "misplaced minus after dollar sign ($-N); use -$N",
@@ -275,8 +317,7 @@ def check_latex_tables(path: Path) -> list[dict[str, Any]]:
     """Flag LaTeX vertical table rules (| or \\vline) and double horizontal rules instead of booktabs."""
     text = _strip_latex_comments(path.read_text(encoding="utf-8"))
     findings: list[dict[str, Any]] = []
-    for index, match in enumerate(LATEX_TABULAR_RE.finditer(text), start=1):
-        col_spec, body = match.group(1), match.group(2)
+    for index, (col_spec, body) in enumerate(_iter_latex_tables(text), start=1):
         if "|" in col_spec or r"\vline" in body:
             findings.append({
                 "code": "COMP007", "artifact": str(path), "table": index,
@@ -291,7 +332,7 @@ def check_latex_tables(path: Path) -> list[dict[str, Any]]:
 
 
 def check_latex_citations(tex_paths: list[Path], bib_paths: list[Path]) -> list[dict[str, Any]]:
-    """Reconcile LaTeX \\cite keys against .bib entries in both directions."""
+    """Reconcile LaTeX \\cite keys against .bib entries across line breaks in both directions."""
     cited: set[str] = set()
     nocite_all = False
     for tex in tex_paths:
@@ -305,11 +346,12 @@ def check_latex_citations(tex_paths: list[Path], bib_paths: list[Path]) -> list[
 
     bib_keys: set[str] = set()
     for bib in bib_paths:
-        for line in bib.read_text(encoding="utf-8").splitlines():
-            for match in BIB_ENTRY_RE.finditer(line):
-                entry_type, key = match.group(1).lower(), match.group(2).strip()
-                if entry_type not in {"comment", "preamble", "string"}:
-                    bib_keys.add(key)
+        bib_lines = [line for line in bib.read_text(encoding="utf-8").splitlines() if not line.lstrip().startswith("%")]
+        bib_text = "\n".join(bib_lines)
+        for match in BIB_ENTRY_RE.finditer(bib_text):
+            entry_type, key = match.group(1).lower(), match.group(2).strip()
+            if entry_type not in {"comment", "preamble", "string"}:
+                bib_keys.add(key)
 
     findings: list[dict[str, Any]] = []
     for key in sorted(cited - bib_keys):
@@ -326,25 +368,74 @@ def check_latex_citations(tex_paths: list[Path], bib_paths: list[Path]) -> list[
     return findings
 
 
+def _resolve_style_border(
+    style_id: str, edge_local: str, styles_by_id: dict[str, ET.Element], seen: set[str]
+) -> str | None:
+    if not style_id or style_id in seen or style_id not in styles_by_id:
+        return None
+    seen.add(style_id)
+    style = styles_by_id[style_id]
+    edge = style.find(f"./{W_PREFIX}tblPr/{W_PREFIX}tblBorders/{W_PREFIX}{edge_local}")
+    if edge is not None:
+        return edge.get(f"{W_PREFIX}val", "")
+    based_on = style.find(f"./{W_PREFIX}basedOn")
+    if based_on is not None:
+        parent_id = based_on.get(f"{W_PREFIX}val", "")
+        if parent_id:
+            return _resolve_style_border(parent_id, edge_local, styles_by_id, seen)
+    return None
+
+
 def check_docx_tables(path: Path) -> list[dict[str, Any]]:
-    """Flag Word .docx tables with visible vertical borders or multi-row tables missing w:tblHeader."""
+    """Flag Word .docx tables with visible or inherited vertical borders or multi-row tables missing w:tblHeader."""
     with zipfile.ZipFile(path, "r") as archive:
         root = ET.fromstring(archive.read("word/document.xml"))
+        styles_by_id: dict[str, ET.Element] = {}
+        if "word/styles.xml" in archive.namelist():
+            styles_root = ET.fromstring(archive.read("word/styles.xml"))
+            for style in styles_root.findall(f"./{W_PREFIX}style"):
+                sid = style.get(f"{W_PREFIX}styleId")
+                if sid:
+                    styles_by_id[sid] = style
+
     findings: list[dict[str, Any]] = []
-    vert_tags = {f"{W_PREFIX}left", f"{W_PREFIX}right", f"{W_PREFIX}insideV"}
+    vert_edges = ("left", "right", "insideV")
     for idx, tbl in enumerate(root.findall(f".//{W_PREFIX}body/{W_PREFIX}tbl"), start=1):
         has_vertical = False
-        for btag in vert_tags:
-            for edge in tbl.findall(f".//{btag}"):
-                val = edge.get(f"{W_PREFIX}val", "")
+        unverified_style: str | None = None
+        tbl_style_el = tbl.find(f"./{W_PREFIX}tblPr/{W_PREFIX}tblStyle")
+        style_id = tbl_style_el.get(f"{W_PREFIX}val", "") if tbl_style_el is not None else ""
+
+        for edge_name in vert_edges:
+            for cell_edge in tbl.findall(f".//{W_PREFIX}tcPr/{W_PREFIX}tcBorders/{W_PREFIX}{edge_name}"):
+                val = cell_edge.get(f"{W_PREFIX}val", "")
                 if val and val.lower() not in {"none", "nil"}:
                     has_vertical = True
                     break
+            tbl_edge = tbl.find(f"./{W_PREFIX}tblPr/{W_PREFIX}tblBorders/{W_PREFIX}{edge_name}")
+            if tbl_edge is not None:
+                val = tbl_edge.get(f"{W_PREFIX}val", "")
+                if val and val.lower() not in {"none", "nil"}:
+                    has_vertical = True
+            elif style_id:
+                if style_id in styles_by_id:
+                    inherited = _resolve_style_border(style_id, edge_name, styles_by_id, set())
+                    if inherited and inherited.lower() not in {"none", "nil"}:
+                        has_vertical = True
+                else:
+                    unverified_style = style_id
+
         if has_vertical:
             findings.append({
                 "code": "COMP009", "artifact": str(path), "table": idx,
                 "message": f"Word table {idx} uses visible vertical borders; prefer horizontal three-line rules (insideV=none)",
             })
+        elif unverified_style:
+            findings.append({
+                "code": "COMP009", "artifact": str(path), "table": idx,
+                "message": f"Word table {idx} references style '{unverified_style}' whose vertical borders could not be checked without word/styles.xml",
+            })
+
         rows = tbl.findall(f"./{W_PREFIX}tr")
         if len(rows) >= 2:
             header_pr = rows[0].find(f"./{W_PREFIX}trPr/{W_PREFIX}tblHeader")

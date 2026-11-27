@@ -412,7 +412,7 @@ def main() -> int:
         tests.append("second-wave AI tells, CJK stock phrases, and guided Results cues")
 
         from audit_companion_limits import (
-            check_abstract, check_caption_sync, check_csv_table, check_discrete_band,
+            _extract_captions, check_abstract, check_caption_sync, check_csv_table, check_discrete_band,
             check_docx_tables, check_highlights, check_latex_citations, check_latex_tables,
             check_text_formatting,
         )
@@ -436,9 +436,10 @@ def main() -> int:
         make_docx(
             word_cap_docx,
             '<w:p><w:r><w:t>first</w:t><w:br/><w:t>second</w:t></w:r>'
-            '<w:moveFrom w:author="A"><w:r><w:t> oldmoved</w:t></w:r></w:moveFrom></w:p>',
+            '<w:moveFrom w:author="A"><w:r><w:t> oldmoved</w:t></w:r></w:moveFrom></w:p>'
+            '<w:moveFrom w:author="A"><w:p><w:r><w:t>three hidden words</w:t></w:r></w:p></w:moveFrom>',
         )
-        require(check_abstract(word_cap_docx, max_words=2) == [], "w:moveFrom was counted or w:br merged words")
+        require(check_abstract(word_cap_docx, max_words=2) == [], "w:moveFrom paragraph or run was counted or w:br merged words")
         two_words = root / "word_breaks.docx"
         make_docx(two_words, '<w:p><w:r><w:t>alpha</w:t><w:br/><w:t>beta</w:t></w:r></w:p>')
         require(any(item["code"] == "COMP002" for item in check_abstract(two_words, max_words=1)), "w:br word split not counted cleanly")
@@ -498,20 +499,28 @@ def main() -> int:
             "\\begin{document}\n"
             "\\begin{abstract}Short abstract.\\end{abstract}\n"
             "\\section{Results}\n"
-            "It is not merely an LLM; it is a watershed shift \\cite{smith2024,missing2025}.\n"
+            "It is not merely an LLM; it is a watershed shift \\parencite{smith2024,missing2025}.\n"
+            "The change was $-0.25$ units overall.\n"
             "\\begin{figure}\\caption{Accuracy by group. Shaded bands show standard deviations.}\\end{figure}\n"
-            "\\begin{table}\\begin{tabular}{|l|c|}\\hline\\hline A & \\$-40K \\\\\\hline\\end{tabular}\\end{table}\n"
+            "\\begin{table}\\begin{tabular}[t]{p{3cm}|c}\\hline\\hline A & \\$-40K \\\\\\hline\\end{tabular}\\end{table}\n"
+            "\\begin{longtable}{lc}\\caption{Long table summary.}\\label{tab:lt}\\\\ \\endfirsthead "
+            "\\caption[]{Long table summary (continued).}\\\\ \\endhead A & B \\\\ \\end{longtable}\n"
             "\\end{document}\n",
             encoding="utf-8",
         )
         bib_doc = root / "refs.bib"
-        bib_doc.write_text("@article{smith2024,\n  title={Flood}\n}\n@article{uncited2023,\n  title={Extra}\n}\n", encoding="utf-8")
+        bib_doc.write_text("@article{\n  smith2024,\n  title={Flood}\n}\n@article{uncited2023,\n  title={Extra}\n}\n", encoding="utf-8")
+        clean_math_tex = root / "clean_math.tex"
+        clean_math_tex.write_text("The change was $-0.25$ units and the bias was -$40\\text{K}.\n", encoding="utf-8")
+        require(check_text_formatting(clean_math_tex) == [], f"false positive COMP004 on inline math: {check_text_formatting(clean_math_tex)}")
         tex_state = {"artifacts": [{"id": "tex", "path": "manuscript.tex", "role": "manuscript", "status": "ACTIVE"}]}
         tex_prose_codes = {item["code"] for item in audit_prose(tex_state, root)}
         require("PROSE014" in tex_prose_codes, f"LaTeX prose unwrap missed PROSE014: {sorted(tex_prose_codes)}")
         require(check_abstract(tex_doc, max_words=5) == [], "LaTeX abstract environment word count included body")
+        tex_caps = _extract_captions(tex_doc)
+        require(tex_caps.get("Table 1") == "Long table summary.", f"longtable caption unexpected: {tex_caps}")
         require(any(item["code"] == "COMP003" for item in check_caption_sync(tex_doc, cap_file)), "LaTeX caption sync mismatch missed")
-        require(any(item["code"] == "COMP004" for item in check_text_formatting(tex_doc)), "LaTeX escaped \\$-40K currency check missed")
+        require(len(check_text_formatting(tex_doc)) == 1, f"expected only escaped \\$-40K COMP004: {check_text_formatting(tex_doc)}")
         require(len(check_latex_tables(tex_doc)) >= 2, "LaTeX COMP007 vertical-rule/double-hline check missed")
         cite_keys = {item["key"] for item in check_latex_citations([tex_doc], [bib_doc])}
         require(cite_keys == {"missing2025", "uncited2023"}, f"BibTeX reconciliation unexpected keys: {cite_keys}")
@@ -529,14 +538,44 @@ def main() -> int:
             any("vertical borders" in msg for msg in docx_tbl_msgs) and any("w:tblHeader" in msg for msg in docx_tbl_msgs),
             f"Word table COMP009 missed border/header findings: {docx_tbl_msgs}",
         )
-        clean_tbl_docx = root / "clean_table.docx"
-        make_docx(
-            clean_tbl_docx,
-            '<w:tbl><w:tblPr><w:tblBorders><w:insideV w:val="none"/></w:tblBorders></w:tblPr>'
-            '<w:tr><w:trPr><w:tblHeader/></w:trPr><w:tc><w:p><w:r><w:t>H1</w:t></w:r></w:p></w:tc></w:tr>'
-            '<w:tr><w:tc><w:p><w:r><w:t>V1</w:t></w:r></w:p></w:tc></w:tr></w:tbl>',
+        styled_grid_docx = root / "styled_grid.docx"
+        with zipfile.ZipFile(styled_grid_docx, "w") as archive:
+            archive.writestr(
+                "word/document.xml",
+                f'<w:document xmlns:w="{W}"><w:body>'
+                '<w:tbl><w:tblPr><w:tblStyle w:val="TableGrid"/></w:tblPr>'
+                '<w:tr><w:trPr><w:tblHeader/></w:trPr><w:tc><w:p><w:r><w:t>H1</w:t></w:r></w:p></w:tc></w:tr>'
+                '<w:tr><w:tc><w:p><w:r><w:t>V1</w:t></w:r></w:p></w:tc></w:tr></w:tbl>'
+                '</w:body></w:document>',
+            )
+            archive.writestr(
+                "word/styles.xml",
+                f'<w:styles xmlns:w="{W}"><w:style w:type="table" w:styleId="TableGrid">'
+                '<w:tblPr><w:tblBorders><w:insideV w:val="single" w:sz="4"/></w:tblBorders></w:tblPr>'
+                '</w:style></w:styles>',
+            )
+        require(
+            any("vertical borders" in item["message"] for item in check_docx_tables(styled_grid_docx)),
+            "Word TableGrid inherited vertical border missed",
         )
-        require(check_docx_tables(clean_tbl_docx) == [], f"false positive on clean Word three-line table: {check_docx_tables(clean_tbl_docx)}")
+        clean_tbl_docx = root / "clean_table.docx"
+        with zipfile.ZipFile(clean_tbl_docx, "w") as archive:
+            archive.writestr(
+                "word/document.xml",
+                f'<w:document xmlns:w="{W}"><w:body>'
+                '<w:tbl><w:tblPr><w:tblStyle w:val="TableGrid"/>'
+                '<w:tblBorders><w:left w:val="none"/><w:right w:val="none"/><w:insideV w:val="none"/></w:tblBorders></w:tblPr>'
+                '<w:tr><w:trPr><w:tblHeader/></w:trPr><w:tc><w:p><w:r><w:t>H1</w:t></w:r></w:p></w:tc></w:tr>'
+                '<w:tr><w:tc><w:p><w:r><w:t>V1</w:t></w:r></w:p></w:tc></w:tr></w:tbl>'
+                '</w:body></w:document>',
+            )
+            archive.writestr(
+                "word/styles.xml",
+                f'<w:styles xmlns:w="{W}"><w:style w:type="table" w:styleId="TableGrid">'
+                '<w:tblPr><w:tblBorders><w:insideV w:val="single" w:sz="4"/></w:tblBorders></w:tblPr>'
+                '</w:style></w:styles>',
+            )
+        require(check_docx_tables(clean_tbl_docx) == [], f"false positive on overridden Word three-line table: {check_docx_tables(clean_tbl_docx)}")
         tests.append("Word .docx three-line table borders and w:tblHeader COMP009 check")
 
     print(json.dumps({"status": "PASS", "tests": tests}, indent=2))

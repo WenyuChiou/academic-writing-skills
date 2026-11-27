@@ -348,7 +348,7 @@ def clean_latex_prose(text: str) -> str:
         body = re.sub(rf"\\begin\{{{env}\}}.*?\\end\{{{env}\}}", "\n", body, flags=re.DOTALL)
     body = re.sub(r"\\(?:documentclass|usepackage|bibliographystyle|bibliography|addbibresource)(?:\[[^\]]*\])?\{[^}]*\}", "", body)
     body = re.sub(r"\\(?:label|ref|eqref|autoref|pageref|hspace|vspace)\{[^}]*\}", "", body)
-    body = re.sub(r"\\cite[a-zA-Z*]*\s*(?:\[[^\]]*\]\s*)*\{[^}]*\}", "", body)
+    body = re.sub(r"\\[a-zA-Z]*cite[a-zA-Z*]*\s*(?:\[[^\]]*\]\s*)*\{[^}]*\}", "", body)
     body = re.sub(r"\\(?:begin|end)\{(?:abstract|figure\*?|table\*?|itemize|enumerate)\}(?:\[[^\]]*\])?", "\n", body)
     unwrap_re = re.compile(
         r"\\(?:(?:sub)*section\*?|paragraph|textbf|textit|emph|textrm|text|caption)(?:\[[^\]]*\])?\{([^{}]*)\}"
