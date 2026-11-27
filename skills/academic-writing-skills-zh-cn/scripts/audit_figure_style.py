@@ -18,14 +18,16 @@ VALID_NEGATIVE_MATHTEXT_RE = re.compile(
 )
 
 
-def _iter_calls_no_defs(node: ast.AST):
-    """Yield Call AST nodes in lexical tree order while pruning nested function and class definitions."""
+def _iter_expr_calls(node: ast.AST):
+    """Yield Call AST nodes within a single statement's expressions without descending into nested statements or defs."""
     if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
         return
     if isinstance(node, ast.Call):
         yield node
     for child in ast.iter_child_nodes(node):
-        yield from _iter_calls_no_defs(child)
+        if isinstance(child, (ast.stmt, ast.excepthandler)):
+            continue
+        yield from _iter_expr_calls(child)
 
 
 def _literal_number_list(node: ast.AST) -> list[float] | None:
@@ -121,7 +123,7 @@ def _check_paired_ylim_in_scope(stmts: list[ast.stmt], lines: list[str], artifac
                 for target in stmt.targets:
                     for name in _extract_target_names(target):
                         current_axis.pop(name, None)
-            for node in _iter_calls_no_defs(stmt):
+            for node in _iter_expr_calls(stmt):
                 if not isinstance(node.func, ast.Attribute) or not isinstance(node.func.value, ast.Name):
                     continue
                 receiver = node.func.value.id
@@ -178,7 +180,7 @@ def _lint_legends_in_scope(
             if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
                 walk(stmt.body, set(active_figs) | {"fig"})
                 continue
-            for node in _iter_calls_no_defs(stmt):
+            for node in _iter_expr_calls(stmt):
                 if not isinstance(node.func, ast.Attribute):
                     continue
                 attr = node.func.attr

@@ -374,6 +374,42 @@ def _extract_cite_keys_from_tex(text: str) -> tuple[set[str], bool]:
     return cited, nocite_all
 
 
+def _extract_bib_keys(bib_text: str) -> set[str]:
+    """Extract active BibTeX entry keys while skipping complete balanced @comment/@preamble/@string blocks."""
+    lines = [line for line in bib_text.splitlines() if not line.lstrip().startswith("%")]
+    cleaned = "\n".join(lines)
+    keys: set[str] = set()
+    header_re = re.compile(r"@([a-zA-Z]+)\s*([{(])")
+    pos = 0
+    while pos < len(cleaned):
+        match = header_re.search(cleaned, pos)
+        if not match:
+            break
+        entry_type = match.group(1).lower()
+        open_ch = match.group(2)
+        close_ch = "}" if open_ch == "{" else ")"
+        start = match.end() - 1
+        depth = 0
+        idx = start
+        while idx < len(cleaned):
+            ch = cleaned[idx]
+            if ch == open_ch:
+                depth += 1
+            elif ch == close_ch:
+                depth -= 1
+                if depth == 0:
+                    idx += 1
+                    break
+            idx += 1
+        block_body = cleaned[start + 1:idx - 1 if depth == 0 else idx]
+        if entry_type not in {"comment", "preamble", "string"}:
+            key_match = re.match(r"\s*([^,\s{}()]+)\s*,", block_body)
+            if key_match:
+                keys.add(key_match.group(1).strip())
+        pos = max(idx, match.end())
+    return keys
+
+
 def check_latex_citations(tex_paths: list[Path], bib_paths: list[Path]) -> list[dict[str, Any]]:
     """Reconcile LaTeX \\cite keys against .bib entries across line breaks and multicite groups in both directions."""
     cited: set[str] = set()
@@ -386,12 +422,7 @@ def check_latex_citations(tex_paths: list[Path], bib_paths: list[Path]) -> list[
 
     bib_keys: set[str] = set()
     for bib in bib_paths:
-        bib_lines = [line for line in bib.read_text(encoding="utf-8").splitlines() if not line.lstrip().startswith("%")]
-        bib_text = "\n".join(bib_lines)
-        for match in BIB_ENTRY_RE.finditer(bib_text):
-            entry_type, key = match.group(1).lower(), match.group(2).strip()
-            if entry_type not in {"comment", "preamble", "string"}:
-                bib_keys.add(key)
+        bib_keys.update(_extract_bib_keys(bib.read_text(encoding="utf-8")))
 
     findings: list[dict[str, Any]] = []
     for key in sorted(cited - bib_keys):

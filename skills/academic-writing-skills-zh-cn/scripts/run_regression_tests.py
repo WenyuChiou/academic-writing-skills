@@ -509,6 +509,9 @@ def main() -> int:
             "def f1():\n    f, ax = plt.subplots()\n    ax.set_ylim(0, 10)\n    ax.set_ylim(0, 12)\n"
             "figure_custom, ax_c = plt.subplots()\n"
             "figure_custom.legend(loc='upper center')\n"
+            "if __name__ == '__main__':\n"
+            "    canvas, ax_m = plt.subplots()\n"
+            "    canvas.legend(loc='upper center')\n"
             "def f2():\n    f, ax2 = plt.subplots()\n    ax2.set_ylim(0, 99)\n"
             "fig_a, (ax1, ax2) = plt.subplots(1, 2)\n"
             "ax1.set_ylim(0, 10)\n"
@@ -550,8 +553,15 @@ def main() -> int:
             "@article{yr2024,\n  title={YearPar}\n}\n"
             "@article{multiA,\n  title={A}\n}\n"
             "@article{multiB,\n  title={B}\n}\n"
+            "@comment{ @article{disabled2021, title={Disabled}} }\n"
             "@article{uncited2023,\n  title={Extra}\n}\n",
             encoding="utf-8",
+        )
+        cited_disabled_tex = root / "disabled_cite.tex"
+        cited_disabled_tex.write_text("\\cite{disabled2021}\n", encoding="utf-8")
+        require(
+            any(item["code"] == "COMP008" and item["key"] == "disabled2021" for item in check_latex_citations([cited_disabled_tex], [bib_doc])),
+            "disabled key inside @comment{...} block satisfied missing-entry check",
         )
         clean_math_tex = root / "clean_math.tex"
         clean_math_tex.write_text("The change was $-0.25$ units and the bias was -$40\\text{K}.\n", encoding="utf-8")
