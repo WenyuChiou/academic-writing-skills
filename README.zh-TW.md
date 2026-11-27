@@ -7,7 +7,7 @@
 
 從大綱到修回文件，協助建立研究論證、連貫地逐段撰寫，並核對目前證據能支持哪些主張。
 
-可搭配 **Codex**、**Claude Code**、**OpenCode**、**Hermes Agent**，以及其他支援 Agent Skills 格式的 AI agents 使用。可用工具與整合功能依 host 而定。
+可搭配 **Codex**、**Claude Code**、**Antigravity**、**OpenCode**、**Hermes Agent**，以及其他支援 Agent Skills 格式的 AI agents 使用。可用工具與整合功能依 host 而定。
 
 [English](./README.md) | 繁體中文 | [简体中文](./README.zh-CN.md)
 
@@ -77,7 +77,7 @@ claude plugin install academic-writing-skills@ai-research-skills --scope user
 
 更新指令：`claude plugin update academic-writing-skills@ai-research-skills`。
 
-Codex 或 ChatGPT 可使用可用的 skill／plugin 介面。其他 Agent Skills clients 可將 `skills/` 下選定功能與語言的資料夾放入支援的位置：OpenCode 使用 `.agents/skills/` 或 `.opencode/skills/`，Hermes Agent 使用 `~/.hermes/skills/`。
+**Antigravity** 可將 `skills/` 下選定的資料夾放入專案 `.agents/skills/`、`~/.agents/skills/` 或 `~/.gemini/config/skills/`；若將整份 repo 直接 clone 於 `~/.agents/skills/academic-writing-skills`，可執行 `python scripts/install_flat_host_shims.py --dest ~/.agents/skills --include-locales` 自動建立單層探索目錄（`academic-writing-flat`、`paper-review` 及多語系入口）。Codex 或 ChatGPT 可使用可用的 skill／plugin 介面。其他 Agent Skills clients 可將 `skills/` 下選定功能與語言的資料夾放入支援的位置：OpenCode 使用 `.agents/skills/` 或 `.opencode/skills/`，Hermes Agent 使用 `~/.hermes/skills/`。
 
 ## 直接試用
 

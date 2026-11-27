@@ -396,19 +396,21 @@ def _lint_titles_in_scope(
                         "message": f"baked-in figure/axis title via .{call_name}(); move title to manuscript caption",
                     })
 
+    deferred_funcs: list[ast.FunctionDef | ast.AsyncFunctionDef] = []
+
     def walk(nodes: list[ast.stmt]) -> None:
         for stmt in nodes:
-            if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 _apply_scope_imports_and_shadows(stmt, aliases, imported_titles)
                 for dec in stmt.decorator_list:
                     check_exprs(dec)
-                child_aliases = set(aliases)
-                child_titles = set(imported_titles)
-                if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                    pnames = _param_names(stmt)
-                    child_aliases -= pnames
-                    child_titles -= pnames
-                findings.extend(_lint_titles_in_scope(stmt.body, lines, artifact, child_aliases, child_titles))
+                deferred_funcs.append(stmt)
+                continue
+            if isinstance(stmt, ast.ClassDef):
+                _apply_scope_imports_and_shadows(stmt, aliases, imported_titles)
+                for dec in stmt.decorator_list:
+                    check_exprs(dec)
+                findings.extend(_lint_titles_in_scope(stmt.body, lines, artifact, set(aliases), set(imported_titles)))
                 continue
             check_exprs(stmt)
             _apply_scope_imports_and_shadows(stmt, aliases, imported_titles)
@@ -430,6 +432,9 @@ def _lint_titles_in_scope(
                     walk(case.body)
 
     walk(stmts)
+    for fn in deferred_funcs:
+        pnames = _param_names(fn)
+        findings.extend(_lint_titles_in_scope(fn.body, lines, artifact, set(aliases) - pnames, set(imported_titles) - pnames))
     return findings
 
 
@@ -444,7 +449,10 @@ def _lint_ticks_in_scope(
     current_plt_axis: int | None = None
     scale_by_axis: dict[tuple[int, str], str] = {}
     tick_configs: dict[tuple[int, str, bool], tuple[int, list[float]]] = {}
+    exported_ticks: list[tuple[int, int, str, list[float], str | None]] = []
+    seen_exports: set[tuple[int, int, str]] = set()
     nested_findings: list[dict[str, Any]] = []
+    deferred_funcs: list[ast.FunctionDef | ast.AsyncFunctionDef] = []
     next_id = 0
 
     def alloc_id() -> int:
@@ -583,16 +591,23 @@ def _lint_ticks_in_scope(
                 record_ticks(node, ax_id, "x" if attr == "set_xticks" else "y")
             elif attr in {"yticks", "xticks"} and node.args and (is_plt_recv or not receiver):
                 record_ticks(node, ensure_plt_axis(), "x" if attr == "xticks" else "y")
+            elif attr in {"savefig", "show"}:
+                for (t_ax, t_ch, _minor), (t_line, t_vals) in tick_configs.items():
+                    sig = (t_line, t_ax, t_ch)
+                    if sig not in seen_exports:
+                        seen_exports.add(sig)
+                        exported_ticks.append((t_line, t_ax, t_ch, t_vals, scale_by_axis.get((t_ax, t_ch), "linear")))
 
     def walk_scope(nodes: list[ast.stmt]) -> None:
         nonlocal current_plt_axis, current_plt_fig
         for stmt in nodes:
-            if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 _apply_scope_imports_and_shadows(stmt, aliases)
-                child_aliases = set(aliases)
-                if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                    child_aliases -= _param_names(stmt)
-                nested_findings.extend(_lint_ticks_in_scope(stmt.body, lines, artifact, child_aliases))
+                deferred_funcs.append(stmt)
+                continue
+            if isinstance(stmt, ast.ClassDef):
+                _apply_scope_imports_and_shadows(stmt, aliases)
+                nested_findings.extend(_lint_ticks_in_scope(stmt.body, lines, artifact, set(aliases)))
                 continue
             skip_call: ast.Call | None = None
             if isinstance(stmt, ast.Assign):
@@ -670,9 +685,16 @@ def _lint_ticks_in_scope(
                     walk_scope(case.body)
 
     walk_scope(stmts)
+    for fn in deferred_funcs:
+        nested_findings.extend(_lint_ticks_in_scope(fn.body, lines, artifact, set(aliases) - _param_names(fn)))
+    for (t_ax, t_ch, _minor), (t_line, t_vals) in tick_configs.items():
+        sig = (t_line, t_ax, t_ch)
+        if sig not in seen_exports:
+            seen_exports.add(sig)
+            exported_ticks.append((t_line, t_ax, t_ch, t_vals, None))
     findings: list[dict[str, Any]] = list(nested_findings)
-    for (ax_id, axis_ch, _is_minor), (lineno, ticks) in sorted(tick_configs.items(), key=lambda kv: kv[1][0]):
-        scale = scale_by_axis.get((ax_id, axis_ch), "linear")
+    for lineno, ax_id, axis_ch, ticks, snap_scale in sorted(exported_ticks, key=lambda row: row[0]):
+        scale = snap_scale if snap_scale is not None else scale_by_axis.get((ax_id, axis_ch), "linear")
         ordered = sorted(ticks)
         if scale == "log":
             if not all(val > 0 for val in ordered):

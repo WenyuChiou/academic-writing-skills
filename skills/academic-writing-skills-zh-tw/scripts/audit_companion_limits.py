@@ -45,7 +45,7 @@ def _unwrap_latex_inline(text: str) -> str:
         if updated == cleaned:
             break
         cleaned = updated
-    cleaned = re.sub(r"\$([^$]+)\$", r"\1", cleaned)
+    cleaned = re.sub(r"(?<!\\)\$((?:\\.|[^$\\])+?)(?<!\\)\$", r"\1", cleaned)
     return re.sub(r"\s+", " ", cleaned.replace(r"\%", "%").replace(r"\$", "$")).strip()
 
 

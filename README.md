@@ -7,7 +7,7 @@ Part of [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills).
 
 Develop a research argument, write connected paragraphs, and check what the current evidence supports—from an outline to a revision package.
 
-Use with **Codex**, **Claude Code**, **OpenCode**, **Hermes Agent**, and other AI agents that support the Agent Skills format. Available tools and integrations depend on the host.
+Use with **Codex**, **Claude Code**, **Antigravity**, **OpenCode**, **Hermes Agent**, and other AI agents that support the Agent Skills format. Available tools and integrations depend on the host.
 
 [繁體中文](./README.zh-TW.md) | [简体中文](./README.zh-CN.md)
 
@@ -81,7 +81,7 @@ claude plugin install academic-writing-skills@ai-research-skills --scope user
 
 Update with `claude plugin update academic-writing-skills@ai-research-skills`.
 
-For Codex or ChatGPT, use the available skill/plugin interface. For other Agent Skills clients, copy the selected capability/language folders under `skills/` into a supported directory: `.agents/skills/` or `.opencode/skills/` for OpenCode, or `~/.hermes/skills/` for Hermes Agent.
+For **Antigravity**, copy the selected folders under `skills/` into `.agents/skills/` (workspace), `~/.agents/skills/`, or `~/.gemini/config/skills/`; if this repository is cloned directly under `~/.agents/skills/academic-writing-skills`, run `python scripts/install_flat_host_shims.py --dest ~/.agents/skills --include-locales` to create one-level discovery folders (`academic-writing-flat`, `paper-review`, and locale variants). For Codex or ChatGPT, use the available skill/plugin interface. For other Agent Skills clients, copy the selected capability/language folders under `skills/` into `.agents/skills/` or `.opencode/skills/` for OpenCode, or `~/.hermes/skills/` for Hermes Agent.
 
 ## Try it
 

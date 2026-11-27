@@ -13,13 +13,14 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-@pytest.mark.parametrize("name", ["README.md", "README.zh-TW.md"])
+@pytest.mark.parametrize("name", ["README.md", "README.zh-TW.md", "README.zh-CN.md"])
 def test_readme_names_agent_clients_without_a_testing_badge(name):
     text = (ROOT / name).read_text(encoding="utf-8")
     assert "actions/workflows/test.yml/badge.svg" not in text
     opening = text.split("## ", 1)[0]
-    for client in ("Codex", "Claude Code", "OpenCode", "Hermes Agent", "Agent Skills"):
+    for client in ("Codex", "Claude Code", "Antigravity", "OpenCode", "Hermes Agent", "Agent Skills"):
         assert client in opening, (name, client)
+    assert "install_flat_host_shims.py" in text, name
     assert "depend on the host" in opening or "依 host 而定" in opening
 
 

@@ -479,12 +479,16 @@ def main() -> int:
             "plt.rcParams.update({'axes.unicode_minus': False})\n"
             "fig, ax = plt.subplots()\n"
             "plt.title('Accuracy by condition')\n"
+            "def draw():\n    title('Deferred title')\n"
+            "from matplotlib.pyplot import title\n"
+            "draw()\n"
             "fig.savefig('t.png')\n",
             encoding="utf-8",
         )
+        plt_title_findings = lint_python_script(plt_title_script)
         require(
-            {item["code"] for item in lint_python_script(plt_title_script)} == {"FIG001"},
-            f"plt.title FIG001 missed: {lint_python_script(plt_title_script)}",
+            [item["line"] for item in plt_title_findings if item["code"] == "FIG001"] == [4, 6],
+            f"plt.title / deferred import FIG001 mismatch: {plt_title_findings}",
         )
         rebound_leg = root / "rebound_legend.py"
         rebound_leg.write_text(
@@ -556,13 +560,19 @@ def main() -> int:
             "ax_sup = fig_sup.add_subplot(111)\n"
             "ax_sup.set_xticks([0.00, 0.04, 0.08, 0.10, 0.12])\n"
             "ax_sup.set_xticks([0.00, 0.04, 0.08, 0.12])\n"
+            "fig_exp = plt.figure()\n"
+            "ax_exp = fig_exp.add_subplot(111)\n"
+            "ax_exp.set_xticks([0.00, 0.04, 0.08, 0.10, 0.12])\n"
+            "fig_exp.savefig('before.png')\n"
+            "ax_exp.set_xticks([0.00, 0.04, 0.08, 0.12])\n"
+            "fig_exp.savefig('after.png')\n"
             "class PlotBox:\n"
             "    fig_cls, ax_cls = plt.subplots()\n"
             "    ax_cls.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n",
             encoding="utf-8",
         )
         require(
-            [item["line"] for item in lint_python_script(scale_isolation) if item["code"] == "FIG004"] == [10, 13, 40],
+            [item["line"] for item in lint_python_script(scale_isolation) if item["code"] == "FIG004"] == [10, 13, 40, 46],
             f"scale isolation / log / ClassDef FIG004 mismatch: {lint_python_script(scale_isolation)}",
         )
         clean_separate_figs = root / "separate_figs.py"
@@ -657,6 +667,20 @@ def main() -> int:
         require(any(item["code"] == "COMP003" for item in check_caption_sync(tex_doc, cap_file)), "LaTeX caption sync mismatch missed")
         require(len(check_text_formatting(tex_doc)) == 1, f"expected only escaped \\$-40K COMP004: {check_text_formatting(tex_doc)}")
         require(len(check_latex_tables(tex_doc)) >= 2, "LaTeX COMP007 vertical-rule/double-hline check missed")
+        clean_currency_cap_tex = root / "currency_cap.tex"
+        clean_currency_cap_tex.write_text(
+            "\\begin{figure}\\caption{Costs were \\$40 and \\$50.}\\end{figure}\n",
+            encoding="utf-8",
+        )
+        clean_currency_cap_md = root / "currency_cap.md"
+        clean_currency_cap_md.write_text(
+            "**Figure 1.** Costs were $40 and $50.\n",
+            encoding="utf-8",
+        )
+        require(
+            check_caption_sync(clean_currency_cap_tex, clean_currency_cap_md) == [],
+            f"false positive COMP003 on two escaped currency tokens: {check_caption_sync(clean_currency_cap_tex, clean_currency_cap_md)}",
+        )
         cite_keys = {item["key"] for item in check_latex_citations([tex_doc], [bib_doc])}
         require(cite_keys == {"missing2025", "uncited2023"}, f"BibTeX reconciliation unexpected keys: {cite_keys}")
         tests.append("LaTeX prose unwrapping, abstract/caption sync, booktabs COMP007, and BibTeX COMP008")
