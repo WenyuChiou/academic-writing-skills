@@ -27,7 +27,8 @@ LATEX_FLOAT_ENV_RE = re.compile(
 )
 LATEX_TABULAR_BEGIN_RE = re.compile(r"\\begin\{(tabular\*?|tabularx|longtable)\}")
 LATEX_CITE_CMD_RE = re.compile(
-    r"\\(?!(?:citestyle|defcitealias|Declare[a-zA-Z]*)\b)(?:[a-zA-Z]*cite[a-zA-Z*]*|nocite)\*?",
+    r"\\(?:cite(?:t(?:itle|ext)?|p|alt|alp|author|year|yearpar|num|url|field|list|name|date|s)?|"
+    r"(?:paren|text|auto|foot|full|super|smart|no|multi|vol|fvol|pvol|tvol)cites?)\*?",
     re.IGNORECASE,
 )
 BIB_ENTRY_RE = re.compile(r"@([a-zA-Z]+)\s*[{(]\s*([^,\s{}()]+)\s*,")

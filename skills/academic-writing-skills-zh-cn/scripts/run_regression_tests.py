@@ -514,6 +514,7 @@ def main() -> int:
             "\\begin{document}\n"
             "\\begin{abstract}Short abstract.\\end{abstract}\n"
             "\\citestyle{authoryear}\n"
+            "\\newcites{supp}{Supplementary references}\n"
             "\\section{Results}\n"
             "It is not merely an LLM; it is a watershed shift \\parencite{smith2024,missing2025}.\n"
             "See \\citeurl{url2024} and \\parencites[see][]{multiA}[cf.]{multiB}.\n"
