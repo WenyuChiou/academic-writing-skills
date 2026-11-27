@@ -186,3 +186,33 @@ ax2.set_yticks([0.00, 0.04, 0.08, 0.12])  # omit 0.10 so 0.08 never collides
 ax2.set_ylabel("RMSEA (threshold <= 0.08)", fontsize=15)
 fig.legend(loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=3, frameon=False, fontsize=14)
 ```
+
+### Deliverable Formats: LaTeX, Word, and Markdown
+
+Deliver manuscript text, tables, and displays cleanly in whichever submission format the author selects without changing scientific meaning:
+
+- **LaTeX (`.tex` and `.bib`):** Export quantitative figures as vector `.pdf` alongside `300 DPI` `.png` previews, embed via `\includegraphics` with caption-only titles (`\caption` and `\label`), format three-line tables with `booktabs` and `threeparttable` (`\toprule`, `\midrule`, `\bottomrule`, zero vertical `|` or `\vline` borders, and `tablenotes` specifying `N`, `95% CI`, and scale scope), format negative currency and threshold inequalities with `-\$40\text{K}` and `\leq`, reconcile `\cite` keys against `.bib` entries in both directions, and use `xelatex` or `lualatex` with `ctex` for Chinese LaTeX manuscripts.
+- **Word (`.docx`):** Use native Word paragraph styles and OMML equations, insert high-resolution figures (`300–600 DPI` `.png` or `.svg`) paired with native Word captions instead of baked-in titles, construct three-line OOXML / `python-docx` or Node `docx` tables (`1 pt` top and bottom rules, `0.5 pt` header-bottom rule, `insideV=none`, `w:tblHeader` repeated headers on continuation pages, and `w:keepNext` to prevent orphan rows), and inspect accepted text plus Print Layout pagination.
+- **Markdown (`.md`):** Keep pipe tables aligned with verified source numbers, place an explicit `Note.` paragraph directly beneath each table, and preserve `-$40K` and bracket spacing (`0.068 [0.061, 0.075]`) prior to Pandoc or Quarto conversion.
+
+```latex
+\begin{table}[htbp]
+  \centering
+  \begin{threeparttable}
+    \caption{Error and fit summary across synthetic runs ($N = 1,200$).}
+    \label{tab:synthetic-summary}
+    \begin{tabular}{llccc}
+      \toprule
+      Model & Condition & Net Bias (\$K) & RMSEA [95\% CI] & Scale Scope \\
+      \midrule
+      Model A & Current & $-\$40\text{K}$ & 0.068 [0.061, 0.075] & 4-item primary \\
+      Model B & Legacy check & $+\$22\text{K}$ & 0.106 [0.097, 0.115] & 3-item legacy \\
+      \bottomrule
+    \end{tabular}
+    \begin{tablenotes}[flushleft]
+      \small
+      \item Note. Synthetic illustration ($N = 1,200$). RMSEA threshold $\leq 0.08$.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+```

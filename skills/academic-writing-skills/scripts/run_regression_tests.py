@@ -413,7 +413,8 @@ def main() -> int:
 
         from audit_companion_limits import (
             check_abstract, check_caption_sync, check_csv_table, check_discrete_band,
-            check_highlights, check_text_formatting,
+            check_docx_tables, check_highlights, check_latex_citations, check_latex_tables,
+            check_text_formatting,
         )
         from audit_figure_style import lint_png_file, lint_python_script
         import struct
@@ -425,11 +426,22 @@ def main() -> int:
         abs_file.write_text(("word " * 260).strip(), encoding="utf-8")
         require(any(item["code"] == "COMP002" for item in check_abstract(abs_file)), "long abstract missed")
         cap_file = root / "captions.txt"
-        cap_file.write_text("Figure 1. Standalone caption differs.\n", encoding="utf-8")
+        cap_file.write_text("Figure 1. Accuracy by group.\nShaded bands show 95% CIs.\n", encoding="utf-8")
         ms_cap = root / "ms_cap.txt"
-        ms_cap.write_text("Figure 1. Manuscript caption wording. $-40K and 0.208[0.189, 0.229].\n", encoding="utf-8")
-        require(any(item["code"] == "COMP003" for item in check_caption_sync(ms_cap, cap_file)), "caption mismatch missed")
+        ms_cap.write_text("Figure 1. Accuracy by group.\nShaded bands show standard deviations.\n$-40K and 0.208[0.189, 0.229].\n", encoding="utf-8")
+        require(any(item["code"] == "COMP003" for item in check_caption_sync(ms_cap, cap_file)), "multiline caption continuation mismatch missed")
         require(len(check_text_formatting(ms_cap)) == 2, "numeric currency/CI spacing check missed")
+
+        word_cap_docx = root / "word_caps.docx"
+        make_docx(
+            word_cap_docx,
+            '<w:p><w:r><w:t>first</w:t><w:br/><w:t>second</w:t></w:r>'
+            '<w:moveFrom w:author="A"><w:r><w:t> oldmoved</w:t></w:r></w:moveFrom></w:p>',
+        )
+        require(check_abstract(word_cap_docx, max_words=2) == [], "w:moveFrom was counted or w:br merged words")
+        two_words = root / "word_breaks.docx"
+        make_docx(two_words, '<w:p><w:r><w:t>alpha</w:t><w:br/><w:t>beta</w:t></w:r></w:p>')
+        require(any(item["code"] == "COMP002" for item in check_abstract(two_words, max_words=1)), "w:br word split not counted cleanly")
         csv_file = root / "table.csv"
         csv_file.write_text("model,status,val\nA,available,NA\n", encoding="utf-8")
         require(any(item["code"] == "COMP005" for item in check_csv_table(csv_file)), "CSV available/NA missed")
@@ -440,23 +452,92 @@ def main() -> int:
         bad_plot.write_text(
             "import matplotlib.pyplot as plt\n"
             "plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei']\n"
-            "fig, (ax1, ax2) = plt.subplots(1, 2)\n"
-            "fig.suptitle('Baked')\n"
+            "f, (ax1, ax2) = plt.subplots(1, 2)\n"
+            "f.suptitle('Baked')\n"
             "ax1.legend()\n"
             "ax1.set_ylabel('RMSEA ≤ 0.08')\n"
             "ax1.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n"
             "ax1.set_ylim(0, 38)\n"
             "ax2.set_ylim(0, 45)\n"
-            "fig.savefig('x.png')\n",
+            "f.savefig('x.png')\n",
             encoding="utf-8",
         )
         fig_codes = {item["code"] for item in lint_python_script(bad_plot)}
         require({"FIG001", "FIG002", "FIG003", "FIG004", "FIG005"}.issubset(fig_codes), f"figure linter missed codes: {sorted(fig_codes)}")
+        add_sub_plot = root / "add_sub.py"
+        add_sub_plot.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "canvas = plt.figure()\n"
+            "p1 = canvas.add_subplot(1, 2, 1)\n"
+            "p2 = canvas.add_subplot(1, 2, 2)\n"
+            "p1.set_ylim(0, 10)\n"
+            "p2.set_ylim(0, 20)\n",
+            encoding="utf-8",
+        )
+        require(any(item["code"] == "FIG005" for item in lint_python_script(add_sub_plot)), "add_subplot Fig005 missed")
+        clean_separate_figs = root / "separate_figs.py"
+        clean_separate_figs.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "def f1():\n    f, ax = plt.subplots()\n    ax.set_ylim(0, 10)\n    ax.set_ylim(0, 12)\n"
+            "def f2():\n    f, ax2 = plt.subplots()\n    ax2.set_ylim(0, 99)\n",
+            encoding="utf-8",
+        )
+        require(lint_python_script(clean_separate_figs) == [], f"false positive on separate figs / rcParams.update: {lint_python_script(clean_separate_figs)}")
         small_png = root / "small.png"
         ihdr_data = struct.pack(">IIBBBBB", 640, 400, 8, 2, 0, 0, 0)
         small_png.write_bytes(b"\x89PNG\r\n\x1a\n" + struct.pack(">I", 13) + b"IHDR" + ihdr_data + b"\x00\x00\x00\x00")
         require(any(item["code"] == "FIG006" for item in lint_png_file(small_png)), "narrow PNG width missed")
         tests.append("static figure style AST and PNG width linter")
+
+        tex_doc = root / "manuscript.tex"
+        tex_doc.write_text(
+            "\\documentclass{article}\n"
+            "% \\cite{ghost_comment_key}\n"
+            "\\begin{document}\n"
+            "\\begin{abstract}Short abstract.\\end{abstract}\n"
+            "\\section{Results}\n"
+            "It is not merely an LLM; it is a watershed shift \\cite{smith2024,missing2025}.\n"
+            "\\begin{figure}\\caption{Accuracy by group. Shaded bands show standard deviations.}\\end{figure}\n"
+            "\\begin{table}\\begin{tabular}{|l|c|}\\hline\\hline A & \\$-40K \\\\\\hline\\end{tabular}\\end{table}\n"
+            "\\end{document}\n",
+            encoding="utf-8",
+        )
+        bib_doc = root / "refs.bib"
+        bib_doc.write_text("@article{smith2024,\n  title={Flood}\n}\n@article{uncited2023,\n  title={Extra}\n}\n", encoding="utf-8")
+        tex_state = {"artifacts": [{"id": "tex", "path": "manuscript.tex", "role": "manuscript", "status": "ACTIVE"}]}
+        tex_prose_codes = {item["code"] for item in audit_prose(tex_state, root)}
+        require("PROSE014" in tex_prose_codes, f"LaTeX prose unwrap missed PROSE014: {sorted(tex_prose_codes)}")
+        require(check_abstract(tex_doc, max_words=5) == [], "LaTeX abstract environment word count included body")
+        require(any(item["code"] == "COMP003" for item in check_caption_sync(tex_doc, cap_file)), "LaTeX caption sync mismatch missed")
+        require(any(item["code"] == "COMP004" for item in check_text_formatting(tex_doc)), "LaTeX escaped \\$-40K currency check missed")
+        require(len(check_latex_tables(tex_doc)) >= 2, "LaTeX COMP007 vertical-rule/double-hline check missed")
+        cite_keys = {item["key"] for item in check_latex_citations([tex_doc], [bib_doc])}
+        require(cite_keys == {"missing2025", "uncited2023"}, f"BibTeX reconciliation unexpected keys: {cite_keys}")
+        tests.append("LaTeX prose unwrapping, abstract/caption sync, booktabs COMP007, and BibTeX COMP008")
+
+        bad_tbl_docx = root / "bad_table.docx"
+        make_docx(
+            bad_tbl_docx,
+            '<w:tbl><w:tblPr><w:tblBorders><w:insideV w:val="single" w:sz="4"/></w:tblBorders></w:tblPr>'
+            '<w:tr><w:tc><w:p><w:r><w:t>H1</w:t></w:r></w:p></w:tc></w:tr>'
+            '<w:tr><w:tc><w:p><w:r><w:t>V1</w:t></w:r></w:p></w:tc></w:tr></w:tbl>',
+        )
+        docx_tbl_msgs = [item["message"] for item in check_docx_tables(bad_tbl_docx)]
+        require(
+            any("vertical borders" in msg for msg in docx_tbl_msgs) and any("w:tblHeader" in msg for msg in docx_tbl_msgs),
+            f"Word table COMP009 missed border/header findings: {docx_tbl_msgs}",
+        )
+        clean_tbl_docx = root / "clean_table.docx"
+        make_docx(
+            clean_tbl_docx,
+            '<w:tbl><w:tblPr><w:tblBorders><w:insideV w:val="none"/></w:tblBorders></w:tblPr>'
+            '<w:tr><w:trPr><w:tblHeader/></w:trPr><w:tc><w:p><w:r><w:t>H1</w:t></w:r></w:p></w:tc></w:tr>'
+            '<w:tr><w:tc><w:p><w:r><w:t>V1</w:t></w:r></w:p></w:tc></w:tr></w:tbl>',
+        )
+        require(check_docx_tables(clean_tbl_docx) == [], f"false positive on clean Word three-line table: {check_docx_tables(clean_tbl_docx)}")
+        tests.append("Word .docx three-line table borders and w:tblHeader COMP009 check")
 
     print(json.dumps({"status": "PASS", "tests": tests}, indent=2))
     return 0

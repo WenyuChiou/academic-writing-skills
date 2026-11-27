@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "source_revision": "2726092e3fc7f4cf24a64de1b67e5b12432ec2f6",
+  "source_revision": "354ae82fe90a5f6a785564288308262ef0b398b3",
   "locales": [
     "zh-TW",
     "zh-CN"
@@ -12,8 +12,8 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/SKILL.md",
       "target": "skills/academic-writing-skills-zh-tw/SKILL.md",
-      "source_sha256": "5ddef1711c65c00182b6b19dd977cab4b1ea8134594da16295183cf6fcbd0c02",
-      "target_sha256": "3cfa78e815451b253ed7a96cd2a6621fc7a3a94cd5c4c1f012fb1c686e261e68"
+      "source_sha256": "e616d6ff03d643c92fedd5c90e63192ab9946a7388782e81629dfcc16a551e8c",
+      "target_sha256": "e3846e2878b94263ba562099d94bb82fbac18436fc07ce2ee08bf81e5d953142"
     },
     {
       "locale": "zh-TW",
@@ -61,8 +61,8 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/figures-tables-and-supplements.md",
       "target": "skills/academic-writing-skills-zh-tw/references/figures-tables-and-supplements.md",
-      "source_sha256": "57505ef35069427b3e2d48fbeaed7d9e78485f984d04ec4e7ee956c1a104702d",
-      "target_sha256": "a45d58b2f3cd2d3d44e8761b7e783fc05412588cabe5ff5978ffbf314b8f7e9f"
+      "source_sha256": "571f7374a7da145b3a1bbd2929b8e98c5848848d49e5245732a19e0b0e2d9e2e",
+      "target_sha256": "d1de11ff5f91aed4b84119ecc55d7e5a43e3248b5f33708ce0296b9b4992d181"
     },
     {
       "locale": "zh-TW",
@@ -117,8 +117,8 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/results-and-explanation.md",
       "target": "skills/academic-writing-skills-zh-tw/references/results-and-explanation.md",
-      "source_sha256": "26a63d05e44b2821893cfd67afa28dda0e3bd0593467a58407399b8320763642",
-      "target_sha256": "3db6dd203580f5dbe15301977210d02ca951346c7fc9188da532e0a8f9c19fa9"
+      "source_sha256": "42adb540dc2d5c11138010d53d833c4150c92499b3a74b9053b1fe8f30e7d7b6",
+      "target_sha256": "65079538aae86a058aef7e050e0d2305c95507c2121b1e40bf6a565b8447615b"
     },
     {
       "locale": "zh-TW",
@@ -236,8 +236,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/SKILL.md",
       "target": "skills/academic-writing-skills-zh-cn/SKILL.md",
-      "source_sha256": "5ddef1711c65c00182b6b19dd977cab4b1ea8134594da16295183cf6fcbd0c02",
-      "target_sha256": "3da1442a24bb39a1ee8f02a88cb994185b7e9c508599538ac6209e7ca42f63e2"
+      "source_sha256": "e616d6ff03d643c92fedd5c90e63192ab9946a7388782e81629dfcc16a551e8c",
+      "target_sha256": "28d5d67867136a355646b5bd65fbd65f35ef1a001ab405519676f3df4cab58d5"
     },
     {
       "locale": "zh-CN",
@@ -285,8 +285,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/figures-tables-and-supplements.md",
       "target": "skills/academic-writing-skills-zh-cn/references/figures-tables-and-supplements.md",
-      "source_sha256": "57505ef35069427b3e2d48fbeaed7d9e78485f984d04ec4e7ee956c1a104702d",
-      "target_sha256": "9ded322f79cbe2774b783b491b464bcc2acb592c9e041326e3f8423d58b09984"
+      "source_sha256": "571f7374a7da145b3a1bbd2929b8e98c5848848d49e5245732a19e0b0e2d9e2e",
+      "target_sha256": "05dc06dc169685958135b6384da52361de8a489e0a18275f634a5780dbf2ccc9"
     },
     {
       "locale": "zh-CN",
@@ -341,8 +341,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/results-and-explanation.md",
       "target": "skills/academic-writing-skills-zh-cn/references/results-and-explanation.md",
-      "source_sha256": "26a63d05e44b2821893cfd67afa28dda0e3bd0593467a58407399b8320763642",
-      "target_sha256": "0b1f62574258b23c6ecb8ec3a0bd94d5dccfeef98dc0fc5ea938bfbaaf2ec6df"
+      "source_sha256": "42adb540dc2d5c11138010d53d833c4150c92499b3a74b9053b1fe8f30e7d7b6",
+      "target_sha256": "f384f1daaa4c47c1f05ba4c8ff41c10abd5756ac88b7271a7f414f6648307c0e"
     },
     {
       "locale": "zh-CN",

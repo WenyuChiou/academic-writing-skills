@@ -202,3 +202,33 @@ ax2.set_yticks([0.00, 0.04, 0.08, 0.12])  # omit 0.10 so 0.08 never collides
 ax2.set_ylabel("RMSEA (threshold <= 0.08)", fontsize=15)
 fig.legend(loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=3, frameon=False, fontsize=14)
 ```
+
+### 交付格式支持：LaTeX、Word 与 Markdown
+
+依作者选定的投稿格式洁净产出正文、表格与图表，且不得变动科学含义：
+
+- **LaTeX（`.tex` 与 `.bib`）：** 将量化数据图导出为矢量 `.pdf` 并附 `300 DPI` `.png` 预览图，通过 `\includegraphics` 嵌入且将标题置于 `\caption` 与 `\label`；使用 `booktabs` 与 `threeparttable` 制作三线表（`\toprule`、`\midrule`、`\bottomrule`，禁止竖线 `|` 或 `\vline` 边框，并以 `tablenotes` 载明 `N`、`95% CI` 与题项定义范围）；用 `-\$40\text{K}` 与 `\leq` 规范书写负金额与阈值不等式；双向核对 `\cite` 与 `.bib` 键值；中文 LaTeX 稿件建议使用 `xelatex` 或 `lualatex` 搭配 `ctex`。
+- **Word（`.docx`）：** 采用 Word 原生样式与 OMML 公式，插入高分辨率图档（`300–600 DPI` `.png` 或 `.svg`）并配合 Word 题注（避免图内嵌标题）；通过 OOXML / `python-docx` 或 Node `docx` 包设置三线表（顶线与底线 `1 pt`、表头底线 `0.5 pt`、`insideV=none`、跨页重复表头 `w:tblHeader` 与防孤立行 `w:keepNext`），并在打印布局下核查审定文本与分页。
+- **Markdown（`.md`）：** 保持管道表格与来源数值一致，在表格正下方附上明确的 `Note.` 说明，并在传入 Pandoc 或 Quarto 转换前确认 `-$40K` 与区间空格（`0.068 [0.061, 0.075]`）格式无误。
+
+```latex
+\begin{table}[htbp]
+  \centering
+  \begin{threeparttable}
+    \caption{Error and fit summary across synthetic runs ($N = 1,200$).}
+    \label{tab:synthetic-summary}
+    \begin{tabular}{llccc}
+      \toprule
+      Model & Condition & Net Bias (\$K) & RMSEA [95\% CI] & Scale Scope \\
+      \midrule
+      Model A & Current & $-\$40\text{K}$ & 0.068 [0.061, 0.075] & 4-item primary \\
+      Model B & Legacy check & $+\$22\text{K}$ & 0.106 [0.097, 0.115] & 3-item legacy \\
+      \bottomrule
+    \end{tabular}
+    \begin{tablenotes}[flushleft]
+      \small
+      \item Note. Synthetic illustration ($N = 1,200$). RMSEA threshold $\leq 0.08$.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+```

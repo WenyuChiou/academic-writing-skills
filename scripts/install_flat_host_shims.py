@@ -50,13 +50,21 @@ def install_shims(repo_root: Path, dest_dir: Path, include_locales: bool = False
     if include_locales:
         mapping.update(LOCALE_SHIMS)
 
-    dest_dir.mkdir(parents=True, exist_ok=True)
-    installed: list[dict[str, object]] = []
+    pairs: list[tuple[str, str, Path, Path]] = []
     for shim_name, source_name in mapping.items():
         src = repo_root / "skills" / source_name
         if not (src / "SKILL.md").is_file():
             raise FileNotFoundError(f"missing source SKILL.md: {src / 'SKILL.md'}")
         dst = dest_dir / shim_name
+        src_res, dst_res = src.resolve(), dst.resolve()
+        if dst_res == src_res or dst_res in src_res.parents or src_res in dst_res.parents:
+            raise ValueError(f"refusing overlapping source and destination paths: {src} -> {dst}")
+        pairs.append((shim_name, source_name, src, dst))
+
+    dest_dir.mkdir(parents=True, exist_ok=True)
+
+    installed: list[dict[str, object]] = []
+    for shim_name, source_name, src, dst in pairs:
         if dst.exists() and force and not (dst / MARKER_NAME).is_file():
             shutil.rmtree(dst)
         count = _copy_tree(src, dst)

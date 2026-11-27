@@ -473,7 +473,7 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 31
+    assert len(report["tests"]) == 33
 
 
 def test_v15_pre_draft_blueprint_figures_and_anti_miss_guards():
@@ -498,6 +498,7 @@ def test_v16_guided_results_second_wave_and_flat_shims(tmp_path):
     assert "Given-to-New flow" in prose and "anti-echo check" in prose
     assert "5a. Second-Wave Syntactic and Rhetorical Patterns" in banned
     assert "5c. Chinese Academic Stock and Buzzword Diagnostics" in banned
+    assert "Deliverable Formats: LaTeX, Word, and Markdown" in read(CORE / "references" / "figures-tables-and-supplements.md")
 
     shim_script = ROOT / "scripts" / "install_flat_host_shims.py"
     assert shim_script.is_file()
@@ -513,6 +514,16 @@ def test_v16_guided_results_second_wave_and_flat_shims(tmp_path):
     assert report["status"] == "PASS"
     assert (tmp_path / "academic-writing-flat" / "SKILL.md").is_file()
     assert (tmp_path / "paper-review" / "SKILL.md").is_file()
+
+    overlap = subprocess.run(
+        [sys.executable, str(shim_script), "--root", str(ROOT), "--dest", str(ROOT / "skills"), "--force"],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert overlap.returncode != 0
+    assert (ROOT / "skills" / "paper-review" / "SKILL.md").is_file()
 
 
 def test_evals_cover_core_and_progressive_review_behavior():

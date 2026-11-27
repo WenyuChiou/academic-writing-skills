@@ -337,6 +337,33 @@ def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str
     return findings
 
 
+def clean_latex_prose(text: str) -> str:
+    """Strip LaTeX comments, preamble, equations, tabular blocks, and cite/label commands while unwrapping prose text."""
+    lines = [re.sub(r"(?<!\\)%.*$", "", line) for line in text.splitlines()]
+    body = "\n".join(lines)
+    doc_match = re.search(r"\\begin\{document\}(.*?)\\end\{document\}", body, re.DOTALL)
+    if doc_match:
+        body = doc_match.group(1)
+    for env in ("equation", r"equation\*", "align", r"align\*", "gather", r"gather\*", "tabular", r"tabular\*", "tabularx", "longtable", "thebibliography"):
+        body = re.sub(rf"\\begin\{{{env}\}}.*?\\end\{{{env}\}}", "\n", body, flags=re.DOTALL)
+    body = re.sub(r"\\(?:documentclass|usepackage|bibliographystyle|bibliography|addbibresource)(?:\[[^\]]*\])?\{[^}]*\}", "", body)
+    body = re.sub(r"\\(?:label|ref|eqref|autoref|pageref|hspace|vspace)\{[^}]*\}", "", body)
+    body = re.sub(r"\\cite[a-zA-Z*]*\s*(?:\[[^\]]*\]\s*)*\{[^}]*\}", "", body)
+    body = re.sub(r"\\(?:begin|end)\{(?:abstract|figure\*?|table\*?|itemize|enumerate)\}(?:\[[^\]]*\])?", "\n", body)
+    unwrap_re = re.compile(
+        r"\\(?:(?:sub)*section\*?|paragraph|textbf|textit|emph|textrm|text|caption)(?:\[[^\]]*\])?\{([^{}]*)\}"
+    )
+    for _ in range(5):
+        updated = unwrap_re.sub(r"\1", body)
+        if updated == body:
+            break
+        body = updated
+    body = re.sub(r"\$([^$]+)\$", r"\1", body)
+    body = body.replace("---", "—").replace(r"\%", "%").replace(r"\$", "$").replace(r"\&", "&")
+    body = re.sub(r"\\[a-zA-Z]+\*?(?:\[[^\]]*\])?", " ", body)
+    return body
+
+
 def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
     scanned = False
@@ -346,9 +373,12 @@ def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
             findings.append({"code": "PROSE000", "artifact": artifact, "message": error})
         else:
             scanned = True
+            suffix = Path(item["path"]).suffix.lower()
             # DOCX extraction emits one line per paragraph; wrapped text files do not.
-            if Path(item["path"]).suffix.lower() == ".docx":
+            if suffix == ".docx":
                 text = text.replace("\n", "\n\n")
+            elif suffix == ".tex":
+                text = clean_latex_prose(text)
             findings.extend(audit_text(text, artifact, state))
     if not scanned and not findings:
         findings.append({"code": "PROSE000", "artifact": "project",

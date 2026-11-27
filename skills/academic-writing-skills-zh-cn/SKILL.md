@@ -204,7 +204,7 @@ description: "为学术论文建立研究定位与大纲、规划并修订相互
 - `scripts/audit_candidate_text.py`：依据使用中的项目术语、禁用异体词与散文设定档扫描提议的精确段落，并记录其杂凑值
 - `scripts/audit_handoff.py`：可选择性验证依处理范围而定的覆盖记录与精确文件杂凑；`COVERAGE_COMPLETE` 并非编辑或科学认证
 - `scripts/audit_docx_structure.py`：使用精确标签名称检查 Word OOXML，以检视修订追踪、修订者、批注、与父项连结的回复、回复者、功能变数与预留位置
-- `scripts/audit_companion_limits.py`：检查 Highlights 字符上限（`<= 85`）、摘要字数、独立图注与正文图注同步、负金额符号顺序（`-$40K`）、CSV `available`/`NA` 矛盾与离散子量表步长退化
+- `scripts/audit_companion_limits.py`：检查 Highlights 字符上限（`<= 85`）、摘要字数、独立图注与正文图注同步、负金额符号顺序（`-$40K`）、CSV `available`/`NA` 矛盾、离散子量表步长退化、LaTeX/BibTeX（`COMP007`–`COMP008` 检查 `booktabs` 框线与 `.tex`/`.bib` 引用同步），以及 Word 表格规范（`COMP009` 竖线／`w:tblHeader`）
 - `scripts/audit_figure_style.py`：静态扫描 Matplotlib 绘图码与 PNG 宽度，侦测图内标题、图内图例、`Microsoft JhengHei` 裸字形 `<=` 陷阱、相邻刻度碰撞与成对子图 Y 轴尺度不一致
 - `scripts/run_regression_tests.py`：针对随附的失败案例验证审查工具
 
@@ -266,7 +266,7 @@ description: "为学术论文建立研究定位与大纲、规划并修订相互
 <a id="work-with-formatted-files"></a>
 ## 处理格式化文件
 
-若 Word 交付或版面审查涵盖数据表，请使用 [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md) 的逐表打印布局检查，并纳入[格式化文件验收](references/execution-and-acceptance.md)的记录。未影响表格或分页的局部文字修改，不会触发整套文件的逐表审查。
+若 Word（`.docx`）、LaTeX（`.tex`／`.bib`）或 Markdown（`.md`）交付涵盖数据表或图表，请按 [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md) 的输出格式规范执行、在适用处运行 `scripts/audit_companion_limits.py`，并将渲染检查结果纳入[格式化文件验收](references/execution-and-acceptance.md)的记录。未影响表格或分页的局部文字修改，不会触发整套文件的逐表审查。
 
 文件格式操作与视觉验证请使用专门的文件、试算表、简报或 PDF 技能。本技能规范学术诚信；它不能取代特定格式的版面呈现、修订追踪或 OOXML 工作流程。
 

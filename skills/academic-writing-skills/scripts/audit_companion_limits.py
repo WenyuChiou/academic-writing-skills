@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic checks for submission companion limits, caption sync, and numeric hygiene."""
+"""Deterministic checks for submission companion limits, caption sync, LaTeX/Word tables, and BibTeX keys."""
 
 from __future__ import annotations
 
@@ -15,35 +15,92 @@ from xml.etree import ElementTree as ET
 
 W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 W_PREFIX = f"{{{W_NS}}}"
-CAPTION_RE = re.compile(r"((?:Figure|Table)\s+S?\d+)\s*[.:]\s*([^\n]+)", re.IGNORECASE)
-MISPLACED_CURRENCY_MINUS_RE = re.compile(r"\$-(?=[0-9])")
+HIDDEN_TAGS = {f"{W_PREFIX}del", f"{W_PREFIX}moveFrom", f"{W_PREFIX}instrText"}
+SEP_TAGS = {f"{W_PREFIX}br", f"{W_PREFIX}cr", f"{W_PREFIX}tab"}
+CAPTION_RE = re.compile(r"((?:Figure|Table)\s+S?\d+)\s*[.:]\s*(.*)", re.IGNORECASE)
+BLOCK_BREAK_RE = re.compile(r"^(?:#{1,6}\s|```|---+$|\*\*\*+$)")
+MISPLACED_CURRENCY_MINUS_RE = re.compile(r"\\?\$-(?=[0-9])")
 MISSING_BRACKET_SPACE_RE = re.compile(r"\d\[(?:\d|[-+])")
+LATEX_FLOAT_ENV_RE = re.compile(r"\\begin\{(figure|table)\*?\}(.*?)\\end\{\1\*?\}", re.DOTALL | re.IGNORECASE)
+LATEX_TABULAR_RE = re.compile(r"\\begin\{(?:tabular\*?|tabularx|longtable)\}(?:\{[^}]*\})?\{([^}]*)\}(.*?)\\end\{(?:tabular\*?|tabularx|longtable)\}", re.DOTALL)
+LATEX_CITE_RE = re.compile(r"\\(?:[a-zA-Z]*cite[a-zA-Z*]*|nocite)\s*(?:\[[^\]]*\]\s*)*\{([^}]+)\}")
+BIB_ENTRY_RE = re.compile(r"@([a-zA-Z]+)\s*[{(]\s*([^,\s]+)\s*,")
+
+
+def _strip_latex_comments(text: str) -> str:
+    return "\n".join(re.sub(r"(?<!\\)%.*$", "", line) for line in text.splitlines())
+
+
+def _unwrap_latex_inline(text: str) -> str:
+    cleaned = re.sub(r"\\label\{[^}]*\}", "", text)
+    unwrap_re = re.compile(r"\\(?:textbf|textit|emph|textrm|text)\{([^{}]*)\}")
+    for _ in range(4):
+        updated = unwrap_re.sub(r"\1", cleaned)
+        if updated == cleaned:
+            break
+        cleaned = updated
+    cleaned = re.sub(r"\$([^$]+)\$", r"\1", cleaned)
+    return re.sub(r"\s+", " ", cleaned.replace(r"\%", "%").replace(r"\$", "$")).strip()
+
+
+def _extract_balanced_braces(text: str, open_pos: int) -> tuple[str, int] | None:
+    if open_pos >= len(text) or text[open_pos] != "{":
+        return None
+    depth = 0
+    for idx in range(open_pos, len(text)):
+        ch = text[idx]
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return text[open_pos + 1:idx], idx + 1
+    return None
+
+
+def _collect_visible_text(node: ET.Element, parts: list[str]) -> None:
+    if node.tag in HIDDEN_TAGS:
+        return
+    if node.tag in SEP_TAGS:
+        parts.append("\t" if node.tag == f"{W_PREFIX}tab" else " ")
+        return
+    if node.tag == f"{W_PREFIX}t" and node.text:
+        parts.append(node.text)
+    for child in node:
+        _collect_visible_text(child, parts)
 
 
 def _extract_docx_paragraphs(path: Path) -> list[str]:
-    """Read accepted visible paragraphs from a Word .docx package."""
+    """Read accepted visible paragraphs from a Word .docx package, skipping w:del/w:moveFrom/w:instrText and keeping breaks."""
     with zipfile.ZipFile(path, "r") as archive:
         root = ET.fromstring(archive.read("word/document.xml"))
     paragraphs: list[str] = []
     for para in root.iter(f"{W_PREFIX}p"):
         parts: list[str] = []
-        for node in para.iter():
-            tag = node.tag
-            if tag in {f"{W_PREFIX}delText", f"{W_PREFIX}instrText"}:
-                continue
-            if tag == f"{W_PREFIX}t" and node.text:
-                parts.append(node.text)
-        line = "".join(parts).strip()
+        _collect_visible_text(para, parts)
+        line = re.sub(r"[ \t]+", " ", "".join(parts)).strip()
         if line:
             paragraphs.append(line)
     return paragraphs
 
 
-def read_lines(path: Path) -> list[str]:
-    """Load non-empty lines from .txt, .md, or .docx."""
+def read_raw_lines(path: Path) -> list[str]:
+    """Load paragraph/file lines while preserving blank separators in text files."""
     if path.suffix.lower() == ".docx":
-        return _extract_docx_paragraphs(path)
-    return [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+        out: list[str] = []
+        for para in _extract_docx_paragraphs(path):
+            out.append(para)
+            out.append("")
+        return out
+    raw = path.read_text(encoding="utf-8")
+    if path.suffix.lower() == ".tex":
+        raw = _strip_latex_comments(raw)
+    return [line.strip() for line in raw.splitlines()]
+
+
+def read_lines(path: Path) -> list[str]:
+    """Load non-empty lines from .txt, .md, .tex, or .docx."""
+    return [line for line in read_raw_lines(path) if line]
 
 
 def check_highlights(path: Path, max_chars: int = 85) -> list[dict[str, Any]]:
@@ -63,8 +120,14 @@ def check_highlights(path: Path, max_chars: int = 85) -> list[dict[str, Any]]:
 
 
 def check_abstract(path: Path, max_words: int = 250) -> list[dict[str, Any]]:
-    """Flag abstract body exceeding max_words."""
+    """Flag abstract body exceeding max_words (extracting \\begin{abstract}...\\end{abstract} for .tex when present)."""
     text = "\n".join(read_lines(path))
+    if path.suffix.lower() == ".tex":
+        abs_match = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", text, re.DOTALL)
+        if abs_match:
+            text = _unwrap_latex_inline(abs_match.group(1))
+        else:
+            text = _unwrap_latex_inline(text)
     words = re.findall(r"[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*", text)
     if len(words) > max_words:
         return [{
@@ -75,16 +138,66 @@ def check_abstract(path: Path, max_words: int = 250) -> list[dict[str, Any]]:
     return []
 
 
+def _extract_tex_captions(path: Path) -> dict[str, str]:
+    text = _strip_latex_comments(path.read_text(encoding="utf-8"))
+    counters = {"figure": 0, "table": 0}
+    captions: dict[str, str] = {}
+    for match in LATEX_FLOAT_ENV_RE.finditer(text):
+        kind = match.group(1).lower()
+        body = match.group(2)
+        cap_cmd = re.search(r"\\caption(?:\[[^\]]*\])?\s*\{", body)
+        if not cap_cmd:
+            continue
+        extracted = _extract_balanced_braces(body, cap_cmd.end() - 1)
+        if not extracted:
+            continue
+        raw_cap = _unwrap_latex_inline(extracted[0])
+        counters[kind] += 1
+        cap_match = CAPTION_RE.match(raw_cap)
+        if cap_match:
+            label = cap_match.group(1).title()
+            cap_text = re.sub(r"\s+", " ", cap_match.group(2)).strip()
+        else:
+            label = f"{kind.title()} {counters[kind]}"
+            cap_text = raw_cap
+        captions[label] = cap_text
+    return captions
+
+
+def _extract_captions(path: Path) -> dict[str, str]:
+    """Collect complete multi-line Figure/Table captions until a blank line or block boundary (plus LaTeX \\caption{})."""
+    if path.suffix.lower() == ".tex":
+        return _extract_tex_captions(path)
+    captions: dict[str, str] = {}
+    current_label: str | None = None
+    chunks: list[str] = []
+
+    def flush() -> None:
+        nonlocal current_label, chunks
+        if current_label is not None:
+            captions[current_label] = re.sub(r"\s+", " ", " ".join(chunks)).strip()
+        current_label = None
+        chunks = []
+
+    for line in read_raw_lines(path):
+        if not line or BLOCK_BREAK_RE.match(line):
+            flush()
+            continue
+        match = CAPTION_RE.match(line)
+        if match:
+            flush()
+            current_label = match.group(1).title()
+            if match.group(2).strip():
+                chunks.append(match.group(2).strip())
+        elif current_label is not None:
+            chunks.append(line)
+    flush()
+    return captions
+
+
 def check_caption_sync(manuscript: Path, captions: Path) -> list[dict[str, Any]]:
     """Compare standalone Figure/Table captions against manuscript captions."""
-    norm = lambda value: re.sub(r"\s+", " ", value).strip()
-    extract = lambda path: {
-        m.group(1).title(): norm(m.group(2))
-        for line in read_lines(path)
-        for m in [CAPTION_RE.match(line)]
-        if m
-    }
-    ms_caps, stand_caps = extract(manuscript), extract(captions)
+    ms_caps, stand_caps = _extract_captions(manuscript), _extract_captions(captions)
     findings: list[dict[str, Any]] = []
     for label in sorted(set(ms_caps) | set(stand_caps)):
         if label not in ms_caps:
@@ -106,7 +219,7 @@ def check_caption_sync(manuscript: Path, captions: Path) -> list[dict[str, Any]]
 
 
 def check_text_formatting(path: Path) -> list[dict[str, Any]]:
-    """Check misplaced negative currency signs ($-40K) and missing space before [CI]."""
+    """Check misplaced negative currency signs ($-40K / \\$-40K) and missing space before [CI]."""
     text = "\n".join(read_lines(path))
     findings: list[dict[str, Any]] = []
     for match in MISPLACED_CURRENCY_MINUS_RE.finditer(text):
@@ -158,6 +271,92 @@ def check_discrete_band(scale_items: int, band: float) -> list[dict[str, Any]]:
     return []
 
 
+def check_latex_tables(path: Path) -> list[dict[str, Any]]:
+    """Flag LaTeX vertical table rules (| or \\vline) and double horizontal rules instead of booktabs."""
+    text = _strip_latex_comments(path.read_text(encoding="utf-8"))
+    findings: list[dict[str, Any]] = []
+    for index, match in enumerate(LATEX_TABULAR_RE.finditer(text), start=1):
+        col_spec, body = match.group(1), match.group(2)
+        if "|" in col_spec or r"\vline" in body:
+            findings.append({
+                "code": "COMP007", "artifact": str(path), "table": index,
+                "message": f"LaTeX table {index} uses vertical rules ({col_spec!r}); prefer booktabs three-line horizontal rules",
+            })
+        if re.search(r"\\hline\s*\\hline", body):
+            findings.append({
+                "code": "COMP007", "artifact": str(path), "table": index,
+                "message": f"LaTeX table {index} uses double \\hline; use \\toprule/\\midrule/\\bottomrule from booktabs",
+            })
+    return findings
+
+
+def check_latex_citations(tex_paths: list[Path], bib_paths: list[Path]) -> list[dict[str, Any]]:
+    """Reconcile LaTeX \\cite keys against .bib entries in both directions."""
+    cited: set[str] = set()
+    nocite_all = False
+    for tex in tex_paths:
+        text = _strip_latex_comments(tex.read_text(encoding="utf-8"))
+        for match in LATEX_CITE_RE.finditer(text):
+            raw_keys = [part.strip() for part in match.group(1).split(",") if part.strip()]
+            if "*" in raw_keys:
+                nocite_all = True
+                raw_keys = [k for k in raw_keys if k != "*"]
+            cited.update(raw_keys)
+
+    bib_keys: set[str] = set()
+    for bib in bib_paths:
+        for line in bib.read_text(encoding="utf-8").splitlines():
+            for match in BIB_ENTRY_RE.finditer(line):
+                entry_type, key = match.group(1).lower(), match.group(2).strip()
+                if entry_type not in {"comment", "preamble", "string"}:
+                    bib_keys.add(key)
+
+    findings: list[dict[str, Any]] = []
+    for key in sorted(cited - bib_keys):
+        findings.append({
+            "code": "COMP008", "artifact": str(tex_paths[0]), "key": key,
+            "message": f"LaTeX citation key '{key}' is missing from supplied .bib file(s)",
+        })
+    if not nocite_all:
+        for key in sorted(bib_keys - cited):
+            findings.append({
+                "code": "COMP008", "artifact": str(bib_paths[0]), "key": key,
+                "message": f"BibTeX entry '{key}' is uncited in supplied .tex file(s)",
+            })
+    return findings
+
+
+def check_docx_tables(path: Path) -> list[dict[str, Any]]:
+    """Flag Word .docx tables with visible vertical borders or multi-row tables missing w:tblHeader."""
+    with zipfile.ZipFile(path, "r") as archive:
+        root = ET.fromstring(archive.read("word/document.xml"))
+    findings: list[dict[str, Any]] = []
+    vert_tags = {f"{W_PREFIX}left", f"{W_PREFIX}right", f"{W_PREFIX}insideV"}
+    for idx, tbl in enumerate(root.findall(f".//{W_PREFIX}body/{W_PREFIX}tbl"), start=1):
+        has_vertical = False
+        for btag in vert_tags:
+            for edge in tbl.findall(f".//{btag}"):
+                val = edge.get(f"{W_PREFIX}val", "")
+                if val and val.lower() not in {"none", "nil"}:
+                    has_vertical = True
+                    break
+        if has_vertical:
+            findings.append({
+                "code": "COMP009", "artifact": str(path), "table": idx,
+                "message": f"Word table {idx} uses visible vertical borders; prefer horizontal three-line rules (insideV=none)",
+            })
+        rows = tbl.findall(f"./{W_PREFIX}tr")
+        if len(rows) >= 2:
+            header_pr = rows[0].find(f"./{W_PREFIX}trPr/{W_PREFIX}tblHeader")
+            header_val = header_pr.get(f"{W_PREFIX}val", "1") if header_pr is not None else None
+            if header_pr is None or header_val.lower() in {"0", "false", "off"}:
+                findings.append({
+                    "code": "COMP009", "artifact": str(path), "table": idx,
+                    "message": f"Word table {idx} ({len(rows)} rows) is missing w:tblHeader on row 1 for continuation pages",
+                })
+    return findings
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--highlights", type=Path)
@@ -166,6 +365,9 @@ def main() -> int:
     parser.add_argument("--captions", type=Path)
     parser.add_argument("--csv", type=Path, action="append", default=[])
     parser.add_argument("--text", type=Path, action="append", default=[])
+    parser.add_argument("--tex", type=Path, action="append", default=[])
+    parser.add_argument("--bib", type=Path, action="append", default=[])
+    parser.add_argument("--docx-tables", type=Path, action="append", default=[])
     parser.add_argument("--max-highlight-chars", type=int, default=85)
     parser.add_argument("--max-abstract-words", type=int, default=250)
     parser.add_argument("--scale-items", type=int)
@@ -186,6 +388,13 @@ def main() -> int:
         findings.extend(check_text_formatting(text_path))
     for csv_path in args.csv:
         findings.extend(check_csv_table(csv_path))
+    for tex_path in args.tex:
+        findings.extend(check_text_formatting(tex_path))
+        findings.extend(check_latex_tables(tex_path))
+    if args.tex and args.bib:
+        findings.extend(check_latex_citations(args.tex, args.bib))
+    for docx_path in args.docx_tables:
+        findings.extend(check_docx_tables(docx_path))
     if args.scale_items and args.band is not None:
         findings.extend(check_discrete_band(args.scale_items, args.band))
 

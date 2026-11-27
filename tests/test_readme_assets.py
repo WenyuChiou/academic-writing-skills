@@ -90,20 +90,33 @@ def test_readmes_include_before_and_after_example(name, expected_heading, lang, 
     text = (ROOT / name).read_text(encoding="utf-8")
     assert expected_heading in text
     assert "#before-and-after-walkthrough" in text
+    assert (
+        "| Before | After |" in text
+        or "| 修改前（Before） | 修改後（After） |" in text
+        or "| 修改前（Before） | 修改后（After） |" in text
+    )
+    assert "LaTeX" in text and "Word" in text
     for marker in native_markers:
         assert marker in text, (name, marker)
     for stem in ("ex1_multipanel", "ex2_threshold", "ex3_distribution", "ex4_table"):
-        rel = f"./docs/images/examples/{stem}_{lang}.png"
-        assert rel in text, (name, rel)
+        for variant in ("before", "after"):
+            rel = f"./docs/images/examples/{stem}_{variant}_{lang}.png"
+            assert rel in text, (name, rel)
 
 
 @pytest.mark.parametrize("lang", ["en", "zh-TW", "zh-CN"])
 @pytest.mark.parametrize("stem", ["ex1_multipanel", "ex2_threshold", "ex3_distribution", "ex4_table"])
-def test_representative_example_pngs_are_valid_and_compact(stem, lang):
-    path = ROOT / "docs" / "images" / "examples" / f"{stem}_{lang}.png"
+@pytest.mark.parametrize("variant", ["before", "after"])
+def test_representative_example_pngs_are_valid_and_compact(stem, variant, lang):
+    path = ROOT / "docs" / "images" / "examples" / f"{stem}_{variant}_{lang}.png"
     assert path.is_file(), path
+    legacy = ROOT / "docs" / "images" / "examples" / f"{stem}_{lang}.png"
+    assert not legacy.exists(), legacy
     data = path.read_bytes()
     assert data[:8] == b"\x89PNG\r\n\x1a\n"
+    assert data[12:16] == b"IHDR"
+    width, _ = struct.unpack(">II", data[16:24])
+    assert width >= 900, (path.name, width)
     assert len(data) < 500_000
 
 

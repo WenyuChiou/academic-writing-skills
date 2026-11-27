@@ -142,12 +142,14 @@ Codex 或 ChatGPT 可使用可用的 skill／plugin 介面。其他 Agent Skills
 
 ### 四张代表性科学图表修改前后示例
 
-| 图表类型与关键修正 | 修改前 → 修改后对照图 |
+| 修改前（Before） | 修改后（After） |
 |---|---|
-| **1. 多子图 `(a)` `(b)` 布局、图外共用图例与色盲友好配色** | ![多子图轨迹对比修改前后](./docs/images/examples/ex1_multipanel_zh-CN.png) |
-| **2. 误差阈值线去除柱顶与图内文字遮挡（`RMSEA ≤ 0.08`）** | ![误差阈值图修改前后](./docs/images/examples/ex2_threshold_zh-CN.png) |
-| **3. 超过 10 个已分组情景改用箱线＋抖动散点汇总（`-$40K` 格式；无合理分组时改用点图）** | ![多构念分布汇总修改前后](./docs/images/examples/ex3_distribution_zh-CN.png) |
-| **4. 学术三线表（标明样本量 `N`、`95% CI` 与新旧题项范围注释）** | ![三线表修改前后](./docs/images/examples/ex4_table_zh-CN.png) |
+| **1. 多子图：** 图内标题、内置图例与数值杂讯<br>![多子图修改前](./docs/images/examples/ex1_multipanel_before_zh-CN.png) | **1. 多子图 `(a)` `(b)`：** 标题移入图注、图外共用图例与色盲友好盘<br>![多子图修改后](./docs/images/examples/ex1_multipanel_after_zh-CN.png) |
+| **2. 误差阈值图：** 柱顶撞误差线与 `0.08`/`0.10` 刻度重叠<br>![误差阈值图修改前](./docs/images/examples/ex2_threshold_before_zh-CN.png) | **2. 误差阈值图：** `0.08` 专属阈值刻度与坐标轴注释<br>![误差阈值图修改后](./docs/images/examples/ex2_threshold_after_zh-CN.png) |
+| **3. >10 个分组情景：** 拥挤 15 条柱状图与 `$-40K` 笔误<br>![分布汇总修改前](./docs/images/examples/ex3_distribution_before_zh-CN.png) | **3. >10 个已分组情景：** 箱线＋抖动散点与 `-$40K`（未分组时改点图）<br>![分布汇总修改后](./docs/images/examples/ex3_distribution_after_zh-CN.png) |
+| **4. 数据表：** 全框竖线、`$-40K`、缺 `N` 与区间范围<br>![三线表修改前](./docs/images/examples/ex4_table_before_zh-CN.png) | **4. 学术三线表：** 明确 `N`、`95% CI` 与新旧题项注释（`booktabs`／Word）<br>![三线表修改后](./docs/images/examples/ex4_table_after_zh-CN.png) |
+
+同步支持 **LaTeX**（`.tex`／`.bib`、`booktabs` 与矢量 `.pdf` 图档）、**Word**（`.docx` OOXML 三线表与修订追踪）及 **Markdown** 交付输出。
 
 ## 适用界线与进一步说明
 

@@ -146,7 +146,7 @@ python skills/academic-writing-skills/scripts/audit_manuscript_state.py manuscri
 python skills/academic-writing-skills/scripts/audit_text_consistency.py manuscript_state.json
 python skills/academic-writing-skills/scripts/audit_prose_patterns.py manuscript_state.json
 python skills/academic-writing-skills/scripts/audit_docx_structure.py manuscript.docx
-python skills/academic-writing-skills/scripts/audit_companion_limits.py --highlights highlights.txt --abstract abstract.txt
+python skills/academic-writing-skills/scripts/audit_companion_limits.py --highlights highlights.txt --abstract abstract.txt --tex manuscript.tex --bib references.bib --docx-tables manuscript.docx
 python skills/academic-writing-skills/scripts/audit_figure_style.py figure_script.py figure.png
 python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
@@ -182,5 +182,5 @@ python skills/academic-writing-skills/scripts/run_regression_tests.py
 2. **简中坏 AI 段落与修订结果：**
    - **修改前（AI 八股套语＋未解术语＋越界结论）：**「在当今快速发展的智慧水利时代背景下，大语言模型发挥着至关重要的作用……目前尚无任何水文学研究探索过零样本随机角色提示词条件化……智能体取得 0.04 误差，证明合成受访者已精准复现人类行为并可完全替代实地调查。」
    - **修改后（水资源主轴＋白话引导＋条件与推断边界）：**「尽管多波次问卷能够追踪暴雨后的投保变化，反复抽样成本仍高；既有的回归智能体受限于预设方程，因此本研究检验零样本大语言模型（依据去标识化档案生成评分的文本模型）在增补前期经历提示条件（伴随提示词延长）下对 *N* = 840 家庭的模拟表现。第 2 波群体均值误差为 0.04，但个体跨波变化误差仍高于零变化基线规则，尚不足以替代概率抽样实地调查。」
-3. **四张代表性科学图表修改前后对照：** 分别展示多子图去标题与图外图例（`ex1_multipanel_zh-CN.png`）、误差阈值专属刻度 `0.08` 与轴标签注释（`ex2_threshold_zh-CN.png`）、超过 10 个具明确分组依据情景改用箱线＋散点与 `-$40K` 格式（无合理分组时改用点图，`ex3_distribution_zh-CN.png`），以及三线表样本量与旧版定义区分（`ex4_table_zh-CN.png`）；完整图库位于 `./images/examples/`。
+3. **四张代表性科学图表修改前后独立大图（`./images/examples/`）：** 提供独立的 `*_before_zh-CN.png` 与 `*_after_zh-CN.png` 对照图，涵盖多子图去标题与图外图例（`ex1_multipanel_*_zh-CN.png`）、误差阈值专属刻度 `0.08` 与轴标签注释（`ex2_threshold_*_zh-CN.png`）、超过 10 个具明确分组依据情景改用箱线＋散点与 `-$40K` 格式（无合理分组时改用点图，`ex3_distribution_*_zh-CN.png`），以及三线表样本量与旧版定义区分（`ex4_table_*_zh-CN.png`），并附上 LaTeX（`booktabs`、矢量 `.pdf`）与 Word（`.docx`）输出规格。
 4. **五步引导式 Results 叙事（由大到小、由浅至深）：** 报出 `RMSE = 0.041` 与 `0.29` 前，先写清该段拟验证的目的、为领域外读者解释图 2(a)/(b) 比较什么与误差高低方向，按“群体趋势 → 个体变化”报告关键数值后立即点出 `so what`，并收束回答研究假设、`SQ1` 或论文总目标（Overarching Goal）。

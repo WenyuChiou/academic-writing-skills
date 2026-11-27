@@ -199,7 +199,7 @@ For managed projects, use the bundled scripts when relevant:
 - `scripts/audit_candidate_text.py`: scan the exact proposed passage against the active project terminology, forbidden variants, and prose profile and record its hash
 - `scripts/audit_handoff.py`: optionally validate scope-dependent coverage records and exact-file hashes; `COVERAGE_COMPLETE` is not editorial or scientific certification
 - `scripts/audit_docx_structure.py`: inspect Word OOXML using exact tag names for tracked changes, revision authors, comments, parent-linked replies, reply authors, fields, and placeholders
-- `scripts/audit_companion_limits.py`: check Highlights character caps (`<= 85`), Abstract word caps, standalone vs. manuscript caption sync, negative currency sign order (`-$40K`), CSV `available`/`NA` mismatches, and discrete subscale step collapse
+- `scripts/audit_companion_limits.py`: check Highlights character caps (`<= 85`), Abstract word caps, standalone vs. manuscript caption sync, negative currency sign order (`-$40K`), CSV `available`/`NA` mismatches, discrete subscale step collapse, LaTeX/BibTeX (`COMP007`–`COMP008` for `booktabs` rules and `.tex`/`.bib` citation sync), and Word table hygiene (`COMP009` vertical borders/`w:tblHeader`)
 - `scripts/audit_figure_style.py`: lint Matplotlib plotting code and raster widths for baked-in titles, inside legends, `Microsoft JhengHei` raw `<=` glyph traps, colliding reference ticks, and matched-panel y-axis drift
 - `scripts/run_regression_tests.py`: verify the audit tools against bundled failure cases
 
@@ -257,7 +257,7 @@ Read [reviewer-red-team-and-release.md](references/reviewer-red-team-and-release
 
 ## Work with Formatted Files
 
-For a Word handoff or layout review that covers data tables, use the per-table print-layout check in [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md) and record it in the [formatted-file acceptance check](references/execution-and-acceptance.md). A narrow wording edit with no table or pagination impact does not trigger a package-wide table audit.
+For Word (`.docx`), LaTeX (`.tex` / `.bib`), or Markdown (`.md`) handoffs that include data tables or figures, follow the deliverable specifications in [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md), run `scripts/audit_companion_limits.py` where applicable, and record rendered inspection outcomes in the [formatted-file acceptance check](references/execution-and-acceptance.md). A narrow wording edit with no table or pagination impact does not trigger a package-wide table audit.
 
 Use the dedicated document, spreadsheet, presentation, or PDF skill for file-format operations and visual verification. This skill governs scholarly integrity; it does not replace format-specific rendering, tracked-change, or OOXML workflows.
 

@@ -142,12 +142,14 @@ Codex 或 ChatGPT 可使用可用的 skill／plugin 介面。其他 Agent Skills
 
 ### 四張代表性科學圖表修改前後範例
 
-| 圖表類型與重點修正 | 修改前 → 修改後對照圖 |
+| 修改前（Before） | 修改後（After） |
 |---|---|
-| **1. 多子圖 `(a)` `(b)` 排版、圖外共用圖例與色盲友善盤** | ![多子圖軌跡比較修改前後](./docs/images/examples/ex1_multipanel_zh-TW.png) |
-| **2. 誤差門檻線去除柱頂與圖內文字遮擋（`RMSEA ≤ 0.08`）** | ![誤差門檻圖修改前後](./docs/images/examples/ex2_threshold_zh-TW.png) |
-| **3. 超過 10 個已分組情境改以盒鬚＋抖動散點呈現（`-$40K` 格式；無合理分組時改用點圖）** | ![多構念分布摘要修改前後](./docs/images/examples/ex3_distribution_zh-TW.png) |
-| **4. 學術三線表（明確分母 `N`、`95% CI` 與新舊題項範圍註記）** | ![三線表修改前後](./docs/images/examples/ex4_table_zh-TW.png) |
+| **1. 多子圖：** 圖內標題、內置圖例與數值雜訊<br>![多子圖修改前](./docs/images/examples/ex1_multipanel_before_zh-TW.png) | **1. 多子圖 `(a)` `(b)`：** 標題移入圖說、圖外共用圖例與色盲友善盤<br>![多子圖修改後](./docs/images/examples/ex1_multipanel_after_zh-TW.png) |
+| **2. 誤差門檻圖：** 柱頂撞誤差線與 `0.08`/`0.10` 刻度重疊<br>![誤差門檻圖修改前](./docs/images/examples/ex2_threshold_before_zh-TW.png) | **2. 誤差門檻圖：** `0.08` 專屬門檻刻度與座標軸註記<br>![誤差門檻圖修改後](./docs/images/examples/ex2_threshold_after_zh-TW.png) |
+| **3. >10 個分組情境：** 擁擠 15 條長條圖與 `$-40K` 筆誤<br>![分布摘要修改前](./docs/images/examples/ex3_distribution_before_zh-TW.png) | **3. >10 個已分組情境：** 盒鬚＋抖動散點與 `-$40K`（未分組時改點圖）<br>![分布摘要修改後](./docs/images/examples/ex3_distribution_after_zh-TW.png) |
+| **4. 資料表：** 滿版直框線、`$-40K`、缺 `N` 與區間範圍<br>![三線表修改前](./docs/images/examples/ex4_table_before_zh-TW.png) | **4. 學術三線表：** 明確 `N`、`95% CI` 與新舊題項註記（`booktabs`／Word）<br>![三線表修改後](./docs/images/examples/ex4_table_after_zh-TW.png) |
+
+同步支援 **LaTeX**（`.tex`／`.bib`、`booktabs` 與向量 `.pdf` 圖檔）、**Word**（`.docx` OOXML 三線表與追蹤修訂）及 **Markdown** 交付輸出。
 
 ## 適用界線與進一步說明
 
