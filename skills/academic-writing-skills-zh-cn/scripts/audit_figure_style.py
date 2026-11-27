@@ -272,9 +272,28 @@ def _extract_scale_arg(call: ast.Call) -> str | None:
     return None
 
 
+def _subplot_spec_key(call: ast.Call) -> tuple[int, ...] | None:
+    if call.keywords:
+        return None
+    vals: list[int] = []
+    for arg in call.args:
+        if isinstance(arg, ast.Constant) and isinstance(arg.value, int) and not isinstance(arg.value, bool):
+            vals.append(arg.value)
+        else:
+            return None
+    if not vals:
+        return (1, 1, 1)
+    if len(vals) == 1 and 100 <= vals[0] <= 999:
+        v = vals[0]
+        return (v // 100, (v // 10) % 10, v % 10)
+    return tuple(vals)
+
+
 def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str) -> list[dict[str, Any]]:
     """Track axis scales per binding lifetime and class/function/module scope to avoid cross-figure leakage."""
     current_axis: dict[str, int] = {}
+    current_fig_vars: dict[str, int] = {}
+    subplot_slots: dict[tuple[int, tuple[int, ...]], int] = {}
     current_plt_axis: int | None = None
     scale_by_axis: dict[tuple[int, str], str] = {}
     tick_calls: list[tuple[int, int, str, list[float]]] = []
@@ -284,6 +303,8 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
         nonlocal next_id
         next_id += 1
         return next_id
+
+    current_plt_fig = alloc_id()
 
     def get_axis(name: str) -> int:
         if name not in current_axis:
@@ -295,6 +316,20 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
         if current_plt_axis is None:
             current_plt_axis = alloc_id()
         return current_plt_axis
+
+    def resolve_subplot_axis(call: ast.Call, receiver: str) -> int:
+        fig_id = (
+            current_fig_vars.setdefault(receiver, alloc_id())
+            if receiver and receiver not in {"plt", "pyplot"}
+            else current_plt_fig
+        )
+        spec = _subplot_spec_key(call)
+        if spec is not None:
+            key = (fig_id, spec)
+            if key not in subplot_slots:
+                subplot_slots[key] = alloc_id()
+            return subplot_slots[key]
+        return alloc_id()
 
     def bind_new_axes(names: list[str], reset_plt: bool = False) -> None:
         nonlocal current_plt_axis
@@ -309,7 +344,7 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
             current_plt_axis = created[-1]
 
     def inspect_expr(root_node: ast.AST, skip_call: ast.Call | None = None) -> None:
-        nonlocal current_plt_axis
+        nonlocal current_plt_axis, current_plt_fig
         for node in _iter_expr_calls(root_node):
             if node is skip_call:
                 continue
@@ -317,8 +352,14 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
             if not attr:
                 continue
             if attr in {"figure", "clf"}:
+                current_plt_fig = alloc_id()
                 current_plt_axis = None
-            elif attr in {"subplots", "subplot", "axes", "cla"}:
+            elif attr in {"subplot", "add_subplot"}:
+                current_plt_axis = resolve_subplot_axis(node, receiver)
+            elif attr == "subplots":
+                current_plt_fig = alloc_id()
+                current_plt_axis = alloc_id()
+            elif attr in {"axes", "cla"}:
                 current_plt_axis = alloc_id()
             elif attr in {"set_xscale", "set_yscale"} and receiver:
                 scale_val = _extract_scale_arg(node)
@@ -348,7 +389,7 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
                     tick_calls.append((node.lineno, ax_id, "x" if attr == "set_xticks" else "y", ticks))
 
     def walk_scope(nodes: list[ast.stmt]) -> None:
-        nonlocal current_plt_axis
+        nonlocal current_plt_axis, current_plt_fig
         for stmt in nodes:
             if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
                 continue
@@ -356,26 +397,38 @@ def _lint_ticks_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str)
             if isinstance(stmt, ast.Assign):
                 handled_rhs = False
                 if len(stmt.targets) == 1 and isinstance(stmt.value, ast.Call):
-                    attr, _ = _call_name(stmt.value)
+                    attr, call_recv = _call_name(stmt.value)
                     target = stmt.targets[0]
                     if attr == "subplots":
                         handled_rhs = True
                         skip_call = stmt.value
+                        current_plt_fig = alloc_id()
                         if isinstance(target, (ast.Tuple, ast.List)) and len(target.elts) == 2:
                             for fn in _extract_target_names(target.elts[0]):
                                 current_axis.pop(fn, None)
+                                current_fig_vars[fn] = current_plt_fig
                             bind_new_axes(_extract_target_names(target.elts[1]), reset_plt=True)
                         else:
                             for fn in _extract_target_names(target):
                                 current_axis.pop(fn, None)
+                                current_fig_vars[fn] = current_plt_fig
                             current_plt_axis = alloc_id()
                     elif attr == "figure":
                         handled_rhs = True
                         skip_call = stmt.value
+                        current_plt_fig = alloc_id()
                         for fn in _extract_target_names(target):
                             current_axis.pop(fn, None)
+                            current_fig_vars[fn] = current_plt_fig
                         current_plt_axis = None
-                    elif attr in {"add_subplot", "add_axes", "subplot", "axes"}:
+                    elif attr in {"subplot", "add_subplot"}:
+                        handled_rhs = True
+                        skip_call = stmt.value
+                        ax_id = resolve_subplot_axis(stmt.value, call_recv)
+                        for name in _extract_target_names(target):
+                            current_axis[name] = ax_id
+                        current_plt_axis = ax_id
+                    elif attr in {"add_axes", "axes"}:
                         handled_rhs = True
                         skip_call = stmt.value
                         bind_new_axes(_extract_target_names(target), reset_plt=True)

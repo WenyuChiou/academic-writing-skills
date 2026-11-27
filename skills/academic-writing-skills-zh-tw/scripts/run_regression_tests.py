@@ -524,13 +524,20 @@ def main() -> int:
             "plt.figure()\n"
             "ax_g = plt.gca()\n"
             "ax_g.set_yticks([1, 2, 3, 4])\n"
+            "ax_sub = plt.subplot(111)\n"
+            "ax_sub.set_yscale('log')\n"
+            "ax_sub = plt.subplot(1, 1, 1)\n"
+            "ax_sub.set_yticks([1, 10, 100, 1000])\n"
+            "plt.figure()\n"
+            "ax_sub_new = plt.subplot(111)\n"
+            "ax_sub_new.set_yticks([1, 2, 3, 4])\n"
             "class PlotBox:\n"
             "    fig_cls, ax_cls = plt.subplots()\n"
             "    ax_cls.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n",
             encoding="utf-8",
         )
         require(
-            [item["line"] for item in lint_python_script(scale_isolation) if item["code"] == "FIG004"] == [10, 13, 21],
+            [item["line"] for item in lint_python_script(scale_isolation) if item["code"] == "FIG004"] == [10, 13, 28],
             f"scale isolation / log / ClassDef FIG004 mismatch: {lint_python_script(scale_isolation)}",
         )
         clean_separate_figs = root / "separate_figs.py"
@@ -580,7 +587,7 @@ def main() -> int:
             "\\newcites{supp}{Supplementary references}\n"
             "\\section{Results}\n"
             "It is not merely an LLM; it is a watershed shift \\parencite{smith2024,missing2025}.\n"
-            "See \\citeurl{url2024}, \\citeyearpar{yr2024}, \\citetext{see also \\citealp{paren2024}}, "
+            "See \\citeurl{url2024}, \\citeyearpar{yr2024}, \\footfullcite{ff2024}, \\citetext{see also \\citealp{paren2024}}, "
             "\\volcite{2}[14]{smith2024}, and \\parencites[see][]{multiA}[cf.]{multiB}.\n"
             "The change was $-0.25$ units overall.\n"
             "\\begin{figure}\\caption{Accuracy by group. Shaded bands show standard deviations.}\\end{figure}\n"
@@ -595,6 +602,7 @@ def main() -> int:
             "@article{\n  smith2024,\n  title={Flood}\n}\n"
             "@misc{url2024,\n  title={URL}\n}\n"
             "@article{yr2024,\n  title={YearPar}\n}\n"
+            "@article{ff2024,\n  title={FootFull}\n}\n"
             "@article{multiA,\n  title={A}\n}\n"
             "@article{multiB,\n  title={B}\n}\n"
             "@comment{ @article{disabled2021, title={Disabled}} }\n"
