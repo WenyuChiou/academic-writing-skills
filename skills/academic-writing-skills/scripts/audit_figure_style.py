@@ -166,19 +166,61 @@ def _check_paired_ylim_in_scope(stmts: list[ast.stmt], lines: list[str], artifac
     return findings
 
 
-def _collect_figure_var_names(tree: ast.AST) -> set[str]:
-    """Identify variable names bound to Matplotlib Figure instances."""
-    fig_vars = {"fig"}
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.value, ast.Call):
-            func = node.value.func
-            attr = func.attr if isinstance(func, ast.Attribute) else (func.id if isinstance(func, ast.Name) else None)
-            target = node.targets[0]
-            if attr == "figure":
-                fig_vars.update(_extract_target_names(target))
-            elif attr == "subplots" and isinstance(target, (ast.Tuple, ast.List)) and len(target.elts) == 2:
-                fig_vars.update(_extract_target_names(target.elts[0]))
-    return fig_vars
+def _lint_legends_in_scope(
+    nodes: list[ast.stmt], lines: list[str], artifact: str, fig_vars: set[str] | None = None
+) -> list[dict[str, Any]]:
+    """Track current figure-bound variable names lexically so reassigned axis vars trigger FIG002."""
+    current_fig_vars = set(fig_vars) if fig_vars is not None else {"fig"}
+    findings: list[dict[str, Any]] = []
+
+    def walk(stmts: list[ast.stmt], active_figs: set[str]) -> None:
+        for stmt in stmts:
+            if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                walk(stmt.body, set(active_figs) | {"fig"})
+                continue
+            for node in _iter_calls_no_defs(stmt):
+                if not isinstance(node.func, ast.Attribute):
+                    continue
+                attr = node.func.attr
+                receiver = node.func.value.id if isinstance(node.func.value, ast.Name) else ""
+                line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
+                if attr == "legend" and receiver not in active_figs and "# intentional-legend" not in line_text:
+                    if not any(kw.arg == "bbox_to_anchor" for kw in node.keywords):
+                        findings.append({
+                            "code": "FIG002", "artifact": artifact, "line": node.lineno,
+                            "message": f"inside-axes {receiver or 'ax'}.legend() may cover data; place outside axes or use fig.legend(...)",
+                        })
+            if isinstance(stmt, ast.Assign):
+                for t in stmt.targets:
+                    for name in _extract_target_names(t):
+                        active_figs.discard(name)
+                if len(stmt.targets) == 1 and isinstance(stmt.value, ast.Call):
+                    func = stmt.value.func
+                    attr = func.attr if isinstance(func, ast.Attribute) else (func.id if isinstance(func, ast.Name) else None)
+                    target = stmt.targets[0]
+                    if attr == "figure":
+                        active_figs.update(_extract_target_names(target))
+                    elif attr == "subplots" and isinstance(target, (ast.Tuple, ast.List)) and len(target.elts) == 2:
+                        active_figs.update(_extract_target_names(target.elts[0]))
+            elif isinstance(stmt, ast.AnnAssign) and isinstance(stmt.target, ast.Name):
+                active_figs.discard(stmt.target.id)
+                if isinstance(stmt.value, ast.Call):
+                    func = stmt.value.func
+                    attr = func.attr if isinstance(func, ast.Attribute) else (func.id if isinstance(func, ast.Name) else None)
+                    if attr == "figure":
+                        active_figs.add(stmt.target.id)
+            if hasattr(stmt, "body") and isinstance(stmt.body, list):
+                walk(stmt.body, active_figs)
+            if hasattr(stmt, "orelse") and isinstance(stmt.orelse, list):
+                walk(stmt.orelse, active_figs)
+            for handler in getattr(stmt, "handlers", []):
+                if hasattr(handler, "body") and isinstance(handler.body, list):
+                    walk(handler.body, active_figs)
+            if hasattr(stmt, "finalbody") and isinstance(stmt.finalbody, list):
+                walk(stmt.finalbody, active_figs)
+
+    walk(nodes, current_fig_vars)
+    return findings
 
 
 def lint_python_script(path: Path) -> list[dict[str, Any]]:
@@ -186,7 +228,6 @@ def lint_python_script(path: Path) -> list[dict[str, Any]]:
     source = path.read_text(encoding="utf-8")
     lines = source.splitlines()
     tree = ast.parse(source, filename=str(path))
-    fig_vars = _collect_figure_var_names(tree)
     findings: list[dict[str, Any]] = []
     uses_jhenghei = "Microsoft JhengHei" in source
     has_unicode_minus_false = bool(re.search(
@@ -231,14 +272,6 @@ def lint_python_script(path: Path) -> list[dict[str, Any]]:
                 "message": f"baked-in figure/axis title via .{attr}(); move title to manuscript caption",
             })
 
-        if attr == "legend" and receiver not in fig_vars and "# intentional-legend" not in line_text:
-            has_outside_anchor = any(kw.arg == "bbox_to_anchor" for kw in node.keywords)
-            if not has_outside_anchor:
-                findings.append({
-                    "code": "FIG002", "artifact": str(path), "line": node.lineno,
-                    "message": f"inside-axes {receiver or 'ax'}.legend() may cover data; place outside axes or use fig.legend(...)",
-                })
-
         if attr in {"set_yticks", "set_xticks"} and node.args and "# intentional-ticks" not in line_text:
             ticks = _literal_number_list(node.args[0])
             if ticks:
@@ -252,6 +285,7 @@ def lint_python_script(path: Path) -> list[dict[str, Any]]:
                             "message": f"uneven close neighbor ticks {ordered}; remove neighbor tick colliding with reference cutoff",
                         })
 
+    findings.extend(_lint_legends_in_scope(tree.body, lines, str(path)))
     findings.extend(_check_paired_ylim_in_scope(tree.body, lines, str(path)))
     for node in ast.walk(tree):
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):

@@ -209,6 +209,17 @@ def _extract_tex_captions(path: Path) -> dict[str, str]:
     return captions
 
 
+def _normalize_md_caption_line(line: str) -> str:
+    """Strip blockquote '>' prefixes and bold/italic emphasis wrappers around Figure/Table labels."""
+    cleaned = re.sub(r"^(?:>\s*)+", "", line).strip()
+    return re.sub(
+        r"^(?:\*\*|__|[*_])*\s*((?:Figure|Table)\s+S?\d+)\s*(?:([.:])\s*(?:\*\*|__|[*_])*|(?:\*\*|__|[*_])+\s*([.:])\s*)",
+        lambda m: f"{m.group(1)}{m.group(2) or m.group(3)} ",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+
+
 def _extract_captions(path: Path) -> dict[str, str]:
     """Collect complete multi-line Figure/Table captions until a blank line or block boundary (plus LaTeX \\caption{})."""
     if path.suffix.lower() == ".tex":
@@ -225,17 +236,18 @@ def _extract_captions(path: Path) -> dict[str, str]:
         chunks = []
 
     for line in read_raw_lines(path):
-        if not line or BLOCK_BREAK_RE.match(line):
+        stripped = _normalize_md_caption_line(line)
+        if not stripped or BLOCK_BREAK_RE.match(stripped):
             flush()
             continue
-        match = CAPTION_RE.match(line)
+        match = CAPTION_RE.match(stripped)
         if match:
             flush()
             current_label = match.group(1).title()
             if match.group(2).strip():
                 chunks.append(match.group(2).strip())
         elif current_label is not None:
-            chunks.append(line)
+            chunks.append(stripped)
     flush()
     return captions
 

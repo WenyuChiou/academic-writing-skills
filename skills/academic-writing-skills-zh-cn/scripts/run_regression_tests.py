@@ -431,6 +431,11 @@ def main() -> int:
         ms_cap.write_text("Figure 1. Accuracy by group.\nShaded bands show standard deviations.\n$-40K and 0.208[0.189, 0.229].\n", encoding="utf-8")
         require(any(item["code"] == "COMP003" for item in check_caption_sync(ms_cap, cap_file)), "multiline caption continuation mismatch missed")
         require(len(check_text_formatting(ms_cap)) == 2, "numeric currency/CI spacing check missed")
+        md_cap_a = root / "md_cap_a.md"
+        md_cap_b = root / "md_cap_b.md"
+        md_cap_a.write_text("> **Figure 1.** Accuracy across basins.\n", encoding="utf-8")
+        md_cap_b.write_text("**Figure 1.** Accuracy across states.\n", encoding="utf-8")
+        require(any(item["code"] == "COMP003" for item in check_caption_sync(md_cap_a, md_cap_b)), "Markdown bold/blockquote caption mismatch missed")
         esc_md = root / "escaped_currency.md"
         esc_md.write_text(r"Estimated bias was \$-40K in Markdown.", encoding="utf-8")
         require(any(item["code"] == "COMP004" for item in check_text_formatting(esc_md)), "escaped \\$-40K in Markdown missed")
@@ -468,6 +473,16 @@ def main() -> int:
         )
         fig_codes = {item["code"] for item in lint_python_script(bad_plot)}
         require({"FIG001", "FIG002", "FIG003", "FIG004", "FIG005"}.issubset(fig_codes), f"figure linter missed codes: {sorted(fig_codes)}")
+        rebound_leg = root / "rebound_legend.py"
+        rebound_leg.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "plot = plt.figure()\n"
+            "plot = plot.add_subplot(111)\n"
+            "plot.legend()\n",
+            encoding="utf-8",
+        )
+        require(any(item["code"] == "FIG002" for item in lint_python_script(rebound_leg)), "reassigned plot axis legend missed FIG002")
         add_sub_plot = root / "add_sub.py"
         add_sub_plot.write_text(
             "import matplotlib.pyplot as plt\n"
