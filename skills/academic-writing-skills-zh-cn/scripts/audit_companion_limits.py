@@ -26,10 +26,8 @@ LATEX_FLOAT_ENV_RE = re.compile(
     r"\\begin\{(figure\*?|table\*?|longtable)\}(.*?)\\end\{\1\}", re.DOTALL | re.IGNORECASE
 )
 LATEX_TABULAR_BEGIN_RE = re.compile(r"\\begin\{(tabular\*?|tabularx|longtable)\}")
-LATEX_CITE_RE = re.compile(
-    r"\\(?:cite(?:t|p|alt|alp|author|year|yearpar|num|text|s)?\*?|"
-    r"(?:paren|text|auto|foot|full|super|smart|no|multi|vol)cite[a-zA-Z]*\*?)"
-    r"\s*(?:\[[^\]]*\]\s*)*\{([^}]+)\}",
+LATEX_CITE_CMD_RE = re.compile(
+    r"\\(?!(?:citestyle|defcitealias|Declare[a-zA-Z]*)\b)(?:[a-zA-Z]*cite[a-zA-Z*]*|nocite)\*?",
     re.IGNORECASE,
 )
 BIB_ENTRY_RE = re.compile(r"@([a-zA-Z]+)\s*[{(]\s*([^,\s{}()]+)\s*,")
@@ -336,18 +334,42 @@ def check_latex_tables(path: Path) -> list[dict[str, Any]]:
     return findings
 
 
+def _extract_cite_keys_from_tex(text: str) -> tuple[set[str], bool]:
+    cited: set[str] = set()
+    nocite_all = False
+    for match in LATEX_CITE_CMD_RE.finditer(text):
+        cmd = match.group(0).lstrip("\\").rstrip("*").lower()
+        pos = match.end()
+        is_multicite = cmd.endswith("s") or "multicite" in cmd
+        while pos < len(text):
+            opt = re.match(r"(?:\s*\[[^\]]*\])*\s*", text[pos:])
+            pos += opt.end() if opt else 0
+            if pos >= len(text) or text[pos] != "{":
+                break
+            grp = _extract_balanced_braces(text, pos)
+            if not grp:
+                break
+            keys_str, pos = grp
+            for part in keys_str.split(","):
+                key = part.strip()
+                if key == "*":
+                    nocite_all = True
+                elif key:
+                    cited.add(key)
+            if not is_multicite:
+                break
+    return cited, nocite_all
+
+
 def check_latex_citations(tex_paths: list[Path], bib_paths: list[Path]) -> list[dict[str, Any]]:
-    """Reconcile LaTeX \\cite keys against .bib entries across line breaks in both directions."""
+    """Reconcile LaTeX \\cite keys against .bib entries across line breaks and multicite groups in both directions."""
     cited: set[str] = set()
     nocite_all = False
     for tex in tex_paths:
         text = _strip_latex_comments(tex.read_text(encoding="utf-8"))
-        for match in LATEX_CITE_RE.finditer(text):
-            raw_keys = [part.strip() for part in match.group(1).split(",") if part.strip()]
-            if "*" in raw_keys:
-                nocite_all = True
-                raw_keys = [k for k in raw_keys if k != "*"]
-            cited.update(raw_keys)
+        tex_cited, tex_nocite_all = _extract_cite_keys_from_tex(text)
+        cited.update(tex_cited)
+        nocite_all = nocite_all or tex_nocite_all
 
     bib_keys: set[str] = set()
     for bib in bib_paths:

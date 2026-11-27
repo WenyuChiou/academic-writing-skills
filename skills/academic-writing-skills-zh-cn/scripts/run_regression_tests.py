@@ -492,7 +492,12 @@ def main() -> int:
             "    def unused_helper():\n"
             "        ax2.set_ylim(0, 99)\n"
             "def f1():\n    f, ax = plt.subplots()\n    ax.set_ylim(0, 10)\n    ax.set_ylim(0, 12)\n"
-            "def f2():\n    f, ax2 = plt.subplots()\n    ax2.set_ylim(0, 99)\n",
+            "def f2():\n    f, ax2 = plt.subplots()\n    ax2.set_ylim(0, 99)\n"
+            "fig_a, (ax1, ax2) = plt.subplots(1, 2)\n"
+            "ax1.set_ylim(0, 10)\n"
+            "ax2.set_ylim(0, 10)\n"
+            "fig_b, ax1 = plt.subplots()\n"
+            "ax1.set_ylim(0, 100)\n",
             encoding="utf-8",
         )
         require(lint_python_script(clean_separate_figs) == [], f"false positive on mathtext / nested def / separate figs: {lint_python_script(clean_separate_figs)}")
@@ -511,6 +516,7 @@ def main() -> int:
             "\\citestyle{authoryear}\n"
             "\\section{Results}\n"
             "It is not merely an LLM; it is a watershed shift \\parencite{smith2024,missing2025}.\n"
+            "See \\citeurl{url2024} and \\parencites[see][]{multiA}[cf.]{multiB}.\n"
             "The change was $-0.25$ units overall.\n"
             "\\begin{figure}\\caption{Accuracy by group. Shaded bands show standard deviations.}\\end{figure}\n"
             "\\begin{table}\\begin{tabular}[t]{p{3cm}|c}\\hline\\hline A & \\$-40K \\\\\\hline\\end{tabular}\\end{table}\n"
@@ -520,7 +526,14 @@ def main() -> int:
             encoding="utf-8",
         )
         bib_doc = root / "refs.bib"
-        bib_doc.write_text("@article{\n  smith2024,\n  title={Flood}\n}\n@article{uncited2023,\n  title={Extra}\n}\n", encoding="utf-8")
+        bib_doc.write_text(
+            "@article{\n  smith2024,\n  title={Flood}\n}\n"
+            "@misc{url2024,\n  title={URL}\n}\n"
+            "@article{multiA,\n  title={A}\n}\n"
+            "@article{multiB,\n  title={B}\n}\n"
+            "@article{uncited2023,\n  title={Extra}\n}\n",
+            encoding="utf-8",
+        )
         clean_math_tex = root / "clean_math.tex"
         clean_math_tex.write_text("The change was $-0.25$ units and the bias was -$40\\text{K}.\n", encoding="utf-8")
         require(check_text_formatting(clean_math_tex) == [], f"false positive COMP004 on inline math: {check_text_formatting(clean_math_tex)}")

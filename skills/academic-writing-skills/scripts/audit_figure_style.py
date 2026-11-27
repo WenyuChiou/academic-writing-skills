@@ -68,49 +68,74 @@ def _extract_target_names(target: ast.AST) -> list[str]:
 
 
 def _check_paired_ylim_in_scope(stmts: list[ast.stmt], lines: list[str], artifact: str) -> list[dict[str, Any]]:
-    """Compare final set_ylim values only among distinct axes belonging to the same subplots group/figure."""
+    """Compare final set_ylim values only among distinct axes belonging to the same subplots group/figure instance."""
     findings: list[dict[str, Any]] = []
-    axis_groups: list[set[str]] = []
-    ax_to_group: dict[str, int] = {}
-    final_ylim: dict[str, tuple[int, float, float]] = {}
-    ylabels: dict[str, str] = {}
+    axis_groups: list[list[tuple[int, str]]] = []
+    final_ylim: dict[int, tuple[int, float, float]] = {}
+    ylabels: dict[int, str] = {}
+    current_axis: dict[str, int] = {}
+    current_fig: dict[str, int] = {}
+    fig_axes: dict[int, list[tuple[int, str]]] = {}
+    next_id = 0
 
-    def register_group(names: list[str]) -> None:
-        if len(names) < 2:
-            return
-        idx = len(axis_groups)
-        axis_groups.append(set(names))
+    def alloc_id() -> int:
+        nonlocal next_id
+        next_id += 1
+        return next_id
+
+    def bind_axes(names: list[str], in_group: bool = False, fig_id: int | None = None) -> None:
+        pairs: list[tuple[int, str]] = []
         for name in names:
-            ax_to_group[name] = idx
+            ax_id = alloc_id()
+            current_axis[name] = ax_id
+            pairs.append((ax_id, name))
+        if in_group and len(pairs) >= 2:
+            axis_groups.append(pairs)
+        if fig_id is not None:
+            fig_axes.setdefault(fig_id, []).extend(pairs)
 
     def walk_scope(nodes: list[ast.stmt]) -> None:
-        fig_axes: dict[str, list[str]] = {}
         for stmt in nodes:
             if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
                 continue
-            if isinstance(stmt, ast.Assign) and isinstance(stmt.value, ast.Call):
+            if isinstance(stmt, ast.Assign) and len(stmt.targets) == 1 and isinstance(stmt.value, ast.Call):
                 call = stmt.value
                 attr = call.func.attr if isinstance(call.func, ast.Attribute) else None
-                if attr == "subplots" and len(stmt.targets) == 1:
-                    target = stmt.targets[0]
+                target = stmt.targets[0]
+                if attr == "subplots":
                     if isinstance(target, (ast.Tuple, ast.List)) and len(target.elts) == 2:
-                        ax_names = _extract_target_names(target.elts[1])
-                        register_group(ax_names)
-                elif attr in {"add_subplot", "add_axes"} and len(stmt.targets) == 1 and isinstance(call.func.value, ast.Name):
+                        for fn in _extract_target_names(target.elts[0]):
+                            current_fig[fn] = alloc_id()
+                        bind_axes(_extract_target_names(target.elts[1]), in_group=True)
+                elif attr == "figure":
+                    for fn in _extract_target_names(target):
+                        current_fig[fn] = alloc_id()
+                elif attr in {"add_subplot", "add_axes"} and isinstance(call.func.value, ast.Name):
                     fig_var = call.func.value.id
-                    fig_axes.setdefault(fig_var, []).extend(_extract_target_names(stmt.targets[0]))
+                    fig_id = current_fig.setdefault(fig_var, alloc_id())
+                    bind_axes(_extract_target_names(target), fig_id=fig_id)
+                else:
+                    for name in _extract_target_names(target):
+                        current_axis.pop(name, None)
+            elif isinstance(stmt, ast.Assign):
+                for target in stmt.targets:
+                    for name in _extract_target_names(target):
+                        current_axis.pop(name, None)
             for node in _iter_calls_no_defs(stmt):
                 if not isinstance(node.func, ast.Attribute) or not isinstance(node.func.value, ast.Name):
                     continue
                 receiver = node.func.value.id
+                ax_id = current_axis.get(receiver)
+                if ax_id is None:
+                    continue
                 attr = node.func.attr
                 line_text = lines[node.lineno - 1] if 0 < node.lineno <= len(lines) else ""
                 if attr == "set_ylabel" and node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str):
-                    ylabels[receiver] = node.args[0].value
+                    ylabels[ax_id] = node.args[0].value
                 elif attr == "set_ylim" and "# intentional-ylim-diff" not in line_text:
                     pair = _extract_float_pair(node.args)
                     if pair is not None:
-                        final_ylim[receiver] = (node.lineno, pair[0], pair[1])
+                        final_ylim[ax_id] = (node.lineno, pair[0], pair[1])
             if hasattr(stmt, "body") and isinstance(stmt.body, list):
                 walk_scope(stmt.body)
             if hasattr(stmt, "orelse") and isinstance(stmt.orelse, list):
@@ -120,19 +145,20 @@ def _check_paired_ylim_in_scope(stmts: list[ast.stmt], lines: list[str], artifac
                     walk_scope(handler.body)
             if hasattr(stmt, "finalbody") and isinstance(stmt.finalbody, list):
                 walk_scope(stmt.finalbody)
-        for axes_list in fig_axes.values():
-            register_group(axes_list)
 
     walk_scope(stmts)
+    for fig_group in fig_axes.values():
+        if len(fig_group) >= 2:
+            axis_groups.append(fig_group)
     for group in axis_groups:
-        paired = {ax: final_ylim[ax] for ax in sorted(group) if ax in final_ylim}
+        paired = [(ax_id, name, final_ylim[ax_id]) for ax_id, name in group if ax_id in final_ylim]
         if len(paired) < 2:
             continue
-        distinct_limits = {(lo, hi) for _, lo, hi in paired.values()}
-        distinct_labels = {ylabels[ax] for ax in paired if ax in ylabels}
+        distinct_limits = {(lo, hi) for _, _, (_, lo, hi) in paired}
+        distinct_labels = {ylabels[ax_id] for ax_id, _, _ in paired if ax_id in ylabels}
         if len(distinct_limits) > 1 and len(distinct_labels) <= 1:
-            first_line = min(lineno for lineno, _, _ in paired.values())
-            details = [(ax, lo, hi) for ax, (_, lo, hi) in paired.items()]
+            first_line = min(lineno for _, _, (lineno, _, _) in paired)
+            details = [(name, lo, hi) for _, name, (_, lo, hi) in paired]
             findings.append({
                 "code": "FIG005", "artifact": artifact, "line": first_line,
                 "message": f"mismatched set_ylim across paired sibling axes {details}; match limits or mark # intentional-ylim-diff",
