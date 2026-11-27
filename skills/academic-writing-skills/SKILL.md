@@ -65,7 +65,7 @@ For planning or developing Methods, or substantively clarifying a setting's sour
 
 Load the remaining guides only for the requested reader function or an affected dependency:
 
-- [results-and-explanation.md](references/results-and-explanation.md): evidence-led findings, so-what/SQ closure, visual functions, and supported versus merely programmed mechanisms.
+- [results-and-explanation.md](references/results-and-explanation.md): guided 5-step Results arc for non-specialists, macro-to-micro and shallow-to-deep progression, display orientation, immediate "so what", hypothesis/`SQ`/overarching-goal closure, and supported versus merely programmed mechanisms.
 - [discussion-and-limitations.md](references/discussion-and-limitations.md): interpretation or extension-analysis mode, sensitivity boundaries, and specific-constraint-first limitations.
 - [conclusion-and-abstract.md](references/conclusion-and-abstract.md): recover the current research goal, work, comparison levels and scope before summary drafting; preserve clear author wording and distinguish study identity from findings.
 - [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md): final-size legibility, captions/notes, parallel SM, numbering, and project formatting.
@@ -93,7 +93,7 @@ Before drafting or substantively rewriting, run the pre-draft logic check in [un
 For a **new Introduction, multi-paragraph core section draft, or substantive section reorganization** (excluding grammar-only repairs, single-paragraph local revisions, and requests that explicitly instruct immediate full-prose drafting), output a **Pre-Draft Alignment Blueprint** first and **pause for author confirmation** before writing full section prose:
 
 1. **First-sentence extended outline:** numbered topic sentences showing the end-to-end logical chain from broad problem and grouped prior work to the specific gap and study response.
-2. **Paragraph blueprint (`WHAT / WHY / HOW`):** for each planned paragraph, state its reader function (`WHAT`), rationale (`WHY`), analytical execution (`HOW`), narrowest core claim, authorized evidence, inference boundary or nonclaim, and bridge into the next paragraph.
+2. **Paragraph blueprint (`WHAT / WHY / HOW`):** for each planned paragraph, state its reader function (`WHAT`), rationale (`WHY`), analytical execution (`HOW`), narrowest core claim, authorized evidence, inference boundary or nonclaim, and bridge into the next paragraph; for Results sections, also sketch the Macro-to-Micro and Shallow-to-Deep ladder linking each display/subsection to its target Hypothesis, `SQ/RQ`, or Overarching Goal.
 3. **Host-journal register & guest-term first-use table:** identify the target venue's core readership and list every borrowed cross-disciplinary, AI/LLM, or statistical term with its first-use location, plain-language functional role, and directional meaning; cut unexplainable jargon.
 
 Draft only after the contract and information order are coherent. After drafting, compare the paragraph against the contract and re-read its previous and next paragraphs. Do not polish a paragraph into fluency if its function, evidence, or placement is wrong.
@@ -199,6 +199,8 @@ For managed projects, use the bundled scripts when relevant:
 - `scripts/audit_candidate_text.py`: scan the exact proposed passage against the active project terminology, forbidden variants, and prose profile and record its hash
 - `scripts/audit_handoff.py`: optionally validate scope-dependent coverage records and exact-file hashes; `COVERAGE_COMPLETE` is not editorial or scientific certification
 - `scripts/audit_docx_structure.py`: inspect Word OOXML using exact tag names for tracked changes, revision authors, comments, parent-linked replies, reply authors, fields, and placeholders
+- `scripts/audit_companion_limits.py`: check Highlights character caps (`<= 85`), Abstract word caps, standalone vs. manuscript caption sync, negative currency sign order (`-$40K`), CSV `available`/`NA` mismatches, and discrete subscale step collapse
+- `scripts/audit_figure_style.py`: lint Matplotlib plotting code and raster widths for baked-in titles, inside legends, `Microsoft JhengHei` raw `<=` glyph traps, colliding reference ticks, and matched-panel y-axis drift
 - `scripts/run_regression_tests.py`: verify the audit tools against bundled failure cases
 
 Treat script findings as diagnostics. Inspect each match in context before editing. A clean script report never replaces substantive reading.

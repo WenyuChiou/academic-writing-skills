@@ -188,6 +188,26 @@ testament, paradigm, cornerstone。
 避免使用如 "Building..., integrating..., and leveraging..." 的段落開頭。
 請使用直接的主張。
 
+<a id="second-wave-syntactic-and-rhetorical-patterns"></a>
+### 5a. 第二波句法與修辭 AI 特徵
+
+2024–2026 年科學計量與風格追蹤指出，單字黑名單（如 "delve"、"tapestry"、"pivotal"、"meticulous"）出現後，模型轉而高度重複以下句法骨架；請依脈絡檢視其密度，切勿將單一特徵當成 AI 寫作指控：
+
+- **否定排比句式：** 反覆使用 "It is not merely X; it is Y" 或 "這不僅是……更是……" 來製造看似深刻卻無新增事實的對比；除非真在反駁既有誤區，否則請直接陳述獲得支持的主張。
+- **句尾懸垂現在分詞意義：** 在事實句尾端外掛 ", highlighting the urgent need for ..."、", underscoring its pivotal role" 或「凸顯……的重要性／廣闊前景」等空泛意義；應刪去或改寫為具名權衡、能力邊界與實證結果。
+- **迴避連綴動詞與對稱三元並列：** 用 "serves as / stands as / boasts" 取代單純的「是／包含」，或無實證依據地成組堆疊三個對稱形容詞（"scalable, flexible, and robust"）。
+- **假同義詞輪替：** 為躲避重複而將已定義構念輪流改稱「框架／系統／方法／工具」，極易誤導領域外讀者誤以為在指涉不同模型；請維持一詞一義。
+
+<a id="cross-disciplinary-ambiguous-everyday-modifiers"></a>
+### 5b. 跨領域雙關日常修飾詞消歧
+
+看似普通英文或中文日常詞彙、容易繞過縮寫檢查的詞語同樣常引發跨領域誤讀，首次使用須明示語境：`local`（地端部署權重 vs. 地方郡縣／流域尺度）、`conditioning`（提示詞上下文輸入 vs. 統計條件分布）、`calibration`（機確率定 vs. 水文／模型參數率定）與 `agent`（LLM 提示角色 vs. 模擬決策主體）。
+
+<a id="chinese-academic-stock-and-buzzword-diagnostics"></a>
+### 5c. 中文論文常見套話與網際網路黑話檢核
+
+在繁體或簡體中文稿件中，應標記並精簡下列高頻 AI 味語彙：空洞宏觀開場（「在當今快速發展……背景下」、「隨著……如火如荼」）、無實質資訊承接與收尾（「值得注意的是」、「綜上所述」／「總而言之」、「由此可見」、「提供了新的思路／視角」）、機械排比（「這不僅是……更是……」），以及滲入學術語境的企管／網路詞彙（「賦能」、「抓手」、「閉環」、「痛點」）。請改以具體對照、數據變化與學科原生動詞表達。
+
 <a id="6-overclaim-language"></a>
 ## 6. 過度主張語言
 

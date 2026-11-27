@@ -73,7 +73,7 @@ description: "为学术论文建立研究定位与大纲、规划并修订相互
 
 仅在有特定读者功能需求或受影响的相依项目时，才载入其余指南：
 
-- [results-and-explanation.md](references/results-and-explanation.md)：以证据为主导的发现、so-what/SQ 收尾、图表功能，以及有证据支持与仅由程式设定的机制之对比。
+- [results-and-explanation.md](references/results-and-explanation.md)：面向非领域读者的五步引导式结果弧线（目的 → 图表解说 → 核心指标与数字 → 立即点出 So What → 由大到小、由浅至深扣回假设／`SQ`／研究总目标），并区分有证据支持与仅由程式设定的机制。
 - [discussion-and-limitations.md](references/discussion-and-limitations.md)：解读或延伸分析模式、敏感度边界，以及特定限制优先的研究限制。
 - [conclusion-and-abstract.md](references/conclusion-and-abstract.md)：在起草总结前，先厘清当前研究目标、工作、比较层级与处理范围；保留作者清晰的措辞，并将研究主体定位与研究发现区分开来。
 - [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md)：最终尺寸清晰度、图表说明/注记、平行补充材料（SM）、编号与项目格式。
@@ -100,7 +100,7 @@ description: "为学术论文建立研究定位与大纲、规划并修订相互
 针对**全新的引言（Introduction）、多段落核心章节起草或实质性章节重组**（不包含仅限语法修正、单段落局部修订，以及用户明确指示立即产出完整正文的情况），请先输出**草稿前对齐蓝图（Pre-Draft Alignment Blueprint）**并**暂停等待作者确认**，再撰写完整段落：
 
 1. **首句式延伸大纲：** 以编号主题句呈现从宏观背景、分流文献综述到研究缺口与本研究回应的完整逻辑链。
-2. **段落蓝图表（`WHAT / WHY / HOW`）：** 针对每个规划段落列出其读者功能（`WHAT`）、设立理由（`WHY`）、分析推进方式（`HOW`）、最精炼的核心主张、获授权的证据、推论边界／不主张事项，以及与下一段的衔接关系。
+2. **段落蓝图表（`WHAT / WHY / HOW`）：** 针对每个规划段落列出其读者功能（`WHAT`）、设立理由（`WHY`）、分析推进方式（`HOW`）、最精炼的核心主张、获授权的证据、推论边界／不主张事项，以及与下一段的衔接关系；撰写 Results 章节时，一并标明“由大到小、由浅至深”如何推进并扣回研究假设、`SQ/RQ` 或论文总目标。
 3. **目标期刊语境与跨领域术语首次引导表：** 锁定目标期刊的核心读者立场，列出所有借用的跨学科、AI／LLM 或统计术语及其首次出现位置、功能角色与数值方向说明；删除非必要且无法解释清楚的行话。
 
 唯有在契约与信息顺序连贯时方可起草。起草完成后，将段落与契约进行对照，并重读其前一段与后一段。若段落的功能、证据或配置有误，切勿仅将文字润饰得流畅。
@@ -204,6 +204,8 @@ description: "为学术论文建立研究定位与大纲、规划并修订相互
 - `scripts/audit_candidate_text.py`：依据使用中的项目术语、禁用异体词与散文设定档扫描提议的精确段落，并记录其杂凑值
 - `scripts/audit_handoff.py`：可选择性验证依处理范围而定的覆盖记录与精确文件杂凑；`COVERAGE_COMPLETE` 并非编辑或科学认证
 - `scripts/audit_docx_structure.py`：使用精确标签名称检查 Word OOXML，以检视修订追踪、修订者、批注、与父项连结的回复、回复者、功能变数与预留位置
+- `scripts/audit_companion_limits.py`：检查 Highlights 字符上限（`<= 85`）、摘要字数、独立图注与正文图注同步、负金额符号顺序（`-$40K`）、CSV `available`/`NA` 矛盾与离散子量表步长退化
+- `scripts/audit_figure_style.py`：静态扫描 Matplotlib 绘图码与 PNG 宽度，侦测图内标题、图内图例、`Microsoft JhengHei` 裸字形 `<=` 陷阱、相邻刻度碰撞与成对子图 Y 轴尺度不一致
 - `scripts/run_regression_tests.py`：针对随附的失败案例验证审查工具
 
 将指令码的发现视为诊断结果。在编辑之前，先在脉络中检视每个相符项。完全无误的指令码报告绝不能取代实质阅读。

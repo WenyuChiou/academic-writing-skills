@@ -212,6 +212,23 @@ unless the repetition is deliberate and clear.
 Avoid paragraph openings such as "Building..., integrating..., and leveraging...".
 Use direct claims.
 
+### 5a. Second-Wave Syntactic and Rhetorical Patterns
+
+Scientometric and stylometric audits (2024–2026) show that flagging single excess words ("delve", "tapestry", "pivotal", "meticulous") shifts models toward predictable syntactic skeletons. Review density of these shapes in context—never as proof of AI authorship:
+
+- **Negative parallelism framing:** "It is not merely X; it is Y" or "not just A, but also B" used to manufacture depth without adding evidence. State the supported proposition directly unless refuting a documented misconception.
+- **Dangling participial significance trailers:** ending a concrete factual sentence with ", highlighting the urgent need for ...", ", underscoring its pivotal role", or ", fostering deeper understanding". Delete the trailer or write a grounded finding/boundary clause.
+- **Copula avoidance and symmetric tricolons:** replacing plain "is/has" with "serves as / stands as / boasts" alongside mechanical three-adjective pairs ("scalable, flexible, and robust") unsupported by distinct diagnostics.
+- **Synonym cycling across locked constructs:** rotating "framework / architecture / system / tool" merely for surface variety confuses readers about whether different models or estimators are discussed; keep defined construct names stable.
+
+### 5b. Cross-Disciplinary Ambiguous Everyday Modifiers
+
+Everyday modifiers that evade acronym filters still confuse readers across fields. Clarify which sense applies at first use: `local` (locally hosted weights vs. county/basin scale), `conditioning` (prompt context vs. statistical conditional distribution), `calibration` (probability calibration vs. physical parameter calibration), and `agent` (LLM role persona vs. simulated decision entity).
+
+### 5c. Chinese Academic Stock and Buzzword Diagnostics
+
+For Traditional or Simplified Chinese manuscripts, flag and tighten high-frequency boilerplate: macro throat-clearing ("在當今快速…背景下" / "隨著…如火如荼"), hollow transition/closing fillers ("值得注意的是"、"綜上所述" / "總而言之"、"由此可見"、"提供了新的思路／視角"), rigid negative parallelism ("這不僅是…更是…"), and business/internet buzzwords ("賦能／赋能"、"抓手"、"閉環／闭环"、"痛點／痛点"). Replace with specific comparisons, verified numbers, and domain-native verbs.
+
 ## 6. Overclaim Language
 
 For inferred findings, avoid:

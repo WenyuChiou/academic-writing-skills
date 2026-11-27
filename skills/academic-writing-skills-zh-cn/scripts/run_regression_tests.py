@@ -377,10 +377,86 @@ def main() -> int:
 
         require(
             any("host-journal register" in check for check in MANUAL_CHECKS)
-            and any("bundled condition caveats" in check for check in MANUAL_CHECKS),
-            "manual candidate gate omitted host-register onboarding or bundled-condition propagation",
+            and any("bundled condition caveats" in check for check in MANUAL_CHECKS)
+            and any("guided 5-step Results arc" in check for check in MANUAL_CHECKS)
+            and any("polysemous modifiers" in check for check in MANUAL_CHECKS),
+            "manual candidate gate omitted host-register, bundled-condition, guided-results, or polysemous checks",
         )
-        tests.append("host-register onboarding and bundled-condition manual checks")
+        tests.append("host-register onboarding, guided results, and bundled-condition manual checks")
+
+        second_wave = (
+            "It is not merely a prompt trick; it is a watershed shift. "
+            "Model A achieved 0.04 on Figure 2, thereby highlighting the urgent need for management. "
+            "Two models reached 0.04 on the Wave 2 metric (p < 0.01)."
+        )
+        second_codes = {item["code"] for item in audit_prose_text(second_wave, "second-wave", {})}
+        require(
+            {"PROSE014", "PROSE015", "PROSE016", "PROSE017"}.issubset(second_codes),
+            f"second-wave / guided-results codes incomplete: {sorted(second_codes)}",
+        )
+        require(
+            any(item["code"] == "PROSE003" for item in audit_prose_text("綜上所述，本研究賦能防洪調適。", "cjk-stock", {})),
+            "CJK stock phrase audit missed boilerplate",
+        )
+        require(
+            not any(
+                item["code"] in {"PROSE014", "PROSE015", "PROSE016", "PROSE017"}
+                for item in audit_prose_text(
+                    "To evaluate household transitions, Figure 2 compares errors. "
+                    "Both models reached 0.04 each at Wave 2, limiting inference to exploratory trends.",
+                    "guided-clean", {},
+                )
+            ),
+            "clean guided Results passage triggered false-positive PROSE014-017",
+        )
+        tests.append("second-wave AI tells, CJK stock phrases, and guided Results cues")
+
+        from audit_companion_limits import (
+            check_abstract, check_caption_sync, check_csv_table, check_discrete_band,
+            check_highlights, check_text_formatting,
+        )
+        from audit_figure_style import lint_png_file, lint_python_script
+        import struct
+
+        hl = root / "highlights.txt"
+        hl.write_text("Highlights\n- " + ("x" * 90) + "\n- Concise highlight line.\n", encoding="utf-8")
+        require(any(item["code"] == "COMP001" for item in check_highlights(hl)), "long highlight missed")
+        abs_file = root / "abstract.txt"
+        abs_file.write_text(("word " * 260).strip(), encoding="utf-8")
+        require(any(item["code"] == "COMP002" for item in check_abstract(abs_file)), "long abstract missed")
+        cap_file = root / "captions.txt"
+        cap_file.write_text("Figure 1. Standalone caption differs.\n", encoding="utf-8")
+        ms_cap = root / "ms_cap.txt"
+        ms_cap.write_text("Figure 1. Manuscript caption wording. $-40K and 0.208[0.189, 0.229].\n", encoding="utf-8")
+        require(any(item["code"] == "COMP003" for item in check_caption_sync(ms_cap, cap_file)), "caption mismatch missed")
+        require(len(check_text_formatting(ms_cap)) == 2, "numeric currency/CI spacing check missed")
+        csv_file = root / "table.csv"
+        csv_file.write_text("model,status,val\nA,available,NA\n", encoding="utf-8")
+        require(any(item["code"] == "COMP005" for item in check_csv_table(csv_file)), "CSV available/NA missed")
+        require(any(item["code"] == "COMP006" for item in check_discrete_band(3, 0.114)), "discrete step band missed")
+        tests.append("companion limits, caption sync, currency/CI formatting, and discrete-band checks")
+
+        bad_plot = root / "bad_plot.py"
+        bad_plot.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei']\n"
+            "fig, (ax1, ax2) = plt.subplots(1, 2)\n"
+            "fig.suptitle('Baked')\n"
+            "ax1.legend()\n"
+            "ax1.set_ylabel('RMSEA ≤ 0.08')\n"
+            "ax1.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n"
+            "ax1.set_ylim(0, 38)\n"
+            "ax2.set_ylim(0, 45)\n"
+            "fig.savefig('x.png')\n",
+            encoding="utf-8",
+        )
+        fig_codes = {item["code"] for item in lint_python_script(bad_plot)}
+        require({"FIG001", "FIG002", "FIG003", "FIG004", "FIG005"}.issubset(fig_codes), f"figure linter missed codes: {sorted(fig_codes)}")
+        small_png = root / "small.png"
+        ihdr_data = struct.pack(">IIBBBBB", 640, 400, 8, 2, 0, 0, 0)
+        small_png.write_bytes(b"\x89PNG\r\n\x1a\n" + struct.pack(">I", 13) + b"IHDR" + ihdr_data + b"\x00\x00\x00\x00")
+        require(any(item["code"] == "FIG006" for item in lint_png_file(small_png)), "narrow PNG width missed")
+        tests.append("static figure style AST and PNG width linter")
 
     print(json.dumps({"status": "PASS", "tests": tests}, indent=2))
     return 0

@@ -31,9 +31,9 @@ After drafting, read the paragraph as a whole and its boundary sentences with th
 
 ### Results progression
 
-In Results, state the finding before or with the figure or table callout. Report evidence needed to support it, then give the substantive answer at the paragraph or subsection boundary where it belongs. Do not append an empty synthesis after every result or close only with another inventory of statistics, themes, paths, or cases.
+In Results, guide non-specialist readers deliberately along **purpose → plain-language display orientation → headline pattern and metrics → immediate "so what" → link to the hypothesis, SQ/RQ, or overarching goal**, progressing macro-to-micro and shallow-to-deep. Before citing bare numbers from an unfamiliar figure or table, state what comparison is tested and how to read the axes or direction. Report the main trend with necessary numbers, then immediately state its substantive meaning at the paragraph or subsection boundary rather than ending on a naked statistic or an omnibus closing filler.
 
-Lead with the main pattern or comparison, then use necessary numbers or other evidence to support it. Do not merely report values in variable, group, or panel order and leave the reader to discover the finding. Use [results-and-explanation.md](results-and-explanation.md) for evidence ordering and its qualifications.
+Lead with the analytical comparison, not a mechanical variable, group, or panel inventory that leaves the reader to infer the finding. Keep numbers that support one point together, progressing from aggregate behavior to subgroups and limiting diagnostics, and from observable patterns to formal hypothesis/goal resolution. Evidence ordering and its qualifications belong in [results-and-explanation.md](results-and-explanation.md).
 
 Test the “so what” by asking what the evidence establishes about the question: an effect, contrast, trade-off, boundary, or supported explanation. Removing an SQ/RQ label should not remove the answer. Do not make a descriptive plot carry a causal conclusion or force every visual to demonstrate the full feedback loop.
 

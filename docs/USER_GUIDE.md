@@ -148,6 +148,8 @@ python skills/academic-writing-skills/scripts/audit_manuscript_state.py manuscri
 python skills/academic-writing-skills/scripts/audit_text_consistency.py manuscript_state.json
 python skills/academic-writing-skills/scripts/audit_prose_patterns.py manuscript_state.json
 python skills/academic-writing-skills/scripts/audit_docx_structure.py manuscript.docx
+python skills/academic-writing-skills/scripts/audit_companion_limits.py --highlights highlights.txt --abstract abstract.txt
+python skills/academic-writing-skills/scripts/audit_figure_style.py figure_script.py figure.png
 python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
@@ -182,3 +184,4 @@ Suppose you submit a hydrology/adaptation study that evaluates synthetic survey 
    - **Host-register & guest-term onboarding:** First mention of `zero-shot LLM` explains it functionally as a general-purpose text model prompted with anonymized household records without parameter retraining.
 2. **Claim, transition, and display tightening:** Replaces *"In today's rapidly evolving landscape... LLM agents accurately replicate human behavior (`RMSE = 0.04`) and can replace field surveys"* with *"While multi-wave household surveys track storm-driven insurance shifts, repeating them across changing basins is costly; under the history-augmented prompt (which also lengthens the input prompt) on N = 840 households, Wave 2 group-mean error reached 0.04 on the 0–1 scale, whereas individual change errors lagged a zero-change carry-forward baseline and cannot replace field surveys."*
 3. **Four representative Before/After displays (`./images/examples/`):** Clean `(a)`/`(b)` multi-panel figures with external legends (`ex1_multipanel_en.png`), threshold-tick bar plots without in-bar text (`ex2_threshold_en.png`), boxplot + jitter for >10 pre-grouped scenarios with compatible data (`-$40K` formatting; dot plot or table when ungrouped, `ex3_distribution_en.png`), and three-line tables stating `N`, `95% CI`, and legacy-subset notes (`ex4_table_en.png`).
+4. **Guided 5-Step Results Arc (macro-to-micro, shallow-to-deep):** Before reporting `RMSE = 0.041` vs `0.29`, open with what the test asks, explain in plain words what Figure 2(a)/(b) compare and which direction is lower error, present aggregate trends before individual transitions, add an immediate "so what", and close on Hypothesis 1 / `SQ1` / the study's overarching goal.

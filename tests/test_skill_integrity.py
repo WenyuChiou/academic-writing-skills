@@ -36,7 +36,9 @@ CORE_REFERENCES = {
 }
 CORE_SCRIPTS = {
     "audit_candidate_text.py",
+    "audit_companion_limits.py",
     "audit_docx_structure.py",
+    "audit_figure_style.py",
     "audit_handoff.py",
     "audit_manuscript_state.py",
     "audit_prose_patterns.py",
@@ -77,7 +79,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.5.0"
+    assert manifest["version"] == "1.6.0"
     guide_version = re.search(
         r"plugin skill version `([^`]+)`", read(ROOT / "docs" / "workspace-adapter.md")
     )
@@ -471,7 +473,7 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 28
+    assert len(report["tests"]) == 31
 
 
 def test_v15_pre_draft_blueprint_figures_and_anti_miss_guards():
@@ -485,6 +487,32 @@ def test_v15_pre_draft_blueprint_figures_and_anti_miss_guards():
     assert "diagram-design" in displays and "Zero baked-in titles or subtitles" in displays
     assert "Ten-Point Anti-Miss Pre-Delivery Ledger" in acceptance
     assert "Ten-Point Anti-Miss Pre-Delivery Ledger" in review_skill
+
+
+def test_v16_guided_results_second_wave_and_flat_shims(tmp_path):
+    results = read(CORE / "references" / "results-and-explanation.md")
+    prose = read(CORE / "references" / "prose-and-citation-editing.md")
+    banned = read(CORE / "references" / "banned_words.md")
+    assert "Five-Step Guided Results Arc" in results
+    assert "macro-to-micro and shallow-to-deep progression" in results.lower()
+    assert "Given-to-New flow" in prose and "anti-echo check" in prose
+    assert "5a. Second-Wave Syntactic and Rhetorical Patterns" in banned
+    assert "5c. Chinese Academic Stock and Buzzword Diagnostics" in banned
+
+    shim_script = ROOT / "scripts" / "install_flat_host_shims.py"
+    assert shim_script.is_file()
+    out = subprocess.run(
+        [sys.executable, str(shim_script), "--root", str(ROOT), "--dest", str(tmp_path)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert out.returncode == 0, out.stdout + out.stderr
+    report = json.loads(out.stdout)
+    assert report["status"] == "PASS"
+    assert (tmp_path / "academic-writing-flat" / "SKILL.md").is_file()
+    assert (tmp_path / "paper-review" / "SKILL.md").is_file()
 
 
 def test_evals_cover_core_and_progressive_review_behavior():
