@@ -1,13 +1,13 @@
 # Academic Writing Skills
 
-[![plugin version](https://img.shields.io/badge/plugin-v1.5.0-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.6.0-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 Part of [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills).
 
 Develop a research argument, write connected paragraphs, and check what the current evidence supports—from an outline to a revision package.
 
-Use with **Codex**, **Claude Code**, **OpenCode**, **Hermes Agent**, and other AI agents that support the Agent Skills format. Available tools and integrations depend on the host.
+Use with **Codex**, **Claude Code**, **Antigravity**, **OpenCode**, **Hermes Agent**, and other AI agents that support the Agent Skills format. Available tools and integrations depend on the host.
 
 [繁體中文](./README.zh-TW.md) | [简体中文](./README.zh-CN.md)
 
@@ -81,7 +81,7 @@ claude plugin install academic-writing-skills@ai-research-skills --scope user
 
 Update with `claude plugin update academic-writing-skills@ai-research-skills`.
 
-For Codex or ChatGPT, use the available skill/plugin interface. For other Agent Skills clients, copy the selected capability/language folders under `skills/` into a supported directory: `.agents/skills/` or `.opencode/skills/` for OpenCode, or `~/.hermes/skills/` for Hermes Agent.
+For **Antigravity**, copy the selected folders under `skills/` into `.agents/skills/` (workspace), `~/.agents/skills/`, or `~/.gemini/config/skills/`; if this repository is cloned directly under `~/.agents/skills/academic-writing-skills`, run `python scripts/install_flat_host_shims.py --dest ~/.agents/skills --include-locales` to create one-level discovery folders (`academic-writing-flat`, `paper-review`, and locale variants). For Codex or ChatGPT, use the available skill/plugin interface. For other Agent Skills clients, copy the selected capability/language folders under `skills/` into `.agents/skills/` or `.opencode/skills/` for OpenCode, or `~/.hermes/skills/` for Hermes Agent.
 
 ## Try it
 
@@ -146,12 +146,14 @@ Below is a **synthetic cross-disciplinary example** (a watershed flood-adaptatio
 
 ### Four representative figure and table improvements
 
-| Focus | Before → After comparison |
+| Before | After |
 |---|---|
-| **1. Multi-panel `(a)` `(b)` layout, external legend & colorblind palette** | ![Multi-panel trajectory Before vs After](./docs/images/examples/ex1_multipanel_en.png) |
-| **2. Threshold bar plot without value/text collision (`RMSEA <= 0.08`)** | ![Threshold RMSEA bar plot Before vs After](./docs/images/examples/ex2_threshold_en.png) |
-| **3. Summarizing >10 pre-grouped scenarios as boxplot + jitter (`-$40K` formatting; dot plot if ungrouped)** | ![Distribution summary Before vs After](./docs/images/examples/ex3_distribution_en.png) |
-| **4. Three-line table with explicit `N`, `95% CI` & legacy-scale note** | ![Three-line data table Before vs After](./docs/images/examples/ex4_table_en.png) |
+| **1. Multi-panel:** baked title, inside legend & value clutter<br>![Multi-panel Before](./docs/images/examples/ex1_multipanel_before_en.png) | **1. Multi-panel `(a)` `(b)`:** caption-only title & external legend<br>![Multi-panel After](./docs/images/examples/ex1_multipanel_after_en.png) |
+| **2. Threshold bar:** colliding `0.08`/`0.10` ticks & floating text<br>![Threshold Before](./docs/images/examples/ex2_threshold_before_en.png) | **2. Threshold bar:** dedicated `0.08` cutoff tick & axis note<br>![Threshold After](./docs/images/examples/ex2_threshold_after_en.png) |
+| **3. >10 tiered scenarios:** cramped 15-bar chart & `$-40K` typo<br>![Distribution Before](./docs/images/examples/ex3_distribution_before_en.png) | **3. >10 pre-grouped scenarios:** boxplot + jitter & `-$40K` (dot plot if ungrouped)<br>![Distribution After](./docs/images/examples/ex3_distribution_after_en.png) |
+| **4. Data table:** full gridlines, `$-40K`, missing `N` & CI<br>![Table Before](./docs/images/examples/ex4_table_before_en.png) | **4. Three-line table:** explicit `N`, `95% CI` & scale scope (`booktabs` / Word)<br>![Table After](./docs/images/examples/ex4_table_after_en.png) |
+
+Supports **LaTeX** (`.tex` / `.bib`, `booktabs`, vector `.pdf` figures), **Word** (`.docx` OOXML three-line tables & tracked changes), and **Markdown** deliverables.
 
 ## Boundaries and further reading
 

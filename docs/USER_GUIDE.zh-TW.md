@@ -146,6 +146,8 @@ python skills/academic-writing-skills/scripts/audit_manuscript_state.py manuscri
 python skills/academic-writing-skills/scripts/audit_text_consistency.py manuscript_state.json
 python skills/academic-writing-skills/scripts/audit_prose_patterns.py manuscript_state.json
 python skills/academic-writing-skills/scripts/audit_docx_structure.py manuscript.docx
+python skills/academic-writing-skills/scripts/audit_companion_limits.py --highlights highlights.txt --abstract abstract.txt --tex manuscript.tex --bib references.bib --docx-tables manuscript.docx
+python skills/academic-writing-skills/scripts/audit_figure_style.py figure_script.py figure.png
 python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
@@ -180,4 +182,5 @@ python skills/academic-writing-skills/scripts/run_regression_tests.py
 2. **繁中壞 AI 段落與修訂結果：**
    - **修改前（AI 空洞套語＋未解術語＋越界結論）：**「在當今快速演進的防洪領域中，LLM 扮演著至關重要的核心角色……過去從未有任何研究探討過零樣本隨機角色提示條件化……模型達成 0.04 誤差，證明模擬受試者已完美複製人類行為並可全面取代實體調查。」
    - **修改後（水資源主軸＋白話引導＋條件與推論邊界）：**「雖然多波次問卷能追蹤風災後投保變化，反覆施測成本仍高；既有的迴歸代理人受限於預設函式，因此本研究測試零樣本大型語言模型（依去識別化背景生成評分的文字模型）於增補前期經歷條件（伴隨提示變長）下對 *N* = 840 家戶的推估表現。第 2 波群體均值誤差為 0.04，但個體跨波變化誤差仍劣於零變化基準規則，尚不足以取代實體抽樣調查。」
-3. **四張代表性科學圖表修改前後對照：** 分別展現多子圖去標題與圖外圖例（`ex1_multipanel_zh-TW.png`）、誤差門檻專屬刻度 `0.08` 與軸標籤註記（`ex2_threshold_zh-TW.png`）、超過 10 個具明確分組依據情境改採盒鬚＋散點與 `-$40K` 格式（無合理分組時改用點圖，`ex3_distribution_zh-TW.png`），以及三線表分母與舊版定義區隔（`ex4_table_zh-TW.png`）；完整圖庫位於 `./images/examples/`。
+3. **四張代表性科學圖表修改前後獨立大圖（`./images/examples/`）：** 提供獨立的 `*_before_zh-TW.png` 與 `*_after_zh-TW.png` 對照圖，涵蓋多子圖去標題與圖外圖例（`ex1_multipanel_*_zh-TW.png`）、誤差門檻專屬刻度 `0.08` 與軸標籤註記（`ex2_threshold_*_zh-TW.png`）、超過 10 個具明確分組依據情境改採盒鬚＋散點與 `-$40K` 格式（無合理分組時改用點圖，`ex3_distribution_*_zh-TW.png`），以及三線表分母與舊版定義區隔（`ex4_table_*_zh-TW.png`），並附上 LaTeX（`booktabs`、向量 `.pdf`）與 Word（`.docx`）輸出規格。
+4. **五步引導式 Results 敘事（由大到小、由淺至深）：** 報出 `RMSE = 0.041` 與 `0.29` 前，先寫清該段欲驗證的目的、為領域外讀者解釋圖 2(a)/(b) 比什麼與誤差高低方向，依「群體趨勢 → 個體變動」報告關鍵數值後立即點出 `so what`，並收束回答研究假設、`SQ1` 或論文總目標（Overarching Goal）。

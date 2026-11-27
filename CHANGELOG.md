@@ -11,6 +11,15 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-11-26
+
+### Added
+
+- **Guided 5-Step Results Arc & Macro-to-Micro / Shallow-to-Deep Progression** across `SKILL.md`, `results-and-explanation.md`, `universal-integrity.md`, and `USER_GUIDE*.md` (`en`, `zh-TW`, `zh-CN`): requires non-specialist orientation (analytical purpose + plain-language axis/direction guide) before bare numbers, immediate `"so what"` closure, and cumulative progression from aggregate benchmarks to subgroups/limits and back to the study's Hypothesis, `SQ/RQ`, and Overarching Goal.
+- **Second-Wave AI-Tell, Given-to-New Flow, Anti-Echo & Polysemous Modifier Rules** in `banned_words.md` and `prose-and-citation-editing.md` (`en`, `zh-TW`, `zh-CN`): contextual diagnostics for negative parallelisms, dangling `-ing` trailers, copula avoidance, synonym cycling, Chinese academic/buzzword stock phrases (`賦能`, `抓手`, `閉環`, `在當今…背景下`, `值得注意的是`, `綜上所述`), `While ...` anti-echo limits (`<= 8` words), plural-subject single-number qualifiers, and disambiguation of everyday cross-disciplinary terms (`local`, `conditioning`, `calibration`, `agent`).
+- **Deterministic Linters & Host Discovery Helpers** (`scripts/audit_companion_limits.py`, `scripts/audit_figure_style.py`, `scripts/install_flat_host_shims.py`) and extended `audit_prose_patterns.py` (`PROSE014`–`PROSE017`, plus LaTeX `.tex` prose unwrapping) / `audit_text_consistency.py` (`.bib` + comment-stripped `.tex`) / `audit_candidate_text.py` / `run_regression_tests.py` (33 checks) mirrored byte-identically across all three locales.
+- **Antigravity Host Support & Standalone Large Visuals / LaTeX/Word Output Support:** Documented explicit **Antigravity** workspace/global discovery and one-level `scripts/install_flat_host_shims.py` installation across `README.md`, `README.zh-TW.md`, and `README.zh-CN.md`; added 24 banner-free standalone PNG comparison figures rendered in two-column `Before` | `After` README tables across `en`, `zh-TW`, and `zh-CN`; explicit LaTeX (`.tex`/`.bib`, `booktabs`, `threeparttable`, vector `.pdf`), Word (`.docx` OOXML three-line tables & `w:tblHeader`), and Markdown deliverable guidance backed by `COMP007`–`COMP009` checks in `audit_companion_limits.py`.
+
 ## [1.5.0] - 2026-11-26
 
 ### Added
@@ -1074,7 +1083,9 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   conventions surface in some references; the core workflow is
   domain-neutral.
 
-[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/commits/main
+[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.5.0...v1.6.0
+[1.5.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.4.3...v1.5.0
 [1.4.3]: https://github.com/WenyuChiou/academic-writing-skills/compare/f1e27b9b6991b898dda576b76846fc728cd2f8b0...v1.4.3
 [1.4.2]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.4.1...f1e27b9b6991b898dda576b76846fc728cd2f8b0
 [1.4.1]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.4.0...v1.4.1

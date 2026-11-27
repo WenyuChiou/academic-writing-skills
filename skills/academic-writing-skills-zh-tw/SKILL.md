@@ -73,7 +73,7 @@ description: "為學術論文建立研究定位與大綱、規劃並修訂相互
 
 僅在有特定讀者功能需求或受影響的相依項目時，才載入其餘指南：
 
-- [results-and-explanation.md](references/results-and-explanation.md)：以證據為主導的發現、so-what/SQ 收尾、圖表功能，以及有證據支持與僅由程式設定的機制之對比。
+- [results-and-explanation.md](references/results-and-explanation.md)：面向非領域讀者的五步引導式結果弧線（目的 → 圖表解說 → 核心指標與數字 → 立即點出 So What → 由大到小、由淺至深扣回假設／`SQ`／研究總目標），並區分有證據支持與僅由程式設定的機制。
 - [discussion-and-limitations.md](references/discussion-and-limitations.md)：解讀或延伸分析模式、敏感度邊界，以及特定限制優先的研究限制。
 - [conclusion-and-abstract.md](references/conclusion-and-abstract.md)：在起草總結前，先釐清當前研究目標、工作、比較層級與處理範圍；保留作者清晰的措辭，並將研究主體定位與研究發現區分開來。
 - [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md)：最終尺寸清晰度、圖表說明/註記、平行補充資料（SM）、編號與專案格式。
@@ -100,7 +100,7 @@ description: "為學術論文建立研究定位與大綱、規劃並修訂相互
 針對**全新的引言（Introduction）、多段落核心章節起草或實質性章節重組**（不包含僅限文法修正、單一段落局部修訂，以及使用者明確指示立即產出完整正文的情況），請先輸出**草稿前對齊藍圖（Pre-Draft Alignment Blueprint）**並**暫停等待作者確認**，再撰寫完整段落：
 
 1. **首句式延伸大綱：** 以編號主題句呈現從整體背景、分流文獻回顧到研究缺口與本研究回應的完整邏輯鏈。
-2. **段落藍圖表（`WHAT / WHY / HOW`）：** 針對每個規劃段落列出其讀者功能（`WHAT`）、設立理由（`WHY`）、分析推進方式（`HOW`）、最精煉的核心主張、獲授權的證據、推論邊界／不主張事項，以及與下一段的銜接關係。
+2. **段落藍圖表（`WHAT / WHY / HOW`）：** 針對每個規劃段落列出其讀者功能（`WHAT`）、設立理由（`WHY`）、分析推進方式（`HOW`）、最精煉的核心主張、獲授權的證據、推論邊界／不主張事項，以及與下一段的銜接關係；撰寫 Results 章節時，一併標明「由大到小、由淺至深」如何推進並扣回研究假設、`SQ/RQ` 或論文總目標。
 3. **目標期刊口吻與跨領域術語首次引導表：** 鎖定目標期刊的核心讀者立場，列出所有借用的跨學科、AI／LLM 或統計術語及其首次出現位置、功能角色與數值方向說明；刪除非必要且無法解釋清楚的行話。
 
 唯有在契約與資訊順序連貫時方可起草。起草完成後，將段落與契約進行對照，並重讀其前一段與後一段。若段落的功能、證據或配置有誤，切勿僅將文字潤飾得流暢。
@@ -204,6 +204,8 @@ description: "為學術論文建立研究定位與大綱、規劃並修訂相互
 - `scripts/audit_candidate_text.py`：依據使用中的專案術語、禁用異體詞與散文設定檔掃描提議的精確段落，並記錄其雜湊值
 - `scripts/audit_handoff.py`：可選擇性驗證依處理範圍而定的覆蓋記錄與精確檔案雜湊；`COVERAGE_COMPLETE` 並非編輯或科學認證
 - `scripts/audit_docx_structure.py`：使用精確標籤名稱檢查 Word OOXML，以檢視修訂追蹤、修訂者、批註、與父項連結的回覆、回覆者、功能變數與預留位置
+- `scripts/audit_companion_limits.py`：檢查 Highlights 字元上限（`<= 85`）、摘要字數、獨立圖說與正文圖說同步、負金額符號順序（`-$40K`）、CSV `available`/`NA` 矛盾、離散子量表步長退化、LaTeX/BibTeX（`COMP007`–`COMP008` 檢查 `booktabs` 框線與 `.tex`/`.bib` 引用同步），以及 Word 表格規範（`COMP009` 垂直格線／`w:tblHeader`）
+- `scripts/audit_figure_style.py`：靜態掃描 Matplotlib 繪圖碼與 PNG 寬度，偵測圖內標題、圖內圖例、`Microsoft JhengHei` 裸字形 `<=` 陷阱、相鄰刻度碰撞與成對子圖 Y 軸尺度不一致
 - `scripts/run_regression_tests.py`：針對隨附的失敗案例驗證審查工具
 
 將指令碼的發現視為診斷結果。在編輯之前，先在脈絡中檢視每個相符項。完全無誤的指令碼報告絕不能取代實質閱讀。
@@ -264,7 +266,7 @@ description: "為學術論文建立研究定位與大綱、規劃並修訂相互
 <a id="work-with-formatted-files"></a>
 ## 處理格式化檔案
 
-若 Word 交付或版面審查涵蓋資料表，請使用 [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md) 的逐表列印版面檢查，並納入[格式化檔案驗收](references/execution-and-acceptance.md)的紀錄。未影響表格或分頁的局部文字修改，不會觸發整套文件的逐表審查。
+若 Word（`.docx`）、LaTeX（`.tex`／`.bib`）或 Markdown（`.md`）交付涵蓋資料表或圖表，請依 [figures-tables-and-supplements.md](references/figures-tables-and-supplements.md) 之輸出格式規格執行、在適用處執行 `scripts/audit_companion_limits.py`，並將渲染檢查結果納入[格式化檔案驗收](references/execution-and-acceptance.md)的紀錄。未影響表格或分頁的局部文字修改，不會觸發整套文件的逐表審查。
 
 檔案格式操作與視覺驗證請使用專門的文件、試算表、簡報或 PDF 技能。本技能規範學術誠信；它不能取代特定格式的版面呈現、修訂追蹤或 OOXML 工作流程。
 

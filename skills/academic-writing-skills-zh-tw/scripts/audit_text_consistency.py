@@ -13,7 +13,7 @@ from xml.etree import ElementTree as ET
 
 
 WORD_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-TEXT_SUFFIXES = {".txt", ".md", ".csv", ".tsv", ".json", ".yaml", ".yml", ".tex"}
+TEXT_SUFFIXES = {".txt", ".md", ".csv", ".tsv", ".json", ".yaml", ".yml", ".tex", ".bib"}
 
 
 def _accepted_paragraph_text(paragraph: ET.Element) -> str:
@@ -63,7 +63,10 @@ def extract_text(path: Path) -> str:
         return docx_text(path)
     if path.suffix.lower() in TEXT_SUFFIXES:
         # Replacement characters can hide the very text a scan must verify.
-        return path.read_text(encoding="utf-8-sig")
+        raw = path.read_text(encoding="utf-8-sig")
+        if path.suffix.lower() == ".tex":
+            raw = "\n".join(re.sub(r"(?<!\\)%.*$", "", line) for line in raw.splitlines())
+        return raw
     raise ValueError(f"unsupported file type: {path.suffix}")
 
 

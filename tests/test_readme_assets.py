@@ -13,13 +13,14 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-@pytest.mark.parametrize("name", ["README.md", "README.zh-TW.md"])
+@pytest.mark.parametrize("name", ["README.md", "README.zh-TW.md", "README.zh-CN.md"])
 def test_readme_names_agent_clients_without_a_testing_badge(name):
     text = (ROOT / name).read_text(encoding="utf-8")
     assert "actions/workflows/test.yml/badge.svg" not in text
     opening = text.split("## ", 1)[0]
-    for client in ("Codex", "Claude Code", "OpenCode", "Hermes Agent", "Agent Skills"):
+    for client in ("Codex", "Claude Code", "Antigravity", "OpenCode", "Hermes Agent", "Agent Skills"):
         assert client in opening, (name, client)
+    assert "install_flat_host_shims.py" in text, name
     assert "depend on the host" in opening or "依 host 而定" in opening
 
 
@@ -90,20 +91,33 @@ def test_readmes_include_before_and_after_example(name, expected_heading, lang, 
     text = (ROOT / name).read_text(encoding="utf-8")
     assert expected_heading in text
     assert "#before-and-after-walkthrough" in text
+    assert (
+        "| Before | After |" in text
+        or "| 修改前（Before） | 修改後（After） |" in text
+        or "| 修改前（Before） | 修改后（After） |" in text
+    )
+    assert "LaTeX" in text and "Word" in text
     for marker in native_markers:
         assert marker in text, (name, marker)
     for stem in ("ex1_multipanel", "ex2_threshold", "ex3_distribution", "ex4_table"):
-        rel = f"./docs/images/examples/{stem}_{lang}.png"
-        assert rel in text, (name, rel)
+        for variant in ("before", "after"):
+            rel = f"./docs/images/examples/{stem}_{variant}_{lang}.png"
+            assert rel in text, (name, rel)
 
 
 @pytest.mark.parametrize("lang", ["en", "zh-TW", "zh-CN"])
 @pytest.mark.parametrize("stem", ["ex1_multipanel", "ex2_threshold", "ex3_distribution", "ex4_table"])
-def test_representative_example_pngs_are_valid_and_compact(stem, lang):
-    path = ROOT / "docs" / "images" / "examples" / f"{stem}_{lang}.png"
+@pytest.mark.parametrize("variant", ["before", "after"])
+def test_representative_example_pngs_are_valid_and_compact(stem, variant, lang):
+    path = ROOT / "docs" / "images" / "examples" / f"{stem}_{variant}_{lang}.png"
     assert path.is_file(), path
+    legacy = ROOT / "docs" / "images" / "examples" / f"{stem}_{lang}.png"
+    assert not legacy.exists(), legacy
     data = path.read_bytes()
     assert data[:8] == b"\x89PNG\r\n\x1a\n"
+    assert data[12:16] == b"IHDR"
+    width, _ = struct.unpack(">II", data[16:24])
+    assert width >= 900, (path.name, width)
     assert len(data) < 500_000
 
 

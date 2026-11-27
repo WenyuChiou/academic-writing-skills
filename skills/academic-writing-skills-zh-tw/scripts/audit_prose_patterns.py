@@ -36,12 +36,46 @@ DEICTIC_OPENINGS = {"this", "these", "those", "such"}
 SHORT_TRANSITION_OPENINGS = {
     "additionally", "furthermore", "however", "moreover", "overall", "therefore",
 }
+CJK_STOCK_PHRASES = (
+    "在當今", "在当今", "值得注意的是", "綜上所述", "综上所述",
+    "總而言之", "总而言之", "由此可見", "由此可见", "賦能", "赋能",
+    "抓手", "閉環", "闭环", "提供了新的思路", "提供了新的視角", "提供了新的视角",
+)
 INDIRECT_ACADEMIC_VERB_RE = re.compile(r"\b(?:draw|draws|drawing|drew|drawn)\s+on\b", re.IGNORECASE)
 CONNECTIVE_FRAME_RE = re.compile(
     r"^\s*(?:Beyond\s+[^,]{1,80},|Taken\s+together\b\s*,?)", re.IGNORECASE,
 )
 PROCEDURAL_FRAME_RE = re.compile(
     r"^\s*We\s+(?:first|second|third|then|next|finally|subsequently)\b", re.IGNORECASE,
+)
+NEGATIVE_PARALLELISM_RE = re.compile(
+    r"\bnot\s+(?:merely|just|only)\b[^.!?;]{1,100}\bbut\s+(?:also|rather)\b"
+    r"|\bit\s+is\s+not\s+(?:merely|just)\b[^.!?]{1,80};\s*it\s+is\b"
+    r"|不僅是[^。！？\n]{1,30}更是|不仅是[^。！？\n]{1,30}更是",
+    re.IGNORECASE,
+)
+DANGLING_ING_TRAILER_RE = re.compile(
+    r",\s*(?:thereby\s+)?(?:highlighting|underscoring|emphasizing|fostering|"
+    r"cultivating|showcasing|paving\s+the\s+way\s+for)\b[^.!?]{0,120}[.!?]\s*$",
+    re.IGNORECASE,
+)
+PLURAL_SINGLE_NUMBER_RE = re.compile(
+    r"\b(?:two|three|four|both)\s+(?:models|methods|approaches|conditions|groups|architectures)\b"
+    r"[^.!?]*?\b(?:reached|achieved|yielded|had|produced|recorded)\b[^.!?]*?\b\d+\.\d+\b",
+    re.IGNORECASE,
+)
+PLURAL_QUALIFIER_RE = re.compile(
+    r"\b(?:each|respectively|average|averaging|mean\s+across|pooled|combined)\b"
+    r"|\bbetween\s+\d[^.!?]*\band\s+\d|\bfrom\s+\d[^.!?]*\bto\s+\d",
+    re.IGNORECASE,
+)
+DISPLAY_CALLOUT_RE = re.compile(
+    r"\b(?:Figure|Fig\.|Table)\s+S?\d+|(?:圖|图|表)\s*S?\d+", re.IGNORECASE,
+)
+NAKED_STAT_END_RE = re.compile(
+    r"(?:\((?:p\s*[<>=]\s*0?\.\d+|95%\s*CI[^)]*)\)"
+    r"|(?:RMSE|MAE|R2|R\^2|CFI|RMSEA|p)\s*=\s*0?\.\d+)\.\s*$",
+    re.IGNORECASE,
 )
 
 
@@ -177,6 +211,33 @@ def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str
                 "message": "formulaic connective or indirect academic verb; retain only when it clarifies the relation better than direct wording",
             })
 
+    for match in NEGATIVE_PARALLELISM_RE.finditer(text):
+        findings.append({
+            "code": "PROSE014", "artifact": artifact, "match": match.group(0).strip(), "count": 1,
+            "message": "negative-parallelism rhetorical frame; state the supported proposition directly unless refuting a documented claim",
+        })
+
+    for sentence in sentence_list:
+        trailer = DANGLING_ING_TRAILER_RE.search(sentence)
+        if trailer:
+            findings.append({
+                "code": "PROSE015", "artifact": artifact, "match": trailer.group(0).strip(), "count": 1,
+                "message": "dangling participial significance trailer; replace with a specific grounded finding, trade-off, or boundary",
+            })
+        if PLURAL_SINGLE_NUMBER_RE.search(sentence) and not PLURAL_QUALIFIER_RE.search(sentence):
+            findings.append({
+                "code": "PROSE016", "artifact": artifact, "match": sentence, "count": 1,
+                "message": "plural subject paired with single metric value; specify 'each', 'respectively', or 'averaging'",
+            })
+
+    for paragraph in re.split(r"\n\s*\n", text):
+        para_sentences = sentences(paragraph)
+        if len(para_sentences) >= 2 and DISPLAY_CALLOUT_RE.search(paragraph) and NAKED_STAT_END_RE.search(para_sentences[-1]):
+            findings.append({
+                "code": "PROSE017", "artifact": artifact, "match": para_sentences[-1], "count": 1,
+                "message": "multi-sentence display unit ends on a bare statistic; close with an explicit 'so what' meaning and hypothesis/goal link",
+            })
+
     hyphen_threshold = max(3, int(profile.get("hyphenated_token_threshold", 4)))
     for sentence in sentence_list:
         compounds = re.findall(r"\b[A-Za-z]+(?:-[A-Za-z]+)+\b", sentence)
@@ -233,6 +294,13 @@ def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str
                 "code": "PROSE003", "artifact": artifact, "match": phrase,
                 "count": count, "message": "stock or project-discouraged phrase; inspect in context",
             })
+    for cjk_phrase in CJK_STOCK_PHRASES:
+        count = text.count(cjk_phrase)
+        if count:
+            findings.append({
+                "code": "PROSE003", "artifact": artifact, "match": cjk_phrase,
+                "count": count, "message": "stock or buzzword Chinese phrase; inspect in context",
+            })
 
     phrase_words = max(4, int(profile.get("phrase_words", 5)))
     minimum = max(2, int(profile.get("phrase_min_occurrences", 3)))
@@ -269,6 +337,33 @@ def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str
     return findings
 
 
+def clean_latex_prose(text: str) -> str:
+    """Strip LaTeX comments, preamble, equations, tabular blocks, and cite/label commands while unwrapping prose text."""
+    lines = [re.sub(r"(?<!\\)%.*$", "", line) for line in text.splitlines()]
+    body = "\n".join(lines)
+    doc_match = re.search(r"\\begin\{document\}(.*?)\\end\{document\}", body, re.DOTALL)
+    if doc_match:
+        body = doc_match.group(1)
+    for env in ("equation", r"equation\*", "align", r"align\*", "gather", r"gather\*", "tabular", r"tabular\*", "tabularx", "longtable", "thebibliography"):
+        body = re.sub(rf"\\begin\{{{env}\}}.*?\\end\{{{env}\}}", "\n", body, flags=re.DOTALL)
+    body = re.sub(r"\\(?:documentclass|usepackage|bibliographystyle|citestyle|bibliography|addbibresource)(?:\[[^\]]*\])?\{[^}]*\}", "", body)
+    body = re.sub(r"\\(?:label|ref|eqref|autoref|pageref|hspace|vspace)\{[^}]*\}", "", body)
+    body = re.sub(r"\\[a-zA-Z]*cite[a-zA-Z*]*\s*(?:\[[^\]]*\]\s*)*\{[^}]*\}", "", body)
+    body = re.sub(r"\\(?:begin|end)\{(?:abstract|figure\*?|table\*?|itemize|enumerate)\}(?:\[[^\]]*\])?", "\n", body)
+    unwrap_re = re.compile(
+        r"\\(?:(?:sub)*section\*?|paragraph|textbf|textit|emph|textrm|text|caption)(?:\[[^\]]*\])?\{([^{}]*)\}"
+    )
+    for _ in range(5):
+        updated = unwrap_re.sub(r"\1", body)
+        if updated == body:
+            break
+        body = updated
+    body = re.sub(r"\$([^$]+)\$", r"\1", body)
+    body = body.replace("---", "—").replace(r"\%", "%").replace(r"\$", "$").replace(r"\&", "&")
+    body = re.sub(r"\\[a-zA-Z]+\*?(?:\[[^\]]*\])?", " ", body)
+    return body
+
+
 def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
     scanned = False
@@ -278,9 +373,12 @@ def audit(state: dict[str, Any], project_root: Path) -> list[dict[str, Any]]:
             findings.append({"code": "PROSE000", "artifact": artifact, "message": error})
         else:
             scanned = True
+            suffix = Path(item["path"]).suffix.lower()
             # DOCX extraction emits one line per paragraph; wrapped text files do not.
-            if Path(item["path"]).suffix.lower() == ".docx":
+            if suffix == ".docx":
                 text = text.replace("\n", "\n\n")
+            elif suffix == ".tex":
+                text = clean_latex_prose(text)
             findings.extend(audit_text(text, artifact, state))
     if not scanned and not findings:
         findings.append({"code": "PROSE000", "artifact": "project",

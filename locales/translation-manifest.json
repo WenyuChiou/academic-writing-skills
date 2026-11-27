@@ -1,26 +1,26 @@
 {
   "schema_version": 1,
-  "source_revision": "7bf670623d9d3d79e6696063536e436ec222f2be",
+  "source_revision": "9f08bb0f6eed10bc340f89d722ff108348d948ef",
   "locales": [
     "zh-TW",
     "zh-CN"
   ],
-  "review_state": "v1.5.0 candidate synced across EN, zh-TW, and zh-CN; verified by check_localizations and pytest",
+  "review_state": "v1.6.0 guided Results, second-wave AI-tell & flow upgrades, and companion/figure linters synced across EN, zh-TW, and zh-CN; verified by check_localizations and pytest",
   "method": "Antigravity draft; parent located repairs; OpenCC tw2s with bounded locale glossary; not semantic approval",
   "translations": [
     {
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/SKILL.md",
       "target": "skills/academic-writing-skills-zh-tw/SKILL.md",
-      "source_sha256": "01b451d6ce9f0f43dca0cad7dd980218df82b636a965524caf57d9a430ccfbbe",
-      "target_sha256": "e66da8d99e75c8cb99dee8e78793a2d44e35cedfb93689dfbc25ad46d846290c"
+      "source_sha256": "e616d6ff03d643c92fedd5c90e63192ab9946a7388782e81629dfcc16a551e8c",
+      "target_sha256": "e3846e2878b94263ba562099d94bb82fbac18436fc07ce2ee08bf81e5d953142"
     },
     {
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/banned_words.md",
       "target": "skills/academic-writing-skills-zh-tw/references/banned_words.md",
-      "source_sha256": "64255506e74955c9b5fa140555d45b6c8c19804ae0bddabdecf804bde7a44a70",
-      "target_sha256": "ed7a6996e9026bf7755eb53c3b042cddf1380abe18c0da6d716d24db689f0c2b"
+      "source_sha256": "a56b4e008f897eecdbefff482e77b7b30d14c962db1237c3f06e92eee8616b98",
+      "target_sha256": "2eea55d60ef18f07e890c8a3769c3ff8f00494b30420f1f942f469cf2f1839c5"
     },
     {
       "locale": "zh-TW",
@@ -61,8 +61,8 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/figures-tables-and-supplements.md",
       "target": "skills/academic-writing-skills-zh-tw/references/figures-tables-and-supplements.md",
-      "source_sha256": "57505ef35069427b3e2d48fbeaed7d9e78485f984d04ec4e7ee956c1a104702d",
-      "target_sha256": "a45d58b2f3cd2d3d44e8761b7e783fc05412588cabe5ff5978ffbf314b8f7e9f"
+      "source_sha256": "571f7374a7da145b3a1bbd2929b8e98c5848848d49e5245732a19e0b0e2d9e2e",
+      "target_sha256": "d1de11ff5f91aed4b84119ecc55d7e5a43e3248b5f33708ce0296b9b4992d181"
     },
     {
       "locale": "zh-TW",
@@ -110,15 +110,15 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/prose-and-citation-editing.md",
       "target": "skills/academic-writing-skills-zh-tw/references/prose-and-citation-editing.md",
-      "source_sha256": "12c4197fe7e05acb3e2c8aa3c012d59bd9798f594c2f459199642143a44668e9",
-      "target_sha256": "2c516b3cfb362dd1178f7af739b4f980eae0adbded73d7b2f13a28d57b4981d4"
+      "source_sha256": "aaa2d04ee6940b5d2a26f194265e4c2a08cf4d33a11a5ef209e4ff7b8e1b0be0",
+      "target_sha256": "c19f1ca50a857fbd612dfcbeb9c95357629219f089c6c3be87fa2dcbc543812a"
     },
     {
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/results-and-explanation.md",
       "target": "skills/academic-writing-skills-zh-tw/references/results-and-explanation.md",
-      "source_sha256": "bce3039a776a9c8a1bca08698efb42abfc6c0102c414078ac046184fd1021d81",
-      "target_sha256": "00a900983987f63fc391699b8df45a5540822005624a22ceed23c5f0773bdf4d"
+      "source_sha256": "42adb540dc2d5c11138010d53d833c4150c92499b3a74b9053b1fe8f30e7d7b6",
+      "target_sha256": "65079538aae86a058aef7e050e0d2305c95507c2121b1e40bf6a565b8447615b"
     },
     {
       "locale": "zh-TW",
@@ -152,8 +152,8 @@
       "locale": "zh-TW",
       "source": "skills/academic-writing-skills/references/universal-integrity.md",
       "target": "skills/academic-writing-skills-zh-tw/references/universal-integrity.md",
-      "source_sha256": "5f7335a39209ce301ad3f0c0a8e553bc8dbe1cb474f4afbe601e47af23c1a183",
-      "target_sha256": "7592d176fd3d528003d957c1d873e5dbe062160df162136b2b9c58573a3878a8"
+      "source_sha256": "98fbfa9d40571d1523d0d238dbe108efe5857b32e2be2510cf942c624dcd2a3f",
+      "target_sha256": "44dbffc6844713b472be1fc5e8c3b3c8ea86cf82f64a36e603a1faf76feae02e"
     },
     {
       "locale": "zh-TW",
@@ -236,15 +236,15 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/SKILL.md",
       "target": "skills/academic-writing-skills-zh-cn/SKILL.md",
-      "source_sha256": "01b451d6ce9f0f43dca0cad7dd980218df82b636a965524caf57d9a430ccfbbe",
-      "target_sha256": "37aac6abcd530bb7a234fa5bbd11d93750c9cfb9967609367515287daea684f0"
+      "source_sha256": "e616d6ff03d643c92fedd5c90e63192ab9946a7388782e81629dfcc16a551e8c",
+      "target_sha256": "28d5d67867136a355646b5bd65fbd65f35ef1a001ab405519676f3df4cab58d5"
     },
     {
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/banned_words.md",
       "target": "skills/academic-writing-skills-zh-cn/references/banned_words.md",
-      "source_sha256": "64255506e74955c9b5fa140555d45b6c8c19804ae0bddabdecf804bde7a44a70",
-      "target_sha256": "d847ea23f1ce0738a69d509834acb41460a26199d0f7a1681eaa80a047825b9a"
+      "source_sha256": "a56b4e008f897eecdbefff482e77b7b30d14c962db1237c3f06e92eee8616b98",
+      "target_sha256": "34886e9b1aeb4ea6cdb7e04c2953d45e83d0e90c51fe63ca195270b9d6c03988"
     },
     {
       "locale": "zh-CN",
@@ -285,8 +285,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/figures-tables-and-supplements.md",
       "target": "skills/academic-writing-skills-zh-cn/references/figures-tables-and-supplements.md",
-      "source_sha256": "57505ef35069427b3e2d48fbeaed7d9e78485f984d04ec4e7ee956c1a104702d",
-      "target_sha256": "9ded322f79cbe2774b783b491b464bcc2acb592c9e041326e3f8423d58b09984"
+      "source_sha256": "571f7374a7da145b3a1bbd2929b8e98c5848848d49e5245732a19e0b0e2d9e2e",
+      "target_sha256": "05dc06dc169685958135b6384da52361de8a489e0a18275f634a5780dbf2ccc9"
     },
     {
       "locale": "zh-CN",
@@ -334,15 +334,15 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/prose-and-citation-editing.md",
       "target": "skills/academic-writing-skills-zh-cn/references/prose-and-citation-editing.md",
-      "source_sha256": "12c4197fe7e05acb3e2c8aa3c012d59bd9798f594c2f459199642143a44668e9",
-      "target_sha256": "03fa09b73ba8f6e466092c2d146eccb905287a159e8af55f0a4a1ef8a9868d31"
+      "source_sha256": "aaa2d04ee6940b5d2a26f194265e4c2a08cf4d33a11a5ef209e4ff7b8e1b0be0",
+      "target_sha256": "c49be4945ba5051d1eb921973b7f20771f654141746cdcb6e7a9603a722b478a"
     },
     {
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/results-and-explanation.md",
       "target": "skills/academic-writing-skills-zh-cn/references/results-and-explanation.md",
-      "source_sha256": "bce3039a776a9c8a1bca08698efb42abfc6c0102c414078ac046184fd1021d81",
-      "target_sha256": "372018f3c49c8bd1eacb875d001e3b51026762ab912b7139ac357f873e54ab8f"
+      "source_sha256": "42adb540dc2d5c11138010d53d833c4150c92499b3a74b9053b1fe8f30e7d7b6",
+      "target_sha256": "f384f1daaa4c47c1f05ba4c8ff41c10abd5756ac88b7271a7f414f6648307c0e"
     },
     {
       "locale": "zh-CN",
@@ -376,8 +376,8 @@
       "locale": "zh-CN",
       "source": "skills/academic-writing-skills/references/universal-integrity.md",
       "target": "skills/academic-writing-skills-zh-cn/references/universal-integrity.md",
-      "source_sha256": "5f7335a39209ce301ad3f0c0a8e553bc8dbe1cb474f4afbe601e47af23c1a183",
-      "target_sha256": "bf85d28acc2678c970c1eb79d026f17257f274e559b61d1916a4390702824697"
+      "source_sha256": "98fbfa9d40571d1523d0d238dbe108efe5857b32e2be2510cf942c624dcd2a3f",
+      "target_sha256": "d327acdd492c38c808e57af3345367a07439684f6f7d35994e90ae6c87031753"
     },
     {
       "locale": "zh-CN",

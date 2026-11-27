@@ -240,7 +240,7 @@ def test_extracted_bundle_passes_actual_offline_regression(bundle: Path, tmp_pat
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 28
+    assert len(report["tests"]) == 33
 
 
 @pytest.mark.parametrize("operation", ["state", "consistency", "prose", "candidate", "docx"])

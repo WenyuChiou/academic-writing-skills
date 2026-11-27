@@ -377,10 +377,365 @@ def main() -> int:
 
         require(
             any("host-journal register" in check for check in MANUAL_CHECKS)
-            and any("bundled condition caveats" in check for check in MANUAL_CHECKS),
-            "manual candidate gate omitted host-register onboarding or bundled-condition propagation",
+            and any("bundled condition caveats" in check for check in MANUAL_CHECKS)
+            and any("guided 5-step Results arc" in check for check in MANUAL_CHECKS)
+            and any("polysemous modifiers" in check for check in MANUAL_CHECKS),
+            "manual candidate gate omitted host-register, bundled-condition, guided-results, or polysemous checks",
         )
-        tests.append("host-register onboarding and bundled-condition manual checks")
+        tests.append("host-register onboarding, guided results, and bundled-condition manual checks")
+
+        second_wave = (
+            "It is not merely a prompt trick; it is a watershed shift. "
+            "Model A achieved 0.04 on Figure 2, thereby highlighting the urgent need for management. "
+            "Two models reached 0.04 on the Wave 2 metric (p < 0.01)."
+        )
+        second_codes = {item["code"] for item in audit_prose_text(second_wave, "second-wave", {})}
+        require(
+            {"PROSE014", "PROSE015", "PROSE016", "PROSE017"}.issubset(second_codes),
+            f"second-wave / guided-results codes incomplete: {sorted(second_codes)}",
+        )
+        require(
+            any(item["code"] == "PROSE003" for item in audit_prose_text("綜上所述，本研究賦能防洪調適。", "cjk-stock", {})),
+            "CJK stock phrase audit missed boilerplate",
+        )
+        require(
+            not any(
+                item["code"] in {"PROSE014", "PROSE015", "PROSE016", "PROSE017"}
+                for item in audit_prose_text(
+                    "To evaluate household transitions, Figure 2 compares errors. "
+                    "Both models reached 0.04 each at Wave 2, limiting inference to exploratory trends.",
+                    "guided-clean", {},
+                )
+            ),
+            "clean guided Results passage triggered false-positive PROSE014-017",
+        )
+        tests.append("second-wave AI tells, CJK stock phrases, and guided Results cues")
+
+        from audit_companion_limits import (
+            _extract_captions, check_abstract, check_caption_sync, check_csv_table, check_discrete_band,
+            check_docx_tables, check_highlights, check_latex_citations, check_latex_tables,
+            check_text_formatting,
+        )
+        from audit_figure_style import lint_png_file, lint_python_script
+        import struct
+
+        hl = root / "highlights.txt"
+        hl.write_text("Highlights\n- " + ("x" * 90) + "\n- Concise highlight line.\n", encoding="utf-8")
+        require(any(item["code"] == "COMP001" for item in check_highlights(hl)), "long highlight missed")
+        abs_file = root / "abstract.txt"
+        abs_file.write_text(("word " * 260).strip(), encoding="utf-8")
+        require(any(item["code"] == "COMP002" for item in check_abstract(abs_file)), "long abstract missed")
+        cap_file = root / "captions.txt"
+        cap_file.write_text("Figure 1. Accuracy by group.\nShaded bands show 95% CIs.\n", encoding="utf-8")
+        ms_cap = root / "ms_cap.txt"
+        ms_cap.write_text("Figure 1. Accuracy by group.\nShaded bands show standard deviations.\n$-40K and 0.208[0.189, 0.229].\n", encoding="utf-8")
+        require(any(item["code"] == "COMP003" for item in check_caption_sync(ms_cap, cap_file)), "multiline caption continuation mismatch missed")
+        require(len(check_text_formatting(ms_cap)) == 2, "numeric currency/CI spacing check missed")
+        md_cap_a = root / "md_cap_a.md"
+        md_cap_b = root / "md_cap_b.md"
+        md_cap_a.write_text("> **Figure 1.** Accuracy across basins.\n", encoding="utf-8")
+        md_cap_b.write_text("**Figure 1.** Accuracy across states.\n", encoding="utf-8")
+        require(any(item["code"] == "COMP003" for item in check_caption_sync(md_cap_a, md_cap_b)), "Markdown bold/blockquote caption mismatch missed")
+        esc_md = root / "escaped_currency.md"
+        esc_md.write_text(r"Estimated bias was \$-40K in Markdown.", encoding="utf-8")
+        require(any(item["code"] == "COMP004" for item in check_text_formatting(esc_md)), "escaped \\$-40K in Markdown missed")
+
+        word_cap_docx = root / "word_caps.docx"
+        make_docx(
+            word_cap_docx,
+            '<w:p><w:r><w:t>first</w:t><w:br/><w:t>second</w:t></w:r>'
+            '<w:moveFrom w:author="A"><w:r><w:t> oldmoved</w:t></w:r></w:moveFrom></w:p>'
+            '<w:moveFrom w:author="A"><w:p><w:r><w:t>three hidden words</w:t></w:r></w:p></w:moveFrom>',
+        )
+        require(check_abstract(word_cap_docx, max_words=2) == [], "w:moveFrom paragraph or run was counted or w:br merged words")
+        two_words = root / "word_breaks.docx"
+        make_docx(two_words, '<w:p><w:r><w:t>alpha</w:t><w:br/><w:t>beta</w:t></w:r></w:p>')
+        require(any(item["code"] == "COMP002" for item in check_abstract(two_words, max_words=1)), "w:br word split not counted cleanly")
+        csv_file = root / "table.csv"
+        csv_file.write_text("model,status,val\nA,available,NA\n", encoding="utf-8")
+        require(any(item["code"] == "COMP005" for item in check_csv_table(csv_file)), "CSV available/NA missed")
+        require(any(item["code"] == "COMP006" for item in check_discrete_band(3, 0.114)), "discrete step band missed")
+        tests.append("companion limits, caption sync, currency/CI formatting, and discrete-band checks")
+
+        bad_plot = root / "bad_plot.py"
+        bad_plot.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei']\n"
+            "f, (ax1, ax2) = plt.subplots(1, 2)\n"
+            "f.suptitle('Baked')\n"
+            "ax1.legend()\n"
+            "ax1.set_ylabel('RMSEA ≤ 0.08')\n"
+            "ax1.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n"
+            "ax1.set_ylim(0, 38)\n"
+            "ax2.set_ylim(0, 45)\n"
+            "f.savefig('x.png')\n",
+            encoding="utf-8",
+        )
+        fig_codes = {item["code"] for item in lint_python_script(bad_plot)}
+        require({"FIG001", "FIG002", "FIG003", "FIG004", "FIG005"}.issubset(fig_codes), f"figure linter missed codes: {sorted(fig_codes)}")
+        plt_title_script = root / "plt_title_only.py"
+        plt_title_script.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "fig, ax = plt.subplots()\n"
+            "plt.title('Accuracy by condition')\n"
+            "def draw():\n    title('Deferred title')\n"
+            "from matplotlib.pyplot import title\n"
+            "draw()\n"
+            "fig.savefig('t.png')\n",
+            encoding="utf-8",
+        )
+        plt_title_findings = lint_python_script(plt_title_script)
+        require(
+            [item["line"] for item in plt_title_findings if item["code"] == "FIG001"] == [4, 6],
+            f"plt.title / deferred import FIG001 mismatch: {plt_title_findings}",
+        )
+        rebound_leg = root / "rebound_legend.py"
+        rebound_leg.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "plot = plt.figure()\n"
+            "plot = plot.add_subplot(111)\n"
+            "plot.legend()\n"
+            "fig_mc, ax_mc = plt.subplots()\n"
+            "match 1:\n"
+            "    case 1:\n"
+            "        ax_mc.legend()\n",
+            encoding="utf-8",
+        )
+        require(
+            sum(1 for item in lint_python_script(rebound_leg) if item["code"] == "FIG002") == 2,
+            "reassigned or match-case axis legend missed FIG002",
+        )
+        add_sub_plot = root / "add_sub.py"
+        add_sub_plot.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "canvas = plt.figure()\n"
+            "p1 = canvas.add_subplot(1, 2, 1)\n"
+            "p2 = canvas.add_subplot(1, 2, 2)\n"
+            "p1.set_ylim(0, 10)\n"
+            "match 1:\n"
+            "    case 1:\n"
+            "        p2.set_ylim(0, 20)\n",
+            encoding="utf-8",
+        )
+        require(any(item["code"] == "FIG005" for item in lint_python_script(add_sub_plot)), "add_subplot Fig005 missed")
+        scale_isolation = root / "scale_isolation.py"
+        scale_isolation.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "fig1, ax = plt.subplots()\n"
+            "ax.set_yscale('log')\n"
+            "plt.yscale('log')\n"
+            "fig2, ax = plt.subplots()\n"
+            "ax.set_yticks([1, 2, 3, 4])\n"
+            "fig3, ax_bad = plt.subplots()\n"
+            "ax_bad.set_yscale('log')\n"
+            "ax_bad.set_yticks([1, 10, 12, 100])\n"
+            "fig_mp, (ax_mp1, ax_mp2) = plt.subplots(1, 2)\n"
+            "plt.yscale('log')\n"
+            "ax_mp1.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n"
+            "ax_mp2.set_yticks([1, 10, 100, 1000])\n"
+            "plt.yscale('log')\n"
+            "plt.figure()\n"
+            "ax_g = plt.gca()\n"
+            "ax_g.set_yticks([1, 2, 3, 4])\n"
+            "ax_sub = plt.subplot(111)\n"
+            "ax_sub.set_yscale('log')\n"
+            "ax_sub = plt.subplot(1, 1, 1)\n"
+            "ax_sub.set_yticks([1, 10, 100, 1000])\n"
+            "plt.figure()\n"
+            "ax_sub_new = plt.subplot(111)\n"
+            "ax_sub_new.set_yticks([1, 2, 3, 4])\n"
+            "fig_clf = plt.figure()\n"
+            "ax_clf = fig_clf.add_subplot(111)\n"
+            "ax_clf.set_yscale('log')\n"
+            "ax_clf_sub = plt.subplot(111)\n"
+            "ax_clf_sub.set_yticks([1, 10, 100, 1000])\n"
+            "fig_clf.clf()\n"
+            "ax_clf = fig_clf.add_subplot(111)\n"
+            "ax_clf.set_yticks([1, 2, 3, 4])\n"
+            "fig_sup = plt.figure()\n"
+            "ax_sup = fig_sup.add_subplot(111)\n"
+            "ax_sup.set_xticks([0.00, 0.04, 0.08, 0.10, 0.12])\n"
+            "ax_sup.set_xticks([0.00, 0.04, 0.08, 0.12])\n"
+            "fig_exp = plt.figure()\n"
+            "ax_exp = fig_exp.add_subplot(111)\n"
+            "ax_exp.set_xticks([0.00, 0.04, 0.08, 0.10, 0.12])\n"
+            "fig_exp.savefig('before.png')\n"
+            "ax_exp.set_xticks([0.00, 0.04, 0.08, 0.12])\n"
+            "fig_exp.savefig('after.png')\n"
+            "class PlotBox:\n"
+            "    fig_cls, ax_cls = plt.subplots()\n"
+            "    ax_cls.set_yticks([0.00, 0.04, 0.08, 0.10, 0.12])\n",
+            encoding="utf-8",
+        )
+        require(
+            [item["line"] for item in lint_python_script(scale_isolation) if item["code"] == "FIG004"] == [10, 13, 40, 46],
+            f"scale isolation / log / ClassDef FIG004 mismatch: {lint_python_script(scale_isolation)}",
+        )
+        clean_separate_figs = root / "separate_figs.py"
+        clean_separate_figs.write_text(
+            "import matplotlib.pyplot as plt\n"
+            "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "if True:\n"
+            "    fig, (ax1, ax2) = plt.subplots(1, 2)\n"
+            "    ax1.set_xlabel(r'$-0.25$')\n"
+            "    ax1.set_ylim(0, 10)\n"
+            "    ax2.set_ylim(0, 10)\n"
+            "    def unused_helper():\n"
+            "        ax2.set_ylim(0, 99)\n"
+            "def f1():\n    f, ax = plt.subplots()\n    ax.set_ylim(0, 10)\n    ax.set_ylim(0, 12)\n"
+            "figure_custom, ax_c = plt.subplots()\n"
+            "figure_custom.legend(loc='upper center')\n"
+            "if __name__ == '__main__':\n"
+            "    canvas, ax_m = plt.subplots()\n"
+            "    canvas.legend(loc='upper center')\n"
+            "def f2():\n    f, ax2 = plt.subplots()\n    ax2.set_ylim(0, 99)\n"
+            "fig_a, (ax1, ax2) = plt.subplots(1, 2)\n"
+            "ax1.set_ylim(0, 10)\n"
+            "ax2.set_ylim(0, 10)\n"
+            "fig_b, ax1 = plt.subplots()\n"
+            "ax1.set_ylim(0, 100)\n"
+            "fig_log, ax_log = plt.subplots()\n"
+            "ax_log.set_xscale('log')\n"
+            "ax_log.set_xticks([1, 10, 100, 1000])\n"
+            "ax_log.set_yscale('symlog')\n"
+            "ax_log.set_yticks([0, 1, 10, 100])\n"
+            "def title(s):\n    return s\n"
+            "def local_import_scope():\n    from matplotlib.pyplot import title\n    _ = title\n"
+            "_ = title('not a plot title')\n",
+            encoding="utf-8",
+        )
+        require(lint_python_script(clean_separate_figs) == [], f"false positive on mathtext / nested def / separate figs: {lint_python_script(clean_separate_figs)}")
+        small_png = root / "small.png"
+        ihdr_data = struct.pack(">IIBBBBB", 640, 400, 8, 2, 0, 0, 0)
+        small_png.write_bytes(b"\x89PNG\r\n\x1a\n" + struct.pack(">I", 13) + b"IHDR" + ihdr_data + b"\x00\x00\x00\x00")
+        require(any(item["code"] == "FIG006" for item in lint_png_file(small_png)), "narrow PNG width missed")
+        tests.append("static figure style AST and PNG width linter")
+
+        tex_doc = root / "manuscript.tex"
+        tex_doc.write_text(
+            "\\documentclass{article}\n"
+            "% \\cite{ghost_comment_key}\n"
+            "\\begin{document}\n"
+            "\\begin{abstract}Short abstract.\\end{abstract}\n"
+            "\\citestyle{authoryear}\n"
+            "\\newcites{supp}{Supplementary references}\n"
+            "\\section{Results}\n"
+            "It is not merely an LLM; it is a watershed shift \\parencite{smith2024,missing2025}.\n"
+            "See \\citeurl{url2024}, \\citeyearpar{yr2024}, \\footfullcite{ff2024}, \\citetext{see also \\citealp{paren2024}}, "
+            "\\volcite{2}[14]{smith2024}, and \\parencites[see][]{multiA}[cf.]{multiB}.\n"
+            "The change was $-0.25$ units overall.\n"
+            "\\begin{figure}\\caption{Accuracy by group. Shaded bands show standard deviations.}\\end{figure}\n"
+            "\\begin{table}\\begin{tabular}[t]{p{3cm}|c}\\hline\\hline A & \\$-40K \\\\\\hline\\end{tabular}\\end{table}\n"
+            "\\begin{longtable}{lc}\\caption{Long table summary.}\\label{tab:lt}\\\\ \\endfirsthead "
+            "\\caption[]{Long table summary (continued).}\\\\ \\endhead A & B \\\\ \\end{longtable}\n"
+            "\\end{document}\n",
+            encoding="utf-8",
+        )
+        bib_doc = root / "refs.bib"
+        bib_doc.write_text(
+            "@article{\n  smith2024,\n  title={Flood}\n}\n"
+            "@misc{url2024,\n  title={URL}\n}\n"
+            "@article{yr2024,\n  title={YearPar}\n}\n"
+            "@article{ff2024,\n  title={FootFull}\n}\n"
+            "@article{multiA,\n  title={A}\n}\n"
+            "@article{multiB,\n  title={B}\n}\n"
+            "@comment{ @article{disabled2021, title={Disabled}} }\n"
+            "@comment{Reviewer called this \"unfinished.}\n"
+            "@article(paren2024,\n  title={Effect of treatment (pilot study},\n  note=\"Quoted ) paren\",\n  year={2024}\n)\n"
+            "@article{uncited2023,\n  title={Extra}\n}\n",
+            encoding="utf-8",
+        )
+        cited_disabled_tex = root / "disabled_cite.tex"
+        cited_disabled_tex.write_text("\\cite{disabled2021}\n", encoding="utf-8")
+        require(
+            any(item["code"] == "COMP008" and item["key"] == "disabled2021" for item in check_latex_citations([cited_disabled_tex], [bib_doc])),
+            "disabled key inside @comment{...} block satisfied missing-entry check",
+        )
+        clean_math_tex = root / "clean_math.tex"
+        clean_math_tex.write_text("The change was $-0.25$ units and the bias was -$40\\text{K}.\n", encoding="utf-8")
+        require(check_text_formatting(clean_math_tex) == [], f"false positive COMP004 on inline math: {check_text_formatting(clean_math_tex)}")
+        tex_state = {"artifacts": [{"id": "tex", "path": "manuscript.tex", "role": "manuscript", "status": "ACTIVE"}]}
+        tex_prose_codes = {item["code"] for item in audit_prose(tex_state, root)}
+        require("PROSE014" in tex_prose_codes, f"LaTeX prose unwrap missed PROSE014: {sorted(tex_prose_codes)}")
+        require(check_abstract(tex_doc, max_words=5) == [], "LaTeX abstract environment word count included body")
+        tex_caps = _extract_captions(tex_doc)
+        require(tex_caps.get("Table 1") == "Long table summary.", f"longtable caption unexpected: {tex_caps}")
+        require(any(item["code"] == "COMP003" for item in check_caption_sync(tex_doc, cap_file)), "LaTeX caption sync mismatch missed")
+        require(len(check_text_formatting(tex_doc)) == 1, f"expected only escaped \\$-40K COMP004: {check_text_formatting(tex_doc)}")
+        require(len(check_latex_tables(tex_doc)) >= 2, "LaTeX COMP007 vertical-rule/double-hline check missed")
+        clean_currency_cap_tex = root / "currency_cap.tex"
+        clean_currency_cap_tex.write_text(
+            "\\begin{figure}\\caption{Costs were \\$40 and \\$50.}\\end{figure}\n",
+            encoding="utf-8",
+        )
+        clean_currency_cap_md = root / "currency_cap.md"
+        clean_currency_cap_md.write_text(
+            "**Figure 1.** Costs were $40 and $50.\n",
+            encoding="utf-8",
+        )
+        require(
+            check_caption_sync(clean_currency_cap_tex, clean_currency_cap_md) == [],
+            f"false positive COMP003 on two escaped currency tokens: {check_caption_sync(clean_currency_cap_tex, clean_currency_cap_md)}",
+        )
+        cite_keys = {item["key"] for item in check_latex_citations([tex_doc], [bib_doc])}
+        require(cite_keys == {"missing2025", "uncited2023"}, f"BibTeX reconciliation unexpected keys: {cite_keys}")
+        tests.append("LaTeX prose unwrapping, abstract/caption sync, booktabs COMP007, and BibTeX COMP008")
+
+        bad_tbl_docx = root / "bad_table.docx"
+        make_docx(
+            bad_tbl_docx,
+            '<w:tbl><w:tblPr><w:tblBorders><w:insideV w:val="single" w:sz="4"/></w:tblBorders></w:tblPr>'
+            '<w:tr><w:tc><w:p><w:r><w:t>H1</w:t></w:r></w:p></w:tc></w:tr>'
+            '<w:tr><w:tc><w:p><w:r><w:t>V1</w:t></w:r></w:p></w:tc></w:tr></w:tbl>',
+        )
+        docx_tbl_msgs = [item["message"] for item in check_docx_tables(bad_tbl_docx)]
+        require(
+            any("vertical borders" in msg for msg in docx_tbl_msgs) and any("w:tblHeader" in msg for msg in docx_tbl_msgs),
+            f"Word table COMP009 missed border/header findings: {docx_tbl_msgs}",
+        )
+        styled_grid_docx = root / "styled_grid.docx"
+        with zipfile.ZipFile(styled_grid_docx, "w") as archive:
+            archive.writestr(
+                "word/document.xml",
+                f'<w:document xmlns:w="{W}"><w:body>'
+                '<w:tbl><w:tblPr><w:tblStyle w:val="TableGrid"/></w:tblPr>'
+                '<w:tr><w:trPr><w:tblHeader/></w:trPr><w:tc><w:p><w:r><w:t>H1</w:t></w:r></w:p></w:tc></w:tr>'
+                '<w:tr><w:tc><w:p><w:r><w:t>V1</w:t></w:r></w:p></w:tc></w:tr></w:tbl>'
+                '</w:body></w:document>',
+            )
+            archive.writestr(
+                "word/styles.xml",
+                f'<w:styles xmlns:w="{W}"><w:style w:type="table" w:styleId="TableGrid">'
+                '<w:tblPr><w:tblBorders><w:insideV w:val="single" w:sz="4"/></w:tblBorders></w:tblPr>'
+                '</w:style></w:styles>',
+            )
+        require(
+            any("vertical borders" in item["message"] for item in check_docx_tables(styled_grid_docx)),
+            "Word TableGrid inherited vertical border missed",
+        )
+        clean_tbl_docx = root / "clean_table.docx"
+        with zipfile.ZipFile(clean_tbl_docx, "w") as archive:
+            archive.writestr(
+                "word/document.xml",
+                f'<w:document xmlns:w="{W}"><w:body>'
+                '<w:tbl><w:tblPr><w:tblStyle w:val="TableGrid"/>'
+                '<w:tblBorders><w:left w:val="none"/><w:right w:val="none"/><w:insideV w:val="none"/></w:tblBorders></w:tblPr>'
+                '<w:tr><w:trPr><w:tblHeader/></w:trPr><w:tc><w:p><w:r><w:t>H1</w:t></w:r></w:p></w:tc></w:tr>'
+                '<w:tr><w:tc><w:p><w:r><w:t>V1</w:t></w:r></w:p></w:tc></w:tr></w:tbl>'
+                '</w:body></w:document>',
+            )
+            archive.writestr(
+                "word/styles.xml",
+                f'<w:styles xmlns:w="{W}"><w:style w:type="table" w:styleId="TableGrid">'
+                '<w:tblPr><w:tblBorders><w:insideV w:val="single" w:sz="4"/></w:tblBorders></w:tblPr>'
+                '</w:style></w:styles>',
+            )
+        require(check_docx_tables(clean_tbl_docx) == [], f"false positive on overridden Word three-line table: {check_docx_tables(clean_tbl_docx)}")
+        tests.append("Word .docx three-line table borders and w:tblHeader COMP009 check")
 
     print(json.dumps({"status": "PASS", "tests": tests}, indent=2))
     return 0
