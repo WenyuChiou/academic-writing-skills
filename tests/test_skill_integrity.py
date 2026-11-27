@@ -808,7 +808,7 @@ def test_readmes_are_bilingual_user_facing_entrypoints():
         assert "psychometrics" in text.lower()
         assert "AI/LLM" in text or "AI／LLM" in text
         assert f"plugin-v{version}-blue.svg" in text
-        assert len(text.splitlines()) <= 185
+        assert len(text.splitlines()) <= 240
         for internal_detail in (
             "functional-completeness",
             "audit_prose_patterns.py",

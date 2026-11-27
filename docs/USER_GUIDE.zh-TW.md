@@ -170,11 +170,14 @@ python skills/academic-writing-skills/scripts/run_regression_tests.py
 ```
 
 <a id="before-and-after-walkthrough"></a>
-## 修改前與修改後實戰範例（合成案例）
+## 修改前與修改後實戰範例（繁體中文合成案例）
 
 假設你將一篇結合問卷調查與 LLM 模擬推估的調適行為論文投往水資源管理期刊：
 
 1. **撰寫正文前（`Pre-Draft Alignment Blueprint`）：** `academic-writing-skills-zh-tw` 會先暫停並產出對齊藍圖：
    - **段落功能表（`WHAT / WHY / HOW`）：** 步驟 1（流域調適風險與多波問卷成本）→ 步驟 2（分流文獻評述：統計外推與代理人模型之優勢及結構限制）→ 步驟 3（跨波次群體與個體更新的具體缺口）→ 步驟 4（增補歷史提示條件評估與 `SQ1–SQ2`，並明確標記不得推論「足以取代實體受試者」）。
-   - **期刊口吻與術語首次引導：** 全文以流域管理與家戶調適決策為主語，首次提到 `zero-shot LLM` 時以功能白話說明其為「不重訓權重、依匿名背景生成問卷評分的文字模型」。
-2. **修訂主張、銜接與圖表：** 將 *"Moreover, no study replicated behavior (`RMSE = 0.04`)"* 改為 *"While existing field panels capture storm-triggered decisions, they remain costly to repeat across rapidly changing basins; under the augmented-history prompt, mean county projections followed observed Wave 2 directions (`RMSE = 0.04`), whereas individual-level change tracking lagged a simple zero-change baseline."*；圖內去除大標題與柱頂數字、架構流程圖改採 `diagram-design`、三線表加註樣本分母 `N`、`95% CI` 及舊版題項敏感度說明。
+   - **期刊口吻與術語首次引導：** 全文以流域管理與家戶調適決策為主語，首次提到「零樣本 LLM」時以功能白話說明其為「無須微調權重、依去識別化家戶背景生成問卷評分的文字模型」。
+2. **繁中壞 AI 段落與修訂結果：**
+   - **修改前（AI 空洞套語＋未解術語＋越界結論）：**「在當今快速演進的防洪領域中，LLM 扮演著至關重要的核心角色……過去從未有任何研究探討過零樣本隨機角色提示條件化……模型達成 0.04 誤差，證明模擬受試者已完美複製人類行為並可全面取代實體調查。」
+   - **修改後（水資源主軸＋白話引導＋條件與推論邊界）：**「雖然多波次問卷能追蹤風災後投保變化，反覆施測成本仍高；既有的迴歸代理人受限於預設函式，因此本研究測試零樣本大型語言模型（依去識別化背景生成評分的文字模型）於增補前期經歷條件（伴隨提示變長）下對 *N* = 840 家戶的推估表現。第 2 波群體均值誤差為 0.04，但個體跨波變化誤差仍劣於零變化基準規則，尚不足以取代實體抽樣調查。」
+3. **四張代表性科學圖表修改前後對照：** 分別展現多子圖去標題與圖外圖例（`ex1_multipanel_zh-TW.png`）、誤差門檻專屬刻度 `0.08` 與軸標籤註記（`ex2_threshold_zh-TW.png`）、超過 10 構念改採盒鬚＋散點與 `-$40K` 格式（`ex3_distribution_zh-TW.png`），以及三線表分母與舊版定義區隔（`ex4_table_zh-TW.png`）；完整圖庫位於 `./images/examples/`。

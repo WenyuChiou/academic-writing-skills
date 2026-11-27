@@ -130,15 +130,28 @@ Do not claim a change is complete unless the relevant files support it.
 
 ## Before and after
 
-Using a **synthetic example** (a watershed adaptation survey analyzed with a large language model):
+Below is a **synthetic cross-disciplinary example** (a watershed flood-adaptation survey evaluated with large language models for *Water Resources Research*).
 
-| Dimension | Before (without the skills) | After (with `academic-writing-skills` + `paper-review`) |
-|---|---|---|
-| **Drafting order & jargon** | Writes paragraphs right away: *"Beyond zero-shot persona conditioning, our LLM agents replicated household insurance behavior (`RMSE = 0.04`)."* Readers in water policy must guess what persona conditioning does. | **Pauses with a Pre-Draft Blueprint first**, keeps a water-resources voice, and onboards borrowed terms at first use (*"text models conditioned on anonymized household profiles without retraining"*). |
-| **Claim & condition scope** | Claims *"no study has tested..."* in Introduction and drops context limits in Abstract/Conclusion, leaving an augmented-prompt confound unstated. | Grounds the gap in concrete precedents, bounds `"RMSE = 0.04"` to group-mean direction (`Under the augmented condition...`), and propagates the limit across Abstract, Results, and Conclusion. |
-| **Figures & tables** | Baked-in plot title, inside legend hiding error bars, numbers stamped on bars, `$-40K` typos, and unprinted caption/SM mismatches. | Caption-only title, `(a)` `(b)` outside legend, clean threshold tick (`RMSEA <= 0.08`), `-$40K`, three-line table (`N`, `95% CI`), and synced SM/Abstract/Highlights checks. |
+### Paragraph revision example (bad AI draft vs. revised prose)
 
-**Key difference:** you confirm the logic chain, glossary, and scope *before* full drafting, then catch cross-file arithmetic, denominator, and layout drift before submission. See [the usage guide](./docs/USER_GUIDE.md#before-and-after-walkthrough) for the full pre-draft blueprint and review output.
+**Before — typical AI-generated draft (hype openers, unexplained jargon, and overclaiming):**
+
+> In today's rapidly evolving landscape of climate resilience, large language models play a crucial role in delving into household flood-insurance decisions—not only uncovering complex mechanisms, but also unlocking transformative opportunities. Moreover, no prior hydrology study has ever examined zero-shot stochastic persona prompt-conditioning. Beyond traditional surveys, our synthetic agents achieved an RMSE of 0.04, which underscores the importance of AI; taken together, these findings prove that LLM respondents accurately replicate human adaptation behavior and can replace costly longitudinal field surveys.
+
+**After — revised with `academic-writing-skills` + `paper-review` (domain voice, inline term onboarding, bounded claims):**
+
+> While multi-wave household surveys track how flood-insurance adoption shifts after major storms, repeating large panels across rapidly changing basins remains expensive. Existing behavioral-hydrology agent-based models link survey regressions to aggregate adoption trajectories, yet they rely on fixed functional forms; an alternative uses zero-shot large language models (LLMs)—text models prompted with anonymized household profiles to output survey ratings without parameter retraining. Here we test whether two local LLMs prompted with prior-wave household context match both county trends and individual changes across two storm waves (*N* = 840). Under this history-augmented condition (which also lengthens the input prompt), Wave 2 group-mean error reached 0.04 on the 0–1 adoption scale, whereas individual change errors lagged a simple zero-change carry-forward baseline (assuming no change between waves), indicating that synthetic ratings cannot substitute for field probability surveys.
+
+- **Key differences after using the skills:** (1) removes empty AI openings (*"In today's rapidly evolving..."*, em-dash hype, *"delving into"*, *"taken together"*); (2) pauses with a pre-draft blueprint first so *Water Resources Research* readers get plain-language explanations of `zero-shot` and `zero-change carry-forward baseline` at first use; (3) replaces unsupported *"no prior study"* novelty with regression-ABM precedent and keeps bundled prompt-length limits attached (`Under this history-augmented condition...`); and (4) separates county-mean trend agreement (`0.04`) from weak individual-change accuracy. See [the usage guide](./docs/USER_GUIDE.md#before-and-after-walkthrough) for the full pre-draft alignment table.
+
+### Four representative figure and table improvements
+
+| Focus | Before → After comparison |
+|---|---|
+| **1. Multi-panel `(a)` `(b)` layout, external legend & colorblind palette** | ![Multi-panel trajectory Before vs After](./docs/images/examples/ex1_multipanel_en.png) |
+| **2. Threshold bar plot without value/text collision (`RMSEA <= 0.08`)** | ![Threshold RMSEA bar plot Before vs After](./docs/images/examples/ex2_threshold_en.png) |
+| **3. Summarizing >10 constructs as boxplot + jitter (`-$40K` formatting)** | ![Distribution summary Before vs After](./docs/images/examples/ex3_distribution_en.png) |
+| **4. Three-line table with explicit `N`, `95% CI` & legacy-scale note** | ![Three-line data table Before vs After](./docs/images/examples/ex4_table_en.png) |
 
 ## Boundaries and further reading
 

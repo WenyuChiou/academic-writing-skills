@@ -64,17 +64,47 @@ def test_workflow_and_shared_record_boundaries_remain_visible(name, required):
 
 
 @pytest.mark.parametrize(
-    ("name", "expected_heading"),
+    ("name", "expected_heading", "lang", "native_markers"),
     [
-        ("README.md", "## Before and after"),
-        ("README.zh-TW.md", "## 修改前與修改後對照"),
-        ("README.zh-CN.md", "## 修改前与修改后对照"),
+        (
+            "README.md",
+            "## Before and after",
+            "en",
+            ["In today's rapidly evolving landscape", "While multi-wave household surveys"],
+        ),
+        (
+            "README.zh-TW.md",
+            "## 修改前與修改後對照",
+            "zh-TW",
+            ["在當今快速演進的氣候韌性", "雖然多波次家戶問卷能追蹤"],
+        ),
+        (
+            "README.zh-CN.md",
+            "## 修改前与修改后对照",
+            "zh-CN",
+            ["在当今快速发展的气候韧性", "尽管多波次家庭问卷能够追踪"],
+        ),
     ],
 )
-def test_readmes_include_before_and_after_example(name, expected_heading):
+def test_readmes_include_before_and_after_example(name, expected_heading, lang, native_markers):
     text = (ROOT / name).read_text(encoding="utf-8")
     assert expected_heading in text
     assert "#before-and-after-walkthrough" in text
+    for marker in native_markers:
+        assert marker in text, (name, marker)
+    for stem in ("ex1_multipanel", "ex2_threshold", "ex3_distribution", "ex4_table"):
+        rel = f"./docs/images/examples/{stem}_{lang}.png"
+        assert rel in text, (name, rel)
+
+
+@pytest.mark.parametrize("lang", ["en", "zh-TW", "zh-CN"])
+@pytest.mark.parametrize("stem", ["ex1_multipanel", "ex2_threshold", "ex3_distribution", "ex4_table"])
+def test_representative_example_pngs_are_valid_and_compact(stem, lang):
+    path = ROOT / "docs" / "images" / "examples" / f"{stem}_{lang}.png"
+    assert path.is_file(), path
+    data = path.read_bytes()
+    assert data[:8] == b"\x89PNG\r\n\x1a\n"
+    assert len(data) < 500_000
 
 
 @pytest.mark.parametrize(
