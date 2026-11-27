@@ -508,6 +508,7 @@ def main() -> int:
             "% \\cite{ghost_comment_key}\n"
             "\\begin{document}\n"
             "\\begin{abstract}Short abstract.\\end{abstract}\n"
+            "\\citestyle{authoryear}\n"
             "\\section{Results}\n"
             "It is not merely an LLM; it is a watershed shift \\parencite{smith2024,missing2025}.\n"
             "The change was $-0.25$ units overall.\n"

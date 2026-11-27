@@ -346,7 +346,7 @@ def clean_latex_prose(text: str) -> str:
         body = doc_match.group(1)
     for env in ("equation", r"equation\*", "align", r"align\*", "gather", r"gather\*", "tabular", r"tabular\*", "tabularx", "longtable", "thebibliography"):
         body = re.sub(rf"\\begin\{{{env}\}}.*?\\end\{{{env}\}}", "\n", body, flags=re.DOTALL)
-    body = re.sub(r"\\(?:documentclass|usepackage|bibliographystyle|bibliography|addbibresource)(?:\[[^\]]*\])?\{[^}]*\}", "", body)
+    body = re.sub(r"\\(?:documentclass|usepackage|bibliographystyle|citestyle|bibliography|addbibresource)(?:\[[^\]]*\])?\{[^}]*\}", "", body)
     body = re.sub(r"\\(?:label|ref|eqref|autoref|pageref|hspace|vspace)\{[^}]*\}", "", body)
     body = re.sub(r"\\[a-zA-Z]*cite[a-zA-Z*]*\s*(?:\[[^\]]*\]\s*)*\{[^}]*\}", "", body)
     body = re.sub(r"\\(?:begin|end)\{(?:abstract|figure\*?|table\*?|itemize|enumerate)\}(?:\[[^\]]*\])?", "\n", body)
