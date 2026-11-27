@@ -431,6 +431,9 @@ def main() -> int:
         ms_cap.write_text("Figure 1. Accuracy by group.\nShaded bands show standard deviations.\n$-40K and 0.208[0.189, 0.229].\n", encoding="utf-8")
         require(any(item["code"] == "COMP003" for item in check_caption_sync(ms_cap, cap_file)), "multiline caption continuation mismatch missed")
         require(len(check_text_formatting(ms_cap)) == 2, "numeric currency/CI spacing check missed")
+        esc_md = root / "escaped_currency.md"
+        esc_md.write_text(r"Estimated bias was \$-40K in Markdown.", encoding="utf-8")
+        require(any(item["code"] == "COMP004" for item in check_text_formatting(esc_md)), "escaped \\$-40K in Markdown missed")
 
         word_cap_docx = root / "word_caps.docx"
         make_docx(
@@ -481,11 +484,18 @@ def main() -> int:
         clean_separate_figs.write_text(
             "import matplotlib.pyplot as plt\n"
             "plt.rcParams.update({'axes.unicode_minus': False})\n"
+            "if True:\n"
+            "    fig, (ax1, ax2) = plt.subplots(1, 2)\n"
+            "    ax1.set_xlabel(r'$-0.25$')\n"
+            "    ax1.set_ylim(0, 10)\n"
+            "    ax2.set_ylim(0, 10)\n"
+            "    def unused_helper():\n"
+            "        ax2.set_ylim(0, 99)\n"
             "def f1():\n    f, ax = plt.subplots()\n    ax.set_ylim(0, 10)\n    ax.set_ylim(0, 12)\n"
             "def f2():\n    f, ax2 = plt.subplots()\n    ax2.set_ylim(0, 99)\n",
             encoding="utf-8",
         )
-        require(lint_python_script(clean_separate_figs) == [], f"false positive on separate figs / rcParams.update: {lint_python_script(clean_separate_figs)}")
+        require(lint_python_script(clean_separate_figs) == [], f"false positive on mathtext / nested def / separate figs: {lint_python_script(clean_separate_figs)}")
         small_png = root / "small.png"
         ihdr_data = struct.pack(">IIBBBBB", 640, 400, 8, 2, 0, 0, 0)
         small_png.write_bytes(b"\x89PNG\r\n\x1a\n" + struct.pack(">I", 13) + b"IHDR" + ihdr_data + b"\x00\x00\x00\x00")

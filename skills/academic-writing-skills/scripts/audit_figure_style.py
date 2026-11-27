@@ -13,6 +13,19 @@ from typing import Any
 
 
 CUR_MINUS_RE = re.compile(r"\$-(?=[0-9])")
+VALID_NEGATIVE_MATHTEXT_RE = re.compile(
+    r"(?<!\\)\$-[0-9]+(?:\.[0-9]+)?(?:\s*[-+*/^_=<>\\][A-Za-z0-9{}\\]*)*\$"
+)
+
+
+def _iter_calls_no_defs(node: ast.AST):
+    """Yield Call AST nodes in lexical tree order while pruning nested function and class definitions."""
+    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+        return
+    if isinstance(node, ast.Call):
+        yield node
+    for child in ast.iter_child_nodes(node):
+        yield from _iter_calls_no_defs(child)
 
 
 def _literal_number_list(node: ast.AST) -> list[float] | None:
@@ -86,9 +99,7 @@ def _check_paired_ylim_in_scope(stmts: list[ast.stmt], lines: list[str], artifac
                 elif attr in {"add_subplot", "add_axes"} and len(stmt.targets) == 1 and isinstance(call.func.value, ast.Name):
                     fig_var = call.func.value.id
                     fig_axes.setdefault(fig_var, []).extend(_extract_target_names(stmt.targets[0]))
-            for node in ast.walk(stmt):
-                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) or not isinstance(node, ast.Call):
-                    continue
+            for node in _iter_calls_no_defs(stmt):
                 if not isinstance(node.func, ast.Attribute) or not isinstance(node.func.value, ast.Name):
                     continue
                 receiver = node.func.value.id
@@ -104,6 +115,11 @@ def _check_paired_ylim_in_scope(stmts: list[ast.stmt], lines: list[str], artifac
                 walk_scope(stmt.body)
             if hasattr(stmt, "orelse") and isinstance(stmt.orelse, list):
                 walk_scope(stmt.orelse)
+            for handler in getattr(stmt, "handlers", []):
+                if hasattr(handler, "body") and isinstance(handler.body, list):
+                    walk_scope(handler.body)
+            if hasattr(stmt, "finalbody") and isinstance(stmt.finalbody, list):
+                walk_scope(stmt.finalbody)
         for axes_list in fig_axes.values():
             register_group(axes_list)
 
@@ -155,7 +171,8 @@ def lint_python_script(path: Path) -> list[dict[str, Any]]:
 
     for node in ast.walk(tree):
         if isinstance(node, ast.Constant) and isinstance(node.value, str):
-            if CUR_MINUS_RE.search(node.value):
+            stripped_math = VALID_NEGATIVE_MATHTEXT_RE.sub("", node.value)
+            if CUR_MINUS_RE.search(stripped_math):
                 findings.append({
                     "code": "FIG003", "artifact": str(path), "line": node.lineno,
                     "message": f"misplaced minus after dollar sign in string: {node.value!r}",

@@ -19,7 +19,7 @@ HIDDEN_TAGS = {f"{W_PREFIX}del", f"{W_PREFIX}moveFrom", f"{W_PREFIX}instrText"}
 SEP_TAGS = {f"{W_PREFIX}br", f"{W_PREFIX}cr", f"{W_PREFIX}tab"}
 CAPTION_RE = re.compile(r"((?:Figure|Table)\s+S?\d+)\s*[.:]\s*(.*)", re.IGNORECASE)
 BLOCK_BREAK_RE = re.compile(r"^(?:#{1,6}\s|```|---+$|\*\*\*+$)")
-MISPLACED_CURRENCY_MINUS_RE = re.compile(r"(?<!\\)\$-(?=[0-9])")
+MISPLACED_CURRENCY_MINUS_RE = re.compile(r"\$-(?=[0-9])")
 TEX_MISPLACED_CURRENCY_MINUS_RE = re.compile(r"\\\$-(?=(?:\\text\{)?[0-9])")
 MISSING_BRACKET_SPACE_RE = re.compile(r"\d\[(?:\d|[-+])")
 LATEX_FLOAT_ENV_RE = re.compile(
