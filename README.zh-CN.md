@@ -1,6 +1,6 @@
 # Academic Writing Skills
 
-[![plugin version](https://img.shields.io/badge/plugin-v1.6.0-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.7.0-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 本项目是 [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills) 的一部分。
@@ -77,7 +77,7 @@ claude plugin install academic-writing-skills@ai-research-skills --scope user
 
 更新指令：`claude plugin update academic-writing-skills@ai-research-skills`。
 
-**Antigravity** 可将 `skills/` 下选定的文件夹放入项目 `.agents/skills/`、`~/.agents/skills/` 或 `~/.gemini/config/skills/`；若将整份 repo 直接 clone 于 `~/.agents/skills/academic-writing-skills`，可执行 `python scripts/install_flat_host_shims.py --dest ~/.agents/skills --include-locales` 自动建立单层探索目录（`academic-writing-flat`、`paper-review` 及多语系入口）。Codex 或 ChatGPT 可使用可用的 skill／plugin 介面。其他 Agent Skills clients 可将 `skills/` 下选定功能与语言的资料夹放入支援的位置：OpenCode 使用 `.agents/skills/` 或 `.opencode/skills/`，Hermes Agent 使用 `~/.hermes/skills/`。
+**Antigravity** 可将 `skills/` 下选定的文件夹放入项目 `.agents/skills/`、`~/.agents/skills/` 或 `~/.gemini/config/skills/`；若将整份 repo 直接 clone 于 `~/.agents/skills/academic-writing-skills`，可执行 `python scripts/install_flat_host_shims.py --dest ~/.agents/skills --include-locales` 自动建立单层探索目录（`academic-writing-flat`、`paper-review`、多语系入口，以及宿主中立的 `manuscript-delegate-pass` 委派入口）。Codex 或 ChatGPT 可使用可用的 skill／plugin 介面。其他 Agent Skills clients 可将 `skills/` 下选定功能与语言的资料夹放入支援的位置：OpenCode 使用 `.agents/skills/` 或 `.opencode/skills/`，Hermes Agent 使用 `~/.hermes/skills/`。
 
 ## 直接试用
 

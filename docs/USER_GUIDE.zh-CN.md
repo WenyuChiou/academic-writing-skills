@@ -145,6 +145,9 @@ terminology、decisions、open issues 与 release checks，不会保存每一次
 python skills/academic-writing-skills/scripts/audit_manuscript_state.py manuscript_state.json
 python skills/academic-writing-skills/scripts/audit_text_consistency.py manuscript_state.json
 python skills/academic-writing-skills/scripts/audit_prose_patterns.py manuscript_state.json
+python skills/academic-writing-skills/scripts/build_context_envelope.py manuscript.docx --target "4.2" --mode revise --output workdir/context_envelope.txt
+python skills/academic-writing-skills/scripts/run_scoped_manuscript_pass.py --manuscript manuscript.docx --target "4.2" --backend envelope-only --workdir workdir --json
+python skills/academic-writing-skills/scripts/verify_delegate_numbers.py --mode curated_salience --before before_passage.txt --reply-json delegate_reply.json --spine workdir/spine.json --json
 python skills/academic-writing-skills/scripts/audit_docx_structure.py manuscript.docx
 python skills/academic-writing-skills/scripts/audit_companion_limits.py --highlights highlights.txt --abstract abstract.txt --tex manuscript.tex --bib references.bib --docx-tables manuscript.docx
 python skills/academic-writing-skills/scripts/audit_figure_style.py figure_script.py figure.png

@@ -48,6 +48,7 @@ Distinguish:
 - **definition gap:** a symbol, transformation, or uncertainty display lacks a definition
 - **provenance gap:** the displayed value cannot be traced to an authorized source or rule
 - **display–claim mismatch:** the text asserts a comparison, scale, or uncertainty meaning that the display does not support
+- **display–prose numeric redundancy:** the prose dumps routine conforming table rows or repetitive same-verdict interval walls (`PROSE018`) that add no diagnostic value beyond the figure or table, or prunes Results numbers while stranding orphaned references in `Abstract`, `Highlights`, `Discussion`, or `Conclusion`
 - **cross-artifact regression:** a later edit updates one artifact but leaves equations, captions, supplement, or summaries stale
 
 Apply the base severity and evidence-status system. Do not make a cosmetic notation preference blocking unless ambiguity, reproducibility, or claim interpretation is materially affected.

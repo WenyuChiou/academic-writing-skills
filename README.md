@@ -1,6 +1,6 @@
 # Academic Writing Skills
 
-[![plugin version](https://img.shields.io/badge/plugin-v1.6.0-blue.svg)](./CHANGELOG.md)
+[![plugin version](https://img.shields.io/badge/plugin-v1.7.0-blue.svg)](./CHANGELOG.md)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 Part of [ai-research-skills](https://github.com/WenyuChiou/ai-research-skills).
@@ -81,7 +81,7 @@ claude plugin install academic-writing-skills@ai-research-skills --scope user
 
 Update with `claude plugin update academic-writing-skills@ai-research-skills`.
 
-For **Antigravity**, copy the selected folders under `skills/` into `.agents/skills/` (workspace), `~/.agents/skills/`, or `~/.gemini/config/skills/`; if this repository is cloned directly under `~/.agents/skills/academic-writing-skills`, run `python scripts/install_flat_host_shims.py --dest ~/.agents/skills --include-locales` to create one-level discovery folders (`academic-writing-flat`, `paper-review`, and locale variants). For Codex or ChatGPT, use the available skill/plugin interface. For other Agent Skills clients, copy the selected capability/language folders under `skills/` into `.agents/skills/` or `.opencode/skills/` for OpenCode, or `~/.hermes/skills/` for Hermes Agent.
+For **Antigravity**, copy the selected folders under `skills/` into `.agents/skills/` (workspace), `~/.agents/skills/`, or `~/.gemini/config/skills/`; if this repository is cloned directly under `~/.agents/skills/academic-writing-skills`, run `python scripts/install_flat_host_shims.py --dest ~/.agents/skills --include-locales` to create one-level discovery folders (`academic-writing-flat`, `paper-review`, locale variants, and the host-neutral `manuscript-delegate-pass` entry point). For Codex or ChatGPT, use the available skill/plugin interface. For other Agent Skills clients, copy the selected capability/language folders under `skills/` into `.agents/skills/` or `.opencode/skills/` for OpenCode, or `~/.hermes/skills/` for Hermes Agent.
 
 ## Try it
 

@@ -70,8 +70,17 @@ PLURAL_QUALIFIER_RE = re.compile(
     re.IGNORECASE,
 )
 DISPLAY_CALLOUT_RE = re.compile(
-    r"\b(?:Figure|Fig\.|Table)\s+S?\d+|(?:圖|图|表)\s*S?\d+", re.IGNORECASE,
+    r"\b(?:Figures?|Figs?\.|Tables?)\s+S?\d+|(?:圖|图|表)\s*S?\d+", re.IGNORECASE,
 )
+INTERVAL_BRACKET_RE = re.compile(
+    r"\[\s*([+−\u2013-]?\$?(?:\d+(?:\.\d+)?|\.\d+)[KMBkmb%]?)\s*(?:,|;|\bto\b|[–—]|\s-\s)\s*([+−\u2013-]?\$?(?:\d+(?:\.\d+)?|\.\d+)[KMBkmb%]?)\s*\]",
+    re.IGNORECASE,
+)
+LOCATOR_DECIMAL_RE = re.compile(
+    r"\b(?:Section|Sec\.|Subsection|Chapter|Fig\.|Figs\.|Figure|Figures|Table|Tables|Eq\.|Eqs\.|Equation)\s+S?\d+(?:\.\d+)+",
+    re.IGNORECASE,
+)
+DECIMAL_NUMBER_RE = re.compile(r"(?<![A-Za-z0-9.])(?:\d+\.\d+|\.\d+)(?!\.\d)")
 NAKED_STAT_END_RE = re.compile(
     r"(?:\((?:p\s*[<>=]\s*0?\.\d+|95%\s*CI[^)]*)\)"
     r"|(?:RMSE|MAE|R2|R\^2|CFI|RMSEA|p)\s*=\s*0?\.\d+)\.\s*$",
@@ -230,13 +239,40 @@ def audit_text(text: str, artifact: str, state: dict[str, Any]) -> list[dict[str
                 "message": "plural subject paired with single metric value; specify 'each', 'respectively', or 'averaging'",
             })
 
+    max_interval_brackets = max(2, int(profile.get("max_inline_interval_brackets", 4)))
+    max_para_decimals = max(6, int(profile.get("max_paragraph_decimals", 18)))
+    max_decimal_density = float(profile.get("max_decimals_per_100_words", 9.0))
     for paragraph in re.split(r"\n\s*\n", text):
         para_sentences = sentences(paragraph)
-        if len(para_sentences) >= 2 and DISPLAY_CALLOUT_RE.search(paragraph) and NAKED_STAT_END_RE.search(para_sentences[-1]):
+        has_display = bool(DISPLAY_CALLOUT_RE.search(paragraph))
+        if len(para_sentences) >= 2 and has_display and NAKED_STAT_END_RE.search(para_sentences[-1]):
             findings.append({
                 "code": "PROSE017", "artifact": artifact, "match": para_sentences[-1], "count": 1,
                 "message": "multi-sentence display unit ends on a bare statistic; close with an explicit 'so what' meaning and hypothesis/goal link",
             })
+        if has_display:
+            cleaned_para = LOCATOR_DECIMAL_RE.sub(" ", paragraph)
+            interval_brackets = [
+                m.group(0)
+                for m in INTERVAL_BRACKET_RE.finditer(cleaned_para)
+                if "." in m.group(1)
+                or "." in m.group(2)
+                or m.group(1)[:1] in "+−\u2013-$"
+                or m.group(2)[:1] in "+−\u2013-$"
+            ]
+            decimals = DECIMAL_NUMBER_RE.findall(cleaned_para)
+            word_units = len(re.findall(r"[A-Za-z0-9]+", paragraph)) + len(re.findall(r"[\u3400-\u9fff]", paragraph))
+            dec_density = (len(decimals) * 100.0 / word_units) if word_units else 0.0
+            if len(interval_brackets) >= max_interval_brackets or (
+                len(decimals) >= max_para_decimals and dec_density >= max_decimal_density
+            ):
+                findings.append({
+                    "code": "PROSE018",
+                    "artifact": artifact,
+                    "match": f"{len(decimals)} decimals ({dec_density:.1f}/100w), {len(interval_brackets)} interval brackets",
+                    "count": max(len(interval_brackets), len(decimals)),
+                    "message": "inline-numeric-overload-candidate: display-linked paragraph dumps high-density decimals or interval brackets; keep full matrices in displays and report numbers selectively for magnitude calibration, verdict-shifting intervals, or subgroup exceptions",
+                })
 
     hyphen_threshold = max(3, int(profile.get("hyphenated_token_threshold", 4)))
     for sentence in sentence_list:

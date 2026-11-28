@@ -27,8 +27,9 @@ MANUAL_CHECKS = [
     "necessary technical repetition versus avoidable restatement",
     "host-journal register and plain-language functional explanation at first use of guest-domain or statistical terms",
     "cross-surface propagation of bundled condition caveats, denominators, and legacy-versus-primary construct scope",
-    "guided 5-step Results arc for non-specialists (purpose -> display orientation -> metrics -> immediate so what -> macro-to-micro and shallow-to-deep link to hypotheses/SQ/overarching goal)",
+    "guided 5-step Results arc for non-specialists (purpose -> display orientation -> selective high-value metrics -> immediate so what -> macro-to-micro and shallow-to-deep link to hypotheses/SQ/overarching goal)",
     "cross-disciplinary disambiguation of everyday polysemous modifiers (local, conditioning, calibration, agent) and While-clause anti-echo compression",
+    "two-stage pre-writing evidence-value triage and selective numeric reporting (report exact numbers only when calibrating gap magnitude, shifting interval verdicts, or anchoring substantive item-group/subgroup exceptions; reconcile Mode R omissions against downstream sections)",
 ]
 
 

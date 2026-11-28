@@ -16,7 +16,7 @@ For a reader outside the paper's narrow subfield to follow every Result without 
 
 1. **Analytical purpose (what we are testing):** open with the specific question, hypothesis check, or comparison that motivates this unit in plain scholarly terms.
 2. **Plain-language display orientation:** orient first-time or cross-disciplinary readers to `Figure X` / `Table Y` (what is plotted, compared baselines/groups, and directional meaning such as lower error or better agreement) before quoting raw metrics; when an adjacent passage already established the same reading rule, carry it forward without repeating the tutorial.
-3. **Primary pattern, indicators, and key numbers:** lead with the main trend or group contrast, then report the exact supporting numbers, `N`, denominators, and uncertainty intervals rather than listing cells in table order.
+3. **Primary pattern and selective high-value numbers:** lead with the main trend or group contrast, then report exact numbers, `N`, denominators, and uncertainty intervals selectively where they calibrate gap magnitude, shift the interval verdict, or anchor a substantive item-group/subgroup exception—summarizing routine secondary waves or conforming subgroups in plain relational prose with a `Figure X` / `Table Y` pointer.
 4. **Immediate "so what" (substantive meaning):** state immediately what the comparison establishes (capability boundary, trade-off, mechanism limit, or null/negative result); **never end a multi-sentence display unit on a naked statistical parenthetical**.
 5. **Macro-to-micro and shallow-to-deep progression to Hypotheses / SQ / Overarching Goal:** sequence subsections from aggregate system/population benchmarks to subgroup, wave, or individual/sensitivity regimes (macro-to-micro), and from observable trajectory or pattern to quantitative contrast, supported diagnostic, and explicit verdict on the paper's hypothesis, `SQ/RQ`, or overarching goal (shallow-to-deep).
 
@@ -42,6 +42,21 @@ Retain functioning explanations and definitions rather than demanding a new
 mechanism or a closing formula after each number.
 
 Build that explanation in coherent result units, rather than postponing all meaning until an omnibus closing sentence. Several values can support one finding: keep them together, explain what that comparison establishes, then let the next unit deepen, contrast with, or qualify it. For example, establish what score levels mean before changing to dispersion, and distinguish individual relationships from a whole-model comparison before drawing a group-level conclusion. The required bridge is the analytical relation, not another connector. Do not insert an interpretation after every number, repeat the question at every paragraph, or split a functioning multi-value finding.
+
+<a id="pre-writing-evidence-value-triage-and-displayprose-division-of-labor"></a>
+### Pre-writing evidence-value triage and display–prose division of labor
+
+Because tables and figures already archive the complete numerical matrix, evaluate candidate findings in two stages before writing prose:
+
+1. **Stage A — Result salience (decide what merits main-text space):** foreground primary `RQ`/hypothesis contrasts, capability boundaries or null/adverse limits, cross-level dissociations (such as aggregate mean fit alongside wider individual change error), and substantive subgroup reversals. Leave routine conforming subscales or repetitive secondary slices to `Figure X`, `Table Y`, or `SM` rather than opening a paragraph for every row.
+2. **Stage B — Selective numeric reporting (plain relational prose by default; quote exact numbers under three conditions):**
+   - **Magnitude calibration:** report exact values where they anchor the scale of the primary gap or peak shift, while carrying consistent secondary waves or conditions in plain comparative prose;
+   - **Verdict-shifting intervals:** quote `95% CI` or uncertainty bounds inline when an interval spans zero (making a nonzero point estimate inconclusive), sits near a decision cutoff, flips significance across groups, or diverges from the mean pattern; summarize uniform interval verdicts in one clause instead of repeating `[low, high]` walls;
+   - **Substantive item-group or subgroup exceptions:** do not enumerate conforming subscales in prose; report numbers only for exceptions whose gap magnitude changes the substantive reading, or state purely directional reversals in clear relational prose with a `Table Y` pointer.
+
+**Anti-cherry-picking and revision scope gate:** never invoke numeric concision to omit nonsignificant, zero-crossing, or hypothesis-disconfirming findings, and never assert that unquoted subscales matched the headline index without checking the authoritative source table or CSV. Apply numeric pruning only during `plan`, `draft`, or authorized substantive `revise`; `proofread` and advisor-locked drafts preserve verified values by default. Pruning existing draft numbers is a `Class B` change: reconcile every omitted number to its target display and check `Abstract`, `Highlights`, `Discussion`, and `Conclusion` via `scripts/verify_delegate_numbers.py` so no downstream reference becomes an orphan.
+
+**Scoped context and cross-agent anti-bias rules:** when checking a single Results subsection or delegating a pass across agents, anchor against `scripts/build_context_envelope.py` rather than isolated paragraphs. Under the **Missing-Context Fail-Safe** (when the full manuscript is unavailable), never guess subtraction direction, never endorse suspicious draft run counts (such as confusing bootstrap resamples with generative runs), and never place editorial verification questions in prose—record them in `unverified_context_locks`. Under the **Anti-Methods-Echo Rule** (when the spine is supplied), use `Methods` locks only to calibrate sign direction, denominators, and bundled-condition qualifiers; never copy multi-sentence procedural formulas or bootstrap recipes into `Results` openings.
 
 ### Plan the joint answer before rewriting
 

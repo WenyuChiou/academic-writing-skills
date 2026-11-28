@@ -43,9 +43,12 @@ CORE_SCRIPTS = {
     "audit_manuscript_state.py",
     "audit_prose_patterns.py",
     "audit_text_consistency.py",
+    "build_context_envelope.py",
     "init_manuscript_state.py",
     "inspect_comment_targets.py",
     "run_regression_tests.py",
+    "run_scoped_manuscript_pass.py",
+    "verify_delegate_numbers.py",
 }
 REVIEW_REFERENCES = {
     "ai-llm-computational.md",
@@ -79,7 +82,7 @@ def frontmatter(path: Path) -> dict[str, str]:
 def test_plugin_manifest_marks_major_architecture_release():
     manifest = json.loads(read(ROOT / ".claude-plugin" / "plugin.json"))
     assert manifest["name"] == "academic-writing-skills"
-    assert manifest["version"] == "1.6.0"
+    assert manifest["version"] == "1.7.0"
     guide_version = re.search(
         r"plugin skill version `([^`]+)`", read(ROOT / "docs" / "workspace-adapter.md")
     )
@@ -473,7 +476,7 @@ def test_python_sources_parse_and_regressions_pass():
     assert result.returncode == 0, result.stdout + result.stderr
     report = json.loads(result.stdout)
     assert report["status"] == "PASS"
-    assert len(report["tests"]) == 33
+    assert len(report["tests"]) == 40
 
 
 def test_v15_pre_draft_blueprint_figures_and_anti_miss_guards():
@@ -915,6 +918,7 @@ def test_user_facing_prompts_are_platform_neutral():
 def test_no_common_mojibake_or_internal_skill_ids():
     markers = ["\uFFFD", "\uE73F", "\uEC27", "\uE4C7", "\u929D", "\u5697", "?" + "?"]
     internal_id = re.compile(r"skill-[0-9a-f]{20,}")
+    internal_codename = re.compile(r"gemini-" + r"4-(?:ne" + r"on|car" + r"bon|hydro" + r"gen)", re.IGNORECASE)
     for path in ROOT.rglob("*"):
         if not path.is_file() or ".git" in path.parts:
             continue
@@ -924,3 +928,164 @@ def test_no_common_mojibake_or_internal_skill_ids():
         for marker in markers:
             assert marker not in text, f"{marker!r} found in {path.relative_to(ROOT)}"
         assert not internal_id.search(text), f"internal id found in {path.relative_to(ROOT)}"
+        assert not internal_codename.search(text), f"internal codename found in {path.relative_to(ROOT)}"
+
+
+def test_v17_scoped_envelope_delegate_runner_and_salience_gates(tmp_path):
+    skill = read(CORE / "SKILL.md")
+    results = read(CORE / "references" / "results-and-explanation.md")
+    acceptance = read(CORE / "references" / "execution-and-acceptance.md")
+    lifecycle = read(CORE / "references" / "lifecycle-and-routing.md")
+    review_skill = read(REVIEW / "SKILL.md")
+    review_displays = read(REVIEW / "references" / "display-notation-provenance.md")
+
+    assert "Edit Scope ≠ Context Anchor Scope" in skill
+    assert "scripts/build_context_envelope.py" in skill
+    assert "scripts/verify_delegate_numbers.py" in skill
+    assert "scripts/run_scoped_manuscript_pass.py" in skill
+    assert "Pre-writing evidence-value triage and display–prose division of labor" in results
+    assert "Missing-Context Fail-Safe" in results
+    assert "Anti-Methods-Echo Rule" in results
+    assert "`Class D`" in acceptance and "`Mode R`" in acceptance
+    assert "`scripts/build_context_envelope.py`" in lifecycle
+    assert "display–prose numeric redundancy" in review_skill
+    assert "display–prose numeric redundancy" in review_displays
+    for guide_name in ("USER_GUIDE.md", "USER_GUIDE.zh-TW.md", "USER_GUIDE.zh-CN.md"):
+        guide_path = ROOT / "docs" / guide_name
+        guide_text = read(guide_path)
+        assert b"\r" not in guide_path.read_bytes(), f"CRLF found in {guide_name}"
+        for helper in ("build_context_envelope.py", "run_scoped_manuscript_pass.py", "verify_delegate_numbers.py"):
+            assert f"skills/academic-writing-skills/scripts/{helper}" in guide_text
+
+    # Verify flat host shim installs manuscript-delegate-pass and auto-refreshes existing locale shims
+    shim_script = ROOT / "scripts" / "install_flat_host_shims.py"
+    out = subprocess.run(
+        [sys.executable, str(shim_script), "--root", str(ROOT), "--dest", str(tmp_path), "--include-locales"],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert out.returncode == 0, out.stdout + out.stderr
+    shim_report = json.loads(out.stdout)
+    installed_names = {entry["shim"] for entry in shim_report["installed"]}
+    assert {
+        "academic-writing-flat",
+        "academic-writing-flat-zh-tw",
+        "academic-writing-flat-zh-cn",
+        "paper-review",
+        "paper-review-zh-tw",
+        "paper-review-zh-cn",
+        "manuscript-delegate-pass",
+    } <= installed_names
+    assert (tmp_path / "manuscript-delegate-pass" / "SKILL.md").is_file()
+    assert (tmp_path / "manuscript-delegate-pass" / "scripts" / "run_scoped_manuscript_pass.py").is_file()
+
+    # Verify multi-backend --dry-run-command CLI assembly via standalone shim script
+    md_doc = tmp_path / "synthetic_paper.md"
+    md_doc.write_text(
+        "# Synthetic Flood Policy Paper\n\n"
+        "## Abstract\n\nSubsidy uptake fell by 4.2% on Elevations.\n\n"
+        "## 1. Introduction\n\nHowever, prior work leaves open subgroup shifts. RQ1: How do bundled subsidies affect uptake?\n\n"
+        "## 2. Methods\n\nConfidence intervals use 2,000 household bootstrap resamples across 50 fixed seeds.\n\n"
+        "## 3. Results\n\n### 3.2 Subgroup Contrasts\n\nTable 1 shows Elevations fell by -4.2% while Insurance rose by +8.1%.\n\n"
+        "## 4. Discussion\n\nThe -4.2% Elevations drop in Section 3.2 limits structural protection.\n\n"
+        "## References\n\n[1] Ignored reference 99.9%.\n",
+        encoding="utf-8",
+    )
+    runner = tmp_path / "manuscript-delegate-pass" / "scripts" / "run_scoped_manuscript_pass.py"
+    for backend_name, extra in [
+        ("agy", ["--model", "gemini-2.5-pro", "--resume", "c-1"]),
+        ("codex", ["--resume", "s-2"]),
+        ("claude", ["--resume", "cl-3"]),
+        ("command", ["--cmd-template", "my-runner --prompt {prompt_file} --out {output_file}"]),
+    ]:
+        res = subprocess.run(
+            [
+                sys.executable,
+                str(runner),
+                "--manuscript",
+                str(md_doc),
+                "--target",
+                "3.2",
+                "--backend",
+                backend_name,
+                "--workdir",
+                str(tmp_path / f"wd_{backend_name}"),
+                "--dry-run-command",
+                *extra,
+            ],
+            cwd=tmp_path,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert res.returncode == 0, res.stdout + res.stderr
+        payload = json.loads(res.stdout)
+        assert payload["status"] == "DRY_RUN"
+        assert payload["task_packet_tokens"] <= 4500
+
+    # Verify standalone manuscript-delegate-pass audit_candidate_text.py has required references/
+    cand_state = tmp_path / "cand_state.json"
+    cand_state.write_text(json.dumps({"style_profile": {"sentence_opening_words": 4}}), encoding="utf-8")
+    cand_txt = tmp_path / "cand_passage.txt"
+    cand_txt.write_text("Table 1 shows Elevations fell by -4.2%, bounding structural protection.", encoding="utf-8")
+    cand_cli = subprocess.run(
+        [
+            sys.executable,
+            str(tmp_path / "manuscript-delegate-pass" / "scripts" / "audit_candidate_text.py"),
+            str(cand_state),
+            str(cand_txt),
+            "--json",
+        ],
+        cwd=tmp_path,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert cand_cli.returncode == 0, cand_cli.stdout + cand_cli.stderr
+    cand_report = json.loads(cand_cli.stdout)
+    assert cand_report["status"] == "PASS"
+    assert cand_report["candidate_sha256"]
+
+    # End-to-end live subprocess execution of --backend command (preserving Windows paths)
+    mock_agent = tmp_path / "mock_agent_b.py"
+    mock_agent.write_text(
+        "import json, pathlib, sys\n"
+        "prompt = pathlib.Path(sys.argv[1]).read_text(encoding='utf-8')\n"
+        "assert 'SCOPED MANUSCRIPT CONTEXT ENVELOPE' in prompt\n"
+        "pathlib.Path(sys.argv[2]).write_text(json.dumps({\n"
+        "    'revised_target_prose': 'To test RQ1, Table 1 shows Elevations fell by -4.2% while Insurance followed the expected direction (Table 1), bounding structural uptake.',\n"
+        "    'declared_omitted_to_display': [{'value_or_entity': 'Insurance +8.1%', 'display_ref': 'Table 1', 'rationale_tier': 'routine_conforming_subscale'}],\n"
+        "    'cross_section_sync_alerts': [],\n"
+        "    'unverified_context_locks': []\n"
+        "}), encoding='utf-8')\n",
+        encoding="utf-8",
+    )
+    e2e_cmd_template = f'"{sys.executable}" "{mock_agent}" "{{prompt_file}}" "{{output_file}}"'
+    e2e_res = subprocess.run(
+        [
+            sys.executable,
+            str(runner),
+            "--manuscript",
+            str(md_doc),
+            "--target",
+            "3.2",
+            "--backend",
+            "command",
+            "--cmd-template",
+            e2e_cmd_template,
+            "--workdir",
+            str(tmp_path / "wd_live_command"),
+            "--json",
+        ],
+        cwd=tmp_path,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert e2e_res.returncode == 0, e2e_res.stdout + e2e_res.stderr
+    e2e_receipt = json.loads(e2e_res.stdout)
+    assert e2e_receipt["status"] == "PASS"
+    assert e2e_receipt["summary_words"] <= 200
+    assert (tmp_path / "wd_live_command" / "revised_target_preview.md").is_file()
