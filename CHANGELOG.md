@@ -11,6 +11,19 @@ marketplace; see that repo's CHANGELOG for the catalog-side history.
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-11-27
+
+### Added
+
+- **Deterministic Manuscript Architecture Spine & Scoped Context Envelope (`scripts/build_context_envelope.py`):** extracts a `<= 4,500`-token structured global anchor (hierarchical section map, closing Introduction gap and verbatim `RQ/SQ/Hypothesis` locks, abbreviation-safe `Methods` formula/sign/bootstrap/bundle locks, untruncated target `Figure`/`Table`/`SM` slices, `Abstract`/`Highlights`, `downstream_empirical_dependencies`, and read-only `manuscript_state.json` + `.paper/claims.yml` / `.paper/figures.yml` fusion) across `.docx` (custom `word/styles.xml` `outlineLvl`, `<w:numPr>`, `<m:oMath>`, `<w:tbl>`, `w:del` exclusion, and `References` truncation), `.tex` (recursive `\input`/`\include`), and `.md`.
+- **Partitioned Numeric & Downstream Orphan Verifier (`scripts/verify_delegate_numbers.py`):** supports `strict_preservation` (`proofread` / `Class D` multiset conservation with explicit negative-sign to negative-polarity-verb equivalence) and `curated_salience` (entity- and sign-bound provenance, bootstrap-vs-generative integer drift detection, `Mode R` partitioned conservation via `declared_omitted_to_display`, and `Class B` downstream orphan alerts across `Abstract`, `Highlights`, `Discussion`, and `Conclusion`).
+- **Host- & Model-Agnostic `Agent A -> Agent B` Runner (`scripts/run_scoped_manuscript_pass.py`) & `manuscript-delegate-pass` Flat Alias:** supports `--backend agy`, `codex`, `claude`, `command`, and `envelope-only` (paired with `--verify-reply` for host-native subagents), enforces a four-field dual-channel JSON schema (`revised_target_prose`, `declared_omitted_to_display`, `cross_section_sync_alerts`, `unverified_context_locks`), intercepts silent CLI timeouts (`finished_reason == "print_timeout"` with exit `0` -> exit `124`), writes SHA-256 `evidence_refs`, and emits `<= 200`-word receipts; `scripts/install_flat_host_shims.py` also installs the standalone `manuscript-delegate-pass` flat entry point and auto-refreshes installed locale shims.
+- **Zero-False-Positive Numeric Overload Diagnostic (`PROSE018`):** added `inline-numeric-overload-candidate` to `scripts/audit_prose_patterns.py` (with literature citation `[1, 2]` immunity and configurable `style_profile` thresholds) plus selective numeric reporting manual checks in `scripts/audit_candidate_text.py` and 7 new deterministic offline regression suites (`40` total checks) mirrored byte-identically across `en`, `zh-TW`, and `zh-CN`.
+
+### Changed
+
+- **Two-Stage Evidence-Value Triage, Selective Numeric Reporting & `Edit Scope != Context Anchor Scope` (`en`, `zh-TW`, `zh-CN`):** updated `SKILL.md`, `results-and-explanation.md` (Step 3 + `Pre-writing evidence-value triage and display–prose division of labor`, Missing-Context Fail-Safe, and Anti-Methods-Echo Rule), `execution-and-acceptance.md`, `lifecycle-and-routing.md`, `universal-integrity.md`, `paper-review/SKILL.md`, and `paper-review/references/display-notation-provenance.md` to separate result salience (Stage A) from three-condition numeric reporting (Stage B: magnitude calibration, verdict-shifting intervals, substantive subgroup exceptions) while restricting neighbor-only inspection to `Class D` surface repairs.
+
 ## [1.6.0] - 2026-11-26
 
 ### Added
@@ -1083,7 +1096,8 @@ commit [`a04dee7`](https://github.com/WenyuChiou/academic-writing-skills/commit/
   conventions surface in some references; the core workflow is
   domain-neutral.
 
-[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/WenyuChiou/academic-writing-skills/compare/v1.4.3...v1.5.0
 [1.4.3]: https://github.com/WenyuChiou/academic-writing-skills/compare/f1e27b9b6991b898dda576b76846fc728cd2f8b0...v1.4.3

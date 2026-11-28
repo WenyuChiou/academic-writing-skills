@@ -47,7 +47,7 @@ Use a common core at every scope: identify the accepted source and authorization
 | Whole manuscript | gap–question–method–result–interpretation–conclusion chain; summaries, terms, references, numbers, visuals | verification of unavailable raw evidence or excluded companion files |
 | Submission package | selected manuscript, SM, response and deliverables; promises, labels, numbering, stable line references, tracked/clean state, rendering | readiness of files not selected or not inspected |
 
-A substantive local review checks citations and numbers supporting that local claim. A surface-only edit preserves unchanged support; flag an observed material error without inventing a fix, silently expanding into model execution, or claiming a complete audit. When context or sources are missing, distinguish a usable language edit from an unverified scientific assertion.
+A substantive local review checks citations and numbers supporting that local claim, anchoring against the read-only manuscript spine (`scripts/build_context_envelope.py`) when the manuscript is available rather than inspecting isolated snippets; reserve neighbor-only inspection for `Class D` surface edits. A surface-only edit preserves unchanged support; flag an observed material error without inventing a fix, silently expanding into model execution, or claiming a complete audit. When context or sources are missing, distinguish a usable language edit from an unverified scientific assertion.
 
 At completion, report coverage as checked, not applicable, outside requested scope, or source unavailable/unverified. A local check can be complete within scope without establishing whole-manuscript readiness.
 
@@ -100,8 +100,8 @@ Trace data or premises from source through preparation, measurement, model or an
 ### Results gate
 
 Build findings from verified outputs. For each comparison, identify the reference
-group, scenario, setting, or time, report the necessary result, and then state
-what the observed pattern means for the objective or question. Numbers alone are
+group, scenario, setting, or time, apply two-stage evidence-value triage (reporting exact numbers selectively where they calibrate magnitude, shift interval verdicts, or anchor subgroup exceptions rather than dumping routine table cells), and then state
+what the observed pattern means for the objective or question; treat pruning numbers from an existing draft as a `Class B` change requiring downstream `Abstract`, `Highlights`, `Discussion`, and `Conclusion` sync. Numbers alone are
 not a substantive answer. Add interpretation where the paragraph or subsection's
 function requires it, not a ritual closing sentence after every plot. Temporarily
 remove the SQ/RQ label: the remaining statement must still answer something.

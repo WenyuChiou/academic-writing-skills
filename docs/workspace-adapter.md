@@ -2,7 +2,7 @@
 
 `adapter.json` exposes the existing academic writing and paper review skills to
 an explicitly configured local workspace consumer. Adapter version `1.0.0`
-uses manifest schema `1`, plugin skill version `1.6.0`, and manuscript state
+uses manifest schema `1`, plugin skill version `1.7.0`, and manuscript state
 schema `1.1`. It needs no private checkout, host-specific path, network service,
 or installed project overlay. No scientific rule or audit script is replaced.
 
@@ -91,6 +91,14 @@ thread/anchor diagnostics; `--expected-sha256 HASH` rejects a stale snapshot.
 Successful extraction is not editing authorization, Word Range/layout validation,
 or proof that a candidate respected its scope. Consumers must explicitly support
 this helper rather than forwarding arbitrary arguments through `docx`.
+
+The bundle also ships `build_context_envelope.py`, `verify_delegate_numbers.py`,
+and `run_scoped_manuscript_pass.py` under `skills/academic-writing-skills/scripts/`
+(and byte-identical locale mirrors) as optional unregistered helpers for
+deterministic `<= 4,500`-token manuscript spine envelopes, partitioned numeric
+provenance and downstream `Class B` orphan verification, and host-neutral
+`Agent A -> Agent B` scoped handoffs. Existing six operation contracts remain
+unchanged.
 
 ## Consumer and maintenance boundaries
 

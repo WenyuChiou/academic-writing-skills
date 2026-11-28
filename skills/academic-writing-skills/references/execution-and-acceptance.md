@@ -39,7 +39,7 @@ Reuse the active contract and sources. Name the reader's likely knowledge, the
 unit being compared, the paragraph functions, and the minimum prerequisites.
 For section work, write a short function sequence before drafting: what is
 established, what is added next, and what question the sequence answers. For a
-bounded paragraph, inspect only its available neighbors. Do not silently invent
+surface or grammar-only paragraph repair (`Class D`), inspect only its available neighbors; for a substantive local check or cross-agent delegated pass, anchor against the read-only manuscript spine (`scripts/build_context_envelope.py`) while keeping write permission strictly inside the target unit. Do not silently invent
 missing context or impose a whole-paper rewrite on a local edit.
 
 For a substantive study-summary revision, use the identity preparation in
@@ -62,7 +62,7 @@ needs them; explain their role, not just their expanded acronym.
 For displays, allocate information before composing the caption:
 
 - Caption: what is shown and the essentials needed to decode it independently.
-- Main text: the supported finding, comparison, interpretation, and next step.
+- Main text: the supported finding, comparison, selective high-value numbers (calibrating gap magnitude, shifting interval verdicts, or anchoring subgroup exceptions rather than dumping the full table matrix), interpretation, and next step.
 - Methods/SM: extended procedures, selection rules, settings, or diagnostics.
 
 Remove repeated procedures from captions, but retain an essential sample/run
@@ -97,7 +97,7 @@ verified portion. A successful read or scan of another file cannot clear it.
 
 | Check | Required action and acceptance evidence |
 | --- | --- |
-| Meaning and evidence | Compare the candidate with locked meaning and source evidence; locate any changed claims or citations. For grammar-only work, preserve unchanged verified support and do not claim a fresh literature audit. |
+| Meaning and evidence | Compare the candidate with locked meaning and source evidence; locate any changed claims or citations. When pruning redundant prose numbers into displays (`Mode R`), reconcile every omitted value and verify zero orphaned downstream references in `Abstract`, `Highlights`, `Discussion`, and `Conclusion` via `scripts/verify_delegate_numbers.py`. For grammar-only work, preserve unchanged verified support and do not claim a fresh literature audit. |
 | Language scan | Run the applicable terminology/stock-phrase checks on these bytes and resolve or explicitly retain each contextual finding. A scan's `PASS` covers that scan only. |
 | Reader walkthrough | Before the first handoff and after any later substantive prose edit, read or simulate a cold pass by an informed cross-disciplinary reader who knows the broad field but not the study's internal shorthand. For substantive paragraph or section work, inspect **every adjacent sentence pair**: state what the next sentence adds and why it follows from the previous one, then identify the evidence, comparison, referent, or prerequisite in the text that lets the reader make that link. Check unclear actors, technical terms, comparisons, and referents. If the relation cannot be paraphrased from the passage without hidden project history, repair the order, content, reference, or qualification; removing a redundant sentence may be the minimal repair. Adding a transition word alone is not a repair. Do not force an explicit connector between every sentence, or rewrite necessary technical repetition just to vary the wording. Then paraphrase what the passage lets the reader conclude. An actual independent cold reader is useful for a complex section or a repeated comprehension failure when available; do not fabricate one. |
 | Progression and framing | For substantive work or a section/package, read openings and endings in sequence. Record what each paragraph adds and the actual relation at each boundary. Repair repeated functions, jumps, and drift from the author-locked comparison; adding connectors alone does not repair logic. |

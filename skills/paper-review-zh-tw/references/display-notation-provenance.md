@@ -53,6 +53,7 @@ source data or model output -> transformation or equation -> aggregation or norm
 - **定義缺口（definition gap）：** 符號、轉換或不確定性展示缺乏定義
 - **來源缺口（provenance gap）：** 展示的數值無法追溯至經授權的來源或規則
 - **圖表與主張不符（display–claim mismatch）：** 正文斷言了展示內容不支援的比較、尺度或不確定性涵義
+- **圖表與正文數值冗餘（display–prose numeric redundancy）：** 正文傾倒與總指標一致的常規表格列或連續同判讀區間牆（`PROSE018`）而無額外診斷資訊，或刪減 Results 數字卻在 `Abstract`、`Highlights`、`Discussion` 或 `Conclusion` 留下無主孤兒引用
 - **跨產物回歸（cross-artifact regression）：** 後續編輯更新了某個產物，但導致方程式、說明文字、補充資料或摘要過時
 
 套用基礎嚴重度與證據狀態系統。除非歧義性、可重現性或主張的解讀受到實質影響，否則切勿將形式美化類的符號標記偏好列為阻礙項目。

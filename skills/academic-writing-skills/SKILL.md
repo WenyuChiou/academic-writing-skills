@@ -26,6 +26,8 @@ First identify:
 
 Use **lightweight mode** for bounded text work. Use **managed-project mode** for full-manuscript integration, companion-file coordination, or release certification; reuse an existing managed context for local work in that project. Managed context does not turn a paragraph edit into a whole-paper audit. Route checks by requested action, textual scope, change impact, and source availability using [lifecycle-and-routing.md](references/lifecycle-and-routing.md).
 
+**Edit Scope ≠ Context Anchor Scope (`Agent A → Agent B` Scoped Handoff Contract):** lightweight mode bounds *write permission*, never *architectural context*. Whenever a single agent checks or revises a local section (such as starting at Results) or a primary session (`Agent A`) delegates a paragraph or subsection pass to any subagent, plugin, or external CLI (`Agent B`), build and pass a deterministic spine envelope via `scripts/build_context_envelope.py` (or orchestrate end-to-end via `scripts/run_scoped_manuscript_pass.py`) rather than sending an ad-hoc oral summary or isolated snippet; keep edits locked to the target unit, and verify returned prose with `scripts/verify_delegate_numbers.py` and `scripts/audit_candidate_text.py` before adoption.
+
 In managed-project mode, read [state-and-authority.md](references/state-and-authority.md) and reuse equivalent project records. Initialize the project-state template with `scripts/init_manuscript_state.py` only when sustained coordination actually needs a record and none exists. Do not create project machinery for a one-off edit or reinitialize state merely because a new turn begins.
 
 When project terminology is supplied or sustained writing needs a shared vocabulary, use the terminology procedure in [state-and-authority.md](references/state-and-authority.md), including for local work in that project. Read the relevant confirmed entries before writing; keep new suggestions separate from confirmed choices and distinguish configured scan results from vocabulary completeness.
@@ -84,7 +86,7 @@ Before drafting an outline, section, or paragraph, identify its reader function,
 
 1. function: what the paragraph must accomplish
 2. claim: the narrowest defensible main point
-3. evidence: the source, result, citation, or reasoning that supports it
+3. evidence and numeric salience: the source, result, citation, or reasoning that supports it—distinguishing which findings merit main-text prose versus display/SM storage and when exact numbers add value ([evidence-value triage](references/results-and-explanation.md#pre-writing-evidence-value-triage-and-displayprose-division-of-labor))
 4. development: how the evidence is explained without adding a mechanism
 5. bridge: what relation leads into the next paragraph
 
@@ -93,8 +95,10 @@ Before drafting or substantively rewriting, run the pre-draft logic check in [un
 For a **new Introduction, multi-paragraph core section draft, or substantive section reorganization** (excluding grammar-only repairs, single-paragraph local revisions, and requests that explicitly instruct immediate full-prose drafting), output a **Pre-Draft Alignment Blueprint** first and **pause for author confirmation** before writing full section prose:
 
 1. **First-sentence extended outline:** numbered topic sentences showing the end-to-end logical chain from broad problem and grouped prior work to the specific gap and study response.
-2. **Paragraph blueprint (`WHAT / WHY / HOW`):** for each planned paragraph, state its reader function (`WHAT`), rationale (`WHY`), analytical execution (`HOW`), narrowest core claim, authorized evidence, inference boundary or nonclaim, and bridge into the next paragraph; for Results sections, also sketch the Macro-to-Micro and Shallow-to-Deep ladder linking each display/subsection to its target Hypothesis, `SQ/RQ`, or Overarching Goal.
+2. **Paragraph blueprint (`WHAT / WHY / HOW`):** for each planned paragraph, state its reader function (`WHAT`), rationale (`WHY`), analytical execution (`HOW`), narrowest core claim, authorized evidence, inference boundary or nonclaim, and bridge into the next paragraph; for Results sections, also sketch the Macro-to-Micro and Shallow-to-Deep ladder linking each display/subsection to its target Hypothesis, `SQ/RQ`, or Overarching Goal, plus a compact two-stage evidence-value triage.
 3. **Host-journal register & guest-term first-use table:** identify the target venue's core readership and list every borrowed cross-disciplinary, AI/LLM, or statistical term with its first-use location, plain-language functional role, and directional meaning; cut unexplainable jargon.
+
+When the author directly requests a rewrite preview of an overloaded empirical draft (`Mode R`), emit a non-mutating `.md` preview accompanied by a display-omission reconciliation ledger and a downstream (`Abstract`, `Highlights`, `Discussion`, `Conclusion`) `Class B` sync checklist; apply numeric pruning only during `plan`, `draft`, or authorized substantive `revise` (`proofread` and advisor-locked drafts preserve verified numbers).
 
 Draft only after the contract and information order are coherent. After drafting, compare the paragraph against the contract and re-read its previous and next paragraphs. Do not polish a paragraph into fluency if its function, evidence, or placement is wrong.
 
@@ -195,8 +199,11 @@ For managed projects, use the bundled scripts when relevant:
 
 - `scripts/audit_manuscript_state.py`: validate state completeness, source links, question alignment, dimension coverage, and release blockers
 - `scripts/audit_text_consistency.py`: extract text from supported files and scan registered locked strings, prohibited variants, and fact conflicts
-- `scripts/audit_prose_patterns.py`: report exact duplication, repeated openings and phrases, stock phrasing, and candidate nontechnical word overuse without claiming AI authorship
+- `scripts/audit_prose_patterns.py`: report exact duplication, repeated openings and phrases, stock phrasing, candidate nontechnical word overuse, and display-linked inline numeric overload (`PROSE018`) without claiming AI authorship
 - `scripts/audit_candidate_text.py`: scan the exact proposed passage against the active project terminology, forbidden variants, and prose profile and record its hash
+- `scripts/build_context_envelope.py`: extract a deterministic manuscript architecture spine and bounded context envelope (with read-only `.paper/` and state fusion plus downstream empirical dependency locks) for scoped or cross-agent passes
+- `scripts/verify_delegate_numbers.py`: verify `strict_preservation` or `curated_salience` numeric provenance, sign polarity, partitioned omission accounting, and `Class B` downstream orphan alerts
+- `scripts/run_scoped_manuscript_pass.py`: run or verify bounded cross-agent passes across pluggable backends (`agy`, `codex`, `claude`, `command`, `envelope-only`) with dual-channel JSON isolation and silent-timeout interception
 - `scripts/audit_handoff.py`: optionally validate scope-dependent coverage records and exact-file hashes; `COVERAGE_COMPLETE` is not editorial or scientific certification
 - `scripts/audit_docx_structure.py`: inspect Word OOXML using exact tag names for tracked changes, revision authors, comments, parent-linked replies, reply authors, fields, and placeholders
 - `scripts/audit_companion_limits.py`: check Highlights character caps (`<= 85`), Abstract word caps, standalone vs. manuscript caption sync, negative currency sign order (`-$40K`), CSV `available`/`NA` mismatches, discrete subscale step collapse, LaTeX/BibTeX (`COMP007`–`COMP008` for `booktabs` rules and `.tex`/`.bib` citation sync), and Word table hygiene (`COMP009` vertical borders/`w:tblHeader`)

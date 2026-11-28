@@ -32,6 +32,8 @@ description: "为学术论文建立研究定位与大纲、规划并修订相互
 
 对于有界限的文字工作，使用 **lightweight mode**。若涉及全篇稿件整合、随附文件协调或发布认证，则使用 **managed-project mode**；在该项目中进行局部工作时，重复使用现有的受管脉络。受管脉络并不会将单一段落的编辑扩大为全篇论文审查。请使用 [lifecycle-and-routing.md](references/lifecycle-and-routing.md)，依据所要求的动作、文字处理范围、变更影响以及来源可用性来分流检查项目。
 
+**编辑范围 ≠ 脉络锚定范围（`Agent A → Agent B` 跨代理交接合约）：** 轻量模式限制的是*写入权限*，绝非切断*全篇架构脉络*。无论是单一代理检查或修改局部章节（如直接从 Results 开始检查），或由主控对话（`Agent A`）委派任何子代理、Plugin 或外部 CLI（`Agent B`）编修单一段落／小节，皆须通过 `scripts/build_context_envelope.py` 建立并传递确定性架构脊椎信封（或由 `scripts/run_scoped_manuscript_pass.py` 端到端执行），严禁仅传递手写口头摘要或孤立片段；写入范围仍锁死于目标单元，回传后须经 `scripts/verify_delegate_numbers.py` 与 `scripts/audit_candidate_text.py` 验收方可采纳。
+
 在受管项目模式下，读取 [state-and-authority.md](references/state-and-authority.md) 并重复使用同等的项目记录。只有当持续协调确实需要记录且尚无任何记录时，才使用 `scripts/init_manuscript_state.py` 初始化项目状态范本。切勿为了单次编辑而建立项目机制，亦不可仅因进入新回合就重新初始化状态。
 
 当已提供项目术语，或持续写作需要共享词汇时，请使用 [state-and-authority.md](references/state-and-authority.md) 中的术语程序（包括该项目中的局部工作）。在撰写前请先阅读相关的已确认项目；新建议应与已确认的选择分开，并将已设定的扫描结果与词汇完整性区分开来。
@@ -91,7 +93,7 @@ description: "为学术论文建立研究定位与大纲、规划并修订相互
 
 1. 功能：该段落必须达成的目的
 2. 主张：范围最窄且有充分依据的核心论点
-3. 证据：支持该论点的来源、结果、文献引用或推理
+3. 证据与数值价值：支持该论点的来源、结果、文献引用或推理——动笔前先区分哪些发现值得写入正文、哪些应留存图表／SM，以及何时需要报出精确数字（参见[证据价值分流](references/results-and-explanation.md#pre-writing-evidence-value-triage-and-displayprose-division-of-labor)）
 4. 开展：如何在不增添机制的前提下解释该证据
 5. 桥接：引导至下一段落的关联为何
 
@@ -100,8 +102,10 @@ description: "为学术论文建立研究定位与大纲、规划并修订相互
 针对**全新的引言（Introduction）、多段落核心章节起草或实质性章节重组**（不包含仅限语法修正、单段落局部修订，以及用户明确指示立即产出完整正文的情况），请先输出**草稿前对齐蓝图（Pre-Draft Alignment Blueprint）**并**暂停等待作者确认**，再撰写完整段落：
 
 1. **首句式延伸大纲：** 以编号主题句呈现从宏观背景、分流文献综述到研究缺口与本研究回应的完整逻辑链。
-2. **段落蓝图表（`WHAT / WHY / HOW`）：** 针对每个规划段落列出其读者功能（`WHAT`）、设立理由（`WHY`）、分析推进方式（`HOW`）、最精炼的核心主张、获授权的证据、推论边界／不主张事项，以及与下一段的衔接关系；撰写 Results 章节时，一并标明“由大到小、由浅至深”如何推进并扣回研究假设、`SQ/RQ` 或论文总目标。
+2. **段落蓝图表（`WHAT / WHY / HOW`）：** 针对每个规划段落列出其读者功能（`WHAT`）、设立理由（`WHY`）、分析推进方式（`HOW`）、最精炼的核心主张、获授权的证据、推论边界／不主张事项，以及与下一段的衔接关系；撰写 Results 章节时，一并标明“由大到小、由浅至深”如何推进并扣回研究假设、`SQ/RQ` 或论文总目标，并附上精简两阶段证据价值分流表。
 3. **目标期刊语境与跨领域术语首次引导表：** 锁定目标期刊的核心读者立场，列出所有借用的跨学科、AI／LLM 或统计术语及其首次出现位置、功能角色与数值方向说明；删除非必要且无法解释清楚的行话。
+
+若作者直接要求针对过载实证草稿产出改写预览（`Mode R`），请产出不改动原档的 `.md` 预览稿，并附上移交图表省略对账单与下游章节（`Abstract`、`Highlights`、`Discussion`、`Conclusion`）`Class B` 同步清单；数值精简仅适用于 `plan`、`draft` 或获授权的实质 `revise`（`proofread` 与已锁定定稿默认保留验证数值）。
 
 唯有在契约与信息顺序连贯时方可起草。起草完成后，将段落与契约进行对照，并重读其前一段与后一段。若段落的功能、证据或配置有误，切勿仅将文字润饰得流畅。
 
@@ -200,8 +204,11 @@ description: "为学术论文建立研究定位与大纲、规划并修订相互
 
 - `scripts/audit_manuscript_state.py`：验证状态完整性、来源连结、问题对齐、维度覆盖率与发布阻碍问题
 - `scripts/audit_text_consistency.py`：从支援的文件中撷取文字，并扫描已注册的锁定字串、禁用异体词与事实冲突
-- `scripts/audit_prose_patterns.py`：回报完全重复、重复开头与片语、陈腔滥调，以及候选的非技术字词过度使用，但不声明 AI 撰写
+- `scripts/audit_prose_patterns.py`：回报完全重复、重复开头与片语、陈腔滥调、候选的非技术字词过度使用，以及关联图表之行内数值过载（`PROSE018`），但不声明 AI 撰写
 - `scripts/audit_candidate_text.py`：依据使用中的项目术语、禁用异体词与散文设定档扫描提议的精确段落，并记录其杂凑值
+- `scripts/build_context_envelope.py`：抽取确定性论文架构脊椎与受限上下文信封（含只读融合 `.paper/` 与项目状态，以及下游实证依赖锁），供局部或跨代理编修使用
+- `scripts/verify_delegate_numbers.py`：验证 `strict_preservation` 或 `curated_salience` 数值溯源、正负号方向、分区省略对账，以及 `Class B` 下游孤儿警示
+- `scripts/run_scoped_manuscript_pass.py`：跨可插拔后端（`agy`、`codex`、`claude`、`command`、`envelope-only`）执行或复核受控跨代理编修，具备双通道 JSON 隔离与静默超时拦截
 - `scripts/audit_handoff.py`：可选择性验证依处理范围而定的覆盖记录与精确文件杂凑；`COVERAGE_COMPLETE` 并非编辑或科学认证
 - `scripts/audit_docx_structure.py`：使用精确标签名称检查 Word OOXML，以检视修订追踪、修订者、批注、与父项连结的回复、回复者、功能变数与预留位置
 - `scripts/audit_companion_limits.py`：检查 Highlights 字符上限（`<= 85`）、摘要字数、独立图注与正文图注同步、负金额符号顺序（`-$40K`）、CSV `available`/`NA` 矛盾、离散子量表步长退化、LaTeX/BibTeX（`COMP007`–`COMP008` 检查 `booktabs` 框线与 `.tex`/`.bib` 引用同步），以及 Word 表格规范（`COMP009` 竖线／`w:tblHeader`）
